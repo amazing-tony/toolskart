@@ -1,11 +1,11 @@
 # ToolsKart Robots.txt
-# https://toolskart.github.io/
+# https://amazing-tools.github.io/
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://toolskart.github.io/sitemap.xml
+Sitemap: https://amazing-tools.github.io/sitemap.xml
 
 # Disallow admin/system files
 Disallow: /*.json$
