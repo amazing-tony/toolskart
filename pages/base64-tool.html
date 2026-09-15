@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder / Decoder — Convert Text to Base64 Online | ToolsKart</title>
+    <meta name="description" content="Free online Base64 Encoder and Decoder. Convert text, code, or strings to and from Base64 format instantly. Handles UTF-8 characters properly.">
+    <meta name="keywords" content="base64 encoder, base64 decoder, base64 converter, text to base64, base64 to text, online base64 tool">
+    <link rel="canonical" href="https://toolskart.github.io/pages/base64-tool.html">
+    <meta property="og:title" content="Base64 Encoder / Decoder Online | ToolsKart">
+    <meta property="og:description" content="Encode and decode text to and from Base64 format instantly in your browser.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Base64 Encoder Decoder",
+      "url": "https://toolskart.github.io/pages/base64-tool.html",
+      "description": "Encode and decode text to and from Base64 format instantly.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .stats { font-size: 0.85rem; color: var(--text-muted); }
+        .action-bar { display: flex; gap: 1rem; margin: 1rem 0; justify-content: center; }
+        .error-msg { color: #d32f2f; font-size: 0.9rem; margin-top: 0.5rem; display: none; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#dev-tools">Dev Tools</a> &raquo; Base64 Tool
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Base64 Encoder / Decoder</h1>
+                    <p class="tool-description">Easily encode text to Base64 format or decode Base64 strings back to readable text.</p>
+
+                    <div class="tool-interface">
+                        <!-- Input -->
+                        <div class="form-group">
+                            <div class="toolbar">
+                                <label for="textInput" style="margin:0;">Input</label>
+                                <div class="stats" id="inputStats">Size: 0 B</div>
+                            </div>
+                            <textarea id="textInput" class="input-field" rows="6" placeholder="Type or paste your text/Base64 here..."></textarea>
+                            <div id="errorMsg" class="error-msg"></div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="action-bar">
+                            <button class="btn btn-primary" id="encodeBtn">🔐 Encode to Base64</button>
+                            <button class="btn btn-primary" id="decodeBtn">🔓 Decode from Base64</button>
+                            <button class="btn btn-outline" id="swapBtn">⇅ Swap</button>
+                            <button class="btn btn-outline" id="clearBtn">Clear</button>
+                        </div>
+
+                        <!-- Output -->
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <div class="toolbar">
+                                <label for="textOutput" style="margin:0;">Output</label>
+                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                    <div class="stats" id="outputStats">Size: 0 B</div>
+                                    <button class="btn btn-sm btn-outline" id="copyBtn">📋 Copy</button>
+                                </div>
+                            </div>
+                            <textarea id="textOutput" class="input-field" rows="6" readonly placeholder="Result will appear here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="url-encoder.html" class="related-tool-link">🔗 URL Encoder/Decoder</a>
+                            <a href="json-formatter.html" class="related-tool-link">📦 JSON Formatter</a>
+                            <a href="case-converter.html" class="related-tool-link">🔠 Case Converter</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Base64 Tool</h2>
+                    <ul>
+                        <li><strong>To Encode:</strong> Paste your plain text into the top box and click "Encode to Base64".</li>
+                        <li><strong>To Decode:</strong> Paste your Base64 string into the top box and click "Decode from Base64".</li>
+                        <li><strong>Swap:</strong> Click "Swap" to move the result to the input box so you can perform another operation.</li>
+                        <li>This tool fully supports UTF-8 characters, meaning emojis and non-English text will encode and decode correctly.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>What is Base64?</h2>
+                    <p>Base64 is an encoding scheme used to represent binary data in an ASCII string format. By translating data into a radix-64 representation, Base64 ensures that the data remains intact without modification during transport.</p>
+                    <p>It is commonly used when there is a need to encode binary data (like images or files) that needs to be stored and transferred over media that are designed to deal with textual data. This ensures that the data remains intact during transport.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is Base64 encryption?</h3>
+                        <p class="faq-answer">No, Base64 is NOT an encryption method and provides no security. It is simply an encoding scheme. Anyone who has the Base64 string can easily decode it back to the original text. Never use Base64 to hide passwords or sensitive data.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why does my Base64 string end with '='?</h3>
+                        <p class="faq-answer">The '=' character is used as padding in Base64 encoding. Because Base64 operates on 3-byte blocks of data, if the original data isn't a multiple of 3 bytes, one or two '=' characters are added to the end to pad it out correctly.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why did decoding fail?</h3>
+                        <p class="faq-answer">Decoding usually fails if the input string contains invalid Base64 characters (only A-Z, a-z, 0-9, +, /, and = are allowed) or if it's not a properly formatted Base64 string. Ensure you copied the entire string.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/base64-tool.js"></script>
+</body>
+</html>

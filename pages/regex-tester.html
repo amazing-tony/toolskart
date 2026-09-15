@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tester Online — Regular Expression Validator | ToolsKart</title>
+    <meta name="description" content="Free online Regex tester and validator. Test regular expressions against text with real-time highlighting. Supports flags (g, i, m, s) and capture groups.">
+    <meta name="keywords" content="regex tester, regex tester online, regular expression tester, test regex, regex validator, regex highlight">
+    <link rel="canonical" href="https://toolskart.github.io/pages/regex-tester.html">
+    <meta property="og:title" content="Regex Tester Online | ToolsKart">
+    <meta property="og:description" content="Test regular expressions against text with real-time highlighting and group capturing.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Regex Tester",
+      "url": "https://toolskart.github.io/pages/regex-tester.html",
+      "description": "Test regular expressions against text with real-time highlighting.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .regex-header { display: flex; align-items: stretch; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .regex-input-wrapper { display: flex; flex: 1; align-items: stretch; border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; background: var(--bg-alt); }
+        .regex-slash { padding: 0.75rem; background: var(--border-color); font-weight: bold; font-family: 'Fira Code', monospace; }
+        .regex-pattern { flex: 1; border: none; padding: 0.75rem; font-family: 'Fira Code', monospace; font-size: 1rem; outline: none; background: transparent; }
+        .regex-flags { border: none; padding: 0 0.75rem; font-family: 'Fira Code', monospace; font-weight: bold; background: transparent; outline: none; border-left: 1px solid var(--border-color); width: 80px; }
+        
+        .flag-toggles { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        
+        .editor-container { position: relative; height: 250px; border: 1px solid var(--border-color); border-radius: 6px; background: white; margin-bottom: 1.5rem; overflow: hidden; }
+        .editor-backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 1rem; font-family: 'Fira Code', monospace; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; overflow-y: auto; color: transparent; pointer-events: none; z-index: 1; }
+        .editor-textarea { position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 1rem; font-family: 'Fira Code', monospace; font-size: 14px; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; border: none; resize: none; background: transparent; color: #333; z-index: 2; outline: none; caret-color: black; }
+        
+        .match-hl { background-color: #cce5ff; border-radius: 2px; }
+        .match-hl:nth-child(even) { background-color: #d4edda; }
+        
+        .match-results { background: var(--bg-alt); border-radius: 6px; border: 1px solid var(--border-color); max-height: 300px; overflow-y: auto; }
+        .match-header { padding: 1rem; border-bottom: 1px solid var(--border-color); font-weight: 600; display: flex; justify-content: space-between; position: sticky; top: 0; background: var(--bg-alt); z-index: 10; }
+        .match-item { padding: 1rem; border-bottom: 1px solid var(--border-color); font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+        .match-item:last-child { border-bottom: none; }
+        .group-item { margin-top: 0.5rem; padding-left: 1rem; border-left: 2px solid var(--primary-color); font-size: 0.85rem; color: var(--text-muted); }
+        .error-text { color: #dc3545; padding: 1rem; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#dev-tools">Dev Tools</a> &raquo; Regex Tester
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main" style="max-width: 100%;">
+                    <h1>Regex Tester</h1>
+                    <p class="tool-description">Test, evaluate, and debug regular expressions in real-time with visual highlighting and match details.</p>
+
+                    <div class="tool-interface">
+                        <label>Regular Expression</label>
+                        <div class="regex-header">
+                            <div class="regex-input-wrapper">
+                                <span class="regex-slash">/</span>
+                                <input type="text" id="regexPattern" class="regex-pattern" placeholder="Enter regex pattern (e.g., [a-z]+)" value="([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)">
+                                <span class="regex-slash">/</span>
+                                <input type="text" id="regexFlagsInput" class="regex-flags" value="gm">
+                            </div>
+                        </div>
+
+                        <div class="flag-toggles">
+                            <label class="radio-option"><input type="checkbox" class="flag-cb" value="g" checked> Global (g)</label>
+                            <label class="radio-option"><input type="checkbox" class="flag-cb" value="i"> Case Insensitive (i)</label>
+                            <label class="radio-option"><input type="checkbox" class="flag-cb" value="m" checked> Multiline (m)</label>
+                            <label class="radio-option"><input type="checkbox" class="flag-cb" value="s"> Single Line (s)</label>
+                        </div>
+
+                        <label>Test String</label>
+                        <div class="editor-container">
+                            <div class="editor-backdrop" id="editorBackdrop"></div>
+                            <textarea id="testString" class="editor-textarea" spellcheck="false">Contact us at support@toolskart.com or admin@example.co.uk for any inquiries.
+Also invalid emails like test@.com or user@domain shouldn't match if the regex is strict.</textarea>
+                        </div>
+
+                        <div class="match-results" id="matchResults">
+                            <div class="match-header">
+                                <span>Match Results</span>
+                                <span id="matchCountBadge" style="background: var(--primary-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">0 matches</span>
+                            </div>
+                            <div id="matchesList">
+                                <!-- Matches injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Regex Tester</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Type your regular expression pattern in the top input field. Do not include the starting and ending forward slashes (they are provided).</li>
+                        <li><strong>Step 2:</strong> Check or uncheck the flag boxes (Global, Case Insensitive, Multiline, Single Line) to modify how the search behaves.</li>
+                        <li><strong>Step 3:</strong> Type or paste your test text in the large text area.</li>
+                        <li><strong>Step 4:</strong> Matches will instantly highlight in blue/green, and detailed information about capture groups and indices will appear in the results list below.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>Common Regex Flags Explained</h2>
+                    <p><strong>g (Global):</strong> Don't return after the first match. Find all matches in the document.</p>
+                    <p><strong>i (Insensitive):</strong> Case-insensitive matching. It makes <code>[A-Z]</code> match both uppercase and lowercase letters.</p>
+                    <p><strong>m (Multiline):</strong> Changes the behavior of <code>^</code> and <code>$</code> to match the start and end of a line, instead of just the start and end of the entire string.</p>
+                    <p><strong>s (Single Line / DotAll):</strong> Allows the dot (<code>.</code>) to match newline characters.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What engine does this Regex Tester use?</h3>
+                        <p class="faq-answer">This tool relies on your browser's native JavaScript RegExp engine. It supports standard JavaScript regex syntax, including lookaheads, lookbehinds (in modern browsers), and non-capturing groups.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What are Capture Groups?</h3>
+                        <p class="faq-answer">Capture groups are created by placing parts of your regex inside parentheses <code>()</code>. They group multiple tokens together and "capture" the matched text so you can reference it later or extract specific parts of a string. Our results section will display each captured group under its main match.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/regex-tester.js"></script>
+</body>
+</html>

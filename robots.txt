@@ -1,0 +1,11 @@
+# ToolsKart Robots.txt
+# https://toolskart.github.io/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://toolskart.github.io/sitemap.xml
+
+# Disallow admin/system files
+Disallow: /*.json$

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator - Calculate Home, Car & Personal Loan EMI | ToolsKart</title>
+    <meta name="description" content="Free online EMI calculator for home loan, car loan, and personal loan in India. Calculate monthly EMI, total interest, and total payment.">
+    <meta name="keywords" content="EMI calculator, home loan EMI, car loan EMI calculator, personal loan EMI">
+    <link rel="canonical" href="https://toolskart.github.io/pages/emi-calculator.html">
+    <meta property="og:title" content="EMI Calculator | ToolsKart">
+    <meta property="og:description" content="Free online EMI calculator for home loan, car loan, and personal loan in India.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "EMI Calculator",
+      "url": "https://toolskart.github.io/pages/emi-calculator.html",
+      "description": "Free online EMI calculator for home loan, car loan, and personal loan in India.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; EMI Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>EMI Calculator</h1>
+                    <p class="tool-description">Calculate your monthly Equated Monthly Installment (EMI) for home loans, car loans, and personal loans.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="loanAmount">Loan Amount (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="loanAmount" class="input-field" placeholder="Enter loan amount" min="0" step="any">
+                                <span class="input-unit">₹ INR</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate (% per annum)</label>
+                            <input type="number" id="interestRate" class="input-field" placeholder="Enter annual interest rate" min="0" max="100" step="any">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Loan Tenure</label>
+                            <div class="input-with-unit" style="display:flex; gap:10px; flex-wrap: wrap;">
+                                <input type="number" id="loanTenure" class="input-field" placeholder="Enter loan tenure" min="0" step="1" style="flex: 1;">
+                                <select id="tenureType" class="input-field" style="width: auto;">
+                                    <option value="years">Years</option>
+                                    <option value="months">Months</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate EMI</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title">EMI Calculation Result</h3>
+
+                        <div class="result-highlight" style="margin-bottom: 1rem;">
+                            <div class="result-label">Monthly EMI</div>
+                            <div class="result-value" id="monthlyEmi">—</div>
+                        </div>
+
+                        <div class="result-row">
+                            <span class="result-label">Principal Amount</span>
+                            <span class="result-value" id="principalAmount">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Interest</span>
+                            <span class="result-value" id="totalInterest">—</span>
+                        </div>
+                        <div class="result-row" style="font-weight: 600; font-size: 1.1rem; border-top: 1px solid #ddd; padding-top: 0.5rem; margin-top: 0.5rem;">
+                            <span class="result-label">Total Payment (Principal + Interest)</span>
+                            <span class="result-value" id="totalPayment">—</span>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+
+                        <div id="amortizationContainer" style="margin-top: 2rem; overflow-x: auto;">
+                            <h4>Yearly Amortization Schedule</h4>
+                            <table class="data-table" style="width: 100%; min-width: 500px; text-align: right;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Year</th>
+                                        <th>Principal Paid (₹)</th>
+                                        <th>Interest Paid (₹)</th>
+                                        <th>Total Payment (₹)</th>
+                                        <th>Balance (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="amortizationTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
+                            <a href="fd-calculator.html" class="related-tool-link">🏧 FD Calculator</a>
+                            <a href="compound-interest.html" class="related-tool-link">💰 Compound Interest</a>
+                            <a href="gst-calculator.html" class="related-tool-link">🧾 GST Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the EMI Calculator</h2>
+                    <p>Follow these steps to calculate your Equated Monthly Installment:</p>
+                    <ul>
+                        <li><strong>Step 1:</strong> Enter the principal Loan Amount.</li>
+                        <li><strong>Step 2:</strong> Enter the Interest Rate per annum provided by your bank.</li>
+                        <li><strong>Step 3:</strong> Enter the Loan Tenure and select whether it is in years or months.</li>
+                        <li><strong>Step 4:</strong> Click "Calculate EMI" to see your monthly EMI, total interest payable, and the yearly amortization schedule.</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2>EMI Formula</h2>
+                    <p>The mathematical formula used to calculate EMI is:</p>
+                    <div class="formula-box">
+                        <strong>EMI = [P x R x (1+R)^N] / [(1+R)^N - 1]</strong><br><br>
+                        Where:<br>
+                        <strong>P</strong> = Principal loan amount<br>
+                        <strong>R</strong> = Monthly interest rate (Annual rate / 12 / 100)<br>
+                        <strong>N</strong> = Number of monthly installments (Loan tenure in months)
+                    </div>
+                </div>
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is EMI?</h3>
+                        <p class="faq-answer">EMI stands for Equated Monthly Installment. It is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Does EMI change during the loan tenure?</h3>
+                        <p class="faq-answer">For fixed-rate loans, the EMI remains constant throughout the tenure. For floating-rate loans, the EMI may change if the bank revises the underlying interest rate.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">How does loan tenure affect my EMI?</h3>
+                        <p class="faq-answer">A longer loan tenure means lower monthly EMIs, but you will end up paying more total interest over the life of the loan. A shorter tenure increases your monthly EMI but reduces the total interest burden.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/emi-calculator.js"></script>
+</body>
+</html>

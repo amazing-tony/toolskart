@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator - Mutual Fund Returns Calculator | ToolsKart</title>
+    <meta name="description" content="Free online SIP Calculator to estimate returns on your mutual fund investments. Calculate total wealth, invested amount, and estimated returns.">
+    <meta name="keywords" content="SIP calculator, mutual fund SIP, SIP returns calculator, systematic investment plan, wealth calculator">
+    <link rel="canonical" href="https://toolskart.github.io/pages/sip-calculator.html">
+    <meta property="og:title" content="SIP Calculator | ToolsKart">
+    <meta property="og:description" content="Calculate returns on your mutual fund SIP investments easily.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SIP Calculator",
+      "url": "https://toolskart.github.io/pages/sip-calculator.html",
+      "description": "Calculate returns on your mutual fund SIP investments easily.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; SIP Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>SIP Calculator</h1>
+                    <p class="tool-description">Estimate the future value of your Systematic Investment Plan (SIP) in mutual funds.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="monthlyInvestment">Monthly Investment (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="monthlyInvestment" class="input-field" placeholder="Enter monthly amount" min="0" step="any">
+                                <span class="input-unit">₹ INR</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="returnRate">Expected Return Rate (% per annum)</label>
+                            <input type="number" id="returnRate" class="input-field" placeholder="e.g. 12" min="0" max="100" step="any">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="investmentPeriod">Investment Period (Years)</label>
+                            <input type="number" id="investmentPeriod" class="input-field" placeholder="Enter years" min="0" step="any">
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate Returns</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title">SIP Calculation Result</h3>
+
+                        <div class="result-row">
+                            <span class="result-label">Total Invested Amount</span>
+                            <span class="result-value" id="investedAmount">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Estimated Returns</span>
+                            <span class="result-value" id="estimatedReturns">—</span>
+                        </div>
+                        
+                        <div class="result-highlight" style="margin-top: 1rem;">
+                            <div class="result-label">Total Wealth Generated</div>
+                            <div class="result-value" id="totalValue">—</div>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+
+                        <div id="growthContainer" style="margin-top: 2rem; overflow-x: auto;">
+                            <h4>Year-by-Year Growth Table</h4>
+                            <table class="data-table" style="width: 100%; min-width: 500px; text-align: right;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Year</th>
+                                        <th>Invested (₹)</th>
+                                        <th>Returns (₹)</th>
+                                        <th>Total Value (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="growthTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="compound-interest.html" class="related-tool-link">💰 Compound Interest</a>
+                            <a href="emi-calculator.html" class="related-tool-link">🏦 EMI Calculator</a>
+                            <a href="fd-calculator.html" class="related-tool-link">🏧 FD Calculator</a>
+                            <a href="income-tax-calculator.html" class="related-tool-link">🧾 Income Tax Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the SIP Calculator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Enter the amount you plan to invest every month.</li>
+                        <li><strong>Step 2:</strong> Input the expected annual rate of return (historically equity mutual funds yield 10-14%).</li>
+                        <li><strong>Step 3:</strong> Enter the number of years you want to invest.</li>
+                        <li><strong>Step 4:</strong> Click "Calculate Returns" to see your estimated total wealth.</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2>SIP Formula</h2>
+                    <p>The mathematical formula used to calculate SIP returns is based on compound interest:</p>
+                    <div class="formula-box">
+                        <strong>FV = P × [((1+r)^n - 1) / r] × (1+r)</strong><br><br>
+                        Where:<br>
+                        <strong>FV</strong> = Future Value of the investments<br>
+                        <strong>P</strong> = Monthly investment amount<br>
+                        <strong>r</strong> = Monthly rate of return (Annual rate / 12 / 100)<br>
+                        <strong>n</strong> = Number of monthly installments (Years × 12)
+                    </div>
+                </div>
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is a Systematic Investment Plan (SIP)?</h3>
+                        <p class="faq-answer">A SIP allows you to invest a fixed amount regularly (e.g., monthly) in a mutual fund scheme. It helps in rupee cost averaging and building wealth over the long term through the power of compounding.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Are SIP returns guaranteed?</h3>
+                        <p class="faq-answer">No, SIP returns are generally linked to market performance (like equity or debt markets) and are not guaranteed. The return rate you enter is an estimate based on historical performance or your expectations.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the power of compounding in SIP?</h3>
+                        <p class="faq-answer">Compounding happens when the returns on your investments start generating their own returns. Over a long period, this creates a snowball effect, accelerating the growth of your total wealth.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/sip-calculator.js"></script>
+</body>
+</html>

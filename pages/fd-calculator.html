@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FD Calculator - Fixed Deposit Return Calculator | ToolsKart</title>
+    <meta name="description" content="Free online FD Calculator. Calculate maturity amount and interest earned on your Fixed Deposits with monthly, quarterly, or yearly compounding.">
+    <meta name="keywords" content="FD calculator, fixed deposit calculator, FD interest calculator, FD maturity, term deposit calculator">
+    <link rel="canonical" href="https://toolskart.github.io/pages/fd-calculator.html">
+    <meta property="og:title" content="FD Calculator | ToolsKart">
+    <meta property="og:description" content="Calculate maturity amount and interest earned on your Fixed Deposits.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "FD Calculator",
+      "url": "https://toolskart.github.io/pages/fd-calculator.html",
+      "description": "Calculate maturity amount and interest earned on your Fixed Deposits.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; FD Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>FD Calculator</h1>
+                    <p class="tool-description">Calculate the maturity amount and interest earned on your Fixed Deposit investment.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="depositAmount">Deposit Amount (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="depositAmount" class="input-field" placeholder="Enter principal amount" min="0" step="any">
+                                <span class="input-unit">₹ INR</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate (% p.a.)</label>
+                            <input type="number" id="interestRate" class="input-field" placeholder="Enter annual interest rate" min="0" max="100" step="any">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tenure</label>
+                            <div style="display:flex; gap:10px;">
+                                <input type="number" id="tenureYears" class="input-field" placeholder="Years" min="0" step="1">
+                                <input type="number" id="tenureMonths" class="input-field" placeholder="Months" min="0" max="11" step="1">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="compoundingFrequency">Compounding Frequency</label>
+                            <select id="compoundingFrequency" class="input-field">
+                                <option value="4">Quarterly (Most Common)</option>
+                                <option value="12">Monthly</option>
+                                <option value="2">Half-Yearly</option>
+                                <option value="1">Yearly</option>
+                            </select>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate FD</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title">Fixed Deposit Result</h3>
+
+                        <div class="result-row">
+                            <span class="result-label">Principal Amount</span>
+                            <span class="result-value" id="resPrincipal">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Total Interest Earned</span>
+                            <span class="result-value" id="resInterest">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Effective Annual Rate</span>
+                            <span class="result-value" id="resEffectiveRate">—</span>
+                        </div>
+                        
+                        <div class="result-highlight" style="margin-top: 1rem;">
+                            <div class="result-label">Maturity Amount</div>
+                            <div class="result-value" id="resMaturity">—</div>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="compound-interest.html" class="related-tool-link">💰 Compound Interest</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
+                            <a href="emi-calculator.html" class="related-tool-link">🏦 EMI Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the FD Calculator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Enter the Total Deposit Amount (Principal).</li>
+                        <li><strong>Step 2:</strong> Enter the annual Interest Rate offered by the bank.</li>
+                        <li><strong>Step 3:</strong> Enter the tenure of the Fixed Deposit in years and months.</li>
+                        <li><strong>Step 4:</strong> Select the Compounding Frequency (Indian banks mostly use Quarterly).</li>
+                        <li><strong>Step 5:</strong> Click "Calculate FD" to see your maturity amount and total interest earned.</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2>FD Calculation Formula</h2>
+                    <p>Fixed Deposit maturity is calculated using the compound interest formula:</p>
+                    <div class="formula-box">
+                        <strong>A = P(1 + r/n)^(nt)</strong><br><br>
+                        Where:<br>
+                        <strong>A</strong> = Maturity Amount<br>
+                        <strong>P</strong> = Principal deposit amount<br>
+                        <strong>r</strong> = Annual interest rate (in decimal)<br>
+                        <strong>n</strong> = Number of times interest is compounded per year<br>
+                        <strong>t</strong> = Tenure in years
+                    </div>
+                </div>
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is compounding frequency?</h3>
+                        <p class="faq-answer">It dictates how often the interest is added to the principal balance. Quarterly means interest is calculated and added every 3 months. More frequent compounding leads to slightly higher returns.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is Effective Annual Rate?</h3>
+                        <p class="faq-answer">Because of compounding, the actual yield you get in a year is slightly higher than the quoted annual interest rate. This higher rate is the Effective Annual Rate.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="fd-calculator.html">FD Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="compound-interest.html">Compound Interest</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/fd-calculator.js"></script>
+</body>
+</html>

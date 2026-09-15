@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker & Palette Generator — RGB to HEX | ToolsKart</title>
+    <meta name="description" content="Free online color picker and palette generator. Convert colors between HEX, RGB, and HSL. Instantly generate complementary, analogous, and triadic palettes.">
+    <meta name="keywords" content="color picker, hex color picker, RGB to HEX, color palette generator, HEX to RGB, color schemes">
+    <link rel="canonical" href="https://toolskart.github.io/pages/color-picker.html">
+    <meta property="og:title" content="Color Picker & Palette Generator | ToolsKart">
+    <meta property="og:description" content="Convert colors between HEX, RGB, and HSL. Instantly generate beautiful color palettes.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Color Picker",
+      "url": "https://toolskart.github.io/pages/color-picker.html",
+      "description": "Convert colors between HEX, RGB, and HSL, and generate beautiful color palettes.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .color-picker-container { display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 2rem; }
+        .color-preview-box { width: 150px; height: 150px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 1px solid var(--border-color); flex-shrink: 0; }
+        .color-controls { flex: 1; min-width: 250px; }
+        .color-input-large { width: 100%; height: 50px; border: none; padding: 0; cursor: pointer; border-radius: 8px; margin-bottom: 1rem; }
+        
+        .value-row { display: flex; align-items: center; margin-bottom: 0.75rem; gap: 0.5rem; }
+        .value-label { width: 40px; font-weight: 600; font-size: 0.9rem; }
+        .value-input { flex: 1; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; font-family: monospace; background: var(--bg-alt); }
+        
+        .palette-section { margin-top: 2rem; }
+        .palette-row { margin-bottom: 1.5rem; }
+        .palette-colors { display: flex; height: 80px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid var(--border-color); }
+        .swatch { flex: 1; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 0.5rem; cursor: pointer; transition: 0.2s; position: relative; }
+        .swatch:hover { flex: 1.2; }
+        .swatch-hex { background: rgba(0,0,0,0.6); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; opacity: 0; transition: 0.2s; }
+        .swatch:hover .swatch-hex { opacity: 1; }
+        .copied-toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--text-color); color: var(--bg-color); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 1000; }
+        .copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(-10px); }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#image-tools">Image Tools</a> &raquo; Color Picker
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Color Picker & Palette Generator</h1>
+                    <p class="tool-description">Pick any color, convert it between HEX, RGB, and HSL formats, and generate beautiful color schemes instantly.</p>
+
+                    <div class="tool-interface">
+                        <div class="color-picker-container">
+                            <div class="color-preview-box" id="colorPreview" style="background-color: #3b82f6;"></div>
+                            
+                            <div class="color-controls">
+                                <label for="colorInput" style="display:block; margin-bottom: 0.5rem; font-weight: 500;">Choose a Color:</label>
+                                <input type="color" id="colorInput" class="color-input-large" value="#3b82f6">
+
+                                <div class="value-row">
+                                    <span class="value-label">HEX</span>
+                                    <input type="text" id="hexInput" class="value-input" value="#3b82f6">
+                                    <button class="btn btn-outline btn-sm copy-btn" data-target="hexInput">📋</button>
+                                </div>
+                                <div class="value-row">
+                                    <span class="value-label">RGB</span>
+                                    <input type="text" id="rgbInput" class="value-input" readonly value="rgb(59, 130, 246)">
+                                    <button class="btn btn-outline btn-sm copy-btn" data-target="rgbInput">📋</button>
+                                </div>
+                                <div class="value-row">
+                                    <span class="value-label">HSL</span>
+                                    <input type="text" id="hslInput" class="value-input" readonly value="hsl(217, 90%, 60%)">
+                                    <button class="btn btn-outline btn-sm copy-btn" data-target="hslInput">📋</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+                        <div class="palette-section">
+                            <h3>Generated Color Palettes</h3>
+                            <p class="text-muted" style="margin-bottom: 1.5rem; font-size: 0.9rem;">Click any color swatch to copy its HEX code.</p>
+
+                            <div class="palette-row">
+                                <h4>Complementary</h4>
+                                <div class="palette-colors" id="paletteComp"></div>
+                            </div>
+
+                            <div class="palette-row">
+                                <h4>Analogous</h4>
+                                <div class="palette-colors" id="paletteAnalog"></div>
+                            </div>
+
+                            <div class="palette-row">
+                                <h4>Triadic</h4>
+                                <div class="palette-colors" id="paletteTriad"></div>
+                            </div>
+
+                            <div class="palette-row">
+                                <h4>Monochromatic</h4>
+                                <div class="palette-colors" id="paletteMono"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="image-resizer.html" class="related-tool-link">📏 Image Resizer</a>
+                            <a href="image-compressor.html" class="related-tool-link">📦 Image Compressor</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Color Picker</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Click the large color rectangle to open the system color picker, or manually type a HEX code into the HEX input field.</li>
+                        <li><strong>Step 2:</strong> The tool instantly converts your selected color into HEX, RGB, and HSL values. Click the copy icon next to any value to use it in your CSS or design software.</li>
+                        <li><strong>Step 3:</strong> Scroll down to view automatically generated color palettes based on color theory (Complementary, Analogous, Triadic, Monochromatic).</li>
+                        <li><strong>Step 4:</strong> Click on any generated color swatch to instantly copy its HEX code to your clipboard.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>Understanding Color Models</h2>
+                    <p><strong>HEX (Hexadecimal):</strong> A 6-digit code used primarily in web design (HTML/CSS) to represent colors. It uses combinations of letters (A-F) and numbers (0-9) representing Red, Green, and Blue.</p>
+                    <p><strong>RGB (Red, Green, Blue):</strong> The standard color model used by digital displays. Each value ranges from 0 to 255. Example: <code>rgb(255, 0, 0)</code> is pure red.</p>
+                    <p><strong>HSL (Hue, Saturation, Lightness):</strong> A more intuitive way for humans to understand color. Hue is a degree on the color wheel (0-360), Saturation is a percentage (0% is gray, 100% is full color), and Lightness is a percentage (0% is black, 100% is white).</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is a Complementary color?</h3>
+                        <p class="faq-answer">Complementary colors are pairs of colors that are directly opposite each other on the color wheel (e.g., blue and orange). They create high contrast and high impact when used together.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is an Analogous palette?</h3>
+                        <p class="faq-answer">Analogous color schemes use colors that are next to each other on the color wheel. They usually match well and create serene and comfortable designs, often found in nature.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="copied-toast" id="copiedToast">Copied to clipboard!</div>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/color-picker.js"></script>
+</body>
+</html>

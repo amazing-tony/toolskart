@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter — Beautifier & Validator Online | ToolsKart</title>
+    <meta name="description" content="Free online JSON formatter, beautifier, and validator. Format JSON with indentation, minify JSON, and validate syntax instantly in your browser.">
+    <meta name="keywords" content="JSON formatter, JSON beautifier, JSON validator, format JSON online, minify JSON, pretty print JSON">
+    <link rel="canonical" href="https://toolskart.github.io/pages/json-formatter.html">
+    <meta property="og:title" content="JSON Formatter & Validator Online | ToolsKart">
+    <meta property="og:description" content="Format, beautify, minify, and validate JSON data instantly in your browser.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON Formatter",
+      "url": "https://toolskart.github.io/pages/json-formatter.html",
+      "description": "Format, beautify, minify, and validate JSON data.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .code-area { font-family: 'Fira Code', monospace; font-size: 14px; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
+        .validation-box { padding: 1rem; border-radius: 4px; margin-top: 1rem; display: none; }
+        .valid { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; display: block; }
+        .invalid { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; display: block; }
+        .stats { display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; justify-content: flex-end; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#dev-tools">Dev Tools</a> &raquo; JSON Formatter
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main" style="max-width: 100%;">
+                    <h1>JSON Formatter</h1>
+                    <p class="tool-description">Beautify, format, minify, and validate your JSON data in real-time. Works entirely in your browser.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="jsonInput">Input JSON</label>
+                            <textarea id="jsonInput" class="input-field code-area" rows="8" placeholder='{"paste": "your JSON here"}'></textarea>
+                            <div class="stats" id="inputStats">Size: 0 B | Lines: 0</div>
+                        </div>
+
+                        <div class="toolbar">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" id="formatBtn">✨ Beautify</button>
+                                <button class="btn btn-outline" id="minifyBtn">📦 Minify</button>
+                                <button class="btn btn-outline" id="validateBtn">✅ Validate</button>
+                                <button class="btn btn-outline btn-sm" id="clearBtn">Clear</button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <label for="indent" style="margin:0; font-size: 0.9rem;">Indent:</label>
+                                <select id="indent" class="input-field" style="padding: 0.3rem; margin-bottom:0;">
+                                    <option value="2">2 Spaces</option>
+                                    <option value="4">4 Spaces</option>
+                                    <option value="tab">Tabs</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="validationResult" class="validation-box"></div>
+
+                        <div class="result-area hidden" id="resultArea" style="margin-top: 1.5rem;">
+                            <div class="toolbar">
+                                <h3>Result</h3>
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-outline" id="copyBtn">📋 Copy</button>
+                                    <button class="btn btn-sm btn-outline" id="downloadBtn">💾 Download</button>
+                                </div>
+                            </div>
+                            <textarea id="jsonOutput" class="input-field code-area" rows="12" readonly></textarea>
+                            <div class="stats" id="outputStats">Size: 0 B | Lines: 0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the JSON Formatter</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Paste your unformatted or minified JSON into the input box.</li>
+                        <li><strong>Step 2:</strong> Choose your preferred indentation (2 spaces, 4 spaces, or tabs).</li>
+                        <li><strong>Step 3:</strong> Click <strong>Beautify</strong> to format it, or <strong>Minify</strong> to compress it.</li>
+                        <li><strong>Step 4:</strong> Click <strong>Validate</strong> to check if your JSON has syntax errors.</li>
+                        <li><strong>Step 5:</strong> Copy the result or download it as a <code>.json</code> file.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>What is JSON?</h2>
+                    <p>JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write, and easy for machines to parse and generate. It is widely used in APIs, configuration files, and data storage.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is my JSON data sent to a server?</h3>
+                        <p class="faq-answer">No. All formatting, minifying, and validation happen entirely within your browser using JavaScript. No data is ever uploaded to our servers, ensuring your sensitive information remains private.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why did my JSON fail validation?</h3>
+                        <p class="faq-answer">Common JSON errors include: missing quotes around property names, using single quotes instead of double quotes, trailing commas after the last item in an array or object, or missing commas between items.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What does minifying JSON do?</h3>
+                        <p class="faq-answer">Minifying removes all unnecessary whitespace (spaces, tabs, newlines) from the JSON data. This reduces the file size, making it faster to transmit over the network.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/json-formatter.js"></script>
+</body>
+</html>

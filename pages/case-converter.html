@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Converter — Upper Case to Lower Case Online Tool | ToolsKart</title>
+    <meta name="description" content="Free online case converter. Easily convert text to uppercase, lowercase, title case, sentence case, camelCase, and more. Instant and secure text formatting tool.">
+    <meta name="keywords" content="case converter, uppercase converter, title case converter, lowercase converter, camelcase generator, change text case">
+    <link rel="canonical" href="https://toolskart.github.io/pages/case-converter.html">
+    <meta property="og:title" content="Case Converter — Change Text Case Online | ToolsKart">
+    <meta property="og:description" content="Convert text between uppercase, lowercase, title case, camelCase, and more. Free online formatting tool.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Case Converter",
+      "url": "https://toolskart.github.io/pages/case-converter.html",
+      "description": "Easily convert text to uppercase, lowercase, title case, sentence case, and developer cases like camelCase and snake_case.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .case-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+        .case-btn { padding: 0.5rem 1rem; border-radius: 4px; background: var(--bg-alt); border: 1px solid var(--border-color); cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+        .case-btn:hover { background: var(--border-color); }
+        .output-box { position: relative; margin-top: 1rem; }
+        .copy-abs-btn { position: absolute; top: 0.5rem; right: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#text-tools">Text Tools</a> &raquo; Case Converter
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Case Converter</h1>
+                    <p class="tool-description">Easily transform your text between UPPERCASE, lowercase, Title Case, camelCase, and many more formats.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="textInput">Enter your text below:</label>
+                            <textarea id="textInput" class="input-field" rows="6" placeholder="Type or paste your text here..."></textarea>
+                        </div>
+                        
+                        <div class="case-buttons">
+                            <button class="case-btn" data-action="sentence">Sentence case</button>
+                            <button class="case-btn" data-action="lower">lowercase</button>
+                            <button class="case-btn" data-action="upper">UPPERCASE</button>
+                            <button class="case-btn" data-action="title">Title Case</button>
+                            <button class="case-btn" data-action="camel">camelCase</button>
+                            <button class="case-btn" data-action="snake">snake_case</button>
+                            <button class="case-btn" data-action="kebab">kebab-case</button>
+                            <button class="case-btn" data-action="constant">CONSTANT_CASE</button>
+                            <button class="case-btn" data-action="toggle">tOGGLE cASE</button>
+                            <button class="btn btn-outline btn-sm" id="clearBtn">Clear</button>
+                        </div>
+
+                        <div class="output-box hidden" id="resultArea">
+                            <label>Converted Text:</label>
+                            <textarea id="textOutput" class="input-field" rows="6" readonly></textarea>
+                            <button class="btn btn-primary btn-sm copy-abs-btn" id="copyBtn">📋 Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="word-counter.html" class="related-tool-link">📝 Word Counter</a>
+                            <a href="slug-generator.html" class="related-tool-link">🔗 URL Slug Generator</a>
+                            <a href="lorem-ipsum.html" class="related-tool-link">📃 Lorem Ipsum Generator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Case Converter</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Type or paste your text into the input box.</li>
+                        <li><strong>Step 2:</strong> Click on the desired case format button (e.g., UPPERCASE or Title Case).</li>
+                        <li><strong>Step 3:</strong> The converted text will appear in the output box instantly.</li>
+                        <li><strong>Step 4:</strong> Click the "Copy" button to save the text to your clipboard.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>Supported Case Types</h2>
+                    <p>Our tool supports standard text formats and developer naming conventions:</p>
+                    <ul>
+                        <li><strong>Sentence case:</strong> Capitalizes the first letter of each sentence.</li>
+                        <li><strong>UPPERCASE:</strong> Converts all letters to capitals.</li>
+                        <li><strong>lowercase:</strong> Converts all letters to lowercase.</li>
+                        <li><strong>Title Case:</strong> Capitalizes the first letter of every word.</li>
+                        <li><strong>camelCase:</strong> Removes spaces and capitalizes the first letter of each word except the first (used in programming).</li>
+                        <li><strong>snake_case:</strong> Replaces spaces with underscores (used in database and file naming).</li>
+                        <li><strong>kebab-case:</strong> Replaces spaces with hyphens (used in URLs).</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is Title Case used for?</h3>
+                        <p class="faq-answer">Title Case is typically used for book titles, blog post headings, movie titles, and formal documents. It capitalizes the major words while leaving minor words (like "in", "the", "and") in lowercase, though our simple version capitalizes all words for ease.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why use camelCase or snake_case?</h3>
+                        <p class="faq-answer">These formats are used by programmers. Variable names in code cannot have spaces. JavaScript developers prefer <code>camelCase</code>, while Python developers often use <code>snake_case</code>.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Does this tool work offline?</h3>
+                        <p class="faq-answer">Once the page is loaded, the case converter works entirely in your browser using JavaScript. No server connection is needed, ensuring your data is fast and secure.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/case-converter.js"></script>
+</body>
+</html>

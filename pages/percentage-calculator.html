@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator - Calculate Percentages Easily | ToolsKart</title>
+    <meta name="description" content="Free online percentage calculator. Calculate what is X% of Y, percentage change, increase or decrease with formula explanations.">
+    <meta name="keywords" content="percentage calculator, percent calculator, percentage change, percentage increase, online percentage tool">
+    <link rel="canonical" href="https://toolskart.github.io/pages/percentage-calculator.html">
+    <meta property="og:title" content="Percentage Calculator | ToolsKart">
+    <meta property="og:description" content="Free online percentage calculator with multiple calculation modes.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; }
+        .tab-btn { padding: 0.5rem 1rem; cursor: pointer; border: none; background: transparent; font-weight: 500; color: #555; }
+        .tab-btn.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .inline-inputs { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
+        .inline-inputs .input-field { width: 120px; }
+        .calc-text { font-weight: 500; font-size: 1.1rem; }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Percentage Calculator",
+      "url": "https://toolskart.github.io/pages/percentage-calculator.html",
+      "description": "Calculate what is X% of Y, percentage change, increase or decrease.",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Percentage Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Percentage Calculator</h1>
+                    <p class="tool-description">Easily calculate percentages, percentage changes, and percentage increases/decreases.</p>
+
+                    <div class="tool-interface">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-target="mode1">X% of Y</button>
+                            <button class="tab-btn" data-target="mode2">X is what % of Y</button>
+                            <button class="tab-btn" data-target="mode3">Percentage Change</button>
+                            <button class="tab-btn" data-target="mode4">Increase/Decrease</button>
+                        </div>
+
+                        <!-- Mode 1: What is X% of Y? -->
+                        <div class="tab-content active" id="mode1">
+                            <div class="inline-inputs">
+                                <span class="calc-text">What is</span>
+                                <input type="number" id="m1_x" class="input-field" placeholder="X">
+                                <span class="calc-text">% of</span>
+                                <input type="number" id="m1_y" class="input-field" placeholder="Y">
+                                <span class="calc-text">?</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-primary" onclick="calculateMode1()">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Mode 2: X is what % of Y? -->
+                        <div class="tab-content" id="mode2">
+                            <div class="inline-inputs">
+                                <input type="number" id="m2_x" class="input-field" placeholder="X">
+                                <span class="calc-text">is what % of</span>
+                                <input type="number" id="m2_y" class="input-field" placeholder="Y">
+                                <span class="calc-text">?</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-primary" onclick="calculateMode2()">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Mode 3: Percentage Change -->
+                        <div class="tab-content" id="mode3">
+                            <div class="inline-inputs">
+                                <span class="calc-text">Change from</span>
+                                <input type="number" id="m3_x" class="input-field" placeholder="X">
+                                <span class="calc-text">to</span>
+                                <input type="number" id="m3_y" class="input-field" placeholder="Y">
+                                <span class="calc-text">is what %?</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-primary" onclick="calculateMode3()">Calculate</button>
+                            </div>
+                        </div>
+
+                        <!-- Mode 4: Increase/Decrease by % -->
+                        <div class="tab-content" id="mode4">
+                            <div class="inline-inputs">
+                                <span class="calc-text">What is</span>
+                                <input type="number" id="m4_x" class="input-field" placeholder="X">
+                                <select id="m4_op" class="input-field">
+                                    <option value="inc">Increased by</option>
+                                    <option value="dec">Decreased by</option>
+                                </select>
+                                <input type="number" id="m4_y" class="input-field" placeholder="Y">
+                                <span class="calc-text">%?</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-primary" onclick="calculateMode4()">Calculate</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title">Result</h3>
+                        
+                        <div class="result-highlight" style="text-align: center; font-size: 1.5rem; margin-bottom: 1rem;">
+                            <div class="result-value" id="mainResultText">—</div>
+                        </div>
+
+                        <div class="result-row">
+                            <span class="result-label">Formula Used</span>
+                            <span class="result-value" id="formulaUsed" style="font-family: monospace; background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">—</span>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="gst-calculator.html" class="related-tool-link">🧾 GST Calculator</a>
+                            <a href="age-calculator.html" class="related-tool-link">📅 Age Calculator</a>
+                            <a href="compound-interest.html" class="related-tool-link">💰 Compound Interest</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Percentage Calculator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Select the tab that matches the type of calculation you want to perform.</li>
+                        <li><strong>Step 2:</strong> Enter the required numerical values into the provided fields.</li>
+                        <li><strong>Step 3:</strong> Click the "Calculate" button to view the answer and the mathematical formula used.</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2>Formulas Used</h2>
+                    <div class="formula-box">
+                        <strong>X% of Y:</strong> Result = (X / 100) × Y<br><br>
+                        <strong>X is what % of Y:</strong> Result = (X / Y) × 100<br><br>
+                        <strong>Percentage Change:</strong> Result = ((New Value - Old Value) / |Old Value|) × 100<br><br>
+                        <strong>Increase/Decrease:</strong> Result = Value × (1 ± (Percentage / 100))
+                    </div>
+                </div>
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What does "percent" mean?</h3>
+                        <p class="faq-answer">Percent comes from the Latin "per centum", meaning "by a hundred". It is a number or ratio expressed as a fraction of 100.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">How is percentage change useful?</h3>
+                        <p class="faq-answer">Percentage change is widely used in finance and statistics to show how much a value has grown or shrunk over time relative to its original amount.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I use negative numbers?</h3>
+                        <p class="faq-answer">Yes, for most calculation modes (like percentage change), negative numbers can be used to reflect losses or negative balances.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="percentage-calculator.html">Percentage Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/percentage-calculator.js"></script>
+</body>
+</html>

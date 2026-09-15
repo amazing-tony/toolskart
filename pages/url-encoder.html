@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Encoder / Decoder — Free Online Tool | ToolsKart</title>
+    <meta name="description" content="Free online URL encoder and decoder. Safely encode URL components or decode URLs back to a readable format instantly in your browser.">
+    <meta name="keywords" content="URL encoder, URL decoder, encode URL online, URI encode, decode URI component, URL formatter">
+    <link rel="canonical" href="https://toolskart.github.io/pages/url-encoder.html">
+    <meta property="og:title" content="URL Encoder / Decoder Online | ToolsKart">
+    <meta property="og:description" content="Encode and decode URLs and URI components instantly in your browser.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "URL Encoder Decoder",
+      "url": "https://toolskart.github.io/pages/url-encoder.html",
+      "description": "Encode and decode URLs and URI components instantly.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .action-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; justify-content: center; }
+        .error-msg { color: #d32f2f; font-size: 0.9rem; margin-top: 0.5rem; display: none; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#dev-tools">Dev Tools</a> &raquo; URL Encoder / Decoder
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>URL Encoder / Decoder</h1>
+                    <p class="tool-description">Safely encode URLs to transmit data or decode strings back into readable text format.</p>
+
+                    <div class="tool-interface">
+                        <!-- Input -->
+                        <div class="form-group">
+                            <label for="textInput">Enter text or URL to encode/decode:</label>
+                            <textarea id="textInput" class="input-field" rows="6" placeholder="https://example.com/search?q=hello world"></textarea>
+                            <div id="errorMsg" class="error-msg"></div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="action-bar">
+                            <button class="btn btn-primary" id="encodeUrlBtn">Encode URL</button>
+                            <button class="btn btn-primary" id="encodeCompBtn">Encode Component</button>
+                            <button class="btn btn-outline" id="decodeUrlBtn">Decode URL</button>
+                            <button class="btn btn-outline" id="decodeCompBtn">Decode Component</button>
+                            <button class="btn btn-outline" id="clearBtn" style="border-color: #dc3545; color: #dc3545;">Clear</button>
+                        </div>
+
+                        <!-- Output -->
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <div class="toolbar">
+                                <label for="textOutput" style="margin:0;">Result:</label>
+                                <button class="btn btn-sm btn-outline" id="copyBtn">📋 Copy Output</button>
+                            </div>
+                            <textarea id="textOutput" class="input-field" rows="6" readonly placeholder="Result will appear here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="base64-tool.html" class="related-tool-link">🔐 Base64 Converter</a>
+                            <a href="slug-generator.html" class="related-tool-link">🔗 URL Slug Generator</a>
+                            <a href="json-formatter.html" class="related-tool-link">📦 JSON Formatter</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the URL Encoder</h2>
+                    <ul>
+                        <li><strong>Encode URL:</strong> Encodes an entire URL, leaving reserved characters like <code>: / ? # & =</code> intact so the URL remains valid.</li>
+                        <li><strong>Encode Component:</strong> Encodes everything, including reserved characters. Use this for encoding a value that will be placed <em>inside</em> a URL parameter (e.g., a search query).</li>
+                        <li><strong>Decode:</strong> Reverses the encoding process, turning <code>%20</code> back into spaces, etc.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>What is URL Encoding?</h2>
+                    <p>URL encoding (also known as Percent-encoding) is a mechanism for encoding information in a Uniform Resource Identifier (URI). Since URLs can only be sent over the Internet using the ASCII character-set, unsafe characters (like spaces or special symbols) must be replaced with a <code>%</code> followed by their two-digit hexadecimal equivalent.</p>
+                    <p>For example, a space becomes <code>%20</code>, and an ampersand (&) becomes <code>%26</code>.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">When should I use "Encode Component"?</h3>
+                        <p class="faq-answer">Use "Encode Component" (which uses JavaScript's <code>encodeURIComponent</code>) when you are encoding a string to be used as a query parameter value. For example, if you want to pass <code>http://test.com</code> as a parameter <code>?url=...</code>, you must use Encode Component so the slashes are properly escaped.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is this tool secure?</h3>
+                        <p class="faq-answer">Yes, 100%. The encoding and decoding happens entirely inside your browser using standard JavaScript functions. No data is ever transmitted to our servers.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/url-encoder.js"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Calculator — Calculate GST Amount Online Free | ToolsKart</title>
+    <meta name="description" content="Free online GST Calculator for India. Calculate CGST, SGST, IGST amounts with all GST slabs — 5%, 12%, 18%, 28%. Add or remove GST from any price instantly.">
+    <meta name="keywords" content="GST calculator, GST calculator online, calculate GST, CGST SGST calculator, IGST calculator, GST India, add GST, remove GST, GST slab calculator">
+    <link rel="canonical" href="https://toolskart.github.io/pages/gst-calculator.html">
+    <meta property="og:title" content="GST Calculator — Calculate GST Online Free | ToolsKart">
+    <meta property="og:description" content="Calculate CGST, SGST, IGST amounts with all Indian GST slabs. Add or remove GST from any price.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "GST Calculator",
+      "url": "https://toolskart.github.io/pages/gst-calculator.html",
+      "description": "Free online GST Calculator for India. Calculate CGST, SGST, IGST with all GST slabs.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; GST Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>GST Calculator</h1>
+                    <p class="tool-description">Calculate GST (Goods and Services Tax) amount for any price with Indian GST slabs. Add or remove GST instantly.</p>
+
+                    <div class="tool-interface">
+                        <!-- Tax Type -->
+                        <div class="form-group">
+                            <label>Calculation Type</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="calcType" value="add" checked> Add GST to Price
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="calcType" value="remove"> Remove GST from Price
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Amount -->
+                        <div class="form-group">
+                            <label for="amount">Amount (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="amount" class="input-field" placeholder="Enter amount" min="0" step="any">
+                                <span class="input-unit">₹ INR</span>
+                            </div>
+                        </div>
+
+                        <!-- GST Rate -->
+                        <div class="form-group">
+                            <label for="gstRate">GST Rate (%)</label>
+                            <select id="gstRate" class="input-field">
+                                <option value="5">5% (Essential goods)</option>
+                                <option value="12">12% (Standard goods)</option>
+                                <option value="18" selected>18% (Most services)</option>
+                                <option value="28">28% (Luxury goods)</option>
+                                <option value="custom">Custom Rate</option>
+                            </select>
+                        </div>
+
+                        <!-- Custom Rate (hidden by default) -->
+                        <div class="form-group hidden" id="customRateGroup">
+                            <label for="customRate">Custom GST Rate (%)</label>
+                            <input type="number" id="customRate" class="input-field" placeholder="Enter custom rate" min="0" max="100" step="any">
+                        </div>
+
+                        <!-- Tax Type: IGST or CGST+SGST -->
+                        <div class="form-group">
+                            <label>Tax Type</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="taxType" value="cgst_sgst" checked> CGST + SGST (Intra-state)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="taxType" value="igst"> IGST (Inter-state)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate GST</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title" id="resultTitle">GST Calculation Result</h3>
+
+                        <div class="result-row">
+                            <span class="result-label" id="originalLabel">Original Price</span>
+                            <span class="result-value" id="originalPrice">—</span>
+                        </div>
+
+                        <div id="cgstSgstRows">
+                            <div class="result-row">
+                                <span class="result-label" id="cgstLabel">CGST (9%)</span>
+                                <span class="result-value" id="cgstAmount">—</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label" id="sgstLabel">SGST (9%)</span>
+                                <span class="result-value" id="sgstAmount">—</span>
+                            </div>
+                        </div>
+
+                        <div id="igstRow" class="hidden">
+                            <div class="result-row">
+                                <span class="result-label" id="igstLabel">IGST (18%)</span>
+                                <span class="result-value" id="igstAmount">—</span>
+                            </div>
+                        </div>
+
+                        <div class="result-row">
+                            <span class="result-label">Total GST Amount</span>
+                            <span class="result-value" id="totalGst">—</span>
+                        </div>
+
+                        <div class="result-highlight">
+                            <div class="result-label" id="finalLabel">Total Price (incl. GST)</div>
+                            <div class="result-value" id="finalPrice">—</div>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>GST Slabs in India</h3>
+                        <table class="data-table" style="font-size: 0.85rem;">
+                            <tbody>
+                                <tr><td><strong>5%</strong></td><td>Essential goods, transport</td></tr>
+                                <tr><td><strong>12%</strong></td><td>Processed food, electronics</td></tr>
+                                <tr><td><strong>18%</strong></td><td>Most services, IT products</td></tr>
+                                <tr><td><strong>28%</strong></td><td>Luxury items, automobiles</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="income-tax-calculator.html" class="related-tool-link">🧾 Income Tax Calculator</a>
+                            <a href="percentage-calculator.html" class="related-tool-link">📊 Percentage Calculator</a>
+                            <a href="emi-calculator.html" class="related-tool-link">🏦 EMI Calculator</a>
+                            <a href="fd-calculator.html" class="related-tool-link">🏧 FD Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the GST Calculator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Choose whether you want to add GST to a price or remove GST from a GST-inclusive price.</li>
+                        <li><strong>Step 2:</strong> Enter the amount in Indian Rupees (₹).</li>
+                        <li><strong>Step 3:</strong> Select the applicable GST rate — 5%, 12%, 18%, 28%, or enter a custom rate.</li>
+                        <li><strong>Step 4:</strong> Choose whether it's an intra-state (CGST + SGST) or inter-state (IGST) transaction.</li>
+                        <li><strong>Step 5:</strong> Click "Calculate GST" to see the detailed tax breakdown.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>GST Calculation Formula</h2>
+                    <p>GST (Goods and Services Tax) is calculated differently based on whether you're adding or removing tax:</p>
+                    <div class="formula-box">
+                        <strong>Adding GST:</strong><br>
+                        GST Amount = Original Price × (GST Rate / 100)<br>
+                        Total Price = Original Price + GST Amount<br><br>
+                        <strong>Removing GST:</strong><br>
+                        Original Price = GST-Inclusive Price / (1 + GST Rate / 100)<br>
+                        GST Amount = GST-Inclusive Price − Original Price
+                    </div>
+                    <p>For intra-state transactions, GST is split equally between CGST (Central GST) and SGST (State GST). For inter-state transactions, the full rate applies as IGST (Integrated GST).</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is GST?</h3>
+                        <p class="faq-answer">GST (Goods and Services Tax) is a comprehensive indirect tax on the supply of goods and services in India. It replaced multiple cascading taxes and was implemented on July 1, 2017. GST is levied at every stage of the supply chain with credit available for taxes paid at earlier stages.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the difference between CGST, SGST, and IGST?</h3>
+                        <p class="faq-answer">CGST (Central GST) and SGST (State GST) are levied on intra-state transactions — when the buyer and seller are in the same state. IGST (Integrated GST) is levied on inter-state transactions — when goods/services move between different states. The total tax rate remains the same; only the split changes.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What are the current GST slabs in India?</h3>
+                        <p class="faq-answer">India has four main GST slabs: 5% (essential items like packaged food, transport services), 12% (processed food, computers, umbrellas), 18% (most services including IT, telecom, financial services, restaurants), and 28% (luxury items like automobiles, aerated drinks, premium goods). Some items like fresh food, milk, and grains are GST-exempt (0%).</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">How do I remove GST from a price?</h3>
+                        <p class="faq-answer">To find the original price before GST, divide the GST-inclusive price by (1 + GST rate/100). For example, if an item costs ₹1,180 including 18% GST: Original Price = ₹1,180 / 1.18 = ₹1,000. The GST amount is ₹180.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone. Built with ❤️ in India.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/gst-calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tax Calculator India (FY 2025-26) | ToolsKart</title>
+    <meta name="description" content="Free online Income Tax Calculator for India FY 2025-26. Compare Old vs New Tax Regime, calculate total tax, cess, and take-home salary.">
+    <meta name="keywords" content="income tax calculator India, tax calculator 2025-26, new regime tax, old regime tax, salary tax calculator">
+    <link rel="canonical" href="https://toolskart.github.io/pages/income-tax-calculator.html">
+    <meta property="og:title" content="Income Tax Calculator India | ToolsKart">
+    <meta property="og:description" content="Calculate your income tax for FY 2025-26 under Old and New Regimes.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Income Tax Calculator",
+      "url": "https://toolskart.github.io/pages/income-tax-calculator.html",
+      "description": "Calculate your income tax for FY 2025-26 under Old and New Regimes.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Income Tax Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Income Tax Calculator (FY 2025-26)</h1>
+                    <p class="tool-description">Calculate your income tax liability and compare Old vs New tax regimes for salaried individuals.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="annualIncome">Annual Income (Gross Salary) (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="annualIncome" class="input-field" placeholder="Enter annual income" min="0" step="any">
+                                <span class="input-unit">₹ INR</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ageGroup">Age Group</label>
+                            <select id="ageGroup" class="input-field">
+                                <option value="under60">Below 60 years</option>
+                                <option value="60to80">60 to 80 years (Senior Citizen)</option>
+                                <option value="above80">Above 80 years (Super Senior Citizen)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tax Regime</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="taxRegime" value="new" checked> New Regime
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="taxRegime" value="old"> Old Regime
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate Tax</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title">Tax Calculation Result</h3>
+
+                        <div class="result-row">
+                            <span class="result-label">Gross Income</span>
+                            <span class="result-value" id="resGrossIncome">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Standard Deduction</span>
+                            <span class="result-value" id="resStdDeduction">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Taxable Income</span>
+                            <span class="result-value" id="resTaxableIncome">—</span>
+                        </div>
+                        
+                        <div style="margin: 1.5rem 0;">
+                            <h4>Tax Breakdown by Slabs</h4>
+                            <div id="slabBreakdown" style="background: #f8fafc; padding: 1rem; border-radius: 8px; font-size: 0.95rem;">
+                            </div>
+                        </div>
+
+                        <div class="result-row">
+                            <span class="result-label">Income Tax</span>
+                            <span class="result-value" id="resIncomeTax">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Health & Education Cess (4%)</span>
+                            <span class="result-value" id="resCess">—</span>
+                        </div>
+                        
+                        <div class="result-highlight" style="margin-top: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; border-radius: 8px 8px 0 0;">
+                            <div class="result-label">Total Tax Liability</div>
+                            <div class="result-value" id="resTotalTax">—</div>
+                        </div>
+                        <div class="result-highlight" style="background-color: #f0fdf4; border-color: #bbf7d0; border-radius: 0 0 8px 8px;">
+                            <div class="result-label">Take-Home Salary</div>
+                            <div class="result-value" id="resTakeHome">—</div>
+                        </div>
+
+                        <div class="result-row" style="margin-top: 1rem;">
+                            <span class="result-label">Effective Tax Rate</span>
+                            <span class="result-value" id="resEffectiveRate">—</span>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="gst-calculator.html" class="related-tool-link">🧾 GST Calculator</a>
+                            <a href="emi-calculator.html" class="related-tool-link">🏦 EMI Calculator</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Income Tax Calculator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Enter your Gross Annual Income.</li>
+                        <li><strong>Step 2:</strong> Select your age group as basic exemption limits differ in the Old Regime based on age.</li>
+                        <li><strong>Step 3:</strong> Select the Tax Regime you want to evaluate (Old or New).</li>
+                        <li><strong>Step 4:</strong> Click "Calculate Tax" to see your tax liability, cess, and take-home salary.</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2>Tax Slabs (FY 2025-26)</h2>
+                    <p><strong>New Tax Regime:</strong> Standard Deduction is ₹75,000.<br>
+                    0 to 4L: Nil | 4L to 8L: 5% | 8L to 12L: 10% | 12L to 16L: 15% | 16L to 20L: 20% | 20L to 24L: 25% | > 24L: 30%</p>
+                    <p><strong>Old Tax Regime:</strong> Standard Deduction is ₹50,000.<br>
+                    Below 60 yrs: 0-2.5L: Nil | 2.5L-5L: 5% | 5L-10L: 20% | > 10L: 30%<br>
+                    60-80 yrs: 0-3L: Nil | 3L-5L: 5% | 5L-10L: 20% | > 10L: 30%<br>
+                    > 80 yrs: 0-5L: Nil | 5L-10L: 20% | > 10L: 30%</p>
+                </div>
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is Standard Deduction?</h3>
+                        <p class="faq-answer">It is a flat deduction from your gross salary. For the New Regime in FY 2025-26, it is ₹75,000, and for the Old Regime, it is ₹50,000.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is Health and Education Cess?</h3>
+                        <p class="faq-answer">An additional 4% cess is levied on the calculated income tax to fund health and education initiatives.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Which regime is better?</h3>
+                        <p class="faq-answer">The New Regime generally offers lower tax rates but fewer deductions. If you have significant investments like 80C, HRA, home loan interest, the Old Regime might be better. You should calculate both to see which lowers your tax liability.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/income-tax-calculator.js"></script>
+</body>
+</html>

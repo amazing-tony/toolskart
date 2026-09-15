@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter — Free Online Word & Character Count Tool | ToolsKart</title>
+    <meta name="description" content="Free online word counter tool. Instantly count words, characters, sentences, paragraphs, and check reading time. SEO optimized word count tool.">
+    <meta name="keywords" content="word counter, character counter, word count tool, character count online, text counter, reading time calculator">
+    <link rel="canonical" href="https://toolskart.github.io/pages/word-counter.html">
+    <meta property="og:title" content="Word Counter — Free Online Word & Character Count Tool | ToolsKart">
+    <meta property="og:description" content="Instantly count words, characters, sentences, and paragraphs. Free online text analysis tool.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Word Counter",
+      "url": "https://toolskart.github.io/pages/word-counter.html",
+      "description": "Free online word counter tool. Instantly count words, characters, sentences, paragraphs, and check reading time.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-box { background: var(--bg-alt); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.25rem; }
+        .stat-label { font-size: 0.875rem; color: var(--text-muted); }
+        .freq-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .freq-item { background: var(--bg-alt); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.875rem; border: 1px solid var(--border-color); }
+        .freq-count { font-weight: 600; margin-left: 0.25rem; color: var(--primary-color); }
+        @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#text-tools">Text Tools</a> &raquo; Word Counter
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Word Counter</h1>
+                    <p class="tool-description">Count words, characters, sentences, and paragraphs in real-time. Calculate reading and speaking time instantly.</p>
+
+                    <div class="tool-interface">
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-value" id="wordCount">0</div>
+                                <div class="stat-label">Words</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="charCount">0</div>
+                                <div class="stat-label">Characters</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="charNoSpaceCount">0</div>
+                                <div class="stat-label">Characters (no spaces)</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="sentenceCount">0</div>
+                                <div class="stat-label">Sentences</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="paragraphCount">0</div>
+                                <div class="stat-label">Paragraphs</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value" id="readTime">0 min</div>
+                                <div class="stat-label">Reading Time</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="textInput">Type or paste your text here</label>
+                            <textarea id="textInput" class="input-field" rows="10" placeholder="Start typing or paste your text..."></textarea>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button class="btn btn-outline" id="clearBtn">↺ Clear Text</button>
+                            <button class="btn btn-outline" id="copyBtn">📋 Copy Text</button>
+                        </div>
+
+                        <div class="result-area" style="margin-top: 1.5rem;">
+                            <h3>Top 10 Keywords</h3>
+                            <div class="freq-list" id="keywordList">
+                                <span class="text-muted">Type some text to see frequent words.</span>
+                            </div>
+                            <p class="text-muted" style="margin-top: 1rem; font-size: 0.85rem;">Speaking Time: <span id="speakTime">0 min</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="case-converter.html" class="related-tool-link">🔠 Case Converter</a>
+                            <a href="lorem-ipsum.html" class="related-tool-link">📝 Lorem Ipsum Generator</a>
+                            <a href="slug-generator.html" class="related-tool-link">🔗 URL Slug Generator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Word Counter</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Type or paste your text into the text box above.</li>
+                        <li><strong>Step 2:</strong> The word count, character count, and other metrics will update automatically in real-time.</li>
+                        <li><strong>Step 3:</strong> Check your keyword density in the top 10 keywords list below the text area.</li>
+                        <li><strong>Step 4:</strong> Use the "Copy" or "Clear" buttons to easily manage your text.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>How Reading and Speaking Times are Calculated</h2>
+                    <p>Our tool estimates reading time based on an average reading speed of <strong>200 words per minute (WPM)</strong>, which is standard for adult readers.</p>
+                    <p>Speaking time is calculated based on a conversational speaking rate of <strong>130 words per minute</strong>. These metrics are helpful for writing speeches, presentations, or timing blog post reads.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Does this tool save my text?</h3>
+                        <p class="faq-answer">No, our Word Counter runs entirely in your browser using JavaScript. No text is ever uploaded to our servers, ensuring your data remains 100% private and secure.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the difference between characters and characters without spaces?</h3>
+                        <p class="faq-answer">"Characters" counts every single keystroke, including spaces, tabs, and line breaks. "Characters (no spaces)" ignores all white space. Many systems (like SMS or Twitter) count spaces as characters, while some specific academic assignments only count letters.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">How does it count sentences?</h3>
+                        <p class="faq-answer">The tool counts sentences by looking for punctuation marks that typically end a sentence, such as periods, exclamation points, and question marks.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/word-counter.js"></script>
+</body>
+</html>

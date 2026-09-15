@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator | ToolsKart</title>
+    <meta name="description" content="Free online compound interest calculator. Calculate future value, compare with simple interest, and view year-by-year growth.">
+    <meta name="keywords" content="compound interest calculator, CI calculator, compound interest formula, simple vs compound interest">
+    <link rel="canonical" href="https://toolskart.github.io/pages/compound-interest.html">
+    <meta property="og:title" content="Compound Interest Calculator | ToolsKart">
+    <meta property="og:description" content="Calculate compound interest and view year-by-year growth of your investment.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Compound Interest Calculator",
+      "url": "https://toolskart.github.io/pages/compound-interest.html",
+      "description": "Calculate compound interest and view year-by-year growth.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Compound Interest Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Compound Interest Calculator</h1>
+                    <p class="tool-description">Calculate the power of compounding on your investment and compare it with simple interest.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="principal">Principal Amount (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="principal" class="input-field" placeholder="Enter initial amount" min="0" step="any">
+                                <span class="input-unit">₹ INR</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rate">Annual Interest Rate (%)</label>
+                            <input type="number" id="rate" class="input-field" placeholder="e.g. 8" min="0" max="100" step="any">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Time Period (Years)</label>
+                            <input type="number" id="time" class="input-field" placeholder="Enter years" min="0" step="any">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="compoundingFrequency">Compounding Frequency</label>
+                            <select id="compoundingFrequency" class="input-field">
+                                <option value="1">Yearly</option>
+                                <option value="2">Half-Yearly</option>
+                                <option value="4">Quarterly</option>
+                                <option value="12">Monthly</option>
+                            </select>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate</button>
+                            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="result-area hidden" id="resultArea">
+                        <h3 class="result-title">Interest Calculation Result</h3>
+
+                        <div class="result-highlight" style="margin-bottom: 1rem;">
+                            <div class="result-label">Total Amount (Principal + Compound Interest)</div>
+                            <div class="result-value" id="resTotalAmount">—</div>
+                        </div>
+
+                        <div class="result-row">
+                            <span class="result-label">Principal Amount</span>
+                            <span class="result-value" id="resPrincipal">—</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label" style="color: var(--primary-color); font-weight: 600;">Compound Interest</span>
+                            <span class="result-value" id="resCompoundInterest" style="color: var(--primary-color); font-weight: 600;">—</span>
+                        </div>
+                        <div class="result-row" style="opacity: 0.8; font-size: 0.95rem;">
+                            <span class="result-label">Simple Interest (For comparison)</span>
+                            <span class="result-value" id="resSimpleInterest">—</span>
+                        </div>
+                        <div class="result-row" style="opacity: 0.8; font-size: 0.95rem; background: #f8fafc;">
+                            <span class="result-label">Extra earned due to Compounding</span>
+                            <span class="result-value" id="resDifference">—</span>
+                        </div>
+
+                        <div style="margin-top: 1rem; text-align: right;">
+                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        </div>
+
+                        <div id="growthContainer" style="margin-top: 2rem; overflow-x: auto;">
+                            <h4>Year-by-Year Growth</h4>
+                            <table class="data-table" style="width: 100%; min-width: 500px; text-align: right;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;">Year</th>
+                                        <th>Interest Earned (₹)</th>
+                                        <th>End Balance (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="growthTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="fd-calculator.html" class="related-tool-link">🏧 FD Calculator</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
+                            <a href="percentage-calculator.html" class="related-tool-link">📊 Percentage Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Compound Interest Calculator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Enter the initial Principal Amount.</li>
+                        <li><strong>Step 2:</strong> Input the annual interest rate.</li>
+                        <li><strong>Step 3:</strong> Specify the duration of the investment in years.</li>
+                        <li><strong>Step 4:</strong> Select how frequently the interest compounds.</li>
+                        <li><strong>Step 5:</strong> Click "Calculate" to see the future value and a detailed breakdown.</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h2>Compound Interest Formula</h2>
+                    <p>Unlike simple interest, compound interest is calculated on the initial principal, which also includes all of the accumulated interest from previous periods.</p>
+                    <div class="formula-box">
+                        <strong>A = P(1 + r/n)^(nt)</strong><br><br>
+                        Where:<br>
+                        <strong>A</strong> = Total Amount (Principal + Interest)<br>
+                        <strong>P</strong> = Principal Amount<br>
+                        <strong>r</strong> = Annual Interest Rate (decimal)<br>
+                        <strong>n</strong> = Number of times interest is compounded per year<br>
+                        <strong>t</strong> = Time in years
+                    </div>
+                </div>
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the difference between Simple and Compound Interest?</h3>
+                        <p class="faq-answer">Simple interest is based solely on the principal amount. Compound interest is based on the principal amount and the interest that accumulates on it every period. Over time, compound interest grows much faster.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Why does compounding frequency matter?</h3>
+                        <p class="faq-answer">More frequent compounding (e.g., monthly vs. yearly) means that interest is added to your balance sooner, allowing it to start earning its own interest earlier. This results in slightly higher total returns.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="compound-interest.html">Compound Interest</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/compound-interest.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Tag Generator — Free SEO & Open Graph Tags | ToolsKart</title>
+    <meta name="description" content="Free online SEO Meta Tag Generator. Create HTML meta tags, Open Graph tags, and Twitter Cards to improve your website's search engine ranking and social sharing.">
+    <meta name="keywords" content="meta tag generator, SEO meta tags, open graph generator, twitter card generator, html meta tags">
+    <link rel="canonical" href="https://toolskart.github.io/pages/meta-tag-generator.html">
+    <meta property="og:title" content="Meta Tag Generator | ToolsKart">
+    <meta property="og:description" content="Create perfectly formatted SEO meta tags, Open Graph tags, and Twitter Cards instantly.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Meta Tag Generator",
+      "url": "https://toolskart.github.io/pages/meta-tag-generator.html",
+      "description": "Create HTML meta tags, Open Graph tags, and Twitter Cards.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .preview-box { border: 1px solid #dfe1e5; border-radius: 8px; padding: 1.2rem; background: #fff; margin-bottom: 2rem; box-shadow: 0 1px 6px rgba(32,33,36,.28); }
+        .google-url { font-size: 14px; color: #202124; margin-bottom: 4px; font-family: arial, sans-serif; }
+        .google-title { font-size: 20px; color: #1a0dab; margin-bottom: 4px; font-family: arial, sans-serif; font-weight: normal; }
+        .google-desc { font-size: 14px; color: #4d5156; line-height: 1.58; font-family: arial, sans-serif; }
+        .code-output { font-family: monospace; font-size: 14px; white-space: pre; background: var(--bg-alt); }
+        .input-hint { font-size: 0.8rem; color: var(--text-muted); float: right; }
+        .char-count.over { color: #dc3545; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#dev-tools">Dev Tools</a> &raquo; Meta Tag Generator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Meta Tag Generator</h1>
+                    <p class="tool-description">Create HTML meta tags, Open Graph (Facebook), and Twitter Card tags to boost your SEO and social media presence.</p>
+
+                    <div class="tool-interface">
+                        <!-- Preview -->
+                        <label>Google Search Preview</label>
+                        <div class="preview-box">
+                            <div class="google-url" id="previewUrl">https://example.com/your-page</div>
+                            <div class="google-title" id="previewTitle">Your Page Title Here</div>
+                            <div class="google-desc" id="previewDesc">Your page description will appear here. Make it compelling and include keywords to improve click-through rates.</div>
+                        </div>
+
+                        <!-- Form -->
+                        <div class="form-group">
+                            <label for="siteTitle">Page Title <span class="input-hint"><span id="titleCount">0</span> / 60</span></label>
+                            <input type="text" id="siteTitle" class="input-field" placeholder="e.g., Best Pizza in New York | Mario's">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="siteDesc">Description <span class="input-hint"><span id="descCount">0</span> / 160</span></label>
+                            <textarea id="siteDesc" class="input-field" rows="3" placeholder="Brief description of the page content for search engines..."></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="siteUrl">Canonical URL</label>
+                                <input type="url" id="siteUrl" class="input-field" placeholder="https://example.com/page">
+                            </div>
+                            <div class="form-group">
+                                <label for="siteAuthor">Author</label>
+                                <input type="text" id="siteAuthor" class="input-field" placeholder="John Doe">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="siteKeywords">Keywords (Comma separated, less relevant for Google today)</label>
+                            <input type="text" id="siteKeywords" class="input-field" placeholder="pizza, new york, italian food">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ogImage">Open Graph Image URL</label>
+                                <input type="url" id="ogImage" class="input-field" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label for="twitterHandle">Twitter Handle</label>
+                                <input type="text" id="twitterHandle" class="input-field" placeholder="@username">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Robots Indexing</label>
+                                <select id="robotsIndex" class="input-field">
+                                    <option value="index">Index (Allow search engines to show page)</option>
+                                    <option value="noindex">No-Index (Hide from search engines)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Robots Following</label>
+                                <select id="robotsFollow" class="input-field">
+                                    <option value="follow">Follow (Allow crawling links)</option>
+                                    <option value="nofollow">No-Follow (Do not crawl links)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Output -->
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <label style="margin: 0;">Generated HTML Code</label>
+                                <button class="btn btn-sm btn-primary" id="copyBtn">📋 Copy Tags</button>
+                            </div>
+                            <textarea id="outputArea" class="input-field code-output" rows="12" readonly></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="slug-generator.html" class="related-tool-link">🔗 URL Slug Generator</a>
+                            <a href="url-encoder.html" class="related-tool-link">🔗 URL Encoder</a>
+                            <a href="word-counter.html" class="related-tool-link">📝 Word Counter</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the Meta Tag Generator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Fill in the page title and description. Keep an eye on the character counters to ensure they don't get truncated in search results.</li>
+                        <li><strong>Step 2:</strong> Watch the Google Search Preview update in real-time to see how your page will look to users.</li>
+                        <li><strong>Step 3:</strong> Fill in the advanced fields for Social Media (Open Graph & Twitter) and robot directives.</li>
+                        <li><strong>Step 4:</strong> Click "Copy Tags" and paste the generated code into the <code>&lt;head&gt;</code> section of your HTML document.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>What are Meta Tags?</h2>
+                    <p>Meta tags are snippets of HTML code that describe a page's content. They don't appear on the page itself, but only in the page's source code. Search engines like Google use meta tags to help understand what the page is about.</p>
+                    <p><strong>Open Graph (OG)</strong> tags are used by Facebook, LinkedIn, and other social networks to display a rich preview (image, title, description) when someone shares your link.</p>
+                    <p><strong>Twitter Cards</strong> work similarly to Open Graph tags but are specific to Twitter.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Are meta keywords still important?</h3>
+                        <p class="faq-answer">Google officially announced in 2009 that they do not use the meta keywords tag for web ranking. However, some smaller search engines might still use them, and they can be useful for internal site search engines. We include them for completeness, but title and description are far more critical.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is a Canonical URL?</h3>
+                        <p class="faq-answer">The canonical tag tells search engines which version of a URL you want to appear in search results. It prevents duplicate content issues if your page can be accessed via multiple URLs (e.g., with or without 'www', or with tracking parameters).</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What do Index and Follow mean?</h3>
+                        <p class="faq-answer">"Index" tells search engines to add your page to their database. "Noindex" tells them to exclude it. "Follow" tells crawlers to follow the links on that page to discover new pages. "Nofollow" tells them to ignore the links.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/meta-tag-generator.js"></script>
+</body>
+</html>

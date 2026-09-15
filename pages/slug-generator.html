@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Slug Generator — Create SEO Friendly URLs | ToolsKart</title>
+    <meta name="description" content="Free online URL slug generator. Convert any text, title, or string into an SEO-friendly URL slug instantly. Customize separators and length.">
+    <meta name="keywords" content="slug generator, URL slug, SEO URL generator, create slug, text to slug, permalink generator">
+    <link rel="canonical" href="https://toolskart.github.io/pages/slug-generator.html">
+    <meta property="og:title" content="URL Slug Generator — Create SEO Friendly URLs | ToolsKart">
+    <meta property="og:description" content="Convert any text or title into a clean, SEO-friendly URL slug instantly.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "URL Slug Generator",
+      "url": "https://toolskart.github.io/pages/slug-generator.html",
+      "description": "Convert any text, title, or string into an SEO-friendly URL slug instantly.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#text-tools">Text Tools</a> &raquo; URL Slug Generator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>URL Slug Generator</h1>
+                    <p class="tool-description">Convert your post titles and strings into clean, readable, and SEO-friendly URL slugs.</p>
+
+                    <div class="tool-interface">
+                        <div class="form-group">
+                            <label for="textInput">Enter Title or String</label>
+                            <input type="text" id="textInput" class="input-field" placeholder="e.g., How to Build a URL Slug Generator in 2026!">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="separator">Separator</label>
+                                <select id="separator" class="input-field">
+                                    <option value="-">Hyphen (-)</option>
+                                    <option value="_">Underscore (_)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxLength">Max Length (optional)</label>
+                                <input type="number" id="maxLength" class="input-field" placeholder="No limit" min="5">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="radio-option">
+                                <input type="checkbox" id="transliterate" checked> Transliterate special characters (e.g., é → e)
+                            </label>
+                        </div>
+
+                        <div class="result-area" style="margin-top: 1.5rem;">
+                            <label>Generated Slug:</label>
+                            <div style="position: relative;">
+                                <input type="text" id="slugOutput" class="input-field" readonly style="padding-right: 80px; font-family: monospace; background: var(--bg-color);">
+                                <button class="btn btn-primary btn-sm" id="copyBtn" style="position: absolute; right: 5px; top: 5px; padding: 0.4rem 0.8rem;">📋 Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Tools</h3>
+                        <div class="related-tools">
+                            <a href="url-encoder.html" class="related-tool-link">🔗 URL Encoder/Decoder</a>
+                            <a href="case-converter.html" class="related-tool-link">🔠 Case Converter</a>
+                            <a href="word-counter.html" class="related-tool-link">📝 Word Counter</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- SEO Content -->
+            <section class="tool-info">
+                <div class="info-section">
+                    <h2>How to Use the URL Slug Generator</h2>
+                    <ul>
+                        <li><strong>Step 1:</strong> Type or paste your blog post title or text into the input field.</li>
+                        <li><strong>Step 2:</strong> Choose your preferred word separator (hyphen is recommended for SEO).</li>
+                        <li><strong>Step 3:</strong> Set a maximum length if required for your database.</li>
+                        <li><strong>Step 4:</strong> The tool automatically generates a clean slug in real-time. Click "Copy" to use it.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>Why are URL Slugs Important for SEO?</h2>
+                    <p>A URL slug is the exact address of a specific page on your website (e.g., in <code>example.com/blog/url-slug-generator</code>, the "url-slug-generator" is the slug).</p>
+                    <p>Search engines like Google read your URL slugs to understand what the page is about. A good slug should be:</p>
+                    <ul>
+                        <li><strong>Readable:</strong> Easy for humans to read and understand.</li>
+                        <li><strong>Descriptive:</strong> Contains your primary keyword.</li>
+                        <li><strong>Short:</strong> Avoid stop words (a, an, the) to keep it concise.</li>
+                        <li><strong>Hyphenated:</strong> Google recommends using hyphens (-) instead of underscores (_) to separate words.</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">Hyphens vs. Underscores: Which is better?</h3>
+                        <p class="faq-answer">Google explicitly recommends using hyphens (-) for URLs. Search engine crawlers treat a hyphen as a space, meaning <code>url-slug</code> is read as "url slug". An underscore is not treated as a space, so <code>url_slug</code> would be read as one continuous word "urlslug".</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">What does transliteration mean?</h3>
+                        <p class="faq-answer">Transliteration converts characters from one script or language into characters of another. In our tool, it changes accented letters (like á, é, ñ, ü) into their standard Latin equivalents (a, e, n, u) so they can be safely used in URLs.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3 class="faq-question">How does this tool process text?</h3>
+                        <p class="faq-answer">It first converts everything to lowercase, replaces special characters via transliteration (if selected), removes any non-alphanumeric characters, and replaces spaces with your chosen separator while ensuring no duplicate separators exist.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/slug-generator.js"></script>
+</body>
+</html>
