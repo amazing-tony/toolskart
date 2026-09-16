@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMI Calculator - Calculate Home, Car & Personal Loan EMI | ToolsKart</title>
-    <meta name="description" content="Free online EMI calculator for home loan, car loan, and personal loan in India. Calculate monthly EMI, total interest, and total payment.">
-    <meta name="keywords" content="EMI calculator, home loan EMI, car loan EMI calculator, personal loan EMI">
+    <title>Interactive Loan Prepayment Calculator & SIP Comparison | ToolsKart</title>
+    <meta name="description" content="Calculate loan EMI, model periodic and random prepayments, set target loan tenure, and compare Loan Prepayment vs Alternative Investment (SIP) with interactive charts.">
+    <meta name="keywords" content="loan prepayment calculator, home loan prepayment vs SIP, EMI calculator with prepayment, tenure reduction calculator, loan payoff calculator India">
     <link rel="canonical" href="https://amazing-tools.github.io/pages/emi-calculator.html">
-    <meta property="og:title" content="EMI Calculator | ToolsKart">
-    <meta property="og:description" content="Free online EMI calculator for home loan, car loan, and personal loan in India.">
+    <meta property="og:title" content="Interactive Loan Prepayment & SIP Comparison Calculator | ToolsKart">
+    <meta property="og:description" content="Calculate EMI, model random/periodic prepayments, target payoff goals, and compare Prepayment vs Investment with charts.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -49,81 +59,443 @@
 
             <div class="tool-container">
                 <div class="tool-main">
-                    <h1>EMI Calculator</h1>
-                    <p class="tool-description">Calculate your monthly Equated Monthly Installment (EMI) for home loans, car loans, and personal loans.</p>
+                    <h1>Loan Prepayment & Investment Optimizer</h1>
+                    <p class="tool-description">
+                        Plan your debt freedom smartly: Calculate standard EMIs, model periodic or random prepayments, set a target payoff deadline, and evaluate whether it is more profitable to prepay your loan or invest that extra money in mutual funds.
+                    </p>
 
                     <div class="tool-interface">
-                        <div class="form-group">
-                            <label for="loanAmount">Loan Amount (₹)</label>
-                            <div class="input-with-unit">
-                                <input type="number" id="loanAmount" class="input-field" placeholder="Enter loan amount" min="0" step="any">
-                                <span class="input-unit">₹ INR</span>
+                        <!-- 1. Base Loan Inputs -->
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem;">
+                            <span>1.</span> Base Loan Details
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="loanAmount">Loan Amount (₹)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="loanAmount" class="input-field" placeholder="e.g. 4000000" value="4160000" min="1000" step="any">
+                                    <span class="input-unit">₹ INR</span>
+                                </div>
+                                <div class="hint">Total principal borrowed from bank</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="interestRate">Interest Rate (% p.a.)</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="interestRate" class="input-field" placeholder="e.g. 8.75" value="8.75" min="0.1" max="50" step="any">
+                                    <span class="input-unit">%</span>
+                                </div>
+                                <div class="hint">Annual floating or fixed lending rate</div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="interestRate">Interest Rate (% per annum)</label>
-                            <input type="number" id="interestRate" class="input-field" placeholder="Enter annual interest rate" min="0" max="100" step="any">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Loan Tenure</label>
+                            <label>Original Loan Tenure</label>
                             <div class="input-with-unit" style="display:flex; gap:10px; flex-wrap: wrap;">
-                                <input type="number" id="loanTenure" class="input-field" placeholder="Enter loan tenure" min="0" step="1" style="flex: 1;">
-                                <select id="tenureType" class="input-field" style="width: auto;">
-                                    <option value="years">Years</option>
+                                <input type="number" id="loanTenure" class="input-field" placeholder="e.g. 20" value="20" min="1" step="1" style="flex: 1;">
+                                <select id="tenureType" class="input-field" style="width: 120px;">
+                                    <option value="years" selected>Years</option>
                                     <option value="months">Months</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="btn-group">
-                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate EMI</button>
+                        <!-- 2. Prepayment Strategy Tabs -->
+                        <div class="calc-tabs">
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem;">
+                                <span>2.</span> Prepayment Strategy & Goals
+                            </h3>
+
+                            <div class="calc-tab-nav" id="prepayTabNav">
+                                <button type="button" class="calc-tab-btn active" data-tab="tab-periodic">
+                                    🔄 Periodic Prepayments
+                                </button>
+                                <button type="button" class="calc-tab-btn" data-tab="tab-adhoc">
+                                    🎯 Random / Custom Prepayments
+                                </button>
+                                <button type="button" class="calc-tab-btn" data-tab="tab-target">
+                                    ⏱️ Target Payoff Goal
+                                </button>
+                            </div>
+
+                            <!-- Tab 1: Periodic Prepayments -->
+                            <div class="calc-tab-pane active" id="tab-periodic">
+                                <p style="font-size: 0.88rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                                    Plan regular monthly extra payments, yearly lumpsums, or annual percentage step-ups (as your salary increases).
+                                </p>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="monthlyPrepay">Extra Monthly Payment (₹)</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="monthlyPrepay" class="input-field" placeholder="e.g. 5000" value="0" min="0" step="any">
+                                            <span class="input-unit">₹/mo</span>
+                                        </div>
+                                        <div class="hint">Paid extra every month along with EMI</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="yearlyPrepay">Lumpsum Prepayment Every Year (₹)</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="yearlyPrepay" class="input-field" placeholder="e.g. 100000" value="0" min="0" step="any">
+                                            <span class="input-unit">₹/yr</span>
+                                        </div>
+                                        <div class="hint">Annual bonus or festive prepayment</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="prepayStepUp">Increase Prepayment Every Year (%)</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="prepayStepUp" class="input-field" placeholder="e.g. 5" value="0" min="0" max="100" step="any">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <div class="hint">Step up prepayment as income rises</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emiStepUp">Increase Regular EMI Every Year (%)</label>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="emiStepUp" class="input-field" placeholder="e.g. 5" value="0" min="0" max="100" step="any">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <div class="hint">Annual voluntary EMI increase</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab 2: Custom / Random Prepayments -->
+                            <div class="calc-tab-pane" id="tab-adhoc">
+                                <p style="font-size: 0.88rem; color: var(--color-text-secondary); margin-bottom: 0.75rem;">
+                                    Have unexpected windfalls, asset sales, or mature investments? Add random prepayments at specific months or years.
+                                </p>
+                                
+                                <div style="overflow-x: auto; margin-bottom: 0.75rem;">
+                                    <table class="prepay-table" id="customPrepayTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 140px;">Timing</th>
+                                                <th>Prepayment Amount (₹)</th>
+                                                <th>Description / Note</th>
+                                                <th style="width: 60px; text-align: center;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="customPrepayBody">
+                                            <!-- Dynamic Rows Added Here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div style="background: var(--color-bg); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px dashed var(--color-border); display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                        <label style="font-size: 0.85rem; font-weight: 600;">At Month:</label>
+                                        <input type="number" id="newPrepayMonth" class="input-field" placeholder="Month #" min="1" max="480" style="width: 95px; padding: 0.45rem 0.6rem;">
+                                    </div>
+                                    <div style="display: flex; gap: 0.4rem; align-items: center; flex: 1; min-width: 150px;">
+                                        <label style="font-size: 0.85rem; font-weight: 600;">Amount (₹):</label>
+                                        <input type="number" id="newPrepayAmount" class="input-field" placeholder="e.g. 150000" min="1000" style="padding: 0.45rem 0.6rem;">
+                                    </div>
+                                    <div style="display: flex; gap: 0.4rem; align-items: center; flex: 1; min-width: 150px;">
+                                        <input type="text" id="newPrepayNote" class="input-field" placeholder="e.g. Annual Bonus" style="padding: 0.45rem 0.6rem;">
+                                    </div>
+                                    <button type="button" class="btn btn-secondary btn-sm" id="addPrepayRowBtn">
+                                        + Add Prepayment
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Tab 3: Target Loan Payoff Goal -->
+                            <div class="calc-tab-pane" id="tab-target">
+                                <p style="font-size: 0.88rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+                                    Tell us in how many years you want to be completely loan-free. We will compute the exact extra payment needed!
+                                </p>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="targetTenure">I want to close my loan within:</label>
+                                        <div class="input-with-unit" style="display:flex; gap:10px;">
+                                            <input type="number" id="targetTenure" class="input-field" placeholder="e.g. 10" value="10" min="1" step="1" style="flex: 1;">
+                                            <select id="targetTenureType" class="input-field" style="width: 120px;">
+                                                <option value="years" selected>Years</option>
+                                                <option value="months">Months</option>
+                                            </select>
+                                        </div>
+                                        <div class="hint">Must be shorter than your original tenure</div>
+                                    </div>
+                                    <div class="form-group" style="display: flex; flex-direction: column; justify-content: center;">
+                                        <div id="targetGoalHint" style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: var(--radius-sm); padding: 0.85rem; font-size: 0.88rem; color: #1E40AF;">
+                                            🎯 Target payoff mode will automatically compute the exact monthly top-up or annual lumpsum required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Prepayment Impact Preference -->
+                        <div class="form-group" style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border);">
+                            <label style="margin-bottom: 0.5rem;">How should prepayments impact your loan?</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="impactMode" value="tenure" checked>
+                                    <span><strong>Reduce Loan Tenure</strong> (Recommended — keeps EMI same, closes loan years early & saves massive interest)</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="impactMode" value="emi">
+                                    <span><strong>Reduce Monthly EMI</strong> (Keeps original tenure, lowers monthly payment burden)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 4. Alternative Investment Option (Option B) -->
+                        <div class="form-group" style="background: #F8FAFC; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1rem; margin-top: 1.25rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <label for="investRate" style="font-weight: 700; color: #0F172A; margin: 0;">
+                                    💡 Option B: Alternative Investment / Mutual Fund SIP Rate
+                                </label>
+                                <span style="font-size: 0.8rem; background: #DBEAFE; color: #1E40AF; padding: 0.2rem 0.55rem; border-radius: var(--radius-full); font-weight: 600;">
+                                    Prepay vs Invest Comparative Analysis
+                                </span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 0.75rem;">
+                                What if you invest your extra prepayment money into Equity Mutual Funds / SIP instead of prepaying the loan?
+                            </p>
+                            <div class="input-with-unit" style="max-width: 320px;">
+                                <input type="number" id="investRate" class="input-field" placeholder="e.g. 12" value="12" min="1" max="30" step="any">
+                                <span class="input-unit">% p.a. expected</span>
+                            </div>
+                            <div class="hint">Typical long-term equity mutual funds in India have delivered ~12%–14% CAGR, Hybrid ~10%, Debt/FD ~7%.</div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="btn-group" style="margin-top: 1.5rem;">
+                            <button class="btn btn-primary" id="calculateBtn">🧮 Calculate & Compare Strategy</button>
                             <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
                         </div>
                     </div>
 
-                    <div class="result-area hidden" id="resultArea">
-                        <h3 class="result-title">EMI Calculation Result</h3>
+                    <!-- ===== RESULTS AREA ===== -->
+                    <div class="result-area hidden" id="resultArea" style="background: transparent; border: none; padding: 0;">
+                        
+                        <!-- Top Summary Headline -->
+                        <div style="background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+                                <h3 style="margin: 0; font-size: 1.35rem; color: var(--color-text);">
+                                    📊 Loan Optimization & Prepayment Summary
+                                </h3>
+                                <button class="copy-btn" id="copyResultBtn">📋 Copy Full Summary</button>
+                            </div>
 
-                        <div class="result-highlight" style="margin-bottom: 1rem;">
-                            <div class="result-label">Monthly EMI</div>
-                            <div class="result-value" id="monthlyEmi">—</div>
+                            <!-- KPI Cards Grid -->
+                            <div class="kpi-grid">
+                                <div class="kpi-card">
+                                    <div class="kpi-label">Monthly EMI</div>
+                                    <div class="kpi-value" id="kpiEmi">—</div>
+                                    <div class="kpi-sub" id="kpiEmiSub">Standard installment</div>
+                                </div>
+                                <div class="kpi-card highlight-green">
+                                    <div class="kpi-label">Time Saved</div>
+                                    <div class="kpi-value" id="kpiTimeSaved" style="color: #059669;">—</div>
+                                    <div class="kpi-sub" id="kpiTimeSavedSub">Debt freedom early</div>
+                                </div>
+                                <div class="kpi-card highlight-green">
+                                    <div class="kpi-label">Interest Saved</div>
+                                    <div class="kpi-value" id="kpiInterestSaved" style="color: #059669;">—</div>
+                                    <div class="kpi-sub" id="kpiInterestSavedSub">Guaranteed savings</div>
+                                </div>
+                                <div class="kpi-card highlight-blue">
+                                    <div class="kpi-label">Option B Investment Wealth</div>
+                                    <div class="kpi-value" id="kpiInvestWealth" style="color: #2563EB;">—</div>
+                                    <div class="kpi-sub" id="kpiInvestWealthSub">Corpus at tenure end</div>
+                                </div>
+                            </div>
+
+                            <!-- Detailed Comparison Breakdown Rows -->
+                            <div style="background: var(--color-bg); border-radius: var(--radius-sm); padding: 1rem 1.25rem;">
+                                <div class="result-row">
+                                    <span class="result-label">Base Loan Principal</span>
+                                    <span class="result-value" id="resPrincipal">—</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">Original Total Interest (Without Prepayment)</span>
+                                    <span class="result-value" id="resBaseInterest">—</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">Revised Total Interest (With Prepayment)</span>
+                                    <span class="result-value" id="resNewInterest" style="color: #059669;">—</span>
+                                </div>
+                                <div class="result-row">
+                                    <span class="result-label">Total Extra Prepayments Made</span>
+                                    <span class="result-value" id="resTotalPrepayment">—</span>
+                                </div>
+                                <div class="result-row" style="border-top: 2px solid var(--color-border); margin-top: 0.5rem; padding-top: 0.65rem; font-weight: 700;">
+                                    <span class="result-label">Total Payment: Principal + Interest (Prepayment Strategy)</span>
+                                    <span class="result-value" id="resTotalPayment" style="font-size: 1.1rem; color: var(--color-primary);">—</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="result-row">
-                            <span class="result-label">Principal Amount</span>
-                            <span class="result-value" id="principalAmount">—</span>
-                        </div>
-                        <div class="result-row">
-                            <span class="result-label">Total Interest</span>
-                            <span class="result-value" id="totalInterest">—</span>
-                        </div>
-                        <div class="result-row" style="font-weight: 600; font-size: 1.1rem; border-top: 1px solid #ddd; padding-top: 0.5rem; margin-top: 0.5rem;">
-                            <span class="result-label">Total Payment (Principal + Interest)</span>
-                            <span class="result-value" id="totalPayment">—</span>
+                        <!-- ===== STRATEGIC COMPARISON: OPTION A vs OPTION B ===== -->
+                        <div class="comparison-section">
+                            <div class="comparison-header">
+                                <h3>⚖️ Strategic Comparative Analysis</h3>
+                                <p style="font-size: 0.92rem; color: var(--color-text-secondary); margin: 0;">
+                                    Should you prepay your home loan early, or invest that exact same surplus in an equity mutual fund SIP?
+                                </p>
+                            </div>
+
+                            <div class="comparison-grid">
+                                <!-- Option A Card -->
+                                <div class="comparison-card card-prepay" id="cardOptionA">
+                                    <span class="winner-badge" id="badgeOptionA" style="display: none;">🏆 Recommended</span>
+                                    <h4>🛡️ Option A: Prepay Home Loan</h4>
+                                    <p style="font-size: 0.85rem; color: #166534; margin-bottom: 1rem;">
+                                        Accelerate loan repayment, eliminate interest expense, and become debt-free early.
+                                    </p>
+                                    
+                                    <div class="comparison-stat-row">
+                                        <span>Total Prepayment Invested:</span>
+                                        <span class="comparison-stat-val" id="optAPrepayTotal">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Loan Paid Off In:</span>
+                                        <span class="comparison-stat-val" id="optANewTenure" style="color: #166534;">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Total Interest Paid:</span>
+                                        <span class="comparison-stat-val" id="optAInterestPaid">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Guaranteed Interest Saved:</span>
+                                        <span class="comparison-stat-val" id="optAInterestSaved" style="color: #059669; font-size: 1.05rem;">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Effective Return on Capital:</span>
+                                        <span class="comparison-stat-val" id="optAReturnRate">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Risk Profile:</span>
+                                        <span class="comparison-stat-val" style="color: #059669;">Zero Risk (Guaranteed)</span>
+                                    </div>
+                                </div>
+
+                                <!-- Option B Card -->
+                                <div class="comparison-card card-invest" id="cardOptionB">
+                                    <span class="winner-badge" id="badgeOptionB" style="display: none;">🏆 Higher Net Wealth</span>
+                                    <h4>📈 Option B: Invest Extra in Mutual Funds</h4>
+                                    <p style="font-size: 0.85rem; color: #1E40AF; margin-bottom: 1rem;">
+                                        Pay standard regular EMI and invest the surplus into an equity/hybrid SIP portfolio.
+                                    </p>
+                                    
+                                    <div class="comparison-stat-row">
+                                        <span>Total Capital Invested:</span>
+                                        <span class="comparison-stat-val" id="optBInvestTotal">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Loan Paid Off In:</span>
+                                        <span class="comparison-stat-val" id="optBOriginalTenure">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Total Interest Paid:</span>
+                                        <span class="comparison-stat-val" id="optBInterestPaid">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Gross Investment Corpus Built:</span>
+                                        <span class="comparison-stat-val" id="optBGrossCorpus" style="color: #2563EB; font-size: 1.05rem;">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Net Wealth Gain (Profit):</span>
+                                        <span class="comparison-stat-val" id="optBNetProfit" style="color: #2563EB;">—</span>
+                                    </div>
+                                    <div class="comparison-stat-row">
+                                        <span>Expected Portfolio CAGR:</span>
+                                        <span class="comparison-stat-val" id="optBReturnRate">—</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- The Verdict & Break-Even Box -->
+                            <div class="verdict-box" id="verdictBox">
+                                <div class="verdict-title">
+                                    <span id="verdictIcon">💡</span> <span id="verdictHeading">Financial Verdict & Comparative Advantage</span>
+                                </div>
+                                <p class="verdict-desc" id="verdictSummary">
+                                    Analyzing the financial math between debt prepayment and wealth creation...
+                                </p>
+                                <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem;">
+                                    <span class="break-even-badge" id="breakEvenBadge">Break-even ROI: 8.75%</span>
+                                    <span style="font-size: 0.82rem; color: #713F12;" id="verdictDifference">
+                                        Option B creates ₹0 more net wealth.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
 
-                        <div style="margin-top: 1rem; text-align: right;">
-                            <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+                        <!-- ===== GRAPHICAL VISUALIZATIONS (CHART.JS) ===== -->
+                        <div class="charts-grid">
+                            <!-- Chart 1: Outstanding Loan Balance Trajectory -->
+                            <div class="chart-box">
+                                <h4>
+                                    <span>📉 Outstanding Loan Balance Trajectory</span>
+                                    <span style="font-size: 0.78rem; font-weight: normal; color: var(--color-text-muted);">Year-by-Year</span>
+                                </h4>
+                                <div class="chart-canvas-wrapper">
+                                    <canvas id="loanTrajectoryChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Chart 2: Net Outflow & Wealth Comparison -->
+                            <div class="chart-box">
+                                <h4>
+                                    <span>💰 Total Cost & Wealth Creation</span>
+                                    <span style="font-size: 0.78rem; font-weight: normal; color: var(--color-text-muted);">At Loan End</span>
+                                </h4>
+                                <div class="chart-canvas-wrapper">
+                                    <canvas id="wealthComparisonChart"></canvas>
+                                </div>
+                            </div>
                         </div>
 
-                        <div id="amortizationContainer" style="margin-top: 2rem; overflow-x: auto;">
-                            <h4>Yearly Amortization Schedule</h4>
-                            <table class="data-table" style="width: 100%; min-width: 500px; text-align: right;">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: left;">Year</th>
-                                        <th>Principal Paid (₹)</th>
-                                        <th>Interest Paid (₹)</th>
-                                        <th>Total Payment (₹)</th>
-                                        <th>Balance (₹)</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="amortizationTableBody">
-                                </tbody>
-                            </table>
+                        <!-- ===== AMORTIZATION SCHEDULE ===== -->
+                        <div style="background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 2rem; box-shadow: var(--shadow-sm);">
+                            <div class="schedule-controls">
+                                <div>
+                                    <h3 style="font-size: 1.2rem; margin: 0 0 0.25rem; color: var(--color-text);">
+                                        📅 Complete Amortization Schedule
+                                    </h3>
+                                    <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin: 0;">
+                                        Inspect opening balance, interest, prepayments, and closing principal for every period.
+                                    </p>
+                                </div>
+                                <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                                    <div class="schedule-toggle-group">
+                                        <button type="button" class="schedule-toggle-btn active" id="toggleYearlyBtn">Yearly</button>
+                                        <button type="button" class="schedule-toggle-btn" id="toggleMonthlyBtn">Monthly</button>
+                                    </div>
+                                    <button type="button" class="btn btn-outline btn-sm" id="downloadCsvBtn">
+                                        📥 Download CSV
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="amortizationContainer" style="overflow-x: auto; max-height: 520px;">
+                                <table class="data-table" style="width: 100%; min-width: 650px; text-align: right; font-size: 0.9rem;">
+                                    <thead style="position: sticky; top: 0; background: var(--color-bg); z-index: 2;">
+                                        <tr>
+                                            <th style="text-align: left;" id="periodHeader">Year</th>
+                                            <th>Opening Balance (₹)</th>
+                                            <th>Regular EMI (₹)</th>
+                                            <th>Prepayment (₹)</th>
+                                            <th>Principal Paid (₹)</th>
+                                            <th>Interest Paid (₹)</th>
+                                            <th>Total Paid (₹)</th>
+                                            <th>Closing Balance (₹)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="amortizationTableBody">
+                                        <!-- Table Rows Rendered via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -131,53 +503,88 @@
                     <div class="ad-slot">
                         <div class="ad-placeholder">Advertisement</div>
                     </div>
+                    
                     <div class="sidebar-section">
-                        <h3>Related Tools</h3>
+                        <h3>💡 Smart Loan Tips</h3>
+                        <div style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; padding: 0.75rem; border-radius: var(--radius-sm);">
+                                <strong style="color: #166534;">1 Extra EMI a Year:</strong>
+                                Paying just 1 extra EMI every year on a 20-year home loan can reduce your tenure by nearly 4 years!
+                            </div>
+                            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 0.75rem; border-radius: var(--radius-sm);">
+                                <strong style="color: #1E40AF;">5% Annual Step-Up:</strong>
+                                Increasing your EMI by just 5% each year as your salary rises can cut a 20-year tenure down to ~11 years.
+                            </div>
+                            <div style="background: #FEF9C3; border: 1px solid #FDE047; padding: 0.75rem; border-radius: var(--radius-sm);">
+                                <strong style="color: #854D0E;">Prepay in Early Years:</strong>
+                                In the initial years, up to 80% of your EMI goes into interest. Prepayments made in years 1–5 save the maximum interest.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Financial Tools</h3>
                         <div class="related-tools">
                             <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
-                            <a href="fd-calculator.html" class="related-tool-link">🏧 FD Calculator</a>
                             <a href="compound-interest.html" class="related-tool-link">💰 Compound Interest</a>
+                            <a href="fd-calculator.html" class="related-tool-link">🏧 FD Calculator</a>
                             <a href="gst-calculator.html" class="related-tool-link">🧾 GST Calculator</a>
+                            <a href="income-tax-calculator.html" class="related-tool-link">📑 Income Tax Calculator</a>
                         </div>
                     </div>
                 </aside>
             </div>
 
+            <!-- Informational Article & FAQs -->
             <section class="tool-info">
                 <div class="info-section">
-                    <h2>How to Use the EMI Calculator</h2>
-                    <p>Follow these steps to calculate your Equated Monthly Installment:</p>
-                    <ul>
-                        <li><strong>Step 1:</strong> Enter the principal Loan Amount.</li>
-                        <li><strong>Step 2:</strong> Enter the Interest Rate per annum provided by your bank.</li>
-                        <li><strong>Step 3:</strong> Enter the Loan Tenure and select whether it is in years or months.</li>
-                        <li><strong>Step 4:</strong> Click "Calculate EMI" to see your monthly EMI, total interest payable, and the yearly amortization schedule.</li>
-                    </ul>
+                    <h2>How Loan Prepayment and Optimization Works</h2>
+                    <p>
+                        When you take a long-term loan (such as a 20-year or 30-year home loan), the bank charges interest using monthly reducing balance compounding. In the early years, the bulk of your monthly EMI goes directly towards paying interest, with very little reducing your principal.
+                    </p>
+                    <p>
+                        <strong>Why prepayments make a massive impact:</strong> Any extra prepayment you make is deducted directly from your principal outstanding. Because the principal shrinks immediately, the future interest calculated on that principal permanently drops, triggering a cascading compounding benefit.
+                    </p>
                 </div>
+
                 <div class="info-section">
-                    <h2>EMI Formula</h2>
-                    <p>The mathematical formula used to calculate EMI is:</p>
-                    <div class="formula-box">
-                        <strong>EMI = [P x R x (1+R)^N] / [(1+R)^N - 1]</strong><br><br>
-                        Where:<br>
-                        <strong>P</strong> = Principal loan amount<br>
-                        <strong>R</strong> = Monthly interest rate (Annual rate / 12 / 100)<br>
-                        <strong>N</strong> = Number of monthly installments (Loan tenure in months)
+                    <h2>Loan Prepayment vs. Alternative Investment (SIP): Which is Better?</h2>
+                    <p>
+                        One of the greatest personal finance debates is whether to prepay a home loan or invest that surplus in mutual funds or equities. Here is the mathematical and behavioral framework:
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.25rem 0;">
+                        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; padding: 1.25rem; border-radius: var(--radius-md);">
+                            <h3 style="color: #166534; font-size: 1.1rem; margin-bottom: 0.5rem;">Why Choose Prepayment (Option A)?</h3>
+                            <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: #166534; line-height: 1.6;">
+                                <li><strong>Guaranteed Return:</strong> Saves interest at your loan rate (e.g. 8.75% p.a.) completely risk-free.</li>
+                                <li><strong>Tax-Free Savings:</strong> Saved interest has zero capital gains tax or wealth tax.</li>
+                                <li><strong>Psychological Freedom:</strong> Erasing debt delivers peace of mind and frees up future cash flow.</li>
+                            </ul>
+                        </div>
+                        <div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 1.25rem; border-radius: var(--radius-md);">
+                            <h3 style="color: #1E40AF; font-size: 1.1rem; margin-bottom: 0.5rem;">Why Choose Investment (Option B)?</h3>
+                            <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: #1E40AF; line-height: 1.6;">
+                                <li><strong>Power of Compounding:</strong> Long-term equity index/mutual funds have historically delivered 12%–14% CAGR in India.</li>
+                                <li><strong>Positive Spread:</strong> If investments return 12% and loan costs 8.75%, you pocket the 3.25% positive net spread.</li>
+                                <li><strong>High Liquidity:</strong> Mutual fund investments can be withdrawn during emergencies, whereas money put into prepayments is locked in real estate equity.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
                 <div class="info-section">
-                    <h2>Frequently Asked Questions</h2>
+                    <h2>Frequently Asked Questions (FAQ)</h2>
                     <div class="faq-item">
-                        <h3 class="faq-question">What is EMI?</h3>
-                        <p class="faq-answer">EMI stands for Equated Monthly Installment. It is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs are used to pay off both interest and principal each month so that over a specified number of years, the loan is paid off in full.</p>
+                        <h3 class="faq-question">Are there prepayment penalties on home loans in India?</h3>
+                        <p class="faq-answer">According to RBI guidelines, commercial banks and Housing Finance Companies (HFCs) cannot charge any prepayment penalty or foreclosure fees on floating-rate individual home loans. You can make prepayments anytime at zero extra charge.</p>
                     </div>
                     <div class="faq-item">
-                        <h3 class="faq-question">Does EMI change during the loan tenure?</h3>
-                        <p class="faq-answer">For fixed-rate loans, the EMI remains constant throughout the tenure. For floating-rate loans, the EMI may change if the bank revises the underlying interest rate.</p>
+                        <h3 class="faq-question">Should I reduce loan tenure or reduce EMI?</h3>
+                        <p class="faq-answer"><strong>Reducing tenure</strong> is mathematically much more beneficial because you stop interest accrual for several years, saving maximum money. <strong>Reducing EMI</strong> is recommended only if your household monthly cash flow is tight and you need breathing room.</p>
                     </div>
                     <div class="faq-item">
-                        <h3 class="faq-question">How does loan tenure affect my EMI?</h3>
-                        <p class="faq-answer">A longer loan tenure means lower monthly EMIs, but you will end up paying more total interest over the life of the loan. A shorter tenure increases your monthly EMI but reduces the total interest burden.</p>
+                        <h3 class="faq-question">What is the break-even return rate?</h3>
+                        <p class="faq-answer">The break-even return rate is the minimum annual rate of return an alternative investment must generate to match the money saved by prepaying the loan. If your investment earns higher than the break-even rate, investing the surplus builds more total wealth than prepaying.</p>
                     </div>
                 </div>
             </section>
@@ -188,14 +595,15 @@
         <div class="container footer-content">
             <div class="footer-section">
                 <h4>🔧 ToolsKart</h4>
-                <p>Free online tools and calculators for everyone.</p>
+                <p>Free online tools and calculators for everyone. Built with ❤️ in India.</p>
             </div>
             <div class="footer-section">
                 <h4>Calculators</h4>
                 <a href="gst-calculator.html">GST Calculator</a>
-                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="emi-calculator.html">EMI & Prepayment</a>
                 <a href="sip-calculator.html">SIP Calculator</a>
-                <a href="age-calculator.html">Age Calculator</a>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="fd-calculator.html">FD Calculator</a>
             </div>
             <div class="footer-section">
                 <h4>Tools</h4>

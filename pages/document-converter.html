@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Document Converter — DOCX, PDF, PPTX, XLSX | ToolsKart</title>
+    <meta name="description" content="Free online document converter. Convert DOCX to PDF, PDF to DOCX (Word), PDF to PPTX, PPTX to PDF, Excel to PDF and Word with 100% privacy in your browser.">
+    <meta name="keywords" content="document converter, convert pdf to word, docx to pdf, pdf to ppt, excel to pdf, pdf to excel, word to pdf, free online converter">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/document-converter.html">
+    <meta property="og:title" content="Universal Document Converter — DOCX, PDF, PPTX, XLSX | ToolsKart">
+    <meta property="og:description" content="Convert Word, PDF, Excel, and PowerPoint documents instantly in your browser with zero server uploads.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Universal Document Converter",
+      "url": "https://amazing-tools.github.io/pages/document-converter.html",
+      "description": "Convert DOCX, PDF, Excel, and PowerPoint files directly in browser with 100% privacy.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .converter-hero {
+            background: linear-gradient(135deg, #1E3A5F 0%, #2A5298 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .converter-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .converter-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .quick-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1.25rem;
+        }
+        .quick-pill {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quick-pill:hover { background: rgba(255, 255, 255, 0.3); transform: translateY(-1px); }
+
+        .upload-area {
+            border: 2.5px dashed var(--border-color);
+            background: var(--bg-alt);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-bottom: 1.5rem;
+        }
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: var(--primary-color);
+            background: #f0f7ff;
+            transform: scale(1.005);
+        }
+        .upload-icon { font-size: 3.5rem; margin-bottom: 0.75rem; }
+
+        .file-info-card {
+            display: none;
+            background: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .file-info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .file-details { display: flex; align-items: center; gap: 0.75rem; }
+        .file-badge {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .conversion-options {
+            display: none;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .option-group { margin-bottom: 1.25rem; }
+        .option-label { font-weight: 600; display: block; margin-bottom: 0.5rem; }
+
+        .progress-section {
+            display: none;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .progress-track {
+            background: #eee;
+            border-radius: 999px;
+            height: 12px;
+            width: 100%;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #1E3A5F, #2A5298);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .result-section {
+            display: none;
+            background: #f4fdf6;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .result-icon { font-size: 3rem; margin-bottom: 0.5rem; color: #28a745; }
+
+        .supported-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .matrix-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .matrix-icon { font-size: 1.8rem; margin-bottom: 0.35rem; }
+        .matrix-title { font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; }
+        .matrix-desc { font-size: 0.82rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo">🔧 ToolsKart</a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; Document Converter
+            </nav>
+
+            <div class="converter-hero">
+                <h1>📄 Universal Document Converter</h1>
+                <p>Seamlessly convert between <strong>DOCX, PDF, PPTX, and XLSX</strong> directly in your browser. 100% private, instant processing with zero server uploads.</p>
+                <div class="quick-pill-row">
+                    <span class="quick-pill">Word ⇄ PDF</span>
+                    <span class="quick-pill">PDF ⇄ Excel</span>
+                    <span class="quick-pill">PowerPoint ⇄ PDF</span>
+                    <span class="quick-pill">Excel ⇄ Word</span>
+                    <span class="quick-pill">100% Free & Private</span>
+                </div>
+            </div>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    
+                    <div class="tool-interface">
+                        <!-- Drop & Upload Zone -->
+                        <div id="uploadArea" class="upload-area">
+                            <div class="upload-icon">📂</div>
+                            <h3>Click or Drag & Drop Any Document Here</h3>
+                            <p class="text-muted" style="margin-top: 0.5rem;">Supports <strong>.docx, .pdf, .xlsx, .pptx</strong> (Up to 50 MB)</p>
+                            <input type="file" id="fileInput" accept=".docx,.doc,.pdf,.xlsx,.xls,.pptx,.ppt" style="display: none;">
+                        </div>
+
+                        <!-- Selected File Info -->
+                        <div id="fileInfoCard" class="file-info-card">
+                            <div class="file-info-row">
+                                <div class="file-details">
+                                    <span class="file-badge" id="fileTypeBadge">PDF</span>
+                                    <div>
+                                        <div id="fileName" style="font-weight: 600;">document.pdf</div>
+                                        <div id="fileSize" class="text-muted" style="font-size: 0.85rem;">1.2 MB</div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" id="removeFileBtn">✕ Choose Another File</button>
+                            </div>
+                        </div>
+
+                        <!-- Conversion Options -->
+                        <div id="conversionOptions" class="conversion-options">
+                            <div class="option-group">
+                                <label for="targetFormatSelect" class="option-label">Convert To Format:</label>
+                                <select id="targetFormatSelect" class="input-field" style="max-width: 400px; font-size: 1rem; font-weight: 600;">
+                                    <!-- Options populated dynamically -->
+                                </select>
+                            </div>
+                            <p id="targetDescription" class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem;">
+                                Converts the document with layout and formatting preservation.
+                            </p>
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <button class="btn btn-primary" id="convertBtn" style="padding: 0.85rem 2rem; font-size: 1.05rem;">
+                                    ⚡ Convert Now
+                                </button>
+                                <span class="text-muted" style="font-size: 0.85rem;">🔒 Processed client-side on your device</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div id="progressSection" class="progress-section">
+                            <div style="font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem;" id="progressText">Processing document...</div>
+                            <div class="progress-track">
+                                <div id="progressBar" class="progress-fill"></div>
+                            </div>
+                            <p class="text-muted" style="font-size: 0.85rem;">Please hold on while the browser parses and builds your file...</p>
+                        </div>
+
+                        <!-- Result Box -->
+                        <div id="resultSection" class="result-section">
+                            <div class="result-icon">✅</div>
+                            <h2 style="color: #155724; margin-bottom: 0.5rem;">Conversion Successful!</h2>
+                            <p id="resultSummary" style="color: #155724; margin-bottom: 1.5rem;">Your converted document is ready for download.</p>
+                            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                                <button class="btn btn-primary" id="downloadResultBtn" style="padding: 0.85rem 2rem; font-size: 1.05rem;">
+                                    ⬇️ Download Converted File
+                                </button>
+                                <button class="btn btn-secondary" id="convertAnotherBtn" style="padding: 0.85rem 1.5rem;">
+                                    Convert Another File
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Supported Conversion Paths Matrix -->
+                    <h3 style="margin-top: 3rem;">⚡ Supported Document Conversions</h3>
+                    <div class="supported-matrix">
+                        <div class="matrix-card">
+                            <div class="matrix-icon">📝 ➔ 📑</div>
+                            <div class="matrix-title">DOCX to PDF</div>
+                            <div class="matrix-desc">Preserves headings, text styling, and paragraph hierarchy into crisp PDF.</div>
+                        </div>
+                        <div class="matrix-card">
+                            <div class="matrix-icon">📑 ➔ 📝</div>
+                            <div class="matrix-title">PDF to DOCX</div>
+                            <div class="matrix-desc">Reconstructs PDF pages and text streams into editable Microsoft Word documents.</div>
+                        </div>
+                        <div class="matrix-card">
+                            <div class="matrix-icon">📊 ➔ 📑</div>
+                            <div class="matrix-title">Excel to PDF</div>
+                            <div class="matrix-desc">Formats all workbook sheets and data rows into structured printable tables.</div>
+                        </div>
+                        <div class="matrix-card">
+                            <div class="matrix-icon">📑 ➔ 📊</div>
+                            <div class="matrix-title">PDF to Excel</div>
+                            <div class="matrix-desc">Scans PDF page layouts to extract tabular rows and numbers into an XLSX workbook.</div>
+                        </div>
+                        <div class="matrix-card">
+                            <div class="matrix-icon">📑 ➔ 📽️</div>
+                            <div class="matrix-title">PDF to PowerPoint</div>
+                            <div class="matrix-desc">Converts document pages into presentation slides with slide speaker notes.</div>
+                        </div>
+                        <div class="matrix-card">
+                            <div class="matrix-icon">📊 ➔ 📝</div>
+                            <div class="matrix-title">Excel to DOCX</div>
+                            <div class="matrix-desc">Converts Excel worksheets into beautifully styled Microsoft Word tables.</div>
+                        </div>
+                    </div>
+
+                    <!-- Content & FAQ -->
+                    <div class="info-section">
+                        <h2>Why Use ToolsKart Document Converter?</h2>
+                        <p>Most online converters upload your sensitive contracts, financial spreadsheets, resumes, and presentation decks to third-party cloud servers. ToolsKart is different:</p>
+                        <ul>
+                            <li><strong>100% Client-Side Privacy:</strong> Conversions execute directly in your browser's JavaScript sandbox. Your documents never touch any external server.</li>
+                            <li><strong>Zero Paywalls or Limits:</strong> No page caps, no file counters, and no registration required.</li>
+                            <li><strong>Desktop Automation Kit:</strong> Freelancers and agencies can also use our native desktop engine (MS Office COM) for 100% automated batch processing via the FreelanceReady Python suite.</li>
+                        </ul>
+
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-item">
+                            <h3 class="faq-question">Are my documents private and secure?</h3>
+                            <p class="faq-answer">Yes, 100%. Unlike conventional web converters, ToolsKart processes files entirely in your browser using client-side libraries. No data is ever transmitted or stored on any server.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-question">Can I convert scanned PDFs into Word or Excel?</h3>
+                            <p class="faq-answer">For scanned image-only PDFs, text extraction requires Optical Character Recognition (OCR). If your PDF contains selectable text, it is extracted cleanly into editable paragraphs and tables.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-question">Is there a file size limit?</h3>
+                            <p class="faq-answer">Because conversions occur in your computer's memory, you can comfortably convert files up to 50 MB depending on your device RAM.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Document Tools</h4>
+                <a href="document-converter.html">Document Converter</a>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="case-converter.html">Case Converter</a>
+                <a href="base64-tool.html">Base64 Tool</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+                <a href="age-calculator.html">Age Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External Client-Side Conversion Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/document-converter.js"></script>
+</body>
+</html>

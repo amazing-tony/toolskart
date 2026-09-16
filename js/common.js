@@ -23,15 +23,66 @@
     });
   }
 
+  // ---- Category Filter Pills (Homepage) ----
+  const filterPills = document.querySelectorAll('.filter-pill');
+  if (filterPills.length > 0) {
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', function () {
+        filterPills.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
+
+        const featuredSec = document.getElementById('featured-section');
+        const sections = document.querySelectorAll('.category-section:not(#facilities)');
+
+        if (filter === 'all') {
+          if (featuredSec) featuredSec.style.display = '';
+          sections.forEach(sec => sec.style.display = '');
+        } else if (filter === 'featured') {
+          if (featuredSec) {
+            featuredSec.style.display = '';
+            featuredSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          sections.forEach(sec => sec.style.display = 'none');
+        } else {
+          if (featuredSec) featuredSec.style.display = 'none';
+          sections.forEach(sec => {
+            if (sec.id === filter) {
+              sec.style.display = '';
+              sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              sec.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
+  }
+
   // ---- Tool Search (Homepage) ----
   const toolSearch = document.getElementById('toolSearch');
   if (toolSearch) {
+    // Keyboard shortcut '/' to search
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== toolSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        toolSearch.focus();
+      }
+    });
+
     toolSearch.addEventListener('input', function () {
       const query = this.value.toLowerCase().trim();
       const cards = document.querySelectorAll('.tool-card');
-      const sections = document.querySelectorAll('.category-section');
+      const featuredCards = document.querySelectorAll('.featured-card');
+      const sections = document.querySelectorAll('.category-section:not(#facilities)');
+      const featuredSec = document.getElementById('featured-section');
 
       cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+
+      featuredCards.forEach(card => {
         const text = card.textContent.toLowerCase();
         card.style.display = text.includes(query) ? '' : 'none';
       });
@@ -41,6 +92,11 @@
         const visibleCards = section.querySelectorAll('.tool-card:not([style*="display: none"])');
         section.style.display = visibleCards.length === 0 ? 'none' : '';
       });
+
+      if (featuredSec) {
+        const visibleFeatured = featuredSec.querySelectorAll('.featured-card:not([style*="display: none"])');
+        featuredSec.style.display = visibleFeatured.length === 0 ? 'none' : '';
+      }
     });
   }
 
