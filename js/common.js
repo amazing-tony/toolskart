@@ -23,6 +23,54 @@
     });
   }
 
+  // ---- Left Sidebar Navigation Toggle & Search ----
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const portalSidebar = document.getElementById('portalSidebar');
+  if (sidebarToggle && portalSidebar) {
+    sidebarToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      portalSidebar.classList.toggle('open');
+    });
+
+    // Close sidebar on click outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 1024 && portalSidebar.classList.contains('open')) {
+        if (!portalSidebar.contains(e.target) && e.target !== sidebarToggle) {
+          portalSidebar.classList.remove('open');
+        }
+      }
+    });
+
+    // Close sidebar when clicking any sidebar link on mobile
+    portalSidebar.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 1024) {
+          portalSidebar.classList.remove('open');
+        }
+      });
+    });
+  }
+
+  // Quick search filter inside sidebar
+  const sidebarSearch = document.getElementById('sidebarSearch');
+  if (sidebarSearch && portalSidebar) {
+    sidebarSearch.addEventListener('input', function () {
+      const q = this.value.toLowerCase().trim();
+      const links = portalSidebar.querySelectorAll('.sidebar-link');
+      const groups = portalSidebar.querySelectorAll('.sidebar-group');
+
+      links.forEach(link => {
+        const text = link.textContent.toLowerCase();
+        link.style.display = text.includes(q) ? '' : 'none';
+      });
+
+      groups.forEach(grp => {
+        const visibleLinks = grp.querySelectorAll('.sidebar-link:not([style*="display: none"])');
+        grp.style.display = visibleLinks.length === 0 && q ? 'none' : '';
+      });
+    });
+  }
+
   // ---- Category Filter Pills (Homepage) ----
   const filterPills = document.querySelectorAll('.filter-pill');
   if (filterPills.length > 0) {

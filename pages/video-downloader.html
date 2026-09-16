@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Video & Audio Downloader | YouTube, Shorts, Reels, FB in 1080p & MP3</title>
+    <meta name="description" content="Download any video or audio from YouTube, YouTube Shorts, Instagram Reels, Facebook, TikTok in HD, 1080p, 720p or 320kbps MP3 audio. Free, instant, zero software needed.">
+    <meta name="keywords" content="youtube video downloader, shorts downloader, instagram reels downloader, facebook video download, extract audio mp3 from youtube, 1080p video download">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/video-downloader.html">
+    <meta property="og:title" content="Universal Video & Audio Downloader | ToolsKart">
+    <meta property="og:description" content="Download YouTube, Shorts, Instagram Reels, Facebook in 1080p, 720p or MP3 Audio.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Universal Video & Audio Downloader",
+      "url": "https://amazing-tools.github.io/pages/video-downloader.html",
+      "description": "Free online video and audio downloader for YouTube, Shorts, Instagram Reels, and Facebook.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+</head>
+<body class="downloader-theme-dark">
+
+    <!-- Privacy Declaration Banner (USP) -->
+    <div class="privacy-usp-strip">
+        <div class="container usp-strip-content">
+            <span class="usp-badge">🛡️ 100% Client-Side Privacy</span>
+            <span class="usp-text">"I got frustrated with sketchy converter/downloader sites uploading private data to unknown servers, so I built this 100% browser-side portal with zero tracking. Free & open."</span>
+        </div>
+    </div>
+
+    <!-- Slim AdminLTE Header -->
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <a href="../index.html" class="logo">🔧 ToolsKart</a>
+                <span class="header-badge-tag">Media Studio</span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page downloader-page-container">
+        <div class="container">
+            <nav class="breadcrumb breadcrumb-dark">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; Video & Audio Downloader
+            </nav>
+
+            <div class="downloader-hero-wrap">
+                <!-- Branding icon inspired by screenshot -->
+                <div class="downloader-brand-badge">
+                    <span class="yt-play-icon">▶</span>
+                    <span>Universal Media Engine</span>
+                </div>
+
+                <h1 class="downloader-main-title">Universal Video & Audio Downloader</h1>
+                <p class="downloader-main-sub">
+                    Download any YouTube video, Shorts, Instagram Reel, or Facebook clip in <strong>HD 1080p, 4K, 720p, or 320kbps MP3 Audio</strong>. Free, instant, zero software needed.
+                </p>
+
+                <!-- URL Input Form (Matching Screenshot) -->
+                <div class="downloader-input-card">
+                    <div class="downloader-input-row">
+                        <span class="input-link-icon">🔗</span>
+                        <input type="url" id="videoUrlInput" class="downloader-url-input" placeholder="Paste YouTube, Shorts, Instagram, or Facebook link here..." autocomplete="off">
+                        <button type="button" class="btn-clear-input" id="btnClearUrl" title="Clear input" style="display:none;">&times;</button>
+                    </div>
+
+                    <div class="downloader-presets-row">
+                        <span class="presets-label">Supported:</span>
+                        <span class="platform-chip">📺 YouTube & Shorts</span>
+                        <span class="platform-chip">📸 Instagram Reels</span>
+                        <span class="platform-chip">📘 Facebook Video</span>
+                        <span class="platform-chip">🎵 TikTok & X</span>
+                    </div>
+
+                    <button type="button" class="btn-downloader-primary" id="btnFetchVideo">
+                        <span id="btnFetchText">Download Now</span>
+                        <span class="btn-spinner" id="btnSpinner" style="display:none;"></span>
+                    </button>
+                    
+                    <div id="fetchErrorMessage" class="downloader-error-banner" style="display:none;"></div>
+                </div>
+
+                <!-- DOWNLOAD RESULT BOX (Matching Screenshot UI) -->
+                <div class="downloader-result-card" id="downloaderResultArea" style="display:none;">
+                    
+                    <!-- Video Info Header (Thumbnail + Title) -->
+                    <div class="video-preview-header">
+                        <div class="thumbnail-wrapper">
+                            <img src="" alt="Video Thumbnail" id="videoThumbnail" class="video-thumb-img">
+                            <span class="video-duration-badge" id="videoDuration">0:00</span>
+                        </div>
+                        <div class="video-meta-details">
+                            <h3 class="video-meta-title" id="videoTitle">Loading Title...</h3>
+                            <div class="video-meta-sub" id="videoAuthor">Creator / Channel</div>
+                        </div>
+                    </div>
+
+                    <!-- Dual Tabs: Video & Audio -->
+                    <div class="downloader-tabs-nav">
+                        <button type="button" class="downloader-tab-btn active" data-tab="tab-video" id="tabBtnVideo">
+                            <span>🎥 Video</span>
+                        </button>
+                        <button type="button" class="downloader-tab-btn" data-tab="tab-audio" id="tabBtnAudio">
+                            <span>🎵 Audio (MP3)</span>
+                        </button>
+                    </div>
+
+                    <!-- Video Formats Table -->
+                    <div class="downloader-tab-pane active" id="pane-video">
+                        <div class="format-table-header">
+                            <span>Quality</span>
+                            <span>Format</span>
+                            <span style="text-align: right;">Action</span>
+                        </div>
+                        <div class="format-table-body" id="videoFormatsList">
+                            <!-- Dynamic Format Rows -->
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>1080p</strong>
+                                    <span class="badge-fhd">Full HD</span>
+                                </div>
+                                <div class="col-format">MP4</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="1080" data-type="video">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>720p</strong>
+                                    <span class="badge-hd">HD</span>
+                                </div>
+                                <div class="col-format">MP4</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="720" data-type="video">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>480p</strong>
+                                    <span class="badge-sd">SD</span>
+                                </div>
+                                <div class="col-format">MP4</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="480" data-type="video">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>360p</strong>
+                                    <span class="badge-mob">Mobile</span>
+                                </div>
+                                <div class="col-format">MP4</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="360" data-type="video">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audio Formats Table -->
+                    <div class="downloader-tab-pane" id="pane-audio" style="display:none;">
+                        <div class="format-table-header">
+                            <span>Audio Quality</span>
+                            <span>Format</span>
+                            <span style="text-align: right;">Action</span>
+                        </div>
+                        <div class="format-table-body" id="audioFormatsList">
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>320 kbps</strong>
+                                    <span class="badge-fhd">Studio Quality</span>
+                                </div>
+                                <div class="col-format">MP3</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="320" data-type="audio">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>192 kbps</strong>
+                                    <span class="badge-hd">Standard</span>
+                                </div>
+                                <div class="col-format">MP3</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="192" data-type="audio">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>128 kbps</strong>
+                                    <span class="badge-sd">Compact</span>
+                                </div>
+                                <div class="col-format">MP3</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="128" data-type="audio">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="format-row-item">
+                                <div class="col-quality">
+                                    <strong>M4A Audio</strong>
+                                    <span class="badge-mob">Apple AAC</span>
+                                </div>
+                                <div class="col-format">M4A</div>
+                                <div class="col-action">
+                                    <button type="button" class="btn-format-download" data-quality="m4a" data-type="audio">
+                                        Download Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Download Status Bar -->
+                    <div id="downloadProgressBar" class="download-progress-wrap" style="display:none;">
+                        <div class="progress-label-row">
+                            <span id="progressStatusText">Preparing media stream...</span>
+                            <span id="progressPercentText">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Trust and Features Showcase -->
+                <div class="downloader-features-grid">
+                    <div class="downloader-feature-box">
+                        <div class="feat-icon">⚡</div>
+                        <h4>Ultra Fast & Direct</h4>
+                        <p>High-speed stream resolving without intrusive popup ads, redirects, or waiting timers.</p>
+                    </div>
+                    <div class="downloader-feature-box">
+                        <div class="feat-icon">🛡️</div>
+                        <h4>100% Private & Safe</h4>
+                        <p>No downloads or personal information stored on our servers. Processing occurs directly in your browser.</p>
+                    </div>
+                    <div class="downloader-feature-box">
+                        <div class="feat-icon">📱</div>
+                        <h4>All Devices Supported</h4>
+                        <p>Works seamlessly on Android, iPhone (iOS Safari), Mac, Windows, Linux, and tablets.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="tool-info" style="margin-top: 3rem;">
+                <div class="info-section">
+                    <h2>How to Download Videos or Audio from YouTube, Shorts & Instagram</h2>
+                    <ol style="padding-left: 1.5rem; line-height: 1.8; color: var(--color-text-secondary);">
+                        <li><strong>Copy Link:</strong> Open YouTube, Instagram, or Facebook and copy the link to the video or Reel.</li>
+                        <li><strong>Paste Link:</strong> Paste the URL into the search box above and tap <strong>"Download Now"</strong>.</li>
+                        <li><strong>Choose Quality:</strong> Select either <strong>Video (1080p, 720p, 480p)</strong> or <strong>Audio (320kbps MP3)</strong>.</li>
+                        <li><strong>Save to Device:</strong> Click the red Download button next to your desired quality to save the file instantly.</li>
+                    </ol>
+                </div>
+
+                <div class="info-section">
+                    <h2>Frequently Asked Questions (FAQ)</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I download only the audio (MP3) from a YouTube or Instagram video?</h3>
+                        <p class="faq-answer">Yes! Click the <strong>Audio (MP3)</strong> tab after pasting your link. You can download high-fidelity 320kbps, 192kbps, or 128kbps MP3 audio files directly to your phone or computer.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Is it safe and free to use?</h3>
+                        <p class="faq-answer">ToolsKart is 100% free with zero malware, zero extensions, and zero software installation needed. We do not store your downloads on our servers.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free online tools and calculators for everyone. Built with ❤️ in India.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Media & Converters</h4>
+                <a href="video-downloader.html">Video & Audio Downloader</a>
+                <a href="document-converter.html">Document Converter</a>
+                <a href="image-resizer.html">Image Resizer</a>
+                <a href="image-compressor.html">Image Compressor</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">Loan Prepayment & EMI</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/video-downloader.js"></script>
+</body>
+</html>
