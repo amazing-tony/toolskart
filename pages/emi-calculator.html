@@ -161,6 +161,24 @@
                                 </div>
                             </div>
 
+                            <!-- Loan Start Date / First EMI Date -->
+                            <div class="calc-field-group" style="margin-top: 1.25rem;">
+                                <div class="calc-field-top">
+                                    <label for="loanStartDate">Loan Start Date / First EMI Month</label>
+                                    <span class="calc-val-sub" id="startDateDisplay">Starting: October 2026</span>
+                                </div>
+                                <div class="dual-input-row" style="align-items: center;">
+                                    <div class="input-with-unit" style="max-width: 220px; width: 100%;">
+                                        <input type="month" id="loanStartDate" class="input-field" value="2026-10">
+                                    </div>
+                                    <div class="quick-chip-row" style="margin-top: 0; margin-left: 0.5rem;">
+                                        <button type="button" class="quick-chip" id="chipStartThisMonth">This Month</button>
+                                        <button type="button" class="quick-chip active" id="chipStartNextMonth">Next Month</button>
+                                        <button type="button" class="quick-chip" id="chipStartJanNext">Jan Next Year</button>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Baseline Card (Mini Preview) -->
                             <div class="baseline-preview-card">
                                 <div>
@@ -430,6 +448,16 @@
                                 Your loan finishes in <strong id="heroNewTenure">14.8 Years</strong> instead of 20 Years, saving you a massive <strong id="heroInterestSaved" class="text-highlight-green">₹ 14.3 Lakhs</strong> in bank interest!
                             </p>
 
+                            <!-- Target Calendar Debt-Free Date -->
+                            <div class="freedom-date-banner" id="freedomDateBanner">
+                                <span class="freedom-date-icon">🗓️</span>
+                                <div class="freedom-date-text">
+                                    <span>Target Debt-Free Date:</span>
+                                    <strong id="heroFreedomDate">August 2041</strong>
+                                    <span class="freedom-date-orig" id="heroOrigDate">(Original: October 2046)</span>
+                                </div>
+                            </div>
+
                             <!-- Visual Payoff Timeline Comparison -->
                             <div class="timeline-visualizer">
                                 <div class="timeline-row">
@@ -591,11 +619,50 @@
                             <div class="charts-tab-header">
                                 <h3>📊 Visual Comparison Charts</h3>
                                 <div class="chart-legend-row">
-                                    <span class="legend-chip"><span class="legend-dot" style="background:#94A3B8;"></span> Standard Loan</span>
-                                    <span class="legend-chip"><span class="legend-dot" style="background:#10B981;"></span> With Prepayments</span>
+                                    <span class="legend-chip"><span class="legend-dot" style="background:#10B981;"></span> Principal Paid</span>
+                                    <span class="legend-chip"><span class="legend-dot" style="background:#F59E0B;"></span> Prepayment</span>
+                                    <span class="legend-chip"><span class="legend-dot" style="background:#EF4444;"></span> Interest Paid</span>
+                                    <span class="legend-chip"><span class="legend-dot" style="background:#3B82F6;"></span> Remaining Loan</span>
                                 </div>
                             </div>
                             
+                            <!-- Featured Chart: Principal vs Interest Breakdown Trend -->
+                            <div class="featured-chart-box">
+                                <div class="featured-chart-header">
+                                    <div>
+                                        <div class="featured-chart-title">
+                                            <span>📊 Principal vs. Interest Reduction Trend</span>
+                                            <span class="chart-badge-hot">Key Amortization Trend</span>
+                                        </div>
+                                        <p class="featured-chart-subtitle">
+                                            Year-by-year (or month-by-month) breakdown showing how your payments shift from high interest to pure principal
+                                        </p>
+                                    </div>
+                                    <div class="chart-controls-group">
+                                        <div class="toggle-pill-group">
+                                            <button type="button" class="toggle-pill-btn active" id="toggleTrendYearlyBtn">Yearly</button>
+                                            <button type="button" class="toggle-pill-btn" id="toggleTrendMonthlyBtn">Monthly</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Key Milestones & Early Traps Callouts -->
+                                <div class="chart-insights-bar">
+                                    <div class="insight-pill insight-crossover" id="crossoverMilestoneBadge">
+                                        <span class="insight-icon">🎯</span>
+                                        <span id="crossoverMilestoneText">Crossover Point: Calculating...</span>
+                                    </div>
+                                    <div class="insight-pill insight-trap" id="earlyInterestTrapBadge">
+                                        <span class="insight-icon">⚠️</span>
+                                        <span id="earlyInterestTrapText">Year 1 Interest: Calculating...</span>
+                                    </div>
+                                </div>
+
+                                <div class="featured-canvas-container">
+                                    <canvas id="principalInterestChart"></canvas>
+                                </div>
+                            </div>
+
                             <div class="charts-grid-modern">
                                 <!-- Chart 1: Outstanding Balance Trajectory -->
                                 <div class="single-chart-box">

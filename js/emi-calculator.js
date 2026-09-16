@@ -27,6 +27,13 @@
   const loanTenureSlider = document.getElementById('loanTenureSlider');
   const tenureMonthsLabel = document.getElementById('tenureMonthsLabel');
 
+  // Loan Start Date / First EMI elements
+  const loanStartDateInput = document.getElementById('loanStartDate');
+  const startDateDisplay = document.getElementById('startDateDisplay');
+  const chipStartThisMonth = document.getElementById('chipStartThisMonth');
+  const chipStartNextMonth = document.getElementById('chipStartNextMonth');
+  const chipStartJanNext = document.getElementById('chipStartJanNext');
+
   // Baseline display previews
   const baselineEmiDisplay = document.getElementById('baselineEmiDisplay');
   const baselineInterestDisplay = document.getElementById('baselineInterestDisplay');
@@ -72,6 +79,8 @@
   const heroYearsSaved = document.getElementById('heroYearsSaved');
   const heroNewTenure = document.getElementById('heroNewTenure');
   const heroInterestSaved = document.getElementById('heroInterestSaved');
+  const heroFreedomDate = document.getElementById('heroFreedomDate');
+  const heroOrigDate = document.getElementById('heroOrigDate');
   const btnCopySummary = document.getElementById('btnCopySummary');
 
   // Visual Timeline
@@ -120,9 +129,20 @@
   const amortizationTableBody = document.getElementById('amortizationTableBody');
   const periodHeader = document.getElementById('periodHeader');
 
+  // Featured Trend Chart Controls
+  const toggleTrendYearlyBtn = document.getElementById('toggleTrendYearlyBtn');
+  const toggleTrendMonthlyBtn = document.getElementById('toggleTrendMonthlyBtn');
+  const crossoverMilestoneBadge = document.getElementById('crossoverMilestoneBadge');
+  const crossoverMilestoneText = document.getElementById('crossoverMilestoneText');
+  const earlyInterestTrapBadge = document.getElementById('earlyInterestTrapBadge');
+  const earlyInterestTrapText = document.getElementById('earlyInterestTrapText');
+
   // Charts
   let trajectoryChartInstance = null;
   let wealthChartInstance = null;
+  let trendChartInstance = null;
+  let currentTrendView = 'yearly';
+  let latestSimulationParams = null;
 
   // State
   let customLumpsums = [];
@@ -136,8 +156,11 @@
   initDualSyncSliders();
   initQuickChips();
   initImpactRadios();
+  initStartDateControls();
+  initTrendChartControls();
   initEventListeners();
   updateWordDisplays();
+  updateStartDateDisplay();
   updateTargetSolver();
   triggerLiveCalculation();
 
@@ -272,6 +295,129 @@
         triggerLiveCalculation();
       });
     });
+  }
+
+  // --- 4b. Loan Start Date & Trend Controls ---
+  const MONTH_NAMES_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const MONTH_NAMES_LONG = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  function getParsedStartDate() {
+    let val = loanStartDateInput ? loanStartDateInput.value : '';
+    if (!val || !/^\d{4}-\d{2}$/.test(val)) {
+      const now = new Date();
+      let y = now.getFullYear();
+      let m = now.getMonth() + 2; // default to next month
+      if (m > 12) { y += 1; m = 1; }
+      val = `${y}-${String(m).padStart(2, '0')}`;
+      if (loanStartDateInput) loanStartDateInput.value = val;
+    }
+    const parts = val.split('-');
+    return {
+      year: parseInt(parts[0], 10),
+      month: parseInt(parts[1], 10)
+    };
+  }
+
+  function getPeriodDate(startYear, startMonth, monthOffset) {
+    const totalMonthIndex = (startMonth - 1) + monthOffset;
+    const y = startYear + Math.floor(totalMonthIndex / 12);
+    const m = ((totalMonthIndex % 12) + 12) % 12;
+    return {
+      year: y,
+      month: m + 1,
+      short: `${MONTH_NAMES_SHORT[m]} ${y}`,
+      long: `${MONTH_NAMES_LONG[m]} ${y}`
+    };
+  }
+
+  function updateStartDateDisplay() {
+    const d = getParsedStartDate();
+    const currentPeriod = getPeriodDate(d.year, d.month, 0);
+    if (startDateDisplay) {
+      startDateDisplay.textContent = `Starting: ${currentPeriod.long}`;
+    }
+  }
+
+  function setActiveStartChip(activeChip) {
+    [chipStartThisMonth, chipStartNextMonth, chipStartJanNext].forEach(chip => {
+      if (chip) chip.classList.remove('active');
+    });
+    if (activeChip) activeChip.classList.add('active');
+  }
+
+  function initStartDateControls() {
+    if (loanStartDateInput) {
+      loanStartDateInput.addEventListener('change', () => {
+        updateStartDateDisplay();
+        triggerLiveCalculation();
+      });
+      loanStartDateInput.addEventListener('input', () => {
+        updateStartDateDisplay();
+        triggerLiveCalculation();
+      });
+    }
+
+    const now = new Date();
+    const thisYear = now.getFullYear();
+    const thisMonth = now.getMonth() + 1;
+
+    let nextYear = thisYear;
+    let nextMonth = thisMonth + 1;
+    if (nextMonth > 12) { nextYear += 1; nextMonth = 1; }
+
+    const janNextYear = thisYear + 1;
+
+    const thisMonthVal = `${thisYear}-${String(thisMonth).padStart(2, '0')}`;
+    const nextMonthVal = `${nextYear}-${String(nextMonth).padStart(2, '0')}`;
+    const janNextVal = `${janNextYear}-01`;
+
+    if (chipStartThisMonth) {
+      chipStartThisMonth.addEventListener('click', () => {
+        if (loanStartDateInput) loanStartDateInput.value = thisMonthVal;
+        setActiveStartChip(chipStartThisMonth);
+        updateStartDateDisplay();
+        triggerLiveCalculation();
+      });
+    }
+
+    if (chipStartNextMonth) {
+      chipStartNextMonth.addEventListener('click', () => {
+        if (loanStartDateInput) loanStartDateInput.value = nextMonthVal;
+        setActiveStartChip(chipStartNextMonth);
+        updateStartDateDisplay();
+        triggerLiveCalculation();
+      });
+    }
+
+    if (chipStartJanNext) {
+      chipStartJanNext.addEventListener('click', () => {
+        if (loanStartDateInput) loanStartDateInput.value = janNextVal;
+        setActiveStartChip(chipStartJanNext);
+        updateStartDateDisplay();
+        triggerLiveCalculation();
+      });
+    }
+  }
+
+  function initTrendChartControls() {
+    if (toggleTrendYearlyBtn && toggleTrendMonthlyBtn) {
+      toggleTrendYearlyBtn.addEventListener('click', () => setTrendView('yearly'));
+      toggleTrendMonthlyBtn.addEventListener('click', () => setTrendView('monthly'));
+    }
+  }
+
+  function setTrendView(view) {
+    currentTrendView = view;
+    if (view === 'yearly') {
+      if (toggleTrendYearlyBtn) toggleTrendYearlyBtn.classList.add('active');
+      if (toggleTrendMonthlyBtn) toggleTrendMonthlyBtn.classList.remove('active');
+    } else {
+      if (toggleTrendYearlyBtn) toggleTrendYearlyBtn.classList.remove('active');
+      if (toggleTrendMonthlyBtn) toggleTrendMonthlyBtn.classList.add('active');
+    }
+    if (latestSimulationParams) {
+      renderPrincipalInterestChart(latestSimulationParams);
+    }
   }
 
   // --- 5. Event Listeners ---
@@ -645,14 +791,17 @@
     currentMonthlySchedule = prepaySchedule.monthly;
     renderAmortizationTable();
 
-    // Render Charts
-    renderVisualCharts({
+    // Cache latest simulation params for view switching
+    latestSimulationParams = {
       principal,
       totalMonths,
       baseSchedule,
       prepaySchedule,
       investmentFutureValue
-    });
+    };
+
+    // Render Charts
+    renderVisualCharts(latestSimulationParams);
   }
 
   function runSimulation(params) {
@@ -839,6 +988,24 @@
       `;
     }
 
+    // Calendar Debt-Free Dates
+    const startDate = getParsedStartDate();
+    const newFinishDate = getPeriodDate(startDate.year, startDate.month, Math.max(0, data.prepayMonths - 1));
+    const origFinishDate = getPeriodDate(startDate.year, startDate.month, Math.max(0, data.totalMonths - 1));
+
+    if (heroFreedomDate) {
+      heroFreedomDate.textContent = newFinishDate.long;
+    }
+    if (heroOrigDate) {
+      if (data.monthsSaved > 0) {
+        heroOrigDate.textContent = `(Original: ${origFinishDate.long})`;
+        heroOrigDate.style.display = 'inline';
+      } else {
+        heroOrigDate.textContent = `(Standard Schedule: ${origFinishDate.long})`;
+        heroOrigDate.style.display = 'inline';
+      }
+    }
+
     // Timeline comparison bar
     const origY = (data.totalMonths / 12).toFixed(1);
     const newY = data.newTenureYears.toFixed(1);
@@ -958,149 +1125,370 @@
   // --- 13. Charts (Chart.js) ---
   function renderVisualCharts(params) {
     if (typeof Chart === 'undefined') return;
+    renderPrincipalInterestChart(params);
+    renderTrajectoryChart(params);
+    renderWealthChart(params);
+  }
 
-    const { principal, baseSchedule, prepaySchedule, investmentFutureValue } = params;
+  // 1. Featured Chart: Principal vs. Interest Breakdown Trend
+  function renderPrincipalInterestChart(params) {
+    const canvas = document.getElementById('principalInterestChart');
+    if (!canvas || typeof Chart === 'undefined') return;
 
-    // 1. Balance Trajectory Line Chart
-    const trajectoryCanvas = document.getElementById('loanTrajectoryChart');
-    if (trajectoryCanvas) {
-      if (trajectoryChartInstance) trajectoryChartInstance.destroy();
+    if (trendChartInstance) {
+      trendChartInstance.destroy();
+      trendChartInstance = null;
+    }
 
-      const labels = [];
-      const baseBalances = [];
-      const prepayBalances = [];
-      const maxYears = Math.max(baseSchedule.yearly.length, prepaySchedule.yearly.length);
+    const { prepaySchedule, principal } = params;
+    const startDate = getParsedStartDate();
 
-      labels.push('Yr 0');
-      baseBalances.push(principal);
-      prepayBalances.push(principal);
+    const labels = [];
+    const principalData = [];
+    const prepayData = [];
+    const interestData = [];
+    const balanceData = [];
 
-      for (let y = 1; y <= maxYears; y++) {
-        labels.push(`Yr ${y}`);
-        const b = baseSchedule.yearly.find(i => i.year === y);
-        const p = prepaySchedule.yearly.find(i => i.year === y);
-        baseBalances.push(b ? Math.max(0, b.closingBalance) : 0);
-        prepayBalances.push(p ? Math.max(0, p.closingBalance) : 0);
+    if (currentTrendView === 'yearly') {
+      const yearly = prepaySchedule.yearly;
+      yearly.forEach(item => {
+        const startD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12);
+        labels.push(`Year ${item.year} (${startD.year})`);
+        principalData.push(Math.round(item.principalPaid));
+        prepayData.push(Math.round(item.prepayment));
+        interestData.push(Math.round(item.interestPaid));
+        balanceData.push(Math.round(Math.max(0, item.closingBalance)));
+      });
+
+      // Find Crossover Year
+      let crossoverYear = null;
+      let crossoverObj = null;
+      for (let i = 0; i < yearly.length; i++) {
+        const item = yearly[i];
+        if (item.principalPaid + item.prepayment >= item.interestPaid) {
+          crossoverYear = item.year;
+          crossoverObj = item;
+          break;
+        }
       }
 
-      const ctx1 = trajectoryCanvas.getContext('2d');
-      trajectoryChartInstance = new Chart(ctx1, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Standard Loan (No Prepayment)',
-              data: baseBalances,
-              borderColor: '#94A3B8',
-              borderDash: [5, 5],
-              borderWidth: 2,
-              fill: false,
-              tension: 0.15
-            },
-            {
-              label: 'With Your Prepayments',
-              data: prepayBalances,
-              borderColor: '#10B981',
-              backgroundColor: 'rgba(16, 185, 129, 0.12)',
-              borderWidth: 3,
-              fill: true,
-              tension: 0.15
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: function (ctx) {
-                  return `${ctx.dataset.label}: ${formatLakhsCrores(ctx.parsed.y)}`;
-                }
-              }
-            },
-            legend: { display: false }
-          },
-          scales: {
-            y: {
-              ticks: {
-                callback: function (v) {
-                  if (v >= 10000000) return '₹' + (v / 10000000).toFixed(1) + ' Cr';
-                  if (v >= 100000) return '₹' + (v / 100000).toFixed(0) + ' L';
-                  return '₹' + v;
-                },
-                font: { size: 10 }
-              }
-            },
-            x: { ticks: { font: { size: 10 } } }
-          }
-        }
+      if (crossoverYear && crossoverMilestoneBadge && crossoverMilestoneText) {
+        const crossD = getPeriodDate(startDate.year, startDate.month, (crossoverYear - 1) * 12);
+        crossoverMilestoneText.innerHTML = `<strong>Crossover in Year ${crossoverYear} (${crossD.year}):</strong> Principal paid (${formatLakhsCrores(crossoverObj.principalPaid + crossoverObj.prepayment)}) surpasses interest (${formatLakhsCrores(crossoverObj.interestPaid)})!`;
+        crossoverMilestoneBadge.style.display = 'inline-flex';
+      } else if (crossoverMilestoneBadge) {
+        crossoverMilestoneBadge.style.display = 'none';
+      }
+
+      if (yearly.length > 0 && earlyInterestTrapBadge && earlyInterestTrapText) {
+        const yr1 = yearly[0];
+        const yr1Pct = yr1.totalPaid > 0 ? ((yr1.interestPaid / yr1.totalPaid) * 100).toFixed(0) : 0;
+        earlyInterestTrapText.innerHTML = `<strong>Year 1 Reality:</strong> ${yr1Pct}% of your installment goes into bank interest!`;
+        earlyInterestTrapBadge.style.display = 'inline-flex';
+      }
+    } else {
+      // Monthly View
+      const monthly = prepaySchedule.monthly;
+      monthly.forEach(item => {
+        const mD = getPeriodDate(startDate.year, startDate.month, item.month - 1);
+        labels.push(mD.short);
+        principalData.push(Math.round(item.principalPaid));
+        prepayData.push(Math.round(item.prepayment));
+        interestData.push(Math.round(item.interestPaid));
+        balanceData.push(Math.round(Math.max(0, item.closingBalance)));
       });
+
+      // Find Crossover Month
+      let crossoverMonth = null;
+      let crossoverObj = null;
+      for (let i = 0; i < monthly.length; i++) {
+        const item = monthly[i];
+        if (item.principalPaid + item.prepayment >= item.interestPaid) {
+          crossoverMonth = item.month;
+          crossoverObj = item;
+          break;
+        }
+      }
+
+      if (crossoverMonth && crossoverMilestoneBadge && crossoverMilestoneText) {
+        const crossD = getPeriodDate(startDate.year, startDate.month, crossoverMonth - 1);
+        crossoverMilestoneText.innerHTML = `<strong>Crossover in ${crossD.short} (Month ${crossoverMonth}):</strong> Principal repayment overtakes bank interest!`;
+        crossoverMilestoneBadge.style.display = 'inline-flex';
+      } else if (crossoverMilestoneBadge) {
+        crossoverMilestoneBadge.style.display = 'none';
+      }
+
+      if (monthly.length > 0 && earlyInterestTrapBadge && earlyInterestTrapText) {
+        const m1 = monthly[0];
+        const m1Pct = m1.totalPaid > 0 ? ((m1.interestPaid / m1.totalPaid) * 100).toFixed(0) : 0;
+        earlyInterestTrapText.innerHTML = `<strong>Month 1 Reality:</strong> ${m1Pct}% of installment goes into bank interest.`;
+        earlyInterestTrapBadge.style.display = 'inline-flex';
+      }
     }
 
-    // 2. Outflow vs Wealth Bar Chart
+    const ctx = canvas.getContext('2d');
+    trendChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            type: 'line',
+            label: 'Remaining Principal Balance',
+            data: balanceData,
+            borderColor: '#3B82F6',
+            backgroundColor: 'rgba(59, 130, 246, 0.08)',
+            borderWidth: 2.5,
+            pointRadius: currentTrendView === 'yearly' ? 3 : 0,
+            pointHoverRadius: 5,
+            fill: false,
+            tension: 0.15,
+            yAxisID: 'y1'
+          },
+          {
+            type: 'bar',
+            label: 'Principal Repaid',
+            data: principalData,
+            backgroundColor: '#10B981',
+            stack: 'outflow',
+            borderRadius: 4,
+            yAxisID: 'y'
+          },
+          {
+            type: 'bar',
+            label: 'Extra Prepayment',
+            data: prepayData,
+            backgroundColor: '#F59E0B',
+            stack: 'outflow',
+            borderRadius: 4,
+            yAxisID: 'y'
+          },
+          {
+            type: 'bar',
+            label: 'Interest Paid',
+            data: interestData,
+            backgroundColor: '#EF4444',
+            stack: 'outflow',
+            borderRadius: 4,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return `${ctx.dataset.label}: ${formatLakhsCrores(ctx.parsed.y)}`;
+              }
+            }
+          },
+          legend: {
+            position: 'bottom',
+            labels: { boxWidth: 12, font: { size: 11, family: "'Inter', sans-serif" } }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            ticks: {
+              font: { size: 10 },
+              maxRotation: 45,
+              autoSkip: true,
+              maxTicksLimit: currentTrendView === 'yearly' ? 25 : 24
+            },
+            grid: { display: false }
+          },
+          y: {
+            stacked: true,
+            position: 'left',
+            title: {
+              display: true,
+              text: 'Installment Breakdown (₹)',
+              font: { size: 10, weight: '600' }
+            },
+            ticks: {
+              callback: function (v) {
+                if (v >= 10000000) return '₹' + (v / 10000000).toFixed(1) + ' Cr';
+                if (v >= 100000) return '₹' + (v / 100000).toFixed(0) + ' L';
+                return '₹' + v;
+              },
+              font: { size: 10 }
+            }
+          },
+          y1: {
+            position: 'right',
+            grid: { drawOnChartArea: false },
+            title: {
+              display: true,
+              text: 'Remaining Balance (₹)',
+              font: { size: 10, weight: '600' }
+            },
+            ticks: {
+              callback: function (v) {
+                if (v >= 10000000) return '₹' + (v / 10000000).toFixed(1) + ' Cr';
+                if (v >= 100000) return '₹' + (v / 100000).toFixed(0) + ' L';
+                return '₹' + v;
+              },
+              font: { size: 10 }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // 2. Balance Trajectory Line Chart
+  function renderTrajectoryChart(params) {
+    const { principal, baseSchedule, prepaySchedule } = params;
+    const trajectoryCanvas = document.getElementById('loanTrajectoryChart');
+    if (!trajectoryCanvas) return;
+
+    if (trajectoryChartInstance) trajectoryChartInstance.destroy();
+
+    const labels = [];
+    const baseBalances = [];
+    const prepayBalances = [];
+    const maxYears = Math.max(baseSchedule.yearly.length, prepaySchedule.yearly.length);
+
+    labels.push('Yr 0');
+    baseBalances.push(principal);
+    prepayBalances.push(principal);
+
+    for (let y = 1; y <= maxYears; y++) {
+      labels.push(`Yr ${y}`);
+      const b = baseSchedule.yearly.find(i => i.year === y);
+      const p = prepaySchedule.yearly.find(i => i.year === y);
+      baseBalances.push(b ? Math.max(0, b.closingBalance) : 0);
+      prepayBalances.push(p ? Math.max(0, p.closingBalance) : 0);
+    }
+
+    const ctx1 = trajectoryCanvas.getContext('2d');
+    trajectoryChartInstance = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Standard Loan (No Prepayment)',
+            data: baseBalances,
+            borderColor: '#94A3B8',
+            borderDash: [5, 5],
+            borderWidth: 2,
+            fill: false,
+            tension: 0.15
+          },
+          {
+            label: 'With Your Prepayments',
+            data: prepayBalances,
+            borderColor: '#10B981',
+            backgroundColor: 'rgba(16, 185, 129, 0.12)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.15
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return `${ctx.dataset.label}: ${formatLakhsCrores(ctx.parsed.y)}`;
+              }
+            }
+          },
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            ticks: {
+              callback: function (v) {
+                if (v >= 10000000) return '₹' + (v / 10000000).toFixed(1) + ' Cr';
+                if (v >= 100000) return '₹' + (v / 100000).toFixed(0) + ' L';
+                return '₹' + v;
+              },
+              font: { size: 10 }
+            }
+          },
+          x: { ticks: { font: { size: 10 } } }
+        }
+      }
+    });
+  }
+
+  // 3. Outflow vs Wealth Bar Chart
+  function renderWealthChart(params) {
+    const { principal, baseSchedule, prepaySchedule, investmentFutureValue } = params;
     const wealthCanvas = document.getElementById('wealthComparisonChart');
-    if (wealthCanvas) {
-      if (wealthChartInstance) wealthChartInstance.destroy();
+    if (!wealthCanvas) return;
 
-      const ctx2 = wealthCanvas.getContext('2d');
-      wealthChartInstance = new Chart(ctx2, {
-        type: 'bar',
-        data: {
-          labels: ['Standard Loan', 'Option A (Prepay)', 'Option B (SIP)'],
-          datasets: [
-            {
-              label: 'Principal',
-              data: [principal, principal, principal],
-              backgroundColor: '#93C5FD'
-            },
-            {
-              label: 'Interest Paid',
-              data: [baseSchedule.totalInterest, prepaySchedule.totalInterest, baseSchedule.totalInterest],
-              backgroundColor: '#F87171'
-            },
-            {
-              label: 'Extra Paid / Invested',
-              data: [0, prepaySchedule.totalPrepayment, prepaySchedule.totalPrepayment],
-              backgroundColor: '#FBBF24'
-            },
-            {
-              label: 'SIP Corpus Created',
-              data: [0, 0, investmentFutureValue],
-              backgroundColor: '#34D399'
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: function (ctx) {
-                  return `${ctx.dataset.label}: ${formatLakhsCrores(ctx.parsed.y)}`;
-                }
-              }
-            },
-            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+    if (wealthChartInstance) wealthChartInstance.destroy();
+
+    const ctx2 = wealthCanvas.getContext('2d');
+    wealthChartInstance = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Standard Loan', 'Option A (Prepay)', 'Option B (SIP)'],
+        datasets: [
+          {
+            label: 'Principal',
+            data: [principal, principal, principal],
+            backgroundColor: '#93C5FD'
           },
-          scales: {
-            y: {
-              ticks: {
-                callback: function (v) {
-                  if (v >= 10000000) return '₹' + (v / 10000000).toFixed(1) + ' Cr';
-                  if (v >= 100000) return '₹' + (v / 100000).toFixed(0) + ' L';
-                  return '₹' + v;
-                },
-                font: { size: 10 }
-              }
-            },
-            x: { ticks: { font: { size: 10 } } }
+          {
+            label: 'Interest Paid',
+            data: [baseSchedule.totalInterest, prepaySchedule.totalInterest, baseSchedule.totalInterest],
+            backgroundColor: '#F87171'
+          },
+          {
+            label: 'Extra Paid / Invested',
+            data: [0, prepaySchedule.totalPrepayment, prepaySchedule.totalPrepayment],
+            backgroundColor: '#FBBF24'
+          },
+          {
+            label: 'SIP Corpus Created',
+            data: [0, 0, investmentFutureValue],
+            backgroundColor: '#34D399'
           }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return `${ctx.dataset.label}: ${formatLakhsCrores(ctx.parsed.y)}`;
+              }
+            }
+          },
+          legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+        },
+        scales: {
+          y: {
+            ticks: {
+              callback: function (v) {
+                if (v >= 10000000) return '₹' + (v / 10000000).toFixed(1) + ' Cr';
+                if (v >= 100000) return '₹' + (v / 100000).toFixed(0) + ' L';
+                return '₹' + v;
+              },
+              font: { size: 10 }
+            }
+          },
+          x: { ticks: { font: { size: 10 } } }
         }
-      });
-    }
+      }
+    });
   }
 
   // --- 14. Amortization Schedule Table ---
@@ -1109,11 +1497,11 @@
     if (view === 'yearly') {
       toggleYearlyBtn.classList.add('active');
       toggleMonthlyBtn.classList.remove('active');
-      periodHeader.textContent = 'Year';
+      periodHeader.textContent = 'Year / Date';
     } else {
       toggleYearlyBtn.classList.remove('active');
       toggleMonthlyBtn.classList.add('active');
-      periodHeader.textContent = 'Month';
+      periodHeader.textContent = 'Month / Date';
     }
     renderAmortizationTable();
   }
@@ -1124,10 +1512,19 @@
 
     const data = currentScheduleView === 'yearly' ? currentYearlySchedule : currentMonthlySchedule;
     const format = v => Math.round(v).toLocaleString('en-IN');
+    const startDate = getParsedStartDate();
 
     data.forEach(item => {
       const tr = document.createElement('tr');
-      const periodText = currentScheduleView === 'yearly' ? `Year ${item.year}` : `Month ${item.month}`;
+      let periodText = '';
+      if (currentScheduleView === 'yearly') {
+        const startD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12);
+        const endD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12 + 11);
+        periodText = `Year ${item.year} <span style="font-size:0.75rem; font-weight:400; color:#64748B; display:block;">${startD.short} – ${endD.short}</span>`;
+      } else {
+        const mD = getPeriodDate(startDate.year, startDate.month, item.month - 1);
+        periodText = `${mD.short} <span style="font-size:0.75rem; font-weight:400; color:#64748B; display:block;">Month ${item.month}</span>`;
+      }
 
       tr.innerHTML = `
         <td style="font-weight: 600;">${periodText}</td>
@@ -1150,8 +1547,11 @@
       return;
     }
 
+    const startDate = getParsedStartDate();
+
     const headers = [
       currentScheduleView === 'yearly' ? 'Year' : 'Month',
+      'Calendar Period',
       'Opening Balance (INR)',
       'Regular EMI (INR)',
       'Prepayment (INR)',
@@ -1161,16 +1561,29 @@
       'Closing Balance (INR)'
     ];
 
-    const rows = data.map(item => [
-      currentScheduleView === 'yearly' ? `Year ${item.year}` : `Month ${item.month}`,
-      item.openingBalance.toFixed(2),
-      item.regularEmi.toFixed(2),
-      item.prepayment.toFixed(2),
-      item.principalPaid.toFixed(2),
-      item.interestPaid.toFixed(2),
-      item.totalPaid.toFixed(2),
-      Math.max(0, item.closingBalance).toFixed(2)
-    ]);
+    const rows = data.map(item => {
+      let dateLabel = '';
+      if (currentScheduleView === 'yearly') {
+        const startD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12);
+        const endD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12 + 11);
+        dateLabel = `${startD.short} to ${endD.short}`;
+      } else {
+        const mD = getPeriodDate(startDate.year, startDate.month, item.month - 1);
+        dateLabel = mD.short;
+      }
+
+      return [
+        currentScheduleView === 'yearly' ? `Year ${item.year}` : `Month ${item.month}`,
+        `"${dateLabel}"`,
+        item.openingBalance.toFixed(2),
+        item.regularEmi.toFixed(2),
+        item.prepayment.toFixed(2),
+        item.principalPaid.toFixed(2),
+        item.interestPaid.toFixed(2),
+        item.totalPaid.toFixed(2),
+        Math.max(0, item.closingBalance).toFixed(2)
+      ];
+    });
 
     let csvContent = headers.join(',') + '\n';
     rows.forEach(r => {
@@ -1180,6 +1593,12 @@
     const filename = `loan_prepayment_schedule_${currentScheduleView}.csv`;
     if (window.ToolsKart) {
       window.ToolsKart.downloadFile(csvContent, filename, 'text/csv');
+    } else {
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
     }
   }
 
@@ -1188,16 +1607,18 @@
     const p = parseFloat(loanAmountInput.value) || 0;
     const r = parseFloat(interestRateInput.value) || 0;
     const t = parseFloat(loanTenureInput.value) || 0;
-    const emi = kpiEmi.textContent;
-    const timeSaved = kpiTimeSaved.textContent;
-    const intSaved = kpiInterestSaved.textContent;
-    const sipCorpus = kpiInvestWealth.textContent;
+    const emi = kpiEmi ? kpiEmi.textContent : '';
+    const timeSaved = kpiTimeSaved ? kpiTimeSaved.textContent : '';
+    const intSaved = kpiInterestSaved ? kpiInterestSaved.textContent : '';
+    const sipCorpus = kpiInvestWealth ? kpiInvestWealth.textContent : '';
+    const debtFreeDate = heroFreedomDate ? heroFreedomDate.textContent : '';
 
     let text = '=== LOAN PREPAYMENT & FREEDOM SUMMARY ===\n';
     text += `Loan Amount: ${formatLakhsCrores(p)}\n`;
     text += `Interest Rate: ${r}% p.a.\n`;
     text += `Tenure: ${t} Years\n`;
     text += `Monthly EMI: ${emi}\n\n`;
+    if (debtFreeDate) text += `🗓️ Target Debt-Free Date: ${debtFreeDate}\n`;
     text += `🎉 Time Saved: ${timeSaved}\n`;
     text += `💰 Interest Saved: ${intSaved}\n`;
     text += `📈 Option B Mutual Fund Corpus: ${sipCorpus}\n\n`;
