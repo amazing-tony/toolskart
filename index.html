@@ -42,14 +42,6 @@
 </head>
 <body>
 
-    <!-- Privacy Declaration Banner (USP) -->
-    <div class="privacy-usp-strip">
-        <div class="container usp-strip-content">
-            <span class="usp-badge">🛡️ 100% Client-Side Privacy</span>
-            <span class="usp-text">"I got frustrated with sketchy PDF/Doc converter sites uploading private files to unknown servers, so I built a 100% client-side, browser-only converter with zero server uploads (plus Indian & Global financial tools). Free & open."</span>
-        </div>
-    </div>
-
     <!-- Slim AdminLTE Header -->
     <header class="header header-slim">
         <div class="container header-content">
@@ -65,7 +57,31 @@
                 <a href="#text-tools">Text</a>
                 <a href="#dev-tools">Dev</a>
             </nav>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <!-- AdminLTE Multi-Theme Switcher -->
+                <div class="theme-switcher-wrap">
+                    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
+                        <span class="theme-toggle-icon">🎨</span>
+                        <span class="theme-toggle-label" id="currentThemeLabel">AdminLTE Slate</span>
+                        <span style="font-size:0.65rem; opacity:0.7;">▼</span>
+                    </button>
+                    <div class="theme-dropdown-menu" id="themeDropdown">
+                        <button class="theme-option-item active" data-theme-choice="adminlte">
+                            <span class="theme-color-dot" style="background:#2563EB;"></span> AdminLTE Slate (Default)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="dark">
+                            <span class="theme-color-dot" style="background:#0F172A; border-color:#38BDF8;"></span> Midnight Cyber (Dark)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="emerald">
+                            <span class="theme-color-dot" style="background:#059669;"></span> FinTech Emerald
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="royal">
+                            <span class="theme-color-dot" style="background:#7C3AED;"></span> Royal Velvet
+                        </button>
+                    </div>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
+            </div>
         </div>
     </header>
 
@@ -81,19 +97,19 @@
 
                 <div class="sidebar-group">
                     <div class="sidebar-group-title">⭐ Featured & Popular</div>
-                    <a href="pages/document-converter.html" class="sidebar-link">
+                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link">
                         <span>📄 Document Converter</span>
                         <span class="sidebar-tag tag-new">Private</span>
                     </a>
-                    <a href="pages/video-downloader.html" class="sidebar-link">
+                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link">
                         <span>🎥 Video Downloader</span>
                         <span class="sidebar-tag tag-hot">1080p</span>
                     </a>
-                    <a href="pages/income-tax-calculator.html" class="sidebar-link">
+                    <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link">
                         <span>📑 Income Tax (Old vs New)</span>
                         <span class="sidebar-tag tag-new">Deductions</span>
                     </a>
-                    <a href="pages/emi-calculator.html" class="sidebar-link">
+                    <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link">
                         <span>🏦 Loan Prepayment & EMI</span>
                         <span class="sidebar-tag">Sliders</span>
                     </a>
@@ -101,33 +117,33 @@
 
                 <div class="sidebar-group">
                     <div class="sidebar-group-title">📄 Document & Media Tools</div>
-                    <a href="pages/document-converter.html" class="sidebar-link"><span>Word ⇄ PDF</span></a>
-                    <a href="pages/document-converter.html" class="sidebar-link"><span>PDF ⇄ Excel</span></a>
-                    <a href="pages/document-converter.html" class="sidebar-link"><span>PDF ⇄ PowerPoint</span></a>
-                    <a href="pages/video-downloader.html" class="sidebar-link"><span>YouTube & Shorts Downloader</span></a>
-                    <a href="pages/video-downloader.html" class="sidebar-link"><span>Instagram Reels & Audio MP3</span></a>
+                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link"><span>Word ⇄ PDF</span></a>
+                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link"><span>PDF ⇄ Excel</span></a>
+                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link"><span>PDF ⇄ PowerPoint</span></a>
+                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link"><span>YouTube & Shorts Downloader</span></a>
+                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link"><span>Instagram Reels & Audio MP3</span></a>
                 </div>
 
                 <div class="sidebar-group">
                     <div class="sidebar-group-title">🧮 Financial Calculators</div>
-                    <a href="pages/income-tax-calculator.html" class="sidebar-link"><span>Income Tax & Deductions</span></a>
-                    <a href="pages/emi-calculator.html" class="sidebar-link"><span>Home Loan & Prepayment</span></a>
-                    <a href="pages/gst-calculator.html" class="sidebar-link"><span>GST & Sales Tax</span></a>
-                    <a href="pages/sip-calculator.html" class="sidebar-link"><span>SIP & Mutual Funds</span></a>
-                    <a href="pages/compound-interest.html" class="sidebar-link"><span>Compound Interest</span></a>
-                    <a href="pages/fd-calculator.html" class="sidebar-link"><span>Fixed Deposit (FD)</span></a>
-                    <a href="pages/percentage-calculator.html" class="sidebar-link"><span>Percentage Calculator</span></a>
+                    <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link"><span>Income Tax & Deductions</span></a>
+                    <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link"><span>Home Loan & Prepayment</span></a>
+                    <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="sidebar-link"><span>GST & Sales Tax</span></a>
+                    <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="sidebar-link"><span>SIP & Mutual Funds</span></a>
+                    <a href="pages/compound-interest.html" data-tool="compound-interest" class="sidebar-link"><span>Compound Interest</span></a>
+                    <a href="pages/fd-calculator.html" data-tool="fd-calculator" class="sidebar-link"><span>Fixed Deposit (FD)</span></a>
+                    <a href="pages/percentage-calculator.html" data-tool="percentage-calculator" class="sidebar-link"><span>Percentage Calculator</span></a>
                 </div>
 
                 <div class="sidebar-group">
                     <div class="sidebar-group-title">📝 Text & Development</div>
-                    <a href="pages/word-counter.html" class="sidebar-link"><span>Word & Character Counter</span></a>
-                    <a href="pages/json-formatter.html" class="sidebar-link"><span>JSON Formatter & Validator</span></a>
-                    <a href="pages/case-converter.html" class="sidebar-link"><span>Case Converter</span></a>
-                    <a href="pages/image-compressor.html" class="sidebar-link"><span>Image Compressor</span></a>
-                    <a href="pages/image-resizer.html" class="sidebar-link"><span>Image Resizer</span></a>
-                    <a href="pages/base64-tool.html" class="sidebar-link"><span>Base64 Tool</span></a>
-                    <a href="pages/regex-tester.html" class="sidebar-link"><span>Regex Tester</span></a>
+                    <a href="pages/word-counter.html" data-tool="word-counter" class="sidebar-link"><span>Word & Character Counter</span></a>
+                    <a href="pages/json-formatter.html" data-tool="json-formatter" class="sidebar-link"><span>JSON Formatter & Validator</span></a>
+                    <a href="pages/case-converter.html" data-tool="case-converter" class="sidebar-link"><span>Case Converter</span></a>
+                    <a href="pages/image-compressor.html" data-tool="image-compressor" class="sidebar-link"><span>Image Compressor</span></a>
+                    <a href="pages/image-resizer.html" data-tool="image-resizer" class="sidebar-link"><span>Image Resizer</span></a>
+                    <a href="pages/base64-tool.html" data-tool="base64-tool" class="sidebar-link"><span>Base64 Tool</span></a>
+                    <a href="pages/regex-tester.html" data-tool="regex-tester" class="sidebar-link"><span>Regex Tester</span></a>
                 </div>
 
                 <div class="sidebar-trust-box">
@@ -140,23 +156,94 @@
         <!-- Main Portal Content -->
         <div class="portal-main-area">
 
-            <!-- Hero Section -->
-            <section class="hero">
-                <div class="container">
-                    <h1>Free Online Tools & Calculators</h1>
-                    <p>30+ powerful tools for document conversions, video & audio downloads, tax planning, financial modeling, and image optimization — 100% client-side privacy, zero server uploads.</p>
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search tools… e.g. Video Downloader, PDF to Word, Income Tax, Loan EMI" id="toolSearch" autocomplete="off">
+            <!-- Compact Premium AdminLTE Banner with Short Keyword Declaration -->
+            <div class="container">
+                <div class="premium-banner">
+                    <div class="premium-banner-top">
+                        <div class="premium-banner-title">
+                            <h1>🔧 ToolsKart Multi-Tool Control Center</h1>
+                            <p>30+ high-performance tools for document conversions, video & audio downloads, tax planning, debt-freedom, and developer utilities — runs 100% inside your browser.</p>
+                        </div>
                     </div>
-                    <div class="hero-stats">
-                        <span>📄 Document Converters</span>
-                        <span>🎥 Video & MP3 Downloader</span>
-                        <span>🧮 8 Calculators</span>
-                        <span>📝 6 Text Tools</span>
-                        <span>🖼️ 3 Image Tools</span>
+                    
+                    <!-- Short Keyword-Based Privacy & Security Declaration -->
+                    <div class="usp-badge-group">
+                        <span class="usp-pill highlight-green">🛡️ SECURE</span>
+                        <span class="usp-pill highlight-green">🔒 100% PRIVATE</span>
+                        <span class="usp-pill highlight-blue">⚡ CLIENT-SIDE ONLY</span>
+                        <span class="usp-pill">🚀 ZERO SERVER UPLOADS</span>
+                        <span class="usp-pill">✨ 100% FREE</span>
+                    </div>
+
+                    <!-- Compact Banner Search -->
+                    <div class="banner-search-row">
+                        <div class="banner-search-wrapper">
+                            <span class="banner-search-icon">🔍</span>
+                            <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search tools… e.g. Video Downloader, PDF to Word, Income Tax, Loan EMI" autocomplete="off">
+                            <span class="banner-kbd-shortcut">Press /</span>
+                        </div>
                     </div>
                 </div>
-            </section>
+
+                <!-- AdminLTE KPI Info-Boxes -->
+                <div class="info-box-grid">
+                    <div class="info-box-widget">
+                        <div class="info-box-icon bg-blue">⚡</div>
+                        <div class="info-box-content">
+                            <div class="info-box-label">Processing Engine</div>
+                            <div class="info-box-value">Client-Side Only</div>
+                        </div>
+                    </div>
+                    <div class="info-box-widget">
+                        <div class="info-box-icon bg-green">🔒</div>
+                        <div class="info-box-content">
+                            <div class="info-box-label">Server Uploads</div>
+                            <div class="info-box-value">Zero (0) Bytes</div>
+                        </div>
+                    </div>
+                    <div class="info-box-widget">
+                        <div class="info-box-icon bg-purple">🛠️</div>
+                        <div class="info-box-content">
+                            <div class="info-box-label">Portal Tools</div>
+                            <div class="info-box-value">25+ Pro Utilities</div>
+                        </div>
+                    </div>
+                    <div class="info-box-widget">
+                        <div class="info-box-icon bg-amber">✨</div>
+                        <div class="info-box-content">
+                            <div class="info-box-label">Access Cost</div>
+                            <div class="info-box-value">100% Free Forever</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single-Portal Tool Content Panel (Integrated Workstation) -->
+                <div id="toolContentPanel" class="tool-content-panel" style="display: none;">
+                    <div class="tool-panel-header">
+                        <div class="tool-breadcrumb-bar">
+                            <a href="#" id="breadcrumbDashboardLink">🏠 Dashboard</a>
+                            <span>/</span>
+                            <span id="panelBreadcrumbCategory">Category</span>
+                            <span>/</span>
+                            <span class="tool-breadcrumb-current" id="panelBreadcrumbTitle">Tool Name</span>
+                        </div>
+                        <div class="tool-panel-actions">
+                            <button class="tool-action-btn" id="toolFullscreenBtn" title="Toggle Fullscreen">
+                                <span>🗖</span> Fullscreen
+                            </button>
+                            <button class="tool-action-btn btn-close-tool" id="toolCloseBtn" title="Back to Dashboard">
+                                <span>✕</span> Back to Dashboard
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tool-frame-container">
+                        <iframe id="toolIframe" class="tool-iframe" src="about:blank" title="ToolsKart Tool Frame" allow="clipboard-read; clipboard-write"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Overview Container (Hidden when a tool is opened in-portal) -->
+            <div id="dashboardOverview">
 
             <!-- Ad Banner -->
             <div class="container">
@@ -191,7 +278,7 @@
                     
                     <div class="featured-grid">
                         <!-- 0. Universal Document Converter -->
-                        <a href="pages/document-converter.html" class="featured-card">
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="featured-card">
                             <div class="featured-header">
                                 <div class="featured-icon">📄</div>
                                 <span class="featured-badge highlight">New • 100% Private</span>
@@ -207,7 +294,7 @@
                         </a>
 
                         <!-- 1. Universal Video & Audio Downloader -->
-                        <a href="pages/video-downloader.html" class="featured-card">
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="featured-card">
                             <div class="featured-header">
                                 <div class="featured-icon">🎥</div>
                                 <span class="featured-badge" style="background:#FEE2E2; color:#DC2626;">Hot • 1080p & MP3</span>
@@ -223,7 +310,7 @@
                         </a>
 
                         <!-- 2. Income Tax Calculator & Optimizer -->
-                        <a href="pages/income-tax-calculator.html" class="featured-card">
+                        <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="featured-card">
                             <div class="featured-header">
                                 <div class="featured-icon">🧾</div>
                                 <span class="featured-badge highlight">FY 2025-26 • Break-Even</span>
@@ -239,7 +326,7 @@
                         </a>
 
                         <!-- 3. Loan Prepayment & Debt-Freedom Planner -->
-                        <a href="pages/emi-calculator.html" class="featured-card">
+                        <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="featured-card">
                             <div class="featured-header">
                                 <div class="featured-icon">🏦</div>
                                 <span class="featured-badge highlight">Interactive • Sliders & Timeline</span>
@@ -255,7 +342,7 @@
                         </a>
 
                         <!-- 4. SIP & Wealth Calculator -->
-                        <a href="pages/sip-calculator.html" class="featured-card">
+                        <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="featured-card">
                             <div class="featured-header">
                                 <div class="featured-icon">📈</div>
                                 <span class="featured-badge">Wealth Builder</span>
@@ -271,7 +358,7 @@
                         </a>
 
                         <!-- 5. GST Calculator -->
-                        <a href="pages/gst-calculator.html" class="featured-card">
+                        <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="featured-card">
                             <div class="featured-header">
                                 <div class="featured-icon">🏷️</div>
                                 <span class="featured-badge">Business Essential</span>
@@ -295,33 +382,65 @@
                     <h2 class="section-title">📄 Document Tools & Converters</h2>
                     <p class="section-desc">100% private, client-side document conversion between Word, PDF, Excel, and PowerPoint with zero server uploads.</p>
                     <div class="tools-grid">
-                        <a href="pages/document-converter.html" class="tool-card">
-                            <div class="tool-icon">🔄</div>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔄</div>
+                                <span class="tool-badge-pill">Featured</span>
+                            </div>
                             <h3>Universal Document Converter</h3>
                             <p>All-in-one document conversion suite. Convert between DOCX, PDF, PPTX, and XLSX instantly.</p>
-                            <span class="tool-tag new">Featured</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">DOCX ⇄ PDF</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/document-converter.html" class="tool-card">
-                            <div class="tool-icon">📑</div>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📑</div>
+                                <span class="tool-badge-pill">Popular</span>
+                            </div>
                             <h3>PDF to Word (DOCX)</h3>
                             <p>Reconstruct PDF pages into editable Microsoft Word documents with paragraph and table formatting.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">PDF ⇄ Word</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/document-converter.html" class="tool-card">
-                            <div class="tool-icon">📝</div>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📝</div>
+                                <span class="tool-badge-pill">Popular</span>
+                            </div>
                             <h3>Word (DOCX) to PDF</h3>
                             <p>Convert DOCX and DOC files to crisp, professional PDF documents ready for printing and sharing.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Word ⇄ PDF</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/document-converter.html" class="tool-card">
-                            <div class="tool-icon">📊</div>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📊</div>
+                                <span class="tool-badge-pill">Tables</span>
+                            </div>
                             <h3>PDF to Excel (XLSX)</h3>
                             <p>Extract financial tables, numbers, and tabular data from PDF files directly into Excel spreadsheets.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">PDF ⇄ Excel</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/document-converter.html" class="tool-card">
-                            <div class="tool-icon">📽️</div>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📽️</div>
+                                <span class="tool-badge-pill">Slides</span>
+                            </div>
                             <h3>PDF to PowerPoint (PPTX)</h3>
                             <p>Turn multi-page PDF documents into editable Microsoft PowerPoint presentation slide decks.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">PDF ⇄ PPTX</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -333,29 +452,53 @@
                     <h2 class="section-title">🎥 Video & Media Tools</h2>
                     <p class="section-desc">Download videos and extract audio from popular social media platforms in 1080p, 720p, or 320kbps MP3.</p>
                     <div class="tools-grid">
-                        <a href="pages/video-downloader.html" class="tool-card">
-                            <div class="tool-icon">▶️</div>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">▶️</div>
+                                <span class="tool-badge-pill">Hot • 1080p</span>
+                            </div>
                             <h3>Universal Video Downloader</h3>
                             <p>Download YouTube videos, Shorts, Instagram Reels, and Facebook clips in 1080p, 720p, or 480p MP4.</p>
-                            <span class="tool-tag new">Hot</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Video MP4</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/video-downloader.html" class="tool-card">
-                            <div class="tool-icon">🎵</div>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🎵</div>
+                                <span class="tool-badge-pill">Audio</span>
+                            </div>
                             <h3>Extract Audio (MP3)</h3>
                             <p>Extract high-quality 320kbps, 192kbps, or 128kbps MP3 audio tracks directly from video links.</p>
-                            <span class="tool-tag">MP3</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Audio MP3</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/video-downloader.html" class="tool-card">
-                            <div class="tool-icon">📱</div>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📱</div>
+                                <span class="tool-badge-pill">Mobile</span>
+                            </div>
                             <h3>YouTube Shorts Downloader</h3>
                             <p>Fast and instant downloader for YouTube Shorts and vertical mobile video clips.</p>
-                            <span class="tool-tag">Shorts</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Shorts</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/video-downloader.html" class="tool-card">
-                            <div class="tool-icon">📸</div>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📸</div>
+                                <span class="tool-badge-pill">Reels</span>
+                            </div>
                             <h3>Instagram Reels Downloader</h3>
                             <p>Save Instagram Reels and video posts directly to your phone or computer in original quality.</p>
-                            <span class="tool-tag">Reels</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">IG Reels</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -367,50 +510,101 @@
                     <h2 class="section-title">🧮 Financial & Everyday Calculators</h2>
                     <p class="section-desc">Essential calculators for Income Tax, GST, Home Loans, SIP, age, and investments.</p>
                     <div class="tools-grid">
-                        <a href="pages/income-tax-calculator.html" class="tool-card">
-                            <div class="tool-icon">🧾</div>
+                        <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🧾</div>
+                                <span class="tool-badge-pill">FY 25-26</span>
+                            </div>
                             <h3>Income Tax (Old vs New)</h3>
                             <p>Compare Old vs New Tax Regime with full 80C, NPS, 80D, HRA exemptions, and break-even analyzer.</p>
-                            <span class="tool-tag new">Updated</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Tax Planning</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/emi-calculator.html" class="tool-card">
-                            <div class="tool-icon">🏦</div>
+                        <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🏦</div>
+                                <span class="tool-badge-pill">Debt Freedom</span>
+                            </div>
                             <h3>Loan Prepayment & Debt-Freedom</h3>
                             <p>Interactive sliders, 1-click '1 extra EMI/year' hack, visual payoff timeline, and Prepay vs SIP comparison.</p>
-                            <span class="tool-tag new">Interactive</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Home Loan</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/gst-calculator.html" class="tool-card">
-                            <div class="tool-icon">🏷️</div>
+                        <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🏷️</div>
+                                <span class="tool-badge-pill">Business</span>
+                            </div>
                             <h3>GST Calculator</h3>
                             <p>Calculate GST amount and total price with all Indian tax slabs — 5%, 12%, 18%, 28%.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">All Slabs</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/sip-calculator.html" class="tool-card">
-                            <div class="tool-icon">📈</div>
+                        <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📈</div>
+                                <span class="tool-badge-pill">Wealth</span>
+                            </div>
                             <h3>SIP Calculator</h3>
                             <p>Calculate future returns on your Systematic Investment Plan with visual growth breakdown.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Mutual Funds</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/age-calculator.html" class="tool-card">
-                            <div class="tool-icon">🎂</div>
+                        <a href="pages/age-calculator.html" data-tool="age-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🎂</div>
+                                <span class="tool-badge-pill">Everyday</span>
+                            </div>
                             <h3>Age Calculator</h3>
                             <p>Calculate your exact age in years, months, days, hours, and minutes from your date of birth.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Exact Age</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/compound-interest.html" class="tool-card">
-                            <div class="tool-icon">💰</div>
+                        <a href="pages/compound-interest.html" data-tool="compound-interest" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">💰</div>
+                                <span class="tool-badge-pill">Growth</span>
+                            </div>
                             <h3>Compound Interest Calculator</h3>
                             <p>Calculate compound interest with flexible compounding frequency and contribution options.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Compounding</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/fd-calculator.html" class="tool-card">
-                            <div class="tool-icon">🏧</div>
+                        <a href="pages/fd-calculator.html" data-tool="fd-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🏧</div>
+                                <span class="tool-badge-pill">Savings</span>
+                            </div>
                             <h3>FD Calculator</h3>
                             <p>Calculate fixed deposit maturity amount and interest earned across banks in India.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Fixed Deposit</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/percentage-calculator.html" class="tool-card">
-                            <div class="tool-icon">🔢</div>
+                        <a href="pages/percentage-calculator.html" data-tool="percentage-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔢</div>
+                                <span class="tool-badge-pill">Math</span>
+                            </div>
                             <h3>Percentage Calculator</h3>
                             <p>Find percentage of a number, percentage increase/decrease, and percentage difference.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Percentage</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -422,37 +616,77 @@
                     <h2 class="section-title">📝 Text & Content Tools</h2>
                     <p class="section-desc">Helpful tools for writers, bloggers, students, and content creators.</p>
                     <div class="tools-grid">
-                        <a href="pages/word-counter.html" class="tool-card">
-                            <div class="tool-icon">📊</div>
+                        <a href="pages/word-counter.html" data-tool="word-counter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📊</div>
+                                <span class="tool-badge-pill">Analytics</span>
+                            </div>
                             <h3>Word Counter</h3>
                             <p>Count words, characters, sentences, paragraphs, and estimate reading time.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Word Count</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/case-converter.html" class="tool-card">
-                            <div class="tool-icon">🔤</div>
+                        <a href="pages/case-converter.html" data-tool="case-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔤</div>
+                                <span class="tool-badge-pill">Formatting</span>
+                            </div>
                             <h3>Case Converter</h3>
                             <p>Convert text to UPPERCASE, lowercase, Title Case, sentence case, and more.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Text Transform</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/lorem-ipsum.html" class="tool-card">
-                            <div class="tool-icon">📄</div>
+                        <a href="pages/lorem-ipsum.html" data-tool="lorem-ipsum" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📄</div>
+                                <span class="tool-badge-pill">Generator</span>
+                            </div>
                             <h3>Lorem Ipsum Generator</h3>
                             <p>Generate placeholder text for designs, mockups, and layouts by paragraphs or words.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Placeholder</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/slug-generator.html" class="tool-card">
-                            <div class="tool-icon">🔗</div>
+                        <a href="pages/slug-generator.html" data-tool="slug-generator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔗</div>
+                                <span class="tool-badge-pill">SEO</span>
+                            </div>
                             <h3>URL Slug Generator</h3>
                             <p>Convert any text into clean, SEO-friendly URL slugs with custom separators.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Clean URLs</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/json-formatter.html" class="tool-card">
-                            <div class="tool-icon">{ }</div>
+                        <a href="pages/json-formatter.html" data-tool="json-formatter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">{ }</div>
+                                <span class="tool-badge-pill">Developer</span>
+                            </div>
                             <h3>JSON Formatter & Validator</h3>
                             <p>Format, beautify, validate, and minify JSON with syntax error detection.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">JSON Prettify</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/base64-tool.html" class="tool-card">
-                            <div class="tool-icon">🔐</div>
+                        <a href="pages/base64-tool.html" data-tool="base64-tool" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔐</div>
+                                <span class="tool-badge-pill">Security</span>
+                            </div>
                             <h3>Base64 Encoder / Decoder</h3>
                             <p>Encode text to Base64 and decode Base64 back to plain text instantly.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Encode / Decode</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -464,22 +698,41 @@
                     <h2 class="section-title">🖼️ Image Tools</h2>
                     <p class="section-desc">Quick image editing tools that process everything in your browser — zero server uploads.</p>
                     <div class="tools-grid">
-                        <a href="pages/image-resizer.html" class="tool-card">
-                            <div class="tool-icon">📐</div>
+                        <a href="pages/image-resizer.html" data-tool="image-resizer" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📐</div>
+                                <span class="tool-badge-pill">Dimensions</span>
+                            </div>
                             <h3>Image Resizer</h3>
                             <p>Resize images by dimensions or percentage while maintaining aspect ratio.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Maintain Ratio</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/image-compressor.html" class="tool-card">
-                            <div class="tool-icon">🗜️</div>
+                        <a href="pages/image-compressor.html" data-tool="image-compressor" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🗜️</div>
+                                <span class="tool-badge-pill">Optimize</span>
+                            </div>
                             <h3>Image Compressor</h3>
                             <p>Compress JPEG, PNG, and WebP images to reduce file size with adjustable quality.</p>
-                            <span class="tool-tag">Popular</span>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Zero Quality Loss</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/color-picker.html" class="tool-card">
-                            <div class="tool-icon">🎨</div>
+                        <a href="pages/color-picker.html" data-tool="color-picker" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🎨</div>
+                                <span class="tool-badge-pill">Design</span>
+                            </div>
                             <h3>Color Picker & Converter</h3>
                             <p>Pick colors, generate palettes, and convert between HEX, RGB, and HSL formats.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">HEX / RGB / HSL</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -491,15 +744,29 @@
                     <h2 class="section-title">💻 Developer Tools</h2>
                     <p class="section-desc">Handy utilities for web developers and programmers.</p>
                     <div class="tools-grid">
-                        <a href="pages/url-encoder.html" class="tool-card">
-                            <div class="tool-icon">🌐</div>
+                        <a href="pages/url-encoder.html" data-tool="url-encoder" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🌐</div>
+                                <span class="tool-badge-pill">Utilities</span>
+                            </div>
                             <h3>URL Encoder / Decoder</h3>
                             <p>Encode and decode URLs with full support for query strings and special characters.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">URI Components</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
-                        <a href="pages/regex-tester.html" class="tool-card">
-                            <div class="tool-icon">🔍</div>
+                        <a href="pages/regex-tester.html" data-tool="regex-tester" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔍</div>
+                                <span class="tool-badge-pill">Regex</span>
+                            </div>
                             <h3>Regex Tester</h3>
                             <p>Test regular expressions against sample text with live matching and capture groups.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Live Testing</span>
+                                <span class="tool-launch-btn">Open Tool <span>&rarr;</span></span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -538,6 +805,7 @@
                     </div>
                 </div>
             </section>
+            </div> <!-- /dashboardOverview -->
 
             <!-- Footer -->
             <footer class="footer">

@@ -6,6 +6,77 @@
 (function () {
   'use strict';
 
+  // ---- Multi-Theme Switching Engine ----
+  const THEME_KEY = 'toolskart_theme';
+  const DEFAULT_THEME = 'adminlte';
+  const themeLabels = {
+    'adminlte': 'AdminLTE Slate',
+    'dark': 'Midnight Cyber',
+    'emerald': 'FinTech Emerald',
+    'royal': 'Royal Velvet'
+  };
+
+  function applyTheme(themeName) {
+    if (!themeLabels[themeName]) themeName = DEFAULT_THEME;
+    document.documentElement.setAttribute('data-theme', themeName);
+    try {
+      localStorage.setItem(THEME_KEY, themeName);
+    } catch (e) {}
+
+    const themeLabelEl = document.getElementById('currentThemeLabel');
+    if (themeLabelEl) {
+      themeLabelEl.textContent = themeLabels[themeName] || 'Theme';
+    }
+
+    document.querySelectorAll('.theme-option-item').forEach(item => {
+      item.classList.toggle('active', item.getAttribute('data-theme-choice') === themeName);
+    });
+
+    const toolIframe = document.getElementById('toolIframe');
+    if (toolIframe && toolIframe.contentDocument) {
+      try {
+        toolIframe.contentDocument.documentElement.setAttribute('data-theme', themeName);
+      } catch (e) {}
+    }
+  }
+
+  // Detect and set initial theme
+  let savedTheme = DEFAULT_THEME;
+  try {
+    savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+  } catch (e) {}
+  applyTheme(savedTheme);
+
+  // If running inside an iframe, enable embedded mode
+  if (window.self !== window.top) {
+    document.body.classList.add('is-embedded');
+  }
+
+  // Theme dropdown interaction
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeDropdown = document.getElementById('themeDropdown');
+  if (themeToggleBtn && themeDropdown) {
+    themeToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      themeDropdown.classList.toggle('show');
+    });
+
+    themeDropdown.querySelectorAll('.theme-option-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const choice = btn.getAttribute('data-theme-choice');
+        applyTheme(choice);
+        themeDropdown.classList.remove('show');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!themeDropdown.contains(e.target) && e.target !== themeToggleBtn) {
+        themeDropdown.classList.remove('show');
+      }
+    });
+  }
+
   // ---- Mobile Navigation Toggle ----
   const mobileToggle = document.getElementById('mobileToggle');
   const mainNav = document.getElementById('mainNav');
@@ -148,8 +219,197 @@
     });
   }
 
+  // ---- Single-Portal Tool Loading & Routing Engine ----
+  const toolRegistry = {
+    'document-converter': { title: 'Universal Document Converter', category: 'Document Tools', url: 'pages/document-converter.html' },
+    'video-downloader': { title: 'Video & Audio Downloader', category: 'Media Tools', url: 'pages/video-downloader.html' },
+    'income-tax-calculator': { title: 'Income Tax Optimizer (Old vs New)', category: 'Financial Calculators', url: 'pages/income-tax-calculator.html' },
+    'emi-calculator': { title: 'Loan Prepayment & Debt-Freedom Planner', category: 'Financial Calculators', url: 'pages/emi-calculator.html' },
+    'gst-calculator': { title: 'GST Calculator & Tax Splitter', category: 'Financial Calculators', url: 'pages/gst-calculator.html' },
+    'sip-calculator': { title: 'SIP & Wealth Builder', category: 'Financial Calculators', url: 'pages/sip-calculator.html' },
+    'age-calculator': { title: 'Age Calculator', category: 'Everyday Calculators', url: 'pages/age-calculator.html' },
+    'compound-interest': { title: 'Compound Interest Calculator', category: 'Financial Calculators', url: 'pages/compound-interest.html' },
+    'fd-calculator': { title: 'Fixed Deposit (FD) Calculator', category: 'Financial Calculators', url: 'pages/fd-calculator.html' },
+    'percentage-calculator': { title: 'Percentage Calculator', category: 'Everyday Calculators', url: 'pages/percentage-calculator.html' },
+    'word-counter': { title: 'Word & Character Counter', category: 'Text Tools', url: 'pages/word-counter.html' },
+    'case-converter': { title: 'Case Converter', category: 'Text Tools', url: 'pages/case-converter.html' },
+    'lorem-ipsum': { title: 'Lorem Ipsum Generator', category: 'Text Tools', url: 'pages/lorem-ipsum.html' },
+    'slug-generator': { title: 'URL Slug Generator', category: 'Text Tools', url: 'pages/slug-generator.html' },
+    'json-formatter': { title: 'JSON Formatter & Validator', category: 'Developer Tools', url: 'pages/json-formatter.html' },
+    'base64-tool': { title: 'Base64 Encoder / Decoder', category: 'Developer Tools', url: 'pages/base64-tool.html' },
+    'image-resizer': { title: 'Image Resizer', category: 'Image Tools', url: 'pages/image-resizer.html' },
+    'image-compressor': { title: 'Image Compressor', category: 'Image Tools', url: 'pages/image-compressor.html' },
+    'color-picker': { title: 'Color Picker & Converter', category: 'Image Tools', url: 'pages/color-picker.html' },
+    'url-encoder': { title: 'URL Encoder / Decoder', category: 'Developer Tools', url: 'pages/url-encoder.html' },
+    'regex-tester': { title: 'Regex Tester', category: 'Developer Tools', url: 'pages/regex-tester.html' },
+    'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' }
+  };
+
+  function extractSlugFromUrl(url) {
+    if (!url) return null;
+    const match = url.match(/(?:pages\/|^)([\w-]+)\.html/);
+    return match ? match[1] : null;
+  }
+
+  function openToolInPortal(slug, customTitle, customCat) {
+    const dashboardOverview = document.getElementById('dashboardOverview');
+    const toolPanel = document.getElementById('toolContentPanel');
+    const toolIframe = document.getElementById('toolIframe');
+    const breadcrumbCat = document.getElementById('panelBreadcrumbCategory');
+    const breadcrumbTitle = document.getElementById('panelBreadcrumbTitle');
+
+    if (!toolPanel || !toolIframe) {
+      // If outside index.html, navigate to index.html#slug
+      const prefix = window.location.pathname.includes('/pages/') ? '../index.html#' : 'index.html#';
+      window.location.href = prefix + slug;
+      return;
+    }
+
+    const tool = toolRegistry[slug] || {
+      title: customTitle || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+      category: customCat || 'Tools',
+      url: 'pages/' + slug + '.html'
+    };
+
+    // Update breadcrumbs
+    if (breadcrumbCat) breadcrumbCat.textContent = tool.category;
+    if (breadcrumbTitle) breadcrumbTitle.textContent = tool.title;
+
+    // Show tool panel and hide overview
+    if (dashboardOverview) dashboardOverview.style.display = 'none';
+    toolPanel.style.display = 'flex';
+
+    // Set iframe target if different
+    const targetUrl = tool.url;
+    if (!toolIframe.src.endsWith(targetUrl)) {
+      toolIframe.src = targetUrl;
+    }
+
+    // Smooth scroll to tool panel
+    toolPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Update URL hash
+    if (history.pushState) {
+      history.pushState(null, null, '#' + slug);
+    } else {
+      window.location.hash = slug;
+    }
+
+    // Update active state in sidebar
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      const linkSlug = link.getAttribute('data-tool') || extractSlugFromUrl(link.getAttribute('href'));
+      link.classList.toggle('is-active', linkSlug === slug);
+    });
+
+    // Close mobile sidebar if open
+    const portalSidebar = document.getElementById('portalSidebar');
+    if (portalSidebar && window.innerWidth <= 1024) {
+      portalSidebar.classList.remove('open');
+    }
+  }
+
+  function closeToolPanel() {
+    const dashboardOverview = document.getElementById('dashboardOverview');
+    const toolPanel = document.getElementById('toolContentPanel');
+
+    if (toolPanel) {
+      toolPanel.style.display = 'none';
+      toolPanel.classList.remove('is-fullscreen');
+    }
+    if (dashboardOverview) {
+      dashboardOverview.style.display = '';
+      dashboardOverview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // Clear URL hash
+    if (history.pushState) {
+      history.pushState(null, null, window.location.pathname + window.location.search);
+    } else {
+      window.location.hash = '';
+    }
+    // Clear sidebar active highlights
+    document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('is-active'));
+  }
+
+  // Bind Tool Panel Buttons
+  const toolCloseBtn = document.getElementById('toolCloseBtn');
+  const breadcrumbDashboardLink = document.getElementById('breadcrumbDashboardLink');
+  const toolFullscreenBtn = document.getElementById('toolFullscreenBtn');
+
+  if (toolCloseBtn) {
+    toolCloseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeToolPanel();
+    });
+  }
+  if (breadcrumbDashboardLink) {
+    breadcrumbDashboardLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeToolPanel();
+    });
+  }
+  if (toolFullscreenBtn) {
+    toolFullscreenBtn.addEventListener('click', () => {
+      const toolPanel = document.getElementById('toolContentPanel');
+      if (toolPanel) {
+        toolPanel.classList.toggle('is-fullscreen');
+        const isFull = toolPanel.classList.contains('is-fullscreen');
+        toolFullscreenBtn.innerHTML = isFull ? '<span>🗗</span> Exit Fullscreen' : '<span>🗖</span> Fullscreen';
+      }
+    });
+  }
+
+  // Intercept click on tools, cards, and sidebar links
+  document.addEventListener('click', function (e) {
+    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link');
+    if (!trigger) return;
+
+    const toolPanel = document.getElementById('toolContentPanel');
+    if (!toolPanel) return;
+
+    let slug = trigger.getAttribute('data-tool');
+    const href = trigger.getAttribute('href');
+
+    if (!slug && href) {
+      slug = extractSlugFromUrl(href);
+    }
+
+    if (slug && toolRegistry[slug]) {
+      e.preventDefault();
+      const title = trigger.querySelector('h3')?.textContent?.trim() || toolRegistry[slug].title;
+      openToolInPortal(slug, title);
+    }
+  });
+
+  // Check URL hash on page load or on hashchange
+  function checkUrlHash() {
+    const hash = window.location.hash.replace('#', '').trim();
+    if (hash && toolRegistry[hash]) {
+      openToolInPortal(hash);
+    }
+  }
+  window.addEventListener('load', checkUrlHash);
+  window.addEventListener('hashchange', checkUrlHash);
+
+  // Sync theme when iframe finishes loading
+  const toolIframeEl = document.getElementById('toolIframe');
+  if (toolIframeEl) {
+    toolIframeEl.addEventListener('load', () => {
+      try {
+        const curTheme = document.documentElement.getAttribute('data-theme') || DEFAULT_THEME;
+        if (toolIframeEl.contentDocument) {
+          toolIframeEl.contentDocument.documentElement.setAttribute('data-theme', curTheme);
+          toolIframeEl.contentDocument.body.classList.add('is-embedded');
+        }
+      } catch (e) {}
+    });
+  }
+
   // ---- Utility Functions (globally available) ----
   window.ToolsKart = {
+    openTool: openToolInPortal,
+    closeTool: closeToolPanel,
+    setTheme: applyTheme,
+
     // Format number with commas (Indian system)
     formatIndian: function (num) {
       if (num === null || num === undefined || isNaN(num)) return '0';
