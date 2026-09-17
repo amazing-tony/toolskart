@@ -308,10 +308,9 @@
   --sidebar-box-bg: #FFFFFF;
   --card-glossy-bg: #FFFFFF;
   --card-glossy-border: #E2E8F0;
-  --card-glossy-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --banner-bg: linear-gradient(135deg, #0369A1 0%, #0284C7 40%, #0EA5E9 100%);
-  --banner-border: rgba(255, 255, 255, 0.5);
-  --banner-glow: rgba(2, 132, 199, 0.65);
+  --banner-bg: linear-gradient(135deg, #2B3A4A 0%, #3B4E63 50%, #2F3F52 100%);
+  --banner-border: rgba(148, 163, 184, 0.4);
+  --banner-glow: rgba(71, 85, 105, 0.15);
 }
 
 /* Theme 7: Warm Ivory (Cream / Warm White Background) */
@@ -4753,8 +4752,8 @@ ins.adsbygoogle iframe + .ad-placeholder {
 
 /* ========================================================
    PURE MINIMAL THEME (white) HEADER & BANNER CONTRAST FIXES
-   Ensures white header is clearly separated from sky-blue banner
-   and all nav text is legible on white background.
+   Ensures white header is clearly separated and banner has a
+   soothing, eye-friendly greyish-blue palette without harsh lighting.
    ======================================================== */
 [data-theme="white"] .header {
   box-shadow: 0 1px 0 0 #CBD5E1, 0 2px 8px rgba(0, 0, 0, 0.06) !important;
@@ -4772,9 +4771,60 @@ ins.adsbygoogle iframe + .ad-placeholder {
   color: #0F172A !important;
 }
 [data-theme="white"] .header-badge-tag {
-  background: #E0F2FE !important;
-  color: #0369A1 !important;
-  border: 1px solid #BAE6FD !important;
+  background: #F1F5F9 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
+}
+
+/* Soothing, elegant Greyish-Blue Banner without eye-straining lighting */
+[data-theme="white"] .premium-banner {
+  background: linear-gradient(135deg, #2B3A4A 0%, #3B4E63 50%, #2F3F52 100%) !important;
+  border: 1.5px solid rgba(148, 163, 184, 0.4) !important;
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12),
+              0 4px 6px -2px rgba(15, 23, 42, 0.05),
+              inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  animation: none !important;
+}
+[data-theme="white"] .premium-banner::before {
+  opacity: 0.12 !important;
+}
+[data-theme="white"] .premium-banner::after {
+  display: none !important;
+}
+[data-theme="white"] .premium-banner .live-ai-badge {
+  background: rgba(15, 23, 42, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #FFFFFF !important;
+}
+[data-theme="white"] .premium-banner .dynamic-word {
+  background: rgba(15, 23, 42, 0.38) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  color: #FFFFFF !important;
+}
+[data-theme="white"] .premium-banner .usp-pill {
+  background: rgba(15, 23, 42, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  color: #FFFFFF !important;
+}
+[data-theme="white"] .premium-banner .usp-pill.highlight-green {
+  background: rgba(6, 78, 59, 0.45) !important;
+  border-color: rgba(52, 211, 153, 0.6) !important;
+  color: #A7F3D0 !important;
+}
+[data-theme="white"] .premium-banner .usp-pill.highlight-blue {
+  background: rgba(15, 76, 129, 0.45) !important;
+  border-color: rgba(96, 165, 250, 0.6) !important;
+  color: #BFDBFE !important;
+}
+[data-theme="white"] .premium-banner .banner-search-input {
+  background: rgba(15, 23, 42, 0.45) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+}
+[data-theme="white"] .premium-banner .banner-search-input:focus {
+  border-color: #93C5FD !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.25) !important;
 }
 
 /* ========================================================
