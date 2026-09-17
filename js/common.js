@@ -6,70 +6,116 @@
 (function () {
   'use strict';
 
-  // ---- Multi-Theme Switching Engine (11 Curated Global & Indian Themes) ----
+  // ---- Multi-Theme Architecture: 11 Distinct Design Systems ----
   const THEME_KEY = 'toolskart_theme';
-  const DEFAULT_THEME = 'us-tech';
-  
-  // Normalized theme mapping (supporting legacy aliases)
-  const themeAliases = {
-    'adminlte': 'us-tech',
-    'teal': 'us-tech',
-    'sejda': 'us-tech',
-    'emerald': 'uk-oxford',
-    'grey': 'nordic',
-    'royal': 'punjabi',
-    'facebook': 'delhi-metro',
-    'amber': 'kolkata',
-    'ivory': 'indian-ethos',
-    'warm-ivory': 'indian-ethos',
-    'white': 'minimal-light',
-    'dark': 'minimal-dark'
+  const DEFAULT_THEME = 'theme-01-executive';
+
+  const THEMES = [
+    { id: 'theme-01-executive', name: 'Executive' },
+    { id: 'theme-02-horizon',   name: 'Horizon' },
+    { id: 'theme-03-heritage',  name: 'Heritage' },
+    { id: 'theme-04-slate',     name: 'Slate' },
+    { id: 'theme-05-copper',    name: 'Copper' },
+    { id: 'theme-06-ocean',     name: 'Ocean' },
+    { id: 'theme-07-forest',    name: 'Forest' },
+    { id: 'theme-08-graphite',  name: 'Graphite' },
+    { id: 'theme-09-paper',     name: 'Paper' },
+    { id: 'theme-10-studio',    name: 'Studio' },
+    { id: 'theme-11-midnight',  name: 'Midnight' }
+  ];
+
+  const THEME_ALIASES = {
+    'executive': 'theme-01-executive',
+    'us-tech': 'theme-01-executive',
+    'adminlte': 'theme-01-executive',
+    'teal': 'theme-01-executive',
+    'sejda': 'theme-01-executive',
+    'horizon': 'theme-02-horizon',
+    'minimal-light': 'theme-02-horizon',
+    'white': 'theme-02-horizon',
+    'heritage': 'theme-03-heritage',
+    'indian-ethos': 'theme-03-heritage',
+    'ivory': 'theme-03-heritage',
+    'warm-ivory': 'theme-03-heritage',
+    'slate': 'theme-04-slate',
+    'nordic': 'theme-04-slate',
+    'grey': 'theme-04-slate',
+    'copper': 'theme-05-copper',
+    'kolkata': 'theme-05-copper',
+    'amber': 'theme-05-copper',
+    'ocean': 'theme-06-ocean',
+    'forest': 'theme-07-forest',
+    'uk-oxford': 'theme-07-forest',
+    'emerald': 'theme-07-forest',
+    'graphite': 'theme-08-graphite',
+    'minimal-dark': 'theme-08-graphite',
+    'dark': 'theme-08-graphite',
+    'paper': 'theme-09-paper',
+    'chinese-harmony': 'theme-09-paper',
+    'studio': 'theme-10-studio',
+    'punjabi': 'theme-10-studio',
+    'royal': 'theme-10-studio',
+    'midnight': 'theme-11-midnight',
+    'delhi-metro': 'theme-11-midnight',
+    'russian-granite': 'theme-11-midnight',
+    'facebook': 'theme-11-midnight'
   };
 
-  const themeLabels = {
-    'us-tech': '🇺🇸 US Silicon Valley',
-    'uk-oxford': '🇬🇧 UK Oxford Classic',
-    'nordic': '🇪🇺 Europe Nordic',
-    'russian-granite': '🇷🇺 Russian Imperial',
-    'chinese-harmony': '🇨🇳 Chinese Harmony',
-    'indian-ethos': '🪔 Indian Ethos / Vedic',
-    'punjabi': '🌾 Punjab Vibrant',
-    'delhi-metro': '🏛️ Delhi Metro',
-    'kolkata': '🎨 Kolkata Heritage',
-    'minimal-light': '⚪ Pure Minimal Light',
-    'minimal-dark': '🌑 Minimal Dark'
-  };
+  let toastTimer = null;
 
-  function applyTheme(themeName) {
-    if (themeAliases[themeName]) themeName = themeAliases[themeName];
-    if (!themeLabels[themeName]) themeName = DEFAULT_THEME;
-    document.documentElement.setAttribute('data-theme', themeName);
-    try {
-      localStorage.setItem(THEME_KEY, themeName);
-    } catch (e) {}
+  function showThemeToast(themeName) {
+    const toastEls = document.querySelectorAll('.theme-toast');
+    if (toastEls.length === 0) return;
 
-    const themeLabelEl = document.getElementById('currentThemeLabel');
-    if (themeLabelEl) {
-      themeLabelEl.textContent = themeLabels[themeName] || 'Theme';
-    }
-
-    document.querySelectorAll('.theme-option-item').forEach(item => {
-      const choice = item.getAttribute('data-theme-choice');
-      const normalizedChoice = themeAliases[choice] || choice;
-      item.classList.toggle('active', normalizedChoice === themeName);
+    toastEls.forEach(toast => {
+      toast.textContent = 'Theme: ' + themeName;
+      toast.classList.add('visible');
     });
 
-    const sidebarThemeSelect = document.getElementById('sidebarThemeSelect');
-    if (sidebarThemeSelect) {
-      sidebarThemeSelect.value = themeName;
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastEls.forEach(toast => toast.classList.remove('visible'));
+    }, 1350);
+  }
+
+  function applyTheme(themeId, triggerToast = false) {
+    if (THEME_ALIASES[themeId]) themeId = THEME_ALIASES[themeId];
+    const themeObj = THEMES.find(t => t.id === themeId) || THEMES[0];
+    const resolvedId = themeObj.id;
+
+    document.documentElement.setAttribute('data-theme', resolvedId);
+    try {
+      localStorage.setItem(THEME_KEY, resolvedId);
+    } catch (e) {}
+
+    // Update all theme buttons title and aria-labels
+    document.querySelectorAll('.theme-cycle-btn').forEach(btn => {
+      btn.setAttribute('title', 'Theme: ' + themeObj.name + ' (Click or Shift+T to cycle)');
+      btn.setAttribute('aria-label', 'Theme: ' + themeObj.name + '. Click to cycle theme.');
+    });
+
+    if (triggerToast) {
+      showThemeToast(themeObj.name);
     }
 
+    // Propagate to iframe if present
     const toolIframe = document.getElementById('toolIframe');
     if (toolIframe && toolIframe.contentDocument) {
       try {
-        toolIframe.contentDocument.documentElement.setAttribute('data-theme', themeName);
+        toolIframe.contentDocument.documentElement.setAttribute('data-theme', resolvedId);
       } catch (e) {}
     }
+  }
+
+  function cycleTheme() {
+    let currentId = document.documentElement.getAttribute('data-theme') || DEFAULT_THEME;
+    if (THEME_ALIASES[currentId]) currentId = THEME_ALIASES[currentId];
+    
+    let currentIndex = THEMES.findIndex(t => t.id === currentId);
+    if (currentIndex === -1) currentIndex = 0;
+
+    const nextIndex = (currentIndex + 1) % THEMES.length;
+    applyTheme(THEMES[nextIndex].id, true);
   }
 
   // Detect and set initial theme
@@ -77,44 +123,33 @@
   try {
     savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
   } catch (e) {}
-  applyTheme(savedTheme);
+  applyTheme(savedTheme, false);
 
   // If running inside an iframe, enable embedded mode
   if (window.self !== window.top) {
     document.body.classList.add('is-embedded');
   }
 
-  // Theme dropdown interaction
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeDropdown = document.getElementById('themeDropdown');
-  if (themeToggleBtn && themeDropdown) {
-    themeToggleBtn.addEventListener('click', (e) => {
+  // Theme Cycle Button listener (Single Icon ◐)
+  document.addEventListener('click', (e) => {
+    const cycleBtn = e.target.closest('.theme-cycle-btn');
+    if (cycleBtn) {
+      e.preventDefault();
       e.stopPropagation();
-      themeDropdown.classList.toggle('show');
-    });
+      cycleTheme();
+    }
+  });
 
-    themeDropdown.querySelectorAll('.theme-option-item').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const choice = btn.getAttribute('data-theme-choice');
-        applyTheme(choice);
-        themeDropdown.classList.remove('show');
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!themeDropdown.contains(e.target) && e.target !== themeToggleBtn) {
-        themeDropdown.classList.remove('show');
+  // Shift + T keyboard shortcut
+  document.addEventListener('keydown', (e) => {
+    if (e.shiftKey && (e.key === 'T' || e.key === 't')) {
+      const activeTag = document.activeElement ? document.activeElement.tagName : '';
+      if (activeTag !== 'INPUT' && activeTag !== 'TEXTAREA') {
+        e.preventDefault();
+        cycleTheme();
       }
-    });
-  }
-
-  const sidebarThemeSelect = document.getElementById('sidebarThemeSelect');
-  if (sidebarThemeSelect) {
-    sidebarThemeSelect.addEventListener('change', function() {
-      applyTheme(this.value);
-    });
-  }
+    }
+  });
 
   const dynamicWords = [
     { text: "100% Secure", color: "#34D399", bg: "rgba(16, 185, 129, 0.15)", border: "rgba(16, 185, 129, 0.45)" },

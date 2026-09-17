@@ -21,7 +21,7 @@
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script type="application/ld+json">
     {
@@ -60,31 +60,10 @@
                 <a href="../index.html#text-tools">Text Tools</a>
                 <a href="../index.html#dev-tools">Dev Tools</a>
             </nav>
-                        <!-- Multi-Theme Switcher (11 Presets) -->
-            <div class="theme-switcher-wrap" style="margin-left:auto; margin-right:0.75rem;">
-                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
-                    <span class="theme-toggle-icon">🎨</span>
-                    <span class="theme-toggle-label" id="currentThemeLabel">Theme</span>
-                    <span style="font-size:0.65rem; opacity:0.7;">▼</span>
-                </button>
-                <div class="theme-dropdown-menu" id="themeDropdown">
-                    <div class="theme-group-header">🌐 Global & Developed</div>
-                    <button class="theme-option-item" data-theme-choice="us-tech"><span class="theme-option-flag">🇺🇸</span> US Silicon Valley</button>
-                    <button class="theme-option-item" data-theme-choice="uk-oxford"><span class="theme-option-flag">🇬🇧</span> UK Oxford Classic</button>
-                    <button class="theme-option-item" data-theme-choice="nordic"><span class="theme-option-flag">🇪🇺</span> Europe Nordic</button>
-                    <button class="theme-option-item" data-theme-choice="russian-granite"><span class="theme-option-flag">🇷🇺</span> Russian Imperial</button>
-                    <button class="theme-option-item" data-theme-choice="chinese-harmony"><span class="theme-option-flag">🇨🇳</span> Chinese Harmony</button>
-                    <div class="theme-group-divider"></div>
-                    <div class="theme-group-header">🇮🇳 Indian Ethos & Regional</div>
-                    <button class="theme-option-item" data-theme-choice="indian-ethos"><span class="theme-option-flag">🪔</span> Indian Ethos (Vedic)</button>
-                    <button class="theme-option-item" data-theme-choice="punjabi"><span class="theme-option-flag">🌾</span> Punjab Vibrant</button>
-                    <button class="theme-option-item" data-theme-choice="delhi-metro"><span class="theme-option-flag">🏛️</span> Delhi Metro & Capital</button>
-                    <button class="theme-option-item" data-theme-choice="kolkata"><span class="theme-option-flag">🎨</span> Kolkata Heritage</button>
-                    <div class="theme-group-divider"></div>
-                    <div class="theme-group-header">⚡ Minimal & Distraction-Free</div>
-                    <button class="theme-option-item" data-theme-choice="minimal-light"><span class="theme-option-flag">⚪</span> Pure Minimal Light</button>
-                    <button class="theme-option-item" data-theme-choice="minimal-dark"><span class="theme-option-flag">🌑</span> Minimal Dark (Midnight)</button>
-                </div>
+                                    <!-- Theme Cycle Button [ ◐ ] -->
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
             </div>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
         </div>

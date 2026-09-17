@@ -23,7 +23,7 @@
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <!-- Google AdSense Safe Queue Initializer -->
     <script>window.adsbygoogle = window.adsbygoogle || [];</script>
@@ -56,12 +56,12 @@
     <header class="header header-slim">
         <div class="container header-content">
             <div class="header-left">
-                <a href="index.html" class="logo" title="Amazing-tools — Free Client-Side Online Tools">
-                    <span class="logo-icon-bolt">⚡</span>
-                    <span>Amazing-tools</span>
-                </a>
                 <button class="sidebar-toggle-btn" id="sidebarToggle" aria-label="Toggle Sidebar" title="Toggle Sidebar Navigation">☰</button>
-                <span class="header-badge-tag"><span class="pulse-dot"></span> Private & AI-Ready</span>
+                <a href="index.html" class="logo" title="Amazing-Tools — Free Client-Side Online Tools">
+                    <span class="logo-icon-bolt">⚡</span>
+                    <span class="logo-brand-name">Amazing-Tools</span>
+                    <span class="brand-subtitle">Private • Free • Browser-Based</span>
+                </a>
             </div>
             <nav class="nav" id="mainNav">
                 <div class="nav-category-item">
@@ -124,65 +124,9 @@
             </nav>
             <div style="display:flex; align-items:center; gap:0.75rem;">
                 <!-- Multi-Theme Switcher (8 Themes) -->
-                <div class="theme-switcher-wrap">
-                    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
-                        <span class="theme-toggle-icon">🎨</span>
-                        <span class="theme-toggle-label" id="currentThemeLabel">🇺🇸 US Silicon Valley</span>
-                        <span style="font-size:0.65rem; opacity:0.7;">▼</span>
-                    </button>
-                    <div class="theme-dropdown-menu" id="themeDropdown">
-                        <div class="theme-group-header">🌐 Global & Developed</div>
-                        <button class="theme-option-item active" data-theme-choice="us-tech">
-                            <span class="theme-option-flag">🇺🇸</span>
-                            <span>US Silicon Valley</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="uk-oxford">
-                            <span class="theme-option-flag">🇬🇧</span>
-                            <span>UK Oxford Classic</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="nordic">
-                            <span class="theme-option-flag">🇪🇺</span>
-                            <span>Europe Nordic</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="russian-granite">
-                            <span class="theme-option-flag">🇷🇺</span>
-                            <span>Russian Imperial</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="chinese-harmony">
-                            <span class="theme-option-flag">🇨🇳</span>
-                            <span>Chinese Harmony</span>
-                        </button>
-
-                        <div class="theme-group-divider"></div>
-                        <div class="theme-group-header">🇮🇳 Indian Ethos & Regional</div>
-                        <button class="theme-option-item" data-theme-choice="indian-ethos">
-                            <span class="theme-option-flag">🪔</span>
-                            <span>Indian Ethos (Vedic)</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="punjabi">
-                            <span class="theme-option-flag">🌾</span>
-                            <span>Punjab Vibrant</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="delhi-metro">
-                            <span class="theme-option-flag">🏛️</span>
-                            <span>Delhi Metro & Capital</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="kolkata">
-                            <span class="theme-option-flag">🎨</span>
-                            <span>Kolkata Heritage</span>
-                        </button>
-
-                        <div class="theme-group-divider"></div>
-                        <div class="theme-group-header">⚡ Minimal & Distraction-Free</div>
-                        <button class="theme-option-item" data-theme-choice="minimal-light">
-                            <span class="theme-option-flag">⚪</span>
-                            <span>Pure Minimal Light</span>
-                        </button>
-                        <button class="theme-option-item" data-theme-choice="minimal-dark">
-                            <span class="theme-option-flag">🌑</span>
-                            <span>Minimal Dark (Midnight)</span>
-                        </button>
-                    </div>
+                <div class="theme-cycle-wrap">
+                    <button class="theme-cycle-btn" id="themeCycleBtn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                    <div class="theme-toast" id="themeToast" role="status" aria-live="polite"></div>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
             </div>
@@ -392,38 +336,34 @@
 
             <!-- Compact Premium AdminLTE Banner with Short Keyword Declaration -->
             <div class="container">
-                <div class="premium-banner">
-                    <div class="premium-banner-top">
-                        <div class="premium-banner-title">
-                            <div class="live-ai-badge"><span class="pulse-dot"></span> Next-Gen Browser Engine • 100% Client-Side Privacy</div>
-                            <div class="banner-dynamic-headline">
-                                <span class="dynamic-lead">Amazing-Tools is</span>
-                                <span class="dynamic-rotator-wrap">
-                                    <span class="dynamic-word" id="dynamicUspText">100% Secure</span>
-                                    <span class="dynamic-cursor">|</span>
-                                </span>
+                <div class="premium-banner product-hero-clean">
+                    <div class="hero-content-clean">
+                        <div class="hero-privacy-pill">
+                            <span class="pulse-dot"></span>
+                            <span>100% Client-Side • Zero Server Uploads</span>
+                        </div>
+                        <h1 class="hero-clean-title">Your tools. Your browser. <span class="hero-clean-accent">Your data stays with you.</span></h1>
+                        <p class="hero-clean-sub">Private online tools for documents, media, calculations and everyday productivity — runs entirely inside your browser.</p>
+                        
+                        <div class="hero-search-row">
+                            <div class="banner-search-wrapper">
+                                <span class="banner-search-icon">🔍</span>
+                                <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search 34+ tools… e.g. Video Downloader, PDF to Word, Income Tax, Loan Prepayment" autocomplete="off">
+                                <span class="banner-kbd-shortcut">Press /</span>
                             </div>
-                            <p>30+ high-performance tools for private document conversions, video & audio downloads, tax planning, debt-freedom, and developer utilities — runs 100% inside your browser.</p>
                         </div>
-                    </div>
-                    
-                    <!-- Short Keyword-Based Privacy & Security Declaration -->
-                    <div class="usp-badge-group">
-                        <span class="usp-pill highlight-green">🛡️ SECURE</span>
-                        <span class="usp-pill highlight-green">🔒 100% PRIVATE</span>
-                        <span class="usp-pill highlight-blue">⚡ CLIENT-SIDE ONLY</span>
-                        <span class="usp-pill">🚀 ZERO SERVER UPLOADS</span>
-                        <span class="usp-pill">✨ 100% FREE</span>
-                    </div>
 
-                    <!-- Compact Banner Search -->
-                    <div class="banner-search-row">
-                        <div class="banner-search-wrapper">
-                            <span class="banner-search-icon">🔍</span>
-                            <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search tools… e.g. Video Downloader, PDF to Word, Income Tax, Loan EMI" autocomplete="off">
-                            <span class="banner-kbd-shortcut">Press /</span>
+                        <div class="hero-stats-row">
+                            <span class="hero-stat-badge">⚡ 34+ Tools</span>
+                            <span class="hero-stat-sep">•</span>
+                            <span class="hero-stat-badge">🛡️ 100% Client-Side</span>
+                            <span class="hero-stat-sep">•</span>
+                            <span class="hero-stat-badge">🔒 Zero Server Tracking</span>
+                            <span class="hero-stat-sep">•</span>
+                            <span class="hero-stat-badge">🆓 Free &amp; Open</span>
                         </div>
                     </div>
+                </div>
                 </div>
 
                 <!-- Google AdSense Top Leaderboard Unit (Responsive / High RPM) -->
