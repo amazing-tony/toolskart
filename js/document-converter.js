@@ -244,16 +244,34 @@
        CONVERSION ENGINES (Client-Side JS)
        ------------------------------------------------------------- */
 
-    // 1. DOCX -> PDF
+    // 1. DOCX -> PDF (with html2canvas auto-loader and direct text fallback)
     async function convertDocxToPdf(buffer) {
         updateProgress(35, 'Extracting text, headings, and formatting from DOCX...');
         if (!window.mammoth) {
             throw new Error('Mammoth.js library is loading. Please check internet connection.');
         }
-        const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
-        const html = result.value;
 
-        updateProgress(65, 'Rendering PDF pages with jsPDF...');
+        // Dynamically ensure html2canvas is ready if not yet available
+        if (!window.html2canvas) {
+            await new Promise((resolve) => {
+                const s = document.createElement('script');
+                s.src = '../js/html2canvas.min.js';
+                s.onload = resolve;
+                s.onerror = () => {
+                    const cdnS = document.createElement('script');
+                    cdnS.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                    cdnS.onload = resolve;
+                    cdnS.onerror = resolve;
+                    document.head.appendChild(cdnS);
+                };
+                document.head.appendChild(s);
+            });
+        }
+
+        const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
+        const html = result.value || '';
+
+        updateProgress(65, 'Rendering PDF pages...');
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({ unit: 'pt', format: 'a4', orientation: 'portrait' });
 
@@ -263,17 +281,63 @@
         container.style.fontFamily = 'Helvetica, Arial, sans-serif';
         container.style.fontSize = '12pt';
         container.style.lineHeight = '1.6';
+        container.style.color = '#111827';
+        container.style.background = '#ffffff';
         container.innerHTML = html;
         document.body.appendChild(container);
 
-        await pdf.html(container, {
-            x: 20,
-            y: 20,
-            width: 550,
-            windowWidth: 750
-        });
+        let renderedSuccess = false;
+        if (window.html2canvas) {
+            try {
+                await pdf.html(container, {
+                    x: 20,
+                    y: 20,
+                    width: 550,
+                    windowWidth: 750,
+                    html2canvas: {
+                        scale: 0.75,
+                        logging: false,
+                        useCORS: true
+                    }
+                });
+                renderedSuccess = true;
+            } catch (renderErr) {
+                console.warn('html2canvas render error, using text fallback:', renderErr);
+            }
+        }
 
         document.body.removeChild(container);
+
+        // Fallback to direct text layout if html2canvas was blocked or failed
+        if (!renderedSuccess) {
+            updateProgress(75, 'Applying clean direct text PDF formatting...');
+            const rawResult = await mammoth.extractRawText({ arrayBuffer: buffer });
+            const lines = rawText.split('\n');
+
+            let currentY = 40;
+            const pageHeight = 800;
+            const margin = 40;
+            pdf.setFontSize(11);
+            pdf.setFont('helvetica', 'normal');
+
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) {
+                    currentY += 12;
+                    continue;
+                }
+                const wrappedLines = pdf.splitTextToSize(line, 515);
+                for (const wLine of wrappedLines) {
+                    if (currentY + 16 > pageHeight) {
+                        pdf.addPage('a4', 'portrait');
+                        currentY = margin;
+                    }
+                    pdf.text(wLine, margin, currentY);
+                    currentY += 16;
+                }
+            }
+        }
+
         updateProgress(90, 'Finalizing PDF document...');
         return pdf.output('blob');
     }

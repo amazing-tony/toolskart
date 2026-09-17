@@ -17,7 +17,8 @@
     'grey': 'Silver Nordic',
     'white': 'Pure Minimal',
     'ivory': 'Warm Ivory',
-    'amber': 'Solar Amber'
+    'amber': 'Solar Amber',
+    'facebook': 'Social Blue (Facebook)'
   };
 
   function applyTheme(themeName) {
