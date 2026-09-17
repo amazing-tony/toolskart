@@ -6,24 +6,42 @@
 (function () {
   'use strict';
 
-  // ---- Multi-Theme Switching Engine (8 Curated Themes) ----
+  // ---- Multi-Theme Switching Engine (11 Curated Global & Indian Themes) ----
   const THEME_KEY = 'toolskart_theme';
-  const DEFAULT_THEME = 'adminlte';
+  const DEFAULT_THEME = 'us-tech';
+  
+  // Normalized theme mapping (supporting legacy aliases)
+  const themeAliases = {
+    'adminlte': 'us-tech',
+    'teal': 'us-tech',
+    'sejda': 'us-tech',
+    'emerald': 'uk-oxford',
+    'grey': 'nordic',
+    'royal': 'punjabi',
+    'facebook': 'delhi-metro',
+    'amber': 'kolkata',
+    'ivory': 'indian-ethos',
+    'warm-ivory': 'indian-ethos',
+    'white': 'minimal-light',
+    'dark': 'minimal-dark'
+  };
+
   const themeLabels = {
-    'adminlte': 'Titanium Blue',
-    'dark': 'Midnight Cyber',
-    'emerald': 'FinTech Emerald',
-    'royal': 'Royal Velvet',
-    'grey': 'Silver Nordic',
-    'white': 'Pure Minimal',
-    'ivory': 'Warm Ivory',
-    'amber': 'Solar Amber',
-    'facebook': 'Social Blue',
-    'teal': 'Clean Teal',
-    'sejda': 'Clean Teal'
+    'us-tech': '🇺🇸 US Silicon Valley',
+    'uk-oxford': '🇬🇧 UK Oxford Classic',
+    'nordic': '🇪🇺 Europe Nordic',
+    'russian-granite': '🇷🇺 Russian Imperial',
+    'chinese-harmony': '🇨🇳 Chinese Harmony',
+    'indian-ethos': '🪔 Indian Ethos / Vedic',
+    'punjabi': '🌾 Punjab Vibrant',
+    'delhi-metro': '🏛️ Delhi Metro',
+    'kolkata': '🎨 Kolkata Heritage',
+    'minimal-light': '⚪ Pure Minimal Light',
+    'minimal-dark': '🌑 Minimal Dark'
   };
 
   function applyTheme(themeName) {
+    if (themeAliases[themeName]) themeName = themeAliases[themeName];
     if (!themeLabels[themeName]) themeName = DEFAULT_THEME;
     document.documentElement.setAttribute('data-theme', themeName);
     try {
@@ -36,8 +54,15 @@
     }
 
     document.querySelectorAll('.theme-option-item').forEach(item => {
-      item.classList.toggle('active', item.getAttribute('data-theme-choice') === themeName);
+      const choice = item.getAttribute('data-theme-choice');
+      const normalizedChoice = themeAliases[choice] || choice;
+      item.classList.toggle('active', normalizedChoice === themeName);
     });
+
+    const sidebarThemeSelect = document.getElementById('sidebarThemeSelect');
+    if (sidebarThemeSelect) {
+      sidebarThemeSelect.value = themeName;
+    }
 
     const toolIframe = document.getElementById('toolIframe');
     if (toolIframe && toolIframe.contentDocument) {
@@ -84,7 +109,13 @@
     });
   }
 
-  // ---- Yii-Inspired Dynamic Animated Typewriter Rotator ----
+  const sidebarThemeSelect = document.getElementById('sidebarThemeSelect');
+  if (sidebarThemeSelect) {
+    sidebarThemeSelect.addEventListener('change', function() {
+      applyTheme(this.value);
+    });
+  }
+
   const dynamicWords = [
     { text: "100% Secure", color: "#34D399", bg: "rgba(16, 185, 129, 0.15)", border: "rgba(16, 185, 129, 0.45)" },
     { text: "Completely Private", color: "#38BDF8", bg: "rgba(56, 189, 248, 0.15)", border: "rgba(56, 189, 248, 0.45)" },

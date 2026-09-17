@@ -5,20 +5,20 @@
    Global Stylesheet
    ======================================== */
 
-/* ---- 1. CSS Custom Properties & Multi-Theme Engine ---- */
+/* ---- 1. CSS Custom Properties & Multi-Theme Engine (11 Curated Themes) ---- */
 
-/* Theme 1: Titanium Blue (Default AdminLTE Slate) */
-:root, [data-theme="adminlte"] {
+/* Theme 1: 🇺🇸 US Silicon Valley / Wall Street (Default) */
+:root, [data-theme="us-tech"], [data-theme="adminlte"], [data-theme="teal"], [data-theme="sejda"] {
   --color-primary: #2563EB;
   --color-primary-hover: #1D4ED8;
-  --color-primary-light: #DBEAFE;
-  --color-accent: #10B981;
-  --color-accent-hover: #059669;
-  --color-accent-light: #D1FAE5;
-  --color-bg: #F1F5F9;
+  --color-primary-light: #EFF6FF;
+  --color-accent: #0D9488;
+  --color-accent-hover: #0F766E;
+  --color-accent-light: #CCFBF1;
+  --color-bg: #F8FAFC;
   --color-surface: #FFFFFF;
   --color-text: #0F172A;
-  --color-text-secondary: #475569;
+  --color-text-secondary: #334155;
   --color-text-muted: #64748B;
   --color-border: #E2E8F0;
   --color-border-hover: #CBD5E1;
@@ -31,41 +31,46 @@
   --color-header: #0F172A;
   --header-border: #1E293B;
   --header-text: #FFFFFF;
-  --header-nav-text: #CBD5E1;
+  --header-nav-text: #94A3B8;
   --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.1);
-  --header-btn-bg: rgba(255, 255, 255, 0.12);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.16);
   --header-dropdown-bg: #1E293B;
   --header-dropdown-border: #334155;
   --header-dropdown-text: #F1F5F9;
   --header-dropdown-hover-bg: #2563EB;
   --header-dropdown-hover-text: #FFFFFF;
   --color-footer: #0F172A;
-  --sidebar-bg: #1E293B;
-  --sidebar-border: #334155;
-  --sidebar-text: #CBD5E1;
-  --sidebar-text-muted: #94A3B8;
-  --sidebar-hover: #2A384C;
+  --sidebar-bg: #0B1120;
+  --sidebar-border: #1E293B;
+  --sidebar-text: #94A3B8;
+  --sidebar-text-muted: #64748B;
+  --sidebar-hover: #1E293B;
   --sidebar-link-hover: #FFFFFF;
   --sidebar-active: #2563EB;
   --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #0F172A;
-  --sidebar-input-border: #334155;
-  --sidebar-box-bg: #131E32;
-  --card-glossy-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.85) 100%);
-  --card-glossy-border: rgba(255, 255, 255, 0.85);
-  --card-glossy-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  --banner-bg: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
-  --banner-border: rgba(255, 255, 255, 0.16);
-  --banner-glow: rgba(37, 99, 235, 0.55);
+  --sidebar-input-bg: #131D31;
+  --sidebar-input-border: #23334E;
+  --sidebar-box-bg: #111A2C;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E2E8F0;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #0F172A;
+  --banner-border: #1E293B;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #94A3B8;
+  --banner-glow: transparent;
+  --usp-strip-bg: #0B1120;
+  --usp-strip-border: #1E293B;
+  --usp-strip-text: #CBD5E1;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.05);
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-lg: 14px;
   --radius-full: 9999px;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
@@ -74,14 +79,545 @@
   --max-width: 1400px;
 }
 
-/* Theme 2: Midnight Cyber (Full Dark Mode) */
-[data-theme="dark"] {
+/* Theme 2: 🇬🇧 UK Oxford Classic (British Racing Green & Heritage Gold) */
+[data-theme="uk-oxford"], [data-theme="emerald"] {
+  --color-primary: #065F46;
+  --color-primary-hover: #044E39;
+  --color-primary-light: #ECFDF5;
+  --color-accent: #D97706;
+  --color-accent-hover: #B45309;
+  --color-accent-light: #FEF3C7;
+  --color-bg: #F8FAF8;
+  --color-surface: #FFFFFF;
+  --color-text: #142B23;
+  --color-text-secondary: #334E44;
+  --color-text-muted: #5B7A6E;
+  --color-border: #D7E2DC;
+  --color-border-hover: #B8CCC2;
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+  --color-header: #064E3B;
+  --header-border: #043E2E;
+  --header-text: #FFFFFF;
+  --header-nav-text: #D1FAE5;
+  --header-nav-hover: #FFFFFF;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.1);
+  --header-btn-bg: rgba(255, 255, 255, 0.1);
+  --header-btn-border: rgba(255, 255, 255, 0.2);
+  --header-dropdown-bg: #043E2E;
+  --header-dropdown-border: #065F46;
+  --header-dropdown-text: #ECFDF5;
+  --header-dropdown-hover-bg: #065F46;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #064E3B;
+  --sidebar-bg: #042E23;
+  --sidebar-border: #084534;
+  --sidebar-text: #A7C4B8;
+  --sidebar-text-muted: #6B8F82;
+  --sidebar-hover: #064E3B;
+  --sidebar-link-hover: #FFFFFF;
+  --sidebar-active: #059669;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #03241B;
+  --sidebar-input-border: #0A533F;
+  --sidebar-box-bg: #05372A;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #D7E2DC;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #064E3B;
+  --banner-border: #08634B;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #A7C4B8;
+  --banner-glow: transparent;
+  --usp-strip-bg: #032E22;
+  --usp-strip-border: #064E3B;
+  --usp-strip-text: #D1FAE5;
+}
+
+/* Theme 3: 🇪🇺 Europe Nordic (Scandinavian Glacier & Minimalist Porcelain) */
+[data-theme="nordic"], [data-theme="grey"] {
+  --color-primary: #0284C7;
+  --color-primary-hover: #0369A1;
+  --color-primary-light: #F0F9FF;
+  --color-accent: #0F766E;
+  --color-accent-hover: #115E59;
+  --color-accent-light: #CCFBF1;
+  --color-bg: #F1F5F9;
+  --color-surface: #FFFFFF;
+  --color-text: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-border: #CBD5E1;
+  --color-border-hover: #94A3B8;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-success: #10B981;
+  --color-success-light: #D1FAE5;
+  --color-header: #1E293B;
+  --header-border: #334155;
+  --header-text: #FFFFFF;
+  --header-nav-text: #CBD5E1;
+  --header-nav-hover: #FFFFFF;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.16);
+  --header-dropdown-bg: #1E293B;
+  --header-dropdown-border: #334155;
+  --header-dropdown-text: #F1F5F9;
+  --header-dropdown-hover-bg: #0284C7;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #1E293B;
+  --sidebar-bg: #1E293B;
+  --sidebar-border: #334155;
+  --sidebar-text: #CBD5E1;
+  --sidebar-text-muted: #94A3B8;
+  --sidebar-hover: #2A384C;
+  --sidebar-link-hover: #FFFFFF;
+  --sidebar-active: #0284C7;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #0F172A;
+  --sidebar-input-border: #334155;
+  --sidebar-box-bg: #172130;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #CBD5E1;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #1E293B;
+  --banner-border: #334155;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #94A3B8;
+  --banner-glow: transparent;
+  --usp-strip-bg: #141C2B;
+  --usp-strip-border: #233044;
+  --usp-strip-text: #CBD5E1;
+}
+
+/* Theme 4: 🇷🇺 Russian Imperial (St. Petersburg Granite & Ruby Crimson) */
+[data-theme="russian-granite"] {
+  --color-primary: #DC2626;
+  --color-primary-hover: #B91C1C;
+  --color-primary-light: #FEF2F2;
+  --color-accent: #D97706;
+  --color-accent-hover: #B45309;
+  --color-accent-light: #FEF3C7;
+  --color-bg: #F4F4F5;
+  --color-surface: #FFFFFF;
+  --color-text: #18181B;
+  --color-text-secondary: #27272A;
+  --color-text-muted: #71717A;
+  --color-border: #E4E4E7;
+  --color-border-hover: #D4D4D8;
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-success: #16A34A;
+  --color-success-light: #DCFCE7;
+  --color-header: #18181B;
+  --header-border: #27272A;
+  --header-text: #FFFFFF;
+  --header-nav-text: #A1A1AA;
+  --header-nav-hover: #FFFFFF;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.18);
+  --header-dropdown-bg: #27272A;
+  --header-dropdown-border: #3F3F46;
+  --header-dropdown-text: #FAFAFA;
+  --header-dropdown-hover-bg: #DC2626;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #18181B;
+  --sidebar-bg: #18181B;
+  --sidebar-border: #27272A;
+  --sidebar-text: #A1A1AA;
+  --sidebar-text-muted: #71717A;
+  --sidebar-hover: #27272A;
+  --sidebar-link-hover: #FFFFFF;
+  --sidebar-active: #DC2626;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #27272A;
+  --sidebar-input-border: #3F3F46;
+  --sidebar-box-bg: #202024;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E4E4E7;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #18181B;
+  --banner-border: #27272A;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #A1A1AA;
+  --banner-glow: transparent;
+  --usp-strip-bg: #09090B;
+  --usp-strip-border: #18181B;
+  --usp-strip-text: #E4E4E7;
+}
+
+/* Theme 5: 🇨🇳 Chinese Harmony (Imperial Vermilion & Warm Silk) */
+[data-theme="chinese-harmony"] {
+  --color-primary: #E11D48;
+  --color-primary-hover: #BE123C;
+  --color-primary-light: #FFF1F2;
+  --color-accent: #059669;
+  --color-accent-hover: #047857;
+  --color-accent-light: #D1FAE5;
+  --color-bg: #FBF8F5;
+  --color-surface: #FFFFFF;
+  --color-text: #1C1917;
+  --color-text-secondary: #292524;
+  --color-text-muted: #78716C;
+  --color-border: #E7E5E4;
+  --color-border-hover: #D6D3D1;
+  --color-error: #E11D48;
+  --color-error-light: #FFE4E6;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+  --color-header: #1C1917;
+  --header-border: #292524;
+  --header-text: #FFFFFF;
+  --header-nav-text: #A8A29E;
+  --header-nav-hover: #FFFFFF;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.18);
+  --header-dropdown-bg: #292524;
+  --header-dropdown-border: #44403C;
+  --header-dropdown-text: #FAFAF9;
+  --header-dropdown-hover-bg: #E11D48;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #1C1917;
+  --sidebar-bg: #1C1917;
+  --sidebar-border: #292524;
+  --sidebar-text: #A8A29E;
+  --sidebar-text-muted: #78716C;
+  --sidebar-hover: #292524;
+  --sidebar-link-hover: #FFFFFF;
+  --sidebar-active: #E11D48;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #292524;
+  --sidebar-input-border: #44403C;
+  --sidebar-box-bg: #23201D;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E7E5E4;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #1C1917;
+  --banner-border: #292524;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #A8A29E;
+  --banner-glow: transparent;
+  --usp-strip-bg: #0C0A09;
+  --usp-strip-border: #1C1917;
+  --usp-strip-text: #E7E5E4;
+}
+
+/* Theme 6: 🪔 Indian Ethos / Vedic (Sandalwood Ivory & Sacred Kesar Saffron) */
+[data-theme="indian-ethos"], [data-theme="ivory"], [data-theme="warm-ivory"] {
+  --color-primary: #D9531E;
+  --color-primary-hover: #B83E0F;
+  --color-primary-light: #FFF7ED;
+  --color-accent: #0D9488;
+  --color-accent-hover: #0F766E;
+  --color-accent-light: #CCFBF1;
+  --color-bg: #F8F5EE;
+  --color-surface: #FFFFFF;
+  --color-text: #26201B;
+  --color-text-secondary: #423830;
+  --color-text-muted: #786B60;
+  --color-border: #E4DCD3;
+  --color-border-hover: #D2C6BA;
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+  --color-header: #211B17;
+  --header-border: #332B25;
+  --header-text: #FFFBF5;
+  --header-nav-text: #C4B6A9;
+  --header-nav-hover: #FFFBF5;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.18);
+  --header-dropdown-bg: #302722;
+  --header-dropdown-border: #473B34;
+  --header-dropdown-text: #FFFBF5;
+  --header-dropdown-hover-bg: #D9531E;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #211B17;
+  --sidebar-bg: #1B1612;
+  --sidebar-border: #2E2520;
+  --sidebar-text: #B8AAA0;
+  --sidebar-text-muted: #7A6F66;
+  --sidebar-hover: #2B231E;
+  --sidebar-link-hover: #FFFBF5;
+  --sidebar-active: #D9531E;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #27201A;
+  --sidebar-input-border: #3D322A;
+  --sidebar-box-bg: #221B16;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E4DCD3;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #211B17;
+  --banner-border: #382F28;
+  --banner-text: #FFFBF5;
+  --banner-text-muted: #B8AAA0;
+  --banner-glow: transparent;
+  --usp-strip-bg: #14100D;
+  --usp-strip-border: #26201B;
+  --usp-strip-text: #EDE4DC;
+}
+
+/* Theme 7: 🌾 Punjab Vibrant (Phulkari Mustard Amber & Royal Patiala Indigo) */
+[data-theme="punjabi"], [data-theme="royal"] {
+  --color-primary: #D97706;
+  --color-primary-hover: #B45309;
+  --color-primary-light: #FEF3C7;
+  --color-accent: #4338CA;
+  --color-accent-hover: #3730A3;
+  --color-accent-light: #E0E7FF;
+  --color-bg: #FAF9F3;
+  --color-surface: #FFFFFF;
+  --color-text: #191432;
+  --color-text-secondary: #312B52;
+  --color-text-muted: #645C85;
+  --color-border: #E5E0EE;
+  --color-border-hover: #CAC2D8;
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-success: #16A34A;
+  --color-success-light: #DCFCE7;
+  --color-header: #1E1B4B;
+  --header-border: #2E296E;
+  --header-text: #FFFFFF;
+  --header-nav-text: #C7D2FE;
+  --header-nav-hover: #FFFFFF;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.1);
+  --header-btn-bg: rgba(255, 255, 255, 0.1);
+  --header-btn-border: rgba(255, 255, 255, 0.2);
+  --header-dropdown-bg: #262160;
+  --header-dropdown-border: #3F3795;
+  --header-dropdown-text: #EEF2FF;
+  --header-dropdown-hover-bg: #D97706;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #1E1B4B;
+  --sidebar-bg: #151336;
+  --sidebar-border: #252157;
+  --sidebar-text: #A59FC9;
+  --sidebar-text-muted: #6C668F;
+  --sidebar-hover: #221E53;
+  --sidebar-link-hover: #FFFFFF;
+  --sidebar-active: #D97706;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #1F1B47;
+  --sidebar-input-border: #352E75;
+  --sidebar-box-bg: #1B1842;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E5E0EE;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #1E1B4B;
+  --banner-border: #2E296E;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #C7D2FE;
+  --banner-glow: transparent;
+  --usp-strip-bg: #100E2B;
+  --usp-strip-border: #1E1B4B;
+  --usp-strip-text: #E0E7FF;
+}
+
+/* Theme 8: 🏛️ Delhi Metro & Capital (Urban Slate & Metro Red Line) */
+[data-theme="delhi-metro"], [data-theme="facebook"] {
+  --color-primary: #DC2626;
+  --color-primary-hover: #B91C1C;
+  --color-primary-light: #FEF2F2;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-light: #DBEAFE;
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-text: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-success: #10B981;
+  --color-success-light: #D1FAE5;
+  --color-header: #0F172A;
+  --header-border: #1E293B;
+  --header-text: #FFFFFF;
+  --header-nav-text: #CBD5E1;
+  --header-nav-hover: #FFFFFF;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.16);
+  --header-dropdown-bg: #1E293B;
+  --header-dropdown-border: #334155;
+  --header-dropdown-text: #F1F5F9;
+  --header-dropdown-hover-bg: #DC2626;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #0F172A;
+  --sidebar-bg: #0B1120;
+  --sidebar-border: #1E293B;
+  --sidebar-text: #94A3B8;
+  --sidebar-text-muted: #64748B;
+  --sidebar-hover: #1E293B;
+  --sidebar-link-hover: #FFFFFF;
+  --sidebar-active: #DC2626;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #131D31;
+  --sidebar-input-border: #23334E;
+  --sidebar-box-bg: #111A2C;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E2E8F0;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #0F172A;
+  --banner-border: #1E293B;
+  --banner-text: #FFFFFF;
+  --banner-text-muted: #94A3B8;
+  --banner-glow: transparent;
+  --usp-strip-bg: #0B1120;
+  --usp-strip-border: #1E293B;
+  --usp-strip-text: #E2E8F0;
+}
+
+/* Theme 9: 🎨 Kolkata Heritage (Clay Terracotta & Mishti Cream) */
+[data-theme="kolkata"], [data-theme="amber"] {
+  --color-primary: #C2410C;
+  --color-primary-hover: #9A3412;
+  --color-primary-light: #FFF7ED;
+  --color-accent: #B45309;
+  --color-accent-hover: #92400E;
+  --color-accent-light: #FEF3C7;
+  --color-bg: #F8F4EE;
+  --color-surface: #FFFFFF;
+  --color-text: #241A16;
+  --color-text-secondary: #3D2D27;
+  --color-text-muted: #736058;
+  --color-border: #E5DAD0;
+  --color-border-hover: #CFC1B5;
+  --color-error: #DC2626;
+  --color-error-light: #FEE2E2;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+  --color-header: #241A16;
+  --header-border: #382823;
+  --header-text: #FFFBF7;
+  --header-nav-text: #CFC0B8;
+  --header-nav-hover: #FFFBF7;
+  --header-nav-hover-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-bg: rgba(255, 255, 255, 0.08);
+  --header-btn-border: rgba(255, 255, 255, 0.18);
+  --header-dropdown-bg: #33241F;
+  --header-dropdown-border: #4D3730;
+  --header-dropdown-text: #FFFBF7;
+  --header-dropdown-hover-bg: #C2410C;
+  --header-dropdown-hover-text: #FFFFFF;
+  --color-footer: #241A16;
+  --sidebar-bg: #1C1411;
+  --sidebar-border: #2D201C;
+  --sidebar-text: #B5A59D;
+  --sidebar-text-muted: #7A6961;
+  --sidebar-hover: #2D201C;
+  --sidebar-link-hover: #FFFBF7;
+  --sidebar-active: #C2410C;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #271C18;
+  --sidebar-input-border: #3E2C26;
+  --sidebar-box-bg: #221814;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E5DAD0;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --banner-bg: #241A16;
+  --banner-border: #3D2C26;
+  --banner-text: #FFFBF7;
+  --banner-text-muted: #B5A59D;
+  --banner-glow: transparent;
+  --usp-strip-bg: #140E0C;
+  --usp-strip-border: #241A16;
+  --usp-strip-text: #EDE2DA;
+}
+
+/* Theme 10: ⚪ Pure Minimal Light (Zero Distraction Crisp White) */
+[data-theme="minimal-light"], [data-theme="white"] {
+  --color-primary: #1E293B;
+  --color-primary-hover: #0F172A;
+  --color-primary-light: #F1F5F9;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-light: #EFF6FF;
+  --color-bg: #FFFFFF;
+  --color-surface: #F8FAFC;
+  --color-text: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-success: #10B981;
+  --color-success-light: #D1FAE5;
+  --color-header: #FFFFFF;
+  --header-border: #E2E8F0;
+  --header-text: #0F172A;
+  --header-nav-text: #475569;
+  --header-nav-hover: #0F172A;
+  --header-nav-hover-bg: #F1F5F9;
+  --header-btn-bg: #F1F5F9;
+  --header-btn-border: #E2E8F0;
+  --header-dropdown-bg: #FFFFFF;
+  --header-dropdown-border: #E2E8F0;
+  --header-dropdown-text: #0F172A;
+  --header-dropdown-hover-bg: #F1F5F9;
+  --header-dropdown-hover-text: #0F172A;
+  --color-footer: #F8FAFC;
+  --sidebar-bg: #F8FAFC;
+  --sidebar-border: #E2E8F0;
+  --sidebar-text: #475569;
+  --sidebar-text-muted: #64748B;
+  --sidebar-hover: #EDF2F7;
+  --sidebar-link-hover: #0F172A;
+  --sidebar-active: #1E293B;
+  --sidebar-active-text: #FFFFFF;
+  --sidebar-input-bg: #FFFFFF;
+  --sidebar-input-border: #CBD5E1;
+  --sidebar-box-bg: #F1F5F9;
+  --card-glossy-bg: #FFFFFF;
+  --card-glossy-border: #E2E8F0;
+  --card-glossy-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --banner-bg: #F8FAFC;
+  --banner-border: #CBD5E1;
+  --banner-text: #0F172A;
+  --banner-text-muted: #475569;
+  --banner-glow: transparent;
+  --usp-strip-bg: #F1F5F9;
+  --usp-strip-border: #E2E8F0;
+  --usp-strip-text: #334155;
+}
+
+/* Theme 11: 🌑 Minimal Dark (Low-Eyestrain Midnight Slate) */
+[data-theme="minimal-dark"], [data-theme="dark"] {
   --color-primary: #38BDF8;
   --color-primary-hover: #0EA5E9;
-  --color-primary-light: rgba(56, 189, 248, 0.15);
+  --color-primary-light: rgba(56, 189, 248, 0.12);
   --color-accent: #34D399;
   --color-accent-hover: #10B981;
-  --color-accent-light: rgba(52, 211, 153, 0.15);
+  --color-accent-light: rgba(52, 211, 153, 0.12);
   --color-bg: #090D16;
   --color-surface: #111827;
   --color-text: #F8FAFC;
@@ -89,6 +625,12 @@
   --color-text-muted: #64748B;
   --color-border: #1E293B;
   --color-border-hover: #334155;
+  --color-error: #F87171;
+  --color-error-light: rgba(239, 68, 68, 0.15);
+  --color-warning: #FBBF24;
+  --color-warning-light: rgba(245, 158, 11, 0.15);
+  --color-success: #34D399;
+  --color-success-light: rgba(16, 185, 129, 0.15);
   --color-header: #0B0F19;
   --header-border: #1E293B;
   --header-text: #F8FAFC;
@@ -100,7 +642,7 @@
   --header-dropdown-bg: #111827;
   --header-dropdown-border: #1E293B;
   --header-dropdown-text: #F8FAFC;
-  --header-dropdown-hover-bg: rgba(56, 189, 248, 0.2);
+  --header-dropdown-hover-bg: rgba(56, 189, 248, 0.18);
   --header-dropdown-hover-text: #38BDF8;
   --color-footer: #0B0F19;
   --sidebar-bg: #0B0F19;
@@ -114,397 +656,17 @@
   --sidebar-input-bg: #111827;
   --sidebar-input-border: #1E293B;
   --sidebar-box-bg: #111827;
-  --card-glossy-bg: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(17, 24, 39, 0.9) 100%);
-  --card-glossy-border: rgba(255, 255, 255, 0.08);
-  --card-glossy-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --banner-bg: linear-gradient(135deg, #050811 0%, #0F172A 50%, #050811 100%);
-  --banner-border: rgba(56, 189, 248, 0.28);
-  --banner-glow: rgba(56, 189, 248, 0.6);
-}
-
-/* Theme 3: FinTech Emerald */
-[data-theme="emerald"] {
-  --color-primary: #059669;
-  --color-primary-hover: #047857;
-  --color-primary-light: #D1FAE5;
-  --color-accent: #10B981;
-  --color-accent-hover: #059669;
-  --color-accent-light: #ECFDF5;
-  --color-bg: #F0FDF4;
-  --color-surface: #FFFFFF;
-  --color-text: #064E3B;
-  --color-text-secondary: #166534;
-  --color-text-muted: #047857;
-  --color-border: #A7F3D0;
-  --color-border-hover: #6EE7B7;
-  --color-header: #064E3B;
-  --header-border: #047857;
-  --header-text: #FFFFFF;
-  --header-nav-text: #D1FAE5;
-  --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-bg: #043628;
-  --header-dropdown-border: #065F46;
-  --header-dropdown-text: #ECFDF5;
-  --header-dropdown-hover-bg: #059669;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #064E3B;
-  --sidebar-bg: #043628;
-  --sidebar-border: #065F46;
-  --sidebar-text: #ECFDF5;
-  --sidebar-text-muted: #A7F3D0;
-  --sidebar-hover: #065F46;
-  --sidebar-link-hover: #FFFFFF;
-  --sidebar-active: #10B981;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #022C22;
-  --sidebar-input-border: #065F46;
-  --sidebar-box-bg: #022C22;
-  --card-glossy-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 244, 0.85) 100%);
-  --card-glossy-border: rgba(167, 243, 208, 0.6);
-  --card-glossy-shadow: 0 4px 6px -1px rgba(6, 78, 59, 0.06), 0 10px 15px -3px rgba(6, 78, 59, 0.05);
-  --banner-bg: linear-gradient(135deg, #022C22 0%, #064E3B 50%, #022C22 100%);
-  --banner-border: rgba(110, 231, 183, 0.35);
-  --banner-glow: rgba(16, 185, 129, 0.55);
-}
-
-/* Theme 4: Royal Velvet */
-[data-theme="royal"] {
-  --color-primary: #7C3AED;
-  --color-primary-hover: #6D28D9;
-  --color-primary-light: #EDE9FE;
-  --color-accent: #8B5CF6;
-  --color-accent-hover: #7C3AED;
-  --color-accent-light: #F5F3FF;
-  --color-bg: #FAF5FF;
-  --color-surface: #FFFFFF;
-  --color-text: #2E1065;
-  --color-text-secondary: #5B21B6;
-  --color-text-muted: #6D28D9;
-  --color-border: #DDD6FE;
-  --color-border-hover: #C4B5FD;
-  --color-header: #2E1065;
-  --header-border: #4C1D95;
-  --header-text: #FFFFFF;
-  --header-nav-text: #EDE9FE;
-  --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-bg: #1E0B40;
-  --header-dropdown-border: #4C1D95;
-  --header-dropdown-text: #F5F3FF;
-  --header-dropdown-hover-bg: #7C3AED;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #2E1065;
-  --sidebar-bg: #1E0B40;
-  --sidebar-border: #4C1D95;
-  --sidebar-text: #F5F3FF;
-  --sidebar-text-muted: #C4B5FD;
-  --sidebar-hover: #3B1578;
-  --sidebar-link-hover: #FFFFFF;
-  --sidebar-active: #8B5CF6;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #160730;
-  --sidebar-input-border: #4C1D95;
-  --sidebar-box-bg: #160730;
-  --card-glossy-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 245, 255, 0.85) 100%);
-  --card-glossy-border: rgba(221, 214, 254, 0.6);
-  --card-glossy-shadow: 0 4px 6px -1px rgba(46, 16, 101, 0.06), 0 10px 15px -3px rgba(46, 16, 101, 0.05);
-  --banner-bg: linear-gradient(135deg, #1E0B40 0%, #2E1065 50%, #1E0B40 100%);
-  --banner-border: rgba(196, 181, 253, 0.35);
-  --banner-glow: rgba(139, 92, 246, 0.55);
-}
-
-/* Theme 5: Silver Nordic (Cool Grey Background) */
-[data-theme="grey"] {
-  --color-primary: #2563EB;
-  --color-primary-hover: #1D4ED8;
-  --color-primary-light: #DBEAFE;
-  --color-accent: #059669;
-  --color-accent-hover: #047857;
-  --color-accent-light: #D1FAE5;
-  --color-bg: #E2E8F0;
-  --color-surface: #FFFFFF;
-  --color-text: #0F172A;
-  --color-text-secondary: #334155;
-  --color-text-muted: #475569;
-  --color-border: #CBD5E1;
-  --color-border-hover: #94A3B8;
-  --color-header: #334155;
-  --header-border: #475569;
-  --header-text: #FFFFFF;
-  --header-nav-text: #E2E8F0;
-  --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-bg: #1E293B;
-  --header-dropdown-border: #475569;
-  --header-dropdown-text: #F8FAFC;
-  --header-dropdown-hover-bg: #2563EB;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #1E293B;
-  --sidebar-bg: #1E293B;
-  --sidebar-border: #334155;
-  --sidebar-text: #F1F5F9;
-  --sidebar-text-muted: #94A3B8;
-  --sidebar-hover: #334155;
-  --sidebar-link-hover: #FFFFFF;
-  --sidebar-active: #2563EB;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #0F172A;
-  --sidebar-input-border: #475569;
-  --sidebar-box-bg: #0F172A;
-  --card-glossy-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 249, 0.9) 100%);
-  --card-glossy-border: rgba(255, 255, 255, 0.9);
-  --card-glossy-shadow: 0 4px 8px rgba(15, 23, 42, 0.08);
-  --banner-bg: linear-gradient(135deg, #1E293B 0%, #334155 50%, #1E293B 100%);
-  --banner-border: rgba(255, 255, 255, 0.22);
-  --banner-glow: rgba(37, 99, 235, 0.45);
-}
-
-/* Theme 6: Pure Minimal (Crisp Pure White Background with Sky Blue Banner) */
-[data-theme="white"] {
-  --color-primary: #0284C7;
-  --color-primary-hover: #0369A1;
-  --color-primary-light: #E0F2FE;
-  --color-accent: #10B981;
-  --color-accent-hover: #059669;
-  --color-accent-light: #ECFDF5;
-  --color-bg: #FFFFFF;
-  --color-surface: #FFFFFF;
-  --color-text: #090D16;
-  --color-text-secondary: #334155;
-  --color-text-muted: #475569;
-  --color-border: #E2E8F0;
-  --color-border-hover: #CBD5E1;
-  --color-header: #FFFFFF;
-  --header-border: #CBD5E1;
-  --header-text: #090D16;
-  --header-nav-text: #1E293B;
-  --header-nav-hover: #0284C7;
-  --header-nav-hover-bg: #EFF6FF;
-  --header-btn-bg: #F1F5F9;
-  --header-btn-border: #CBD5E1;
-  --header-dropdown-bg: #FFFFFF;
-  --header-dropdown-border: #CBD5E1;
-  --header-dropdown-text: #0F172A;
-  --header-dropdown-hover-bg: #E0F2FE;
-  --header-dropdown-hover-text: #0284C7;
-  --color-footer: #F8FAFC;
-  --sidebar-bg: #F8FAFC;
-  --sidebar-border: #E2E8F0;
-  --sidebar-text: #0F172A;
-  --sidebar-text-muted: #475569;
-  --sidebar-hover: #EEF2F6;
-  --sidebar-link-hover: #0284C7;
-  --sidebar-active: #0284C7;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #FFFFFF;
-  --sidebar-input-border: #CBD5E1;
-  --sidebar-box-bg: #FFFFFF;
-  --card-glossy-bg: #FFFFFF;
-  --card-glossy-border: #E2E8F0;
-  --banner-bg: linear-gradient(135deg, #2B3A4A 0%, #3B4E63 50%, #2F3F52 100%);
-  --banner-border: rgba(148, 163, 184, 0.4);
-  --banner-glow: rgba(71, 85, 105, 0.15);
-}
-
-/* Theme 7: Warm Ivory (Cream / Warm White Background) */
-[data-theme="ivory"] {
-  --color-primary: #EA580C;
-  --color-primary-hover: #C2410C;
-  --color-primary-light: #FFEDD5;
-  --color-accent: #16A34A;
-  --color-accent-hover: #15803D;
-  --color-accent-light: #DCFCE7;
-  --color-bg: #FAF6F0;
-  --color-surface: #FFFFFF;
-  --color-text: #29221D;
-  --color-text-secondary: #574B41;
-  --color-text-muted: #6B5E52;
-  --color-border: #E8DFD5;
-  --color-border-hover: #D7C9BB;
-  --color-header: #3D3128;
-  --header-border: #574B41;
-  --header-text: #FFFDF9;
-  --header-nav-text: #E8DFD5;
-  --header-nav-hover: #FFFDF9;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-bg: #2A221C;
-  --header-dropdown-border: #574B41;
-  --header-dropdown-text: #FFFDF9;
-  --header-dropdown-hover-bg: #EA580C;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #29221D;
-  --sidebar-bg: #2A221C;
-  --sidebar-border: #44372E;
-  --sidebar-text: #F5EBE1;
-  --sidebar-text-muted: #B8A89A;
-  --sidebar-hover: #44372E;
-  --sidebar-link-hover: #FFFDF9;
-  --sidebar-active: #EA580C;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #1F1813;
-  --sidebar-input-border: #44372E;
-  --sidebar-box-bg: #1F1813;
-  --card-glossy-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 250, 247, 0.9) 100%);
-  --card-glossy-border: #E8DFD5;
-  --card-glossy-shadow: 0 4px 10px rgba(41, 34, 29, 0.06);
-  --banner-bg: linear-gradient(135deg, #241D18 0%, #3D3128 50%, #241D18 100%);
-  --banner-border: rgba(234, 88, 12, 0.35);
-  --banner-glow: rgba(234, 88, 12, 0.5);
-}
-
-/* Theme 8: Solar Amber (Warm Yellowish Background) */
-[data-theme="amber"] {
-  --color-primary: #D97706;
-  --color-primary-hover: #B45309;
-  --color-primary-light: #FEF3C7;
-  --color-accent: #059669;
-  --color-accent-hover: #047857;
-  --color-accent-light: #D1FAE5;
-  --color-bg: #FEF9C3;
-  --color-surface: #FFFBEB;
-  --color-text: #451A03;
-  --color-text-secondary: #78350F;
-  --color-text-muted: #78350F;
-  --color-border: #FDE68A;
-  --color-border-hover: #F59E0B;
-  --color-header: #78350F;
-  --header-border: #92400E;
-  --header-text: #FFFBEB;
-  --header-nav-text: #FEF3C7;
-  --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-bg: #451A03;
-  --header-dropdown-border: #78350F;
-  --header-dropdown-text: #FFFBEB;
-  --header-dropdown-hover-bg: #D97706;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #451A03;
-  --sidebar-bg: #451A03;
-  --sidebar-border: #78350F;
-  --sidebar-text: #FEF3C7;
-  --sidebar-text-muted: #FCD34D;
-  --sidebar-hover: #632504;
-  --sidebar-link-hover: #FFFFFF;
-  --sidebar-active: #D97706;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #331302;
-  --sidebar-input-border: #78350F;
-  --sidebar-box-bg: #331302;
-  --card-glossy-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 251, 235, 0.88) 100%);
-  --card-glossy-border: #FDE68A;
-  --card-glossy-shadow: 0 4px 12px rgba(69, 26, 3, 0.08);
-  --banner-bg: linear-gradient(135deg, #381502 0%, #612204 50%, #381502 100%);
-  --banner-border: rgba(245, 158, 11, 0.45);
-  --banner-glow: rgba(245, 158, 11, 0.55);
-}
-
-/* Theme 9: Social Blue */
-[data-theme="facebook"] {
-  --color-primary: #1877F2;
-  --color-primary-hover: #166FE5;
-  --color-primary-light: #E7F3FF;
-  --color-accent: #10B981;
-  --color-accent-hover: #059669;
-  --color-accent-light: #D1FAE5;
-  --color-bg: #F0F2F5;
-  --color-surface: #FFFFFF;
-  --color-text: #0F172A;
-  --color-text-secondary: #334155;
-  --color-text-muted: #475569;
-  --color-border: #CBD5E1;
-  --color-border-hover: #94A3B8;
-  --color-header: #1877F2;
-  --header-border: #166FE5;
-  --header-text: #FFFFFF;
-  --header-nav-text: #FFFFFF;
-  --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.22);
-  --header-btn-bg: rgba(255, 255, 255, 0.2);
-  --header-btn-border: rgba(255, 255, 255, 0.38);
-  --header-dropdown-bg: #1565C0;
-  --header-dropdown-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-text: #FFFFFF;
-  --header-dropdown-hover-bg: #0D47A1;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #1877F2;
-  --sidebar-bg: #FFFFFF;
-  --sidebar-border: #CBD5E1;
-  --sidebar-text: #0F172A;
-  --sidebar-text-muted: #475569;
-  --sidebar-hover: #F1F5F9;
-  --sidebar-link-hover: #1877F2;
-  --sidebar-active: #1877F2;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #F1F5F9;
-  --sidebar-input-border: #CBD5E1;
-  --sidebar-box-bg: #F8FAFC;
-  --card-glossy-bg: #FFFFFF;
-  --card-glossy-border: #CBD5E1;
-  --card-glossy-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --banner-bg: linear-gradient(135deg, #0D1F6B 0%, #0F2780 35%, #1565C0 100%);
-  --banner-border: rgba(255, 255, 255, 0.4);
-  --banner-glow: rgba(21, 101, 192, 0.65);
-}
-
-/* Theme 10: Clean Teal (Crisp, High-Contrast Modern Teal Design) */
-[data-theme="sejda"],
-[data-theme="teal"],
-[data-theme="cleanteal"] {
-  --color-primary: #0D7A82;
-  --color-primary-hover: #095B61;
-  --color-primary-light: #E6F5F6;
-  --color-accent: #22C55E;
-  --color-accent-hover: #16A34A;
-  --color-accent-light: #DCFCE7;
-  --color-bg: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-text: #0F172A;
-  --color-text-secondary: #334155;
-  --color-text-muted: #64748B;
-  --color-border: #CBD5E1;
-  --color-border-hover: #94A3B8;
-  --color-header: #0D7A82;
-  --header-border: #0A6066;
-  --header-text: #FFFFFF;
-  --header-nav-text: #E6F5F6;
-  --header-nav-hover: #FFFFFF;
-  --header-nav-hover-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-bg: rgba(255, 255, 255, 0.15);
-  --header-btn-border: rgba(255, 255, 255, 0.25);
-  --header-dropdown-bg: #074347;
-  --header-dropdown-border: #0D7A82;
-  --header-dropdown-text: #F1FBFB;
-  --header-dropdown-hover-bg: #0D7A82;
-  --header-dropdown-hover-text: #FFFFFF;
-  --color-footer: #083E42;
-  --sidebar-bg: #083E42;
-  --sidebar-border: #0D7A82;
-  --sidebar-text: #E6F5F6;
-  --sidebar-text-muted: #99D5D9;
-  --sidebar-hover: #0D5055;
-  --sidebar-link-hover: #FFFFFF;
-  --sidebar-active: #0D7A82;
-  --sidebar-active-text: #FFFFFF;
-  --sidebar-input-bg: #052B2E;
-  --sidebar-input-border: #0D7A82;
-  --sidebar-box-bg: #052B2E;
-  --card-glossy-bg: #FFFFFF;
-  --card-glossy-border: #E2E8F0;
-  --card-glossy-shadow: 0 4px 12px rgba(13, 122, 130, 0.06);
-  --banner-bg: linear-gradient(135deg, #052B2E 0%, #0D7A82 50%, #083E42 100%);
-  --banner-border: rgba(13, 122, 130, 0.35);
-  --banner-glow: rgba(13, 122, 130, 0.55);
+  --card-glossy-bg: #111827;
+  --card-glossy-border: #1E293B;
+  --card-glossy-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --banner-bg: #111827;
+  --banner-border: #1F2937;
+  --banner-text: #F8FAFC;
+  --banner-text-muted: #94A3B8;
+  --banner-glow: transparent;
+  --usp-strip-bg: #06090F;
+  --usp-strip-border: #131A26;
+  --usp-strip-text: #94A3B8;
 }
 
 /* ---- 2. Reset & Base ---- */
@@ -602,7 +764,8 @@ code, .code { font-family: var(--font-mono); font-size: 0.9em; background: var(-
 
 /* ---- 6. Hero Section ---- */
 .hero {
-  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #2563EB 100%);
+  background: var(--color-header);
+  border-bottom: 1px solid var(--header-border);
   color: #fff;
   padding: 3.5rem 0;
   text-align: center;
@@ -610,14 +773,7 @@ code, .code { font-family: var(--font-mono); font-size: 0.9em; background: var(-
   overflow: hidden;
 }
 .hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 50%);
-  pointer-events: none;
+  display: none;
 }
 .hero h1 {
   font-size: 2.5rem;
@@ -707,7 +863,7 @@ code, .code { font-family: var(--font-mono); font-size: 0.9em; background: var(-
   left: 0;
   right: 0;
   height: 2.5px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  background: var(--color-primary);
   transform: scaleX(0);
   transition: transform var(--transition);
 }
@@ -909,7 +1065,7 @@ select.input-field option {
   text-decoration: none;
 }
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+  background: var(--color-primary);
   color: #fff;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
@@ -936,14 +1092,14 @@ select.input-field option {
 
 /* Result Area */
 .result-area {
-  background: linear-gradient(135deg, #F0F9FF 0%, #EFF6FF 100%);
+  background: var(--color-surface);
   border: 1px solid var(--color-primary-light);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   animation: fadeSlideIn 0.3s ease;
 }
-.result-area.success { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-color: var(--color-accent-light); }
+.result-area.success { background: var(--color-surface); border-color: var(--color-accent); }
 .result-area.error { background: var(--color-error-light); border-color: #FECACA; }
 .result-title { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-text); }
 .result-row {
@@ -2569,9 +2725,9 @@ select.input-field option {
    25. AdminLTE Slim Header & Privacy First USP Strip
    ======================================================== */
 .privacy-usp-strip {
-  background: linear-gradient(90deg, #0F172A 0%, #1E293B 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: #E2E8F0;
+  background: var(--usp-strip-bg, #0B1120);
+  border-bottom: 1px solid var(--usp-strip-border, #1E293B);
+  color: var(--usp-strip-text, #CBD5E1);
   font-size: 0.8rem;
   padding: 0.35rem 0;
 }
@@ -3958,22 +4114,15 @@ select.input-field option {
 /* Compact Premium Banner with Glossy Finish & Border Lightning Glow */
 .premium-banner {
   background: var(--banner-bg);
-  border: 1.5px solid var(--banner-border, rgba(255, 255, 255, 0.35));
+  border: 1px solid var(--banner-border);
   border-radius: var(--radius-lg);
   padding: 1.85rem 2.25rem;
   margin: 1.25rem 0 1.5rem;
-  color: #FFFFFF;
+  color: var(--banner-text, #FFFFFF);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 0 16px -1px var(--banner-glow, rgba(56, 189, 248, 0.45)),
-              0 0 32px -4px var(--banner-glow, rgba(37, 99, 235, 0.25)),
-              0 12px 32px -4px rgba(0, 0, 0, 0.28),
-              inset 0 1px 2px 0 rgba(255, 255, 255, 0.6),
-              inset 0 -1px 2px 0 rgba(0, 0, 0, 0.15);
-  animation: bannerBorderLighting 3.5s ease-in-out infinite alternate;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition), background-color var(--transition);
 }
 
 /* Ensure banner contents sit above glossy reflections */
@@ -3984,52 +4133,16 @@ select.input-field option {
 
 /* Glossy Top Glass Specular Reflection */
 .premium-banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 52%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.06) 55%, transparent 100%);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 /* Radial Accent Lighting Glow inside Banner */
 .premium-banner::after {
-  content: '';
-  position: absolute;
-  top: -80px;
-  right: -60px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.06) 50%, transparent 75%);
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 /* Electric Lightning / Glowing Aura Around Banner Borders */
-@keyframes bannerBorderLighting {
-  0% {
-    box-shadow: 0 0 14px 0 var(--banner-glow, rgba(56, 189, 248, 0.4)),
-                0 0 28px -4px var(--banner-glow, rgba(37, 99, 235, 0.22)),
-                0 12px 30px -4px rgba(0, 0, 0, 0.25),
-                inset 0 1px 2px 0 rgba(255, 255, 255, 0.55);
-  }
-  50% {
-    box-shadow: 0 0 24px 3px var(--banner-glow, rgba(56, 189, 248, 0.72)),
-                0 0 46px -2px var(--banner-glow, rgba(37, 99, 235, 0.38)),
-                0 15px 36px -3px rgba(0, 0, 0, 0.3),
-                inset 0 1.5px 2.5px 0 rgba(255, 255, 255, 0.85);
-  }
-  100% {
-    box-shadow: 0 0 18px 1px var(--banner-glow, rgba(56, 189, 248, 0.5)),
-                0 0 32px -3px var(--banner-glow, rgba(37, 99, 235, 0.28)),
-                0 12px 30px -4px rgba(0, 0, 0, 0.25),
-                inset 0 1px 2px 0 rgba(255, 255, 255, 0.65);
-  }
-}
+/* Distraction-free: neon border lighting removed */
 
 .premium-banner-top {
   display: flex;
@@ -4777,12 +4890,11 @@ ins.adsbygoogle iframe + .ad-placeholder {
 }
 
 /* Soothing, elegant Greyish-Blue Banner without eye-straining lighting */
-[data-theme="white"] .premium-banner {
-  background: linear-gradient(135deg, #2B3A4A 0%, #3B4E63 50%, #2F3F52 100%) !important;
-  border: 1.5px solid rgba(148, 163, 184, 0.4) !important;
-  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12),
-              0 4px 6px -2px rgba(15, 23, 42, 0.05),
-              inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+[data-theme="white"] .premium-banner, [data-theme="minimal-light"] .premium-banner {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  color: #0F172A !important;
   animation: none !important;
 }
 [data-theme="white"] .premium-banner::before {
@@ -5137,7 +5249,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
 .sejda-hero {
   text-align: center;
   padding: 2.5rem 1.5rem 2rem;
-  background: linear-gradient(180deg, rgba(13, 122, 130, 0.08) 0%, rgba(13, 122, 130, 0.01) 100%);
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1.5px solid rgba(13, 122, 130, 0.2);
   margin-bottom: 2rem;
@@ -5951,3 +6063,53 @@ ins.adsbygoogle iframe + .ad-placeholder {
   .sejda-editor-toolbar { justify-content: center; }
 }
 
+
+/* Theme Dropdown Group Headers & Styling */
+.theme-dropdown-menu {
+  min-width: 250px !important;
+  max-height: 480px;
+  overflow-y: auto;
+}
+.theme-group-header {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  padding: 0.5rem 0.65rem 0.25rem;
+  display: block;
+}
+.theme-group-divider {
+  height: 1px;
+  background: var(--header-dropdown-border, #334155);
+  margin: 0.35rem 0;
+}
+.theme-option-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-sm);
+  color: var(--header-dropdown-text) !important;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  transition: all var(--transition);
+}
+.theme-option-item:hover {
+  background: var(--header-dropdown-hover-bg);
+  color: var(--header-dropdown-hover-text) !important;
+}
+.theme-option-item.active {
+  background: var(--header-dropdown-hover-bg);
+  color: var(--header-dropdown-hover-text) !important;
+  font-weight: 600;
+}
+.theme-option-flag {
+  font-size: 1rem;
+  line-height: 1;
+}
