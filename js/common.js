@@ -18,7 +18,7 @@
     'white': 'Pure Minimal',
     'ivory': 'Warm Ivory',
     'amber': 'Solar Amber',
-    'facebook': 'Social Blue (Facebook)'
+    'facebook': 'Social Blue'
   };
 
   function applyTheme(themeName) {
