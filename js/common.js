@@ -191,17 +191,59 @@
   // ---- Left Sidebar Navigation Toggle & Search ----
   const sidebarToggle = document.getElementById('sidebarToggle');
   const portalSidebar = document.getElementById('portalSidebar');
+  const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
   if (sidebarToggle && portalSidebar) {
+    // Restore desktop collapsed preference if previously saved
+    try {
+      const savedCollapsed = localStorage.getItem('portal_sidebar_collapsed');
+      if (savedCollapsed === '1' && window.innerWidth > 1024) {
+        document.body.classList.add('sidebar-collapsed');
+        portalSidebar.classList.add('is-collapsed');
+        sidebarToggle.classList.add('is-active');
+        sidebarToggle.setAttribute('title', 'Expand Sidebar Navigation');
+        sidebarToggle.setAttribute('aria-expanded', 'false');
+      } else {
+        sidebarToggle.setAttribute('title', 'Collapse Sidebar Navigation');
+        sidebarToggle.setAttribute('aria-expanded', 'true');
+      }
+    } catch (_) {}
+
+    const closeMobileSidebar = () => {
+      portalSidebar.classList.remove('open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+    };
+
     sidebarToggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      portalSidebar.classList.toggle('open');
+      if (window.innerWidth <= 1024) {
+        // Mobile Drawer Toggle
+        const isOpen = portalSidebar.classList.toggle('open');
+        if (sidebarBackdrop) {
+          sidebarBackdrop.classList.toggle('active', isOpen);
+        }
+      } else {
+        // Desktop Collapse / Expand Toggle
+        const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+        portalSidebar.classList.toggle('is-collapsed', isCollapsed);
+        sidebarToggle.classList.toggle('is-active', isCollapsed);
+        sidebarToggle.setAttribute('title', isCollapsed ? 'Expand Sidebar Navigation' : 'Collapse Sidebar Navigation');
+        sidebarToggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+        try {
+          localStorage.setItem('portal_sidebar_collapsed', isCollapsed ? '1' : '0');
+        } catch (_) {}
+      }
     });
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+    }
 
     // Close sidebar on click outside on mobile
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 1024 && portalSidebar.classList.contains('open')) {
         if (!portalSidebar.contains(e.target) && e.target !== sidebarToggle) {
-          portalSidebar.classList.remove('open');
+          closeMobileSidebar();
         }
       }
     });
@@ -210,9 +252,17 @@
     portalSidebar.querySelectorAll('.sidebar-link').forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth <= 1024) {
-          portalSidebar.classList.remove('open');
+          closeMobileSidebar();
         }
       });
+    });
+
+    // Optional keyboard shortcut: Ctrl+B or Cmd+B toggles sidebar
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+        e.preventDefault();
+        sidebarToggle.click();
+      }
     });
   }
 
