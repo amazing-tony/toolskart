@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RD Calculator - Recurring Deposit Maturity Calculator | ToolsKart</title>
+    <meta name="description" content="Free online RD Calculator. Calculate maturity amount and interest earned on your bank &amp; post office recurring deposits with quarterly compounding.">
+    <meta name="keywords" content="RD calculator, recurring deposit calculator, RD interest calculator, bank RD maturity, post office RD calculator">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/rd-calculator.html">
+    <meta property="og:title" content="RD Calculator | ToolsKart">
+    <meta property="og:description" content="Calculate maturity amount and interest earned on your Recurring Deposits.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "RD Calculator",
+      "url": "https://amazing-tools.github.io/pages/rd-calculator.html",
+      "description": "Calculate maturity amount and interest earned on Recurring Deposits.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <div class="privacy-usp-strip">
+        <div class="container usp-strip-content">
+            <span class="usp-badge">🛡️ 100% Client-Side Privacy</span>
+            <span class="usp-text">"All computations run locally inside your browser with zero server data tracking."</span>
+        </div>
+    </div>
+
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <a href="../index.html" class="logo">🔧 ToolsKart</a>
+                <span class="header-badge-tag">RD Calculator</span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; RD Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>RD Calculator (Recurring Deposit)</h1>
+                    <p class="tool-description">Calculate the maturity amount and interest earned on your bank or post office Recurring Deposit investment.</p>
+
+                    <div class="calc-box-card">
+                        <div class="form-group">
+                            <label for="rdMonthlyAmount">Monthly Deposit Amount (₹)</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="rdMonthlyAmount" class="input-field" value="5000" min="100" step="500">
+                                <span class="input-unit">₹/mo</span>
+                            </div>
+                            <div class="quick-chip-row" style="margin-top:0.5rem;">
+                                <button type="button" class="quick-chip" data-val="1000">₹ 1,000</button>
+                                <button type="button" class="quick-chip" data-val="2500">₹ 2,500</button>
+                                <button type="button" class="quick-chip active" data-val="5000">₹ 5,000</button>
+                                <button type="button" class="quick-chip" data-val="10000">₹ 10,000</button>
+                                <button type="button" class="quick-chip" data-val="25000">₹ 25,000</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:1.25rem;">
+                            <label for="rdInterestRate">Annual Interest Rate (% p.a.)</label>
+                            <input type="number" id="rdInterestRate" class="input-field" value="7.0" min="1" max="15" step="0.1">
+                        </div>
+
+                        <div class="form-group" style="margin-top:1.25rem;">
+                            <label>Deposit Tenure</label>
+                            <div style="display:flex; gap:10px;">
+                                <div style="flex:1;">
+                                    <input type="number" id="rdTenureYears" class="input-field" value="3" min="0" max="10" step="1" placeholder="Years">
+                                    <small style="color:var(--text-muted);">Years</small>
+                                </div>
+                                <div style="flex:1;">
+                                    <input type="number" id="rdTenureMonths" class="input-field" value="0" min="0" max="11" step="1" placeholder="Months">
+                                    <small style="color:var(--text-muted);">Months</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top:1.25rem;">
+                            <label for="rdCompounding">Compounding Frequency</label>
+                            <select id="rdCompounding" class="input-field">
+                                <option value="4" selected>Quarterly (Indian Bank &amp; Post Office Standard)</option>
+                                <option value="12">Monthly</option>
+                                <option value="2">Half-Yearly</option>
+                                <option value="1">Annually</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- RESULTS -->
+                    <div class="results-dashboard" style="margin-top:2rem;">
+                        <div class="winner-callout-card" style="background:linear-gradient(135deg, #1e3a8a, #2563eb); color:#fff; border-radius:12px; padding:1.5rem;">
+                            <span style="font-size:0.85rem; opacity:0.9; text-transform:uppercase; font-weight:600;">Maturity Amount</span>
+                            <div style="font-size:2.4rem; font-weight:800; margin:0.25rem 0;" id="kpiRdMaturity">₹ 2,01,150</div>
+                            <div style="font-size:0.9rem; opacity:0.9;" id="kpiRdSummary">Total Invested: ₹ 1,80,000 • Total Interest: ₹ 21,150</div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-top:1.5rem;">
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1.25rem;">
+                                <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">TOTAL DEPOSITED</span>
+                                <div style="font-size:1.6rem; font-weight:800; margin:0.3rem 0;" id="kpiRdInvested">₹ 1,80,000</div>
+                            </div>
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1.25rem;">
+                                <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">TOTAL INTEREST EARNED</span>
+                                <div style="font-size:1.6rem; font-weight:800; color:#059669; margin:0.3rem 0;" id="kpiRdInterest">₹ 21,150</div>
+                            </div>
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1.25rem;">
+                                <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">EFFECTIVE ANNUAL YIELD</span>
+                                <div style="font-size:1.6rem; font-weight:800; color:#2563eb; margin:0.3rem 0;" id="kpiRdYield">7.19%</div>
+                            </div>
+                        </div>
+
+                        <!-- CHART -->
+                        <div class="chart-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.5rem; margin-top:2rem;">
+                            <h3 style="margin:0; font-size:1.15rem;">📊 Principal vs. Interest Breakdown</h3>
+                            <div style="height:260px; position:relative; margin-top:1rem;">
+                                <canvas id="rdChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SIDEBAR -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Calculators</h3>
+                        <div class="related-tools">
+                            <a href="fd-calculator.html" class="related-tool-link">💰 FD Calculator</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
+                            <a href="compound-interest.html" class="related-tool-link">🪙 Compound Interest</a>
+                            <a href="goal-financial-planner.html" class="related-tool-link">🎯 Goal Financial Planner</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- EDUCATIONAL INFO -->
+            <section class="tool-info" style="margin-top:3rem;">
+                <div class="info-section">
+                    <h2>How RD Interest is Calculated in India</h2>
+                    <p>
+                        In India, banks and the Post Office calculate interest on recurring deposits compounded on a <strong>quarterly</strong> basis. The formula used is:
+                    </p>
+                    <div class="formula-box">
+                        <strong>M = P &times; ((1 + r/4)^(4t) - 1) / (1 - (1 + r/4)^(-1/3))</strong><br><br>
+                        Where:<br>
+                        <strong>M</strong> = Maturity Amount<br>
+                        <strong>P</strong> = Monthly installment<br>
+                        <strong>r</strong> = Annual interest rate (in decimal)<br>
+                        <strong>t</strong> = Tenure in years
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free, private financial tools for disciplined savers.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="rd-calculator.html">RD Calculator</a>
+                <a href="fd-calculator.html">FD Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/rd-calculator.js"></script>
+</body>
+</html>

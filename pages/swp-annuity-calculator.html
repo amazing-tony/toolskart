@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWP &amp; Annuity Pension Calculator | Inflation-Indexed Retirement Payout Planner</title>
+    <meta name="description" content="Calculate monthly pension payouts from your retirement corpus or find required corpus for desired monthly income with Systematic Withdrawal Plan (SWP) and inflation escalation.">
+    <meta name="keywords" content="SWP calculator India, annuity calculator, retirement pension calculator, systematic withdrawal plan calculator, inflation adjusted SWP, corpus drawdown planner">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/swp-annuity-calculator.html">
+    <meta property="og:title" content="SWP &amp; Annuity Pension Calculator | ToolsKart">
+    <meta property="og:description" content="Calculate sustainable monthly pension from your corpus with annual inflation indexing and visual drawdown schedule.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SWP & Annuity Calculator",
+      "url": "https://amazing-tools.github.io/pages/swp-annuity-calculator.html",
+      "description": "Systematic Withdrawal Plan (SWP) and Annuity Pension Payout Calculator.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <div class="privacy-usp-strip">
+        <div class="container usp-strip-content">
+            <span class="usp-badge">🛡️ 100% Client-Side Privacy</span>
+            <span class="usp-text">"Your retirement numbers remain strictly in your browser. Zero tracking or server data transfers."</span>
+        </div>
+    </div>
+
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <a href="../index.html" class="logo">🔧 ToolsKart</a>
+                <span class="header-badge-tag">SWP &amp; Annuity</span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; SWP &amp; Annuity Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <div class="tool-header-badge">
+                        <span>💵 Retirement Cash-Flow &amp; SWP Optimizer • Inflation-Indexed</span>
+                    </div>
+                    <h1>SWP &amp; Annuity Pension Payout Planner</h1>
+                    <p class="tool-description">
+                        Plan a secure, predictable income stream throughout your retirement. Determine how much <strong>monthly pension</strong> your lump sum corpus can sustain, or calculate the exact <strong>corpus needed</strong> for your target monthly lifestyle — with optional <strong>annual inflation adjustments</strong>.
+                    </p>
+
+                    <!-- MODE SELECTOR -->
+                    <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+                        <button type="button" class="quick-chip active" id="modeCorpusToPayout" style="padding:0.6rem 1.2rem; font-weight:600;">
+                            💰 Mode A: I Have a Corpus &rarr; Calculate Monthly Pension
+                        </button>
+                        <button type="button" class="quick-chip" id="modePayoutToCorpus" style="padding:0.6rem 1.2rem; font-weight:600;">
+                            🎯 Mode B: I Need a Target Pension &rarr; Calculate Required Corpus
+                        </button>
+                    </div>
+
+                    <!-- CALCULATOR CARD -->
+                    <div class="calc-box-card">
+
+                        <!-- INPUT GROUP 1: CORPUS / TARGET PENSION -->
+                        <div class="calc-section">
+                            <div class="calc-section-header">
+                                <span class="step-num">1</span>
+                                <div>
+                                    <h3 id="step1Title">Starting Capital / Principal Corpus</h3>
+                                    <p class="calc-section-subtitle" id="step1Subtitle">Total retirement nest-egg available for systematic withdrawals</p>
+                                </div>
+                            </div>
+
+                            <div class="calc-field-group">
+                                <div class="calc-field-top">
+                                    <label for="primaryAmount" id="primaryAmountLabel">Principal Investment Corpus (₹)</label>
+                                    <div class="calc-val-badge" id="primaryAmountBadge">₹ 50 Lakhs</div>
+                                </div>
+                                <div class="dual-input-row">
+                                    <div class="input-with-unit" style="flex:1; max-width:260px;">
+                                        <input type="number" id="primaryAmount" class="input-field" value="5000000" min="100000" max="100000000" step="50000">
+                                        <span class="input-unit">₹</span>
+                                    </div>
+                                    <input type="range" id="primaryAmountSlider" class="custom-range-slider" min="500000" max="20000000" step="100000" value="5000000">
+                                </div>
+                                <div class="quick-chip-row" id="corpusQuickChips">
+                                    <button type="button" class="quick-chip" data-val="2500000">₹ 25 L</button>
+                                    <button type="button" class="quick-chip active" data-val="5000000">₹ 50 L</button>
+                                    <button type="button" class="quick-chip" data-val="7500000">₹ 75 L</button>
+                                    <button type="button" class="quick-chip" data-val="10000000">₹ 1 Cr</button>
+                                    <button type="button" class="quick-chip" data-val="20000000">₹ 2 Cr</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INPUT GROUP 2: RATE & DURATION -->
+                        <div class="calc-section" style="margin-top:2rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num">2</span>
+                                <div>
+                                    <h3>Returns, Duration &amp; Inflation Escalation</h3>
+                                    <p class="calc-section-subtitle">Portfolio yield and withdrawal longevity</p>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem;">
+                                <div class="calc-field-group">
+                                    <label for="annualReturn">Expected Portfolio Return (% p.a.)</label>
+                                    <input type="number" id="annualReturn" class="input-field" value="8.0" min="4" max="16" step="0.25">
+                                    <small style="color:var(--text-muted); font-size:0.75rem;">SWP in Hybrid/Debt: 7-9%, Equity: 10-12%</small>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <label for="payoutYears">Payout Duration (Years)</label>
+                                    <input type="number" id="payoutYears" class="input-field" value="20" min="1" max="50" step="1">
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <label for="inflationEscalation">Annual Payout Increase / Inflation (%)</label>
+                                    <input type="number" id="inflationEscalation" class="input-field" value="5.0" min="0" max="12" step="0.5">
+                                    <small style="color:var(--text-muted); font-size:0.75rem;">0% for fixed pension, 5-6% to beat inflation</small>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <label for="payoutFreq">Payout Frequency</label>
+                                    <select id="payoutFreq" class="input-field">
+                                        <option value="12" selected>Monthly (12 times/yr)</option>
+                                        <option value="4">Quarterly (4 times/yr)</option>
+                                        <option value="1">Annually (1 time/yr)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- /calc-box-card -->
+
+                    <!-- RESULTS KPI AREA -->
+                    <div class="results-dashboard" style="margin-top:2rem;">
+                        <div class="winner-callout-card" style="background:linear-gradient(135deg, #065f46, #059669); color:#fff; border-radius:12px; padding:1.5rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                                <div>
+                                    <span style="font-size:0.85rem; opacity:0.9; text-transform:uppercase; font-weight:600;" id="kpiMainLabel">Sustainable Initial Monthly Pension</span>
+                                    <div style="font-size:2.4rem; font-weight:800; margin:0.25rem 0;" id="kpiMainValue">₹ 35,820 / mo</div>
+                                    <div style="font-size:0.875rem; opacity:0.9;" id="kpiMainSubtext">Increases by 5% annually to reach ₹ 90,380/mo in Year 20</div>
+                                </div>
+                                <div style="background:rgba(255,255,255,0.15); border-radius:10px; padding:0.75rem 1.25rem;">
+                                    <div style="font-size:0.8rem; opacity:0.85;">Corpus Sustainability</div>
+                                    <div style="font-size:1.25rem; font-weight:700;">✅ Full 20 Years</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- METRICS GRID -->
+                        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem; margin-top:1.5rem;">
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.25rem;">
+                                <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">TOTAL PAYOUTS RECEIVED</span>
+                                <div style="font-size:1.8rem; font-weight:800; color:#047857; margin:0.4rem 0;" id="kpiTotalPayout">₹ 1.42 Cr</div>
+                                <div style="font-size:0.8rem; color:var(--text-muted);">Total cash received across tenure</div>
+                            </div>
+
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.25rem;">
+                                <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">INTEREST / GAINS GENERATED</span>
+                                <div style="font-size:1.8rem; font-weight:800; color:#2563eb; margin:0.4rem 0;" id="kpiTotalInterest">₹ 92.4 Lakhs</div>
+                                <div style="font-size:0.8rem; color:var(--text-muted);">Generated by remaining balance</div>
+                            </div>
+
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.25rem;">
+                                <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">FINAL YEAR MONTHLY PAYOUT</span>
+                                <div style="font-size:1.8rem; font-weight:800; color:#d97706; margin:0.4rem 0;" id="kpiFinalPayout">₹ 90,380 / mo</div>
+                                <div style="font-size:0.8rem; color:var(--text-muted);">Adjusted for 5% annual inflation</div>
+                            </div>
+                        </div>
+
+                        <!-- DRAWDOWN CHART -->
+                        <div class="chart-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.5rem; margin-top:2rem;">
+                            <h3 style="margin:0; font-size:1.15rem;">📊 Capital Balance Drawdown &amp; Cumulative Income</h3>
+                            <p style="margin:0.25rem 0 1rem; font-size:0.85rem; color:var(--text-muted);">
+                                Track how your capital generates returns while smoothly liquidating over the retirement period.
+                            </p>
+                            <div style="height:320px; position:relative;">
+                                <canvas id="annuityChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- AMORTIZATION / DRAWDOWN TABLE -->
+                        <div class="table-section" style="margin-top:2.5rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                                <div>
+                                    <h3 style="margin:0; font-size:1.15rem;">📋 Year-by-Year Withdrawal Schedule</h3>
+                                    <p style="margin:0.25rem 0 0; font-size:0.85rem; color:var(--text-muted);">
+                                        Opening balance, annual payout withdrawn, interest earned, and closing principal.
+                                    </p>
+                                </div>
+                                <button type="button" class="btn btn-outline" id="exportScheduleCsvBtn">📥 Download CSV</button>
+                            </div>
+
+                            <div class="schedule-table-wrap" style="max-height:400px; overflow:auto; border:1px solid var(--border-color, #e2e8f0); border-radius:10px;">
+                                <table class="amort-table" style="width:100%; border-collapse:collapse; font-size:0.875rem; text-align:right;">
+                                    <thead style="position:sticky; top:0; background:var(--bg-card, #f8fafc);">
+                                        <tr style="border-bottom:2px solid var(--border-color, #e2e8f0);">
+                                            <th style="padding:0.75rem; text-align:center;">Year</th>
+                                            <th style="padding:0.75rem;">Opening Balance</th>
+                                            <th style="padding:0.75rem; color:#059669;">Annual Payout</th>
+                                            <th style="padding:0.75rem;">Monthly Equiv.</th>
+                                            <th style="padding:0.75rem; color:#2563eb;">Interest Earned</th>
+                                            <th style="padding:0.75rem;">Closing Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="scheduleTableBody">
+                                        <!-- Populated via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div> <!-- /results-dashboard -->
+
+                </div> <!-- /tool-main -->
+
+                <!-- SIDEBAR -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Calculators</h3>
+                        <div class="related-tools">
+                            <a href="goal-financial-planner.html" class="related-tool-link">🎯 Goal Financial Planner</a>
+                            <a href="buy-vs-rent-calculator.html" class="related-tool-link">🏡 Buy vs Rent Calculator</a>
+                            <a href="retirement-benefits-calculator.html" class="related-tool-link">💼 Retirement Benefits</a>
+                            <a href="fd-calculator.html" class="related-tool-link">💰 FD Calculator</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Calculator</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- EDUCATIONAL CONTENT -->
+            <section class="tool-info" style="margin-top:3rem;">
+                <div class="info-section">
+                    <h2>What is a Systematic Withdrawal Plan (SWP)?</h2>
+                    <p>
+                        An SWP allows you to withdraw a fixed amount of money from your mutual fund investments at regular intervals (monthly, quarterly, or annually). While you withdraw money, the remaining balance continues to generate market returns, significantly delaying or preventing capital exhaustion.
+                    </p>
+                </div>
+                <div class="info-section">
+                    <h2>Why Inflation-Indexed Annuities Matter</h2>
+                    <p>
+                        A fixed pension of ₹40,000/month might feel comfortable today. However, with 6% annual inflation, that same ₹40,000 will have the purchasing power of only ₹12,400 after 20 years. Planning with an annual payout increase ensures your dignified lifestyle remains unbroken well into your 80s.
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free, private financial retirement calculators.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="swp-annuity-calculator.html">SWP Annuity Calculator</a>
+                <a href="goal-financial-planner.html">Goal Planner</a>
+                <a href="buy-vs-rent-calculator.html">Buy vs Rent</a>
+                <a href="retirement-benefits-calculator.html">Retirement Benefits</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/swp-annuity-calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Goal Financial Planner &amp; Corpus Calculator | Retirement, Education, Marriage &amp; Home</title>
+    <meta name="description" content="Comprehensive Life Goal &amp; Financial Freedom Planner. Calculate future corpus and monthly SIP required for Retirement, Child Education, Marriage, and Home Down-payment with inflation indexing.">
+    <meta name="keywords" content="financial planning calculator India, retirement corpus calculator, child education planner, marriage goal SIP calculator, financial freedom planner, multi-goal SIP calculator">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/goal-financial-planner.html">
+    <meta property="og:title" content="Life Goal Financial Planner | ToolsKart">
+    <meta property="og:description" content="Plan all your major life goals simultaneously: Retirement, Child College, Marriage &amp; Home Down Payment with inflation-adjusted SIPs.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Life Goal Financial Planner",
+      "url": "https://amazing-tools.github.io/pages/goal-financial-planner.html",
+      "description": "Multi-goal life financial planner with inflation indexing and consolidated SIP roadmap.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <div class="privacy-usp-strip">
+        <div class="container usp-strip-content">
+            <span class="usp-badge">🛡️ 100% Client-Side Privacy</span>
+            <span class="usp-text">"Your family's financial roadmap is 100% private. Computations execute solely inside your browser."</span>
+        </div>
+    </div>
+
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <a href="../index.html" class="logo">🔧 ToolsKart</a>
+                <span class="header-badge-tag">Goal Planner</span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Life Goal Financial Planner
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <div class="tool-header-badge">
+                        <span>🎯 Comprehensive Life Financial Planning • Inflation-Adjusted</span>
+                    </div>
+                    <h1>Life Goal &amp; Financial Freedom Planner</h1>
+                    <p class="tool-description">
+                        Achieve complete clarity on your family's financial future. Map out your <strong>Retirement Corpus</strong>, <strong>Child's Higher Education</strong>, <strong>Marriage</strong>, and <strong>Home Down-Payment</strong> to calculate the exact monthly SIP investment required today to achieve all goals without financial strain.
+                    </p>
+
+                    <!-- CONSOLIDATED SUMMARY TOP BANNER -->
+                    <div class="winner-callout-card" style="background:linear-gradient(135deg, #1e3a8a, #2563eb); color:#fff; border-radius:14px; padding:1.5rem; margin-bottom:2rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                            <div>
+                                <span style="text-transform:uppercase; font-size:0.8rem; letter-spacing:1px; opacity:0.85; font-weight:600;">Total Monthly Investment Required Today</span>
+                                <div style="font-size:2.5rem; font-weight:800; margin:0.25rem 0;" id="totalRequiredSipBadge">₹ 42,500 / month</div>
+                                <div style="font-size:0.9rem; opacity:0.9;" id="totalGoalsTargetBadge">To fund 4 life goals totaling ₹ 3.85 Crore in future value</div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.15); border-radius:10px; padding:0.75rem 1.25rem; backdrop-filter:blur(4px);">
+                                <div style="font-size:0.8rem; opacity:0.85;">Expected Portfolio Return</div>
+                                <div style="font-size:1.3rem; font-weight:700;">12.0% p.a.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GOALS CONTAINER TABS / ACCORDION -->
+                    <div class="calc-box-card">
+
+                        <!-- GLOBAL INVESTMENT RETURN -->
+                        <div style="background:var(--bg-card, #f8fafc); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                            <div>
+                                <strong style="font-size:0.95rem;">📈 Expected SIP Return on Investments (% p.a.)</strong>
+                                <p style="margin:0.2rem 0 0; font-size:0.8rem; color:var(--text-muted);">Expected return for equity mutual funds / diversified portfolio during accumulation phase.</p>
+                            </div>
+                            <div style="width:140px;">
+                                <input type="number" id="globalReturnRate" class="input-field" value="12.0" min="6" max="18" step="0.5">
+                            </div>
+                        </div>
+
+                        <!-- GOAL 1: RETIREMENT -->
+                        <div class="calc-section" style="border-left:4px solid #2563eb; padding-left:1.25rem; margin-bottom:2rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num" style="background:#2563eb;">1</span>
+                                <div style="display:flex; justify-content:space-between; width:100%; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                                    <div>
+                                        <h3 style="margin:0;">🌴 Retirement &amp; Financial Independence (FIRE)</h3>
+                                        <p class="calc-section-subtitle">Maintain your lifestyle post-retirement with inflation protection</p>
+                                    </div>
+                                    <div class="calc-val-badge" id="retSipBadge">SIP: ₹ 22,150/mo</div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-top:1.25rem;">
+                                <div class="form-group">
+                                    <label for="retCurrentAge">Current Age</label>
+                                    <input type="number" id="retCurrentAge" class="input-field" value="30" min="18" max="70">
+                                </div>
+                                <div class="form-group">
+                                    <label for="retRetireAge">Retirement Age</label>
+                                    <input type="number" id="retRetireAge" class="input-field" value="58" min="35" max="80">
+                                </div>
+                                <div class="form-group">
+                                    <label for="retLifeExpectancy">Life Expectancy (Age)</label>
+                                    <input type="number" id="retLifeExpectancy" class="input-field" value="85" min="60" max="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="retCurrentExpense">Current Monthly Expenses (₹)</label>
+                                    <input type="number" id="retCurrentExpense" class="input-field" value="45000" min="5000" step="5000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="retInflation">Retirement Inflation (% p.a.)</label>
+                                    <input type="number" id="retInflation" class="input-field" value="6.0" min="3" max="12" step="0.5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="retPostReturn">Post-Retirement Return (% p.a.)</label>
+                                    <input type="number" id="retPostReturn" class="input-field" value="8.0" min="4" max="12" step="0.5">
+                                </div>
+                            </div>
+
+                            <div class="result-highlight" style="margin-top:1rem; background:rgba(37,99,235,0.06); border:1px solid #bfdbfe; border-radius:8px; padding:0.85rem 1.25rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-size:0.875rem;">
+                                <div>Future Monthly Expense at 58: <strong id="retFutureExpense">₹ 2.30 Lakhs/mo</strong></div>
+                                <div>Required Retirement Corpus: <strong id="retRequiredCorpus" style="color:#1d4ed8;">₹ 3.84 Crore</strong></div>
+                                <div>Monthly SIP Needed: <strong id="retMonthlySipText" style="color:#2563eb;">₹ 22,150/mo</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- GOAL 2: CHILD EDUCATION -->
+                        <div class="calc-section" style="border-left:4px solid #10b981; padding-left:1.25rem; margin-bottom:2rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num" style="background:#10b981;">2</span>
+                                <div style="display:flex; justify-content:space-between; width:100%; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                                    <div>
+                                        <h3 style="margin:0;">🎓 Child's Higher Education Goal</h3>
+                                        <p class="calc-section-subtitle">Undergraduate or postgraduate degree expenses with education inflation</p>
+                                    </div>
+                                    <div class="calc-val-badge" id="eduSipBadge">SIP: ₹ 9,800/mo</div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-top:1.25rem;">
+                                <div class="form-group">
+                                    <label for="eduChildAge">Child's Current Age</label>
+                                    <input type="number" id="eduChildAge" class="input-field" value="4" min="0" max="25">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eduCollegeAge">College Entry Age</label>
+                                    <input type="number" id="eduCollegeAge" class="input-field" value="18" min="15" max="30">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eduCurrentCost">Today's Estimated Degree Cost (₹)</label>
+                                    <input type="number" id="eduCurrentCost" class="input-field" value="2500000" min="100000" step="100000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="eduInflation">Education Inflation (% p.a.)</label>
+                                    <input type="number" id="eduInflation" class="input-field" value="9.0" min="4" max="15" step="0.5">
+                                    <small style="color:var(--text-muted); font-size:0.75rem;">Higher than CPI: typically 8-10%</small>
+                                </div>
+                            </div>
+
+                            <div class="result-highlight" style="margin-top:1rem; background:rgba(16,185,129,0.06); border:1px solid #a7f3d0; border-radius:8px; padding:0.85rem 1.25rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-size:0.875rem;">
+                                <div>Years to Goal: <strong id="eduYearsToGoal">14 Years</strong></div>
+                                <div>Future College Cost: <strong id="eduFutureCost" style="color:#047857;">₹ 83.5 Lakhs</strong></div>
+                                <div>Monthly SIP Needed: <strong id="eduMonthlySipText" style="color:#10b981;">₹ 9,800/mo</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- GOAL 3: CHILD / SELF MARRIAGE -->
+                        <div class="calc-section" style="border-left:4px solid #f59e0b; padding-left:1.25rem; margin-bottom:2rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num" style="background:#f59e0b;">3</span>
+                                <div style="display:flex; justify-content:space-between; width:100%; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                                    <div>
+                                        <h3 style="margin:0;">💍 Marriage / Milestone Family Celebration</h3>
+                                        <p class="calc-section-subtitle">Weddings, gifts, venue &amp; celebration corpus</p>
+                                    </div>
+                                    <div class="calc-val-badge" id="marSipBadge">SIP: ₹ 5,250/mo</div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-top:1.25rem;">
+                                <div class="form-group">
+                                    <label for="marYearsToGoal">Years from Now to Marriage</label>
+                                    <input type="number" id="marYearsToGoal" class="input-field" value="18" min="1" max="40">
+                                </div>
+                                <div class="form-group">
+                                    <label for="marCurrentCost">Today's Estimated Cost (₹)</label>
+                                    <input type="number" id="marCurrentCost" class="input-field" value="2000000" min="100000" step="100000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="marInflation">Marriage Inflation (% p.a.)</label>
+                                    <input type="number" id="marInflation" class="input-field" value="7.5" min="3" max="15" step="0.5">
+                                </div>
+                            </div>
+
+                            <div class="result-highlight" style="margin-top:1rem; background:rgba(245,158,11,0.06); border:1px solid #fde68a; border-radius:8px; padding:0.85rem 1.25rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-size:0.875rem;">
+                                <div>Future Celebration Cost: <strong id="marFutureCost" style="color:#b45309;">₹ 73.5 Lakhs</strong></div>
+                                <div>Monthly SIP Needed: <strong id="marMonthlySipText" style="color:#d97706;">₹ 5,250/mo</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- GOAL 4: HOME DOWN PAYMENT -->
+                        <div class="calc-section" style="border-left:4px solid #8b5cf6; padding-left:1.25rem; margin-bottom:1rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num" style="background:#8b5cf6;">4</span>
+                                <div style="display:flex; justify-content:space-between; width:100%; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                                    <div>
+                                        <h3 style="margin:0;">🏠 Home Purchase Down Payment Accumulator</h3>
+                                        <p class="calc-section-subtitle">Save up your 20% down payment + stamp duty &amp; registration</p>
+                                    </div>
+                                    <div class="calc-val-badge" id="homeSipBadge">SIP: ₹ 14,800/mo</div>
+                                </div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.25rem; margin-top:1.25rem;">
+                                <div class="form-group">
+                                    <label for="homeYearsToGoal">Years to Purchase Home</label>
+                                    <input type="number" id="homeYearsToGoal" class="input-field" value="5" min="1" max="25">
+                                </div>
+                                <div class="form-group">
+                                    <label for="homeCurrentCost">Today's Target Down Payment + Costs (₹)</label>
+                                    <input type="number" id="homeCurrentCost" class="input-field" value="1500000" min="100000" step="50000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="homeInflation">Real Estate Appreciation (% p.a.)</label>
+                                    <input type="number" id="homeInflation" class="input-field" value="7.0" min="3" max="15" step="0.5">
+                                </div>
+                            </div>
+
+                            <div class="result-highlight" style="margin-top:1rem; background:rgba(139,92,246,0.06); border:1px solid #ddd6fe; border-radius:8px; padding:0.85rem 1.25rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-size:0.875rem;">
+                                <div>Future Required Down Payment: <strong id="homeFutureCost" style="color:#6d28d9;">₹ 21.0 Lakhs</strong></div>
+                                <div>Monthly SIP Needed: <strong id="homeMonthlySipText" style="color:#7c3aed;">₹ 14,800/mo</strong></div>
+                            </div>
+                        </div>
+
+                    </div> <!-- /calc-box-card -->
+
+                    <!-- CHARTS & ROADMAP VISUALIZATION -->
+                    <div class="charts-wrapper" style="margin-top:2.5rem;">
+                        <div class="chart-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+                            <h3 style="margin:0; font-size:1.15rem;">📊 Goal SIP Allocation Breakdown</h3>
+                            <p style="margin:0.25rem 0 1rem; font-size:0.85rem; color:var(--text-muted);">
+                                How your total monthly savings are apportioned across different life priorities.
+                            </p>
+                            <div style="height:280px; position:relative;">
+                                <canvas id="sipAllocationChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.5rem;">
+                            <h3 style="margin:0; font-size:1.15rem;">📅 Life Wealth &amp; Goal Milestones Roadmap</h3>
+                            <p style="margin:0.25rem 0 1rem; font-size:0.85rem; color:var(--text-muted);">
+                                Total portfolio wealth creation over the next 30 years vs milestone withdrawal events.
+                            </p>
+                            <div style="height:320px; position:relative;">
+                                <canvas id="goalRoadmapChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GOAL SUMMARY TABLE -->
+                    <div class="table-section" style="margin-top:2.5rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                            <div>
+                                <h3 style="margin:0; font-size:1.15rem;">📋 Consolidated Life Goals Master Table</h3>
+                                <p style="margin:0.25rem 0 0; font-size:0.85rem; color:var(--text-muted);">
+                                    Present costs, inflation escalations, future targets, and monthly investments.
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-outline" id="exportGoalsCsvBtn">📥 Download CSV</button>
+                        </div>
+
+                        <div class="schedule-table-wrap" style="border:1px solid var(--border-color, #e2e8f0); border-radius:10px; overflow:auto;">
+                            <table class="amort-table" style="width:100%; border-collapse:collapse; font-size:0.875rem; text-align:right;">
+                                <thead style="background:var(--bg-card, #f8fafc);">
+                                    <tr style="border-bottom:2px solid var(--border-color, #e2e8f0);">
+                                        <th style="padding:0.75rem; text-align:left;">Goal Name</th>
+                                        <th style="padding:0.75rem;">Years to Goal</th>
+                                        <th style="padding:0.75rem;">Today's Cost</th>
+                                        <th style="padding:0.75rem;">Inflation</th>
+                                        <th style="padding:0.75rem;">Future Corpus Target</th>
+                                        <th style="padding:0.75rem; color:#2563eb;">Monthly SIP Required</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="goalsTableBody">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div> <!-- /tool-main -->
+
+                <!-- SIDEBAR -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Planning Tools</h3>
+                        <div class="related-tools">
+                            <a href="buy-vs-rent-calculator.html" class="related-tool-link">🏡 Buy vs Rent Calculator</a>
+                            <a href="swp-annuity-calculator.html" class="related-tool-link">💵 SWP &amp; Pension Planner</a>
+                            <a href="retirement-benefits-calculator.html" class="related-tool-link">💼 Retirement &amp; Gratuity</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Wealth Calculator</a>
+                            <a href="emi-calculator.html" class="related-tool-link">🏦 Loan Prepayment Planner</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- EDUCATIONAL INFO & STRATEGY GUIDE -->
+            <section class="tool-info" style="margin-top:3rem;">
+                <div class="info-section">
+                    <h2>🧠 Goal-Based Investing: The Secret to Long-Term Wealth</h2>
+                    <p>
+                        Most people invest blindly without knowing <em>why</em> they are investing or <em>when</em> they need the money. Goal-based financial planning ties every rupee you save to a specific milestone in your life.
+                    </p>
+                    <ul>
+                        <li><strong>Never mix short-term and long-term goals:</strong> Goals under 3 years (e.g. Home Down Payment) should be in liquid/arbitrage funds or fixed deposits, not equity.</li>
+                        <li><strong>Account for realistic inflation:</strong> General CPI inflation is ~6%, but education inflation is 9-10% and healthcare inflation is 12-14%. If you don't inflate costs, your target corpus will fall drastically short.</li>
+                        <li><strong>Increase your SIP by 10% every year (Step-up):</strong> As your salary grows, stepping up your SIP ensures you hit all your life targets 5 to 7 years ahead of schedule.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free, client-side financial planning calculators for disciplined investors.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="goal-financial-planner.html">Goal Financial Planner</a>
+                <a href="buy-vs-rent-calculator.html">Buy vs Rent Calculator</a>
+                <a href="swp-annuity-calculator.html">SWP Annuity Planner</a>
+                <a href="retirement-benefits-calculator.html">Retirement Benefits</a>
+                <a href="rd-calculator.html">RD Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/goal-financial-planner.js"></script>
+</body>
+</html>

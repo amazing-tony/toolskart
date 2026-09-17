@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy vs Rent Calculator India | Flat vs House, EMI vs Rent & Investment Opportunity Cost</title>
+    <meta name="description" content="Ultimate Buy vs Rent Calculator for India. Compare property appreciation (flats vs independent land), EMI vs escalating rent, shifting charges, agent brokerage, and opportunity cost of investing down payment in mutual funds.">
+    <meta name="keywords" content="buy vs rent calculator India, renting vs buying a house calculator, buy flat vs rent, buy home vs rent mutual fund, rent vs buy break even calculator, property appreciation vs SIP">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/buy-vs-rent-calculator.html">
+    <meta property="og:title" content="Buy vs Rent Calculator & Decision Engine | ToolsKart">
+    <meta property="og:description" content="Decide whether to buy a home or rent. Detailed 30-year net worth comparison, opportunity cost compounding, and mature decision heuristics.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Buy vs Rent Calculator India",
+      "url": "https://amazing-tools.github.io/pages/buy-vs-rent-calculator.html",
+      "description": "Interactive Buy Home vs Rent Calculator with opportunity cost modeling, 30-year wealth comparison, and mature decision framework.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+</head>
+<body>
+    <!-- Privacy Declaration Banner (USP) -->
+    <div class="privacy-usp-strip">
+        <div class="container usp-strip-content">
+            <span class="usp-badge">🛡️ 100% Client-Side Privacy</span>
+            <span class="usp-text">"Your personal financial scenarios are 100% private. All mathematical models execute locally in your browser with zero server uploads."</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <a href="../index.html" class="logo">🔧 ToolsKart</a>
+                <span class="header-badge-tag">Buy vs Rent</span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Buy vs Rent Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <div class="tool-header-badge">
+                        <span>🏡 Real Estate vs. Wealth Creation Engine • Indian Market Specialized</span>
+                    </div>
+                    <h1>Buy Home vs. Rent Calculator &amp; Decision Matrix</h1>
+                    <p class="tool-description">
+                        Should you buy a home or rent and invest the difference? Analyze the total <strong>30-year wealth impact</strong> taking into account property appreciation, loan interest, registration, recurring maintenance, escalating rents, shifting charges, agent brokerages, and the <strong>opportunity cost of investing your down payment in equity mutual funds</strong>.
+                    </p>
+
+                    <!-- MAIN CALCULATOR CARD -->
+                    <div class="calc-box-card">
+
+                        <!-- STEP 1: PROPERTY & BUYING DETAILS -->
+                        <div class="calc-section">
+                            <div class="calc-section-header">
+                                <span class="step-num">1</span>
+                                <div>
+                                    <h3>Home Purchase Scenario (Buying)</h3>
+                                    <p class="calc-section-subtitle">Property price, loan structure, appreciation &amp; ownership costs</p>
+                                </div>
+                            </div>
+
+                            <!-- Property Type -->
+                            <div class="calc-field-group">
+                                <label for="propertyType">Property Type</label>
+                                <div class="segmented-control" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.35rem;">
+                                    <button type="button" class="quick-chip active" data-prop-type="flat" id="typeFlat">🏢 Apartment / Flat (Structure Depreciates, UDS Appreciates)</button>
+                                    <button type="button" class="quick-chip" data-prop-type="house" id="typeHouse">🏡 Independent House / Villa (High Land Value)</button>
+                                    <button type="button" class="quick-chip" data-prop-type="plot" id="typePlot">📐 Plot / Land + Construction</button>
+                                </div>
+                                <input type="hidden" id="propertyType" value="flat">
+                            </div>
+
+                            <!-- Property Purchase Price -->
+                            <div class="calc-field-group" style="margin-top:1.25rem;">
+                                <div class="calc-field-top">
+                                    <label for="propertyPrice">Property Purchase Price (₹)</label>
+                                    <div class="calc-val-badge" id="propertyPriceWords">₹ 75 Lakhs</div>
+                                </div>
+                                <div class="dual-input-row">
+                                    <div class="input-with-unit" style="flex: 1; max-width: 260px;">
+                                        <input type="number" id="propertyPrice" class="input-field" value="7500000" min="1000000" max="100000000" step="100000">
+                                        <span class="input-unit">₹</span>
+                                    </div>
+                                    <input type="range" id="propertyPriceSlider" class="custom-range-slider" min="1500000" max="25000000" step="100000" value="7500000">
+                                </div>
+                                <div class="quick-chip-row">
+                                    <button type="button" class="quick-chip" data-target="propertyPrice" data-val="3500000">₹ 35 L</button>
+                                    <button type="button" class="quick-chip" data-target="propertyPrice" data-val="5000000">₹ 50 L</button>
+                                    <button type="button" class="quick-chip active" data-target="propertyPrice" data-val="7500000">₹ 75 L</button>
+                                    <button type="button" class="quick-chip" data-target="propertyPrice" data-val="10000000">₹ 1 Cr</button>
+                                    <button type="button" class="quick-chip" data-target="propertyPrice" data-val="15000000">₹ 1.5 Cr</button>
+                                    <button type="button" class="quick-chip" data-target="propertyPrice" data-val="25000000">₹ 2.5 Cr</button>
+                                </div>
+                            </div>
+
+                            <!-- Down Payment & Loan Tenure -->
+                            <div class="form-row" style="margin-top:1.25rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem;">
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="downPaymentPct">Down Payment (%)</label>
+                                        <div class="calc-val-badge" id="downPaymentAmountBadge">₹ 15 Lakhs (20%)</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="downPaymentPct" class="input-field" value="20" min="10" max="60" step="1">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <input type="range" id="downPaymentSlider" class="custom-range-slider" min="10" max="50" step="1" value="20">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="downPaymentPct" data-val="10">10%</button>
+                                        <button type="button" class="quick-chip" data-target="downPaymentPct" data-val="15">15%</button>
+                                        <button type="button" class="quick-chip active" data-target="downPaymentPct" data-val="20">20%</button>
+                                        <button type="button" class="quick-chip" data-target="downPaymentPct" data-val="25">25%</button>
+                                        <button type="button" class="quick-chip" data-target="downPaymentPct" data-val="30">30%</button>
+                                    </div>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="loanRate">Loan Interest Rate (% p.a.)</label>
+                                        <div class="calc-val-badge">8.5% p.a.</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="loanRate" class="input-field" value="8.5" min="5" max="15" step="0.05">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <input type="range" id="loanRateSlider" class="custom-range-slider" min="6.5" max="12.0" step="0.1" value="8.5">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="loanRate" data-val="7.5">7.5%</button>
+                                        <button type="button" class="quick-chip" data-target="loanRate" data-val="8.0">8.0%</button>
+                                        <button type="button" class="quick-chip active" data-target="loanRate" data-val="8.5">8.5%</button>
+                                        <button type="button" class="quick-chip" data-target="loanRate" data-val="9.0">9.0%</button>
+                                    </div>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="loanTenure">Loan Tenure (Years)</label>
+                                        <div class="calc-val-badge" id="monthlyEmiBadge">EMI: ₹52,093/mo</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="loanTenure" class="input-field" value="20" min="5" max="30" step="1">
+                                            <span class="input-unit">Yrs</span>
+                                        </div>
+                                        <input type="range" id="loanTenureSlider" class="custom-range-slider" min="5" max="30" step="1" value="20">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="loanTenure" data-val="10">10Y</button>
+                                        <button type="button" class="quick-chip" data-target="loanTenure" data-val="15">15Y</button>
+                                        <button type="button" class="quick-chip active" data-target="loanTenure" data-val="20">20Y</button>
+                                        <button type="button" class="quick-chip" data-target="loanTenure" data-val="25">25Y</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Advanced Upfront & Ownership Costs Collapsible Accordion -->
+                            <details class="advanced-details-box" style="margin-top:1.25rem; border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:0.75rem 1rem;">
+                                <summary style="font-weight:600; cursor:pointer; color:var(--primary, #2563eb);">
+                                    ⚙️ Additional Buying Costs (Registration, Maintenance, Appreciation &amp; Tax)
+                                </summary>
+                                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1rem;">
+                                    <div class="form-group">
+                                        <label for="stampDutyPct">Stamp Duty &amp; Registration (%)</label>
+                                        <input type="number" id="stampDutyPct" class="input-field" value="6.0" min="1" max="12" step="0.5">
+                                        <small style="color:var(--text-muted); font-size:0.75rem;">Typically 5% - 8% in Indian states</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="interiorCost">Furnishing &amp; Initial Interiors (₹)</label>
+                                        <input type="number" id="interiorCost" class="input-field" value="300000" min="0" step="50000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="buyerBrokerageLegal">Legal &amp; Loan Processing (₹)</label>
+                                        <input type="number" id="buyerBrokerageLegal" class="input-field" value="50000" min="0" step="10000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="propertyAppreciation">Expected Appreciation (% p.a.)</label>
+                                        <input type="number" id="propertyAppreciation" class="input-field" value="6.5" min="1" max="15" step="0.25">
+                                        <small style="color:var(--text-muted); font-size:0.75rem;">Historical avg: Flats 5-7%, Houses 8-10%</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="buyerMaintenance">Monthly Maintenance (₹/mo)</label>
+                                        <input type="number" id="buyerMaintenance" class="input-field" value="3500" min="0" step="500">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="propertyTax">Annual Property Tax &amp; Ins. (₹/yr)</label>
+                                        <input type="number" id="propertyTax" class="input-field" value="12000" min="0" step="1000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taxRegime">Home Loan Tax Benefit</label>
+                                        <select id="taxRegime" class="input-field">
+                                            <option value="none" selected>New Tax Regime (Zero Deductions)</option>
+                                            <option value="old_30">Old Regime (30% Bracket - Sec 24b + 80C)</option>
+                                            <option value="old_20">Old Regime (20% Bracket - Sec 24b + 80C)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- STEP 2: RENTING SCENARIO -->
+                        <div class="calc-section" style="margin-top:2rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num">2</span>
+                                <div>
+                                    <h3>Renting Scenario</h3>
+                                    <p class="calc-section-subtitle">Initial rent, annual escalation, shifting costs &amp; brokerages</p>
+                                </div>
+                            </div>
+
+                            <!-- Initial Monthly Rent -->
+                            <div class="calc-field-group">
+                                <div class="calc-field-top">
+                                    <label for="monthlyRent">Initial Monthly Rent (₹)</label>
+                                    <div class="calc-val-badge" id="monthlyRentWords">₹ 22,000 / month</div>
+                                </div>
+                                <div class="dual-input-row">
+                                    <div class="input-with-unit" style="flex:1; max-width:260px;">
+                                        <input type="number" id="monthlyRent" class="input-field" value="22000" min="3000" max="500000" step="1000">
+                                        <span class="input-unit">₹/mo</span>
+                                    </div>
+                                    <input type="range" id="monthlyRentSlider" class="custom-range-slider" min="5000" max="100000" step="1000" value="22000">
+                                </div>
+                                <div class="quick-chip-row">
+                                    <button type="button" class="quick-chip" data-target="monthlyRent" data-val="12000">₹ 12,000</button>
+                                    <button type="button" class="quick-chip" data-target="monthlyRent" data-val="18000">₹ 18,000</button>
+                                    <button type="button" class="quick-chip active" data-target="monthlyRent" data-val="22000">₹ 22,000</button>
+                                    <button type="button" class="quick-chip" data-target="monthlyRent" data-val="30000">₹ 30,000</button>
+                                    <button type="button" class="quick-chip" data-target="monthlyRent" data-val="45000">₹ 45,000</button>
+                                    <button type="button" class="quick-chip" data-target="monthlyRent" data-val="65000">₹ 65,000</button>
+                                </div>
+                            </div>
+
+                            <!-- Rent Escalation & Security Deposit -->
+                            <div class="form-row" style="margin-top:1.25rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem;">
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="rentEscalation">Annual Rent Increase (% p.a.)</label>
+                                        <div class="calc-val-badge">7.5% p.a.</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="rentEscalation" class="input-field" value="7.5" min="2" max="15" step="0.5">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <input type="range" id="rentEscalationSlider" class="custom-range-slider" min="3" max="12" step="0.5" value="7.5">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="rentEscalation" data-val="5">5%</button>
+                                        <button type="button" class="quick-chip active" data-target="rentEscalation" data-val="7.5">7.5%</button>
+                                        <button type="button" class="quick-chip" data-target="rentEscalation" data-val="10">10%</button>
+                                    </div>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="securityDepositMonths">Security Deposit (Months of Rent)</label>
+                                        <div class="calc-val-badge" id="securityDepositBadge">₹ 1.32 Lakhs (Refundable)</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="securityDepositMonths" class="input-field" value="6" min="1" max="12" step="1">
+                                            <span class="input-unit">Mo</span>
+                                        </div>
+                                        <input type="range" id="securityDepositSlider" class="custom-range-slider" min="1" max="11" step="1" value="6">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="securityDepositMonths" data-val="2">2 Mo</button>
+                                        <button type="button" class="quick-chip" data-target="securityDepositMonths" data-val="3">3 Mo</button>
+                                        <button type="button" class="quick-chip active" data-target="securityDepositMonths" data-val="6">6 Mo (Std)</button>
+                                        <button type="button" class="quick-chip" data-target="securityDepositMonths" data-val="10">10 Mo (BLR/MUM)</button>
+                                    </div>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="renterMaintenance">Tenant Maintenance (₹/mo)</label>
+                                        <div class="calc-val-badge">₹ 2,000/mo</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="renterMaintenance" class="input-field" value="2000" min="0" step="500">
+                                            <span class="input-unit">₹/mo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Relocation & Shifting Costs Details -->
+                            <details class="advanced-details-box" style="margin-top:1.25rem; border:1px solid var(--border-color, #e2e8f0); border-radius:8px; padding:0.75rem 1rem;" open>
+                                <summary style="font-weight:600; cursor:pointer; color:var(--primary, #2563eb);">
+                                    🚚 Relocation, Shifting &amp; Agent Brokerage Expenses
+                                </summary>
+                                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1rem;">
+                                    <div class="form-group">
+                                        <label for="shiftingFrequencyYears">Moving Frequency (Every N Years)</label>
+                                        <select id="shiftingFrequencyYears" class="input-field">
+                                            <option value="1">Every 1 Year (High mobility / frequent rent hikes)</option>
+                                            <option value="2">Every 2 Years</option>
+                                            <option value="3" selected>Every 3 Years (Standard average)</option>
+                                            <option value="5">Every 5 Years (Long stay)</option>
+                                            <option value="0">Never Move (Permanent 30Y lease)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="agentFeeMonths">Agent Brokerage Fee Per Move</label>
+                                        <select id="agentFeeMonths" class="input-field">
+                                            <option value="0">0 Months (No broker / direct owner)</option>
+                                            <option value="0.5">15 Days Rent (0.5 Month)</option>
+                                            <option value="1" selected>1 Month Rent (Standard Metro Brokerage)</option>
+                                            <option value="2">2 Months Rent</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="shiftingCost">Packers &amp; Movers Cost (₹ per move)</label>
+                                        <input type="number" id="shiftingCost" class="input-field" value="20000" min="0" step="2500">
+                                        <small style="color:var(--text-muted); font-size:0.75rem;">Escalates with inflation over time</small>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- STEP 3: INVESTMENT RETURN & OPPORTUNITY COST -->
+                        <div class="calc-section" style="margin-top:2rem;">
+                            <div class="calc-section-header">
+                                <span class="step-num">3</span>
+                                <div>
+                                    <h3>Opportunity Cost &amp; Investment Parameters</h3>
+                                    <p class="calc-section-subtitle">How much wealth the renter creates by investing saved capital</p>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem;">
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="investmentReturn">Alternative Investment Return (% p.a.)</label>
+                                        <div class="calc-val-badge">12.0% p.a.</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="investmentReturn" class="input-field" value="12.0" min="4" max="20" step="0.5">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <input type="range" id="investmentReturnSlider" class="custom-range-slider" min="6" max="16" step="0.5" value="12.0">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="investmentReturn" data-val="8">8% (Debt/FD)</button>
+                                        <button type="button" class="quick-chip" data-target="investmentReturn" data-val="10">10% (Hybrid)</button>
+                                        <button type="button" class="quick-chip active" data-target="investmentReturn" data-val="12">12% (Nifty/MF)</button>
+                                        <button type="button" class="quick-chip" data-target="investmentReturn" data-val="14">14% (Aggressive)</button>
+                                    </div>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="inflationRate">General Inflation Rate (% p.a.)</label>
+                                        <div class="calc-val-badge">6.0% p.a.</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="inflationRate" class="input-field" value="6.0" min="2" max="12" step="0.5">
+                                            <span class="input-unit">%</span>
+                                        </div>
+                                        <input type="range" id="inflationRateSlider" class="custom-range-slider" min="3" max="10" step="0.5" value="6.0">
+                                    </div>
+                                </div>
+
+                                <div class="calc-field-group">
+                                    <div class="calc-field-top">
+                                        <label for="timeHorizon">Analysis Horizon (Years)</label>
+                                        <div class="calc-val-badge" id="timeHorizonBadge">15 Years</div>
+                                    </div>
+                                    <div class="dual-input-row">
+                                        <div class="input-with-unit" style="flex:1;">
+                                            <input type="number" id="timeHorizon" class="input-field" value="15" min="3" max="30" step="1">
+                                            <span class="input-unit">Yrs</span>
+                                        </div>
+                                        <input type="range" id="timeHorizonSlider" class="custom-range-slider" min="5" max="30" step="5" value="15">
+                                    </div>
+                                    <div class="quick-chip-row">
+                                        <button type="button" class="quick-chip" data-target="timeHorizon" data-val="5">5Y</button>
+                                        <button type="button" class="quick-chip" data-target="timeHorizon" data-val="10">10Y</button>
+                                        <button type="button" class="quick-chip active" data-target="timeHorizon" data-val="15">15Y</button>
+                                        <button type="button" class="quick-chip" data-target="timeHorizon" data-val="20">20Y</button>
+                                        <button type="button" class="quick-chip" data-target="timeHorizon" data-val="30">30Y</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- /calc-box-card -->
+
+                    <!-- RESULTS DASHBOARD -->
+                    <div class="results-dashboard" id="resultsDashboard" style="margin-top:2.5rem;">
+
+                        <!-- WINNER CALLOUT BANNER -->
+                        <div class="winner-callout-card" id="winnerCallout">
+                            <div class="winner-icon-wrap" id="winnerIcon">🏆</div>
+                            <div class="winner-content">
+                                <div class="winner-title-row">
+                                    <h2 id="winnerHeadline">Calculating Recommendation...</h2>
+                                    <span class="break-even-pill" id="breakEvenPill">Break-even: Year --</span>
+                                </div>
+                                <p id="winnerSubtext">Comparing your 30-year net worth trajectory.</p>
+                            </div>
+                        </div>
+
+                        <!-- PRICE TO RENT RATIO CALLOUT -->
+                        <div class="metric-ribbon" style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1rem 1.5rem; margin-top:1rem; flex-wrap:wrap; gap:1rem;">
+                            <div>
+                                <span style="font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; font-weight:600; letter-spacing:0.5px;">Valuation Health Check</span>
+                                <div style="font-size:1.25rem; font-weight:700; margin-top:0.25rem;" id="ptrRatioText">Price-to-Rent Ratio: 28.4</div>
+                            </div>
+                            <div id="ptrBadge" style="padding:0.4rem 1rem; border-radius:20px; font-weight:600; font-size:0.875rem;">
+                                🟡 High Ratio (> 25): Mathematically Favors Renting
+                            </div>
+                        </div>
+
+                        <!-- CORE COMPARISON KPI GRID -->
+                        <div class="kpi-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.25rem; margin-top:1.5rem;">
+                            <!-- Buyer Net Worth Card -->
+                            <div class="kpi-card" style="background:linear-gradient(135deg, rgba(37,99,235,0.06), rgba(37,99,235,0.02)); border:1.5px solid #2563eb; border-radius:12px; padding:1.25rem;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-weight:700; color:#1d4ed8; font-size:0.95rem;">🏠 BUYER NET WORTH</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);" id="buyerAtYearLabel">At Year 15</span>
+                                </div>
+                                <div style="font-size:2rem; font-weight:800; color:#1e3a8a; margin:0.5rem 0;" id="kpiBuyerNetWorth">₹ 1.25 Cr</div>
+                                <div style="font-size:0.825rem; color:var(--text-muted); line-height:1.4;">
+                                    Property Value: <strong id="kpiPropertyVal">₹ 1.94 Cr</strong><br>
+                                    Less: Outstanding Loan: <strong id="kpiLoanRemaining">₹ 28.4 L</strong><br>
+                                    Less: Selling Cost: <strong id="kpiSellingCost">₹ 2.9 L</strong>
+                                </div>
+                            </div>
+
+                            <!-- Renter Net Worth Card -->
+                            <div class="kpi-card" style="background:linear-gradient(135deg, rgba(16,185,129,0.06), rgba(16,185,129,0.02)); border:1.5px solid #10b981; border-radius:12px; padding:1.25rem;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-weight:700; color:#047857; font-size:0.95rem;">📈 RENTER NET WORTH</span>
+                                    <span style="font-size:0.8rem; color:var(--text-muted);" id="renterAtYearLabel">At Year 15</span>
+                                </div>
+                                <div style="font-size:2rem; font-weight:800; color:#064e3b; margin:0.5rem 0;" id="kpiRenterNetWorth">₹ 1.68 Cr</div>
+                                <div style="font-size:0.825rem; color:var(--text-muted); line-height:1.4;">
+                                    Upfront Fund Growth: <strong id="kpiLumpSumGrowth">₹ 1.18 Cr</strong><br>
+                                    Monthly SIP Savings: <strong id="kpiSipGrowth">₹ 48.7 L</strong><br>
+                                    Refunded Deposit: <strong id="kpiRefundedDeposit">₹ 1.32 L</strong>
+                                </div>
+                            </div>
+
+                            <!-- Total Cash Outflow Comparison Card -->
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.25rem;">
+                                <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">💸 TOTAL CASH OUTFLOW</span>
+                                <div style="margin:0.75rem 0; font-size:0.9rem;">
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                                        <span>Total Spent Buying:</span>
+                                        <strong id="kpiTotalBuyerOutflow" style="color:#2563eb;">₹ 1.48 Cr</strong>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                                        <span>Total Spent Renting:</span>
+                                        <strong id="kpiTotalRenterOutflow" style="color:#10b981;">₹ 82.5 L</strong>
+                                    </div>
+                                    <div style="border-top:1px dashed var(--border-color, #e2e8f0); padding-top:0.4rem; display:flex; justify-content:space-between; font-weight:700;">
+                                        <span>Renting Outflow Savings:</span>
+                                        <span id="kpiOutflowDifference" style="color:#059669;">₹ 65.5 L Less</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Payment Evolution Card -->
+                            <div class="kpi-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.25rem;">
+                                <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">📅 MONTHLY OUTFLOW COMPARISON</span>
+                                <div style="margin:0.75rem 0; font-size:0.875rem;">
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                                        <span>Year 1 Buy vs Rent:</span>
+                                        <span><strong style="color:#2563eb;" id="kpiYr1Buy">₹56.6K</strong> vs <strong style="color:#10b981;" id="kpiYr1Rent">₹24K</strong></span>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                                        <span id="kpiMidYearLabel">Year 15 Buy vs Rent:</span>
+                                        <span><strong style="color:#2563eb;" id="kpiMidBuy">₹62.1K</strong> vs <strong style="color:#10b981;" id="kpiMidRent">₹65.8K</strong></span>
+                                    </div>
+                                    <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px dashed var(--border-color, #e2e8f0); padding-top:0.4rem;">
+                                        *EMI stops after loan payoff; rent escalates permanently.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- INTERACTIVE VISUAL CHARTS -->
+                        <div class="charts-wrapper" style="margin-top:2.5rem;">
+                            <!-- Chart 1: Net Worth Trajectory -->
+                            <div class="chart-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+                                    <div>
+                                        <h3 style="margin:0; font-size:1.15rem;">📊 30-Year Wealth Trajectory: Home Equity vs. Investment Portfolio</h3>
+                                        <p style="margin:0.25rem 0 0; font-size:0.85rem; color:var(--text-muted);">
+                                            Blue line shows Buyer equity (Property value - loan). Green line shows Renter portfolio (invested savings).
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="height:340px; position:relative;">
+                                    <canvas id="netWorthChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Chart 2: Cumulative Cash Outflow -->
+                            <div class="chart-card" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:12px; padding:1.5rem;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+                                    <div>
+                                        <h3 style="margin:0; font-size:1.15rem;">💸 Cumulative Cash Outflow Over Time</h3>
+                                        <p style="margin:0.25rem 0 0; font-size:0.85rem; color:var(--text-muted);">
+                                            Total money out of pocket for Buying (Down payment + EMIs + Maintenance + Taxes) vs. Renting (Rent + Brokerage + Moving).
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="height:300px; position:relative;">
+                                    <canvas id="cashOutflowChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 30-YEAR COMPARISON TABLE WITH EXPORT -->
+                        <div class="table-section" style="margin-top:2.5rem;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                                <div>
+                                    <h3 style="margin:0; font-size:1.15rem;">📋 Year-by-Year Financial Breakdown</h3>
+                                    <p style="margin:0.25rem 0 0; font-size:0.85rem; color:var(--text-muted);">
+                                        Detailed breakdown of property values, outstanding debt, monthly rents, and portfolio values.
+                                    </p>
+                                </div>
+                                <div style="display:flex; gap:0.5rem;">
+                                    <button type="button" class="btn btn-outline" id="exportScheduleBtn">📥 Download CSV</button>
+                                    <button type="button" class="btn btn-outline" id="copyScheduleBtn">📋 Copy Table</button>
+                                </div>
+                            </div>
+
+                            <div class="schedule-table-wrap" style="max-height:420px; overflow:auto; border:1px solid var(--border-color, #e2e8f0); border-radius:10px;">
+                                <table class="amort-table" id="comparisonTable" style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:right;">
+                                    <thead style="position:sticky; top:0; background:var(--bg-card, #f8fafc); z-index:2;">
+                                        <tr style="border-bottom:2px solid var(--border-color, #e2e8f0);">
+                                            <th style="padding:0.75rem; text-align:center;">Year</th>
+                                            <th style="padding:0.75rem;">Property Value</th>
+                                            <th style="padding:0.75rem;">Loan Balance</th>
+                                            <th style="padding:0.75rem; color:#2563eb;">Buyer Net Worth</th>
+                                            <th style="padding:0.75rem;">Monthly Rent</th>
+                                            <th style="padding:0.75rem; color:#10b981;">Renter Portfolio</th>
+                                            <th style="padding:0.75rem; text-align:center;">Winner of Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="comparisonTableBody">
+                                        <!-- Populated via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div> <!-- /results-dashboard -->
+
+                </div> <!-- /tool-main -->
+
+                <!-- SIDEBAR -->
+                <aside class="tool-sidebar">
+                    <div class="ad-slot">
+                        <div class="ad-placeholder">Advertisement</div>
+                    </div>
+
+                    <!-- Quick Rule of Thumb Box -->
+                    <div class="sidebar-section" style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1.25rem;">
+                        <h3 style="font-size:1rem; margin-top:0;">💡 Rules of Thumb</h3>
+                        <ul style="padding-left:1.2rem; font-size:0.825rem; color:var(--text-muted); line-height:1.6; margin-bottom:0;">
+                            <li><strong>Price-to-Rent &gt; 25:</strong> Renting + investing the difference mathematically generates significantly higher wealth in India.</li>
+                            <li><strong>3-20-30 Rule:</strong> Property &le; 3x annual income, &ge; 20% down payment, EMI &le; 30% take-home pay.</li>
+                            <li><strong>5-Year Mobility Rule:</strong> If there is any chance of moving cities within 5 years, do not buy — transaction friction eats capital.</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Related Financial Planners</h3>
+                        <div class="related-tools">
+                            <a href="goal-financial-planner.html" class="related-tool-link">🎯 Life Goal &amp; Freedom Planner</a>
+                            <a href="emi-calculator.html" class="related-tool-link">🏦 Loan Prepayment Optimizer</a>
+                            <a href="swp-annuity-calculator.html" class="related-tool-link">💵 SWP &amp; Pension Payout Planner</a>
+                            <a href="sip-calculator.html" class="related-tool-link">📈 SIP Wealth Calculator</a>
+                            <a href="income-tax-calculator.html" class="related-tool-link">🧾 Income Tax (Old vs New)</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- MATURE DECISION FRAMEWORK & EDUCATIONAL MATRIX -->
+            <section class="tool-info" style="margin-top:3rem;">
+                
+                <!-- SECTION 1: PROS AND CONS TABLE -->
+                <div class="info-section">
+                    <h2>⚖️ Advantages &amp; Disadvantages: Buying vs. Renting</h2>
+                    <p>A home is simultaneously an emotional shelter and the largest financial liability most families ever undertake. Here is an honest, objective breakdown:</p>
+                    
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem; margin-top:1.25rem;">
+                        <!-- Buying Pros/Cons -->
+                        <div style="background:var(--bg-card, #fff); border:1px solid #bfdbfe; border-radius:10px; padding:1.25rem;">
+                            <h3 style="color:#1d4ed8; margin-top:0; display:flex; align-items:center; gap:0.5rem;">
+                                🏠 Buying a Home
+                            </h3>
+                            <h4 style="color:#16a34a; font-size:0.9rem; margin:0.75rem 0 0.35rem;">✅ Advantages:</h4>
+                            <ul style="font-size:0.85rem; padding-left:1.2rem; line-height:1.5; color:var(--text-color);">
+                                <li><strong>Emotional Security &amp; Pride:</strong> True peace of mind, stability for children's schooling, and deep roots in a community.</li>
+                                <li><strong>Complete Freedom:</strong> Renovate, paint, remodel, and furnish however you like without seeking landlord approvals.</li>
+                                <li><strong>Forced Savings Discipline:</strong> Monthly EMI forces capital accumulation instead of lifestyle inflation.</li>
+                                <li><strong>Inflation Hedge:</strong> Fixed EMI remains static in nominal rupees while rents in India double every 9-10 years.</li>
+                                <li><strong>Zero Landlord Hassle:</strong> No fear of sudden eviction, arbitrary rent hikes, or invasive inspections.</li>
+                            </ul>
+
+                            <h4 style="color:#dc2626; font-size:0.9rem; margin:1rem 0 0.35rem;">❌ Disadvantages &amp; Risks:</h4>
+                            <ul style="font-size:0.85rem; padding-left:1.2rem; line-height:1.5; color:var(--text-color);">
+                                <li><strong>Massive Upfront Illiquidity:</strong> Down payment, 6% stamp duty, and interiors lock away your liquid emergency cushion.</li>
+                                <li><strong>Heavy Interest Load:</strong> Over a 20-year loan at 8.5%, you repay <strong>more than double</strong> the original principal amount!</li>
+                                <li><strong>Transaction Friction:</strong> You lose 6% to 8% in registration and brokerages on entry, and 1-2% on exit.</li>
+                                <li><strong>Career Mobility Anchor:</strong> Tying yourself to one neighborhood makes accepting higher-paying job offers in other tech hubs difficult.</li>
+                                <li><strong>Maintenance &amp; Aging Structure:</strong> Older apartments face leaking pipes, failing elevators, and massive society special-repair levies.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Renting Pros/Cons -->
+                        <div style="background:var(--bg-card, #fff); border:1px solid #a7f3d0; border-radius:10px; padding:1.25rem;">
+                            <h3 style="color:#047857; margin-top:0; display:flex; align-items:center; gap:0.5rem;">
+                                📈 Renting &amp; Investing the Difference
+                            </h3>
+                            <h4 style="color:#16a34a; font-size:0.9rem; margin:0.75rem 0 0.35rem;">✅ Advantages:</h4>
+                            <ul style="font-size:0.85rem; padding-left:1.2rem; line-height:1.5; color:var(--text-color);">
+                                <li><strong>Superior Mathematical Compounding:</strong> Because Indian rental yields are low (2.5% - 3.5%), investing the down payment and monthly EMI surplus into equity index funds (12% CAGR) produces significantly higher liquid net worth.</li>
+                                <li><strong>100% Career &amp; Geographic Agility:</strong> Move across cities or switch neighborhoods near your workplace to eliminate 2-hour daily traffic commutes.</li>
+                                <li><strong>Zero Debt Anxiety:</strong> No multi-decade EMI liability hanging over your head during industry layoffs or economic slowdowns.</li>
+                                <li><strong>Zero Maintenance Burden:</strong> Structural repairs, property taxes, and major plumbing overhauls are paid by the landlord.</li>
+                                <li><strong>Flexibility to Upsize/Downsize:</strong> Easily upgrade to a bigger 3BHK when having children, or downsize when empty-nesting.</li>
+                            </ul>
+
+                            <h4 style="color:#dc2626; font-size:0.9rem; margin:1rem 0 0.35rem;">❌ Disadvantages &amp; Risks:</h4>
+                            <ul style="font-size:0.85rem; padding-left:1.2rem; line-height:1.5; color:var(--text-color);">
+                                <li><strong>Perpetual Escalating Rent:</strong> Rent never stops. At 8% annual escalation, a ₹25,000 rent becomes ₹1.02 Lakh/month in 18 years.</li>
+                                <li><strong>Relocation Fatigue &amp; Moving Costs:</strong> Packing, shifting, hiring movers, and paying 1 month brokerage to agents every 2-3 years causes heavy stress.</li>
+                                <li><strong>Behavioral Discipline Risk:</strong> The math ONLY works if you <em>diligently invest the exact monthly savings</em> into equity/MF. If spent on lifestyle upgrades, you end up with zero home AND zero savings.</li>
+                                <li><strong>Insecurity in Old Age:</strong> Renting in your 60s and 70s can be emotionally stressful as many landlords prefer younger working tenants.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: CONSTRAINTS, RISKS & MATURE DECISION FRAMEWORK -->
+                <div class="info-section">
+                    <h2>🎯 The Mature Decision Checklist: How to Decide</h2>
+                    <p>Stop asking <em>"Which gives more money on an Excel sheet?"</em> and start asking <em>"Which choice aligns with my career phase, family stability, and psychological risk tolerance?"</em></p>
+
+                    <div style="background:var(--bg-card, #fff); border:1px solid var(--border-color, #e2e8f0); border-radius:10px; padding:1.5rem; margin-top:1rem;">
+                        <h3 style="font-size:1.05rem; margin-top:0;">1. The 3 Golden Constraints Before Buying:</h3>
+                        <ol style="font-size:0.875rem; padding-left:1.2rem; line-height:1.6; color:var(--text-color);">
+                            <li><strong>The EMI Safety Ratio:</strong> Your total monthly EMI must NEVER exceed <strong>35% to 40% of your net monthly take-home salary</strong>. If an EMI requires 50%+ of your income, you are walking into financial vulnerability.</li>
+                            <li><strong>The Untouchable Emergency Buffer:</strong> After paying the 20% down payment, stamp duty, registration, and interiors, you must STILL have at least <strong>6 months of living expenses + EMIs</strong> intact in liquid Fixed Deposits/Savings. Never drain your last rupee to buy a house.</li>
+                            <li><strong>The 5 to 7 Year Horizon:</strong> Because registration (6%), interior design (₹3-5L), and brokerage consume ~10% of property cost, you will lose money if you sell within 5 years. Only buy if you are confident you will live there for at least 7+ years.</li>
+                        </ol>
+
+                        <h3 style="font-size:1.05rem; margin-top:1.5rem;">2. Property Type Realities: Flats vs. Independent Houses:</h3>
+                        <p style="font-size:0.875rem; line-height:1.6; color:var(--text-color);">
+                            In real estate, <strong>Land appreciates while building concrete depreciates</strong>. An apartment flat has a small Undivided Share of Land (UDS). After 25-30 years, apartment buildings age and demand expensive maintenance, capping capital growth to 5-7%. Conversely, independent houses and plots own 100% of the land, delivering historical appreciation of 8-11%. If buying a flat, buy primarily for <em>living utility</em>, not as a speculative multi-bagger asset.
+                        </p>
+
+                        <h3 style="font-size:1.05rem; margin-top:1.5rem;">3. When Should You Definitely RENT?</h3>
+                        <ul style="font-size:0.875rem; padding-left:1.2rem; line-height:1.6; color:var(--text-color);">
+                            <li>You are in your 20s or early 30s with rapid career growth and potential job changes across cities or overseas.</li>
+                            <li>You do not have a 20% down payment saved, or paying it would deplete your emergency fund.</li>
+                            <li>The Price-to-Rent ratio in your desired locality is above 30 (rental yields under 3%).</li>
+                            <li>You want to live in a prime central city location (where buying is unaffordable, but renting is accessible).</li>
+                        </ul>
+
+                        <h3 style="font-size:1.05rem; margin-top:1.5rem;">4. When Should You Confidently BUY?</h3>
+                        <ul style="font-size:0.875rem; padding-left:1.2rem; line-height:1.6; color:var(--text-color);">
+                            <li>You have stable income, roots in the city, school-going children, or aging parents needing permanence.</li>
+                            <li>You have the 20% down payment plus an untouched 6-month emergency reserve.</li>
+                            <li>The EMI is comfortable (&lt; 35% of income) and you plan to stay in the home for 10 to 20+ years.</li>
+                            <li>You value psychological peace, freedom to customize, and zero landlord interference over optimizing marginal percentages in a stock portfolio.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: FREQUENTLY ASKED QUESTIONS -->
+                <div class="info-section">
+                    <h2>Frequently Asked Questions (FAQs)</h2>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the Price-to-Rent Ratio and how is it interpreted?</h3>
+                        <p class="faq-answer">
+                            Price-to-Rent Ratio is calculated as: <code>Property Purchase Price / Annual Rent</code>. In global finance, a ratio below 15 strongly favors buying, 16-24 is neutral, and 25 or above strongly favors renting. In Indian tier-1 cities (Bangalore, Mumbai, Delhi-NCR, Pune), this ratio is often 28 to 38, meaning property prices are very high relative to rents, making renting financially attractive if the savings are diligently invested.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">What is the "Opportunity Cost" of buying a home?</h3>
+                        <p class="faq-answer">
+                            When you buy a home, you pay a large lump sum upfront (down payment + stamp duty + interior). If you had rented instead, that lump sum could have been invested in equity mutual funds compounding at 12% p.a. Furthermore, in the early years, loan EMI + maintenance is much higher than rent. The opportunity cost is the wealth you miss out on by locking that money in brick and mortar instead of productive capital assets.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question">Can I claim tax benefits on home loans?</h3>
+                        <p class="faq-answer">
+                            Under the Old Tax Regime, you can deduct up to ₹2,00,000 per year on home loan interest (Section 24b) and up to ₹1,50,000 on principal repayment (Section 80C). However, under the popular New Tax Regime, these deductions are NOT available. This calculator includes a tax toggle allowing you to model both scenarios accurately.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>🔧 ToolsKart</h4>
+                <p>Free, privacy-first financial decision engines &amp; calculators for smart investors.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Financial Tools</h4>
+                <a href="buy-vs-rent-calculator.html">Buy vs Rent Calculator</a>
+                <a href="goal-financial-planner.html">Goal Financial Planner</a>
+                <a href="emi-calculator.html">EMI &amp; Prepayment Planner</a>
+                <a href="swp-annuity-calculator.html">SWP &amp; Pension Planner</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tax &amp; Savings</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="retirement-benefits-calculator.html">Retirement Benefits</a>
+                <a href="fd-calculator.html">FD Calculator</a>
+                <a href="rd-calculator.html">RD Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 ToolsKart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/buy-vs-rent-calculator.js"></script>
+</body>
+</html>

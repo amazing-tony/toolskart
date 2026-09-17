@@ -15,7 +15,7 @@
     'emerald': 'FinTech Emerald',
     'royal': 'Royal Velvet',
     'grey': 'Silver Nordic',
-    'white': 'Pure Crystal',
+    'white': 'Pure Minimal',
     'ivory': 'Warm Ivory',
     'amber': 'Solar Amber'
   };
