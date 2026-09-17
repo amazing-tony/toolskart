@@ -3985,10 +3985,13 @@ select.input-field { cursor: pointer; appearance: auto; }
 /* Embedded Single-Portal View (Hides duplicate header/footer when rendered inside portal iframe) */
 body.is-embedded .privacy-usp-strip,
 body.is-embedded .header,
+body.is-embedded .header-slim,
 body.is-embedded .footer,
 body.is-embedded .ad-slot,
+body.is-embedded .ad-slot-container,
 body.is-embedded .portal-sidebar,
-body.is-embedded .sidebar-toggle-btn {
+body.is-embedded .sidebar-toggle-btn,
+body.is-embedded .breadcrumb {
   display: none !important;
 }
 body.is-embedded {

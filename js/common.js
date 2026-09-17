@@ -321,6 +321,11 @@
     'emi-calculator': { title: 'Loan Prepayment & Debt-Freedom Planner', category: 'Financial Calculators', url: 'pages/emi-calculator.html' },
     'gst-calculator': { title: 'GST Calculator & Tax Splitter', category: 'Financial Calculators', url: 'pages/gst-calculator.html' },
     'sip-calculator': { title: 'SIP & Wealth Builder', category: 'Financial Calculators', url: 'pages/sip-calculator.html' },
+    'buy-vs-rent-calculator': { title: 'Buy Home vs Rent Decision', category: 'Financial Calculators', url: 'pages/buy-vs-rent-calculator.html' },
+    'goal-financial-planner': { title: 'Life Goal & Freedom Planner', category: 'Financial Calculators', url: 'pages/goal-financial-planner.html' },
+    'swp-annuity-calculator': { title: 'SWP & Pension Annuity Planner', category: 'Financial Calculators', url: 'pages/swp-annuity-calculator.html' },
+    'retirement-benefits-calculator': { title: 'Retirement Benefits & Gratuity', category: 'Financial Calculators', url: 'pages/retirement-benefits-calculator.html' },
+    'rd-calculator': { title: 'Recurring Deposit (RD) Calculator', category: 'Financial Calculators', url: 'pages/rd-calculator.html' },
     'age-calculator': { title: 'Age Calculator', category: 'Everyday Calculators', url: 'pages/age-calculator.html' },
     'compound-interest': { title: 'Compound Interest Calculator', category: 'Financial Calculators', url: 'pages/compound-interest.html' },
     'fd-calculator': { title: 'Fixed Deposit (FD) Calculator', category: 'Financial Calculators', url: 'pages/fd-calculator.html' },
@@ -341,7 +346,7 @@
 
   function extractSlugFromUrl(url) {
     if (!url) return null;
-    const match = url.match(/(?:pages\/|^)([\w-]+)\.html/);
+    const match = url.match(/(?:pages\/|^|\/)([\w-]+)\.html(?:\?|#|$)/);
     return match ? match[1] : null;
   }
 
@@ -353,7 +358,17 @@
     const breadcrumbTitle = document.getElementById('panelBreadcrumbTitle');
 
     if (!toolPanel || !toolIframe) {
-      // If outside index.html, navigate to index.html#slug
+      // If outside index.html or inside an iframe, navigate parent to index.html#slug
+      if (window.self !== window.top) {
+        try {
+          if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
+            window.top.ToolsKart.openTool(slug, customTitle, customCat);
+            return;
+          }
+        } catch (e) {}
+        window.top.location.href = (window.location.pathname.includes('/pages/') ? '../index.html#' : 'index.html#') + slug;
+        return;
+      }
       const prefix = window.location.pathname.includes('/pages/') ? '../index.html#' : 'index.html#';
       window.location.href = prefix + slug;
       return;
@@ -361,7 +376,7 @@
 
     const tool = toolRegistry[slug] || {
       title: customTitle || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
-      category: customCat || 'Tools',
+      category: customCat || 'Financial Calculators',
       url: 'pages/' + slug + '.html'
     };
 
@@ -454,11 +469,8 @@
 
   // Intercept click on tools, cards, and sidebar links
   document.addEventListener('click', function (e) {
-    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link');
+    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .nav-quick-item');
     if (!trigger) return;
-
-    const toolPanel = document.getElementById('toolContentPanel');
-    if (!toolPanel) return;
 
     let slug = trigger.getAttribute('data-tool');
     const href = trigger.getAttribute('href');
@@ -467,17 +479,32 @@
       slug = extractSlugFromUrl(href);
     }
 
-    if (slug && toolRegistry[slug]) {
-      e.preventDefault();
-      const title = trigger.querySelector('h3')?.textContent?.trim() || toolRegistry[slug].title;
-      openToolInPortal(slug, title);
+    if (slug) {
+      const toolPanel = document.getElementById('toolContentPanel');
+      if (toolPanel) {
+        e.preventDefault();
+        const title = trigger.querySelector('h3')?.textContent?.trim() || 
+                      trigger.querySelector('span')?.textContent?.trim() || 
+                      (toolRegistry[slug] && toolRegistry[slug].title);
+        openToolInPortal(slug, title);
+      } else if (window.self !== window.top) {
+        // We are inside an iframe; request top window to open the tool in the AdminLTE portal workstation
+        e.preventDefault();
+        try {
+          if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
+            window.top.ToolsKart.openTool(slug);
+            return;
+          }
+        } catch (err) {}
+        window.top.location.href = '../index.html#' + slug;
+      }
     }
   });
 
   // Check URL hash on page load or on hashchange
   function checkUrlHash() {
     const hash = window.location.hash.replace('#', '').trim();
-    if (hash && toolRegistry[hash]) {
+    if (hash && (toolRegistry[hash] || hash.includes('-'))) {
       openToolInPortal(hash);
     }
   }
