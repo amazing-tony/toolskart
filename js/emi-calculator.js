@@ -643,6 +643,7 @@
       year,
       monthInYear,
       loanMonth,
+      month: loanMonth,
       amount,
       note: note || `Year ${year} Month ${monthInYear} Prepayment`
     });
@@ -864,7 +865,22 @@
     const newTenureYears = prepaySchedule.monthsCompleted / 12;
 
     // Update UI Previews
+    if (liveSyncText) {
+      liveSyncText.textContent = `Live Calculated for ₹ ${formatLakhsCrores(principal).replace('₹ ', '')} @ ${rate}% over ${tenureYears} Yrs`;
+    }
+
     renderBaselinePreview(baseEmi, baseSchedule.totalInterest, principal + baseSchedule.totalInterest);
+    renderSchedulerTable({
+      principal,
+      monthlyRate,
+      totalMonths,
+      baseEmi,
+      monthlyPrepay,
+      yearlyPrepay,
+      stepUpRate,
+      impactMode,
+      prepaySchedule
+    });
     renderHeroFreedomCard({
       yearsSaved,
       monthsSaved,
@@ -932,7 +948,8 @@
     const lumpsumMap = {};
     if (customLumpsums && customLumpsums.length > 0) {
       customLumpsums.forEach(item => {
-        lumpsumMap[item.month] = (lumpsumMap[item.month] || 0) + item.amount;
+        const m = item.loanMonth || item.month || (item.year * 12);
+        lumpsumMap[m] = (lumpsumMap[m] || 0) + item.amount;
       });
     }
 
@@ -1733,6 +1750,11 @@
       csvContent += r.join(',') + '\n';
     });
 
+    csvContent += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
+    csvContent += '# This calculation output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
+    csvContent += '# All calculations must be independently verified at user level with your lending institution or bank statement.\n';
+    csvContent += '# Amazing-tools is not responsible or liable for any miscalculations, bank differences, or financial decisions made.\n';
+    csvContent += '# Please report any miscalculations on our portal (hello@toolskart.com) for future corrections.\n';
     const filename = `loan_prepayment_schedule_${currentScheduleView}.csv`;
     if (window.ToolsKart) {
       window.ToolsKart.downloadFile(csvContent, filename, 'text/csv');

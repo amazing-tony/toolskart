@@ -23,6 +23,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -561,7 +563,8 @@
                                         Detailed breakdown of property values, outstanding debt, monthly rents, and portfolio values.
                                     </p>
                                 </div>
-                                <div style="display:flex; gap:0.5rem;">
+                                <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+                                    <button type="button" class="btn btn-primary" id="exportPdfReportBtn" style="font-weight: 600;">📥 Download PDF Report</button>
                                     <button type="button" class="btn btn-outline" id="exportScheduleBtn">📥 Download CSV</button>
                                     <button type="button" class="btn btn-outline" id="copyScheduleBtn">📋 Copy Table</button>
                                 </div>
@@ -589,12 +592,43 @@
 
                     </div> <!-- /results-dashboard -->
 
+                    <!-- OFFICIAL USER VERIFICATION DECLARATION & DISCLAIMER -->
+                    <div class="user-verification-declaration-card" style="margin-top: 1.5rem; background: var(--color-surface); border: 1px solid rgba(245, 158, 11, 0.35); border-left: 5px solid #F59E0B; border-radius: var(--radius-md); padding: 1.15rem 1.4rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);">
+                        <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                            <div style="font-size: 1.4rem; line-height: 1;">🛡️</div>
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0 0 0.45rem 0; color: var(--color-text); font-size: 0.98rem; font-weight: 700;">
+                                    User Verification Declaration &amp; Disclaimer Notice
+                                </h4>
+                                <p style="font-size: 0.86rem; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: 0.5rem;">
+                                    <strong>Amazing-tools</strong> (<code>amazing-tools.github.io</code>) provides this financial calculator <strong>completely free</strong> for educational and planning assistance. Because bank policies, compounding methods, tax brackets, and market returns vary, <strong>all calculations should be independently verified at the user level</strong> with your bank, lender, or tax advisor before making financial commitments.
+                                </p>
+                                <div style="font-size: 0.84rem; color: var(--color-text-muted); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; padding-top: 0.45rem; border-top: 1px dashed var(--color-border);">
+                                    <span>Notice any calculation discrepancy?</span>
+                                    <a href="mailto:hello@toolskart.com?subject=Report%20Calculation%20Discrepancy&body=Hello%20Amazing-tools%20Team%2C%0A%0AI%20noticed%20a%20potential%20calculation%20discrepancy%20in%20one%20of%20the%20calculators.%0A%0ADetails%3A%0A%0AThank%20you!" class="btn btn-outline btn-sm" style="font-size: 0.78rem; padding: 0.25rem 0.65rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem;">
+                                        📢 Report Miscalculation on Portal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div> <!-- /tool-main -->
+
 
                 <!-- SIDEBAR -->
                 <aside class="tool-sidebar">
                     <div class="ad-slot">
-                        <div class="ad-placeholder">Advertisement</div>
+                        <div class="ad-placeholder sponsor-card sponsor-card-sidebar">
+                            <span class="sponsor-badge">📢 SPONSOR THIS SPACE</span>
+                            <div class="sponsor-text">
+                                <strong>Promote Your Brand Here</strong>
+                                <p>Direct exposure to thousands of daily creators & professionals.</p>
+                            </div>
+                            <a href="mailto:tonymagical09@gmail.com?subject=Sponsorship%20Inquiry%20-%20Amazing-Tools" class="sponsor-btn">
+                                ✉️ tonymagical09@gmail.com
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Quick Rule of Thumb Box -->

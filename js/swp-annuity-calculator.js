@@ -329,7 +329,13 @@
         csv += `${s.year},${Math.round(s.openingBalance)},${Math.round(s.annualPayout)},${Math.round(s.monthlyEquivalent)},${Math.round(s.interestEarned)},${Math.round(s.closingBalance)}\n`;
       });
       if (window.ToolsKart && window.ToolsKart.downloadFile) {
-        window.ToolsKart.downloadFile(csv, 'Annuity_SWP_Schedule.csv', 'text/csv');
+        csv += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
+      csv += '# This output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
+      csv += '# Annuity and SWP payout calculations are estimates and do not guarantee future performance.\n';
+      csv += '# All computations must be independently verified at user level with your financial institution or insurer.\n';
+      csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
+      csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
+      window.ToolsKart.downloadFile(csv, 'Annuity_SWP_Schedule.csv', 'text/csv');
       }
     });
   }

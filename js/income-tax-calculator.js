@@ -535,4 +535,103 @@
     }
   }
 
+
+  // Download Tax Report Handlers
+  const btnDownloadTaxCsv = document.getElementById('btnDownloadTaxCsv');
+  if (btnDownloadTaxCsv) {
+    btnDownloadTaxCsv.addEventListener('click', function () {
+      const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+      const oldTax = document.getElementById('oldTotalTaxDisplay').textContent.trim();
+      const newTax = document.getElementById('newTotalTaxDisplay').textContent.trim();
+      const oldTakeHome = document.getElementById('oldMonthlyTakeHome').textContent.trim();
+      const newTakeHome = document.getElementById('newMonthlyTakeHome').textContent.trim();
+
+      let csv = 'Metric,Old Tax Regime,New Tax Regime (Default)\n';
+      csv += `"Gross Salary / Income","Rs. ${gross}","Rs. ${gross}"\n`;
+      csv += `"Total Tax Payable","${oldTax}","${newTax}"\n`;
+      csv += `"Monthly Take-Home Salary","${oldTakeHome}","${newTakeHome}"\n`;
+      csv += `"Verdict","${document.getElementById('verdictMainTitle').textContent.trim()}","—"\n`;
+      csv += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
+      csv += '# This output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and tax planning assistance.\n';
+      csv += '# Income tax calculations, exemptions, and slab interpretations are subject to the Finance Act and official IT Department rules.\n';
+      csv += '# All computations must be independently verified at user level with your Form 16, AIS, or Chartered Accountant.\n';
+      csv += '# Amazing-tools is not responsible or liable for any miscalculations or tax filing decisions.\n';
+      csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
+
+      if (window.ToolsKart && window.ToolsKart.downloadFile) {
+        window.ToolsKart.downloadFile(csv, 'Income_Tax_Comparison_Report.csv', 'text/csv');
+      }
+    });
+  }
+
+  const btnDownloadTaxPdf = document.getElementById('btnDownloadTaxPdf');
+  if (btnDownloadTaxPdf) {
+    btnDownloadTaxPdf.addEventListener('click', function () {
+      if (typeof window.jspdf === 'undefined') {
+        window.print();
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+      const primaryColor = [37, 99, 235];
+
+      doc.setFillColor(...primaryColor);
+      doc.rect(0, 0, 595, 60, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.setTextColor(255, 255, 255);
+      doc.text('Amazing-tools | Income Tax Comparison Report (FY 2025-26)', 30, 35);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(220, 235, 252);
+      doc.text('Generated at amazing-tools.github.io • 100% Client-Side Private Analysis', 30, 50);
+
+      const gross = parseFloat(document.getElementById('grossIncome').value) || 0;
+
+      doc.autoTable({
+        startY: 80,
+        head: [['Tax Parameter', 'Old Tax Regime', 'New Tax Regime (Default)']],
+        body: [
+          ['Gross Income', '₹ ' + gross.toLocaleString('en-IN'), '₹ ' + gross.toLocaleString('en-IN')],
+          ['Standard Deduction', document.getElementById('oldGrossDisplay').parentElement.nextElementSibling.lastElementChild.textContent, '₹ 75,000'],
+          ['Deductions Claimed (80C, 80D, HRA)', document.getElementById('oldOtherDeductionsDisplay').textContent, 'Nil (Not applicable)'],
+          ['Net Taxable Income', document.getElementById('oldTaxableDisplay').textContent, document.getElementById('newTaxableDisplay').textContent],
+          ['Total Tax Payable (incl Cess)', document.getElementById('oldTotalTaxDisplay').textContent, document.getElementById('newTotalTaxDisplay').textContent],
+          ['Effective Tax Rate', document.getElementById('oldEffectiveRateDisplay').textContent, document.getElementById('newEffectiveRateDisplay').textContent],
+          ['Monthly In-Hand Salary', document.getElementById('oldMonthlyTakeHome').textContent, document.getElementById('newMonthlyTakeHome').textContent],
+          ['Recommendation', document.getElementById('verdictMainTitle').textContent, '—']
+        ],
+        theme: 'striped',
+        headStyles: { fillColor: primaryColor, textColor: 255, fontStyle: 'bold' },
+        styles: { fontSize: 8.5, cellPadding: 5 }
+      });
+
+      let curY = doc.lastAutoTable.finalY + 20;
+
+      // Declaration Box
+      doc.setFillColor(254, 243, 199);
+      doc.setDrawColor(245, 158, 11);
+      doc.setLineWidth(1.5);
+      doc.roundedRect(30, curY, 535, 95, 4, 4, 'FD');
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(180, 83, 9);
+      doc.text('USER VERIFICATION DECLARATION & DISCLAIMER NOTICE', 42, curY + 16);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(69, 26, 3);
+      const declText = 
+        "This income tax calculation report is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and tax planning assistance. " +
+        "Tax laws, standard deductions, rebates u/s 87A, surcharge rates, and slab thresholds are determined by the Ministry of Finance / Income Tax Department.\n\n" +
+        "Mandatory Verification: Users must independently verify all calculations, slab computations, and allowable deductions with their official AIS/TIS, Form 16, or a certified Chartered Accountant before filing returns. " +
+        "Amazing-tools and its operators assume no legal or financial liability for any miscalculations, penalties, or tax decisions made based on this output.\n\n" +
+        "Report Miscalculations: If you notice any calculation discrepancy or wish to suggest tax updates, please report it directly on our portal (hello@toolskart.com) for prompt verification and correction.";
+      
+      doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
+      doc.save(`Income_Tax_Report_${Math.round(gross/100000)}L.pdf`);
+    });
+  }
+
 })();

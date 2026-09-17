@@ -646,7 +646,13 @@
         csv += `${d.year},${Math.round(d.propertyValue)},${Math.round(d.loanBalance)},${Math.round(d.buyerNetWorth)},${Math.round(d.monthlyRent)},${Math.round(d.renterNetWorth)},${d.winner}\n`;
       });
       if (window.ToolsKart && window.ToolsKart.downloadFile) {
-        window.ToolsKart.downloadFile(csv, 'Buy_vs_Rent_30Year_Comparison.csv', 'text/csv');
+        csv += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
+      csv += '# This output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
+      csv += '# Real estate appreciation, rental yield, and investment returns vary widely by locality and macroeconomic factors.\n';
+      csv += '# All figures must be independently verified at user level with legal and financial advisors before buying or leasing.\n';
+      csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
+      csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
+      window.ToolsKart.downloadFile(csv, 'Buy_vs_Rent_30Year_Comparison.csv', 'text/csv');
       }
     });
   }
@@ -673,5 +679,101 @@
 
   // Initial Calculation
   recalculateAll();
+
+
+  const exportPdfReportBtn = document.getElementById('exportPdfReportBtn');
+  if (exportPdfReportBtn) {
+    exportPdfReportBtn.addEventListener('click', function () {
+      if (!cachedYearlyData.length || typeof window.jspdf === 'undefined') {
+        window.print();
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+      const primaryColor = [37, 99, 235];
+
+      doc.setFillColor(...primaryColor);
+      doc.rect(0, 0, 595, 60, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      doc.setTextColor(255, 255, 255);
+      doc.text('Amazing-tools | Buy vs. Rent 30-Year Decision Report', 30, 35);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(220, 235, 252);
+      doc.text('Generated at amazing-tools.github.io • 100% Client-Side Private Analysis', 30, 50);
+
+      const propPrice = parseFloat(document.getElementById('propertyPrice').value) || 0;
+      const downPct = parseFloat(document.getElementById('downPaymentPct').value) || 0;
+      const initRent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+      const invReturn = parseFloat(document.getElementById('investReturn').value) || 0;
+
+      // Parameters Table
+      doc.autoTable({
+        startY: 80,
+        head: [['Key Decision Metric', 'Buyer Scenario', 'Renter Scenario']],
+        body: [
+          ['Property Price / Initial Rent', '₹ ' + propPrice.toLocaleString('en-IN'), '₹ ' + initRent.toLocaleString('en-IN') + ' / mo'],
+          ['Upfront Capital Committed', '₹ ' + Math.round(propPrice * downPct / 100).toLocaleString('en-IN') + ' (Down Payment)', 'Invested in Portfolio @ ' + invReturn + '% CAGR'],
+          ['30-Year Wealth Outcome', document.getElementById('kpiBuyerWorth').textContent, document.getElementById('kpiRenterWorth').textContent],
+          ['Total Cash Outflow (30 Yrs)', document.getElementById('kpiBuyerOutflow').textContent, document.getElementById('kpiRenterOutflow').textContent],
+          ['Overall Financial Verdict', document.getElementById('winnerTitle').textContent, '—']
+        ],
+        theme: 'striped',
+        headStyles: { fillColor: primaryColor, textColor: 255, fontStyle: 'bold' },
+        styles: { fontSize: 8.5, cellPadding: 4.5 }
+      });
+
+      // Sample 30-year Table (Every 5 years + final)
+      const milestoneRows = cachedYearlyData.filter(d => d.year === 1 || d.year % 5 === 0 || d.year === 30).map(d => [
+        `Year ${d.year}`,
+        '₹ ' + Math.round(d.propertyValue).toLocaleString('en-IN'),
+        '₹ ' + Math.round(d.loanBalance).toLocaleString('en-IN'),
+        '₹ ' + Math.round(d.buyerNetWorth).toLocaleString('en-IN'),
+        '₹ ' + Math.round(d.monthlyRent).toLocaleString('en-IN'),
+        '₹ ' + Math.round(d.renterNetWorth).toLocaleString('en-IN'),
+        d.winner
+      ]);
+
+      doc.autoTable({
+        startY: doc.lastAutoTable.finalY + 15,
+        head: [['Timeline', 'Property Value', 'Loan Balance', 'Buyer Net Worth', 'Monthly Rent', 'Renter Portfolio', 'Winner']],
+        body: milestoneRows,
+        theme: 'grid',
+        headStyles: { fillColor: [71, 85, 105], textColor: 255 },
+        styles: { fontSize: 8, cellPadding: 4 }
+      });
+
+      let curY = doc.lastAutoTable.finalY + 15;
+      if (curY > 670) {
+        doc.addPage();
+        curY = 40;
+      }
+
+      // Declaration Box
+      doc.setFillColor(254, 243, 199);
+      doc.setDrawColor(245, 158, 11);
+      doc.setLineWidth(1.5);
+      doc.roundedRect(30, curY, 535, 95, 4, 4, 'FD');
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(180, 83, 9);
+      doc.text('USER VERIFICATION DECLARATION & DISCLAIMER NOTICE', 42, curY + 16);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(69, 26, 3);
+      const declText = 
+        "This calculation report is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and comparative scenario planning assistance. " +
+        "Real estate appreciation, rental inflation, maintenance charges, and equity returns are subject to market volatility and local city regulations.\n\n" +
+        "Mandatory Verification: Users must independently verify all assumptions, property appreciation rates, and mortgage quotes with local real estate experts and banks. " +
+        "Amazing-tools and its operators assume no legal or financial liability for any discrepancies, differences, or financial decisions made based on this output.\n\n" +
+        "Report Miscalculations: If you notice any calculation discrepancy, please report it directly on our portal (hello@toolskart.com) for prompt verification and correction.";
+      
+      doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
+      doc.save(`Buy_vs_Rent_Report_30Year.pdf`);
+    });
+  }
 
 })();
