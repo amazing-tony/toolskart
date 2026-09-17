@@ -18,7 +18,8 @@
     'white': 'Pure Minimal',
     'ivory': 'Warm Ivory',
     'amber': 'Solar Amber',
-    'facebook': 'Social Blue'
+    'facebook': 'Social Blue',
+    'sejda': 'Sejda Clean Teal'
   };
 
   function applyTheme(themeName) {
@@ -271,7 +272,7 @@
   if (sidebarSearch && portalSidebar) {
     sidebarSearch.addEventListener('input', function () {
       const q = this.value.toLowerCase().trim();
-      const links = portalSidebar.querySelectorAll('.sidebar-link');
+      const links = portalSidebar.querySelectorAll('.sidebar-link, .sidebar-sublink');
       const groups = portalSidebar.querySelectorAll('.sidebar-group');
 
       links.forEach(link => {
@@ -280,7 +281,7 @@
       });
 
       groups.forEach(grp => {
-        const visibleLinks = grp.querySelectorAll('.sidebar-link:not([style*="display: none"])');
+        const visibleLinks = grp.querySelectorAll('.sidebar-link:not([style*="display: none"]), .sidebar-sublink:not([style*="display: none"])');
         grp.style.display = visibleLinks.length === 0 && q ? 'none' : '';
       });
     });

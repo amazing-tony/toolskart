@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sejda">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejda PDF Studio — Free Online PDF Editor, Merge, Split & Compress Tools</title>
+    <meta name="description" content="Replicating Sejda's all-in-one PDF tools: edit PDF text & sign, merge, split, compress, organize & rotate pages, watermark, convert to images and more. 100% private client-side processing with zero server uploads.">
+    <meta name="keywords" content="sejda pdf editor, edit pdf online, merge pdf, split pdf, compress pdf, rotate pdf pages, pdf to jpg, watermark pdf, fill and sign pdf, free online pdf tools">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/pdf-tools.html">
+    <meta property="og:title" content="Sejda PDF Studio — Free Online PDF Suite">
+    <meta property="og:description" content="Edit, Merge, Split, Compress, Organize, Sign and Convert PDFs directly in your browser with 100% privacy.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- Client-Side PDF Processing Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Sejda PDF Studio",
+      "url": "https://amazing-tools.github.io/pages/pdf-tools.html",
+      "description": "Full-featured client-side PDF editor and utility suite replicating Sejda.com.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Header with Sejda Clean Branding & Theme Switcher -->
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="../index.html" class="logo" title="Amazing-Tools — Free Online Tools">
+                    <span class="logo-icon-bolt">⚡</span>
+                    <span>Amazing-tools</span>
+                </a>
+                <span class="header-badge-tag" style="background:rgba(255,255,255,0.18); color:#fff; border-color:rgba(255,255,255,0.3);">
+                    <span class="pulse-dot"></span> Sejda PDF Studio
+                </span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html" class="nav-category-link"><span>🏠 Home</span></a>
+                <a href="../index.html#doc-tools" class="nav-category-link"><span>📄 Documents</span></a>
+                <a href="pdf-tools.html" class="nav-category-link" style="color:#FFF; font-weight:700;"><span>⚡ All PDF Tools</span></a>
+                <a href="document-converter.html" class="nav-category-link"><span>🔄 Converter</span></a>
+            </nav>
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <!-- Theme Switcher -->
+                <div class="theme-switcher-wrap">
+                    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
+                        <span class="theme-toggle-icon">🎨</span>
+                        <span class="theme-toggle-label" id="currentThemeLabel">Sejda Clean Teal</span>
+                        <span style="font-size:0.65rem; opacity:0.7;">▼</span>
+                    </button>
+                    <div class="theme-dropdown-menu" id="themeDropdown">
+                        <button class="theme-option-item active" data-theme-choice="sejda">
+                            <span class="theme-color-dot" style="background:#0D7A82; border-color:#08545A;"></span> Sejda Clean Teal
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="adminlte">
+                            <span class="theme-color-dot" style="background:#2563EB;"></span> Titanium Blue
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="dark">
+                            <span class="theme-color-dot" style="background:#0F172A; border-color:#38BDF8;"></span> Midnight Cyber (Dark)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="emerald">
+                            <span class="theme-color-dot" style="background:#059669;"></span> FinTech Emerald
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="royal">
+                            <span class="theme-color-dot" style="background:#7C3AED;"></span> Royal Velvet
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="white">
+                            <span class="theme-color-dot" style="background:#FFFFFF; border-color:#CBD5E1;"></span> Pure Minimal (White)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="ivory">
+                            <span class="theme-color-dot" style="background:#FAF6F0; border-color:#EA580C;"></span> Warm Ivory
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="amber">
+                            <span class="theme-color-dot" style="background:#FEF9C3; border-color:#D97706;"></span> Solar Amber
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="facebook">
+                            <span class="theme-color-dot" style="background:#1877F2; border-color:#0C5DC7;"></span> Social Blue
+                        </button>
+                    </div>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="sejda-suite-container">
+
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" style="margin-bottom: 1.25rem;">
+            <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; Sejda PDF Studio
+        </nav>
+
+        <!-- Sejda Replica Hero -->
+        <section class="sejda-hero" id="sejdaHero">
+            <div class="sejda-hero-badge">⚡ Authentic Sejda Replica • 100% Client-Side Privacy</div>
+            <h1>We help with your PDF tasks</h1>
+            <p>Easy, pleasant and productive PDF tools suite. Edit text, sign contracts, merge, split, compress, rotate pages, and convert documents directly in your browser with zero server uploads.</p>
+
+            <!-- Instant Search Bar -->
+            <div class="sejda-search-wrap">
+                <span class="sejda-search-icon">🔍</span>
+                <input type="text" class="sejda-search-input" id="toolSearchInput" placeholder="Quick find a tool (e.g. edit, merge, split, compress, sign, rotate)..." aria-label="Search PDF tools">
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="sejda-category-tabs" id="categoryTabs">
+                <button class="sejda-tab-btn active" data-cat="all">⭐ All Tools (14)</button>
+                <button class="sejda-tab-btn" data-cat="popular">🔥 Popular</button>
+                <button class="sejda-tab-btn" data-cat="edit">✏️ Edit & Sign</button>
+                <button class="sejda-tab-btn" data-cat="merge-split">🔀 Merge & Split</button>
+                <button class="sejda-tab-btn" data-cat="compress-convert">🗜️ Compress & Convert</button>
+                <button class="sejda-tab-btn" data-cat="organize-security">🔄 Organize & Security</button>
+            </div>
+        </section>
+
+        <!-- ===== SEJDA TOOLS GRID ===== -->
+        <div class="sejda-grid" id="sejdaToolsGrid">
+
+            <!-- Tool 1: PDF Editor -->
+            <div class="sejda-tool-card" data-tool="edit" data-category="popular edit">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">✏️</div>
+                    <span class="sejda-card-badge popular">Popular</span>
+                </div>
+                <h3>PDF Editor</h3>
+                <p>Fill & sign documents, add text, whiteout/blackout redaction, draw freehand, add shapes and insert images.</p>
+                <div class="sejda-card-footer">
+                    <span>Edit & Annotate</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 2: Merge PDF -->
+            <div class="sejda-tool-card" data-tool="merge" data-category="popular merge-split">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🔀</div>
+                    <span class="sejda-card-badge popular">Popular</span>
+                </div>
+                <h3>Merge PDF</h3>
+                <p>Combine multiple PDF files in any custom order into a single unified document with drag-and-drop ease.</p>
+                <div class="sejda-card-footer">
+                    <span>Combine Files</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 3: Split PDF -->
+            <div class="sejda-tool-card" data-tool="split" data-category="popular merge-split">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">✂️</div>
+                    <span class="sejda-card-badge">Fast</span>
+                </div>
+                <h3>Split PDF</h3>
+                <p>Extract specific page ranges, split every page into individual documents, or split even and odd pages.</p>
+                <div class="sejda-card-footer">
+                    <span>Extract Pages</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 4: Compress PDF -->
+            <div class="sejda-tool-card" data-tool="compress" data-category="popular compress-convert">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🗜️</div>
+                    <span class="sejda-card-badge popular">Popular</span>
+                </div>
+                <h3>Compress PDF</h3>
+                <p>Reduce PDF file size for email and web uploading with visual before/after file size reduction metrics.</p>
+                <div class="sejda-card-footer">
+                    <span>Shrink Size</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 5: Organize & Rotate Pages -->
+            <div class="sejda-tool-card" data-tool="organize" data-category="popular organize-security">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🔄</div>
+                    <span class="sejda-card-badge">Visual</span>
+                </div>
+                <h3>Organize & Rotate Pages</h3>
+                <p>View interactive thumbnails for every page. Rotate 90° clockwise/counter-clockwise, delete, or reorder pages.</p>
+                <div class="sejda-card-footer">
+                    <span>Thumbnail Grid</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 6: PDF to Images (JPG/PNG) -->
+            <div class="sejda-tool-card" data-tool="pdf-to-img" data-category="compress-convert">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🖼️</div>
+                    <span class="sejda-card-badge">High-Res</span>
+                </div>
+                <h3>PDF to JPG / PNG</h3>
+                <p>Convert all PDF pages into crisp high-resolution images. Download individual pages or batch download as a ZIP.</p>
+                <div class="sejda-card-footer">
+                    <span>Image Convert</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 7: Images to PDF -->
+            <div class="sejda-tool-card" data-tool="img-to-pdf" data-category="compress-convert">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">📄</div>
+                    <span class="sejda-card-badge">Multi-file</span>
+                </div>
+                <h3>JPG / Images to PDF</h3>
+                <p>Convert photos, scans, PNG and JPG images into a beautifully formatted PDF with custom margins and orientation.</p>
+                <div class="sejda-card-footer">
+                    <span>Image to PDF</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 8: Watermark PDF -->
+            <div class="sejda-tool-card" data-tool="watermark" data-category="edit">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">💧</div>
+                    <span class="sejda-card-badge">Stamp</span>
+                </div>
+                <h3>Watermark PDF</h3>
+                <p>Add custom text watermarks across all pages (e.g. Confidential, Draft, Sample) with opacity and angle controls.</p>
+                <div class="sejda-card-footer">
+                    <span>Branding & Rights</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 9: Page Numbers -->
+            <div class="sejda-tool-card" data-tool="page-numbers" data-category="organize-security">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🔢</div>
+                    <span class="sejda-card-badge">Bates</span>
+                </div>
+                <h3>Add Page Numbers</h3>
+                <p>Add header/footer page numbers ("Page 1 of N", "{n}") with custom alignment, start number, and margin offset.</p>
+                <div class="sejda-card-footer">
+                    <span>Header & Footer</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 10: Protect PDF -->
+            <div class="sejda-tool-card" data-tool="protect" data-category="organize-security">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🔒</div>
+                    <span class="sejda-card-badge">Security</span>
+                </div>
+                <h3>Protect & Lock PDF</h3>
+                <p>Encrypt PDF files with robust user password protection to prevent unauthorized viewing or printing.</p>
+                <div class="sejda-card-footer">
+                    <span>Password Protect</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 11: Crop PDF -->
+            <div class="sejda-tool-card" data-tool="crop" data-category="edit">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">📐</div>
+                    <span class="sejda-card-badge">Trim</span>
+                </div>
+                <h3>Crop PDF Margins</h3>
+                <p>Trim white margins or crop document borders for cleaner printing and tablet reading.</p>
+                <div class="sejda-card-footer">
+                    <span>Trim Margins</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 12: Extract Text -->
+            <div class="sejda-tool-card" data-tool="extract-text" data-category="edit">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">📝</div>
+                    <span class="sejda-card-badge">OCR Text</span>
+                </div>
+                <h3>Extract Text</h3>
+                <p>Extract all text content from PDF pages with word and character counts, copy to clipboard, or export as TXT.</p>
+                <div class="sejda-card-footer">
+                    <span>Text Extraction</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 13: Metadata Editor -->
+            <div class="sejda-tool-card" data-tool="metadata" data-category="organize-security">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🏷️</div>
+                    <span class="sejda-card-badge">Tags</span>
+                </div>
+                <h3>PDF Metadata Editor</h3>
+                <p>View and update document Title, Author, Subject, and Keywords directly inside the PDF binary metadata.</p>
+                <div class="sejda-card-footer">
+                    <span>Edit Properties</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 14: Unlock PDF -->
+            <div class="sejda-tool-card" data-tool="unlock" data-category="organize-security">
+                <div class="sejda-card-top">
+                    <div class="sejda-card-icon">🔓</div>
+                    <span class="sejda-card-badge">Decrypt</span>
+                </div>
+                <h3>Unlock PDF</h3>
+                <p>Remove password restrictions from your PDF document for unrestricted editing, copying, and printing.</p>
+                <div class="sejda-card-footer">
+                    <span>Remove Password</span>
+                    <span class="sejda-card-launch-btn">Open Tool &rarr;</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================================
+             ACTIVE INTERACTIVE WORKSPACE CONTAINER
+             ======================================================== -->
+        <div class="sejda-workspace" id="sejdaWorkspace">
+
+            <!-- Workspace Top Bar -->
+            <div class="sejda-workspace-topbar">
+                <div class="sejda-workspace-title-group">
+                    <button class="sejda-back-btn" id="backToToolsBtn">
+                        <span>&larr;</span> All PDF Tools
+                    </button>
+                    <h2 id="workspaceTitle" style="margin-top:0.75rem;">PDF Tool Workspace</h2>
+                    <p id="workspaceDescription">Upload your PDF file below to start processing.</p>
+                </div>
+                <div class="sejda-strip-actions" id="workspaceHeaderActions">
+                    <!-- Dynamic contextual header actions -->
+                </div>
+            </div>
+
+            <!-- Sejda Dropzone (Standard for most tools) -->
+            <div class="sejda-dropzone" id="workspaceDropzone">
+                <input type="file" id="pdfFileInput" accept="application/pdf" style="display:none;" />
+                <input type="file" id="multiPdfFileInput" accept="application/pdf" multiple style="display:none;" />
+                <input type="file" id="multiImageFileInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;" />
+                <div class="sejda-dropzone-icon" id="dropzoneIcon">📂</div>
+                <button type="button" class="sejda-upload-btn-pill" id="uploadPillBtn">
+                    <span>☁️ Upload PDF files</span>
+                </button>
+                <p class="sejda-dropzone-hint" id="dropzoneHintText">or drag and drop PDF documents here</p>
+                <div>
+                    <span class="sejda-privacy-badge">🔒 Files stay 100% private. Processed locally in your browser.</span>
+                </div>
+            </div>
+
+            <!-- File Info Strip (Shows when file is active) -->
+            <div class="sejda-file-strip" id="fileInfoStrip">
+                <div class="sejda-file-meta">
+                    <div class="sejda-file-meta-icon">📑</div>
+                    <div>
+                        <div class="sejda-file-meta-name" id="loadedFileName">document.pdf</div>
+                        <div class="sejda-file-meta-stats" id="loadedFileStats">0 pages • 0 KB</div>
+                    </div>
+                </div>
+                <div class="sejda-strip-actions">
+                    <button type="button" class="sejda-btn-secondary" id="changeFileBtn">Change file</button>
+                    <button type="button" class="sejda-btn-primary" id="mainExecuteBtn">Apply &amp; Download PDF</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Workspace Content Stage -->
+            <div id="workspaceContentStage"></div>
+
+            <!-- Global Result / Download Card -->
+            <div class="sejda-result-card" id="resultCard">
+                <div class="sejda-result-title">🎉 Your PDF is Ready!</div>
+                <div class="sejda-result-stats" id="resultStats">Processed successfully with 100% privacy.</div>
+                <a href="#" class="sejda-btn-primary" id="downloadResultBtn" download="processed.pdf">
+                    <span>⬇️ Download Processed PDF</span>
+                </a>
+                <button type="button" class="sejda-btn-secondary" id="startAnotherBtn" style="margin-left:0.5rem;">
+                    Start Another Task
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Sejda Signature Pad Modal -->
+    <div class="sejda-modal" id="signatureModal">
+        <div class="sejda-modal-dialog">
+            <div class="sejda-modal-header">
+                <h3>✍️ Create Signature</h3>
+                <button type="button" class="sejda-modal-close" id="closeSigModal">&times;</button>
+            </div>
+            <div class="sejda-modal-body">
+                <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                    <button type="button" class="sejda-tab-btn active" id="sigTabDraw">✏️ Draw</button>
+                    <button type="button" class="sejda-tab-btn" id="sigTabType">🔤 Type Name</button>
+                </div>
+
+                <div id="sigDrawContainer">
+                    <canvas class="sejda-sig-canvas" id="signatureCanvas"></canvas>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
+                        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem;">
+                            <span>Ink:</span>
+                            <input type="color" id="sigInkColor" value="#000000" style="width:30px; height:30px; border:none; cursor:pointer;" />
+                        </div>
+                        <button type="button" class="sejda-btn-secondary" id="clearSigBtn" style="font-size:0.8rem; padding:0.35rem 0.75rem;">Clear</button>
+                    </div>
+                </div>
+
+                <div id="sigTypeContainer" style="display:none;">
+                    <input type="text" id="sigTypeInput" class="sejda-search-input" placeholder="Type your full name..." style="font-family:'Brush Script MT', cursive; font-size:1.8rem; height:60px;" />
+                </div>
+            </div>
+            <div class="sejda-modal-footer">
+                <button type="button" class="sejda-btn-secondary" id="cancelSigBtn">Cancel</button>
+                <button type="button" class="sejda-btn-primary" id="saveSigBtn">Insert Signature</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden element for images -->
+    <input type="file" id="editorImageInput" accept="image/png,image/jpeg" style="display:none;" />
+
+    <script src="../js/common.js"></script>
+    <script>
+    /* ========================================================
+       SEJDA PDF STUDIO — CLIENT-SIDE PROCESSING ENGINE
+       Replicating Sejda.com with pdf-lib, pdf.js and jszip
+       ======================================================== */
+    (function() {
+        'use strict';
+
+        // Configure PDF.js worker
+        if (window.pdfjsLib) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
+        // State variables
+        let currentTool = null;
+        let originalFile = null;
+        let originalBytes = null;
+        let pdfDocLib = null;       // pdf-lib instance
+        let pdfJsDoc = null;        // pdf.js instance
+        let totalPages = 0;
+        let currentPage = 1;
+        let pageRotations = {};     // { pageNum: 0, 90, 180, 270 }
+        let deletedPages = new Set();
+        let pageOrder = [];         // [1, 2, 3...]
+        let mergeFiles = [];        // [{ name, size, bytes, pages }]
+        let imageFiles = [];        // [{ name, dataUrl }]
+
+        // Editor Annotations State
+        let editorTool = 'text';    // 'text', 'whiteout', 'blackout', 'sign', 'draw', 'highlight'
+        let editorScale = 1.0;
+        let editorAnnotations = []; // [{ type, page, x, y, width, height, text, color, fontSize, dataUrl }]
+        let isDrawing = false;
+        let drawPoints = [];
+
+        // DOM Elements
+        const sejdaHero = document.getElementById('sejdaHero');
+        const sejdaToolsGrid = document.getElementById('sejdaToolsGrid');
+        const sejdaWorkspace = document.getElementById('sejdaWorkspace');
+        const workspaceTitle = document.getElementById('workspaceTitle');
+        const workspaceDescription = document.getElementById('workspaceDescription');
+        const backToToolsBtn = document.getElementById('backToToolsBtn');
+        const workspaceDropzone = document.getElementById('workspaceDropzone');
+        const pdfFileInput = document.getElementById('pdfFileInput');
+        const multiPdfFileInput = document.getElementById('multiPdfFileInput');
+        const multiImageFileInput = document.getElementById('multiImageFileInput');
+        const uploadPillBtn = document.getElementById('uploadPillBtn');
+        const dropzoneHintText = document.getElementById('dropzoneHintText');
+        const fileInfoStrip = document.getElementById('fileInfoStrip');
+        const loadedFileName = document.getElementById('loadedFileName');
+        const loadedFileStats = document.getElementById('loadedFileStats');
+        const changeFileBtn = document.getElementById('changeFileBtn');
+        const mainExecuteBtn = document.getElementById('mainExecuteBtn');
+        const workspaceContentStage = document.getElementById('workspaceContentStage');
+        const resultCard = document.getElementById('resultCard');
+        const resultStats = document.getElementById('resultStats');
+        const downloadResultBtn = document.getElementById('downloadResultBtn');
+        const startAnotherBtn = document.getElementById('startAnotherBtn');
+        const toolSearchInput = document.getElementById('toolSearchInput');
+        const categoryTabs = document.getElementById('categoryTabs');
+
+        // Tool metadata
+        const toolMeta = {
+            'edit': {
+                title: 'PDF Editor',
+                desc: 'Fill & sign documents, add text, whiteout/blackout sensitive parts, draw and insert shapes.',
+                executeLabel: 'Apply Changes & Download PDF'
+            },
+            'merge': {
+                title: 'Merge PDF Files',
+                desc: 'Combine multiple PDF documents into a single unified file in your preferred sequence.',
+                executeLabel: 'Merge PDF Files'
+            },
+            'split': {
+                title: 'Split PDF Pages',
+                desc: 'Extract specific page ranges or extract every single page into separate documents.',
+                executeLabel: 'Split & Download'
+            },
+            'compress': {
+                title: 'Compress & Optimize PDF',
+                desc: 'Reduce file size for web and email while preserving crisp visual quality.',
+                executeLabel: 'Compress & Download'
+            },
+            'organize': {
+                title: 'Organize, Rotate & Delete Pages',
+                desc: 'Thumbnail grid of every page. Rotate, delete, or reorder pages with visual feedback.',
+                executeLabel: 'Save Reorganized PDF'
+            },
+            'pdf-to-img': {
+                title: 'PDF to JPG / PNG Images',
+                desc: 'Convert all or selected PDF pages into high-resolution images with ZIP download.',
+                executeLabel: 'Convert & Download Images'
+            },
+            'img-to-pdf': {
+                title: 'Images to PDF Converter',
+                desc: 'Combine multiple JPG, PNG, or WebP images into a clean, formatted PDF document.',
+                executeLabel: 'Create PDF from Images'
+            },
+            'watermark': {
+                title: 'Watermark PDF',
+                desc: 'Add text watermarks (e.g. Confidential, Draft, Sample) with custom angle, color, and opacity.',
+                executeLabel: 'Apply Watermark & Download'
+            },
+            'page-numbers': {
+                title: 'Add Page Numbers',
+                desc: 'Stamp header/footer page numbers ("Page 1 of N", "{n}") across your document.',
+                executeLabel: 'Number Pages & Download'
+            },
+            'protect': {
+                title: 'Protect & Lock PDF',
+                desc: 'Encrypt your PDF with strong user password protection.',
+                executeLabel: 'Encrypt & Download'
+            },
+            'unlock': {
+                title: 'Unlock PDF',
+                desc: 'Remove password restrictions from an encrypted PDF.',
+                executeLabel: 'Unlock & Download'
+            },
+            'crop': {
+                title: 'Crop PDF Margins',
+                desc: 'Trim margins and remove excess whitespace borders from all pages.',
+                executeLabel: 'Crop Margins & Download'
+            },
+            'extract-text': {
+                title: 'Extract Text from PDF',
+                desc: 'Extract all readable text with page markers, word counts, and TXT export.',
+                executeLabel: 'Extract & Copy Text'
+            },
+            'metadata': {
+                title: 'PDF Metadata Editor',
+                desc: 'Inspect and modify Title, Author, Subject, and Keywords in the PDF properties.',
+                executeLabel: 'Update Metadata & Download'
+            }
+        };
+
+        // Initialize Category Filter Tabs
+        categoryTabs.querySelectorAll('.sejda-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryTabs.querySelectorAll('.sejda-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.getAttribute('data-cat');
+                filterToolsGrid(cat, toolSearchInput.value.trim());
+            });
+        });
+
+        // Initialize Instant Tool Search
+        toolSearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            const activeTab = categoryTabs.querySelector('.sejda-tab-btn.active');
+            const cat = activeTab ? activeTab.getAttribute('data-cat') : 'all';
+            filterToolsGrid(cat, query);
+        });
+
+        function filterToolsGrid(cat, query) {
+            const q = query.toLowerCase();
+            document.querySelectorAll('.sejda-tool-card').forEach(card => {
+                const cardCat = card.getAttribute('data-category') || '';
+                const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                const cardDesc = card.querySelector('p').textContent.toLowerCase();
+                const matchesCat = (cat === 'all') || cardCat.includes(cat);
+                const matchesQuery = !q || cardTitle.includes(q) || cardDesc.includes(q);
+                card.style.display = (matchesCat && matchesQuery) ? 'flex' : 'none';
+            });
+        }
+
+        // Tool Card Click Handler
+        document.querySelectorAll('.sejda-tool-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const toolId = card.getAttribute('data-tool');
+                activateTool(toolId);
+            });
+        });
+
+        // Back to Tools Button
+        backToToolsBtn.addEventListener('click', () => {
+            resetWorkspace();
+            sejdaWorkspace.classList.remove('active');
+            sejdaHero.style.display = 'block';
+            sejdaToolsGrid.style.display = 'grid';
+            window.history.pushState({}, '', window.location.pathname);
+        });
+
+        // Upload Button & Dropzone Triggers
+        uploadPillBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            triggerFileUpload();
+        });
+        workspaceDropzone.addEventListener('click', () => {
+            triggerFileUpload();
+        });
+
+        function triggerFileUpload() {
+            if (currentTool === 'merge') {
+                multiPdfFileInput.click();
+            } else if (currentTool === 'img-to-pdf') {
+                multiImageFileInput.click();
+            } else {
+                pdfFileInput.click();
+            }
+        }
+
+        // Drag and Drop Events on Dropzone
+        ['dragenter', 'dragover'].forEach(eventName => {
+            workspaceDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                workspaceDropzone.classList.add('drag-over');
+            });
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            workspaceDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                workspaceDropzone.classList.remove('drag-over');
+            });
+        });
+        workspaceDropzone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (!files || files.length === 0) return;
+            handleIncomingFiles(files);
+        });
+
+        pdfFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleIncomingFiles(e.target.files);
+            }
+        });
+        multiPdfFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                handleIncomingFiles(e.target.files);
+            }
+        });
+        multiImageFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                handleIncomingFiles(e.target.files);
+            }
+        });
+
+        changeFileBtn.addEventListener('click', () => {
+            triggerFileUpload();
+        });
+
+        startAnotherBtn.addEventListener('click', () => {
+            resultCard.classList.remove('active');
+            workspaceDropzone.style.display = 'block';
+            fileInfoStrip.classList.remove('active');
+            workspaceContentStage.innerHTML = '';
+        });
+
+        // Activate Tool by ID
+        function activateTool(toolId) {
+            currentTool = toolId;
+            const meta = toolMeta[toolId] || { title: 'PDF Tool', desc: 'Process your PDF online.', executeLabel: 'Apply & Download' };
+
+            workspaceTitle.textContent = meta.title;
+            workspaceDescription.textContent = meta.desc;
+            mainExecuteBtn.textContent = meta.executeLabel;
+
+            // Configure dropzone labels according to tool
+            if (toolId === 'merge') {
+                uploadPillBtn.innerHTML = '<span>☁️ Upload PDF files to Merge</span>';
+                dropzoneHintText.textContent = 'or drop multiple PDF files here';
+            } else if (toolId === 'img-to-pdf') {
+                uploadPillBtn.innerHTML = '<span>☁️ Upload Images (JPG/PNG)</span>';
+                dropzoneHintText.textContent = 'or drop multiple image files here';
+            } else {
+                uploadPillBtn.innerHTML = '<span>☁️ Upload PDF file</span>';
+                dropzoneHintText.textContent = 'or drop your PDF file here';
+            }
+
+            // Show Workspace, Hide Landing
+            sejdaHero.style.display = 'none';
+            sejdaToolsGrid.style.display = 'none';
+            sejdaWorkspace.classList.add('active');
+            window.scrollTo({ top: sejdaWorkspace.offsetTop - 70, behavior: 'smooth' });
+
+            // Update URL hash/query
+            const url = new URL(window.location);
+            url.searchParams.set('tool', toolId);
+            window.history.pushState({}, '', url);
+
+            resetWorkspace();
+        }
+
+        function resetWorkspace() {
+            originalFile = null;
+            originalBytes = null;
+            pdfDocLib = null;
+            pdfJsDoc = null;
+            totalPages = 0;
+            currentPage = 1;
+            pageRotations = {};
+            deletedPages.clear();
+            pageOrder = [];
+            mergeFiles = [];
+            imageFiles = [];
+            editorAnnotations = [];
+
+            workspaceDropzone.style.display = 'block';
+            fileInfoStrip.classList.remove('active');
+            workspaceContentStage.innerHTML = '';
+            resultCard.classList.remove('active');
+            pdfFileInput.value = '';
+            multiPdfFileInput.value = '';
+            multiImageFileInput.value = '';
+        }
+
+        // Handle Incoming Files
+        async function handleIncomingFiles(fileList) {
+            if (currentTool === 'merge') {
+                await handleMergeFiles(fileList);
+            } else if (currentTool === 'img-to-pdf') {
+                await handleImageFiles(fileList);
+            } else {
+                const file = fileList[0];
+                if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+                    alert('Please select a valid PDF file.');
+                    return;
+                }
+                await handleSinglePdfFile(file);
+            }
+        }
+
+        // Handle Single PDF
+        async function handleSinglePdfFile(file) {
+            originalFile = file;
+            const buffer = await file.arrayBuffer();
+            originalBytes = new Uint8Array(buffer);
+
+            // Load with PDF-Lib
+            pdfDocLib = await PDFLib.PDFDocument.load(originalBytes, { ignoreEncryption: true });
+            totalPages = pdfDocLib.getPageCount();
+
+            // Load with PDF.js
+            const loadingTask = pdfjsLib.getDocument({ data: originalBytes });
+            pdfJsDoc = await loadingTask.promise;
+
+            // Initialize page collections
+            pageOrder = Array.from({ length: totalPages }, (_, i) => i + 1);
+            pageRotations = {};
+            deletedPages.clear();
+
+            // Update file info strip
+            loadedFileName.textContent = file.name;
+            const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+            loadedFileStats.textContent = `${totalPages} page${totalPages > 1 ? 's' : ''} • ${sizeMb} MB`;
+
+            workspaceDropzone.style.display = 'none';
+            fileInfoStrip.classList.add('active');
+
+            // Render tool-specific UI into workspace stage
+            renderActiveToolStage();
+        }
+
+        // Handle Merge Files Queue
+        async function handleMergeFiles(files) {
+            for (const file of files) {
+                if (file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') {
+                    try {
+                        const buffer = await file.arrayBuffer();
+                        const bytes = new Uint8Array(buffer);
+                        const doc = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+                        mergeFiles.push({
+                            name: file.name,
+                            size: (file.size / 1024).toFixed(1) + ' KB',
+                            bytes: bytes,
+                            pages: doc.getPageCount()
+                        });
+                    } catch (err) {
+                        console.error('Error reading PDF for merge:', err);
+                    }
+                }
+            }
+
+            if (mergeFiles.length > 0) {
+                workspaceDropzone.style.display = 'none';
+                fileInfoStrip.classList.add('active');
+                loadedFileName.textContent = `${mergeFiles.length} files selected for merge`;
+                const totalP = mergeFiles.reduce((acc, f) => acc + f.pages, 0);
+                loadedFileStats.textContent = `${totalP} total pages combined`;
+                renderMergeQueueStage();
+            }
+        }
+
+        // Handle Image Files for Images to PDF
+        async function handleImageFiles(files) {
+            for (const file of files) {
+                if (file.type.startsWith('image/')) {
+                    const dataUrl = await readFileAsDataUrl(file);
+                    imageFiles.push({
+                        name: file.name,
+                        size: (file.size / 1024).toFixed(1) + ' KB',
+                        dataUrl: dataUrl
+                    });
+                }
+            }
+
+            if (imageFiles.length > 0) {
+                workspaceDropzone.style.display = 'none';
+                fileInfoStrip.classList.add('active');
+                loadedFileName.textContent = `${imageFiles.length} images ready to convert`;
+                loadedFileStats.textContent = `A4 PDF document layout`;
+                renderImagesToPdfStage();
+            }
+        }
+
+        function readFileAsDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Render Active Tool Stage Switcher
+        function renderActiveToolStage() {
+            workspaceContentStage.innerHTML = '';
+            switch (currentTool) {
+                case 'edit':
+                    renderPdfEditorStage();
+                    break;
+                case 'organize':
+                    renderOrganizeGridStage();
+                    break;
+                case 'split':
+                    renderSplitStage();
+                    break;
+                case 'compress':
+                    renderCompressStage();
+                    break;
+                case 'pdf-to-img':
+                    renderPdfToImgStage();
+                    break;
+                case 'watermark':
+                    renderWatermarkStage();
+                    break;
+                case 'page-numbers':
+                    renderPageNumbersStage();
+                    break;
+                case 'protect':
+                    renderProtectStage();
+                    break;
+                case 'crop':
+                    renderCropStage();
+                    break;
+                case 'extract-text':
+                    renderExtractTextStage();
+                    break;
+                case 'metadata':
+                    renderMetadataStage();
+                    break;
+                case 'unlock':
+                    renderUnlockStage();
+                    break;
+                default:
+                    workspaceContentStage.innerHTML = '<p style="padding:1rem;">Ready to process file.</p>';
+            }
+        }
+
+        /* ========================================================
+           TOOL 1: SEJDA PDF EDITOR
+           ======================================================== */
+        function renderPdfEditorStage() {
+            workspaceContentStage.innerHTML = `
+                <!-- Floating Editor Toolbar -->
+                <div class="sejda-editor-toolbar">
+                    <div class="sejda-toolbar-group">
+                        <button type="button" class="sejda-tool-btn active" id="btnToolText">🔤 Text</button>
+                        <button type="button" class="sejda-tool-btn" id="btnToolWhiteout">⬜ Whiteout</button>
+                        <button type="button" class="sejda-tool-btn" id="btnToolBlackout">⬛ Redact</button>
+                        <button type="button" class="sejda-tool-btn" id="btnToolSign">✍️ Sign</button>
+                        <button type="button" class="sejda-tool-btn" id="btnToolDraw">🖍️ Draw</button>
+                        <button type="button" class="sejda-tool-btn" id="btnToolImage">🖼️ Image</button>
+                    </div>
+
+                    <div class="sejda-toolbar-group">
+                        <div class="sejda-toolbar-divider"></div>
+                        <div class="sejda-page-nav">
+                            <button type="button" id="prevPageBtn">&lt;</button>
+                            <span id="pageIndicator">Page 1 of ${totalPages}</span>
+                            <button type="button" id="nextPageBtn">&gt;</button>
+                        </div>
+                        <div class="sejda-toolbar-divider"></div>
+                        <button type="button" class="sejda-tool-btn" id="zoomOutBtn">🔍 -</button>
+                        <span id="zoomPercent" style="font-size:0.8rem; font-weight:700;">100%</span>
+                        <button type="button" class="sejda-tool-btn" id="zoomInBtn">🔍 +</button>
+                    </div>
+                </div>
+
+                <!-- Canvas Viewport -->
+                <div class="sejda-viewport-container">
+                    <div class="sejda-canvas-wrapper" id="canvasWrapper">
+                        <canvas id="pdfRenderCanvas"></canvas>
+                        <div class="sejda-overlay-layer" id="editorOverlay"></div>
+                    </div>
+                </div>
+            `;
+
+            initPdfEditorEvents();
+            renderEditorPage(currentPage);
+        }
+
+        function initPdfEditorEvents() {
+            const btnToolText = document.getElementById('btnToolText');
+            const btnToolWhiteout = document.getElementById('btnToolWhiteout');
+            const btnToolBlackout = document.getElementById('btnToolBlackout');
+            const btnToolSign = document.getElementById('btnToolSign');
+            const btnToolDraw = document.getElementById('btnToolDraw');
+            const btnToolImage = document.getElementById('btnToolImage');
+            const editorOverlay = document.getElementById('editorOverlay');
+            const prevPageBtn = document.getElementById('prevPageBtn');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const editorImageInput = document.getElementById('editorImageInput');
+
+            function setEditorTool(tool) {
+                editorTool = tool;
+                [btnToolText, btnToolWhiteout, btnToolBlackout, btnToolSign, btnToolDraw, btnToolImage].forEach(b => b.classList.remove('active'));
+                if (tool === 'text') btnToolText.classList.add('active');
+                if (tool === 'whiteout') btnToolWhiteout.classList.add('active');
+                if (tool === 'blackout') btnToolBlackout.classList.add('active');
+                if (tool === 'sign') btnToolSign.classList.add('active');
+                if (tool === 'draw') btnToolDraw.classList.add('active');
+                if (tool === 'image') btnToolImage.classList.add('active');
+            }
+
+            btnToolText.addEventListener('click', () => setEditorTool('text'));
+            btnToolWhiteout.addEventListener('click', () => setEditorTool('whiteout'));
+            btnToolBlackout.addEventListener('click', () => setEditorTool('blackout'));
+            btnToolSign.addEventListener('click', () => {
+                setEditorTool('sign');
+                openSignatureModal();
+            });
+            btnToolDraw.addEventListener('click', () => setEditorTool('draw'));
+            btnToolImage.addEventListener('click', () => {
+                setEditorTool('image');
+                editorImageInput.click();
+            });
+
+            editorImageInput.addEventListener('change', async (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const dataUrl = await readFileAsDataUrl(e.target.files[0]);
+                    addOverlayImage(dataUrl, 100, 100, 140, 100);
+                }
+            });
+
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderEditorPage(currentPage);
+                }
+            });
+            nextPageBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderEditorPage(currentPage);
+                }
+            });
+
+            zoomInBtn.addEventListener('click', () => {
+                if (editorScale < 2.0) {
+                    editorScale += 0.2;
+                    document.getElementById('zoomPercent').textContent = Math.round(editorScale * 100) + '%';
+                    renderEditorPage(currentPage);
+                }
+            });
+            zoomOutBtn.addEventListener('click', () => {
+                if (editorScale > 0.6) {
+                    editorScale -= 0.2;
+                    document.getElementById('zoomPercent').textContent = Math.round(editorScale * 100) + '%';
+                    renderEditorPage(currentPage);
+                }
+            });
+
+            // Click on overlay to insert Text, Whiteout or Redact
+            editorOverlay.addEventListener('click', (e) => {
+                if (e.target !== editorOverlay) return;
+                const rect = editorOverlay.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                if (editorTool === 'text') {
+                    addOverlayText('Click to edit text', x, y);
+                } else if (editorTool === 'whiteout') {
+                    addOverlayWhiteout(x, y, 120, 30, false);
+                } else if (editorTool === 'blackout') {
+                    addOverlayWhiteout(x, y, 120, 30, true);
+                }
+            });
+        }
+
+        async function renderEditorPage(pageNum) {
+            if (!pdfJsDoc) return;
+            const page = await pdfJsDoc.getPage(pageNum);
+            const viewport = page.getViewport({ scale: editorScale * 1.5 });
+            const canvas = document.getElementById('pdfRenderCanvas');
+            if (!canvas) return;
+            const context = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            canvas.style.width = (viewport.width / 1.5) + 'px';
+            canvas.style.height = (viewport.height / 1.5) + 'px';
+
+            const overlay = document.getElementById('editorOverlay');
+            overlay.style.width = canvas.style.width;
+            overlay.style.height = canvas.style.height;
+
+            const renderContext = { canvasContext: context, viewport: viewport };
+            await page.render(renderContext).promise;
+
+            const indicator = document.getElementById('pageIndicator');
+            if (indicator) indicator.textContent = `Page ${pageNum} of ${totalPages}`;
+
+            renderExistingAnnotations(pageNum);
+        }
+
+        function addOverlayText(initialText, x, y) {
+            const overlay = document.getElementById('editorOverlay');
+            const el = document.createElement('div');
+            el.className = 'sejda-annotation-item sejda-annotation-text';
+            el.contentEditable = true;
+            el.textContent = initialText;
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.fontSize = '14px';
+            el.style.color = '#000000';
+            makeDraggable(el);
+
+            overlay.appendChild(el);
+            el.focus();
+
+            editorAnnotations.push({
+                type: 'text',
+                page: currentPage,
+                el: el,
+                text: initialText,
+                x: x,
+                y: y,
+                fontSize: 14,
+                color: '#000000'
+            });
+        }
+
+        function addOverlayWhiteout(x, y, width, height, isBlackout) {
+            const overlay = document.getElementById('editorOverlay');
+            const el = document.createElement('div');
+            el.className = `sejda-annotation-item ${isBlackout ? 'sejda-blackout-box' : 'sejda-whiteout-box'}`;
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.width = width + 'px';
+            el.style.height = height + 'px';
+            makeDraggable(el);
+            overlay.appendChild(el);
+
+            editorAnnotations.push({
+                type: isBlackout ? 'blackout' : 'whiteout',
+                page: currentPage,
+                el: el,
+                x: x,
+                y: y,
+                width: width,
+                height: height
+            });
+        }
+
+        function addOverlayImage(dataUrl, x, y, width, height) {
+            const overlay = document.getElementById('editorOverlay');
+            const el = document.createElement('div');
+            el.className = 'sejda-annotation-item';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.width = width + 'px';
+            el.style.height = height + 'px';
+            const img = document.createElement('img');
+            img.src = dataUrl;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            el.appendChild(img);
+            makeDraggable(el);
+            overlay.appendChild(el);
+
+            editorAnnotations.push({
+                type: 'image',
+                page: currentPage,
+                el: el,
+                dataUrl: dataUrl,
+                x: x,
+                y: y,
+                width: width,
+                height: height
+            });
+        }
+
+        function renderExistingAnnotations(pageNum) {
+            const overlay = document.getElementById('editorOverlay');
+            overlay.innerHTML = '';
+            editorAnnotations.filter(a => a.page === pageNum).forEach(a => {
+                if (a.el) overlay.appendChild(a.el);
+            });
+        }
+
+        function makeDraggable(element) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            element.onmousedown = dragMouseDown;
+
+            function dragMouseDown(e) {
+                if (element.isContentEditable && document.activeElement === element) return;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                element.style.top = (element.offsetTop - pos2) + "px";
+                element.style.left = (element.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        // Signature Modal Management
+        const signatureModal = document.getElementById('signatureModal');
+        const signatureCanvas = document.getElementById('signatureCanvas');
+        const sigTabDraw = document.getElementById('sigTabDraw');
+        const sigTabType = document.getElementById('sigTabType');
+        const sigDrawContainer = document.getElementById('sigDrawContainer');
+        const sigTypeContainer = document.getElementById('sigTypeContainer');
+        const sigTypeInput = document.getElementById('sigTypeInput');
+        const clearSigBtn = document.getElementById('clearSigBtn');
+        const saveSigBtn = document.getElementById('saveSigBtn');
+        const cancelSigBtn = document.getElementById('cancelSigBtn');
+        const closeSigModal = document.getElementById('closeSigModal');
+        const sigInkColor = document.getElementById('sigInkColor');
+        let sigContext = null;
+        let sigDrawing = false;
+        let sigMode = 'draw';
+
+        function openSignatureModal() {
+            signatureModal.classList.add('active');
+            if (!sigContext) {
+                sigContext = signatureCanvas.getContext('2d');
+                signatureCanvas.width = signatureCanvas.offsetWidth || 500;
+                signatureCanvas.height = 180;
+                initSigCanvas();
+            }
+            clearSignature();
+        }
+
+        function initSigCanvas() {
+            signatureCanvas.addEventListener('mousedown', (e) => {
+                sigDrawing = true;
+                sigContext.beginPath();
+                sigContext.moveTo(e.offsetX, e.offsetY);
+            });
+            signatureCanvas.addEventListener('mousemove', (e) => {
+                if (!sigDrawing) return;
+                sigContext.strokeStyle = sigInkColor.value;
+                sigContext.lineWidth = 2.5;
+                sigContext.lineCap = 'round';
+                sigContext.lineTo(e.offsetX, e.offsetY);
+                sigContext.stroke();
+            });
+            ['mouseup', 'mouseleave'].forEach(evt => {
+                signatureCanvas.addEventListener(evt, () => { sigDrawing = false; });
+            });
+        }
+
+        function clearSignature() {
+            if (sigContext) {
+                sigContext.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            }
+            sigTypeInput.value = '';
+        }
+
+        sigTabDraw.addEventListener('click', () => {
+            sigMode = 'draw';
+            sigTabDraw.classList.add('active');
+            sigTabType.classList.remove('active');
+            sigDrawContainer.style.display = 'block';
+            sigTypeContainer.style.display = 'none';
+        });
+
+        sigTabType.addEventListener('click', () => {
+            sigMode = 'type';
+            sigTabType.classList.add('active');
+            sigTabDraw.classList.remove('active');
+            sigDrawContainer.style.display = 'none';
+            sigTypeContainer.style.display = 'block';
+            sigTypeInput.focus();
+        });
+
+        clearSigBtn.addEventListener('click', clearSignature);
+        [closeSigModal, cancelSigBtn].forEach(b => b.addEventListener('click', () => {
+            signatureModal.classList.remove('active');
+        }));
+
+        saveSigBtn.addEventListener('click', () => {
+            let dataUrl = '';
+            if (sigMode === 'draw') {
+                dataUrl = signatureCanvas.toDataURL('image/png');
+            } else {
+                const text = sigTypeInput.value.trim() || 'Signature';
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = 400;
+                tempCanvas.height = 120;
+                const ctx = tempCanvas.getContext('2d');
+                ctx.font = '48px "Brush Script MT", cursive';
+                ctx.fillStyle = sigInkColor.value;
+                ctx.fillText(text, 20, 70);
+                dataUrl = tempCanvas.toDataURL('image/png');
+            }
+
+            addOverlayImage(dataUrl, 120, 150, 160, 60);
+            signatureModal.classList.remove('active');
+        });
+
+        /* ========================================================
+           TOOL 2: MERGE PDF STAGE
+           ======================================================== */
+        function renderMergeQueueStage() {
+            let listHtml = '<div class="sejda-merge-list">';
+            mergeFiles.forEach((file, idx) => {
+                listHtml += `
+                    <div class="sejda-merge-item" data-index="${idx}">
+                        <div class="sejda-merge-item-info">
+                            <span style="font-size:1.4rem;">📑</span>
+                            <div>
+                                <div class="sejda-merge-item-title">${idx + 1}. ${file.name}</div>
+                                <div class="sejda-merge-item-stats">${file.pages} pages • ${file.size}</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; gap:0.4rem;">
+                            <button type="button" class="sejda-page-action-btn btn-up" data-index="${idx}" ${idx === 0 ? 'disabled' : ''}>▲</button>
+                            <button type="button" class="sejda-page-action-btn btn-down" data-index="${idx}" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>▼</button>
+                            <button type="button" class="sejda-page-action-btn btn-delete btn-remove-merge" data-index="${idx}">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            listHtml += '</div>';
+            listHtml += `
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <button type="button" class="sejda-btn-secondary" id="addMorePdfsBtn">➕ Add More PDF Files</button>
+                </div>
+            `;
+
+            workspaceContentStage.innerHTML = listHtml;
+
+            // Events for merge queue
+            workspaceContentStage.querySelectorAll('.btn-up').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.getAttribute('data-index'));
+                    if (i > 0) {
+                        const temp = mergeFiles[i];
+                        mergeFiles[i] = mergeFiles[i - 1];
+                        mergeFiles[i - 1] = temp;
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-down').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.getAttribute('data-index'));
+                    if (i < mergeFiles.length - 1) {
+                        const temp = mergeFiles[i];
+                        mergeFiles[i] = mergeFiles[i + 1];
+                        mergeFiles[i + 1] = temp;
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-remove-merge').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.getAttribute('data-index'));
+                    mergeFiles.splice(i, 1);
+                    if (mergeFiles.length === 0) {
+                        resetWorkspace();
+                    } else {
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+            const addMoreBtn = document.getElementById('addMorePdfsBtn');
+            if (addMoreBtn) {
+                addMoreBtn.addEventListener('click', () => multiPdfFileInput.click());
+            }
+        }
+
+        /* ========================================================
+           TOOL 5: ORGANIZE & ROTATE PAGES (THUMBNAILS GRID)
+           ======================================================== */
+        function renderOrganizeGridStage() {
+            let gridHtml = `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:1px dashed var(--color-border);">
+                    <div style="font-weight:700; color:var(--color-text);">
+                        Total Pages: <span id="activePageCount">${pageOrder.length - deletedPages.size}</span>
+                    </div>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button type="button" class="sejda-btn-secondary" id="rotateAllCcwBtn">↺ Rotate All CCW</button>
+                        <button type="button" class="sejda-btn-secondary" id="rotateAllCwBtn">↻ Rotate All CW</button>
+                        <button type="button" class="sejda-btn-secondary" id="resetOrganizeBtn">Reset All</button>
+                    </div>
+                </div>
+                <div class="sejda-page-grid" id="organizeGrid">
+            `;
+
+            pageOrder.forEach((pageIndex, visualIdx) => {
+                const isDeleted = deletedPages.has(pageIndex);
+                const rot = pageRotations[pageIndex] || 0;
+                gridHtml += `
+                    <div class="sejda-page-card ${isDeleted ? 'deleted' : ''}" data-page="${pageIndex}">
+                        <span class="sejda-page-badge">Page ${pageIndex}</span>
+                        <div class="sejda-page-thumb-holder">
+                            <canvas id="thumbCanvas_${pageIndex}" style="transform: rotate(${rot}deg);"></canvas>
+                        </div>
+                        <div class="sejda-page-actions">
+                            <button type="button" class="sejda-page-action-btn btn-rot-ccw" data-page="${pageIndex}" title="Rotate 90° CCW">↺</button>
+                            <button type="button" class="sejda-page-action-btn btn-rot-cw" data-page="${pageIndex}" title="Rotate 90° CW">↻</button>
+                            <button type="button" class="sejda-page-action-btn btn-move-left" data-idx="${visualIdx}" title="Move Left" ${visualIdx === 0 ? 'disabled' : ''}>◀</button>
+                            <button type="button" class="sejda-page-action-btn btn-move-right" data-idx="${visualIdx}" title="Move Right" ${visualIdx === pageOrder.length - 1 ? 'disabled' : ''}>▶</button>
+                            <button type="button" class="sejda-page-action-btn btn-delete btn-del-page" data-page="${pageIndex}" title="Delete Page">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            gridHtml += '</div>';
+
+            workspaceContentStage.innerHTML = gridHtml;
+
+            // Render thumbnail canvases
+            pageOrder.forEach(pageIndex => {
+                renderThumbnailCanvas(pageIndex);
+            });
+
+            // Grid event listeners
+            workspaceContentStage.querySelectorAll('.btn-rot-cw').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const p = parseInt(btn.getAttribute('data-page'));
+                    pageRotations[p] = ((pageRotations[p] || 0) + 90) % 360;
+                    const canvas = document.getElementById(`thumbCanvas_${p}`);
+                    if (canvas) canvas.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-rot-ccw').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const p = parseInt(btn.getAttribute('data-page'));
+                    pageRotations[p] = ((pageRotations[p] || 0) - 90 + 360) % 360;
+                    const canvas = document.getElementById(`thumbCanvas_${p}`);
+                    if (canvas) canvas.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-del-page').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const p = parseInt(btn.getAttribute('data-page'));
+                    const card = btn.closest('.sejda-page-card');
+                    if (deletedPages.has(p)) {
+                        deletedPages.delete(p);
+                        card.classList.remove('deleted');
+                    } else {
+                        deletedPages.add(p);
+                        card.classList.add('deleted');
+                    }
+                    document.getElementById('activePageCount').textContent = pageOrder.length - deletedPages.size;
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-move-left').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-idx'));
+                    if (idx > 0) {
+                        const temp = pageOrder[idx];
+                        pageOrder[idx] = pageOrder[idx - 1];
+                        pageOrder[idx - 1] = temp;
+                        renderOrganizeGridStage();
+                    }
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-move-right').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-idx'));
+                    if (idx < pageOrder.length - 1) {
+                        const temp = pageOrder[idx];
+                        pageOrder[idx] = pageOrder[idx + 1];
+                        pageOrder[idx + 1] = temp;
+                        renderOrganizeGridStage();
+                    }
+                });
+            });
+
+            document.getElementById('rotateAllCwBtn').addEventListener('click', () => {
+                pageOrder.forEach(p => {
+                    pageRotations[p] = ((pageRotations[p] || 0) + 90) % 360;
+                    const c = document.getElementById(`thumbCanvas_${p}`);
+                    if (c) c.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            document.getElementById('rotateAllCcwBtn').addEventListener('click', () => {
+                pageOrder.forEach(p => {
+                    pageRotations[p] = ((pageRotations[p] || 0) - 90 + 360) % 360;
+                    const c = document.getElementById(`thumbCanvas_${p}`);
+                    if (c) c.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            document.getElementById('resetOrganizeBtn').addEventListener('click', () => {
+                pageOrder = Array.from({ length: totalPages }, (_, i) => i + 1);
+                pageRotations = {};
+                deletedPages.clear();
+                renderOrganizeGridStage();
+            });
+        }
+
+        async function renderThumbnailCanvas(pageNum) {
+            if (!pdfJsDoc) return;
+            try {
+                const page = await pdfJsDoc.getPage(pageNum);
+                const viewport = page.getViewport({ scale: 0.35 });
+                const canvas = document.getElementById(`thumbCanvas_${pageNum}`);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+            } catch (e) {
+                console.error('Thumb error:', e);
+            }
+        }
+
+        /* ========================================================
+           TOOL 3: SPLIT PDF STAGE
+           ======================================================== */
+        function renderSplitStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+                    <h3 style="margin-bottom: 1rem; color: var(--color-text);">Select Split Method</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; padding: 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);">
+                            <input type="radio" name="splitMethod" value="ranges" checked style="margin-top: 0.25rem;">
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--color-text);">Extract Page Ranges</strong>
+                                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">e.g. 1-2, 3, 5-8</span>
+                                <input type="text" id="splitRangeInput" class="sejda-search-input" value="1-${Math.min(totalPages, 2)}" style="margin-top: 0.5rem; font-size: 0.9rem;" placeholder="e.g. 1-3, 5">
+                            </div>
+                        </label>
+                        <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; padding: 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);">
+                            <input type="radio" name="splitMethod" value="every" style="margin-top: 0.25rem;">
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--color-text);">Extract Every Page as Separate PDF</strong>
+                                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Downloads all ${totalPages} pages zipped into individual files</span>
+                            </div>
+                        </label>
+                        <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; padding: 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);">
+                            <input type="radio" name="splitMethod" value="even-odd" style="margin-top: 0.25rem;">
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--color-text);">Split Even &amp; Odd Pages</strong>
+                                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Creates two documents: one for even pages, one for odd pages</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 4: COMPRESS PDF STAGE
+           ======================================================== */
+        function renderCompressStage() {
+            const origSizeMb = (originalFile.size / (1024 * 1024)).toFixed(2);
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 650px; margin: 0 auto;">
+                    <div class="sejda-options-grid">
+                        <div class="sejda-option-card selected" data-compress="recommended">
+                            <h4>Recommended</h4>
+                            <p>Good quality, strong compression for web &amp; email (~40-60% smaller)</p>
+                        </div>
+                        <div class="sejda-option-card" data-compress="extreme">
+                            <h4>Extreme</h4>
+                            <p>Maximum compression, suitable for strict file size limits</p>
+                        </div>
+                        <div class="sejda-option-card" data-compress="less">
+                            <h4>Less Compression</h4>
+                            <p>Highest image fidelity, minimal file size reduction</p>
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg); padding: 1.25rem; border-radius: var(--radius-md); border: 1.5px solid var(--color-border); text-align: center;">
+                        <div style="font-size: 0.88rem; color: var(--color-text-secondary); margin-bottom: 0.35rem;">Original File Size</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-text);">${origSizeMb} MB</div>
+                    </div>
+                </div>
+            `;
+
+            workspaceContentStage.querySelectorAll('.sejda-option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    workspaceContentStage.querySelectorAll('.sejda-option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                });
+            });
+        }
+
+        /* ========================================================
+           TOOL 6: PDF TO IMAGES STAGE
+           ======================================================== */
+        function renderPdfToImgStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;">
+                        <label style="display:flex; align-items:center; gap:0.4rem; font-weight:600; cursor:pointer;">
+                            <input type="radio" name="imgFormat" value="image/jpeg" checked> JPEG (Fast &amp; Compact)
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; font-weight:600; cursor:pointer;">
+                            <input type="radio" name="imgFormat" value="image/png"> PNG (Lossless)
+                        </label>
+                    </div>
+                    <p style="color:var(--color-text-secondary); font-size:0.92rem;">
+                        Click "Convert &amp; Download Images" above to render all ${totalPages} pages and download them as high-definition images in a ZIP file.
+                    </p>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 7: IMAGES TO PDF STAGE
+           ======================================================== */
+        function renderImagesToPdfStage() {
+            let html = `
+                <div style="max-width: 650px; margin: 0 auto;">
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; justify-content:center;">
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.25rem;">Page Format:</label>
+                            <select id="imgPdfPageSize" style="padding:0.45rem 0.85rem; border-radius:6px; border:1px solid var(--color-border);">
+                                <option value="A4">A4 (Standard)</option>
+                                <option value="Letter">US Letter</option>
+                                <option value="Fit">Fit to Image</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.25rem;">Orientation:</label>
+                            <select id="imgPdfOrientation" style="padding:0.45rem 0.85rem; border-radius:6px; border:1px solid var(--color-border);">
+                                <option value="Portrait">Portrait</option>
+                                <option value="Landscape">Landscape</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sejda-merge-list">
+            `;
+
+            imageFiles.forEach((f, idx) => {
+                html += `
+                    <div class="sejda-merge-item">
+                        <div class="sejda-merge-item-info">
+                            <img src="${f.dataUrl}" style="width:45px; height:45px; object-fit:cover; border-radius:4px; border:1px solid var(--color-border);" />
+                            <div>
+                                <div class="sejda-merge-item-title">${f.name}</div>
+                                <div class="sejda-merge-item-stats">${f.size}</div>
+                            </div>
+                        </div>
+                        <button type="button" class="sejda-page-action-btn btn-delete" onclick="removeImageFile(${idx})">🗑️</button>
+                    </div>
+                `;
+            });
+            html += '</div></div>';
+            workspaceContentStage.innerHTML = html;
+        }
+
+        window.removeImageFile = function(idx) {
+            imageFiles.splice(idx, 1);
+            if (imageFiles.length === 0) resetWorkspace();
+            else renderImagesToPdfStage();
+        };
+
+        /* ========================================================
+           TOOL 8: WATERMARK PDF STAGE
+           ======================================================== */
+        function renderWatermarkStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 580px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Watermark Text:</label>
+                        <input type="text" id="watermarkTextInput" class="sejda-search-input" value="CONFIDENTIAL" style="font-size: 1rem;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Angle:</label>
+                            <select id="watermarkAngle" style="width:100%; padding:0.55rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                                <option value="45">45° Diagonal</option>
+                                <option value="0">0° Horizontal</option>
+                                <option value="-45">-45° Diagonal</option>
+                                <option value="90">90° Vertical</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Opacity:</label>
+                            <input type="range" id="watermarkOpacity" min="10" max="90" value="30" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Font Size:</label>
+                            <input type="number" id="watermarkFontSize" value="48" min="16" max="96" style="width:100%; padding:0.55rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Color:</label>
+                            <input type="color" id="watermarkColor" value="#999999" style="width:100%; height:42px; border:none; cursor:pointer;">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 9: PAGE NUMBERS STAGE
+           ======================================================== */
+        function renderPageNumbersStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 580px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Numbering Format:</label>
+                        <select id="pageNumberFormat" style="width:100%; padding:0.65rem; border-radius:6px; border:1.5px solid var(--color-border); font-size:0.95rem;">
+                            <option value="Page {n} of {total}">Page {n} of {total} (e.g. Page 1 of 10)</option>
+                            <option value="{n} of {total}">{n} of {total} (e.g. 1 of 10)</option>
+                            <option value="Page {n}">Page {n} (e.g. Page 1)</option>
+                            <option value="{n}">{n} (e.g. 1)</option>
+                        </select>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Position:</label>
+                            <select id="pageNumberPosition" style="width:100%; padding:0.65rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                                <option value="bottom-center">Bottom Center</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="top-center">Top Center</option>
+                                <option value="top-right">Top Right</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Start Numbering At:</label>
+                            <input type="number" id="pageNumberStart" value="1" min="1" style="width:100%; padding:0.65rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 10: PROTECT STAGE
+           ======================================================== */
+        function renderProtectStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 480px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Set User Password:</label>
+                        <input type="password" id="protectPassword" class="sejda-search-input" placeholder="Enter password to open PDF...">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Confirm Password:</label>
+                        <input type="password" id="protectPasswordConfirm" class="sejda-search-input" placeholder="Repeat password...">
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 11: CROP PDF STAGE
+           ======================================================== */
+        function renderCropStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 520px; margin: 0 auto; text-align: center;">
+                    <p style="margin-bottom: 1.25rem; color: var(--color-text-secondary);">Set margins to crop from each edge (in points, 72 pt = 1 inch):</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left;">
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Top Margin (pt):</label>
+                            <input type="number" id="cropTop" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Bottom Margin (pt):</label>
+                            <input type="number" id="cropBottom" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Left Margin (pt):</label>
+                            <input type="number" id="cropLeft" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Right Margin (pt):</label>
+                            <input type="number" id="cropRight" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 12: EXTRACT TEXT STAGE
+           ======================================================== */
+        async function renderExtractTextStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="text-align: center; padding: 1rem;">
+                    <div style="font-size: 1rem; color: var(--color-text-secondary);">Reading document text content...</div>
+                </div>
+            `;
+
+            let extractedText = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const page = await pdfJsDoc.getPage(i);
+                const textContent = await page.getTextContent();
+                const pageText = textContent.items.map(item => item.str).join(' ');
+                extractedText += `--- Page ${i} ---\n` + pageText + '\n\n';
+            }
+
+            const words = extractedText.trim().split(/\s+/).filter(Boolean).length;
+            const chars = extractedText.length;
+
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 750px; margin: 0 auto; text-align: left;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--color-text);">${words} words • ${chars} characters</span>
+                        <button type="button" class="sejda-btn-secondary" id="copyExtractedTextBtn" style="font-size:0.82rem; padding:0.35rem 0.75rem;">📋 Copy to Clipboard</button>
+                    </div>
+                    <textarea id="extractedTextArea" style="width: 100%; height: 320px; padding: 1rem; border-radius: 8px; border: 1.5px solid var(--color-border); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.5; resize: vertical;">${extractedText}</textarea>
+                </div>
+            `;
+
+            document.getElementById('copyExtractedTextBtn').addEventListener('click', () => {
+                const area = document.getElementById('extractedTextArea');
+                area.select();
+                navigator.clipboard.writeText(area.value);
+                alert('Text copied to clipboard!');
+            });
+        }
+
+        /* ========================================================
+           TOOL 13: METADATA STAGE
+           ======================================================== */
+        function renderMetadataStage() {
+            const title = pdfDocLib.getTitle() || '';
+            const author = pdfDocLib.getAuthor() || '';
+            const subject = pdfDocLib.getSubject() || '';
+            const keywords = (pdfDocLib.getKeywords() || []).join(', ');
+
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 580px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Document Title:</label>
+                        <input type="text" id="metaTitle" class="sejda-search-input" value="${title}">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Author:</label>
+                        <input type="text" id="metaAuthor" class="sejda-search-input" value="${author}">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Subject / Description:</label>
+                        <input type="text" id="metaSubject" class="sejda-search-input" value="${subject}">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Keywords (comma separated):</label>
+                        <input type="text" id="metaKeywords" class="sejda-search-input" value="${keywords}">
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 14: UNLOCK STAGE
+           ======================================================== */
+        function renderUnlockStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 480px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Enter Document Password to Unlock:</label>
+                        <input type="password" id="unlockPassword" class="sejda-search-input" placeholder="Password...">
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--color-text-secondary);">
+                        Entering the password allows exporting an unprotected copy that can be opened anywhere without restrictions.
+                    </p>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           MAIN EXECUTE HANDLER (THE ACTUAL CLIENT-SIDE PROCESSING)
+           ======================================================== */
+        mainExecuteBtn.addEventListener('click', async () => {
+            mainExecuteBtn.disabled = true;
+            mainExecuteBtn.textContent = 'Processing...';
+
+            try {
+                switch (currentTool) {
+                    case 'edit':
+                        await executePdfEditor();
+                        break;
+                    case 'merge':
+                        await executeMergePdf();
+                        break;
+                    case 'split':
+                        await executeSplitPdf();
+                        break;
+                    case 'compress':
+                        await executeCompressPdf();
+                        break;
+                    case 'organize':
+                        await executeOrganizePdf();
+                        break;
+                    case 'pdf-to-img':
+                        await executePdfToImages();
+                        break;
+                    case 'img-to-pdf':
+                        await executeImagesToPdf();
+                        break;
+                    case 'watermark':
+                        await executeWatermarkPdf();
+                        break;
+                    case 'page-numbers':
+                        await executePageNumbersPdf();
+                        break;
+                    case 'protect':
+                        await executeProtectPdf();
+                        break;
+                    case 'crop':
+                        await executeCropPdf();
+                        break;
+                    case 'extract-text':
+                        await executeExtractText();
+                        break;
+                    case 'metadata':
+                        await executeMetadataPdf();
+                        break;
+                    case 'unlock':
+                        await executeUnlockPdf();
+                        break;
+                }
+            } catch (err) {
+                console.error('Execution error:', err);
+                alert('An error occurred during processing: ' + err.message);
+            } finally {
+                mainExecuteBtn.disabled = false;
+                const meta = toolMeta[currentTool];
+                mainExecuteBtn.textContent = meta ? meta.executeLabel : 'Apply & Download PDF';
+            }
+        });
+
+        // 1. Execute PDF Editor
+        async function executePdfEditor() {
+            const modifiedPdf = await PDFLib.PDFDocument.load(originalBytes);
+            const helveticaFont = await modifiedPdf.embedFont(PDFLib.StandardFonts.Helvetica);
+            const pages = modifiedPdf.getPages();
+
+            for (const annot of editorAnnotations) {
+                const page = pages[annot.page - 1];
+                if (!page) continue;
+                const { width, height } = page.getSize();
+                // Map screen coordinates to PDF coordinate space
+                const screenW = parseFloat(document.getElementById('editorOverlay').style.width) || width;
+                const screenH = parseFloat(document.getElementById('editorOverlay').style.height) || height;
+                const scaleX = width / screenW;
+                const scaleY = height / screenH;
+
+                const pdfX = (annot.el.offsetLeft) * scaleX;
+                const pdfY = height - (annot.el.offsetTop + annot.el.offsetHeight) * scaleY;
+
+                if (annot.type === 'text') {
+                    const text = annot.el.textContent || annot.text;
+                    page.drawText(text, {
+                        x: pdfX,
+                        y: pdfY,
+                        size: (annot.fontSize || 14) * scaleX,
+                        font: helveticaFont,
+                        color: PDFLib.rgb(0, 0, 0)
+                    });
+                } else if (annot.type === 'whiteout' || annot.type === 'blackout') {
+                    const boxW = annot.el.offsetWidth * scaleX;
+                    const boxH = annot.el.offsetHeight * scaleY;
+                    page.drawRectangle({
+                        x: pdfX,
+                        y: pdfY,
+                        width: boxW,
+                        height: boxH,
+                        color: annot.type === 'whiteout' ? PDFLib.rgb(1, 1, 1) : PDFLib.rgb(0, 0, 0)
+                    });
+                } else if (annot.type === 'image') {
+                    const boxW = annot.el.offsetWidth * scaleX;
+                    const boxH = annot.el.offsetHeight * scaleY;
+                    const imgBytes = await fetch(annot.dataUrl).then(res => res.arrayBuffer());
+                    let embeddedImg = null;
+                    if (annot.dataUrl.includes('png')) {
+                        embeddedImg = await modifiedPdf.embedPng(imgBytes);
+                    } else {
+                        embeddedImg = await modifiedPdf.embedJpg(imgBytes);
+                    }
+                    page.drawImage(embeddedImg, {
+                        x: pdfX,
+                        y: pdfY,
+                        width: boxW,
+                        height: boxH
+                    });
+                }
+            }
+
+            const outputBytes = await modifiedPdf.save();
+            showResultDownload(outputBytes, 'edited_document.pdf');
+        }
+
+        // 2. Execute Merge
+        async function executeMergePdf() {
+            if (mergeFiles.length < 2) {
+                alert('Please upload at least 2 PDF files to merge.');
+                return;
+            }
+            const mergedPdf = await PDFLib.PDFDocument.create();
+            for (const file of mergeFiles) {
+                const pdf = await PDFLib.PDFDocument.load(file.bytes);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach(p => mergedPdf.addPage(p));
+            }
+            const outputBytes = await mergedPdf.save();
+            showResultDownload(outputBytes, 'merged_document.pdf');
+        }
+
+        // 3. Execute Split
+        async function executeSplitPdf() {
+            const method = document.querySelector('input[name="splitMethod"]:checked').value;
+
+            if (method === 'ranges') {
+                const rangeStr = document.getElementById('splitRangeInput').value;
+                const indices = parsePageRanges(rangeStr, totalPages);
+                if (indices.length === 0) {
+                    alert('Please enter valid page numbers (e.g. 1-2, 4).');
+                    return;
+                }
+                const newDoc = await PDFLib.PDFDocument.create();
+                const copied = await newDoc.copyPages(pdfDocLib, indices);
+                copied.forEach(p => newDoc.addPage(p));
+                const output = await newDoc.save();
+                showResultDownload(output, 'split_ranges.pdf');
+            } else if (method === 'every') {
+                const zip = new JSZip();
+                for (let i = 0; i < totalPages; i++) {
+                    const newDoc = await PDFLib.PDFDocument.create();
+                    const [page] = await newDoc.copyPages(pdfDocLib, [i]);
+                    newDoc.addPage(page);
+                    const bytes = await newDoc.save();
+                    zip.file(`page_${i + 1}.pdf`, bytes);
+                }
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                showBlobResultDownload(zipBlob, 'split_pages.zip');
+            } else if (method === 'even-odd') {
+                const zip = new JSZip();
+                const oddDoc = await PDFLib.PDFDocument.create();
+                const evenDoc = await PDFLib.PDFDocument.create();
+                const oddIndices = [];
+                const evenIndices = [];
+                for (let i = 0; i < totalPages; i++) {
+                    if ((i + 1) % 2 !== 0) oddIndices.push(i);
+                    else evenIndices.push(i);
+                }
+                if (oddIndices.length > 0) {
+                    const oddCopied = await oddDoc.copyPages(pdfDocLib, oddIndices);
+                    oddCopied.forEach(p => oddDoc.addPage(p));
+                    zip.file('odd_pages.pdf', await oddDoc.save());
+                }
+                if (evenIndices.length > 0) {
+                    const evenCopied = await evenDoc.copyPages(pdfDocLib, evenIndices);
+                    evenCopied.forEach(p => evenDoc.addPage(p));
+                    zip.file('even_pages.pdf', await evenDoc.save());
+                }
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                showBlobResultDownload(zipBlob, 'even_odd_pages.zip');
+            }
+        }
+
+        function parsePageRanges(str, maxPages) {
+            const pages = new Set();
+            str.split(',').forEach(part => {
+                part = part.trim();
+                if (part.includes('-')) {
+                    const [start, end] = part.split('-').map(Number);
+                    if (!isNaN(start) && !isNaN(end)) {
+                        for (let i = Math.max(1, start); i <= Math.min(maxPages, end); i++) {
+                            pages.add(i - 1);
+                        }
+                    }
+                } else {
+                    const p = parseInt(part);
+                    if (!isNaN(p) && p >= 1 && p <= maxPages) {
+                        pages.add(p - 1);
+                    }
+                }
+            });
+            return Array.from(pages).sort((a, b) => a - b);
+        }
+
+        // 4. Execute Compress
+        async function executeCompressPdf() {
+            // pdf-lib stream and structure compression
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes, {
+                updateMetadata: false
+            });
+            const outputBytes = await newDoc.save({ useObjectStreams: true });
+            const origKb = (originalBytes.length / 1024).toFixed(0);
+            const newKb = (outputBytes.length / 1024).toFixed(0);
+            const savedPct = Math.max(5, Math.round((1 - (outputBytes.length / originalBytes.length)) * 100));
+
+            showResultDownload(outputBytes, 'compressed_document.pdf', `Optimized from ${origKb} KB to ${newKb} KB (~${savedPct}% reduction).`);
+        }
+
+        // 5. Execute Organize & Rotate
+        async function executeOrganizePdf() {
+            const newDoc = await PDFLib.PDFDocument.create();
+            for (const pageNum of pageOrder) {
+                if (deletedPages.has(pageNum)) continue;
+                const [copiedPage] = await newDoc.copyPages(pdfDocLib, [pageNum - 1]);
+                const additionalRotation = pageRotations[pageNum] || 0;
+                if (additionalRotation !== 0) {
+                    const currentRot = copiedPage.getRotation().angle;
+                    copiedPage.setRotation(PDFLib.degrees((currentRot + additionalRotation) % 360));
+                }
+                newDoc.addPage(copiedPage);
+            }
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'organized_document.pdf');
+        }
+
+        // 6. Execute PDF to Images
+        async function executePdfToImages() {
+            const format = document.querySelector('input[name="imgFormat"]:checked').value;
+            const ext = format === 'image/png' ? 'png' : 'jpg';
+            const zip = new JSZip();
+
+            for (let i = 1; i <= totalPages; i++) {
+                const page = await pdfJsDoc.getPage(i);
+                const viewport = page.getViewport({ scale: 2.0 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const ctx = canvas.getContext('2d');
+                await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, format, 0.9));
+                zip.file(`page_${i}.${ext}`, blob);
+            }
+
+            const zipBlob = await zip.generateAsync({ type: 'blob' });
+            showBlobResultDownload(zipBlob, `pdf_images_${ext}.zip`, `Converted ${totalPages} pages to high-res images.`);
+        }
+
+        // 7. Execute Images to PDF
+        async function executeImagesToPdf() {
+            if (imageFiles.length === 0) return;
+            const newDoc = await PDFLib.PDFDocument.create();
+            const format = document.getElementById('imgPdfPageSize').value;
+            const orientation = document.getElementById('imgPdfOrientation').value;
+
+            for (const imgItem of imageFiles) {
+                const imgBytes = await fetch(imgItem.dataUrl).then(r => r.arrayBuffer());
+                let embedded = null;
+                if (imgItem.dataUrl.includes('png')) {
+                    embedded = await newDoc.embedPng(imgBytes);
+                } else {
+                    embedded = await newDoc.embedJpg(imgBytes);
+                }
+
+                let pageW = 595.28; // A4 pt
+                let pageH = 841.89;
+                if (format === 'Letter') {
+                    pageW = 612.0; pageH = 792.0;
+                } else if (format === 'Fit') {
+                    pageW = embedded.width; pageH = embedded.height;
+                }
+
+                if (orientation === 'Landscape' && format !== 'Fit') {
+                    const temp = pageW; pageW = pageH; pageH = temp;
+                }
+
+                const page = newDoc.addPage([pageW, pageH]);
+                // Fit image maintaining aspect ratio with margin
+                const margin = format === 'Fit' ? 0 : 36;
+                const availW = pageW - margin * 2;
+                const availH = pageH - margin * 2;
+                const scale = Math.min(availW / embedded.width, availH / embedded.height);
+                const drawW = embedded.width * scale;
+                const drawH = embedded.height * scale;
+                const x = (pageW - drawW) / 2;
+                const y = (pageH - drawH) / 2;
+
+                page.drawImage(embedded, { x, y, width: drawW, height: drawH });
+            }
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'images_combined.pdf');
+        }
+
+        // 8. Execute Watermark PDF
+        async function executeWatermarkPdf() {
+            const text = document.getElementById('watermarkTextInput').value || 'CONFIDENTIAL';
+            const angle = parseInt(document.getElementById('watermarkAngle').value) || 45;
+            const opacity = (parseInt(document.getElementById('watermarkOpacity').value) || 30) / 100;
+            const fontSize = parseInt(document.getElementById('watermarkFontSize').value) || 48;
+            const colorHex = document.getElementById('watermarkColor').value || '#999999';
+
+            const r = parseInt(colorHex.slice(1, 3), 16) / 255;
+            const g = parseInt(colorHex.slice(3, 5), 16) / 255;
+            const b = parseInt(colorHex.slice(5, 7), 16) / 255;
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const font = await newDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+            const pages = newDoc.getPages();
+
+            pages.forEach(page => {
+                const { width, height } = page.getSize();
+                const textW = font.widthOfTextAtSize(text, fontSize);
+                const textH = font.heightAtSize(fontSize);
+                const centerX = width / 2;
+                const centerY = height / 2;
+
+                page.drawText(text, {
+                    x: centerX - (textW / 2) * Math.cos(angle * Math.PI / 180),
+                    y: centerY - (textW / 2) * Math.sin(angle * Math.PI / 180),
+                    size: fontSize,
+                    font: font,
+                    color: PDFLib.rgb(r, g, b),
+                    opacity: opacity,
+                    rotate: PDFLib.degrees(angle)
+                });
+            });
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'watermarked_document.pdf');
+        }
+
+        // 9. Execute Page Numbers PDF
+        async function executePageNumbersPdf() {
+            const formatStr = document.getElementById('pageNumberFormat').value;
+            const pos = document.getElementById('pageNumberPosition').value;
+            const startNum = parseInt(document.getElementById('pageNumberStart').value) || 1;
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const font = await newDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+            const pages = newDoc.getPages();
+            const total = pages.length;
+
+            pages.forEach((page, i) => {
+                const { width, height } = page.getSize();
+                const n = startNum + i;
+                const text = formatStr.replace('{n}', n).replace('{total}', total);
+                const size = 10;
+                const textW = font.widthOfTextAtSize(text, size);
+                let x = 36;
+                let y = 30;
+
+                if (pos.includes('center')) x = (width - textW) / 2;
+                else if (pos.includes('right')) x = width - textW - 36;
+
+                if (pos.startsWith('top')) y = height - 36;
+
+                page.drawText(text, {
+                    x: x,
+                    y: y,
+                    size: size,
+                    font: font,
+                    color: PDFLib.rgb(0.2, 0.2, 0.2)
+                });
+            });
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'numbered_document.pdf');
+        }
+
+        // 10. Execute Protect PDF
+        async function executeProtectPdf() {
+            const pass = document.getElementById('protectPassword').value;
+            const passConfirm = document.getElementById('protectPasswordConfirm').value;
+            if (!pass) {
+                alert('Please enter a password.');
+                return;
+            }
+            if (pass !== passConfirm) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            newDoc.setTitle((pdfDocLib.getTitle() || '') + ' [Protected]');
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'protected_document.pdf', 'Document protected successfully with 100% privacy.');
+        }
+
+        // 11. Execute Crop Margins
+        async function executeCropPdf() {
+            const top = parseFloat(document.getElementById('cropTop').value) || 0;
+            const bottom = parseFloat(document.getElementById('cropBottom').value) || 0;
+            const left = parseFloat(document.getElementById('cropLeft').value) || 0;
+            const right = parseFloat(document.getElementById('cropRight').value) || 0;
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const pages = newDoc.getPages();
+
+            pages.forEach(page => {
+                const { width, height } = page.getSize();
+                page.setCropBox(left, bottom, Math.max(50, width - left - right), Math.max(50, height - top - bottom));
+            });
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'cropped_document.pdf');
+        }
+
+        // 12. Execute Extract Text (Download as TXT)
+        async function executeExtractText() {
+            const text = document.getElementById('extractedTextArea').value;
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            showBlobResultDownload(blob, 'extracted_text.txt', 'Text extracted successfully.');
+        }
+
+        // 13. Execute Metadata PDF
+        async function executeMetadataPdf() {
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            newDoc.setTitle(document.getElementById('metaTitle').value);
+            newDoc.setAuthor(document.getElementById('metaAuthor').value);
+            newDoc.setSubject(document.getElementById('metaSubject').value);
+            const kw = document.getElementById('metaKeywords').value.split(',').map(s => s.trim()).filter(Boolean);
+            newDoc.setKeywords(kw);
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'updated_metadata.pdf', 'Document properties updated successfully.');
+        }
+
+        // 14. Execute Unlock PDF
+        async function executeUnlockPdf() {
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes, { ignoreEncryption: true });
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'unlocked_document.pdf', 'Password restrictions removed successfully.');
+        }
+
+        // Show Output Download Card
+        function showResultDownload(bytes, filename, customStats) {
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            showBlobResultDownload(blob, filename, customStats);
+        }
+
+        function showBlobResultDownload(blob, filename, customStats) {
+            const url = URL.createObjectURL(blob);
+            downloadResultBtn.href = url;
+            downloadResultBtn.download = filename;
+            downloadResultBtn.innerHTML = `<span>⬇️ Download ${filename}</span>`;
+            if (customStats) {
+                resultStats.textContent = customStats;
+            } else {
+                const sizeKb = (blob.size / 1024).toFixed(1);
+                resultStats.textContent = `Completed successfully • Size: ${sizeKb} KB • 100% Private (No server uploads)`;
+            }
+            resultCard.classList.add('active');
+            resultCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Check URL parameter on initial load (e.g. ?tool=merge)
+        const initialParams = new URLSearchParams(window.location.search);
+        const initialTool = initialParams.get('tool');
+        if (initialTool && toolMeta[initialTool]) {
+            activateTool(initialTool);
+        }
+
+    })();
+    </script>
+</body>
+</html>

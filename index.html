@@ -61,10 +61,14 @@
                         <span>📄 Documents</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
                     </a>
                     <div class="nav-quick-menu">
+                        <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="nav-quick-item" style="font-weight:700; color:#0D7A82 !important;"><span>⚡ Sejda PDF Studio (All Tools)</span></a>
+                        <a href="pages/pdf-tools.html?tool=edit" data-tool="pdf-tools" class="nav-quick-item"><span>✏️ PDF Editor (Sign, Text, Draw)</span></a>
+                        <a href="pages/pdf-tools.html?tool=merge" data-tool="pdf-tools" class="nav-quick-item"><span>🔀 Merge PDF Files</span></a>
+                        <a href="pages/pdf-tools.html?tool=split" data-tool="pdf-tools" class="nav-quick-item"><span>✂️ Split PDF Pages</span></a>
+                        <a href="pages/pdf-tools.html?tool=compress" data-tool="pdf-tools" class="nav-quick-item"><span>🗜️ Compress PDF Size</span></a>
+                        <a href="pages/pdf-tools.html?tool=organize" data-tool="pdf-tools" class="nav-quick-item"><span>🔄 Organize & Rotate Pages</span></a>
                         <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>🔄 Universal Converter</span></a>
                         <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>📑 PDF to Word (DOCX)</span></a>
-                        <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>📝 Word (DOCX) to PDF</span></a>
-                        <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>📊 PDF to Excel (XLSX)</span></a>
                     </div>
                 </div>
                 <div class="nav-category-item">
@@ -146,6 +150,9 @@
                         <button class="theme-option-item" data-theme-choice="facebook">
                             <span class="theme-color-dot" style="background:#1877F2; border-color:#0C5DC7;"></span> Social Blue
                         </button>
+                        <button class="theme-option-item" data-theme-choice="sejda">
+                            <span class="theme-color-dot" style="background:#0D7A82; border-color:#08545A;"></span> Sejda Clean Teal
+                        </button>
                     </div>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
@@ -163,8 +170,16 @@
                     <input type="text" class="sidebar-search-input" id="sidebarSearch" placeholder="🔍 Quick find tool... (Press '/')">
                 </div>
 
-                <div class="sidebar-group">
-                    <div class="sidebar-group-title">⭐ Featured & Popular</div>
+                <!-- Category 1: Popular & Featured -->
+                <div class="sidebar-group" data-category="popular">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">⭐ Popular &amp; Trending</span>
+                        <span class="sidebar-group-badge">Hot</span>
+                    </div>
+                    <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="sidebar-link">
+                        <span>⚡ Sejda PDF Studio</span>
+                        <span class="sidebar-tag tag-sejda">All-in-One</span>
+                    </a>
                     <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link">
                         <span>📄 Document Converter</span>
                         <span class="sidebar-tag tag-new">Private</span>
@@ -175,48 +190,142 @@
                     </a>
                     <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link">
                         <span>📑 Income Tax (Old vs New)</span>
-                        <span class="sidebar-tag tag-new">Deductions</span>
                     </a>
                     <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link">
-                        <span>🏦 Loan Prepayment & EMI</span>
-                        <span class="sidebar-tag">Sliders</span>
+                        <span>🏦 Loan Prepayment &amp; EMI</span>
                     </a>
                 </div>
 
-                <div class="sidebar-group">
-                    <div class="sidebar-group-title">📄 Document & Media Tools</div>
-                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link"><span>Word ⇄ PDF</span></a>
-                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link"><span>PDF ⇄ Excel</span></a>
-                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link"><span>PDF ⇄ PowerPoint</span></a>
-                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link"><span>YouTube & Shorts Downloader</span></a>
-                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link"><span>Instagram Reels & Audio MP3</span></a>
+                <!-- Category 2: Sejda PDF & Document Studio -->
+                <div class="sidebar-group" data-category="pdf">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">📄 PDF &amp; Document Studio</span>
+                        <span class="sidebar-group-badge">Sejda</span>
+                    </div>
+                    <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="sidebar-link">
+                        <span>⚡ All PDF Tools (14-in-1)</span>
+                        <span class="sidebar-tag tag-sejda">Suite</span>
+                    </a>
+                    <div class="sidebar-sublinks">
+                        <a href="pages/pdf-tools.html?tool=edit" class="sidebar-sublink"><span>✏️ PDF Editor &amp; Sign</span></a>
+                        <a href="pages/pdf-tools.html?tool=merge" class="sidebar-sublink"><span>🔀 Merge PDF</span></a>
+                        <a href="pages/pdf-tools.html?tool=split" class="sidebar-sublink"><span>✂️ Split by Pages</span></a>
+                        <a href="pages/pdf-tools.html?tool=compress" class="sidebar-sublink"><span>🗜️ Compress PDF</span></a>
+                        <a href="pages/pdf-tools.html?tool=organize" class="sidebar-sublink"><span>🔄 Rotate &amp; Reorder</span></a>
+                        <a href="pages/pdf-tools.html?tool=pdf-to-img" class="sidebar-sublink"><span>🖼️ PDF to JPG/PNG</span></a>
+                        <a href="pages/pdf-tools.html?tool=protect" class="sidebar-sublink"><span>🔒 Protect &amp; Unlock</span></a>
+                    </div>
+                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link">
+                        <span>Word ⇄ PDF Converter</span>
+                    </a>
                 </div>
 
-                <div class="sidebar-group">
-                    <div class="sidebar-group-title">🧮 Financial Calculators</div>
-                    <a href="pages/buy-vs-rent-calculator.html" data-tool="buy-vs-rent-calculator" class="sidebar-link"><span>🏡 Buy vs Rent Decision</span><span class="sidebar-tag tag-hot">Hot</span></a>
-                    <a href="pages/goal-financial-planner.html" data-tool="goal-financial-planner" class="sidebar-link"><span>🎯 Life Goal Planner</span><span class="sidebar-tag tag-new">New</span></a>
-                    <a href="pages/swp-annuity-calculator.html" data-tool="swp-annuity-calculator" class="sidebar-link"><span>💵 SWP &amp; Pension</span></a>
-                    <a href="pages/retirement-benefits-calculator.html" data-tool="retirement-benefits-calculator" class="sidebar-link"><span>💼 Retirement &amp; Gratuity</span></a>
-                    <a href="pages/rd-calculator.html" data-tool="rd-calculator" class="sidebar-link"><span>🔄 RD Calculator</span></a>
-                    <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link"><span>Income Tax & Deductions</span></a>
-                    <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link"><span>Home Loan & Prepayment</span></a>
-                    <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="sidebar-link"><span>GST & Sales Tax</span></a>
-                    <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="sidebar-link"><span>SIP & Mutual Funds</span></a>
-                    <a href="pages/compound-interest.html" data-tool="compound-interest" class="sidebar-link"><span>Compound Interest</span></a>
-                    <a href="pages/fd-calculator.html" data-tool="fd-calculator" class="sidebar-link"><span>Fixed Deposit (FD)</span></a>
-                    <a href="pages/percentage-calculator.html" data-tool="percentage-calculator" class="sidebar-link"><span>Percentage Calculator</span></a>
+                <!-- Category 3: Video & Audio Tools -->
+                <div class="sidebar-group" data-category="media">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">🎥 Video &amp; Audio Tools</span>
+                        <span class="sidebar-group-badge">Media</span>
+                    </div>
+                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link">
+                        <span>📥 Universal Downloader</span>
+                        <span class="sidebar-tag tag-hot">HD</span>
+                    </a>
+                    <div class="sidebar-sublinks">
+                        <a href="pages/video-downloader.html#audio" class="sidebar-sublink"><span>🎵 MP3 Audio Extractor</span></a>
+                        <a href="pages/video-downloader.html#shorts" class="sidebar-sublink"><span>📱 Shorts &amp; Reels</span></a>
+                    </div>
                 </div>
 
-                <div class="sidebar-group">
-                    <div class="sidebar-group-title">📝 Text & Development</div>
-                    <a href="pages/word-counter.html" data-tool="word-counter" class="sidebar-link"><span>Word & Character Counter</span></a>
-                    <a href="pages/json-formatter.html" data-tool="json-formatter" class="sidebar-link"><span>JSON Formatter & Validator</span></a>
-                    <a href="pages/case-converter.html" data-tool="case-converter" class="sidebar-link"><span>Case Converter</span></a>
-                    <a href="pages/image-compressor.html" data-tool="image-compressor" class="sidebar-link"><span>Image Compressor</span></a>
-                    <a href="pages/image-resizer.html" data-tool="image-resizer" class="sidebar-link"><span>Image Resizer</span></a>
-                    <a href="pages/base64-tool.html" data-tool="base64-tool" class="sidebar-link"><span>Base64 Tool</span></a>
-                    <a href="pages/regex-tester.html" data-tool="regex-tester" class="sidebar-link"><span>Regex Tester</span></a>
+                <!-- Category 4: Loans & Debt Freedom -->
+                <div class="sidebar-group" data-category="loans">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">🏦 Loans &amp; Debt Freedom</span>
+                        <span class="sidebar-group-badge">Loans</span>
+                    </div>
+                    <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link">
+                        <span>Loan Prepayment &amp; EMI</span>
+                        <span class="sidebar-tag tag-hot">Save ₹</span>
+                    </a>
+                    <a href="pages/buy-vs-rent-calculator.html" data-tool="buy-vs-rent-calculator" class="sidebar-link">
+                        <span>Buy vs Rent Decision</span>
+                        <span class="sidebar-tag tag-new">Smart</span>
+                    </a>
+                    <a href="pages/fd-calculator.html" data-tool="fd-calculator" class="sidebar-link">
+                        <span>Fixed Deposit (FD)</span>
+                    </a>
+                    <a href="pages/rd-calculator.html" data-tool="rd-calculator" class="sidebar-link">
+                        <span>Recurring Deposit (RD)</span>
+                    </a>
+                </div>
+
+                <!-- Category 5: Tax & Wealth Planning -->
+                <div class="sidebar-group" data-category="wealth">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">📈 Tax &amp; Wealth Planning</span>
+                        <span class="sidebar-group-badge">Tax/Inv</span>
+                    </div>
+                    <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link">
+                        <span>Income Tax (Old vs New)</span>
+                        <span class="sidebar-tag tag-new">FY 25-26</span>
+                    </a>
+                    <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="sidebar-link">
+                        <span>GST &amp; Sales Tax</span>
+                    </a>
+                    <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="sidebar-link">
+                        <span>SIP Mutual Funds</span>
+                    </a>
+                    <a href="pages/swp-annuity-calculator.html" data-tool="swp-annuity-calculator" class="sidebar-link">
+                        <span>SWP &amp; Pension</span>
+                    </a>
+                    <a href="pages/goal-financial-planner.html" data-tool="goal-financial-planner" class="sidebar-link">
+                        <span>Life Goal Planner</span>
+                    </a>
+                    <a href="pages/retirement-benefits-calculator.html" data-tool="retirement-benefits-calculator" class="sidebar-link">
+                        <span>Retirement &amp; Gratuity</span>
+                    </a>
+                    <a href="pages/compound-interest.html" data-tool="compound-interest" class="sidebar-link">
+                        <span>Compound Interest</span>
+                    </a>
+                    <a href="pages/percentage-calculator.html" data-tool="percentage-calculator" class="sidebar-link">
+                        <span>Percentage Calculator</span>
+                    </a>
+                </div>
+
+                <!-- Category 6: Text & Utilities -->
+                <div class="sidebar-group" data-category="text">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">📝 Text &amp; Utilities</span>
+                        <span class="sidebar-group-badge">Text</span>
+                    </div>
+                    <a href="pages/word-counter.html" data-tool="word-counter" class="sidebar-link">
+                        <span>Word &amp; Character Counter</span>
+                    </a>
+                    <a href="pages/case-converter.html" data-tool="case-converter" class="sidebar-link">
+                        <span>Case Converter</span>
+                    </a>
+                    <a href="pages/json-formatter.html" data-tool="json-formatter" class="sidebar-link">
+                        <span>JSON Formatter &amp; Validator</span>
+                    </a>
+                    <a href="pages/base64-tool.html" data-tool="base64-tool" class="sidebar-link">
+                        <span>Base64 Encoder / Decoder</span>
+                    </a>
+                </div>
+
+                <!-- Category 7: Dev & Images -->
+                <div class="sidebar-group" data-category="dev">
+                    <div class="sidebar-group-header">
+                        <span class="sidebar-group-title">💻 Dev &amp; Images</span>
+                        <span class="sidebar-group-badge">Dev</span>
+                    </div>
+                    <a href="pages/image-compressor.html" data-tool="image-compressor" class="sidebar-link">
+                        <span>Image Compressor</span>
+                    </a>
+                    <a href="pages/image-resizer.html" data-tool="image-resizer" class="sidebar-link">
+                        <span>Image Resizer</span>
+                    </a>
+                    <a href="pages/regex-tester.html" data-tool="regex-tester" class="sidebar-link">
+                        <span>Regex Tester</span>
+                    </a>
                 </div>
 
                 <!-- Sidebar Google AdSense Unit (Sticky / Responsive) -->
@@ -366,20 +475,37 @@
                     </div>
                     
                     <div class="featured-grid">
-                    <!-- Buy vs Rent Spotlight -->
-                    <a href="pages/buy-vs-rent-calculator.html" class="tool-card featured-card" data-tool="buy-vs-rent-calculator">
-                        <div class="tool-card-top">
-                            <span class="tool-card-icon">🏡</span>
-                            <span class="tool-card-badge badge-hot">🔥 Popular &amp; High Impact</span>
-                        </div>
-                        <h3>Buy Home vs. Rent Decision Engine</h3>
-                        <p>Comprehensive 30-year wealth comparison: Flat vs House appreciation, EMI vs escalating rent, moving costs, brokerages &amp; down payment opportunity cost.</p>
-                        <div class="tool-card-footer">
-                            <span class="tool-card-tag">Real Estate</span>
-                            <span class="tool-card-tag">Opportunity Cost</span>
-                            <span class="tool-card-cta">Decide Now &rarr;</span>
-                        </div>
-                    </a>
+                        <!-- 0. Sejda PDF Studio Spotlight -->
+                        <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="featured-card" style="border-color: #0D7A82;">
+                            <div class="featured-header">
+                                <div class="featured-icon" style="background:#E6F5F6; color:#0D7A82;">⚡</div>
+                                <span class="featured-badge" style="background:#0D7A82; color:#fff;">Sejda Suite • 14-in-1</span>
+                            </div>
+                            <h3 style="color:#0D7A82;">Sejda PDF Studio</h3>
+                            <p>Full-featured browser PDF studio: Edit &amp; sign documents, merge, split, compress, organize pages, convert to images, and protect files with zero uploads.</p>
+                            <div class="featured-features">
+                                <span class="featured-tag" style="background:#E6F5F6; color:#0D7A82;">PDF Editor &amp; Sign</span>
+                                <span class="featured-tag" style="background:#E6F5F6; color:#0D7A82;">Merge &amp; Split</span>
+                                <span class="featured-tag" style="background:#E6F5F6; color:#0D7A82;">Compress</span>
+                            </div>
+                            <div class="featured-cta" style="color:#0D7A82;">Launch Sejda Studio <span>&rarr;</span></div>
+                        </a>
+
+                        <!-- Buy vs Rent Spotlight -->
+                        <a href="pages/buy-vs-rent-calculator.html" data-tool="buy-vs-rent-calculator" class="featured-card">
+                            <div class="featured-header">
+                                <div class="featured-icon">🏡</div>
+                                <span class="featured-badge" style="background:#FEE2E2; color:#DC2626;">Popular • Smart</span>
+                            </div>
+                            <h3>Buy Home vs. Rent Decision</h3>
+                            <p>Comprehensive 30-year wealth comparison: Flat vs House appreciation, EMI vs escalating rent, moving costs, brokerages &amp; down payment opportunity cost.</p>
+                            <div class="featured-features">
+                                <span class="featured-tag">Real Estate</span>
+                                <span class="featured-tag">Opportunity Cost</span>
+                                <span class="featured-tag">30-Yr Comparison</span>
+                            </div>
+                            <div class="featured-cta">Decide Now <span>&rarr;</span></div>
+                        </a>
 
                         <!-- 0. Universal Document Converter -->
                         <a href="pages/document-converter.html" data-tool="document-converter" class="featured-card">
@@ -486,6 +612,18 @@
                     <h2 class="section-title">📄 Document Tools & Converters</h2>
                     <p class="section-desc">100% private, client-side document conversion between Word, PDF, Excel, and PowerPoint with zero server uploads.</p>
                     <div class="tools-grid">
+                        <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="tool-card tool-card-glossy" style="border: 2px solid #0D7A82;">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper" style="background:#E6F5F6; color:#0D7A82;">⚡</div>
+                                <span class="tool-badge-pill" style="background:#0D7A82; color:#fff;">Sejda Suite</span>
+                            </div>
+                            <h3 style="color:#0D7A82;">Sejda PDF Studio (All-in-One)</h3>
+                            <p>Complete replica of Sejda.com! Full PDF Editor (Sign, Text, Draw, Redact), Merge, Split, Compress, Organize & Rotate, Watermark, Convert to Images & more.</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill" style="background:#E6F5F6; color:#0D7A82;">13+ PDF Tools</span>
+                                <span class="tool-launch-btn" style="color:#0D7A82;">Open Studio <span>&rarr;</span></span>
+                            </div>
+                        </a>
                         <a href="pages/document-converter.html" data-tool="document-converter" class="tool-card tool-card-glossy">
                             <div class="tool-card-header">
                                 <div class="tool-icon-wrapper">🔄</div>
