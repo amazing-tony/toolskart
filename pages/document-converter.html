@@ -397,9 +397,10 @@
 
     <!-- docx-preview for 100% Word style, font & table fidelity -->
     <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.3.3/dist/docx-preview.min.js"></script>
-    <script>window.docx && window.docx.renderAsync || document.write('<script src="../js/docx-preview.min.js"><\/script>')</script>
     <script>
-        window.docxPreview = window.docx || window.docxPreview;
+        if (window.docx && typeof window.docx.renderAsync === 'function') {
+            window.docxPreview = window.docx;
+        }
         window.docx = _savedDocxGen;
     </script>
 

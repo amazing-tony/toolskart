@@ -24,6 +24,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -99,7 +101,7 @@
                                     <div class="calc-val-badge" id="loanAmountWords">₹ 50 Lakhs</div>
                                 </div>
                                 <div class="dual-input-row">
-                                    <div class="input-with-unit" style="flex: 1; max-width: 260px;">
+                                    <div class="input-with-unit" style="flex: 0 1 280px; min-width: 180px;">
                                         <input type="number" id="loanAmount" class="input-field" value="5000000" min="100000" max="50000000" step="50000">
                                         <span class="input-unit">₹</span>
                                     </div>
@@ -123,7 +125,7 @@
                                         <span class="calc-val-sub" id="rateSubLabel">Typical: 8.5% – 9.5%</span>
                                     </div>
                                     <div class="dual-input-row">
-                                        <div class="input-with-unit" style="width: 140px;">
+                                        <div class="input-with-unit" style="width: 170px; min-width: 160px;">
                                             <input type="number" id="interestRate" class="input-field" value="8.75" min="4" max="25" step="0.05">
                                             <span class="input-unit">%</span>
                                         </div>
@@ -145,7 +147,7 @@
                                         <span class="calc-val-sub" id="tenureMonthsLabel">240 Months</span>
                                     </div>
                                     <div class="dual-input-row">
-                                        <div class="input-with-unit" style="width: 140px;">
+                                        <div class="input-with-unit" style="width: 170px; min-width: 160px;">
                                             <input type="number" id="loanTenure" class="input-field" value="20" min="1" max="35" step="1">
                                             <span class="input-unit">Yrs</span>
                                         </div>
@@ -220,7 +222,7 @@
                                     <span>⏱️</span> Target Debt-Free Date
                                 </button>
                                 <button type="button" class="prepay-mode-btn" data-mode="lumpsum">
-                                    <span>🗓️</span> Custom Lumpsums
+                                    <span>🗓️</span> Month &amp; Year Scheduler
                                 </button>
                             </div>
 
@@ -235,7 +237,7 @@
                                         <div class="calc-val-badge" id="monthlyPrepayWords">+ ₹ 5,000 / mo</div>
                                     </div>
                                     <div class="dual-input-row">
-                                        <div class="input-with-unit" style="flex: 1; max-width: 240px;">
+                                        <div class="input-with-unit" style="flex: 0 1 260px; min-width: 175px;">
                                             <input type="number" id="monthlyPrepay" class="input-field" value="5000" min="0" max="200000" step="500">
                                             <span class="input-unit">₹/mo</span>
                                         </div>
@@ -281,11 +283,11 @@
                                         <div class="calc-val-badge" id="yearlyPrepayWords">₹ 0 / year</div>
                                     </div>
                                     <div class="dual-input-row">
-                                        <div class="input-with-unit" style="flex: 1; max-width: 240px;">
+                                        <div class="input-with-unit" style="flex: 0 1 260px; min-width: 175px;">
                                             <input type="number" id="yearlyPrepay" class="input-field" value="0" min="0" max="2000000" step="5000">
                                             <span class="input-unit">₹/yr</span>
                                         </div>
-                                        <input type="range" id="yearlyPrepaySlider" class="custom-range-slider" min="0" max="500000" step="5000" value="0">
+                                        <input type="range" id="yearlyPrepaySlider" class="custom-range-slider" min="0" max="50000" step="5000" value="0">
                                     </div>
                                     <div class="quick-chip-row">
                                         <button type="button" class="quick-chip active" data-target="yearlyPrepay" data-val="0">₹ 0</button>
@@ -307,7 +309,7 @@
                                         <div class="calc-val-badge" id="targetTenureWords">10 Years</div>
                                     </div>
                                     <div class="dual-input-row">
-                                        <div class="input-with-unit" style="width: 140px;">
+                                        <div class="input-with-unit" style="width: 170px; min-width: 160px;">
                                             <input type="number" id="targetTenure" class="input-field" value="10" min="1" max="30" step="1">
                                             <span class="input-unit">Years</span>
                                         </div>
@@ -330,16 +332,21 @@
                                 </div>
                             </div>
 
-                            <!-- Mode 4: Custom Lumpsums (Ad-Hoc) -->
+                            <!-- Mode 4: Custom Month & Year Prepayment Scheduler -->
                             <div class="prepay-pane" id="pane-lumpsum">
-                                <p class="pane-help-text">
-                                    Expect a windfall, FD maturity, or property sale down the road? Add one-time prepayments at specific years.
-                                </p>
+                                <div style="margin-bottom: 0.75rem;">
+                                    <h4 style="margin: 0 0 0.35rem 0; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span>🗓️</span> Custom Month &amp; Year Prepayment Scheduler
+                                    </h4>
+                                    <p class="pane-help-text" style="margin-bottom: 0.75rem;">
+                                        Plan irregular or scheduled prepayments for any specific month and year during your loan tenure (e.g. bonus, FD maturity, property sale, or salary hike). See exact time and interest gains for each payment!
+                                    </p>
+                                </div>
                                 
-                                <div class="lumpsum-entry-bar">
-                                    <div class="lumpsum-entry-item">
-                                        <label>At Year:</label>
-                                        <select id="newPrepayYear" class="input-field mini-select">
+                                <div class="lumpsum-entry-bar" style="background: var(--color-bg); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end;">
+                                    <div class="lumpsum-entry-item" style="min-width: 120px;">
+                                        <label for="newPrepayYear" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">Loan Year:</label>
+                                        <select id="newPrepayYear" class="input-field mini-select" style="width: 100%;">
                                             <option value="1">Year 1</option>
                                             <option value="2" selected>Year 2</option>
                                             <option value="3">Year 3</option>
@@ -349,23 +356,68 @@
                                             <option value="10">Year 10</option>
                                         </select>
                                     </div>
+                                    <div class="lumpsum-entry-item" style="min-width: 130px;">
+                                        <label for="newPrepayMonth" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">In Month:</label>
+                                        <select id="newPrepayMonth" class="input-field mini-select" style="width: 100%;">
+                                            <option value="1">Month 1</option>
+                                            <option value="2">Month 2</option>
+                                            <option value="3">Month 3</option>
+                                            <option value="4">Month 4</option>
+                                            <option value="5">Month 5</option>
+                                            <option value="6" selected>Month 6</option>
+                                            <option value="7">Month 7</option>
+                                            <option value="8">Month 8</option>
+                                            <option value="9">Month 9</option>
+                                            <option value="10">Month 10</option>
+                                            <option value="11">Month 11</option>
+                                            <option value="12">Month 12</option>
+                                        </select>
+                                    </div>
                                     <div class="lumpsum-entry-item" style="flex: 1; min-width: 160px;">
-                                        <label>Amount (₹):</label>
-                                        <input type="number" id="newPrepayAmount" class="input-field" placeholder="e.g. 200000" min="1000" step="10000">
+                                        <label for="newPrepayAmount" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">Amount (₹):</label>
+                                        <input type="number" id="newPrepayAmount" class="input-field" placeholder="e.g. 100000" min="1000" step="5000">
                                     </div>
                                     <div class="lumpsum-entry-item" style="flex: 1; min-width: 140px;">
-                                        <label>Note:</label>
-                                        <input type="text" id="newPrepayNote" class="input-field" placeholder="e.g. Bonus / FD">
+                                        <label for="newPrepayNote" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">Purpose / Note:</label>
+                                        <input type="text" id="newPrepayNote" class="input-field" placeholder="e.g. Diwali Bonus / FD">
                                     </div>
-                                    <button type="button" class="btn btn-secondary btn-sm" id="btnAddLumpsum" style="align-self: flex-end; height: 42px;">
-                                        + Add
+                                    <button type="button" class="btn btn-primary btn-sm" id="btnAddLumpsum" style="align-self: flex-end; height: 42px; white-space: nowrap; font-weight: 600;">
+                                        + Schedule Prepayment
                                     </button>
                                 </div>
 
-                                <!-- Added Lumpsums Pills -->
-                                <div class="lumpsum-tags-container" id="lumpsumTagsList">
-                                    <!-- Dynamic chips rendered here -->
+                                <div class="quick-chip-row" style="margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                                    <span style="font-size: 0.78rem; color: var(--color-text-muted); margin-right: 0.25rem;">Quick Amounts:</span>
+                                    <button type="button" class="quick-chip" data-target="newPrepayAmount" data-val="25000">₹ 25k</button>
+                                    <button type="button" class="quick-chip" data-target="newPrepayAmount" data-val="50000">₹ 50k</button>
+                                    <button type="button" class="quick-chip" data-target="newPrepayAmount" data-val="100000">₹ 1 Lakh</button>
+                                    <button type="button" class="quick-chip" data-target="newPrepayAmount" data-val="200000">₹ 2 Lakhs</button>
+                                    <button type="button" class="quick-chip" data-target="newPrepayAmount" data-val="500000">₹ 5 Lakhs</button>
                                 </div>
+
+                                <!-- Scheduler Table -->
+                                <div class="scheduler-table-wrap" id="schedulerTableWrap" style="margin-top: 1rem;">
+                                    <table class="scheduler-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Tenure Timing</th>
+                                                <th>Calendar Date</th>
+                                                <th>Prepayment Amount</th>
+                                                <th>Purpose / Note</th>
+                                                <th>Calculated Gain (Time &amp; Money)</th>
+                                                <th style="text-align: center;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="schedulerTableBody">
+                                            <tr>
+                                                <td colspan="6" style="text-align: center; color: var(--color-text-muted); padding: 1rem;">
+                                                    No scheduled prepayments yet. Select a year, month, and amount above to see your time &amp; money savings!
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="schedulerSummaryStrip" style="margin-top: 0.75rem; font-size: 0.86rem; color: var(--color-text-secondary);"></div>
                             </div>
                         </div>
 
@@ -407,7 +459,7 @@
                                         Expected return if you invest surplus in Mutual Funds / SIP instead:
                                     </p>
                                     <div class="dual-input-row">
-                                        <div class="input-with-unit" style="width: 120px;">
+                                        <div class="input-with-unit" style="width: 170px; min-width: 160px;">
                                             <input type="number" id="investRate" class="input-field" value="12" min="5" max="25" step="0.5">
                                             <span class="input-unit">%</span>
                                         </div>
@@ -421,7 +473,10 @@
                                 </div>
                             </div>
 
-                            <div style="display: flex; justify-content: flex-end; margin-top: 1.25rem;">
+                            <div class="calc-action-bar" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border);">
+                                <button type="button" class="btn btn-primary btn-lg" id="btnCalculatePlan" style="font-size: 1.05rem; padding: 0.85rem 1.85rem; font-weight: 700; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); cursor: pointer;">
+                                    🚀 Calculate Debt-Freedom Plan &amp; Savings
+                                </button>
                                 <button type="button" class="btn btn-outline btn-sm" id="btnResetAll">
                                     ↺ Reset to Default Example
                                 </button>
@@ -429,6 +484,12 @@
                         </div>
 
                     </div> <!-- /calc-box-card -->
+
+                    <!-- Live Sync Indicator -->
+                    <div class="live-sync-indicator" id="liveSyncStatus" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; font-weight: 600; color: #059669; background: rgba(16, 185, 129, 0.1); padding: 0.4rem 0.9rem; border-radius: 9999px; margin-bottom: 1rem; border: 1px solid rgba(16, 185, 129, 0.25);">
+                        <span class="live-dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10B981; animation: pulseDot 2s infinite;"></span>
+                        <span id="liveSyncText">Live Calculated for ₹ 50 Lakhs @ 8.75%</span>
+                    </div>
 
                     <!-- ============================================
                          RESULTS & FREEDOM DASHBOARD (LIVE UPDATING)
@@ -695,11 +756,14 @@
                                     <h3>📅 Complete Amortization Schedule</h3>
                                     <p>Track opening balance, interest, prepayments, and closing balance for each period.</p>
                                 </div>
-                                <div class="schedule-actions">
+                                <div class="schedule-actions" style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
                                     <div class="toggle-pill-group">
                                         <button type="button" class="toggle-pill-btn active" id="toggleYearlyBtn">Yearly</button>
                                         <button type="button" class="toggle-pill-btn" id="toggleMonthlyBtn">Monthly</button>
                                     </div>
+                                    <button type="button" class="btn btn-primary btn-sm" id="btnDownloadReport" style="font-weight: 600;">
+                                        📥 Download PDF Summary Report
+                                    </button>
                                     <button type="button" class="btn btn-outline btn-sm" id="downloadCsvBtn">
                                         📥 Download CSV
                                     </button>

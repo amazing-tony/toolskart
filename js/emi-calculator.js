@@ -64,6 +64,13 @@
   const newPrepayNote = document.getElementById('newPrepayNote');
   const btnAddLumpsum = document.getElementById('btnAddLumpsum');
   const lumpsumTagsList = document.getElementById('lumpsumTagsList');
+  const newPrepayMonth = document.getElementById('newPrepayMonth');
+  const schedulerTableBody = document.getElementById('schedulerTableBody');
+  const schedulerSummaryStrip = document.getElementById('schedulerSummaryStrip');
+  const btnCalculatePlan = document.getElementById('btnCalculatePlan');
+  const liveSyncStatus = document.getElementById('liveSyncStatus');
+  const liveSyncText = document.getElementById('liveSyncText');
+  const btnDownloadReport = document.getElementById('btnDownloadReport');
 
   // Impact mode & SIP
   const labelImpactTenure = document.getElementById('labelImpactTenure');
@@ -151,18 +158,7 @@
   let currentMonthlySchedule = [];
   let calculationRafId = null;
 
-  // Initialize
-  initPrepayModeTabs();
-  initDualSyncSliders();
-  initQuickChips();
-  initImpactRadios();
-  initStartDateControls();
-  initTrendChartControls();
-  initEventListeners();
-  updateWordDisplays();
-  updateStartDateDisplay();
-  updateTargetSolver();
-  triggerLiveCalculation();
+  // (Initialization moved to bottom of file)
 
   // --- 1. Dual-Sync Sliders & Inputs ---
   function initDualSyncSliders() {
@@ -465,6 +461,25 @@
     if (btnCopySummary) {
       btnCopySummary.addEventListener('click', handleCopySummary);
     }
+
+    // Calculate My Plan Button
+    if (btnCalculatePlan) {
+      btnCalculatePlan.addEventListener('click', () => {
+        calculateAndRender();
+        const resultsEl = document.getElementById('resultsDashboard');
+        if (resultsEl) {
+          resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          resultsEl.classList.remove('results-highlight-pulse');
+          void resultsEl.offsetWidth;
+          resultsEl.classList.add('results-highlight-pulse');
+        }
+      });
+    }
+
+    // Download PDF Report Button
+    if (btnDownloadReport) {
+      btnDownloadReport.addEventListener('click', handleDownloadReport);
+    }
   }
 
   // --- 6. Helper: Convert Numbers to Indian Words (Lakhs & Crores) ---
@@ -585,54 +600,147 @@
     triggerLiveCalculation();
   }
 
-  // --- 9. Custom Lumpsums Handler ---
+  // --- 9. Custom Month & Year Prepayment Scheduler Handler ---
+  function updateSchedulerYearOptions() {
+    if (!newPrepayYear) return;
+    const tenureYears = Math.max(1, Math.round(parseFloat(loanTenureInput.value) || 20));
+    const currentVal = parseInt(newPrepayYear.value, 10) || 2;
+    newPrepayYear.innerHTML = '';
+    for (let y = 1; y <= tenureYears; y++) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = `Year ${y}`;
+      if (y === currentVal || (currentVal > tenureYears && y === tenureYears)) {
+        opt.selected = true;
+      }
+      newPrepayYear.appendChild(opt);
+    }
+  }
+
   function handleAddLumpsum() {
-    const year = parseInt(newPrepayYear.value, 10);
+    const year = parseInt(newPrepayYear ? newPrepayYear.value : '1', 10) || 1;
+    const monthInYear = parseInt(newPrepayMonth ? newPrepayMonth.value : '1', 10) || 1;
     const amount = parseFloat(newPrepayAmount.value);
-    const note = newPrepayNote.value.trim();
+    const note = newPrepayNote ? newPrepayNote.value.trim() : '';
 
     if (isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid lumpsum prepayment amount.');
-      newPrepayAmount.focus();
+      alert('Please enter a valid prepayment amount (e.g. ₹ 50,000).');
+      if (newPrepayAmount) newPrepayAmount.focus();
       return;
     }
 
-    customLumpsums.push({ year, month: year * 12, amount, note: note || `Year ${year} Lumpsum` });
-    newPrepayAmount.value = '';
-    newPrepayNote.value = '';
-    renderLumpsumTags();
+    const tenureYears = parseFloat(loanTenureInput.value) || 20;
+    const totalMaxMonths = Math.round(tenureYears * 12);
+    const loanMonth = (year - 1) * 12 + monthInYear;
+
+    if (loanMonth > totalMaxMonths) {
+      alert(`Selected timing (Year ${year}, Month ${monthInYear}) is beyond your total loan tenure of ${tenureYears} years.`);
+      return;
+    }
+
+    customLumpsums.push({
+      id: 'sched_' + Date.now() + '_' + Math.floor(Math.random() * 10000),
+      year,
+      monthInYear,
+      loanMonth,
+      amount,
+      note: note || `Year ${year} Month ${monthInYear} Prepayment`
+    });
+
+    customLumpsums.sort((a, b) => a.loanMonth - b.loanMonth);
+
+    if (newPrepayAmount) newPrepayAmount.value = '';
+    if (newPrepayNote) newPrepayNote.value = '';
+
     triggerLiveCalculation();
   }
 
-  function renderLumpsumTags() {
-    if (!lumpsumTagsList) return;
-    lumpsumTagsList.innerHTML = '';
+  function renderSchedulerTable(currentParams) {
+    if (!schedulerTableBody) return;
+    schedulerTableBody.innerHTML = '';
 
-    if (customLumpsums.length === 0) {
-      lumpsumTagsList.innerHTML = '<span style="font-size:0.82rem; color:var(--color-text-muted);">No custom lumpsums added yet.</span>';
+    if (!customLumpsums || customLumpsums.length === 0) {
+      schedulerTableBody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align: center; color: var(--color-text-muted); padding: 1.25rem 1rem;">
+            No custom prepayments scheduled yet. Select a year, month, and amount above to see your exact time and interest savings!
+          </td>
+        </tr>
+      `;
+      if (schedulerSummaryStrip) schedulerSummaryStrip.innerHTML = '';
       return;
     }
 
-    customLumpsums.sort((a, b) => a.year - b.year);
+    const startDate = getParsedStartDate();
+    let totalScheduledAmount = 0;
 
     customLumpsums.forEach((item, index) => {
-      const tag = document.createElement('div');
-      tag.className = 'lumpsum-tag';
-      tag.innerHTML = `
-        <span><strong>Year ${item.year}:</strong> ₹${item.amount.toLocaleString('en-IN')} (${item.note})</span>
-        <button type="button" class="lumpsum-tag-remove" data-index="${index}">&times;</button>
+      totalScheduledAmount += item.amount;
+      const calDate = getPeriodDate(startDate.year, startDate.month, item.loanMonth - 1);
+
+      // Calculate isolated gain for this single prepayment
+      let gainBadgeHtml = '<span class="scheduler-gain-badge">Calculating...</span>';
+      if (currentParams) {
+        const withoutThis = runSimulation({
+          ...currentParams,
+          customLumpsums: customLumpsums.filter(x => x.id !== item.id)
+        });
+        const mSaved = Math.max(0, withoutThis.monthsCompleted - currentParams.prepaySchedule.monthsCompleted);
+        const intSaved = Math.max(0, withoutThis.totalInterest - currentParams.prepaySchedule.totalInterest);
+
+        if (mSaved > 0 && intSaved > 0) {
+          const y = Math.floor(mSaved / 12);
+          const remM = mSaved % 12;
+          const timeText = (y > 0 && remM > 0) ? `${y}y ${remM}m` : (y > 0 ? `${y} yrs` : `${remM} mos`);
+          gainBadgeHtml = `<span class="scheduler-gain-badge">⏳ ~${timeText} saved • 💰 ₹${Math.round(intSaved).toLocaleString('en-IN')}</span>`;
+        } else if (intSaved > 0) {
+          gainBadgeHtml = `<span class="scheduler-gain-badge">💰 ₹${Math.round(intSaved).toLocaleString('en-IN')} interest saved</span>`;
+        } else {
+          gainBadgeHtml = `<span class="scheduler-gain-badge" style="background:rgba(100,116,139,0.1); color:var(--color-text-secondary); border-color:transparent;">Paid near close</span>`;
+        }
+      }
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>Year ${item.year}, Month ${item.monthInYear}</strong> <span style="font-size:0.75rem; color:var(--color-text-muted);">(Month ${item.loanMonth})</span></td>
+        <td>${calDate.long}</td>
+        <td><strong style="color:var(--color-text);">₹ ${Math.round(item.amount).toLocaleString('en-IN')}</strong></td>
+        <td>${item.note || 'Scheduled Prepayment'}</td>
+        <td>${gainBadgeHtml}</td>
+        <td style="text-align: center;">
+          <button type="button" class="scheduler-del-btn" data-id="${item.id}" title="Remove this prepayment">🗑️ Delete</button>
+        </td>
       `;
-      lumpsumTagsList.appendChild(tag);
+      schedulerTableBody.appendChild(tr);
     });
 
-    lumpsumTagsList.querySelectorAll('.lumpsum-tag-remove').forEach(btn => {
+    // Wire up delete buttons
+    schedulerTableBody.querySelectorAll('.scheduler-del-btn').forEach(btn => {
       btn.addEventListener('click', function () {
-        const idx = parseInt(this.getAttribute('data-index'), 10);
-        customLumpsums.splice(idx, 1);
-        renderLumpsumTags();
+        const idToDelete = this.getAttribute('data-id');
+        customLumpsums = customLumpsums.filter(x => x.id !== idToDelete);
         triggerLiveCalculation();
       });
     });
+
+    if (schedulerSummaryStrip && currentParams) {
+      const allWithoutScheduler = runSimulation({
+        ...currentParams,
+        customLumpsums: []
+      });
+      const schedMonthsSaved = Math.max(0, allWithoutScheduler.monthsCompleted - currentParams.prepaySchedule.monthsCompleted);
+      const schedInterestSaved = Math.max(0, allWithoutScheduler.totalInterest - currentParams.prepaySchedule.totalInterest);
+      const y = Math.floor(schedMonthsSaved / 12);
+      const remM = schedMonthsSaved % 12;
+      const totalTimeText = (y > 0 && remM > 0) ? `${y} Years ${remM} Months` : (y > 0 ? `${y} Years` : `${remM} Months`);
+
+      schedulerSummaryStrip.innerHTML = `
+        <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem;">
+          <span><strong>Total Scheduled Prepayments:</strong> ₹ ${Math.round(totalScheduledAmount).toLocaleString('en-IN')} (${customLumpsums.length} payments)</span>
+          <span style="color: #059669; font-weight: 700;">🚀 Total Gains: ~${totalTimeText} Saved • ₹ ${Math.round(schedInterestSaved).toLocaleString('en-IN')} Interest Eliminated</span>
+        </div>
+      `;
+    }
   }
 
   // --- 10. Reset All Handler ---
@@ -665,7 +773,8 @@
     }
 
     customLumpsums = [];
-    renderLumpsumTags();
+    updateSchedulerYearOptions();
+    renderSchedulerTable(null);
 
     // Default mode tab: monthly
     const monthlyBtn = document.querySelector('.prepay-mode-btn[data-mode="monthly"]');
@@ -768,6 +877,9 @@
     });
     renderKpiCards({
       baseEmi,
+      newEmi: prepaySchedule.newEmi,
+      monthlyPrepay,
+      impactMode,
       monthsSaved,
       newTenureYears,
       interestSaved,
@@ -975,17 +1087,33 @@
       timeSavedStr = '0 Months';
     }
 
-    if (data.monthsSaved > 0) {
-      heroYearsSaved.textContent = timeSavedStr;
-      freedomHeadline.innerHTML = `You Will Be 100% Debt-Free <span class="text-highlight">${timeSavedStr}</span>`;
-      freedomSubHeadline.innerHTML = `
-        Your loan finishes in <strong>${data.newTenureYears.toFixed(1)} Years</strong> instead of ${(data.totalMonths / 12).toFixed(0)} Years, saving you a massive <strong class="text-highlight-green">${formatLakhsCrores(data.interestSaved)}</strong> in bank interest!
-      `;
+    const freedomBadge = document.getElementById('freedomBadge');
+    if (data.monthsSaved > 0 || data.interestSaved > 0) {
+      if (freedomBadge) {
+        freedomBadge.textContent = '🎉 Massive Financial Savings';
+        freedomBadge.style.background = 'rgba(5, 150, 105, 0.12)';
+        freedomBadge.style.color = '#059669';
+      }
+      if (heroYearsSaved) heroYearsSaved.textContent = timeSavedStr;
+      if (freedomHeadline) freedomHeadline.innerHTML = `You Will Be 100% Debt-Free <span class="text-highlight">${timeSavedStr}</span>`;
+      if (freedomSubHeadline) {
+        freedomSubHeadline.innerHTML = `
+          Your loan finishes in <strong>${data.newTenureYears.toFixed(1)} Years</strong> instead of ${(data.totalMonths / 12).toFixed(0)} Years, saving you a massive <strong class="text-highlight-green">${formatLakhsCrores(data.interestSaved)}</strong> in bank interest!
+        `;
+      }
     } else {
-      freedomHeadline.innerHTML = 'Add Prepayments to Accelerate Debt Freedom';
-      freedomSubHeadline.innerHTML = `
-        Enter an extra monthly payment or annual bonus above to see how many years and lakhs of interest you can save.
-      `;
+      if (freedomBadge) {
+        freedomBadge.textContent = 'ℹ️ Standard Loan Trajectory (No Prepayment Added)';
+        freedomBadge.style.background = 'rgba(100, 116, 139, 0.12)';
+        freedomBadge.style.color = 'var(--color-text-secondary)';
+      }
+      if (heroYearsSaved) heroYearsSaved.textContent = `${(data.totalMonths / 12).toFixed(0)} Years (Standard)`;
+      if (freedomHeadline) freedomHeadline.innerHTML = `Standard Loan Duration: <span class="text-highlight">${(data.totalMonths / 12).toFixed(0)} Years</span>`;
+      if (freedomSubHeadline) {
+        freedomSubHeadline.innerHTML = `
+          No prepayments added yet. Try adjusting the sliders in Step 2 above to discover how many years and lakhs in bank interest you can save!
+        `;
+      }
     }
 
     // Calendar Debt-Free Dates
@@ -1030,7 +1158,22 @@
   }
 
   function renderKpiCards(data) {
-    if (kpiEmi) kpiEmi.textContent = '₹ ' + Math.round(data.baseEmi).toLocaleString('en-IN');
+    if (data.impactMode === 'emi') {
+      const activeEmi = data.newEmi || data.baseEmi;
+      if (kpiEmi) kpiEmi.textContent = '₹ ' + Math.round(activeEmi).toLocaleString('en-IN');
+      const diff = Math.max(0, data.baseEmi - activeEmi);
+      if (kpiEmiSub) kpiEmiSub.textContent = diff > 0 ? `Reduced from original ₹${Math.round(data.baseEmi).toLocaleString('en-IN')} (saves ₹${Math.round(diff).toLocaleString('en-IN')}/mo)` : 'Standard installment';
+    } else {
+      if (kpiEmi) kpiEmi.textContent = '₹ ' + Math.round(data.baseEmi).toLocaleString('en-IN');
+      if (kpiEmiSub) {
+        if (data.monthlyPrepay > 0) {
+          kpiEmiSub.textContent = `+ ₹${Math.round(data.monthlyPrepay).toLocaleString('en-IN')} prepay = ₹${Math.round(data.baseEmi + data.monthlyPrepay).toLocaleString('en-IN')} total monthly outflow`;
+        } else {
+          kpiEmiSub.textContent = 'Standard monthly installment';
+        }
+      }
+    }
+
     const y = Math.floor(data.monthsSaved / 12);
     const m = data.monthsSaved % 12;
     let timeStr = '0 Mos';
@@ -1039,11 +1182,11 @@
     else if (m > 0) timeStr = `${m} Months`;
 
     if (kpiTimeSaved) kpiTimeSaved.textContent = timeStr;
-    if (kpiTimeSavedSub) kpiTimeSavedSub.textContent = data.monthsSaved > 0 ? `Closes in ${data.newTenureYears.toFixed(1)} yrs` : 'Standard tenure';
+    if (kpiTimeSavedSub) kpiTimeSavedSub.textContent = data.monthsSaved > 0 ? `Closes in ${data.newTenureYears.toFixed(1)} yrs` : 'Standard tenure (0 prepay)';
 
     if (kpiInterestSaved) kpiInterestSaved.textContent = '₹ ' + Math.round(data.interestSaved).toLocaleString('en-IN');
     const pctSaved = data.baseTotalInterest > 0 ? ((data.interestSaved / data.baseTotalInterest) * 100).toFixed(1) : 0;
-    if (kpiInterestSavedSub) kpiInterestSavedSub.textContent = `${pctSaved}% interest saved`;
+    if (kpiInterestSavedSub) kpiInterestSavedSub.textContent = data.interestSaved > 0 ? `${pctSaved}% interest eliminated` : '0% saved yet';
 
     if (kpiInvestWealth) kpiInvestWealth.textContent = formatLakhsCrores(data.investmentFutureValue);
   }
@@ -1603,6 +1746,171 @@
   }
 
   // --- 15. Copy Summary Handler ---
+  
+  // --- 16. PDF Report Generation with User Verification Declaration ---
+  function handleDownloadReport() {
+    if (typeof window.jspdf === 'undefined') {
+      window.print();
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'pt',
+      format: 'a4'
+    });
+
+    const primaryColor = [37, 99, 235];
+    const darkTextColor = [30, 41, 59];
+    const accentGreen = [5, 150, 105];
+
+    // Header banner
+    doc.setFillColor(...primaryColor);
+    doc.rect(0, 0, 595, 60, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.setTextColor(255, 255, 255);
+    doc.text('Amazing-tools | Loan Prepayment & Debt-Freedom Plan', 30, 35);
+
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(220, 235, 252);
+    doc.text('Generated at amazing-tools.github.io • 100% Client-Side Private Analysis', 30, 50);
+
+    const principal = parseFloat(loanAmountInput.value) || 0;
+    const rate = parseFloat(interestRateInput.value) || 0;
+    const tenureYears = parseFloat(loanTenureInput.value) || 0;
+    const totalMonths = Math.round(tenureYears * 12);
+    const monthlyRate = rate / 12 / 100;
+    const baseEmi = computeEmi(principal, monthlyRate, totalMonths);
+    const monthlyPrepay = parseFloat(monthlyPrepayInput.value) || 0;
+    const yearlyPrepay = parseFloat(yearlyPrepayInput.value) || 0;
+    const impactMode = document.querySelector('input[name="impactMode"]:checked') ? document.querySelector('input[name="impactMode"]:checked').value : 'tenure';
+
+    const baseSchedule = runSimulation({
+      principal, monthlyRate, totalMonths, baseEmi,
+      monthlyPrepay: 0, yearlyPrepay: 0, stepUpRate: 0, customLumpsums: [], impactMode: 'tenure'
+    });
+
+    const prepaySchedule = runSimulation({
+      principal, monthlyRate, totalMonths, baseEmi,
+      monthlyPrepay, yearlyPrepay,
+      stepUpRate: enableStepUp && enableStepUp.checked ? (parseFloat(prepayStepUp.value) || 0) / 100 : 0,
+      customLumpsums, impactMode
+    });
+
+    const interestSaved = Math.max(0, baseSchedule.totalInterest - prepaySchedule.totalInterest);
+    const monthsSaved = Math.max(0, totalMonths - prepaySchedule.monthsCompleted);
+    const yearsSaved = monthsSaved / 12;
+    const newTenureYears = prepaySchedule.monthsCompleted / 12;
+
+    const startDate = getParsedStartDate();
+    const newFinishDate = getPeriodDate(startDate.year, startDate.month, Math.max(0, prepaySchedule.monthsCompleted - 1));
+    const origFinishDate = getPeriodDate(startDate.year, startDate.month, Math.max(0, totalMonths - 1));
+
+    let curY = 80;
+
+    // Section 1: Loan & Savings Summary Table
+    doc.autoTable({
+      startY: curY,
+      head: [['Loan Parameter', 'Standard Baseline', 'With Your Prepayments', 'Net Benefit / Savings']],
+      body: [
+        ['Loan Principal Amount', '₹ ' + Math.round(principal).toLocaleString('en-IN'), '₹ ' + Math.round(principal).toLocaleString('en-IN'), '—'],
+        ['Interest Rate', `${rate}% p.a.`, `${rate}% p.a.`, '—'],
+        ['Loan Tenure', `${tenureYears.toFixed(1)} Years (${totalMonths} Mos)`, `${newTenureYears.toFixed(1)} Years (${prepaySchedule.monthsCompleted} Mos)`, `${yearsSaved.toFixed(1)} Years Earlier (${monthsSaved} Mos Saved)`],
+        ['Monthly Installment', '₹ ' + Math.round(baseEmi).toLocaleString('en-IN'), impactMode === 'emi' ? ('₹ ' + Math.round(prepaySchedule.newEmi || baseEmi).toLocaleString('en-IN') + ' (Reduced)') : ('₹ ' + Math.round(baseEmi).toLocaleString('en-IN') + (monthlyPrepay > 0 ? ' (+₹' + Math.round(monthlyPrepay).toLocaleString('en-IN') + ' prepay)' : '')), impactMode === 'emi' ? ('₹ ' + Math.round(baseEmi - (prepaySchedule.newEmi || baseEmi)).toLocaleString('en-IN') + ' saved/mo') : 'Tenure eliminated'],
+        ['Total Interest Payable', '₹ ' + Math.round(baseSchedule.totalInterest).toLocaleString('en-IN'), '₹ ' + Math.round(prepaySchedule.totalInterest).toLocaleString('en-IN'), '₹ ' + Math.round(interestSaved).toLocaleString('en-IN') + ' Interest Saved'],
+        ['Total Bank Outflow', '₹ ' + Math.round(principal + baseSchedule.totalInterest).toLocaleString('en-IN'), '₹ ' + Math.round(prepaySchedule.totalPayment).toLocaleString('en-IN'), '₹ ' + Math.round(interestSaved).toLocaleString('en-IN') + ' Total Savings'],
+        ['Debt-Free Calendar Date', origFinishDate.long, newFinishDate.long, `${yearsSaved.toFixed(1)} Years Ahead of Schedule`]
+      ],
+      theme: 'striped',
+      headStyles: { fillColor: primaryColor, textColor: 255, fontStyle: 'bold' },
+      styles: { fontSize: 8.5, cellPadding: 4.5, textColor: darkTextColor },
+      columnStyles: { 3: { fontStyle: 'bold', textColor: accentGreen } }
+    });
+
+    curY = doc.lastAutoTable.finalY + 12;
+
+    // Section 2: Strategy Details
+    doc.autoTable({
+      startY: curY,
+      head: [['Prepayment Strategy Element', 'Configured Input']],
+      body: [
+        ['Extra Monthly Prepayment', monthlyPrepay > 0 ? ('₹ ' + monthlyPrepay.toLocaleString('en-IN') + ' / month') : 'None'],
+        ['Annual Step-Up on Prepayment', (enableStepUp && enableStepUp.checked) ? (`${prepayStepUp.value}% hike every year`) : 'None'],
+        ['Annual Festive / Bonus Prepayment', yearlyPrepay > 0 ? ('₹ ' + yearlyPrepay.toLocaleString('en-IN') + ' / year') : 'None'],
+        ['Custom Scheduled Month/Year Prepayments', customLumpsums.length > 0 ? (`${customLumpsums.length} prepayments scheduled`) : 'None'],
+        ['Prepayment Impact Mode', impactMode === 'tenure' ? 'Close Loan Early (Reduce Tenure - Maximum Interest Savings)' : 'Lower Monthly Installment (Keep Tenure)']
+      ],
+      theme: 'grid',
+      headStyles: { fillColor: [71, 85, 105], textColor: 255 },
+      styles: { fontSize: 8, cellPadding: 4, textColor: darkTextColor }
+    });
+
+    curY = doc.lastAutoTable.finalY + 12;
+
+    // Section 3: Scheduled Prepayments (if any)
+    if (customLumpsums.length > 0) {
+      const rows = customLumpsums.map(item => {
+        const cal = getPeriodDate(startDate.year, startDate.month, item.loanMonth - 1);
+        return [
+          `Year ${item.year}, Month ${item.monthInYear} (Month ${item.loanMonth})`,
+          cal.long,
+          '₹ ' + Math.round(item.amount).toLocaleString('en-IN'),
+          item.note || 'Scheduled Prepayment'
+        ];
+      });
+
+      doc.autoTable({
+        startY: curY,
+        head: [['Tenure Timing', 'Calendar Date', 'Scheduled Prepayment', 'Purpose / Note']],
+        body: rows,
+        theme: 'grid',
+        headStyles: { fillColor: [5, 150, 105], textColor: 255 },
+        styles: { fontSize: 8, cellPadding: 4, textColor: darkTextColor }
+      });
+
+      curY = doc.lastAutoTable.finalY + 12;
+    }
+
+    // Check page space for Declaration Box
+    if (curY > 660) {
+      doc.addPage();
+      curY = 40;
+    }
+
+    // Official User Verification Declaration & Disclaimer
+    doc.setFillColor(254, 243, 199);
+    doc.setDrawColor(245, 158, 11);
+    doc.setLineWidth(1.5);
+    doc.roundedRect(30, curY, 535, 100, 4, 4, 'FD');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(180, 83, 9);
+    doc.text('USER VERIFICATION DECLARATION & DISCLAIMER NOTICE', 42, curY + 16);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor(69, 26, 3);
+    const declarationText = 
+      "This calculation report is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational, indicative, and scenario planning assistance. " +
+      "Actual loan interest accrual, rest periods, and amortization can vary based on your lending institution's exact compounding method (daily reducing vs. monthly reducing balance), " +
+      "EMI billing dates, interest rate reset cycles, and bank fees.\n\n" +
+      "Mandatory Verification: Users must independently verify all calculations, amortization schedules, and savings estimates with their respective bank, lender, " +
+      "or official loan statement before executing any prepayment or binding financial decision. Amazing-tools and its operators assume no legal or financial liability for any " +
+      "miscalculations, bank policy differences, or financial decisions made.\n\n" +
+      "Report Miscalculations: We continuously strive for 100% mathematical precision. If you spot any calculation discrepancy or difference from your bank statement, " +
+      "please report it on our portal (hello@toolskart.com) for prompt verification and future portal updates.";
+
+    const splitDeclaration = doc.splitTextToSize(declarationText, 510);
+    doc.text(splitDeclaration, 42, curY + 28);
+
+    doc.save(`Debt_Freedom_Plan_${Math.round(principal/100000)}L.pdf`);
+  }
+
   function handleCopySummary() {
     const p = parseFloat(loanAmountInput.value) || 0;
     const r = parseFloat(interestRateInput.value) || 0;
@@ -1633,5 +1941,18 @@
       });
     }
   }
+
+  // Initialize
+  initPrepayModeTabs();
+  initDualSyncSliders();
+  initQuickChips();
+  initImpactRadios();
+  initStartDateControls();
+  initTrendChartControls();
+  initEventListeners();
+  updateWordDisplays();
+  updateStartDateDisplay();
+  updateTargetSolver();
+  triggerLiveCalculation();
 
 })();
