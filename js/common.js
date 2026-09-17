@@ -6,14 +6,18 @@
 (function () {
   'use strict';
 
-  // ---- Multi-Theme Switching Engine ----
+  // ---- Multi-Theme Switching Engine (8 Curated Themes) ----
   const THEME_KEY = 'toolskart_theme';
   const DEFAULT_THEME = 'adminlte';
   const themeLabels = {
-    'adminlte': 'AdminLTE Slate',
+    'adminlte': 'Titanium Blue',
     'dark': 'Midnight Cyber',
     'emerald': 'FinTech Emerald',
-    'royal': 'Royal Velvet'
+    'royal': 'Royal Velvet',
+    'grey': 'Silver Nordic',
+    'white': 'Pure Crystal',
+    'ivory': 'Warm Ivory',
+    'amber': 'Solar Amber'
   };
 
   function applyTheme(themeName) {
@@ -76,6 +80,95 @@
       }
     });
   }
+
+  // ---- Yii-Inspired Dynamic Animated Typewriter Rotator ----
+  const dynamicWords = [
+    { text: "100% Secure", color: "#34D399", bg: "rgba(16, 185, 129, 0.15)", border: "rgba(16, 185, 129, 0.45)" },
+    { text: "Completely Private", color: "#38BDF8", bg: "rgba(56, 189, 248, 0.15)", border: "rgba(56, 189, 248, 0.45)" },
+    { text: "Client-Side Only", color: "#FBBF24", bg: "rgba(245, 158, 11, 0.15)", border: "rgba(245, 158, 11, 0.45)" },
+    { text: "Zero Server Uploads", color: "#A78BFA", bg: "rgba(139, 92, 246, 0.15)", border: "rgba(139, 92, 246, 0.45)" },
+    { text: "Blazing Fast & Free", color: "#FB7185", bg: "rgba(244, 63, 94, 0.15)", border: "rgba(244, 63, 94, 0.45)" },
+    { text: "AI-Powered & Local", color: "#22D3EE", bg: "rgba(6, 182, 212, 0.15)", border: "rgba(6, 182, 212, 0.45)" }
+  ];
+
+  function initDynamicUspRotator() {
+    const el = document.getElementById('dynamicUspText');
+    if (!el) return;
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 90;
+
+    function typeStep() {
+      const current = dynamicWords[wordIndex];
+      const fullText = current.text;
+
+      el.style.color = current.color;
+      el.style.backgroundColor = current.bg;
+      el.style.borderColor = current.border;
+      el.style.textShadow = `0 0 16px ${current.color}66`;
+
+      if (isDeleting) {
+        el.textContent = fullText.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 45;
+      } else {
+        el.textContent = fullText.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 85;
+      }
+
+      if (!isDeleting && charIndex === fullText.length) {
+        typingSpeed = 2200;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % dynamicWords.length;
+        typingSpeed = 400;
+      }
+
+      setTimeout(typeStep, typingSpeed);
+    }
+
+    typeStep();
+  }
+
+  // Initialize typewriter on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicUspRotator);
+  } else {
+    initDynamicUspRotator();
+  }
+
+  // ---- Smart Header Category Navigation & Direct Filtering ----
+  document.querySelectorAll('.nav-category-link[data-category-target]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetCatId = this.getAttribute('data-category-target');
+
+      // If a tool is open, close it so dashboard overview is visible
+      const toolPanel = document.getElementById('toolContentPanel');
+      if (toolPanel && toolPanel.style.display !== 'none') {
+        closeToolPanel();
+      }
+
+      // Trigger matching category filter pill
+      const targetFilterPill = document.querySelector(`.filter-pill[data-filter="${targetCatId}"]`);
+      if (targetFilterPill) {
+        targetFilterPill.click();
+      } else {
+        const sec = document.getElementById(targetCatId);
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // Close mobile navigation if active
+      if (mainNav && mainNav.classList.contains('active')) {
+        mainNav.classList.remove('active');
+        if (mobileToggle) mobileToggle.textContent = '☰';
+      }
+    });
+  });
 
   // ---- Mobile Navigation Toggle ----
   const mobileToggle = document.getElementById('mobileToggle');

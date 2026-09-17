@@ -12,11 +12,11 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolsKart — 100% Private Online Tools, Document Converters & Calculators</title>
+    <title>Amazing-Tools — 100% Private Online Tools, Document Converters & Calculators</title>
     <meta name="description" content="25+ free online tools and calculators — Universal Document Converter (Word/PDF/Excel), Video & Audio Downloader (1080p/MP3), Income Tax Calculator (Old vs New), Loan Prepayment, GST, SIP and more. 100% client-side privacy, zero server uploads.">
     <meta name="keywords" content="free online calculator, document converter, video downloader, income tax calculator, GST calculator, EMI calculator, SIP calculator, online tools, India, global">
     <link rel="canonical" href="https://amazing-tools.github.io/">
-    <meta property="og:title" content="ToolsKart — 100% Private Online Tools & Calculators">
+    <meta property="og:title" content="Amazing-Tools — 100% Private Online Tools & Calculators">
     <meta property="og:description" content="25+ free online tools. Zero server uploads, 100% client-side privacy.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://amazing-tools.github.io/">
@@ -29,7 +29,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "ToolsKart",
+      "name": "Amazing-Tools",
       "url": "https://amazing-tools.github.io/",
       "description": "100% private free online calculators and document tools with zero server uploads",
       "potentialAction": {
@@ -45,29 +45,80 @@
     <!-- Slim AdminLTE Header -->
     <header class="header header-slim">
         <div class="container header-content">
-            <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div class="header-left">
                 <button class="sidebar-toggle-btn" id="sidebarToggle" aria-label="Toggle Sidebar">☰</button>
-                <a href="index.html" class="logo">🔧 ToolsKart</a>
-                <span class="header-badge-tag">Private & Browser-Only</span>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon-bolt">⚡</span>
+                    <span>Amazing-Tools</span>
+                </a>
+                <span class="header-badge-tag"><span class="pulse-dot"></span> Private & AI-Ready</span>
             </div>
             <nav class="nav" id="mainNav">
-                <a href="#doc-tools">Documents</a>
-                <a href="#media-tools">Media</a>
-                <a href="#calculators">Calculators</a>
-                <a href="#text-tools">Text</a>
-                <a href="#dev-tools">Dev</a>
+                <div class="nav-category-item">
+                    <a href="#doc-tools" class="nav-category-link" data-category-target="doc-tools">
+                        <span>📄 Documents</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
+                    </a>
+                    <div class="nav-quick-menu">
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>🔄 Universal Converter</span></a>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>📑 PDF to Word (DOCX)</span></a>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>📝 Word (DOCX) to PDF</span></a>
+                        <a href="pages/document-converter.html" data-tool="document-converter" class="nav-quick-item"><span>📊 PDF to Excel (XLSX)</span></a>
+                    </div>
+                </div>
+                <div class="nav-category-item">
+                    <a href="#media-tools" class="nav-category-link" data-category-target="media-tools">
+                        <span>🎥 Media</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
+                    </a>
+                    <div class="nav-quick-menu">
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="nav-quick-item"><span>▶️ Video Downloader (1080p)</span></a>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="nav-quick-item"><span>🎵 Extract MP3 Audio</span></a>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="nav-quick-item"><span>📱 YouTube Shorts Saver</span></a>
+                        <a href="pages/video-downloader.html" data-tool="video-downloader" class="nav-quick-item"><span>📸 Instagram Reels Saver</span></a>
+                    </div>
+                </div>
+                <div class="nav-category-item">
+                    <a href="#calculators" class="nav-category-link" data-category-target="calculators">
+                        <span>🧮 Calculators</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
+                    </a>
+                    <div class="nav-quick-menu">
+                        <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="nav-quick-item"><span>🧾 Income Tax (Old vs New)</span></a>
+                        <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="nav-quick-item"><span>🏦 Loan Prepayment & EMI</span></a>
+                        <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="nav-quick-item"><span>🏷️ GST Calculator</span></a>
+                        <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="nav-quick-item"><span>📈 SIP & Wealth Planner</span></a>
+                    </div>
+                </div>
+                <div class="nav-category-item">
+                    <a href="#text-tools" class="nav-category-link" data-category-target="text-tools">
+                        <span>📝 Text</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
+                    </a>
+                    <div class="nav-quick-menu">
+                        <a href="pages/word-counter.html" data-tool="word-counter" class="nav-quick-item"><span>📊 Word & Character Counter</span></a>
+                        <a href="pages/case-converter.html" data-tool="case-converter" class="nav-quick-item"><span>🔤 Case Converter</span></a>
+                        <a href="pages/json-formatter.html" data-tool="json-formatter" class="nav-quick-item"><span>{ } JSON Validator</span></a>
+                        <a href="pages/base64-tool.html" data-tool="base64-tool" class="nav-quick-item"><span>🔐 Base64 Tool</span></a>
+                    </div>
+                </div>
+                <div class="nav-category-item">
+                    <a href="#dev-tools" class="nav-category-link" data-category-target="dev-tools">
+                        <span>💻 Dev</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
+                    </a>
+                    <div class="nav-quick-menu">
+                        <a href="pages/url-encoder.html" data-tool="url-encoder" class="nav-quick-item"><span>🌐 URL Encoder/Decoder</span></a>
+                        <a href="pages/regex-tester.html" data-tool="regex-tester" class="nav-quick-item"><span>🔍 Regex Live Tester</span></a>
+                    </div>
+                </div>
             </nav>
             <div style="display:flex; align-items:center; gap:0.75rem;">
-                <!-- AdminLTE Multi-Theme Switcher -->
+                <!-- Multi-Theme Switcher (8 Themes) -->
                 <div class="theme-switcher-wrap">
                     <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
                         <span class="theme-toggle-icon">🎨</span>
-                        <span class="theme-toggle-label" id="currentThemeLabel">AdminLTE Slate</span>
+                        <span class="theme-toggle-label" id="currentThemeLabel">Titanium Blue</span>
                         <span style="font-size:0.65rem; opacity:0.7;">▼</span>
                     </button>
                     <div class="theme-dropdown-menu" id="themeDropdown">
                         <button class="theme-option-item active" data-theme-choice="adminlte">
-                            <span class="theme-color-dot" style="background:#2563EB;"></span> AdminLTE Slate (Default)
+                            <span class="theme-color-dot" style="background:#2563EB;"></span> Titanium Blue (Default)
                         </button>
                         <button class="theme-option-item" data-theme-choice="dark">
                             <span class="theme-color-dot" style="background:#0F172A; border-color:#38BDF8;"></span> Midnight Cyber (Dark)
@@ -77,6 +128,18 @@
                         </button>
                         <button class="theme-option-item" data-theme-choice="royal">
                             <span class="theme-color-dot" style="background:#7C3AED;"></span> Royal Velvet
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="grey">
+                            <span class="theme-color-dot" style="background:#94A3B8;"></span> Silver Nordic (Grey)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="white">
+                            <span class="theme-color-dot" style="background:#FFFFFF; border-color:#CBD5E1;"></span> Pure Crystal (White)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="ivory">
+                            <span class="theme-color-dot" style="background:#FAF6F0; border-color:#EA580C;"></span> Warm Ivory (Cream)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="amber">
+                            <span class="theme-color-dot" style="background:#FEF9C3; border-color:#D97706;"></span> Solar Amber (Yellowish)
                         </button>
                     </div>
                 </div>
@@ -161,8 +224,15 @@
                 <div class="premium-banner">
                     <div class="premium-banner-top">
                         <div class="premium-banner-title">
-                            <h1>🔧 ToolsKart Multi-Tool Control Center</h1>
-                            <p>30+ high-performance tools for document conversions, video & audio downloads, tax planning, debt-freedom, and developer utilities — runs 100% inside your browser.</p>
+                            <div class="live-ai-badge"><span class="pulse-dot"></span> Next-Gen Browser Engine • 100% Client-Side Privacy</div>
+                            <div class="banner-dynamic-headline">
+                                <span class="dynamic-lead">Amazing-Tools is</span>
+                                <span class="dynamic-rotator-wrap">
+                                    <span class="dynamic-word" id="dynamicUspText">100% Secure</span>
+                                    <span class="dynamic-cursor">|</span>
+                                </span>
+                            </div>
+                            <p>30+ high-performance tools for private document conversions, video & audio downloads, tax planning, debt-freedom, and developer utilities — runs 100% inside your browser.</p>
                         </div>
                     </div>
                     
@@ -811,7 +881,7 @@
             <footer class="footer">
                 <div class="container footer-content">
                     <div class="footer-section">
-                        <h4>🔧 ToolsKart</h4>
+                        <h4>⚡ Amazing-Tools</h4>
                         <p>100% private, free online tools and calculators. Built with ❤️ for users worldwide.</p>
                     </div>
                     <div class="footer-section">
@@ -837,7 +907,7 @@
                 </div>
                 <div class="footer-bottom">
                     <div class="container">
-                        <p>&copy; 2026 ToolsKart. All rights reserved. 100% Client-Side Private Tools.</p>
+                        <p>&copy; 2026 Amazing-Tools. All rights reserved. 100% Client-Side Private Tools.</p>
                     </div>
                 </div>
             </footer>
