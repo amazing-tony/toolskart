@@ -19,7 +19,8 @@
     'ivory': 'Warm Ivory',
     'amber': 'Solar Amber',
     'facebook': 'Social Blue',
-    'sejda': 'Sejda Clean Teal'
+    'teal': 'Clean Teal',
+    'sejda': 'Clean Teal'
   };
 
   function applyTheme(themeName) {
@@ -366,6 +367,7 @@
 
   // ---- Single-Portal Tool Loading & Routing Engine ----
   const toolRegistry = {
+    'pdf-tools': { title: 'PDF Document Studio', category: 'Document Tools', url: 'pages/pdf-tools.html' },
     'document-converter': { title: 'Universal Document Converter', category: 'Document Tools', url: 'pages/document-converter.html' },
     'video-downloader': { title: 'Video & Audio Downloader', category: 'Media Tools', url: 'pages/video-downloader.html' },
     'income-tax-calculator': { title: 'Income Tax Optimizer (Old vs New)', category: 'Financial Calculators', url: 'pages/income-tax-calculator.html' },
@@ -401,7 +403,7 @@
     return match ? match[1] : null;
   }
 
-  function openToolInPortal(slug, customTitle, customCat) {
+  function openToolInPortal(slug, customTitle, customCat, fullUrl) {
     const dashboardOverview = document.getElementById('dashboardOverview');
     const toolPanel = document.getElementById('toolContentPanel');
     const toolIframe = document.getElementById('toolIframe');
@@ -413,7 +415,7 @@
       if (window.self !== window.top) {
         try {
           if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
-            window.top.ToolsKart.openTool(slug, customTitle, customCat);
+            window.top.ToolsKart.openTool(slug, customTitle, customCat, fullUrl);
             return;
           }
         } catch (e) {}
@@ -427,7 +429,7 @@
 
     const tool = toolRegistry[slug] || {
       title: customTitle || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
-      category: customCat || 'Financial Calculators',
+      category: customCat || 'Document Tools',
       url: 'pages/' + slug + '.html'
     };
 
@@ -439,10 +441,24 @@
     if (dashboardOverview) dashboardOverview.style.display = 'none';
     toolPanel.style.display = 'flex';
 
-    // Set iframe target if different
-    const targetUrl = tool.url;
-    if (!toolIframe.src.endsWith(targetUrl)) {
+    // Target URL for iframe
+    let targetUrl = fullUrl || tool.url;
+    if (!targetUrl.startsWith('http') && !targetUrl.startsWith('pages/')) {
+      targetUrl = 'pages/' + targetUrl;
+    }
+
+    const activeUrl = toolIframe.getAttribute('data-active-url') || '';
+    if (activeUrl !== targetUrl) {
+      toolIframe.setAttribute('data-active-url', targetUrl);
       toolIframe.src = targetUrl;
+    } else if (toolIframe.contentWindow && targetUrl.includes('?tool=')) {
+      try {
+        const u = new URL(targetUrl, window.location.origin);
+        const sub = u.searchParams.get('tool');
+        if (sub) {
+          toolIframe.contentWindow.postMessage({ type: 'activateTool', tool: sub }, '*');
+        }
+      } catch (err) {}
     }
 
     // Smooth scroll to tool panel
@@ -456,7 +472,7 @@
     }
 
     // Update active state in sidebar
-    document.querySelectorAll('.sidebar-link').forEach(link => {
+    document.querySelectorAll('.sidebar-link, .sidebar-sublink').forEach(link => {
       const linkSlug = link.getAttribute('data-tool') || extractSlugFromUrl(link.getAttribute('href'));
       link.classList.toggle('is-active', linkSlug === slug);
     });
@@ -520,7 +536,7 @@
 
   // Intercept click on tools, cards, and sidebar links
   document.addEventListener('click', function (e) {
-    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .nav-quick-item');
+    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .nav-quick-item');
     if (!trigger) return;
 
     let slug = trigger.getAttribute('data-tool');
@@ -537,13 +553,13 @@
         const title = trigger.querySelector('h3')?.textContent?.trim() || 
                       trigger.querySelector('span')?.textContent?.trim() || 
                       (toolRegistry[slug] && toolRegistry[slug].title);
-        openToolInPortal(slug, title);
+        openToolInPortal(slug, title, null, href);
       } else if (window.self !== window.top) {
         // We are inside an iframe; request top window to open the tool in the AdminLTE portal workstation
         e.preventDefault();
         try {
           if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
-            window.top.ToolsKart.openTool(slug);
+            window.top.ToolsKart.openTool(slug, null, null, href);
             return;
           }
         } catch (err) {}
@@ -556,7 +572,9 @@
   function checkUrlHash() {
     const hash = window.location.hash.replace('#', '').trim();
     if (hash && (toolRegistry[hash] || hash.includes('-'))) {
-      openToolInPortal(hash);
+      const search = window.location.search || '';
+      const fullUrl = 'pages/' + hash + '.html' + search;
+      openToolInPortal(hash, null, null, fullUrl);
     }
   }
   window.addEventListener('load', checkUrlHash);

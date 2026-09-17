@@ -11,11 +11,11 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sejda PDF Studio — Free Online PDF Editor, Merge, Split & Compress Tools</title>
-    <meta name="description" content="Replicating Sejda's all-in-one PDF tools: edit PDF text & sign, merge, split, compress, organize & rotate pages, watermark, convert to images and more. 100% private client-side processing with zero server uploads.">
-    <meta name="keywords" content="sejda pdf editor, edit pdf online, merge pdf, split pdf, compress pdf, rotate pdf pages, pdf to jpg, watermark pdf, fill and sign pdf, free online pdf tools">
+    <title>PDF Document Studio — Free Online PDF Editor, Merge, Split &amp; Compress Tools | ToolsKart</title>
+    <meta name="description" content="All-in-one PDF tools: edit PDF text &amp; sign, merge, split, compress, organize &amp; rotate pages, watermark, convert to images and more. 100% private client-side processing with zero server uploads.">
+    <meta name="keywords" content="pdf editor, edit pdf online, merge pdf, split pdf, compress pdf, rotate pdf pages, pdf to jpg, watermark pdf, fill and sign pdf, free online pdf tools">
     <link rel="canonical" href="https://amazing-tools.github.io/pages/pdf-tools.html">
-    <meta property="og:title" content="Sejda PDF Studio — Free Online PDF Suite">
+    <meta property="og:title" content="PDF Document Studio — Free Online PDF Suite | ToolsKart">
     <meta property="og:description" content="Edit, Merge, Split, Compress, Organize, Sign and Convert PDFs directly in your browser with 100% privacy.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,9 +32,9 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Sejda PDF Studio",
+      "name": "PDF Document Studio",
       "url": "https://amazing-tools.github.io/pages/pdf-tools.html",
-      "description": "Full-featured client-side PDF editor and utility suite replicating Sejda.com.",
+      "description": "Full-featured client-side PDF editor and utility suite.",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -43,7 +43,7 @@
 </head>
 <body>
 
-    <!-- Header with Sejda Clean Branding & Theme Switcher -->
+    <!-- Header with Clean Branding & Theme Switcher -->
     <header class="header header-slim">
         <div class="container header-content">
             <div class="header-left">
@@ -52,7 +52,7 @@
                     <span>Amazing-tools</span>
                 </a>
                 <span class="header-badge-tag">
-                    <span class="pulse-dot"></span> Sejda PDF Studio
+                    <span class="pulse-dot"></span> PDF Document Studio
                 </span>
             </div>
             <nav class="nav" id="mainNav">
@@ -66,12 +66,12 @@
                 <div class="theme-switcher-wrap">
                     <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
                         <span class="theme-toggle-icon">🎨</span>
-                        <span class="theme-toggle-label" id="currentThemeLabel">Sejda Clean Teal</span>
+                        <span class="theme-toggle-label" id="currentThemeLabel">Clean Teal</span>
                         <span style="font-size:0.65rem; opacity:0.7;">▼</span>
                     </button>
                     <div class="theme-dropdown-menu" id="themeDropdown">
-                        <button class="theme-option-item active" data-theme-choice="sejda">
-                            <span class="theme-color-dot" style="background:#0D7A82; border-color:#08545A;"></span> Sejda Clean Teal
+                        <button class="theme-option-item active" data-theme-choice="teal">
+                            <span class="theme-color-dot" style="background:#0D7A82; border-color:#08545A;"></span> Clean Teal
                         </button>
                         <button class="theme-option-item" data-theme-choice="adminlte">
                             <span class="theme-color-dot" style="background:#2563EB;"></span> Titanium Blue
@@ -108,14 +108,14 @@
 
         <!-- Breadcrumb Navigation -->
         <nav class="breadcrumb" style="margin-bottom: 1.25rem;">
-            <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; Sejda PDF Studio
+            <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; PDF Document Studio
         </nav>
 
-        <!-- Sejda Replica Hero -->
+        <!-- PDF Studio Hero -->
         <section class="sejda-hero" id="sejdaHero">
-            <div class="sejda-hero-badge">⚡ Authentic Sejda Replica • 100% Client-Side Privacy</div>
-            <h1>We help with your PDF tasks</h1>
-            <p>Easy, pleasant and productive PDF tools suite. Edit text, sign contracts, merge, split, compress, rotate pages, and convert documents directly in your browser with zero server uploads.</p>
+            <div class="sejda-hero-badge">⚡ 100% Client-Side Privacy • Zero Server Uploads</div>
+            <h1>PDF Document Studio</h1>
+            <p>14 powerful browser-based PDF tools. Edit &amp; sign documents, merge, split, compress, organize pages, and convert documents directly in your browser with zero server uploads.</p>
 
             <!-- Instant Search Bar -->
             <div class="sejda-search-wrap">
@@ -356,8 +356,8 @@
 
             <!-- Sejda Dropzone (Standard for most tools) -->
             <div class="sejda-dropzone" id="workspaceDropzone">
-                <input type="file" id="pdfFileInput" accept="application/pdf" style="display:none;" />
-                <input type="file" id="multiPdfFileInput" accept="application/pdf" multiple style="display:none;" />
+                <input type="file" id="pdfFileInput" accept=".pdf,application/pdf" style="display:none;" />
+                <input type="file" id="multiPdfFileInput" accept=".pdf,application/pdf" multiple style="display:none;" />
                 <input type="file" id="multiImageFileInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;" />
                 <div class="sejda-dropzone-icon" id="dropzoneIcon">📂</div>
                 <button type="button" class="sejda-upload-btn-pill" id="uploadPillBtn">
@@ -403,17 +403,18 @@
 
     </main>
 
-    <!-- Sejda Signature Pad Modal -->
+    <!-- Signature Pad Modal -->
     <div class="sejda-modal" id="signatureModal">
         <div class="sejda-modal-dialog">
             <div class="sejda-modal-header">
-                <h3>✍️ Create Signature</h3>
+                <h3>✍️ Create / Upload Signature</h3>
                 <button type="button" class="sejda-modal-close" id="closeSigModal">&times;</button>
             </div>
             <div class="sejda-modal-body">
                 <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
                     <button type="button" class="sejda-tab-btn active" id="sigTabDraw">✏️ Draw</button>
                     <button type="button" class="sejda-tab-btn" id="sigTabType">🔤 Type Name</button>
+                    <button type="button" class="sejda-tab-btn" id="sigTabUpload">🖼️ Upload Image</button>
                 </div>
 
                 <div id="sigDrawContainer">
@@ -430,6 +431,37 @@
                 <div id="sigTypeContainer" style="display:none;">
                     <input type="text" id="sigTypeInput" class="sejda-search-input" placeholder="Type your full name..." style="font-family:'Brush Script MT', cursive; font-size:1.8rem; height:60px;" />
                 </div>
+
+                <div id="sigUploadContainer" style="display:none;">
+                    <div style="border: 2px dashed var(--color-border); border-radius: 8px; padding: 1.5rem; text-align: center; background: var(--color-bg);">
+                        <input type="file" id="sigImageFileInput" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                        <button type="button" class="sejda-btn-secondary" id="sigUploadBrowseBtn">📁 Select Signature Image (PNG/JPG)</button>
+                        <p style="font-size:0.78rem; color:var(--color-text-secondary); margin:0.5rem 0 0;">Recommended: Transparent PNG or clear handwritten signature scan.</p>
+                        <div id="sigImagePreviewBox" style="display:none; margin-top:1rem;">
+                            <img id="sigImagePreview" src="" alt="Signature Preview" style="max-height:90px; max-width:100%; border:1px solid var(--color-border); border-radius:4px; padding:4px; background:#fff;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Application Scope Section -->
+                <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px dashed var(--color-border);">
+                    <label style="font-weight:700; font-size:0.88rem; display:block; margin-bottom:0.45rem;">📄 Apply Signature To:</label>
+                    <div style="display:flex; flex-direction:column; gap:0.45rem; font-size:0.85rem;">
+                        <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                            <input type="radio" name="sigPageScope" value="current" checked />
+                            <span>Current Page only (<strong id="sigCurrentPageLabel">Page 1</strong>)</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                            <input type="radio" name="sigPageScope" value="all" />
+                            <span>All Pages (sign entire document)</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                            <input type="radio" name="sigPageScope" value="custom" />
+                            <span>Selected Pages only:</span>
+                            <input type="text" id="sigCustomPagesInput" placeholder="e.g. 1, 3, 5-8" style="padding:0.2rem 0.5rem; font-size:0.8rem; border:1px solid var(--color-border); border-radius:4px; width:130px;" />
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="sejda-modal-footer">
                 <button type="button" class="sejda-btn-secondary" id="cancelSigBtn">Cancel</button>
@@ -444,11 +476,27 @@
     <script src="../js/common.js"></script>
     <script>
     /* ========================================================
-       SEJDA PDF STUDIO — CLIENT-SIDE PROCESSING ENGINE
-       Replicating Sejda.com with pdf-lib, pdf.js and jszip
+       PDF DOCUMENT STUDIO — CLIENT-SIDE PROCESSING ENGINE
+       Pure client-side processing with pdf-lib, pdf.js and jszip
        ======================================================== */
     (function() {
         'use strict';
+
+        // Guarantee that PDF Document Studio opens inside the AdminLTE workstation container
+        if (window.self === window.top) {
+            const search = window.location.search || '';
+            window.location.replace('../index.html' + search + '#pdf-tools');
+            return;
+        }
+
+        // Listen for tool activation messages from the AdminLTE portal container
+        window.addEventListener('message', (e) => {
+            if (e.data && e.data.type === 'activateTool' && e.data.tool) {
+                if (toolMeta[e.data.tool]) {
+                    activateTool(e.data.tool);
+                }
+            }
+        });
 
         // Configure PDF.js worker
         if (window.pdfjsLib) {
@@ -671,11 +719,13 @@
         multiPdfFileInput.addEventListener('change', (e) => {
             if (e.target.files && e.target.files.length > 0) {
                 handleIncomingFiles(e.target.files);
+                e.target.value = '';
             }
         });
         multiImageFileInput.addEventListener('change', (e) => {
             if (e.target.files && e.target.files.length > 0) {
                 handleIncomingFiles(e.target.files);
+                e.target.value = '';
             }
         });
 
@@ -1108,7 +1158,7 @@
             });
         }
 
-        function addOverlayImage(dataUrl, x, y, width, height) {
+        function addOverlayImage(dataUrl, x, y, width, height, scope, customPages) {
             const overlay = document.getElementById('editorOverlay');
             const el = document.createElement('div');
             el.className = 'sejda-annotation-item';
@@ -1116,12 +1166,48 @@
             el.style.top = y + 'px';
             el.style.width = width + 'px';
             el.style.height = height + 'px';
+            el.style.position = 'absolute';
+            el.style.zIndex = '20';
+
             const img = document.createElement('img');
             img.src = dataUrl;
             img.style.width = '100%';
             img.style.height = '100%';
             img.style.objectFit = 'contain';
+            img.style.pointerEvents = 'none';
+            img.style.display = 'block';
             el.appendChild(img);
+
+            // Scope label pill if applied across multiple pages
+            const finalScope = scope || 'current';
+            if (finalScope === 'all') {
+                const scopeBadge = document.createElement('div');
+                scopeBadge.style.cssText = 'position:absolute; top:-20px; left:0; font-size:10px; font-weight:700; background:#0D7A82; color:#fff; padding:1px 6px; border-radius:3px; white-space:nowrap; pointer-events:none; box-shadow:0 1px 3px rgba(0,0,0,0.2);';
+                scopeBadge.textContent = '📄 All Pages';
+                el.appendChild(scopeBadge);
+            } else if (finalScope === 'custom' && customPages) {
+                const scopeBadge = document.createElement('div');
+                scopeBadge.style.cssText = 'position:absolute; top:-20px; left:0; font-size:10px; font-weight:700; background:#0D7A82; color:#fff; padding:1px 6px; border-radius:3px; white-space:nowrap; pointer-events:none; box-shadow:0 1px 3px rgba(0,0,0,0.2);';
+                scopeBadge.textContent = `📄 Pages: ${customPages}`;
+                el.appendChild(scopeBadge);
+            }
+
+            // Quick delete handle on hover
+            const delHandle = document.createElement('button');
+            delHandle.type = 'button';
+            delHandle.innerHTML = '&times;';
+            delHandle.style.cssText = 'position:absolute; top:-8px; right:-8px; width:18px; height:18px; border-radius:50%; background:#ef4444; color:#fff; border:none; font-size:12px; font-weight:700; cursor:pointer; display:none; align-items:center; justify-content:center; line-height:1; z-index:30; box-shadow:0 1px 3px rgba(0,0,0,0.3);';
+            delHandle.title = 'Delete Annotation';
+            delHandle.onclick = (e) => {
+                e.stopPropagation();
+                el.remove();
+                const idx = editorAnnotations.findIndex(a => a.el === el);
+                if (idx !== -1) editorAnnotations.splice(idx, 1);
+            };
+            el.appendChild(delHandle);
+            el.addEventListener('mouseenter', () => { delHandle.style.display = 'flex'; });
+            el.addEventListener('mouseleave', () => { delHandle.style.display = 'none'; });
+
             makeDraggable(el);
             overlay.appendChild(el);
 
@@ -1133,15 +1219,29 @@
                 x: x,
                 y: y,
                 width: width,
-                height: height
+                height: height,
+                scope: finalScope,
+                customPages: customPages || ''
             });
         }
 
         function renderExistingAnnotations(pageNum) {
             const overlay = document.getElementById('editorOverlay');
             overlay.innerHTML = '';
-            editorAnnotations.filter(a => a.page === pageNum).forEach(a => {
-                if (a.el) overlay.appendChild(a.el);
+            editorAnnotations.forEach(a => {
+                let showOnPage = false;
+                if (a.scope === 'all') {
+                    showOnPage = true;
+                } else if (a.scope === 'custom') {
+                    const pagesIdx = parsePageRanges(a.customPages, totalPages);
+                    showOnPage = pagesIdx.includes(pageNum - 1);
+                } else {
+                    showOnPage = (a.page === pageNum);
+                }
+
+                if (showOnPage && a.el) {
+                    overlay.appendChild(a.el);
+                }
             });
         }
 
@@ -1179,9 +1279,17 @@
         const signatureCanvas = document.getElementById('signatureCanvas');
         const sigTabDraw = document.getElementById('sigTabDraw');
         const sigTabType = document.getElementById('sigTabType');
+        const sigTabUpload = document.getElementById('sigTabUpload');
         const sigDrawContainer = document.getElementById('sigDrawContainer');
         const sigTypeContainer = document.getElementById('sigTypeContainer');
+        const sigUploadContainer = document.getElementById('sigUploadContainer');
         const sigTypeInput = document.getElementById('sigTypeInput');
+        const sigImageFileInput = document.getElementById('sigImageFileInput');
+        const sigUploadBrowseBtn = document.getElementById('sigUploadBrowseBtn');
+        const sigImagePreviewBox = document.getElementById('sigImagePreviewBox');
+        const sigImagePreview = document.getElementById('sigImagePreview');
+        const sigCurrentPageLabel = document.getElementById('sigCurrentPageLabel');
+        const sigCustomPagesInput = document.getElementById('sigCustomPagesInput');
         const clearSigBtn = document.getElementById('clearSigBtn');
         const saveSigBtn = document.getElementById('saveSigBtn');
         const cancelSigBtn = document.getElementById('cancelSigBtn');
@@ -1190,9 +1298,13 @@
         let sigContext = null;
         let sigDrawing = false;
         let sigMode = 'draw';
+        let sigUploadedDataUrl = '';
 
         function openSignatureModal() {
             signatureModal.classList.add('active');
+            if (sigCurrentPageLabel) {
+                sigCurrentPageLabel.textContent = `Page ${currentPage}`;
+            }
             if (!sigContext) {
                 sigContext = signatureCanvas.getContext('2d');
                 signatureCanvas.width = signatureCanvas.offsetWidth || 500;
@@ -1225,25 +1337,69 @@
             if (sigContext) {
                 sigContext.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
             }
-            sigTypeInput.value = '';
+            if (sigTypeInput) sigTypeInput.value = '';
+            sigUploadedDataUrl = '';
+            if (sigImagePreview) sigImagePreview.src = '';
+            if (sigImagePreviewBox) sigImagePreviewBox.style.display = 'none';
+            if (sigImageFileInput) sigImageFileInput.value = '';
         }
 
         sigTabDraw.addEventListener('click', () => {
             sigMode = 'draw';
             sigTabDraw.classList.add('active');
             sigTabType.classList.remove('active');
+            if (sigTabUpload) sigTabUpload.classList.remove('active');
             sigDrawContainer.style.display = 'block';
             sigTypeContainer.style.display = 'none';
+            if (sigUploadContainer) sigUploadContainer.style.display = 'none';
         });
 
         sigTabType.addEventListener('click', () => {
             sigMode = 'type';
             sigTabType.classList.add('active');
             sigTabDraw.classList.remove('active');
+            if (sigTabUpload) sigTabUpload.classList.remove('active');
             sigDrawContainer.style.display = 'none';
             sigTypeContainer.style.display = 'block';
+            if (sigUploadContainer) sigUploadContainer.style.display = 'none';
             sigTypeInput.focus();
         });
+
+        if (sigTabUpload) {
+            sigTabUpload.addEventListener('click', () => {
+                sigMode = 'upload';
+                sigTabUpload.classList.add('active');
+                sigTabDraw.classList.remove('active');
+                sigTabType.classList.remove('active');
+                sigDrawContainer.style.display = 'none';
+                sigTypeContainer.style.display = 'none';
+                if (sigUploadContainer) sigUploadContainer.style.display = 'block';
+            });
+        }
+
+        if (sigUploadBrowseBtn && sigImageFileInput) {
+            sigUploadBrowseBtn.addEventListener('click', () => {
+                sigImageFileInput.click();
+            });
+
+            sigImageFileInput.addEventListener('change', async (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    try {
+                        const dataUrl = await readFileAsDataUrl(file);
+                        sigUploadedDataUrl = dataUrl;
+                        if (sigImagePreview) {
+                            sigImagePreview.src = dataUrl;
+                        }
+                        if (sigImagePreviewBox) {
+                            sigImagePreviewBox.style.display = 'block';
+                        }
+                    } catch (err) {
+                        alert('Could not read image file: ' + err.message);
+                    }
+                }
+            });
+        }
 
         clearSigBtn.addEventListener('click', clearSignature);
         [closeSigModal, cancelSigBtn].forEach(b => b.addEventListener('click', () => {
@@ -1254,7 +1410,7 @@
             let dataUrl = '';
             if (sigMode === 'draw') {
                 dataUrl = signatureCanvas.toDataURL('image/png');
-            } else {
+            } else if (sigMode === 'type') {
                 const text = sigTypeInput.value.trim() || 'Signature';
                 const tempCanvas = document.createElement('canvas');
                 tempCanvas.width = 400;
@@ -1264,45 +1420,159 @@
                 ctx.fillStyle = sigInkColor.value;
                 ctx.fillText(text, 20, 70);
                 dataUrl = tempCanvas.toDataURL('image/png');
+            } else if (sigMode === 'upload') {
+                if (!sigUploadedDataUrl) {
+                    alert('Please select or upload a signature image first.');
+                    return;
+                }
+                dataUrl = sigUploadedDataUrl;
             }
 
-            addOverlayImage(dataUrl, 120, 150, 160, 60);
+            // Read chosen page scope
+            const scopeRadio = document.querySelector('input[name="sigPageScope"]:checked');
+            const scope = scopeRadio ? scopeRadio.value : 'current';
+            const customPages = sigCustomPagesInput ? sigCustomPagesInput.value.trim() : '';
+
+            if (scope === 'custom') {
+                if (!customPages) {
+                    alert('Please enter the target page numbers (e.g. 1, 3, 5-8).');
+                    return;
+                }
+                const parsed = parsePageRanges(customPages, totalPages);
+                if (parsed.length === 0) {
+                    alert('Invalid page range entered. Please check page numbers.');
+                    return;
+                }
+            }
+
+            addOverlayImage(dataUrl, 120, 150, 160, 60, scope, customPages);
             signatureModal.classList.remove('active');
         });
 
         /* ========================================================
            TOOL 2: MERGE PDF STAGE
            ======================================================== */
+        /* ========================================================
+           TOOL 2: MERGE PDF STAGE (INTERACTIVE ORDER & MULTI-FILE)
+           ======================================================== */
+        let draggedMergeIdx = null;
+
         function renderMergeQueueStage() {
-            let listHtml = '<div class="sejda-merge-list">';
+            const totalP = mergeFiles.reduce((acc, f) => acc + f.pages, 0);
+
+            // Update header info strip
+            if (loadedFileName) loadedFileName.textContent = `${mergeFiles.length} files selected for merge`;
+            if (loadedFileStats) loadedFileStats.textContent = `${totalP} total pages combined`;
+
+            let queueHtml = `
+                <!-- Sequence Management Action Bar -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem; padding-bottom:0.85rem; border-bottom:1.5px dashed var(--color-border);">
+                    <div>
+                        <span style="font-weight:700; color:var(--color-text); font-size:0.95rem;">🔀 Merge Sequence:</span>
+                        <span style="font-size:0.85rem; color:var(--color-text-secondary); margin-left:0.4rem;">
+                            <strong>${mergeFiles.length}</strong> files • <strong>${totalP}</strong> pages in total
+                        </span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                        <button type="button" class="sejda-btn-secondary" id="addMorePdfsBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem;">➕ Add More PDFs</button>
+                        <button type="button" class="sejda-btn-secondary" id="sortAzBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem;" title="Sort files alphabetically A to Z">🔤 Sort A-Z</button>
+                        <button type="button" class="sejda-btn-secondary" id="reverseMergeBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem;" title="Reverse the merge order">🔀 Reverse</button>
+                        <button type="button" class="sejda-btn-secondary" id="clearMergeBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem; color:#ef4444;" title="Remove all files">🧹 Clear</button>
+                    </div>
+                </div>
+
+                <div class="sejda-merge-list" id="mergeQueueList">
+            `;
+
             mergeFiles.forEach((file, idx) => {
-                listHtml += `
-                    <div class="sejda-merge-item" data-index="${idx}">
-                        <div class="sejda-merge-item-info">
+                let orderOptions = '';
+                for (let i = 0; i < mergeFiles.length; i++) {
+                    orderOptions += `<option value="${i}" ${i === idx ? 'selected' : ''}>Position ${i + 1}</option>`;
+                }
+
+                queueHtml += `
+                    <div class="sejda-merge-item" data-index="${idx}" draggable="true" style="cursor:grab; user-select:none;">
+                        <div class="sejda-merge-item-info" style="gap:0.75rem; flex:1;">
+                            <span class="merge-drag-handle" style="font-size:1.2rem; cursor:grab; opacity:0.6;" title="Drag to reorder">⠿</span>
+                            <span style="display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--color-primary); color:#fff; font-weight:700; font-size:0.78rem;">${idx + 1}</span>
                             <span style="font-size:1.4rem;">📑</span>
-                            <div>
-                                <div class="sejda-merge-item-title">${idx + 1}. ${file.name}</div>
-                                <div class="sejda-merge-item-stats">${file.pages} pages • ${file.size}</div>
+                            <div style="min-width:0;">
+                                <div class="sejda-merge-item-title" style="font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:320px;" title="${file.name}">${file.name}</div>
+                                <div class="sejda-merge-item-stats">${file.pages} page${file.pages > 1 ? 's' : ''} • ${file.size}</div>
                             </div>
                         </div>
-                        <div style="display:flex; gap:0.4rem;">
-                            <button type="button" class="sejda-page-action-btn btn-up" data-index="${idx}" ${idx === 0 ? 'disabled' : ''}>▲</button>
-                            <button type="button" class="sejda-page-action-btn btn-down" data-index="${idx}" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>▼</button>
-                            <button type="button" class="sejda-page-action-btn btn-delete btn-remove-merge" data-index="${idx}">🗑️</button>
+
+                        <!-- Order Selector & Quick Movement Controls -->
+                        <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                            <label style="font-size:0.78rem; font-weight:600; color:var(--color-text-secondary); margin-right:2px;">Order:</label>
+                            <select class="merge-order-select" data-index="${idx}" style="padding:0.25rem 0.45rem; font-size:0.8rem; border-radius:6px; border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); cursor:pointer;">
+                                ${orderOptions}
+                            </select>
+                            <button type="button" class="sejda-page-action-btn btn-top" data-index="${idx}" title="Move to First" ${idx === 0 ? 'disabled' : ''}>⬆️</button>
+                            <button type="button" class="sejda-page-action-btn btn-up" data-index="${idx}" title="Move Up" ${idx === 0 ? 'disabled' : ''}>▲</button>
+                            <button type="button" class="sejda-page-action-btn btn-down" data-index="${idx}" title="Move Down" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>▼</button>
+                            <button type="button" class="sejda-page-action-btn btn-bottom" data-index="${idx}" title="Move to Last" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>⬇️</button>
+                            <button type="button" class="sejda-page-action-btn btn-delete btn-remove-merge" data-index="${idx}" title="Remove file">🗑️</button>
                         </div>
                     </div>
                 `;
             });
-            listHtml += '</div>';
-            listHtml += `
-                <div style="text-align:center; margin-top:1.5rem;">
-                    <button type="button" class="sejda-btn-secondary" id="addMorePdfsBtn">➕ Add More PDF Files</button>
+
+            queueHtml += '</div>';
+
+            // Sequence flow banner
+            queueHtml += `
+                <div style="margin-top:1.25rem; padding:0.85rem 1rem; border-radius:8px; background:var(--color-bg-alt, #f1f5f9); border:1px solid var(--color-border); font-size:0.83rem; line-height:1.6;">
+                    <strong style="color:var(--color-primary);">Merge Flow:</strong>
+                    <span style="color:var(--color-text-secondary); margin-left:0.35rem;">
+                        ${mergeFiles.map((f, i) => `<strong>[${i + 1}]</strong> ${f.name} (${f.pages}p)`).join(' &nbsp;➔&nbsp; ')}
+                    </span>
                 </div>
             `;
 
-            workspaceContentStage.innerHTML = listHtml;
+            workspaceContentStage.innerHTML = queueHtml;
+            initMergeQueueEvents();
+        }
 
-            // Events for merge queue
+        function initMergeQueueEvents() {
+            // Position Dropdown change
+            workspaceContentStage.querySelectorAll('.merge-order-select').forEach(sel => {
+                sel.addEventListener('change', () => {
+                    const fromIdx = parseInt(sel.getAttribute('data-index'));
+                    const toIdx = parseInt(sel.value);
+                    if (fromIdx !== toIdx) {
+                        const [moved] = mergeFiles.splice(fromIdx, 1);
+                        mergeFiles.splice(toIdx, 0, moved);
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move to First
+            workspaceContentStage.querySelectorAll('.btn-top').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    if (idx > 0) {
+                        const [moved] = mergeFiles.splice(idx, 1);
+                        mergeFiles.unshift(moved);
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move to Last
+            workspaceContentStage.querySelectorAll('.btn-bottom').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    if (idx < mergeFiles.length - 1) {
+                        const [moved] = mergeFiles.splice(idx, 1);
+                        mergeFiles.push(moved);
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move Up
             workspaceContentStage.querySelectorAll('.btn-up').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const i = parseInt(btn.getAttribute('data-index'));
@@ -1314,6 +1584,8 @@
                     }
                 });
             });
+
+            // Move Down
             workspaceContentStage.querySelectorAll('.btn-down').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const i = parseInt(btn.getAttribute('data-index'));
@@ -1325,6 +1597,8 @@
                     }
                 });
             });
+
+            // Remove item
             workspaceContentStage.querySelectorAll('.btn-remove-merge').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const i = parseInt(btn.getAttribute('data-index'));
@@ -1336,10 +1610,73 @@
                     }
                 });
             });
+
+            // Add more files
             const addMoreBtn = document.getElementById('addMorePdfsBtn');
             if (addMoreBtn) {
                 addMoreBtn.addEventListener('click', () => multiPdfFileInput.click());
             }
+
+            // Sort A-Z
+            const sortAzBtn = document.getElementById('sortAzBtn');
+            if (sortAzBtn) {
+                sortAzBtn.addEventListener('click', () => {
+                    mergeFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+                    renderMergeQueueStage();
+                });
+            }
+
+            // Reverse
+            const reverseMergeBtn = document.getElementById('reverseMergeBtn');
+            if (reverseMergeBtn) {
+                reverseMergeBtn.addEventListener('click', () => {
+                    mergeFiles.reverse();
+                    renderMergeQueueStage();
+                });
+            }
+
+            // Clear
+            const clearMergeBtn = document.getElementById('clearMergeBtn');
+            if (clearMergeBtn) {
+                clearMergeBtn.addEventListener('click', () => {
+                    if (confirm('Clear all files from the merge list?')) {
+                        mergeFiles = [];
+                        resetWorkspace();
+                    }
+                });
+            }
+
+            // Drag and Drop reordering on merge items
+            const mergeItems = workspaceContentStage.querySelectorAll('.sejda-merge-item');
+            mergeItems.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedMergeIdx = parseInt(item.getAttribute('data-index'));
+                    e.dataTransfer.effectAllowed = 'move';
+                    item.style.opacity = '0.4';
+                });
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    item.style.border = '2px dashed var(--color-primary)';
+                });
+                item.addEventListener('dragleave', () => {
+                    item.style.border = '';
+                });
+                item.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    item.style.border = '';
+                    const targetIdx = parseInt(item.getAttribute('data-index'));
+                    if (draggedMergeIdx !== null && draggedMergeIdx !== targetIdx) {
+                        const [moved] = mergeFiles.splice(draggedMergeIdx, 1);
+                        mergeFiles.splice(targetIdx, 0, moved);
+                        renderMergeQueueStage();
+                    }
+                });
+                item.addEventListener('dragend', () => {
+                    item.style.opacity = '1';
+                    draggedMergeIdx = null;
+                });
+            });
         }
 
         /* ========================================================
@@ -1898,54 +2235,105 @@
             const helveticaFont = await modifiedPdf.embedFont(PDFLib.StandardFonts.Helvetica);
             const pages = modifiedPdf.getPages();
 
-            for (const annot of editorAnnotations) {
-                const page = pages[annot.page - 1];
-                if (!page) continue;
-                const { width, height } = page.getSize();
-                // Map screen coordinates to PDF coordinate space
-                const screenW = parseFloat(document.getElementById('editorOverlay').style.width) || width;
-                const screenH = parseFloat(document.getElementById('editorOverlay').style.height) || height;
-                const scaleX = width / screenW;
-                const scaleY = height / screenH;
+            const overlay = document.getElementById('editorOverlay');
+            const screenW = parseFloat(overlay ? overlay.style.width : 0) || 600;
+            const screenH = parseFloat(overlay ? overlay.style.height : 0) || 800;
 
-                const pdfX = (annot.el.offsetLeft) * scaleX;
-                const pdfY = height - (annot.el.offsetTop + annot.el.offsetHeight) * scaleY;
+            for (const annot of editorAnnotations) {
+                // Determine target page indices for this annotation
+                let targetPageIndices = [];
+                if (annot.scope === 'all') {
+                    targetPageIndices = Array.from({ length: pages.length }, (_, i) => i);
+                } else if (annot.scope === 'custom' && annot.customPages) {
+                    targetPageIndices = parsePageRanges(annot.customPages, pages.length);
+                } else {
+                    if (annot.page >= 1 && annot.page <= pages.length) {
+                        targetPageIndices = [annot.page - 1];
+                    }
+                }
+
+                if (targetPageIndices.length === 0) continue;
 
                 if (annot.type === 'text') {
-                    const text = annot.el.textContent || annot.text;
-                    page.drawText(text, {
-                        x: pdfX,
-                        y: pdfY,
-                        size: (annot.fontSize || 14) * scaleX,
-                        font: helveticaFont,
-                        color: PDFLib.rgb(0, 0, 0)
-                    });
+                    const text = (annot.el ? annot.el.textContent : '') || annot.text;
+                    const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
+                    const elTop = annot.el ? annot.el.offsetTop : annot.y;
+                    const elH = annot.el ? annot.el.offsetHeight : 20;
+
+                    for (const pIdx of targetPageIndices) {
+                        const page = pages[pIdx];
+                        const { width, height } = page.getSize();
+                        const scaleX = width / screenW;
+                        const scaleY = height / screenH;
+
+                        const pdfX = elLeft * scaleX;
+                        const pdfY = height - (elTop + elH) * scaleY;
+
+                        page.drawText(text, {
+                            x: pdfX,
+                            y: pdfY,
+                            size: (annot.fontSize || 14) * scaleX,
+                            font: helveticaFont,
+                            color: PDFLib.rgb(0, 0, 0)
+                        });
+                    }
                 } else if (annot.type === 'whiteout' || annot.type === 'blackout') {
-                    const boxW = annot.el.offsetWidth * scaleX;
-                    const boxH = annot.el.offsetHeight * scaleY;
-                    page.drawRectangle({
-                        x: pdfX,
-                        y: pdfY,
-                        width: boxW,
-                        height: boxH,
-                        color: annot.type === 'whiteout' ? PDFLib.rgb(1, 1, 1) : PDFLib.rgb(0, 0, 0)
-                    });
+                    const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
+                    const elTop = annot.el ? annot.el.offsetTop : annot.y;
+                    const elW = annot.el ? annot.el.offsetWidth : annot.width;
+                    const elH = annot.el ? annot.el.offsetHeight : annot.height;
+
+                    for (const pIdx of targetPageIndices) {
+                        const page = pages[pIdx];
+                        const { width, height } = page.getSize();
+                        const scaleX = width / screenW;
+                        const scaleY = height / screenH;
+
+                        const boxW = elW * scaleX;
+                        const boxH = elH * scaleY;
+                        const pdfX = elLeft * scaleX;
+                        const pdfY = height - (elTop + elH) * scaleY;
+
+                        page.drawRectangle({
+                            x: pdfX,
+                            y: pdfY,
+                            width: boxW,
+                            height: boxH,
+                            color: annot.type === 'whiteout' ? PDFLib.rgb(1, 1, 1) : PDFLib.rgb(0, 0, 0)
+                        });
+                    }
                 } else if (annot.type === 'image') {
-                    const boxW = annot.el.offsetWidth * scaleX;
-                    const boxH = annot.el.offsetHeight * scaleY;
                     const imgBytes = await fetch(annot.dataUrl).then(res => res.arrayBuffer());
                     let embeddedImg = null;
-                    if (annot.dataUrl.includes('png')) {
+                    if (annot.dataUrl.includes('png') || annot.dataUrl.startsWith('data:image/png')) {
                         embeddedImg = await modifiedPdf.embedPng(imgBytes);
                     } else {
                         embeddedImg = await modifiedPdf.embedJpg(imgBytes);
                     }
-                    page.drawImage(embeddedImg, {
-                        x: pdfX,
-                        y: pdfY,
-                        width: boxW,
-                        height: boxH
-                    });
+
+                    const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
+                    const elTop = annot.el ? annot.el.offsetTop : annot.y;
+                    const elW = annot.el ? annot.el.offsetWidth : annot.width;
+                    const elH = annot.el ? annot.el.offsetHeight : annot.height;
+
+                    for (const pIdx of targetPageIndices) {
+                        const page = pages[pIdx];
+                        const { width, height } = page.getSize();
+                        const scaleX = width / screenW;
+                        const scaleY = height / screenH;
+
+                        const boxW = elW * scaleX;
+                        const boxH = elH * scaleY;
+                        const pdfX = elLeft * scaleX;
+                        const pdfY = height - (elTop + elH) * scaleY;
+
+                        page.drawImage(embeddedImg, {
+                            x: pdfX,
+                            y: pdfY,
+                            width: boxW,
+                            height: boxH
+                        });
+                    }
                 }
             }
 
@@ -1966,7 +2354,12 @@
                 copiedPages.forEach(p => mergedPdf.addPage(p));
             }
             const outputBytes = await mergedPdf.save();
-            showResultDownload(outputBytes, 'merged_document.pdf');
+            const totalPagesCombined = mergedPdf.getPageCount();
+            showResultDownload(
+                outputBytes,
+                'merged_document.pdf',
+                `Successfully combined ${mergeFiles.length} files (${totalPagesCombined} pages total) in your custom sequence.`
+            );
         }
 
         // 3. Execute Split

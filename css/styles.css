@@ -458,8 +458,10 @@
   --banner-glow: rgba(21, 101, 192, 0.65);
 }
 
-/* Theme 10: Sejda Clean Teal (Neat, Crisp, High-Contrast Sejda Design) */
-[data-theme="sejda"] {
+/* Theme 10: Clean Teal (Crisp, High-Contrast Modern Teal Design) */
+[data-theme="sejda"],
+[data-theme="teal"],
+[data-theme="cleanteal"] {
   --color-primary: #0D7A82;
   --color-primary-hover: #095B61;
   --color-primary-light: #E6F5F6;
@@ -2846,7 +2848,8 @@ select.input-field option {
   color: #FFFFFF !important;
   font-weight: 700;
 }
-.sidebar-tag.tag-sejda {
+.sidebar-tag.tag-sejda,
+.sidebar-tag.tag-teal {
   background: #0D7A82;
   color: #FFFFFF !important;
   font-weight: 700;
@@ -4452,9 +4455,14 @@ body.is-embedded .portal-main-area {
 }
 body.is-embedded .tool-page,
 body.is-embedded .tool-container,
+body.is-embedded .sejda-suite-container,
 body.is-embedded .container {
   padding-top: 0.5rem !important;
   max-width: 1200px !important;
+}
+body.is-embedded .sejda-hero {
+  padding: 1.25rem 1rem 1rem !important;
+  margin-bottom: 1rem !important;
 }
 
 /* ========================================================
