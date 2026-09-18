@@ -723,6 +723,7 @@
     setTheme: function (themeId, triggerToast = false) {
       applyTheme(themeId, triggerToast, true);
     },
+    hasAdPlacedInLeaderboard: hasAdPlacedInLeaderboard,
 
     // Format number with commas (Indian system)
     formatIndian: function (num) {
@@ -922,7 +923,37 @@
     }
   });
 
-  // ---- Auto-Dismiss Privacy USP Strip (Disappears after a few seconds) ----
+  // ---- Helper to detect if ads are placed in 'ad-unit ad-leaderboard' ----
+  function hasAdPlacedInLeaderboard() {
+    const leaderboard = document.querySelector('.ad-unit.ad-leaderboard');
+    if (!leaderboard) return false;
+
+    // 1. Explicit class markers
+    if (leaderboard.classList.contains('ad-filled') || leaderboard.classList.contains('has-ad')) {
+      return true;
+    }
+
+    // 2. Google AdSense: check if adsbygoogle has data-ad-status="filled" or contains an ad iframe
+    const ins = leaderboard.querySelector('ins.adsbygoogle');
+    if (ins) {
+      const status = ins.getAttribute('data-ad-status');
+      if (status === 'filled') return true;
+      const adIframe = ins.querySelector('iframe');
+      if (adIframe) return true;
+    }
+
+    // 3. Custom ad content or banner placed (excluding the sponsor-card placeholder & ad badge)
+    const adElements = leaderboard.querySelectorAll('iframe, .active-ad, .ad-content, a[data-ad]');
+    for (let el of adElements) {
+      if (!el.closest('.ad-placeholder') && !el.closest('.sponsor-card')) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // ---- Privacy USP Strip: Shown until ads are placed in 'ad-unit ad-leaderboard' ----
   function initPrivacyUspStrip() {
     const strips = document.querySelectorAll('.privacy-usp-strip');
     if (!strips.length) return;
@@ -943,14 +974,7 @@
         content.appendChild(closeBtn);
       }
 
-      let autoDismissTimer = null;
-      const AUTO_DISMISS_DELAY = 6000; // Disappear after 6 seconds
-
       function dismissNotice() {
-        if (autoDismissTimer) {
-          clearTimeout(autoDismissTimer);
-          autoDismissTimer = null;
-        }
         if (strip.classList.contains('is-dismissing') || strip.classList.contains('is-hidden')) return;
         strip.classList.add('is-dismissing');
         setTimeout(() => {
@@ -959,25 +983,31 @@
         }, 650);
       }
 
-      // Start timer
-      autoDismissTimer = setTimeout(dismissNotice, AUTO_DISMISS_DELAY);
+      // Check if an ad is currently placed in 'ad-unit ad-leaderboard'
+      // The notice is shown as long as no ads are placed.
+      // If an ad IS placed, the notice is dismissed.
+      if (hasAdPlacedInLeaderboard()) {
+        dismissNotice();
+      }
 
-      // Pause while reading on hover
-      strip.addEventListener('mouseenter', () => {
-        if (autoDismissTimer) {
-          clearTimeout(autoDismissTimer);
-          autoDismissTimer = null;
-        }
-      });
+      // Dynamically monitor 'ad-unit ad-leaderboard' for when an ad is placed (e.g. AdSense async fill)
+      const leaderboard = document.querySelector('.ad-unit.ad-leaderboard');
+      if (leaderboard) {
+        const observer = new MutationObserver(() => {
+          if (hasAdPlacedInLeaderboard()) {
+            dismissNotice();
+            observer.disconnect();
+          }
+        });
+        observer.observe(leaderboard, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['data-ad-status', 'class']
+        });
+      }
 
-      // Resume with grace period after mouse leaves
-      strip.addEventListener('mouseleave', () => {
-        if (!strip.classList.contains('is-dismissing') && !strip.classList.contains('is-hidden')) {
-          autoDismissTimer = setTimeout(dismissNotice, 2500);
-        }
-      });
-
-      // Instant dismiss on close button click
+      // Manual dismiss on close button click
       if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
           e.preventDefault();
