@@ -2736,12 +2736,68 @@ select.input-field option {
   color: var(--usp-strip-text, #CBD5E1);
   font-size: 0.8rem;
   padding: 0.35rem 0;
+  max-height: 140px;
+  opacity: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: max-height 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s ease-out,
+              padding 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              margin 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.5s ease-out;
+  will-change: max-height, opacity;
+}
+.privacy-usp-strip.is-dismissing {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-bottom-color: transparent !important;
+  border-bottom-width: 0 !important;
+  pointer-events: none;
+}
+.privacy-usp-strip.is-hidden {
+  display: none !important;
 }
 .usp-strip-content {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  position: relative;
+  padding-right: 2.5rem;
+}
+.usp-close-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--usp-strip-text, #94A3B8);
+  font-size: 1.15rem;
+  line-height: 1;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+  padding: 0;
+}
+.usp-close-btn:hover {
+  opacity: 1;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+}
+.usp-close-btn:focus-visible {
+  outline: 2px solid #10B981;
+  outline-offset: 1px;
 }
 .usp-badge {
   background: #10B981;

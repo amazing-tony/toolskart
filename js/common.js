@@ -902,4 +902,76 @@
     }
   });
 
+  // ---- Auto-Dismiss Privacy USP Strip (Disappears after a few seconds) ----
+  function initPrivacyUspStrip() {
+    const strips = document.querySelectorAll('.privacy-usp-strip');
+    if (!strips.length) return;
+
+    strips.forEach(strip => {
+      if (strip.dataset.uspDismissInit) return;
+      strip.dataset.uspDismissInit = 'true';
+
+      const content = strip.querySelector('.usp-strip-content');
+      let closeBtn = strip.querySelector('.usp-close-btn');
+      if (!closeBtn && content) {
+        closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'usp-close-btn';
+        closeBtn.setAttribute('aria-label', 'Dismiss notice');
+        closeBtn.setAttribute('title', 'Dismiss notice');
+        closeBtn.innerHTML = '&times;';
+        content.appendChild(closeBtn);
+      }
+
+      let autoDismissTimer = null;
+      const AUTO_DISMISS_DELAY = 6000; // Disappear after 6 seconds
+
+      function dismissNotice() {
+        if (autoDismissTimer) {
+          clearTimeout(autoDismissTimer);
+          autoDismissTimer = null;
+        }
+        if (strip.classList.contains('is-dismissing') || strip.classList.contains('is-hidden')) return;
+        strip.classList.add('is-dismissing');
+        setTimeout(() => {
+          strip.classList.add('is-hidden');
+          strip.style.display = 'none';
+        }, 650);
+      }
+
+      // Start timer
+      autoDismissTimer = setTimeout(dismissNotice, AUTO_DISMISS_DELAY);
+
+      // Pause while reading on hover
+      strip.addEventListener('mouseenter', () => {
+        if (autoDismissTimer) {
+          clearTimeout(autoDismissTimer);
+          autoDismissTimer = null;
+        }
+      });
+
+      // Resume with grace period after mouse leaves
+      strip.addEventListener('mouseleave', () => {
+        if (!strip.classList.contains('is-dismissing') && !strip.classList.contains('is-hidden')) {
+          autoDismissTimer = setTimeout(dismissNotice, 2500);
+        }
+      });
+
+      // Instant dismiss on close button click
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dismissNotice();
+        });
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPrivacyUspStrip);
+  } else {
+    initPrivacyUspStrip();
+  }
+
 })();
