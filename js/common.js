@@ -8,7 +8,8 @@
 
   // ---- Multi-Theme Architecture: 11 Distinct Design Systems ----
   const THEME_KEY = 'toolskart_theme';
-  const DEFAULT_THEME = 'theme-01-executive';
+  const THEME_USER_SET_KEY = 'toolskart_theme_user_set';
+  const DEFAULT_THEME = 'theme-09-paper';
 
   const THEMES = [
     { id: 'theme-01-executive', name: 'Executive' },
@@ -78,15 +79,20 @@
     }, 1350);
   }
 
-  function applyTheme(themeId, triggerToast = false) {
+  function applyTheme(themeId, triggerToast = false, isUserAction = false) {
     if (THEME_ALIASES[themeId]) themeId = THEME_ALIASES[themeId];
-    const themeObj = THEMES.find(t => t.id === themeId) || THEMES[0];
+    const themeObj = THEMES.find(t => t.id === themeId) || THEMES.find(t => t.id === DEFAULT_THEME) || THEMES[0];
     const resolvedId = themeObj.id;
 
     document.documentElement.setAttribute('data-theme', resolvedId);
-    try {
-      localStorage.setItem(THEME_KEY, resolvedId);
-    } catch (e) {}
+    
+    // Persist per-user independently whenever the user actively selects/changes their theme
+    if (isUserAction) {
+      try {
+        localStorage.setItem(THEME_KEY, resolvedId);
+        localStorage.setItem(THEME_USER_SET_KEY, 'true');
+      } catch (e) {}
+    }
 
     // Update all theme buttons title and aria-labels
     document.querySelectorAll('.theme-cycle-btn').forEach(btn => {
@@ -115,15 +121,27 @@
     if (currentIndex === -1) currentIndex = 0;
 
     const nextIndex = (currentIndex + 1) % THEMES.length;
-    applyTheme(THEMES[nextIndex].id, true);
+    applyTheme(THEMES[nextIndex].id, true, true);
   }
 
-  // Detect and set initial theme
+  // Detect and set initial theme: Paper by default, or user's explicit saved choice
   let savedTheme = DEFAULT_THEME;
   try {
-    savedTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
+    const isUserSet = localStorage.getItem(THEME_USER_SET_KEY) === 'true';
+    const stored = localStorage.getItem(THEME_KEY);
+    if (stored) {
+      if (isUserSet) {
+        // Explicit user choice persists independently for this user
+        savedTheme = stored;
+      } else if (stored !== 'theme-01-executive' && stored !== 'executive' && stored !== 'adminlte' && stored !== 'teal' && stored !== 'us-tech' && stored !== 'sejda') {
+        savedTheme = stored;
+      } else {
+        // Migrate old automatic default to new 'paper' default
+        savedTheme = DEFAULT_THEME;
+      }
+    }
   } catch (e) {}
-  applyTheme(savedTheme, false);
+  applyTheme(savedTheme, false, false);
 
   // If running inside an iframe, enable embedded mode
   if (window.self !== window.top) {
@@ -702,7 +720,9 @@
   window.ToolsKart = {
     openTool: openToolInPortal,
     closeTool: closeToolPanel,
-    setTheme: applyTheme,
+    setTheme: function (themeId, triggerToast = false) {
+      applyTheme(themeId, triggerToast, true);
+    },
 
     // Format number with commas (Indian system)
     formatIndian: function (num) {

@@ -9,7 +9,6 @@
    ======================================================== */
 
 /* ---- Theme 01: Executive (Enterprise SaaS / Boardroom) ---- */
-:root,
 [data-theme="theme-01-executive"],
 [data-theme="executive"],
 [data-theme="us-tech"],
@@ -443,6 +442,7 @@
 }
 
 /* ---- Theme 09: Paper (Document / Editorial Workspace) ---- */
+:root,
 [data-theme="theme-09-paper"],
 [data-theme="paper"],
 [data-theme="chinese-harmony"] {
