@@ -433,7 +433,24 @@
 
   // ---- Single-Portal Tool Loading & Routing Engine ----
   const toolRegistry = {
+    // Dedicated PDF Document Studio & Sub-Tool Aliases
     'pdf-tools': { title: 'PDF Document Studio', category: 'Document Tools', url: 'pages/pdf-tools.html' },
+    'split': { title: 'Split PDF Pages', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=split' },
+    'merge': { title: 'Merge PDF Files', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=merge' },
+    'edit': { title: 'PDF Editor & Sign', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=edit' },
+    'compress': { title: 'Compress & Optimize PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=compress' },
+    'organize': { title: 'Organize & Rotate PDF Pages', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=organize' },
+    'pdf-to-img': { title: 'PDF to JPG / PNG Images', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=pdf-to-img' },
+    'img-to-pdf': { title: 'Images to PDF Converter', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=img-to-pdf' },
+    'watermark': { title: 'Watermark PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=watermark' },
+    'page-numbers': { title: 'Add Page Numbers to PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=page-numbers' },
+    'protect': { title: 'Protect & Lock PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=protect' },
+    'unlock': { title: 'Unlock PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=unlock' },
+    'crop': { title: 'Crop PDF Margins', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=crop' },
+    'extract-text': { title: 'Extract Text from PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=extract-text' },
+    'metadata': { title: 'PDF Metadata Editor', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=metadata' },
+
+    // Standalone Web Applications
     'document-converter': { title: 'Universal Document Converter', category: 'Document Tools', url: 'pages/document-converter.html' },
     'video-downloader': { title: 'Video & Audio Downloader', category: 'Media Tools', url: 'pages/video-downloader.html' },
     'income-tax-calculator': { title: 'Income Tax Optimizer (Old vs New)', category: 'Financial Calculators', url: 'pages/income-tax-calculator.html' },
@@ -465,6 +482,8 @@
 
   function extractSlugFromUrl(url) {
     if (!url) return null;
+    const toolParam = url.match(/[?&]tool=([\w-]+)/);
+    if (toolParam) return toolParam[1];
     const match = url.match(/(?:pages\/|^|\/)([\w-]+)\.html(?:\?|#|$)/);
     return match ? match[1] : null;
   }
@@ -493,10 +512,16 @@
       return;
     }
 
-    const tool = toolRegistry[slug] || {
+    const regTool = toolRegistry[slug];
+    if (!regTool && !fullUrl) {
+      console.warn('Unknown tool slug:', slug);
+      return;
+    }
+
+    const tool = regTool || {
       title: customTitle || slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
       category: customCat || 'Document Tools',
-      url: 'pages/' + slug + '.html'
+      url: fullUrl || ('pages/' + slug + '.html')
     };
 
     // Update breadcrumbs
@@ -514,17 +539,23 @@
     }
 
     const activeUrl = toolIframe.getAttribute('data-active-url') || '';
-    if (activeUrl !== targetUrl) {
+    const activeBase = activeUrl.split('?')[0];
+    const targetBase = targetUrl.split('?')[0];
+
+    if (activeBase && activeBase === targetBase && activeBase.includes('pdf-tools.html') && targetUrl.includes('?tool=')) {
       toolIframe.setAttribute('data-active-url', targetUrl);
-      toolIframe.src = targetUrl;
-    } else if (toolIframe.contentWindow && targetUrl.includes('?tool=')) {
       try {
         const u = new URL(targetUrl, window.location.origin);
         const sub = u.searchParams.get('tool');
-        if (sub) {
+        if (sub && toolIframe.contentWindow) {
           toolIframe.contentWindow.postMessage({ type: 'activateTool', tool: sub }, '*');
         }
-      } catch (err) {}
+      } catch (err) {
+        toolIframe.src = targetUrl;
+      }
+    } else if (activeUrl !== targetUrl) {
+      toolIframe.setAttribute('data-active-url', targetUrl);
+      toolIframe.src = targetUrl;
     }
 
     // Smooth scroll to tool panel
@@ -602,6 +633,11 @@
 
   // Intercept click on tools, cards, and sidebar links
   document.addEventListener('click', function (e) {
+    // If inside pdf-tools sub-tool card or in-page interactive components, do not intercept
+    if (e.target.closest('.sejda-tool-card') || e.target.closest('[data-pdf-subtool]')) {
+      return;
+    }
+
     const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .nav-quick-item');
     if (!trigger) return;
 
@@ -621,7 +657,8 @@
                       (toolRegistry[slug] && toolRegistry[slug].title);
         openToolInPortal(slug, title, null, href);
       } else if (window.self !== window.top) {
-        // We are inside an iframe; request top window to open the tool in the AdminLTE portal workstation
+        // We are inside an iframe; only forward if slug is a valid registered tool or has a valid href
+        if (!toolRegistry[slug] && !href) return;
         e.preventDefault();
         try {
           if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
@@ -637,10 +674,11 @@
   // Check URL hash on page load or on hashchange
   function checkUrlHash() {
     const hash = window.location.hash.replace('#', '').trim();
-    if (hash && (toolRegistry[hash] || hash.includes('-'))) {
+    if (hash && toolRegistry[hash]) {
+      const tool = toolRegistry[hash];
       const search = window.location.search || '';
-      const fullUrl = 'pages/' + hash + '.html' + search;
-      openToolInPortal(hash, null, null, fullUrl);
+      const fullUrl = tool.url.includes('?') ? tool.url : (tool.url + search);
+      openToolInPortal(hash, tool.title, tool.category, fullUrl);
     }
   }
   window.addEventListener('load', checkUrlHash);
