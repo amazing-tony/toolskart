@@ -2745,14 +2745,19 @@ select.input-field option {
    ======================================================== */
 .privacy-usp-strip {
   background: var(--usp-strip-bg, #0B1120);
-  border-bottom: 1px solid var(--usp-strip-border, #1E293B);
+  border: 1px solid var(--usp-strip-border, #1E293B);
+  border-radius: var(--radius-md, 8px);
   color: var(--usp-strip-text, #CBD5E1);
-  font-size: 0.8rem;
-  padding: 0.35rem 0;
-  max-height: 140px;
+  font-size: 0.82rem;
+  padding: 0.65rem 1.15rem;
+  margin: 0 auto 0.85rem auto;
+  max-width: 100%;
+  max-height: 160px;
   opacity: 1;
   overflow: hidden;
   box-sizing: border-box;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
   transition: max-height 0.65s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.5s ease-out,
               padding 0.65s cubic-bezier(0.4, 0, 0.2, 1),
@@ -2767,8 +2772,8 @@ select.input-field option {
   padding-bottom: 0 !important;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  border-bottom-color: transparent !important;
-  border-bottom-width: 0 !important;
+  border-color: transparent !important;
+  border-width: 0 !important;
   pointer-events: none;
 }
 .privacy-usp-strip.is-hidden {
@@ -2781,6 +2786,8 @@ select.input-field option {
   flex-wrap: wrap;
   position: relative;
   padding-right: 2.5rem;
+  justify-content: flex-start;
+  text-align: left;
 }
 .usp-close-btn {
   position: absolute;
@@ -5166,6 +5173,64 @@ ins.adsbygoogle iframe + .ad-placeholder {
   color: #C2410C !important;
 }
 
+[data-theme="theme-09-paper"] .privacy-usp-strip,
+[data-theme="paper"] .privacy-usp-strip,
+[data-theme="chinese-harmony"] .privacy-usp-strip {
+  background: #FAF5ED !important;
+  border: 1px solid #DFD5C6 !important;
+  color: #1F1A15 !important;
+}
+[data-theme="theme-09-paper"] .privacy-usp-strip .usp-text,
+[data-theme="paper"] .privacy-usp-strip .usp-text,
+[data-theme="chinese-harmony"] .privacy-usp-strip .usp-text {
+  color: #443B33 !important;
+}
+[data-theme="theme-09-paper"] .privacy-usp-strip .usp-close-btn,
+[data-theme="paper"] .privacy-usp-strip .usp-close-btn,
+[data-theme="chinese-harmony"] .privacy-usp-strip .usp-close-btn {
+  color: #7B6E63 !important;
+}
+[data-theme="theme-09-paper"] .privacy-usp-strip .usp-close-btn:hover,
+[data-theme="paper"] .privacy-usp-strip .usp-close-btn:hover,
+[data-theme="chinese-harmony"] .privacy-usp-strip .usp-close-btn:hover {
+  color: #1F1A15 !important;
+  background: #EFE8DD !important;
+}
+
+[data-theme="theme-09-paper"] .sponsor-card,
+[data-theme="paper"] .sponsor-card,
+[data-theme="chinese-harmony"] .sponsor-card {
+  background: #FAF5ED !important;
+  border-color: #DFD5C6 !important;
+}
+[data-theme="theme-09-paper"] .sponsor-badge,
+[data-theme="paper"] .sponsor-badge,
+[data-theme="chinese-harmony"] .sponsor-badge {
+  background: rgba(194, 65, 12, 0.12) !important;
+  color: #C2410C !important;
+}
+[data-theme="theme-09-paper"] .sponsor-text strong,
+[data-theme="paper"] .sponsor-text strong,
+[data-theme="chinese-harmony"] .sponsor-text strong {
+  color: #1F1A15 !important;
+}
+[data-theme="theme-09-paper"] .sponsor-text p,
+[data-theme="paper"] .sponsor-text p,
+[data-theme="chinese-harmony"] .sponsor-text p {
+  color: #443B33 !important;
+}
+[data-theme="theme-09-paper"] .sponsor-btn,
+[data-theme="paper"] .sponsor-btn,
+[data-theme="chinese-harmony"] .sponsor-btn {
+  background: #1A1613 !important;
+  color: #FFFFFF !important;
+}
+[data-theme="theme-09-paper"] .sponsor-btn:hover,
+[data-theme="paper"] .sponsor-btn:hover,
+[data-theme="chinese-harmony"] .sponsor-btn:hover {
+  background: #000000 !important;
+}
+
 /* ========================================================
    SOCIAL BLUE THEME (facebook) BANNER CONTRAST FIX
    Deep navy banner clearly separates from the #1877F2 blue header
@@ -5451,13 +5516,6 @@ ins.adsbygoogle iframe + .ad-placeholder {
 .timeline-bar-text {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
   font-weight: 700 !important;
-}
-
-.privacy-usp-strip {
-  background: #0F172A !important;
-}
-.privacy-usp-strip .usp-text {
-  color: #CBD5E1 !important;
 }
 
 /* ========================================================
