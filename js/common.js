@@ -495,7 +495,10 @@
     'color-picker': { title: 'Color Picker & Converter', category: 'Image Tools', url: 'pages/color-picker.html' },
     'url-encoder': { title: 'URL Encoder / Decoder', category: 'Developer Tools', url: 'pages/url-encoder.html' },
     'regex-tester': { title: 'Regex Tester', category: 'Developer Tools', url: 'pages/regex-tester.html' },
-    'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' }
+    'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' },
+    'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
+    'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
+    'about': { title: 'About Us', category: 'Company', url: 'about.html' }
   };
 
   function extractSlugFromUrl(url) {
@@ -552,7 +555,7 @@
 
     // Target URL for iframe
     let targetUrl = fullUrl || tool.url;
-    if (!targetUrl.startsWith('http') && !targetUrl.startsWith('pages/')) {
+    if (!targetUrl.startsWith('http') && !targetUrl.startsWith('pages/') && !['terms.html', 'privacy-policy.html', 'about.html'].includes(targetUrl)) {
       targetUrl = 'pages/' + targetUrl;
     }
 

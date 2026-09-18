@@ -1372,13 +1372,17 @@ select.input-field option {
 .badge-warning { background: var(--color-warning-light); color: var(--color-warning); }
 
 /* ---- 21. Legal / Static Pages ---- */
-.legal-page { padding: 2rem 0 3rem; max-width: 800px; margin: 0 auto; }
-.legal-page h1 { margin-bottom: 0.5rem; }
-.legal-page .last-updated { color: var(--color-text-muted); font-size: 0.88rem; margin-bottom: 2rem; }
-.legal-page h2 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; }
-.legal-page p, .legal-page li { font-size: 0.95rem; line-height: 1.7; }
-.legal-page ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
-.legal-page ul li { margin-bottom: 0.4rem; color: var(--color-text-secondary); }
+.legal-page { padding: 2rem 0 3rem; max-width: 800px; margin: 0 auto; color: var(--color-text); }
+.legal-page h1 { font-size: 2.25rem; font-weight: 800; color: var(--color-text) !important; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+.legal-page .last-updated { color: var(--color-text-muted) !important; font-size: 0.88rem; margin-bottom: 2rem; }
+.legal-page h2 { font-size: 1.35rem; font-weight: 700; color: var(--color-text) !important; margin-top: 2rem; margin-bottom: 0.6rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.35rem; }
+.legal-page h3 { font-size: 1.1rem; font-weight: 700; color: var(--color-text) !important; margin-top: 1.5rem; margin-bottom: 0.4rem; }
+.legal-page p, .legal-page li { font-size: 0.98rem; line-height: 1.75; color: var(--color-text-secondary); }
+.legal-page strong { color: var(--color-text); font-weight: 700; }
+.legal-page a { color: var(--color-primary, #2563EB); text-decoration: underline; }
+.legal-page a:hover { color: var(--color-primary-hover, #1D4ED8); }
+.legal-page ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+.legal-page ul li { margin-bottom: 0.45rem; color: var(--color-text-secondary); }
 
 /* ========================================
    22. Responsive Design
@@ -5130,6 +5134,36 @@ ins.adsbygoogle iframe + .ad-placeholder {
 [data-theme="chinese-harmony"] .tool-action-btn:not(.btn-close-tool):hover {
   background: #E5DCCF !important;
   border-color: #D3C5B1 !important;
+}
+
+[data-theme="theme-09-paper"] .legal-page h1,
+[data-theme="paper"] .legal-page h1,
+[data-theme="chinese-harmony"] .legal-page h1,
+[data-theme="theme-09-paper"] .legal-page h2,
+[data-theme="paper"] .legal-page h2,
+[data-theme="chinese-harmony"] .legal-page h2,
+[data-theme="theme-09-paper"] .legal-page h3,
+[data-theme="paper"] .legal-page h3,
+[data-theme="chinese-harmony"] .legal-page h3 {
+  color: #1F1A15 !important;
+}
+[data-theme="theme-09-paper"] .legal-page p,
+[data-theme="paper"] .legal-page p,
+[data-theme="chinese-harmony"] .legal-page p,
+[data-theme="theme-09-paper"] .legal-page li,
+[data-theme="paper"] .legal-page li,
+[data-theme="chinese-harmony"] .legal-page li {
+  color: #443B33 !important;
+}
+[data-theme="theme-09-paper"] .legal-page strong,
+[data-theme="paper"] .legal-page strong,
+[data-theme="chinese-harmony"] .legal-page strong {
+  color: #1F1A15 !important;
+}
+[data-theme="theme-09-paper"] .legal-page a,
+[data-theme="paper"] .legal-page a,
+[data-theme="chinese-harmony"] .legal-page a {
+  color: #C2410C !important;
 }
 
 /* ========================================================
