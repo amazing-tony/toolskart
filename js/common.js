@@ -402,55 +402,113 @@
     });
   }
 
-  // ---- Hierarchical Treeview Accordion ----
+  // ---- Hierarchical Treeview Accordion & State Preservation ----
+  function openSidebarTree(treeId, keepScroll) {
+    if (!portalSidebar || !treeId) return;
+    const body = document.getElementById('tree-' + treeId);
+    const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
+    if (!body || !toggle) return;
+
+    // Accordion: close all other trees (opens/expanding a new one closes the previous one)
+    portalSidebar.querySelectorAll('.sb-tree-body.is-open').forEach(el => {
+      if (el !== body) {
+        el.classList.remove('is-open');
+        const otherToggle = portalSidebar.querySelector(`[data-tree="${el.id.replace('tree-','')}"]`);
+        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Expand target tree
+    body.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    try { sessionStorage.setItem('active_sb_tree', treeId); } catch (_) {}
+
+    if (keepScroll) {
+      setTimeout(() => {
+        body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 120);
+    }
+  }
+
+  function closeSidebarTree(treeId) {
+    if (!portalSidebar || !treeId) return;
+    const body = document.getElementById('tree-' + treeId);
+    const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
+    if (body) body.classList.remove('is-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    try {
+      if (sessionStorage.getItem('active_sb_tree') === treeId) {
+        sessionStorage.removeItem('active_sb_tree');
+      }
+    } catch (_) {}
+  }
+
   portalSidebar && portalSidebar.querySelectorAll('.sb-tree-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const treeId = btn.dataset.tree;
       const body = document.getElementById('tree-' + treeId);
       if (!body) return;
 
       const isOpen = body.classList.contains('is-open');
-
-      // Close all other trees (accordion behaviour)
-      portalSidebar.querySelectorAll('.sb-tree-body.is-open').forEach(el => {
-        if (el !== body) {
-          el.classList.remove('is-open');
-          const toggle = portalSidebar.querySelector(`[data-tree="${el.id.replace('tree-','')}"]`);
-          if (toggle) toggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Toggle this tree
-      body.classList.toggle('is-open', !isOpen);
-      btn.setAttribute('aria-expanded', (!isOpen).toString());
-
-      // Auto-scroll into view if opening
-      if (!isOpen) {
-        setTimeout(() => {
-          body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 120);
+      if (isOpen) {
+        // User explicitly clicks an expanded tree header to collapse it
+        closeSidebarTree(treeId);
+      } else {
+        // User opens/expanding a new one -> closes others and opens this one
+        openSidebarTree(treeId, true);
       }
     });
   });
 
-  // Mark active sidebar item based on current URL
-  if (portalSidebar) {
-    const currentPath = window.location.pathname + window.location.search;
-    portalSidebar.querySelectorAll('.sb-item, .sb-child').forEach(link => {
-      const href = link.getAttribute('href') || '';
-      if (href && currentPath.includes(href.split('?')[0]) && href !== '/' && href !== '#') {
-        link.classList.add('is-active');
-        // Open parent tree if nested
-        const parentBody = link.closest('.sb-tree-body');
-        if (parentBody) {
-          parentBody.classList.add('is-open');
-          const treeId = parentBody.id.replace('tree-', '');
-          const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
-          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  // Restore active tree on page load or from current hash
+  function restoreActiveSidebarState() {
+    if (!portalSidebar) return;
+    const hash = window.location.hash.replace('#', '').trim();
+    let treeOpened = false;
+
+    if (hash) {
+      const activeLink = portalSidebar.querySelector(`.sb-item[data-tool="${hash}"], .sb-child[data-tool="${hash}"], [href*="${hash}"]`);
+      if (activeLink) {
+        portalSidebar.querySelectorAll('.sb-item, .sb-child, .sidebar-link, .sidebar-sublink').forEach(link => {
+          link.classList.remove('is-active', 'active');
+        });
+        activeLink.classList.add('is-active', 'active');
+        const parentTree = activeLink.closest('.sb-tree-body');
+        if (parentTree) {
+          openSidebarTree(parentTree.id.replace('tree-', ''), false);
+          treeOpened = true;
         }
       }
-    });
+    }
+
+    if (!treeOpened) {
+      const currentPath = window.location.pathname + window.location.search;
+      portalSidebar.querySelectorAll('.sb-item, .sb-child').forEach(link => {
+        const href = link.getAttribute('href') || '';
+        if (href && currentPath.includes(href.split('?')[0]) && href !== '/' && href !== '#') {
+          link.classList.add('is-active', 'active');
+          const parentTree = link.closest('.sb-tree-body');
+          if (parentTree) {
+            openSidebarTree(parentTree.id.replace('tree-', ''), false);
+            treeOpened = true;
+          }
+        }
+      });
+    }
+
+    if (!treeOpened) {
+      try {
+        const savedTree = sessionStorage.getItem('active_sb_tree');
+        if (savedTree) {
+          openSidebarTree(savedTree, false);
+        }
+      } catch (_) {}
+    }
   }
+  restoreActiveSidebarState();
+  window.addEventListener('hashchange', restoreActiveSidebarState);
 
   // ---- Category Filter Pills (Homepage) ----
   const filterPills = document.querySelectorAll('.filter-pill');
@@ -605,6 +663,14 @@
     'url-encoder': { title: 'URL Encoder / Decoder', category: 'Developer Tools', url: 'pages/url-encoder.html' },
     'regex-tester': { title: 'Regex Tester', category: 'Developer Tools', url: 'pages/regex-tester.html' },
     'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' },
+    'unit-converter': { title: 'Unit Converter', category: 'Everyday Calculators', url: 'pages/unit-converter.html' },
+    'currency-converter': { title: 'Live Currency Converter', category: 'Financial Calculators', url: 'pages/currency-converter.html' },
+    'qr-generator': { title: 'QR Code Generator', category: 'Developer Tools', url: 'pages/qr-generator.html' },
+    'password-generator': { title: 'Password Generator', category: 'Developer Tools', url: 'pages/password-generator.html' },
+    'timezone-converter': { title: 'World Timezone Converter', category: 'Everyday Calculators', url: 'pages/timezone-converter.html' },
+    'tip-calculator': { title: 'Tip & Bill Splitter', category: 'Everyday Calculators', url: 'pages/tip-calculator.html' },
+    'bmi-calculator': { title: 'BMI & Health Calculator', category: 'Everyday Calculators', url: 'pages/bmi-calculator.html' },
+    'markdown-previewer': { title: 'Markdown Live Previewer', category: 'Developer Tools', url: 'pages/markdown-previewer.html' },
     'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
     'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
     'about': { title: 'About Us', category: 'Company', url: 'about.html' }
@@ -698,14 +764,28 @@
       window.location.hash = slug;
     }
 
-    // Update active state in sidebar
-    document.querySelectorAll('.sidebar-link, .sidebar-sublink').forEach(link => {
-      const linkSlug = link.getAttribute('data-tool') || extractSlugFromUrl(link.getAttribute('href'));
-      link.classList.toggle('is-active', linkSlug === slug);
-    });
+    // Update active state in sidebar and ensure parent tree remains open
+    if (portalSidebar) {
+      portalSidebar.querySelectorAll('.sb-item, .sb-child, .sidebar-link, .sidebar-sublink').forEach(link => {
+        link.classList.remove('is-active', 'active');
+      });
+
+      let matchedLink = portalSidebar.querySelector(`.sb-item[data-tool="${slug}"], .sb-child[data-tool="${slug}"]`);
+      if (!matchedLink && targetUrl) {
+        const urlWithoutLeading = targetUrl.replace(/^pages\//, '');
+        matchedLink = portalSidebar.querySelector(`[href*="${urlWithoutLeading}"], [href*="${slug}"]`);
+      }
+
+      if (matchedLink) {
+        matchedLink.classList.add('is-active', 'active');
+        const parentTree = matchedLink.closest('.sb-tree-body');
+        if (parentTree) {
+          openSidebarTree(parentTree.id.replace('tree-', ''), false);
+        }
+      }
+    }
 
     // Close mobile sidebar if open
-    const portalSidebar = document.getElementById('portalSidebar');
     if (portalSidebar && window.innerWidth <= 1024) {
       portalSidebar.classList.remove('open');
     }
@@ -730,7 +810,7 @@
       window.location.hash = '';
     }
     // Clear sidebar active highlights
-    document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('is-active'));
+    document.querySelectorAll('.sidebar-link, .sidebar-sublink, .sb-item, .sb-child').forEach(link => link.classList.remove('is-active', 'active'));
   }
 
   // Bind Tool Panel Buttons
@@ -768,7 +848,7 @@
       return;
     }
 
-    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .nav-quick-item');
+    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .sb-item, .sb-child, .nav-quick-item');
     if (!trigger) return;
 
     let slug = trigger.getAttribute('data-tool');

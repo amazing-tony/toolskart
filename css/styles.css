@@ -3259,6 +3259,33 @@ button.sb-section-label:hover {
 [data-theme="studio"] .sb-child:hover {
   background: rgba(0,0,0,0.05);
 }
+.sb-child.active, .sb-child.is-active {
+  color: var(--color-primary) !important;
+  font-weight: 700;
+  background: rgba(255,255,255,0.14);
+}
+[data-theme="theme-01-executive"] .sb-child.active,
+[data-theme="theme-01-executive"] .sb-child.is-active,
+[data-theme="theme-02-horizon"] .sb-child.active,
+[data-theme="theme-02-horizon"] .sb-child.is-active,
+[data-theme="theme-03-heritage"] .sb-child.active,
+[data-theme="theme-03-heritage"] .sb-child.is-active,
+[data-theme="theme-09-paper"] .sb-child.active,
+[data-theme="theme-09-paper"] .sb-child.is-active,
+[data-theme="theme-10-studio"] .sb-child.active,
+[data-theme="theme-10-studio"] .sb-child.is-active,
+[data-theme="executive"] .sb-child.active,
+[data-theme="executive"] .sb-child.is-active,
+[data-theme="horizon"] .sb-child.active,
+[data-theme="horizon"] .sb-child.is-active,
+[data-theme="heritage"] .sb-child.active,
+[data-theme="heritage"] .sb-child.is-active,
+[data-theme="paper"] .sb-child.active,
+[data-theme="paper"] .sb-child.is-active,
+[data-theme="studio"] .sb-child.active,
+[data-theme="studio"] .sb-child.is-active {
+  background: rgba(0,0,0,0.08);
+}
 
 /* Trust box */
 .sidebar-trust-box {
@@ -7495,7 +7522,6 @@ body,
   .cmd-inner { max-width: calc(100vw - 2rem); }
   .whats-new-strip { font-size: 0.74rem; }
 }
-
 
 /* ── Shared Tool Rating Badge ────────────────────── */
 .tool-rating-badge {
