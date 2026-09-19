@@ -342,10 +342,57 @@
 
             <!-- Workspace Top Bar -->
             <div class="sejda-workspace-topbar">
-                <div class="sejda-workspace-title-group">
+                <div class="sejda-workspace-nav-row">
                     <button class="sejda-back-btn" id="backToToolsBtn">
                         <span>&larr;</span> All PDF Tools
                     </button>
+                    <!-- Suite Quick Tools Strip (All 14 PDF Tools) -->
+                    <div class="suite-quick-nav" id="suiteQuickNav">
+                        <button type="button" class="suite-nav-pill" data-tool="edit" title="PDF Editor &amp; Sign">
+                            <span class="suite-pill-icon">✏️</span><span class="suite-pill-label">Edit &amp; Sign</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="merge" title="Merge PDF Files">
+                            <span class="suite-pill-icon">🔀</span><span class="suite-pill-label">Merge</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="split" title="Split PDF Pages">
+                            <span class="suite-pill-icon">✂️</span><span class="suite-pill-label">Split</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="compress" title="Compress &amp; Optimize PDF">
+                            <span class="suite-pill-icon">🗜️</span><span class="suite-pill-label">Compress</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="organize" title="Organize &amp; Rotate Pages">
+                            <span class="suite-pill-icon">🔄</span><span class="suite-pill-label">Organize</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="pdf-to-img" title="PDF to JPG/PNG Images">
+                            <span class="suite-pill-icon">🖼️</span><span class="suite-pill-label">PDF → JPG</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="img-to-pdf" title="Images to PDF Converter">
+                            <span class="suite-pill-icon">📄</span><span class="suite-pill-label">JPG → PDF</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="watermark" title="Watermark PDF">
+                            <span class="suite-pill-icon">💧</span><span class="suite-pill-label">Watermark</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="page-numbers" title="Add Page Numbers">
+                            <span class="suite-pill-icon">🔢</span><span class="suite-pill-label">Page No.</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="protect" title="Protect &amp; Lock PDF">
+                            <span class="suite-pill-icon">🔒</span><span class="suite-pill-label">Protect</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="unlock" title="Unlock PDF">
+                            <span class="suite-pill-icon">🔓</span><span class="suite-pill-label">Unlock</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="crop" title="Crop PDF Margins">
+                            <span class="suite-pill-icon">📐</span><span class="suite-pill-label">Crop</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="extract-text" title="Extract Text from PDF">
+                            <span class="suite-pill-icon">📝</span><span class="suite-pill-label">Extract Text</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="metadata" title="PDF Metadata Editor">
+                            <span class="suite-pill-icon">🏷️</span><span class="suite-pill-label">Metadata</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="sejda-workspace-title-group">
                     <h2 id="workspaceTitle" style="margin-top:0.75rem;">PDF Tool Workspace</h2>
                     <p id="workspaceDescription">Upload your PDF file below to start processing.</p>
                 </div>
@@ -672,6 +719,7 @@
             sejdaWorkspace.classList.remove('active');
             sejdaHero.style.display = 'block';
             sejdaToolsGrid.style.display = 'grid';
+            document.querySelectorAll('.suite-nav-pill').forEach(p => p.classList.remove('active'));
             if (window.self !== window.top) {
                 try {
                     if (window.top && window.top.history && window.top.history.replaceState) {
@@ -681,6 +729,18 @@
             } else {
                 window.history.pushState({}, '', window.location.pathname);
             }
+        });
+
+        // Suite Quick-Nav Pills Click Event (Switch between all 14 tools instantly)
+        document.querySelectorAll('.suite-nav-pill').forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const toolId = pill.getAttribute('data-tool');
+                if (toolId && toolMeta[toolId]) {
+                    activateTool(toolId);
+                }
+            });
         });
 
         // Upload Button & Dropzone Triggers
@@ -760,6 +820,11 @@
             workspaceTitle.textContent = meta.title;
             workspaceDescription.textContent = meta.desc;
             mainExecuteBtn.textContent = meta.executeLabel;
+
+            // Highlight corresponding suite quick-nav pill
+            document.querySelectorAll('.suite-nav-pill').forEach(pill => {
+                pill.classList.toggle('active', pill.getAttribute('data-tool') === toolId);
+            });
 
             // Configure dropzone labels according to tool
             if (toolId === 'merge') {

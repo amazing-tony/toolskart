@@ -958,4 +958,28 @@
         return pdf.output('blob');
     }
 
+    // Check for preset conversion pairs via URL params (e.g. ?from=pdf&to=docx)
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fromParam = (urlParams.get('from') || '').toLowerCase();
+        const toParam = (urlParams.get('to') || '').toLowerCase();
+        if (fromParam && toParam) {
+            const pairTitles = {
+                'pdf-docx': 'PDF to Word Converter',
+                'docx-pdf': 'Word to PDF Converter',
+                'pdf-xlsx': 'PDF to Excel Converter',
+                'xlsx-pdf': 'Excel to PDF Converter',
+                'pptx-pdf': 'PowerPoint to PDF Converter'
+            };
+            const pairKey = `${fromParam}-${toParam}`;
+            if (pairTitles[pairKey]) {
+                const h1 = document.querySelector('.converter-hero h1');
+                if (h1) h1.textContent = '📄 ' + pairTitles[pairKey];
+                const uploadPrompt = document.querySelector('#uploadArea h3');
+                if (uploadPrompt) uploadPrompt.textContent = `Upload .${fromParam} file to convert to .${toParam}`;
+                document.title = `${pairTitles[pairKey]} — 100% Free & Private | ToolsKart`;
+            }
+        }
+    } catch (_) {}
+
 })();

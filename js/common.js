@@ -591,11 +591,22 @@
     'extract-text': { title: 'Extract Text from PDF', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=extract-text' },
     'metadata': { title: 'PDF Metadata Editor', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=metadata' },
 
-    // Standalone Web Applications
+    // Doc Converter Sub-tools
     'document-converter': { title: 'Universal Document Converter', category: 'Document Tools', url: 'pages/document-converter.html' },
+    'pdf-to-word': { title: 'PDF to Word Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=pdf&to=docx' },
+    'word-to-pdf': { title: 'Word to PDF Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=docx&to=pdf' },
+    'pdf-to-excel': { title: 'PDF to Excel Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=pdf&to=xlsx' },
+    'excel-to-pdf': { title: 'Excel to PDF Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=xlsx&to=pdf' },
+    'pptx-to-pdf': { title: 'PowerPoint to PDF Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=pptx&to=pdf' },
+
+    // Standalone Web Applications & Sub-tools
     'video-downloader': { title: 'Video & Audio Downloader', category: 'Media Tools', url: 'pages/video-downloader.html' },
+    'video-audio': { title: 'MP3 Audio Extractor', category: 'Media Tools', url: 'pages/video-downloader.html#audio' },
+    'video-shorts': { title: 'Reels & Shorts Downloader', category: 'Media Tools', url: 'pages/video-downloader.html#shorts' },
+    'video-youtube': { title: 'YouTube HD Video Downloader', category: 'Media Tools', url: 'pages/video-downloader.html#youtube' },
     'income-tax-calculator': { title: 'Income Tax Optimizer (Old vs New)', category: 'Financial Calculators', url: 'pages/income-tax-calculator.html' },
     'emi-calculator': { title: 'Loan Prepayment & Debt-Freedom Planner', category: 'Financial Calculators', url: 'pages/emi-calculator.html' },
+    'prepayment': { title: 'Loan Prepayment & Debt Planner', category: 'Financial Calculators', url: 'pages/emi-calculator.html#prepay' },
     'gst-calculator': { title: 'GST Calculator & Tax Splitter', category: 'Financial Calculators', url: 'pages/gst-calculator.html' },
     'sip-calculator': { title: 'SIP & Wealth Builder', category: 'Financial Calculators', url: 'pages/sip-calculator.html' },
     'buy-vs-rent-calculator': { title: 'Buy Home vs Rent Decision', category: 'Financial Calculators', url: 'pages/buy-vs-rent-calculator.html' },
@@ -626,15 +637,169 @@
 
   function extractSlugFromUrl(url) {
     if (!url) return null;
+    if (url.includes('from=pdf&to=docx')) return 'pdf-to-word';
+    if (url.includes('from=docx&to=pdf')) return 'word-to-pdf';
+    if (url.includes('from=pdf&to=xlsx')) return 'pdf-to-excel';
+    if (url.includes('from=xlsx&to=pdf')) return 'excel-to-pdf';
+    if (url.includes('from=pptx&to=pdf')) return 'pptx-to-pdf';
+    if (url.includes('#prepay')) return 'prepayment';
+    if (url.includes('#audio')) return 'video-audio';
+    if (url.includes('#shorts')) return 'video-shorts';
+    if (url.includes('#youtube')) return 'video-youtube';
     const toolParam = url.match(/[?&]tool=([\w-]+)/);
     if (toolParam) return toolParam[1];
     const match = url.match(/(?:pages\/|^|\/)([\w-]+)\.html(?:\?|#|$)/);
     return match ? match[1] : null;
   }
 
+  // ---- Suite Facilities Quick Switcher Definitions ----
+  const PORTAL_SUITES = [
+    {
+      id: 'pdf',
+      badge: '📄 PDF Studio (14 Tools)',
+      tools: [
+        { slug: 'edit', name: 'Edit & Sign', icon: '✏️', url: 'pages/pdf-tools.html?tool=edit' },
+        { slug: 'merge', name: 'Merge PDF', icon: '🔀', url: 'pages/pdf-tools.html?tool=merge' },
+        { slug: 'split', name: 'Split PDF', icon: '✂️', url: 'pages/pdf-tools.html?tool=split' },
+        { slug: 'compress', name: 'Compress PDF', icon: '🗜️', url: 'pages/pdf-tools.html?tool=compress' },
+        { slug: 'organize', name: 'Organize', icon: '🔄', url: 'pages/pdf-tools.html?tool=organize' },
+        { slug: 'pdf-to-img', name: 'PDF → JPG', icon: '🖼️', url: 'pages/pdf-tools.html?tool=pdf-to-img' },
+        { slug: 'img-to-pdf', name: 'JPG → PDF', icon: '📄', url: 'pages/pdf-tools.html?tool=img-to-pdf' },
+        { slug: 'watermark', name: 'Watermark', icon: '💧', url: 'pages/pdf-tools.html?tool=watermark' },
+        { slug: 'page-numbers', name: 'Page No.', icon: '🔢', url: 'pages/pdf-tools.html?tool=page-numbers' },
+        { slug: 'protect', name: 'Protect', icon: '🔒', url: 'pages/pdf-tools.html?tool=protect' },
+        { slug: 'unlock', name: 'Unlock', icon: '🔓', url: 'pages/pdf-tools.html?tool=unlock' },
+        { slug: 'crop', name: 'Crop Margins', icon: '📐', url: 'pages/pdf-tools.html?tool=crop' },
+        { slug: 'extract-text', name: 'Extract Text', icon: '📝', url: 'pages/pdf-tools.html?tool=extract-text' },
+        { slug: 'metadata', name: 'Metadata', icon: '🏷️', url: 'pages/pdf-tools.html?tool=metadata' }
+      ],
+      matches: ['pdf-tools', 'edit', 'merge', 'split', 'compress', 'organize', 'pdf-to-img', 'img-to-pdf', 'watermark', 'page-numbers', 'protect', 'unlock', 'crop', 'extract-text', 'metadata']
+    },
+    {
+      id: 'converter',
+      badge: '🔄 Doc Converter Suite',
+      tools: [
+        { slug: 'document-converter', name: 'Universal', icon: '🔄', url: 'pages/document-converter.html' },
+        { slug: 'pdf-to-word', name: 'PDF → Word', icon: '📄', url: 'pages/document-converter.html?from=pdf&to=docx' },
+        { slug: 'word-to-pdf', name: 'Word → PDF', icon: '📝', url: 'pages/document-converter.html?from=docx&to=pdf' },
+        { slug: 'pdf-to-excel', name: 'PDF → Excel', icon: '📊', url: 'pages/document-converter.html?from=pdf&to=xlsx' },
+        { slug: 'excel-to-pdf', name: 'Excel → PDF', icon: '📈', url: 'pages/document-converter.html?from=xlsx&to=pdf' },
+        { slug: 'pptx-to-pdf', name: 'PPTX → PDF', icon: '📽️', url: 'pages/document-converter.html?from=pptx&to=pdf' }
+      ],
+      matches: ['document-converter', 'pdf-to-word', 'word-to-pdf', 'pdf-to-excel', 'excel-to-pdf', 'pptx-to-pdf']
+    },
+    {
+      id: 'media',
+      badge: '🎥 Video & Media Suite',
+      tools: [
+        { slug: 'video-downloader', name: 'Universal Downloader', icon: '📥', url: 'pages/video-downloader.html' },
+        { slug: 'video-audio', name: 'MP3 Extract', icon: '🎵', url: 'pages/video-downloader.html#audio' },
+        { slug: 'video-shorts', name: 'Reels & Shorts', icon: '📱', url: 'pages/video-downloader.html#shorts' },
+        { slug: 'video-youtube', name: 'YouTube HD', icon: '▶️', url: 'pages/video-downloader.html#youtube' }
+      ],
+      matches: ['video-downloader', 'video-audio', 'video-shorts', 'video-youtube']
+    },
+    {
+      id: 'loans',
+      badge: '🏦 Loans & Debt Suite',
+      tools: [
+        { slug: 'emi-calculator', name: 'EMI Calculator', icon: '📊', url: 'pages/emi-calculator.html' },
+        { slug: 'prepayment', name: 'Prepayment Planner', icon: '💰', url: 'pages/emi-calculator.html#prepay' },
+        { slug: 'buy-vs-rent-calculator', name: 'Buy vs Rent', icon: '🏡', url: 'pages/buy-vs-rent-calculator.html' },
+        { slug: 'fd-calculator', name: 'FD Calculator', icon: '🏛️', url: 'pages/fd-calculator.html' },
+        { slug: 'rd-calculator', name: 'RD Calculator', icon: '💳', url: 'pages/rd-calculator.html' }
+      ],
+      matches: ['emi-calculator', 'prepayment', 'buy-vs-rent-calculator', 'fd-calculator', 'rd-calculator']
+    },
+    {
+      id: 'tax',
+      badge: '📑 Tax & Income Suite',
+      tools: [
+        { slug: 'income-tax-calculator', name: 'Income Tax (FY26)', icon: '🏛️', url: 'pages/income-tax-calculator.html' },
+        { slug: 'gst-calculator', name: 'GST Calculator', icon: '🧾', url: 'pages/gst-calculator.html' },
+        { slug: 'percentage-calculator', name: 'Percentage Calc', icon: '%', url: 'pages/percentage-calculator.html' }
+      ],
+      matches: ['income-tax-calculator', 'gst-calculator', 'percentage-calculator']
+    },
+    {
+      id: 'wealth',
+      badge: '📈 Wealth & Investments',
+      tools: [
+        { slug: 'sip-calculator', name: 'SIP Builder', icon: '🌱', url: 'pages/sip-calculator.html' },
+        { slug: 'swp-annuity-calculator', name: 'SWP & Pension', icon: '💵', url: 'pages/swp-annuity-calculator.html' },
+        { slug: 'goal-financial-planner', name: 'Goal Planner', icon: '🎯', url: 'pages/goal-financial-planner.html' },
+        { slug: 'retirement-benefits-calculator', name: 'Retirement & Gratuity', icon: '👴', url: 'pages/retirement-benefits-calculator.html' },
+        { slug: 'compound-interest', name: 'Compound Interest', icon: '📈', url: 'pages/compound-interest.html' }
+      ],
+      matches: ['sip-calculator', 'swp-annuity-calculator', 'goal-financial-planner', 'retirement-benefits-calculator', 'compound-interest']
+    },
+    {
+      id: 'text',
+      badge: '📝 Text & Content Suite',
+      tools: [
+        { slug: 'word-counter', name: 'Word Counter', icon: '🔢', url: 'pages/word-counter.html' },
+        { slug: 'case-converter', name: 'Case Converter', icon: '🔤', url: 'pages/case-converter.html' },
+        { slug: 'json-formatter', name: 'JSON Formatter', icon: '⚡', url: 'pages/json-formatter.html' },
+        { slug: 'base64-tool', name: 'Base64 Tool', icon: '🔐', url: 'pages/base64-tool.html' },
+        { slug: 'lorem-ipsum', name: 'Lorem Ipsum', icon: '📄', url: 'pages/lorem-ipsum.html' },
+        { slug: 'slug-generator', name: 'Slug Generator', icon: '🔗', url: 'pages/slug-generator.html' }
+      ],
+      matches: ['word-counter', 'case-converter', 'json-formatter', 'base64-tool', 'lorem-ipsum', 'slug-generator']
+    },
+    {
+      id: 'dev',
+      badge: '💻 Dev & Media Suite',
+      tools: [
+        { slug: 'image-compressor', name: 'Image Compressor', icon: '🖼️', url: 'pages/image-compressor.html' },
+        { slug: 'image-resizer', name: 'Image Resizer', icon: '📐', url: 'pages/image-resizer.html' },
+        { slug: 'regex-tester', name: 'Regex Tester', icon: '🔍', url: 'pages/regex-tester.html' },
+        { slug: 'color-picker', name: 'Color Picker', icon: '🎨', url: 'pages/color-picker.html' },
+        { slug: 'url-encoder', name: 'URL Encoder', icon: '🌐', url: 'pages/url-encoder.html' },
+        { slug: 'meta-tag-generator', name: 'Meta Tag SEO', icon: '🏷️', url: 'pages/meta-tag-generator.html' }
+      ],
+      matches: ['image-compressor', 'image-resizer', 'regex-tester', 'color-picker', 'url-encoder', 'meta-tag-generator']
+    }
+  ];
+
+  function updatePortalSuiteStrip(activeSlug) {
+    const strip = document.getElementById('portalSuiteStrip');
+    if (!strip) return;
+
+    const matchedSuite = PORTAL_SUITES.find(s => s.matches.includes(activeSlug));
+    if (!matchedSuite) {
+      strip.style.display = 'none';
+      strip.innerHTML = '';
+      return;
+    }
+
+    let html = `<span class="portal-suite-badge">${matchedSuite.badge}:</span>`;
+    html += '<div class="portal-suite-items">';
+    matchedSuite.tools.forEach(t => {
+      const isCurrent = t.slug === activeSlug || (activeSlug === 'pdf-tools' && t.slug === 'edit');
+      html += `<button type="button" class="portal-suite-chip ${isCurrent ? 'active' : ''}" data-tool="${t.slug}" data-url="${t.url}" title="${t.name}">
+        <span>${t.icon}</span><span>${t.name}</span>
+      </button>`;
+    });
+    html += '</div>';
+
+    strip.innerHTML = html;
+    strip.style.display = 'flex';
+
+    strip.querySelectorAll('.portal-suite-chip').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = btn.getAttribute('data-tool');
+        const url = btn.getAttribute('data-url');
+        const title = btn.getAttribute('title');
+        openToolInPortal(slug, title, null, url);
+      });
+    });
+  }
+
   function openToolInPortal(slug, customTitle, customCat, fullUrl) {
     const dashboardOverview = document.getElementById('dashboardOverview');
     const toolPanel = document.getElementById('toolContentPanel');
+    updatePortalSuiteStrip(slug);
     const toolIframe = document.getElementById('toolIframe');
     const breadcrumbCat = document.getElementById('panelBreadcrumbCategory');
     const breadcrumbTitle = document.getElementById('panelBreadcrumbTitle');
@@ -713,9 +878,22 @@
     }
 
     // Update active state in sidebar
-    document.querySelectorAll('.sidebar-link, .sidebar-sublink').forEach(link => {
+    document.querySelectorAll('.sb-item, .sb-child, .sidebar-link, .sidebar-sublink').forEach(link => {
       const linkSlug = link.getAttribute('data-tool') || extractSlugFromUrl(link.getAttribute('href'));
-      link.classList.toggle('is-active', linkSlug === slug);
+      const isMatch = linkSlug === slug;
+      link.classList.toggle('is-active', isMatch);
+      link.classList.toggle('active', isMatch);
+      if (isMatch) {
+        const parentBody = link.closest('.sb-tree-body');
+        if (parentBody) {
+          parentBody.classList.add('is-open');
+          const treeId = parentBody.id.replace('tree-', '');
+          const toggle = document.querySelector(`[data-tree="${treeId}"]`);
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+          const parentSec = parentBody.closest('.sb-section');
+          if (parentSec) parentSec.classList.add('is-open');
+        }
+      }
     });
 
     // Close mobile sidebar if open
@@ -744,7 +922,14 @@
       window.location.hash = '';
     }
     // Clear sidebar active highlights
-    document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('is-active'));
+    document.querySelectorAll('.sb-item, .sb-child, .sidebar-link, .sidebar-sublink').forEach(link => {
+      link.classList.remove('is-active', 'active');
+    });
+    const strip = document.getElementById('portalSuiteStrip');
+    if (strip) {
+      strip.style.display = 'none';
+      strip.innerHTML = '';
+    }
   }
 
   // Bind Tool Panel Buttons
