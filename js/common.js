@@ -345,17 +345,17 @@
   const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
   if (sidebarToggle && portalSidebar) {
-    // Restore desktop collapsed preference if previously saved
+    // Restore desktop collapsed preference
     try {
       const savedCollapsed = localStorage.getItem('portal_sidebar_collapsed');
       if (savedCollapsed === '1' && window.innerWidth > 1024) {
         document.body.classList.add('sidebar-collapsed');
         portalSidebar.classList.add('is-collapsed');
         sidebarToggle.classList.add('is-active');
-        sidebarToggle.setAttribute('title', 'Expand Sidebar Navigation');
+        sidebarToggle.setAttribute('title', 'Expand Sidebar');
         sidebarToggle.setAttribute('aria-expanded', 'false');
       } else {
-        sidebarToggle.setAttribute('title', 'Collapse Sidebar Navigation');
+        sidebarToggle.setAttribute('title', 'Collapse Sidebar');
         sidebarToggle.setAttribute('aria-expanded', 'true');
       }
     } catch (_) {}
@@ -368,72 +368,87 @@
     sidebarToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       if (window.innerWidth <= 1024) {
-        // Mobile Drawer Toggle
         const isOpen = portalSidebar.classList.toggle('open');
-        if (sidebarBackdrop) {
-          sidebarBackdrop.classList.toggle('active', isOpen);
-        }
+        if (sidebarBackdrop) sidebarBackdrop.classList.toggle('active', isOpen);
       } else {
-        // Desktop Collapse / Expand Toggle
         const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
         portalSidebar.classList.toggle('is-collapsed', isCollapsed);
         sidebarToggle.classList.toggle('is-active', isCollapsed);
-        sidebarToggle.setAttribute('title', isCollapsed ? 'Expand Sidebar Navigation' : 'Collapse Sidebar Navigation');
+        sidebarToggle.setAttribute('title', isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar');
         sidebarToggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-        try {
-          localStorage.setItem('portal_sidebar_collapsed', isCollapsed ? '1' : '0');
-        } catch (_) {}
+        try { localStorage.setItem('portal_sidebar_collapsed', isCollapsed ? '1' : '0'); } catch (_) {}
       }
     });
 
-    if (sidebarBackdrop) {
-      sidebarBackdrop.addEventListener('click', closeMobileSidebar);
-    }
+    if (sidebarBackdrop) sidebarBackdrop.addEventListener('click', closeMobileSidebar);
 
-    // Close sidebar on click outside on mobile
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 1024 && portalSidebar.classList.contains('open')) {
-        if (!portalSidebar.contains(e.target) && e.target !== sidebarToggle) {
-          closeMobileSidebar();
-        }
+        if (!portalSidebar.contains(e.target) && e.target !== sidebarToggle) closeMobileSidebar();
       }
     });
 
-    // Close sidebar when clicking any sidebar link on mobile
-    portalSidebar.querySelectorAll('.sidebar-link').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 1024) {
-          closeMobileSidebar();
-        }
-      });
+    // Close mobile sidebar on link click
+    portalSidebar.querySelectorAll('.sb-item, .sb-child').forEach(link => {
+      link.addEventListener('click', () => { if (window.innerWidth <= 1024) closeMobileSidebar(); });
     });
 
-    // Optional keyboard shortcut: Ctrl+B or Cmd+B toggles sidebar
+    // Ctrl+B shortcut
     document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b' && !['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) {
         e.preventDefault();
         sidebarToggle.click();
       }
     });
   }
 
-  // Quick search filter inside sidebar
-  const sidebarSearch = document.getElementById('sidebarSearch');
-  if (sidebarSearch && portalSidebar) {
-    sidebarSearch.addEventListener('input', function () {
-      const q = this.value.toLowerCase().trim();
-      const links = portalSidebar.querySelectorAll('.sidebar-link, .sidebar-sublink');
-      const groups = portalSidebar.querySelectorAll('.sidebar-group');
+  // ---- Hierarchical Treeview Accordion ----
+  portalSidebar && portalSidebar.querySelectorAll('.sb-tree-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const treeId = btn.dataset.tree;
+      const body = document.getElementById('tree-' + treeId);
+      if (!body) return;
 
-      links.forEach(link => {
-        const text = link.textContent.toLowerCase();
-        link.style.display = text.includes(q) ? '' : 'none';
+      const isOpen = body.classList.contains('is-open');
+
+      // Close all other trees (accordion behaviour)
+      portalSidebar.querySelectorAll('.sb-tree-body.is-open').forEach(el => {
+        if (el !== body) {
+          el.classList.remove('is-open');
+          const toggle = portalSidebar.querySelector(`[data-tree="${el.id.replace('tree-','')}"]`);
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
       });
 
-      groups.forEach(grp => {
-        const visibleLinks = grp.querySelectorAll('.sidebar-link:not([style*="display: none"]), .sidebar-sublink:not([style*="display: none"])');
-        grp.style.display = visibleLinks.length === 0 && q ? 'none' : '';
-      });
+      // Toggle this tree
+      body.classList.toggle('is-open', !isOpen);
+      btn.setAttribute('aria-expanded', (!isOpen).toString());
+
+      // Auto-scroll into view if opening
+      if (!isOpen) {
+        setTimeout(() => {
+          body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 120);
+      }
+    });
+  });
+
+  // Mark active sidebar item based on current URL
+  if (portalSidebar) {
+    const currentPath = window.location.pathname + window.location.search;
+    portalSidebar.querySelectorAll('.sb-item, .sb-child').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (href && currentPath.includes(href.split('?')[0]) && href !== '/' && href !== '#') {
+        link.classList.add('is-active');
+        // Open parent tree if nested
+        const parentBody = link.closest('.sb-tree-body');
+        if (parentBody) {
+          parentBody.classList.add('is-open');
+          const treeId = parentBody.id.replace('tree-', '');
+          const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+        }
+      }
     });
   }
 
@@ -446,8 +461,37 @@
         this.classList.add('active');
         const filter = this.getAttribute('data-filter');
 
-        const featuredSec = document.getElementById('featured-section');
-        const sections = document.querySelectorAll('.category-section:not(#facilities)');
+  // Quick search filter inside sidebar (new sb-nav classes)
+  const sidebarSearch = document.getElementById('sidebarSearch');
+  if (sidebarSearch && portalSidebar) {
+    sidebarSearch.addEventListener('input', function () {
+      const q = this.value.toLowerCase().trim();
+      const items = portalSidebar.querySelectorAll('.sb-item, .sb-child');
+      const sections = portalSidebar.querySelectorAll('.sb-section');
+
+      if (!q) {
+        items.forEach(el => el.style.display = '');
+        sections.forEach(s => s.style.display = '');
+        return;
+      }
+
+      items.forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+
+      sections.forEach(s => {
+        const visible = s.querySelectorAll('.sb-item:not([style*="display: none"]), .sb-child:not([style*="display: none"])');
+        s.style.display = visible.length === 0 ? 'none' : '';
+        // Auto-open tree body if it has results
+        const body = s.querySelector('.sb-tree-body');
+        if (body && visible.length > 0) body.classList.add('is-open');
+      });
+    });
+  }
+
+  // ---- Category Filter Pills (Homepage) ----
+  const featuredSec = document.getElementById('featured-section');
+  const sections = document.querySelectorAll('.category-section:not(#facilities)');
 
         if (filter === 'all') {
           if (featuredSec) featuredSec.style.display = '';

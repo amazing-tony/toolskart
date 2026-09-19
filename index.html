@@ -132,171 +132,243 @@
         <aside class="portal-sidebar" id="portalSidebar">
             <div class="portal-sidebar-inner">
                 <div class="sidebar-search-box">
-                    <input type="text" class="sidebar-search-input" id="sidebarSearch" placeholder="🔍 Quick find tool... (Press '/')">
+                    <input type="text" class="sidebar-search-input" id="sidebarSearch" placeholder="🔍 Search tools... (/)">
                 </div>
 
-                <!-- Category 1: Popular & Featured -->
-                <div class="sidebar-group" data-category="popular">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">⭐ Popular &amp; Trending</span>
-                        <span class="sidebar-group-badge">Hot</span>
-                    </div>
-                    <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="sidebar-link">
-                        <span>⚡ PDF Document Studio</span>
-                        <span class="sidebar-tag tag-teal">All-in-One</span>
-                    </a>
-                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link">
-                        <span>📄 Document Converter</span>
-                        <span class="sidebar-tag tag-new">Private</span>
-                    </a>
-                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link">
-                        <span>🎥 Video Downloader</span>
-                        <span class="sidebar-tag tag-hot">1080p</span>
-                    </a>
-                    <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link">
-                        <span>📑 Income Tax (Old vs New)</span>
-                    </a>
-                    <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link">
-                        <span>🏦 Loan Prepayment &amp; EMI</span>
-                    </a>
-                </div>
+                <!-- ★ POPULAR -->
+                <nav class="sb-nav">
 
-                <!-- Category 2: PDF & Document Studio -->
-                <div class="sidebar-group" data-category="pdf">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">📄 PDF &amp; Document Studio</span>
-                        <span class="sidebar-group-badge">Studio</span>
+                  <div class="sb-section">
+                    <div class="sb-section-label"><span class="sb-icon">⭐</span><span class="sb-label-text">Popular</span><span class="sb-badge hot">Hot</span></div>
+                    <div class="sb-items">
+                      <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="sb-item">
+                        <span class="sb-item-icon">⚡</span>
+                        <span class="sb-item-text">PDF Studio</span>
+                        <span class="sb-pill teal">14-in-1</span>
+                      </a>
+                      <a href="pages/video-downloader.html" data-tool="video-downloader" class="sb-item">
+                        <span class="sb-item-icon">🎥</span>
+                        <span class="sb-item-text">Video Downloader</span>
+                        <span class="sb-pill red">HD</span>
+                      </a>
+                      <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sb-item">
+                        <span class="sb-item-icon">📑</span>
+                        <span class="sb-item-text">Income Tax</span>
+                        <span class="sb-pill green">FY26</span>
+                      </a>
+                      <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sb-item">
+                        <span class="sb-item-icon">🏦</span>
+                        <span class="sb-item-text">Loan &amp; EMI</span>
+                        <span class="sb-pill blue">Save ₹</span>
+                      </a>
                     </div>
-                    <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="sidebar-link">
-                        <span>⚡ All PDF Tools (14-in-1)</span>
-                        <span class="sidebar-tag tag-teal">Suite</span>
-                    </a>
-                    <div class="sidebar-sublinks">
-                        <a href="pages/pdf-tools.html?tool=edit" data-tool="edit" class="sidebar-sublink"><span>✏️ PDF Editor &amp; Sign</span></a>
-                        <a href="pages/pdf-tools.html?tool=merge" data-tool="merge" class="sidebar-sublink"><span>🔀 Merge PDF</span></a>
-                        <a href="pages/pdf-tools.html?tool=split" data-tool="split" class="sidebar-sublink"><span>✂️ Split by Pages</span></a>
-                        <a href="pages/pdf-tools.html?tool=compress" data-tool="compress" class="sidebar-sublink"><span>🗜️ Compress PDF</span></a>
-                        <a href="pages/pdf-tools.html?tool=organize" data-tool="organize" class="sidebar-sublink"><span>🔄 Rotate &amp; Reorder</span></a>
-                        <a href="pages/pdf-tools.html?tool=pdf-to-img" data-tool="pdf-to-img" class="sidebar-sublink"><span>🖼️ PDF to JPG/PNG</span></a>
-                        <a href="pages/pdf-tools.html?tool=protect" data-tool="protect" class="sidebar-sublink"><span>🔒 Protect &amp; Unlock</span></a>
-                    </div>
-                    <a href="pages/document-converter.html" data-tool="document-converter" class="sidebar-link">
-                        <span>Word ⇄ PDF Converter</span>
-                    </a>
-                </div>
+                  </div>
 
-                <!-- Category 3: Video & Audio Tools -->
-                <div class="sidebar-group" data-category="media">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">🎥 Video &amp; Audio Tools</span>
-                        <span class="sidebar-group-badge">Media</span>
+                  <!-- 📄 PDF & DOCUMENTS -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="pdf" aria-expanded="false">
+                      <span class="sb-icon">📄</span>
+                      <span class="sb-label-text">PDF &amp; Docs</span>
+                      <span class="sb-badge teal">Studio</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-pdf">
+                      <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="sb-item sb-parent-item">
+                        <span class="sb-item-icon">⚡</span>
+                        <span class="sb-item-text">PDF Studio Suite</span>
+                        <span class="sb-pill teal">All Tools</span>
+                      </a>
+                      <div class="sb-children">
+                        <a href="pages/pdf-tools.html?tool=edit" class="sb-child">✏️ Edit &amp; Sign</a>
+                        <a href="pages/pdf-tools.html?tool=merge" class="sb-child">🔀 Merge</a>
+                        <a href="pages/pdf-tools.html?tool=split" class="sb-child">✂️ Split</a>
+                        <a href="pages/pdf-tools.html?tool=compress" class="sb-child">🗜️ Compress</a>
+                        <a href="pages/pdf-tools.html?tool=organize" class="sb-child">🔄 Reorder</a>
+                        <a href="pages/pdf-tools.html?tool=pdf-to-img" class="sb-child">🖼️ PDF → JPG</a>
+                        <a href="pages/pdf-tools.html?tool=protect" class="sb-child">🔒 Protect</a>
+                      </div>
+                      <a href="pages/document-converter.html" data-tool="document-converter" class="sb-item">
+                        <span class="sb-item-icon">🔄</span>
+                        <span class="sb-item-text">Doc Converter</span>
+                        <span class="sb-pill green">Private</span>
+                      </a>
                     </div>
-                    <a href="pages/video-downloader.html" data-tool="video-downloader" class="sidebar-link">
-                        <span>📥 Universal Downloader</span>
-                        <span class="sidebar-tag tag-hot">HD</span>
-                    </a>
-                    <div class="sidebar-sublinks">
-                        <a href="pages/video-downloader.html#audio" class="sidebar-sublink"><span>🎵 MP3 Audio Extractor</span></a>
-                        <a href="pages/video-downloader.html#shorts" class="sidebar-sublink"><span>📱 Shorts &amp; Reels</span></a>
-                    </div>
-                </div>
+                  </div>
 
-                <!-- Category 4: Loans & Debt Freedom -->
-                <div class="sidebar-group" data-category="loans">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">🏦 Loans &amp; Debt Freedom</span>
-                        <span class="sidebar-group-badge">Loans</span>
+                  <!-- 🎥 VIDEO & MEDIA -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="media" aria-expanded="false">
+                      <span class="sb-icon">🎥</span>
+                      <span class="sb-label-text">Video &amp; Media</span>
+                      <span class="sb-badge red">HD</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-media">
+                      <a href="pages/video-downloader.html" data-tool="video-downloader" class="sb-item sb-parent-item">
+                        <span class="sb-item-icon">📥</span>
+                        <span class="sb-item-text">Universal Downloader</span>
+                        <span class="sb-pill red">1080p</span>
+                      </a>
+                      <div class="sb-children">
+                        <a href="pages/video-downloader.html#audio" class="sb-child">🎵 MP3 Extract</a>
+                        <a href="pages/video-downloader.html#shorts" class="sb-child">📱 Reels &amp; Shorts</a>
+                        <a href="pages/video-downloader.html#youtube" class="sb-child">▶️ YouTube HD</a>
+                      </div>
                     </div>
-                    <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sidebar-link">
-                        <span>Loan Prepayment &amp; EMI</span>
-                        <span class="sidebar-tag tag-hot">Save ₹</span>
-                    </a>
-                    <a href="pages/buy-vs-rent-calculator.html" data-tool="buy-vs-rent-calculator" class="sidebar-link">
-                        <span>Buy vs Rent Decision</span>
-                        <span class="sidebar-tag tag-new">Smart</span>
-                    </a>
-                    <a href="pages/fd-calculator.html" data-tool="fd-calculator" class="sidebar-link">
-                        <span>Fixed Deposit (FD)</span>
-                    </a>
-                    <a href="pages/rd-calculator.html" data-tool="rd-calculator" class="sidebar-link">
-                        <span>Recurring Deposit (RD)</span>
-                    </a>
-                </div>
+                  </div>
 
-                <!-- Category 5: Tax & Wealth Planning -->
-                <div class="sidebar-group" data-category="wealth">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">📈 Tax &amp; Wealth Planning</span>
-                        <span class="sidebar-group-badge">Tax/Inv</span>
+                  <!-- 🏦 LOANS & DEBT -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="loans" aria-expanded="false">
+                      <span class="sb-icon">🏦</span>
+                      <span class="sb-label-text">Loans &amp; Debt</span>
+                      <span class="sb-badge blue">EMI</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-loans">
+                      <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="sb-item">
+                        <span class="sb-item-icon">📊</span>
+                        <span class="sb-item-text">EMI Calculator</span>
+                        <span class="sb-pill red">Save ₹</span>
+                      </a>
+                      <a href="pages/emi-calculator.html#prepay" data-tool="prepayment" class="sb-item">
+                        <span class="sb-item-icon">💰</span>
+                        <span class="sb-item-text">Prepayment Planner</span>
+                      </a>
+                      <a href="pages/buy-vs-rent-calculator.html" data-tool="buy-vs-rent-calculator" class="sb-item">
+                        <span class="sb-item-icon">🏡</span>
+                        <span class="sb-item-text">Buy vs Rent</span>
+                        <span class="sb-pill green">Smart</span>
+                      </a>
+                      <a href="pages/fd-calculator.html" data-tool="fd-calculator" class="sb-item">
+                        <span class="sb-item-icon">🏛️</span>
+                        <span class="sb-item-text">FD Calculator</span>
+                      </a>
+                      <a href="pages/rd-calculator.html" data-tool="rd-calculator" class="sb-item">
+                        <span class="sb-item-icon">💳</span>
+                        <span class="sb-item-text">RD Calculator</span>
+                      </a>
                     </div>
-                    <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sidebar-link">
-                        <span>Income Tax (Old vs New)</span>
-                        <span class="sidebar-tag tag-new">FY 25-26</span>
-                    </a>
-                    <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="sidebar-link">
-                        <span>GST &amp; Sales Tax</span>
-                    </a>
-                    <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="sidebar-link">
-                        <span>SIP Mutual Funds</span>
-                    </a>
-                    <a href="pages/swp-annuity-calculator.html" data-tool="swp-annuity-calculator" class="sidebar-link">
-                        <span>SWP &amp; Pension</span>
-                    </a>
-                    <a href="pages/goal-financial-planner.html" data-tool="goal-financial-planner" class="sidebar-link">
-                        <span>Life Goal Planner</span>
-                    </a>
-                    <a href="pages/retirement-benefits-calculator.html" data-tool="retirement-benefits-calculator" class="sidebar-link">
-                        <span>Retirement &amp; Gratuity</span>
-                    </a>
-                    <a href="pages/compound-interest.html" data-tool="compound-interest" class="sidebar-link">
-                        <span>Compound Interest</span>
-                    </a>
-                    <a href="pages/percentage-calculator.html" data-tool="percentage-calculator" class="sidebar-link">
-                        <span>Percentage Calculator</span>
-                    </a>
-                </div>
+                  </div>
 
-                <!-- Category 6: Text & Utilities -->
-                <div class="sidebar-group" data-category="text">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">📝 Text &amp; Utilities</span>
-                        <span class="sidebar-group-badge">Text</span>
+                  <!-- 📑 TAX & INCOME -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="tax" aria-expanded="false">
+                      <span class="sb-icon">📑</span>
+                      <span class="sb-label-text">Tax &amp; Income</span>
+                      <span class="sb-badge green">FY26</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-tax">
+                      <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="sb-item">
+                        <span class="sb-item-icon">🏛️</span>
+                        <span class="sb-item-text">Income Tax</span>
+                        <span class="sb-pill green">Old/New</span>
+                      </a>
+                      <a href="pages/gst-calculator.html" data-tool="gst-calculator" class="sb-item">
+                        <span class="sb-item-icon">🧾</span>
+                        <span class="sb-item-text">GST Calculator</span>
+                        <span class="sb-pill">5–28%</span>
+                      </a>
+                      <a href="pages/percentage-calculator.html" data-tool="percentage-calculator" class="sb-item">
+                        <span class="sb-item-icon">%</span>
+                        <span class="sb-item-text">Percentage Calc</span>
+                      </a>
                     </div>
-                    <a href="pages/word-counter.html" data-tool="word-counter" class="sidebar-link">
-                        <span>Word &amp; Character Counter</span>
-                    </a>
-                    <a href="pages/case-converter.html" data-tool="case-converter" class="sidebar-link">
-                        <span>Case Converter</span>
-                    </a>
-                    <a href="pages/json-formatter.html" data-tool="json-formatter" class="sidebar-link">
-                        <span>JSON Formatter &amp; Validator</span>
-                    </a>
-                    <a href="pages/base64-tool.html" data-tool="base64-tool" class="sidebar-link">
-                        <span>Base64 Encoder / Decoder</span>
-                    </a>
-                </div>
+                  </div>
 
-                <!-- Category 7: Dev & Images -->
-                <div class="sidebar-group" data-category="dev">
-                    <div class="sidebar-group-header">
-                        <span class="sidebar-group-title">💻 Dev &amp; Images</span>
-                        <span class="sidebar-group-badge">Dev</span>
+                  <!-- 📈 WEALTH & INVESTMENTS -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="wealth" aria-expanded="false">
+                      <span class="sb-icon">📈</span>
+                      <span class="sb-label-text">Wealth &amp; Invest</span>
+                      <span class="sb-badge purple">SIP</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-wealth">
+                      <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="sb-item">
+                        <span class="sb-item-icon">🌱</span>
+                        <span class="sb-item-text">SIP Calculator</span>
+                        <span class="sb-pill green">MF</span>
+                      </a>
+                      <a href="pages/swp-annuity-calculator.html" data-tool="swp-annuity-calculator" class="sb-item">
+                        <span class="sb-item-icon">💵</span>
+                        <span class="sb-item-text">SWP &amp; Pension</span>
+                      </a>
+                      <a href="pages/goal-financial-planner.html" data-tool="goal-financial-planner" class="sb-item">
+                        <span class="sb-item-icon">🎯</span>
+                        <span class="sb-item-text">Goal Planner</span>
+                      </a>
+                      <a href="pages/retirement-benefits-calculator.html" data-tool="retirement-benefits-calculator" class="sb-item">
+                        <span class="sb-item-icon">👴</span>
+                        <span class="sb-item-text">Retirement &amp; Gratuity</span>
+                      </a>
+                      <a href="pages/compound-interest.html" data-tool="compound-interest" class="sb-item">
+                        <span class="sb-item-icon">📈</span>
+                        <span class="sb-item-text">Compound Interest</span>
+                      </a>
                     </div>
-                    <a href="pages/image-compressor.html" data-tool="image-compressor" class="sidebar-link">
-                        <span>Image Compressor</span>
-                    </a>
-                    <a href="pages/image-resizer.html" data-tool="image-resizer" class="sidebar-link">
-                        <span>Image Resizer</span>
-                    </a>
-                    <a href="pages/regex-tester.html" data-tool="regex-tester" class="sidebar-link">
-                        <span>Regex Tester</span>
-                    </a>
-                </div>
+                  </div>
 
-                <!-- Sidebar Google AdSense Unit (Sticky / Responsive) -->
+                  <!-- 📝 TEXT TOOLS -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="text" aria-expanded="false">
+                      <span class="sb-icon">📝</span>
+                      <span class="sb-label-text">Text Tools</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-text">
+                      <a href="pages/word-counter.html" data-tool="word-counter" class="sb-item">
+                        <span class="sb-item-icon">🔢</span>
+                        <span class="sb-item-text">Word Counter</span>
+                        <span class="sb-pill">WPM</span>
+                      </a>
+                      <a href="pages/case-converter.html" data-tool="case-converter" class="sb-item">
+                        <span class="sb-item-icon">🔤</span>
+                        <span class="sb-item-text">Case Converter</span>
+                      </a>
+                      <a href="pages/json-formatter.html" data-tool="json-formatter" class="sb-item">
+                        <span class="sb-item-icon">⚡</span>
+                        <span class="sb-item-text">JSON Formatter</span>
+                        <span class="sb-pill">Lint</span>
+                      </a>
+                      <a href="pages/base64-tool.html" data-tool="base64-tool" class="sb-item">
+                        <span class="sb-item-icon">🔐</span>
+                        <span class="sb-item-text">Base64 Tool</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <!-- 💻 DEV & IMAGES -->
+                  <div class="sb-section sb-tree">
+                    <button class="sb-section-label sb-tree-toggle" data-tree="dev" aria-expanded="false">
+                      <span class="sb-icon">💻</span>
+                      <span class="sb-label-text">Dev &amp; Images</span>
+                      <span class="sb-chevron">›</span>
+                    </button>
+                    <div class="sb-tree-body" id="tree-dev">
+                      <a href="pages/image-compressor.html" data-tool="image-compressor" class="sb-item">
+                        <span class="sb-item-icon">🖼️</span>
+                        <span class="sb-item-text">Image Compressor</span>
+                        <span class="sb-pill">WebP</span>
+                      </a>
+                      <a href="pages/image-resizer.html" data-tool="image-resizer" class="sb-item">
+                        <span class="sb-item-icon">📐</span>
+                        <span class="sb-item-text">Image Resizer</span>
+                      </a>
+                      <a href="pages/regex-tester.html" data-tool="regex-tester" class="sb-item">
+                        <span class="sb-item-icon">🔍</span>
+                        <span class="sb-item-text">Regex Tester</span>
+                        <span class="sb-pill">Live</span>
+                      </a>
+                    </div>
+                  </div>
+
+                </nav>
+
+                <!-- Sidebar Ad -->
                 <div class="sidebar-ad-box">
                     <span class="ad-badge">Sponsored</span>
-                    <!-- Google AdSense Unit -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
@@ -307,7 +379,7 @@
                         <span class="sponsor-badge">📢 SPONSOR THIS SPACE</span>
                         <div class="sponsor-text">
                             <strong>Promote Your Brand Here</strong>
-                            <p>Direct reach to active creators & professionals.</p>
+                            <p>Direct reach to active creators &amp; professionals.</p>
                         </div>
                         <a href="mailto:tonymagical09@gmail.com?subject=Sponsorship%20Inquiry%20-%20Amazing-Tools" class="sponsor-btn">
                             ✉️ tonymagical09@gmail.com
@@ -316,8 +388,8 @@
                 </div>
 
                 <div class="sidebar-trust-box">
-                    <strong>🔒 100% Client-Side Privacy</strong>
-                    <p style="margin:0.25rem 0 0; font-size:0.75rem;">Your files and data never touch any server. Zero uploads, zero tracking.</p>
+                    <strong>🔒 100% Client-Side</strong>
+                    <p style="margin:0.25rem 0 0; font-size:0.73rem;">Zero uploads. Zero tracking. Fully private.</p>
                 </div>
             </div>
         </aside>
