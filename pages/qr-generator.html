@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator — Free Online | Amazing-Tools</title>
+    <meta name="description" content="Free online QR code generator. Create custom QR codes for URLs, text, email, phone, and WiFi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        .qr-layout { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .qr-controls { flex: 1 1 300px; display: flex; flex-direction: column; gap: 1rem; }
+        .qr-preview { flex: 1 1 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg-alt); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color); }
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-group label { font-weight: 500; }
+        .input-group input, .input-group select, .input-group textarea { padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1rem; background: var(--bg-color); color: var(--text-color); font-family: inherit; }
+        .color-pickers { display: flex; gap: 1rem; }
+        .color-picker { display: flex; align-items: center; gap: 0.5rem; }
+        .color-picker input[type="color"] { width: 40px; height: 40px; padding: 0; border: none; border-radius: 4px; cursor: pointer; }
+        canvas { max-width: 100%; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-primary { background: var(--primary-color); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 1rem; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 1rem; }
+        .dynamic-fields { display: none; flex-direction: column; gap: 1rem; }
+        .dynamic-fields.active { display: flex; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#image-tools">Image Tools</a> &raquo; QR Code Generator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>QR Code Generator</h1>
+                    <p class="tool-description">Generate QR codes for URLs, text, Wi-Fi, emails, and more directly in your browser.</p>
+
+                    <div class="tool-interface qr-layout">
+                        <div class="qr-controls">
+                            <div class="input-group">
+                                <label for="qrType">QR Code Type</label>
+                                <select id="qrType">
+                                    <option value="url">URL</option>
+                                    <option value="text">Text</option>
+                                    <option value="email">Email</option>
+                                    <option value="phone">Phone</option>
+                                    <option value="wifi">WiFi</option>
+                                </select>
+                            </div>
+
+                            <div id="fieldUrl" class="dynamic-fields active">
+                                <div class="input-group">
+                                    <label>URL / Website</label>
+                                    <input type="url" id="valUrl" placeholder="https://example.com" value="https://example.com">
+                                </div>
+                            </div>
+                            <div id="fieldText" class="dynamic-fields">
+                                <div class="input-group">
+                                    <label>Text</label>
+                                    <textarea id="valText" rows="3" placeholder="Enter text here..."></textarea>
+                                </div>
+                            </div>
+                            <div id="fieldEmail" class="dynamic-fields">
+                                <div class="input-group">
+                                    <label>Email Address</label>
+                                    <input type="email" id="valEmail" placeholder="hello@example.com">
+                                </div>
+                                <div class="input-group">
+                                    <label>Subject</label>
+                                    <input type="text" id="valEmailSubject" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div id="fieldPhone" class="dynamic-fields">
+                                <div class="input-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="valPhone" placeholder="+1234567890">
+                                </div>
+                            </div>
+                            <div id="fieldWifi" class="dynamic-fields">
+                                <div class="input-group">
+                                    <label>Network Name (SSID)</label>
+                                    <input type="text" id="valWifiSsid" placeholder="Network Name">
+                                </div>
+                                <div class="input-group">
+                                    <label>Password</label>
+                                    <input type="password" id="valWifiPass" placeholder="Password">
+                                </div>
+                                <div class="input-group">
+                                    <label>Encryption</label>
+                                    <select id="valWifiEnc">
+                                        <option value="WPA">WPA/WPA2</option>
+                                        <option value="WEP">WEP</option>
+                                        <option value="nopass">None</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Size (px)</label>
+                                <select id="qrSize">
+                                    <option value="128">128x128</option>
+                                    <option value="256" selected>256x256</option>
+                                    <option value="512">512x512</option>
+                                </select>
+                            </div>
+
+                            <div class="color-pickers">
+                                <div class="color-picker">
+                                    <label>Foreground:</label>
+                                    <input type="color" id="colorDark" value="#000000">
+                                </div>
+                                <div class="color-picker">
+                                    <label>Background:</label>
+                                    <input type="color" id="colorLight" value="#ffffff">
+                                </div>
+                            </div>
+
+                            <button class="btn-primary" id="generateBtn">Generate QR Code</button>
+                        </div>
+
+                        <div class="qr-preview">
+                            <canvas id="qrCanvas"></canvas>
+                            <button class="btn-outline" id="downloadBtn" style="margin-top: 1rem; display:none;">⬇ Download PNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="unit-converter.html">Unit Converter</a>
+                <a href="qr-generator.html">QR Generator</a>
+                <a href="password-generator.html">Password Generator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const qrType = document.getElementById('qrType');
+        const fields = document.querySelectorAll('.dynamic-fields');
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const qrCanvas = document.getElementById('qrCanvas');
+
+        qrType.addEventListener('change', (e) => {
+            fields.forEach(f => f.classList.remove('active'));
+            let targetId = 'field' + e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+            let f = document.getElementById(targetId);
+            if(f) f.classList.add('active');
+        });
+
+        function getQRText() {
+            let type = qrType.value;
+            if(type === 'url') return document.getElementById('valUrl').value;
+            if(type === 'text') return document.getElementById('valText').value;
+            if(type === 'email') return `mailto:${document.getElementById('valEmail').value}?subject=${encodeURIComponent(document.getElementById('valEmailSubject').value)}`;
+            if(type === 'phone') return `tel:${document.getElementById('valPhone').value}`;
+            if(type === 'wifi') {
+                let ssid = document.getElementById('valWifiSsid').value;
+                let pass = document.getElementById('valWifiPass').value;
+                let enc = document.getElementById('valWifiEnc').value;
+                return `WIFI:T:${enc};S:${ssid};P:${pass};;`;
+            }
+            return '';
+        }
+
+        generateBtn.addEventListener('click', () => {
+            const text = getQRText();
+            if(!text) { alert('Please enter data for the QR code.'); return; }
+            
+            const size = parseInt(document.getElementById('qrSize').value);
+            const colorDark = document.getElementById('colorDark').value;
+            const colorLight = document.getElementById('colorLight').value;
+
+            QRCode.toCanvas(qrCanvas, text, {
+                width: size,
+                color: {
+                    dark: colorDark,
+                    light: colorLight
+                }
+            }, function (error) {
+                if (error) console.error(error);
+                downloadBtn.style.display = 'block';
+            });
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const url = qrCanvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'qrcode.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        // Generate initial
+        generateBtn.click();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

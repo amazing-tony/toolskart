@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator — Split Bills | Amazing-Tools</title>
+    <meta name="description" content="Calculate tips and split bills easily among friends. Free online tip calculator.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .calc-layout { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .calc-inputs { flex: 1 1 300px; display: flex; flex-direction: column; gap: 1.5rem; }
+        .calc-results { flex: 1 1 300px; background: var(--primary-color); color: white; padding: 2rem; border-radius: 8px; display: flex; flex-direction: column; gap: 2rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-group label { font-weight: 600; color: var(--text-color); }
+        .input-with-icon { position: relative; display: flex; align-items: center; }
+        .input-with-icon span { position: absolute; left: 1rem; color: var(--text-muted); font-weight: 500; }
+        .input-with-icon input { width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1.25rem; background: var(--bg-color); color: var(--text-color); }
+        .tip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+        .tip-btn { background: var(--bg-alt); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: 4px; cursor: pointer; font-size: 1.1rem; font-weight: 600; color: var(--text-color); }
+        .tip-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .tip-custom { padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1.1rem; text-align: center; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color); }
+        .people-control { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; background: var(--bg-color); }
+        .people-btn { background: var(--bg-alt); border: none; padding: 0.75rem 1rem; font-size: 1.25rem; cursor: pointer; color: var(--text-color); }
+        .people-btn:hover { background: var(--border-color); }
+        .people-input { border: none; text-align: center; font-size: 1.25rem; width: 60px; background: transparent; color: var(--text-color); }
+        .result-row { display: flex; justify-content: space-between; align-items: center; }
+        .result-label { font-size: 1.1rem; font-weight: 500; opacity: 0.9; }
+        .result-value { font-size: 2.5rem; font-weight: 700; }
+        .result-sub { font-size: 0.875rem; opacity: 0.7; }
+        .total-row { padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); }
+        .btn-group { display: flex; gap: 1rem; margin-top: 1rem; }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 999px; cursor: pointer; font-weight: 500; font-size: 0.875rem; color: var(--text-color); display: flex; align-items: center; gap: 0.25rem; }
+        .btn-outline:hover { background: var(--bg-alt); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Tip Calculator
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Tip Calculator</h1>
+                    <p class="tool-description">Easily calculate tips and split the bill among your group.</p>
+
+                    <div class="tool-interface calc-layout">
+                        <div class="calc-inputs">
+                            <div class="input-group">
+                                <label for="billAmt">Bill Amount</label>
+                                <div class="input-with-icon">
+                                    <span id="currencySymbol">$</span>
+                                    <input type="number" id="billAmt" placeholder="0.00" step="0.01" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Select Tip %</label>
+                                <div class="tip-grid">
+                                    <button class="tip-btn active" data-tip="10">10%</button>
+                                    <button class="tip-btn" data-tip="15">15%</button>
+                                    <button class="tip-btn" data-tip="18">18%</button>
+                                    <button class="tip-btn" data-tip="20">20%</button>
+                                    <button class="tip-btn" data-tip="25">25%</button>
+                                    <input type="number" class="tip-custom" id="customTip" placeholder="Custom" min="0">
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Number of People</label>
+                                <div class="people-control">
+                                    <button class="people-btn" id="btnMinus">-</button>
+                                    <input type="number" class="people-input" id="peopleCount" value="1" min="1">
+                                    <button class="people-btn" id="btnPlus">+</button>
+                                </div>
+                            </div>
+
+                            <div class="btn-group">
+                                <button class="btn-outline" id="btnRoundUp">↑ Round Up Total</button>
+                                <button class="btn-outline" id="btnRoundDown">↓ Round Down Total</button>
+                                <select id="currencyToggle" class="btn-outline" style="appearance: none; padding-right: 1.5rem;">
+                                    <option value="$">USD ($)</option>
+                                    <option value="€">EUR (€)</option>
+                                    <option value="£">GBP (£)</option>
+                                    <option value="₹">INR (₹)</option>
+                                    <option value="¥">JPY (¥)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="calc-results">
+                            <div class="result-row">
+                                <div>
+                                    <div class="result-label">Tip Amount</div>
+                                    <div class="result-sub">/ person</div>
+                                </div>
+                                <div class="result-value" id="tipPerPerson">$0.00</div>
+                            </div>
+                            <div class="result-row">
+                                <div>
+                                    <div class="result-label">Total Amount</div>
+                                    <div class="result-sub">/ person</div>
+                                </div>
+                                <div class="result-value" id="totalPerPerson">$0.00</div>
+                            </div>
+                            <div class="result-row total-row">
+                                <div>
+                                    <div class="result-label">Total Bill</div>
+                                    <div class="result-sub">inc. tip</div>
+                                </div>
+                                <div class="result-value" id="totalBill" style="font-size: 2rem;">$0.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="unit-converter.html">Unit Converter</a>
+                <a href="tip-calculator.html">Tip Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const billAmt = document.getElementById('billAmt');
+        const customTip = document.getElementById('customTip');
+        const tipBtns = document.querySelectorAll('.tip-btn');
+        const peopleCount = document.getElementById('peopleCount');
+        const btnMinus = document.getElementById('btnMinus');
+        const btnPlus = document.getElementById('btnPlus');
+        const tipPerPersonEl = document.getElementById('tipPerPerson');
+        const totalPerPersonEl = document.getElementById('totalPerPerson');
+        const totalBillEl = document.getElementById('totalBill');
+        const currencySymbol = document.getElementById('currencySymbol');
+        const currencyToggle = document.getElementById('currencyToggle');
+        const btnRoundUp = document.getElementById('btnRoundUp');
+        const btnRoundDown = document.getElementById('btnRoundDown');
+
+        let currentTip = 10;
+        let symbol = localStorage.getItem('preferredCurrency') || '$';
+        currencyToggle.value = symbol;
+        currencySymbol.textContent = symbol;
+
+        currencyToggle.addEventListener('change', (e) => {
+            symbol = e.target.value;
+            localStorage.setItem('preferredCurrency', symbol);
+            currencySymbol.textContent = symbol;
+            calculate();
+        });
+
+        function calculate(roundMode = null) {
+            let bill = parseFloat(billAmt.value);
+            if (isNaN(bill) || bill < 0) bill = 0;
+            
+            let tipPercent = customTip.value !== '' ? parseFloat(customTip.value) : currentTip;
+            if (isNaN(tipPercent) || tipPercent < 0) tipPercent = 0;
+
+            let people = parseInt(peopleCount.value);
+            if (isNaN(people) || people < 1) people = 1;
+
+            let totalTip = bill * (tipPercent / 100);
+            let total = bill + totalTip;
+
+            if (roundMode === 'up') {
+                total = Math.ceil(total);
+                totalTip = total - bill;
+            } else if (roundMode === 'down') {
+                total = Math.floor(total);
+                if (total < bill) total = bill;
+                totalTip = total - bill;
+            }
+
+            let tipPerPerson = totalTip / people;
+            let totalPerPerson = total / people;
+
+            tipPerPersonEl.textContent = `${symbol}${tipPerPerson.toFixed(2)}`;
+            totalPerPersonEl.textContent = `${symbol}${totalPerPerson.toFixed(2)}`;
+            totalBillEl.textContent = `${symbol}${total.toFixed(2)}`;
+        }
+
+        billAmt.addEventListener('input', () => calculate());
+        customTip.addEventListener('input', () => {
+            tipBtns.forEach(b => b.classList.remove('active'));
+            calculate();
+        });
+
+        tipBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tipBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                customTip.value = '';
+                currentTip = parseFloat(btn.dataset.tip);
+                calculate();
+            });
+        });
+
+        btnMinus.addEventListener('click', () => {
+            let p = parseInt(peopleCount.value);
+            if(p > 1) { peopleCount.value = p - 1; calculate(); }
+        });
+        btnPlus.addEventListener('click', () => {
+            let p = parseInt(peopleCount.value);
+            peopleCount.value = p + 1; calculate();
+        });
+        peopleCount.addEventListener('input', () => calculate());
+
+        btnRoundUp.addEventListener('click', () => calculate('up'));
+        btnRoundDown.addEventListener('click', () => calculate('down'));
+
+        calculate();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter — Length, Weight, Temperature, Volume | Amazing-Tools</title>
+    <meta name="description" content="Free online unit converter for Length, Weight, Temperature, Volume, and Speed. Fast, client-side, real-time conversion.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .tab-btn { background: var(--bg-alt); border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: 500; font-family: inherit; color: var(--text-color); }
+        .tab-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .converter-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-group select, .input-group input { padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1rem; width: 100%; box-sizing: border-box; background: var(--bg-color); color: var(--text-color); font-family: inherit; }
+        .swap-btn { background: var(--bg-alt); border: 1px solid var(--border-color); padding: 0.5rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin-top: 1.5rem; color: var(--text-color); }
+        .swap-btn:hover { background: var(--border-color); }
+        .common-conversions { margin-top: 2rem; }
+        .conversion-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .conversion-table th, .conversion-table td { padding: 0.75rem; border: 1px solid var(--border-color); text-align: left; }
+        .conversion-table th { background: var(--bg-alt); font-weight: 600; }
+        @media (max-width: 600px) {
+            .converter-grid { grid-template-columns: 1fr; }
+            .swap-btn { margin: 0 auto; transform: rotate(90deg); margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Unit Converter
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <h1>Unit Converter</h1>
+                    <p class="tool-description">Instantly convert Length, Weight, Temperature, Volume, and Speed entirely in your browser.</p>
+
+                    <div class="tool-interface">
+                        <div class="tabs" id="categoryTabs">
+                            <button class="tab-btn active" data-category="length">Length</button>
+                            <button class="tab-btn" data-category="weight">Weight</button>
+                            <button class="tab-btn" data-category="temperature">Temperature</button>
+                            <button class="tab-btn" data-category="volume">Volume</button>
+                            <button class="tab-btn" data-category="speed">Speed</button>
+                        </div>
+
+                        <div class="converter-grid">
+                            <div class="input-group">
+                                <input type="number" id="fromInput" value="1" step="any">
+                                <select id="fromUnit"></select>
+                            </div>
+                            <button class="swap-btn" id="swapBtn" title="Swap Units">⇄</button>
+                            <div class="input-group">
+                                <input type="number" id="toInput" step="any">
+                                <select id="toUnit"></select>
+                            </div>
+                        </div>
+
+                        <div class="common-conversions" id="commonConversions">
+                            <h3>Common Conversions</h3>
+                            <table class="conversion-table">
+                                <thead><tr><th>From</th><th>To</th></tr></thead>
+                                <tbody id="conversionTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="unit-converter.html">Unit Converter</a>
+                <a href="tip-calculator.html">Tip Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="qr-generator.html">QR Generator</a>
+                <a href="password-generator.html">Password Generator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const units = {
+            length: {
+                base: 'm',
+                units: { 'km': 1000, 'm': 1, 'cm': 0.01, 'mm': 0.001, 'mile': 1609.34, 'yard': 0.9144, 'foot': 0.3048, 'inch': 0.0254 }
+            },
+            weight: {
+                base: 'kg',
+                units: { 'ton': 1000, 'kg': 1, 'g': 0.001, 'mg': 0.000001, 'lb': 0.45359237, 'oz': 0.02834952 }
+            },
+            volume: {
+                base: 'L',
+                units: { 'm³': 1000, 'L': 1, 'mL': 0.001, 'gal': 3.78541, 'fl oz': 0.0295735, 'cup': 0.236588 }
+            },
+            speed: {
+                base: 'm/s',
+                units: { 'm/s': 1, 'km/h': 0.277778, 'mph': 0.44704, 'knot': 0.514444 }
+            }
+        };
+
+        const tempFuncs = {
+            'C_to_F': c => (c * 9/5) + 32,
+            'F_to_C': f => (f - 32) * 5/9,
+            'C_to_K': c => c + 273.15,
+            'K_to_C': k => k - 273.15,
+            'F_to_K': f => (f - 32) * 5/9 + 273.15,
+            'K_to_F': k => (k - 273.15) * 9/5 + 32
+        };
+
+        let currentCategory = 'length';
+        
+        const categoryTabs = document.getElementById('categoryTabs');
+        const fromUnit = document.getElementById('fromUnit');
+        const toUnit = document.getElementById('toUnit');
+        const fromInput = document.getElementById('fromInput');
+        const toInput = document.getElementById('toInput');
+        const swapBtn = document.getElementById('swapBtn');
+        const conversionTableBody = document.getElementById('conversionTableBody');
+
+        function populateUnits(category) {
+            fromUnit.innerHTML = '';
+            toUnit.innerHTML = '';
+            let options = [];
+            if (category === 'temperature') {
+                options = ['°C', '°F', 'K'];
+            } else {
+                options = Object.keys(units[category].units);
+            }
+            
+            options.forEach(opt => {
+                fromUnit.add(new Option(opt, opt));
+                toUnit.add(new Option(opt, opt));
+            });
+            if(options.length > 1) {
+                toUnit.selectedIndex = 1;
+            }
+            updateTable(category);
+            convert('from');
+        }
+
+        function convert(source) {
+            let fromVal = parseFloat(fromInput.value);
+            let toVal = parseFloat(toInput.value);
+            let fromU = fromUnit.value;
+            let toU = toUnit.value;
+
+            if (currentCategory === 'temperature') {
+                if (source === 'from') {
+                    if(isNaN(fromVal)) return toInput.value = '';
+                    if (fromU === toU) return toInput.value = fromVal;
+                    let key = fromU.replace('°', '') + '_to_' + toU.replace('°', '');
+                    let res = tempFuncs[key](fromVal);
+                    toInput.value = parseFloat(res.toFixed(6));
+                } else {
+                    if(isNaN(toVal)) return fromInput.value = '';
+                    if (fromU === toU) return fromInput.value = toVal;
+                    let key = toU.replace('°', '') + '_to_' + fromU.replace('°', '');
+                    let res = tempFuncs[key](toVal);
+                    fromInput.value = parseFloat(res.toFixed(6));
+                }
+                return;
+            }
+
+            let baseUnits = units[currentCategory].units;
+            if (source === 'from') {
+                if(isNaN(fromVal)) return toInput.value = '';
+                let inBase = fromVal * baseUnits[fromU];
+                let out = inBase / baseUnits[toU];
+                toInput.value = parseFloat(out.toFixed(6));
+            } else {
+                if(isNaN(toVal)) return fromInput.value = '';
+                let inBase = toVal * baseUnits[toU];
+                let out = inBase / baseUnits[fromU];
+                fromInput.value = parseFloat(out.toFixed(6));
+            }
+        }
+
+        function updateTable(category) {
+            conversionTableBody.innerHTML = '';
+            let convs = [];
+            if(category === 'length') convs = [['1 mile', '1.609 km'], ['1 inch', '2.54 cm'], ['1 foot', '0.3048 m'], ['1 yard', '0.9144 m']];
+            if(category === 'weight') convs = [['1 kg', '2.205 lb'], ['1 lb', '453.59 g'], ['1 oz', '28.35 g']];
+            if(category === 'temperature') convs = [['0 °C', '32 °F'], ['100 °C', '212 °F'], ['0 K', '-273.15 °C']];
+            if(category === 'volume') convs = [['1 gallon', '3.785 L'], ['1 cup', '236.59 mL'], ['1 fl oz', '29.57 mL']];
+            if(category === 'speed') convs = [['1 mph', '1.609 km/h'], ['1 m/s', '3.6 km/h'], ['1 knot', '1.852 km/h']];
+
+            convs.forEach(c => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${c[0]}</td><td>${c[1]}</td>`;
+                conversionTableBody.appendChild(tr);
+            });
+        }
+
+        categoryTabs.addEventListener('click', e => {
+            if (e.target.classList.contains('tab-btn')) {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentCategory = e.target.dataset.category;
+                populateUnits(currentCategory);
+            }
+        });
+
+        fromInput.addEventListener('input', () => convert('from'));
+        toInput.addEventListener('input', () => convert('to'));
+        fromUnit.addEventListener('change', () => convert('from'));
+        toUnit.addEventListener('change', () => convert('from'));
+
+        swapBtn.addEventListener('click', () => {
+            let tempU = fromUnit.value;
+            fromUnit.value = toUnit.value;
+            toUnit.value = tempU;
+            convert('from');
+        });
+
+        populateUnits(currentCategory);
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

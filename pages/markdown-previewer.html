@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Previewer & Editor — Live Preview | Amazing-Tools</title>
+    <meta name="description" content="Free online Markdown editor and previewer.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    <style>
+        .toolbar { display: flex; gap: 0.5rem; background: var(--bg-alt, #f0f0f0); padding: 0.5rem; border: 1px solid var(--border-color, #ccc); border-radius: 4px 4px 0 0; flex-wrap: wrap; }
+        .toolbar button { padding: 0.25rem 0.5rem; background: #fff; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+        .toolbar button:hover { background: #e0e0e0; }
+        .editor-container { display: flex; height: 60vh; border: 1px solid var(--border-color, #ccc); border-top: none; border-radius: 0 0 4px 4px; }
+        .pane { flex: 1; overflow-y: auto; padding: 1rem; box-sizing: border-box; }
+        #markdownInput { width: 100%; height: 100%; resize: none; border: none; outline: none; font-family: monospace; font-size: 1rem; background: transparent; color: var(--text-color, #000); }
+        .preview-pane { background: var(--bg-color, #fff); border-left: 1px solid var(--border-color, #ccc); color: var(--text-color, #000); }
+        .preview-pane.dark-mode { background: #1e1e1e; color: #d4d4d4; }
+        .statusbar { display: flex; justify-content: space-between; padding: 0.5rem 0; font-size: 0.9rem; color: var(--text-muted, #666); }
+        .layout-btn-group { display: flex; gap: 0.5rem; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#text-tools">Text Tools</a> &raquo; Markdown Previewer
+            </nav>
+            <h1>Markdown Previewer</h1>
+            
+            <div class="toolbar">
+                <button onclick="insertText('**', '**')">B</button>
+                <button onclick="insertText('_', '_')">I</button>
+                <button onclick="insertText('# ', '')">H1</button>
+                <button onclick="insertText('## ', '')">H2</button>
+                <button onclick="insertText('### ', '')">H3</button>
+                <button onclick="insertText('[', '](url)')">Link</button>
+                <button onclick="insertText('![alt](', ')')">Img</button>
+                <button onclick="insertText('`', '`')">Code</button>
+                <button onclick="insertText('> ', '')">Quote</button>
+                <button onclick="insertText('- ', '')">UL</button>
+                <button onclick="insertText('1. ', '')">OL</button>
+                <button onclick="insertText('---\n', '')">HR</button>
+                <button onclick="insertText('| Header | Header |\n|--------|--------|\n| Cell | Cell |', '')">Table</button>
+                <div style="flex: 1"></div>
+                <button onclick="togglePreviewDark()">Toggle Dark/Light</button>
+                <button onclick="copyHtml()">Copy HTML</button>
+                <button onclick="downloadHtml()">Download HTML</button>
+            </div>
+            <div class="editor-container" id="editorContainer">
+                <div class="pane" id="editPane">
+                    <textarea id="markdownInput" placeholder="Type markdown here..."># Hello Markdown&#10;&#10;Start typing to see live preview!</textarea>
+                </div>
+                <div class="pane preview-pane" id="previewPane"></div>
+            </div>
+            <div class="statusbar">
+                <div id="wordCount">Words: 0</div>
+                <div class="layout-btn-group">
+                    <button onclick="setLayout('split')">Split</button>
+                    <button onclick="setLayout('editor')">Editor</button>
+                    <button onclick="setLayout('preview')">Preview</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Amazing-Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const input = document.getElementById('markdownInput');
+        const preview = document.getElementById('previewPane');
+        const wordCount = document.getElementById('wordCount');
+        const editPane = document.getElementById('editPane');
+
+        function updatePreview() {
+            const md = input.value;
+            preview.innerHTML = marked.parse(md);
+            const words = md.trim() === '' ? 0 : md.trim().split(/\s+/).length;
+            wordCount.textContent = `Words: ${words}`;
+        }
+
+        input.addEventListener('input', updatePreview);
+        
+        // Sync scroll
+        input.addEventListener('scroll', () => {
+            const percentage = input.scrollTop / (input.scrollHeight - input.clientHeight);
+            preview.scrollTop = percentage * (preview.scrollHeight - preview.clientHeight);
+        });
+
+        function insertText(prefix, suffix) {
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const text = input.value;
+            const selectedText = text.substring(start, end);
+            input.value = text.substring(0, start) + prefix + selectedText + suffix + text.substring(end);
+            input.focus();
+            input.selectionStart = start + prefix.length;
+            input.selectionEnd = end + prefix.length;
+            updatePreview();
+        }
+
+        function togglePreviewDark() {
+            preview.classList.toggle('dark-mode');
+        }
+
+        function copyHtml() {
+            navigator.clipboard.writeText(preview.innerHTML);
+            alert('HTML copied to clipboard!');
+        }
+
+        function downloadHtml() {
+            const blob = new Blob([preview.innerHTML], {type: 'text/html'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'markdown-preview.html';
+            a.click();
+        }
+
+        function setLayout(mode) {
+            if (mode === 'split') {
+                editPane.style.display = 'block';
+                preview.style.display = 'block';
+            } else if (mode === 'editor') {
+                editPane.style.display = 'block';
+                preview.style.display = 'none';
+            } else {
+                editPane.style.display = 'none';
+                preview.style.display = 'block';
+            }
+        }
+
+        updatePreview();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

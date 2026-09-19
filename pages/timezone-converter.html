@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Zone Converter — World Clock | Amazing-Tools</title>
+    <meta name="description" content="Free online timezone converter and world clock.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tz-controls { margin-bottom: 2rem; display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; }
+        .control-group { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; min-width: 200px; }
+        .control-group input, .control-group select { padding: 0.75rem; border: 1px solid var(--border-color, #ccc); border-radius: 4px; }
+        .btn-add { padding: 0.75rem 1.5rem; background: var(--primary-color, #007bff); color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        .tz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+        .tz-card { background: var(--bg-alt, #f9f9f9); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color, #e0e0e0); position: relative; }
+        .tz-card .remove-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #ff4444; cursor: pointer; font-size: 1.2rem; }
+        .tz-city { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .tz-time { font-size: 2rem; font-weight: 700; color: var(--primary-color, #007bff); font-variant-numeric: tabular-nums; }
+        .tz-date { font-size: 0.9rem; color: var(--text-muted, #666); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Time Zone Converter
+            </nav>
+            <h1>Time Zone Converter</h1>
+            <p class="tool-description">Check times around the world.</p>
+
+            <div class="tz-controls">
+                <div class="control-group">
+                    <label for="baseTime">Select Base Time</label>
+                    <input type="datetime-local" id="baseTime">
+                </div>
+                <div class="control-group">
+                    <label for="tzSelect">Add Timezone</label>
+                    <select id="tzSelect"></select>
+                </div>
+                <button class="btn-add" onclick="addTimezone()">Add City</button>
+                <button class="btn-add" style="background:#666;" onclick="resetToNow()">Reset to Now</button>
+            </div>
+
+            <div class="tz-grid" id="tzGrid"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Amazing-Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const PRESETS = [
+            { name: "New York", zone: "America/New_York" }, { name: "London", zone: "Europe/London" },
+            { name: "Paris", zone: "Europe/Paris" }, { name: "Dubai", zone: "Asia/Dubai" },
+            { name: "Mumbai", zone: "Asia/Kolkata" }, { name: "Singapore", zone: "Asia/Singapore" },
+            { name: "Tokyo", zone: "Asia/Tokyo" }, { name: "Sydney", zone: "Australia/Sydney" },
+            { name: "Los Angeles", zone: "America/Los_Angeles" }, { name: "Toronto", zone: "America/Toronto" },
+            { name: "Berlin", zone: "Europe/Berlin" }, { name: "Moscow", zone: "Europe/Moscow" },
+            { name: "São Paulo", zone: "America/Sao_Paulo" }, { name: "Shanghai", zone: "Asia/Shanghai" },
+            { name: "Cairo", zone: "Africa/Cairo" }, { name: "Lagos", zone: "Africa/Lagos" },
+            { name: "Nairobi", zone: "Africa/Nairobi" }, { name: "Bangkok", zone: "Asia/Bangkok" },
+            { name: "Seoul", zone: "Asia/Seoul" }, { name: "Istanbul", zone: "Europe/Istanbul" }
+        ];
+        
+        let activeZones = [];
+        let isLive = true;
+        let customTime = new Date();
+
+        function init() {
+            const select = document.getElementById('tzSelect');
+            PRESETS.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.zone;
+                opt.textContent = p.name;
+                select.appendChild(opt);
+            });
+            const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            activeZones.push({ name: "Local Time", zone: localZone });
+            activeZones.push(PRESETS[0], PRESETS[1]);
+            
+            document.getElementById('baseTime').addEventListener('change', (e) => {
+                isLive = false;
+                customTime = new Date(e.target.value);
+                updateClocks();
+            });
+            
+            setInterval(() => { if(isLive) updateClocks(); }, 1000);
+            updateClocks();
+        }
+
+        function resetToNow() {
+            isLive = true;
+            document.getElementById('baseTime').value = '';
+            updateClocks();
+        }
+
+        function addTimezone() {
+            const select = document.getElementById('tzSelect');
+            const zone = select.value;
+            const name = select.options[select.selectedIndex].text;
+            if(!activeZones.find(z => z.zone === zone)) {
+                activeZones.push({ name, zone });
+                updateClocks();
+            }
+        }
+        
+        function removeTimezone(index) {
+            activeZones.splice(index, 1);
+            updateClocks();
+        }
+
+        function updateClocks() {
+            const grid = document.getElementById('tzGrid');
+            grid.innerHTML = '';
+            const targetTime = isLive ? new Date() : customTime;
+            
+            activeZones.forEach((tz, idx) => {
+                const formatterTime = new Intl.DateTimeFormat('en-US', { timeZone: tz.zone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+                const formatterDate = new Intl.DateTimeFormat('en-US', { timeZone: tz.zone, weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+                
+                const card = document.createElement('div');
+                card.className = 'tz-card';
+                card.innerHTML = `
+                    ${idx > 0 ? `<button class="remove-btn" onclick="removeTimezone(${idx})">×</button>` : ''}
+                    <div class="tz-city">${tz.name}</div>
+                    <div class="tz-time">${formatterTime.format(targetTime)}</div>
+                    <div class="tz-date">${formatterDate.format(targetTime)}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="theme-09-paper">
 <head>
     <!-- Google tag (gtag.js) -->
@@ -114,8 +114,16 @@
                     </div>
                 </div>
             </nav>
-            <div style="display:flex; align-items:center; gap:0.75rem;">
-                <!-- Multi-Theme Switcher (8 Themes) -->
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+                <!-- Currency Toggle -->
+                <div class="currency-toggle-wrap" id="currencyToggleWrap"></div>
+                <!-- Google Sign-In -->
+                <div id="authBtnWrap">
+                    <button class="auth-btn" id="authSignInBtn" title="Sign in with Google for personalized experience">
+                        <span>👤</span> <span class="auth-btn-label">Sign In</span>
+                    </button>
+                </div>
+                <!-- Multi-Theme Switcher -->
                 <div class="theme-cycle-wrap">
                     <button class="theme-cycle-btn" id="themeCycleBtn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
                     <div class="theme-toast" id="themeToast" role="status" aria-live="polite"></div>
@@ -495,16 +503,30 @@
 
 
             <!-- Category Filter Bar -->
-            <div class="container" style="margin-top: 1.5rem;">
+            <div class="container" style="margin-top: 1.25rem;">
+
+                <!-- What's New Strip -->
+                <div class="whats-new-strip" id="whatsNewStrip">
+                    <span id="whatsNewText">🆕 <strong>New:</strong> Sidebar mini-rail — collapse to icons, hover to expand. Try <kbd>Ctrl+B</kbd>!</span>
+                    <button class="wn-dismiss" id="whatsNewDismiss" title="Dismiss">✕</button>
+                </div>
+
+                <!-- Recently Used Bar -->
+                <div class="recently-used-bar" id="recentlyUsedBar" style="display:none">
+                    <span class="ru-label">🕐 Recent</span>
+                    <div class="ru-chips" id="recentChips"></div>
+                </div>
+
                 <div class="category-filter-bar" id="categoryFilterBar">
-                    <button class="filter-pill active" data-filter="all">✨ All Tools <span class="pill-count">34</span></button>
-                    <button class="filter-pill" data-filter="featured">🔥 Popular & Recommended <span class="pill-count">8</span></button>
-                    <button class="filter-pill" data-filter="doc-tools">📄 Document Tools <span class="pill-count">5</span></button>
-                    <button class="filter-pill" data-filter="media-tools">🎥 Video & Media <span class="pill-count">4</span></button>
+                    <button class="filter-pill active" data-filter="all">✨ All Tools <span class="pill-count">42</span></button>
+                    <button class="filter-pill" data-filter="featured">🔥 Popular <span class="pill-count">8</span></button>
+                    <button class="filter-pill" data-filter="doc-tools">📄 Documents <span class="pill-count">5</span></button>
+                    <button class="filter-pill" data-filter="media-tools">🎥 Media <span class="pill-count">4</span></button>
                     <button class="filter-pill" data-filter="calculators">🧮 Calculators <span class="pill-count">13</span></button>
-                    <button class="filter-pill" data-filter="text-tools">📝 Text Tools <span class="pill-count">4</span></button>
-                    <button class="filter-pill" data-filter="image-tools">🖼️ Image Tools <span class="pill-count">3</span></button>
-                    <button class="filter-pill" data-filter="dev-tools">💻 Developer Tools <span class="pill-count">5</span></button>
+                    <button class="filter-pill" data-filter="text-tools">📝 Text <span class="pill-count">6</span></button>
+                    <button class="filter-pill" data-filter="image-tools">🖼️ Images <span class="pill-count">3</span></button>
+                    <button class="filter-pill" data-filter="dev-tools">💻 Dev <span class="pill-count">6</span></button>
+                    <button class="filter-pill" data-filter="global-tools">🌍 Global <span class="pill-count">8</span></button>
                 </div>
             </div>
 
@@ -1144,6 +1166,144 @@
                 </div>
             </section>
 
+            <!-- ===== GLOBAL TOOLS ===== -->
+            <section class="category-section" id="global-tools">
+                <div class="container">
+                    <h2 class="section-title">🌍 Global Everyday Tools</h2>
+                    <p class="section-desc">Unit Converter, QR Codes, Currency, BMI, Timezones & More — Worldwide Utilities</p>
+                    <div class="tools-grid">
+                        <a href="pages/unit-converter.html" data-tool="unit-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">📏</div>
+                                <span class="tool-badge-pill">Universal</span>
+                            </div>
+                            <h3>Unit Converter</h3>
+                            <p>Length, Weight, Temp, Volume, Speed</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">km ↔ mi ↔ kg</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/currency-converter.html" data-tool="currency-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">💱</div>
+                                <span class="tool-badge-pill">Live Rates</span>
+                            </div>
+                            <h3>Currency Converter</h3>
+                            <p>Live Exchange Rates • 150+ Currencies</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">USD ↔ INR ↔ EUR</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/qr-generator.html" data-tool="qr-generator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">▦</div>
+                                <span class="tool-badge-pill">Instant</span>
+                            </div>
+                            <h3>QR Code Generator</h3>
+                            <p>URL, WiFi, Email, Phone • Download PNG</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">PNG Download</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/password-generator.html" data-tool="password-generator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🔑</div>
+                                <span class="tool-badge-pill" style="background:#DC2626;color:#fff">Secure</span>
+                            </div>
+                            <h3>Password Generator</h3>
+                            <p>crypto.getRandomValues • Strength Meter</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">64-char</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/timezone-converter.html" data-tool="timezone-converter" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🕐</div>
+                                <span class="tool-badge-pill">World</span>
+                            </div>
+                            <h3>Time Zone Converter</h3>
+                            <p>20+ Cities • Live Clock • Meeting Planner</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Live Clock</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/tip-calculator.html" data-tool="tip-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">🍽️</div>
+                                <span class="tool-badge-pill">Split</span>
+                            </div>
+                            <h3>Tip Calculator</h3>
+                            <p>Bill Split • Custom % • Go Dutch</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Split Bills</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/bmi-calculator.html" data-tool="bmi-calculator" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">⚖️</div>
+                                <span class="tool-badge-pill">Health</span>
+                            </div>
+                            <h3>BMI Calculator</h3>
+                            <p>Metric &amp; Imperial • Category Badge</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">kg/cm &amp; lb/ft</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                        <a href="pages/markdown-previewer.html" data-tool="markdown-previewer" class="tool-card tool-card-glossy">
+                            <div class="tool-card-header">
+                                <div class="tool-icon-wrapper">✍️</div>
+                                <span class="tool-badge-pill">Live</span>
+                            </div>
+                            <h3>Markdown Previewer</h3>
+                            <p>Split-Pane Editor • Toolbar • Export HTML</p>
+                            <div class="tool-card-footer">
+                                <span class="tool-tag-pill">Live Preview</span>
+                                <span class="tool-launch-btn">Open <span>&rarr;</span></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== REQUEST A TOOL ===== -->
+            <section class="request-tool-section" id="request-tool">
+                <div class="container">
+                    <div class="request-tool-grid">
+                        <div class="request-tool-form-wrap">
+                            <div class="request-tool-header">
+                                <h2>💡 Request a Tool</h2>
+                                <p>Missing something? Tell us what you need. We build tools people actually use.</p>
+                            </div>
+                            <div class="request-tool-form" id="requestToolForm">
+                                <input type="text" class="rt-input" id="rtToolName" placeholder="Tool name (e.g. Mortgage Calculator)">
+                                <div class="rt-tags">
+                                    <button class="rt-tag active" data-rtcat="Calculator">🧮 Calculator</button>
+                                    <button class="rt-tag" data-rtcat="Converter">🔄 Converter</button>
+                                    <button class="rt-tag" data-rtcat="Generator">⚡ Generator</button>
+                                    <button class="rt-tag" data-rtcat="Utility">🛠️ Utility</button>
+                                    <button class="rt-tag" data-rtcat="Other">💬 Other</button>
+                                </div>
+                                <textarea class="rt-input rt-textarea" id="rtDescription" placeholder="What should it do? Who needs it? (optional)" rows="3"></textarea>
+                                <button class="rt-submit-btn" id="rtSubmit">✉️ Submit Request</button>
+                            </div>
+                            <p class="rt-note">All requests go to our mailbox and are tracked locally. Most-requested tools get built first.</p>
+                        </div>
+                        <div class="wishlist-wrap">
+                            <h3 class="wishlist-title">📋 Community Wishlist</h3>
+                            <p class="wishlist-subtitle">What others have requested on this device</p>
+                            <div class="wishlist-items" id="wishlistItems"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Facilities Section -->
             <section class="facilities-section" id="facilities">
                 <div class="container">
@@ -1209,32 +1369,47 @@
                 <div class="container footer-content">
                     <div class="footer-section">
                         <h4>⚡ Amazing-Tools</h4>
-                        <p>100% private, free online tools and calculators. Built with ❤️ for users worldwide.</p>
+                        <p>42 free tools. Zero server uploads. 100% client-side privacy. Built with ❤️ for the world.</p>
+                        <div class="footer-stats">
+                            <span class="footer-stat">⚡ 42 Tools</span>
+                            <span class="footer-stat">🔒 0 Uploads</span>
+                            <span class="footer-stat">✨ Free Forever</span>
+                        </div>
+                        <p class="footer-made">🌍 Made for the World &nbsp;·&nbsp; 🇮🇳 Built in India</p>
                     </div>
                     <div class="footer-section">
-                        <h4>Media & Converters</h4>
+                        <h4>Media &amp; Converters</h4>
                         <a href="pages/document-converter.html">Document Converter</a>
-                        <a href="pages/video-downloader.html">Video & Audio Downloader</a>
+                        <a href="pages/pdf-tools.html">PDF Studio Suite</a>
+                        <a href="pages/video-downloader.html">Video Downloader</a>
                         <a href="pages/image-compressor.html">Image Compressor</a>
-                        <a href="pages/image-resizer.html">Image Resizer</a>
+                        <a href="pages/qr-generator.html">QR Generator</a>
+                        <a href="pages/unit-converter.html">Unit Converter</a>
                     </div>
                     <div class="footer-section">
                         <h4>Calculators</h4>
                         <a href="pages/income-tax-calculator.html">Income Tax (Old vs New)</a>
-                        <a href="pages/emi-calculator.html">Loan Prepayment & EMI</a>
+                        <a href="pages/emi-calculator.html">Loan &amp; EMI</a>
                         <a href="pages/gst-calculator.html">GST Calculator</a>
                         <a href="pages/sip-calculator.html">SIP Calculator</a>
+                        <a href="pages/buy-vs-rent-calculator.html">Buy vs Rent</a>
+                        <a href="pages/bmi-calculator.html">BMI Calculator</a>
+                        <a href="pages/currency-converter.html">Currency Converter</a>
                     </div>
                     <div class="footer-section">
-                        <h4>Legal</h4>
-                        <a href="privacy-policy.html" data-tool="privacy-policy">Privacy Policy</a>
-                        <a href="terms.html" data-tool="terms">Terms of Service</a>
-                        <a href="about.html" data-tool="about">About Us</a>
+                        <h4>Legal &amp; Info</h4>
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="about.html">About Us</a>
+                        <a href="#request-tool">Request a Tool</a>
+                        <div class="footer-social">
+                            <a href="https://github.com/amazing-tools" target="_blank" rel="noopener" title="GitHub" class="footer-social-link">GitHub ↗</a>
+                        </div>
                     </div>
                 </div>
                 <div class="footer-bottom">
                     <div class="container">
-                        <p>&copy; 2026 Amazing-Tools. All rights reserved. 100% Client-Side Private Tools.</p>
+                        <p>&copy; 2026 Amazing-Tools. All rights reserved. &nbsp;|&nbsp; 100% Client-Side Private Tools &nbsp;|&nbsp; <kbd>Ctrl+K</kbd> to search tools</p>
                     </div>
                 </div>
             </footer>
@@ -1242,6 +1417,122 @@
         </div> <!-- /portal-main-area -->
     </div> <!-- /portal-layout -->
 
+    <!-- ── Command Palette (Ctrl+K) ── -->
+    <div class="cmd-palette" id="cmdPalette" style="display:none" role="dialog" aria-modal="true" aria-label="Command palette">
+        <div class="cmd-inner">
+            <div class="cmd-search-row">
+                <span class="cmd-search-icon">🔍</span>
+                <input type="text" class="cmd-input" id="cmdSearch" placeholder="Search 42 tools… (PDF, Tax, QR, BMI…)" autocomplete="off">
+                <button class="cmd-close" id="cmdPaletteClose" title="Close (Esc)">✕</button>
+            </div>
+            <div class="cmd-results" id="cmdResults"></div>
+            <div class="cmd-footer-hint">
+                <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+                <span><kbd>↵</kbd> open</span>
+                <span><kbd>Esc</kbd> close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Feedback FAB ── -->
+    <div class="feedback-fab-wrap">
+        <div class="feedback-panel" id="feedbackPanel" style="display:none">
+            <div class="fp-header">
+                <span class="fp-title">⭐ Rate &amp; Suggest</span>
+                <button class="fp-close" onclick="document.getElementById('feedbackPanel').style.display='none';document.getElementById('feedbackFab').classList.remove('fab-active')">✕</button>
+            </div>
+            <div class="fp-body">
+                <label class="fp-label">How are we doing?</label>
+                <div class="fp-stars">
+                    <button class="fp-star" data-star="1" title="Poor">★</button>
+                    <button class="fp-star" data-star="2" title="Fair">★</button>
+                    <button class="fp-star" data-star="3" title="Good">★</button>
+                    <button class="fp-star" data-star="4" title="Great">★</button>
+                    <button class="fp-star" data-star="5" title="Excellent">★</button>
+                </div>
+                <input type="hidden" id="fpStarValue" value="0">
+                <label class="fp-label">Tool (optional)</label>
+                <select class="fp-select" id="fpToolSelect"></select>
+                <label class="fp-label">Type</label>
+                <div class="fp-tags">
+                    <button class="fp-tag-btn active" data-tag="compliment">👍 Love it</button>
+                    <button class="fp-tag-btn" data-tag="bug">🐛 Bug</button>
+                    <button class="fp-tag-btn" data-tag="idea">💡 Idea</button>
+                    <button class="fp-tag-btn" data-tag="request">🛠️ New Tool</button>
+                </div>
+                <textarea class="fp-textarea" id="fpMessage" placeholder="Tell us more… (optional)" rows="3"></textarea>
+                <button class="fp-submit" id="fpSubmit">Send Feedback</button>
+            </div>
+        </div>
+        <button class="feedback-fab" id="feedbackFab" title="Rate us &amp; suggest tools">
+            <span class="fab-icon">⭐</span>
+            <span class="fab-text">Feedback</span>
+        </button>
+    </div>
+
+    <!-- ── Scripts ── -->
     <script src="js/common.js"></script>
+    <script src="js/currency.js"></script>
+    <script src="js/portal-features.js"></script>
+    <script>
+    // Request-a-tool form logic
+    (function() {
+      const submitBtn = document.getElementById('rtSubmit');
+      const rtTags = document.querySelectorAll('.rt-tag');
+      let activeCategory = 'Calculator';
+
+      rtTags.forEach(btn => {
+        btn.addEventListener('click', () => {
+          rtTags.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.dataset.rtcat;
+        });
+      });
+
+      submitBtn && submitBtn.addEventListener('click', () => {
+        const name = document.getElementById('rtToolName').value.trim();
+        const desc = document.getElementById('rtDescription').value.trim();
+        if (!name) { document.getElementById('rtToolName').focus(); return; }
+
+        // Save to localStorage
+        try {
+          const wishlist = JSON.parse(localStorage.getItem('at_wishlist') || '[]');
+          wishlist.unshift({ text: `${name}${desc?' — '+desc:''}`, tag: activeCategory, ts: Date.now() });
+          localStorage.setItem('at_wishlist', JSON.stringify(wishlist.slice(0, 50)));
+        } catch(_) {}
+
+        // mailto
+        const subject = encodeURIComponent(`Tool Request: ${name} [${activeCategory}]`);
+        const body = encodeURIComponent(`Tool: ${name}\nCategory: ${activeCategory}\nDescription: ${desc || '(not provided)'}`);
+        window.open(`mailto:tonymagical09@gmail.com?subject=${subject}&body=${body}`);
+
+        document.getElementById('rtToolName').value = '';
+        document.getElementById('rtDescription').value = '';
+        if (window.AT_Features) window.AT_Features.init(); // re-render wishlist
+
+        const toast = document.getElementById('themeToast');
+        if (toast) {
+          toast.textContent = '✅ Request submitted! Thanks for your suggestion.';
+          toast.style.display='block'; toast.style.opacity='1';
+          setTimeout(() => { toast.style.opacity='0'; setTimeout(()=>toast.style.display='none',400); }, 3000);
+        }
+      });
+
+      // Auth button (placeholder until Firebase is configured)
+      const authBtn = document.getElementById('authSignInBtn');
+      authBtn && authBtn.addEventListener('click', () => {
+        if (window.AT_Auth && window.AT_Auth.signIn) {
+          window.AT_Auth.signIn();
+        } else {
+          const toast = document.getElementById('themeToast');
+          if (toast) {
+            toast.textContent = '🔐 Google Sign-In coming soon! Stay tuned.';
+            toast.style.display='block'; toast.style.opacity='1';
+            setTimeout(() => { toast.style.opacity='0'; setTimeout(()=>toast.style.display='none',400); }, 3000);
+          }
+        }
+      });
+    })();
+    </script>
 </body>
-</html>
+</h

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter — Live Exchange Rates | Amazing-Tools</title>
+    <meta name="description" content="Free online currency converter with live exchange rates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .converter-box { background: var(--bg-alt, #f9f9f9); padding: 2rem; border-radius: 8px; border: 1px solid var(--border-color, #e0e0e0); max-width: 600px; margin: 0 auto; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .input-group input, .input-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color, #ccc); border-radius: 4px; box-sizing: border-box; font-size: 1rem; }
+        .swap-btn { width: 100%; padding: 0.5rem; margin: 1rem 0; background: var(--border-color, #e0e0e0); border: none; border-radius: 4px; cursor: pointer; font-size: 1.2rem; }
+        .swap-btn:hover { background: #ccc; }
+        .result { font-size: 2rem; font-weight: 700; color: var(--primary-color, #007bff); text-align: center; margin-top: 1.5rem; }
+        .last-updated { font-size: 0.8rem; color: var(--text-muted, #666); text-align: center; margin-top: 0.5rem; }
+        .error-msg { color: #e74c3c; text-align: center; display: none; margin-top: 1rem; }
+        .quick-table { width: 100%; margin-top: 2rem; border-collapse: collapse; }
+        .quick-table th, .quick-table td { border: 1px solid var(--border-color, #ccc); padding: 0.5rem; text-align: left; }
+        .quick-table th { background: var(--bg-alt, #f0f0f0); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#calculators">Calculators</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Currency Converter
+            </nav>
+            <h1>Currency Converter</h1>
+            <p class="tool-description">Check live foreign exchange rates.</p>
+
+            <div class="converter-box">
+                <div class="input-group">
+                    <label>Amount</label>
+                    <input type="number" id="amount" value="1" min="0" oninput="convert()">
+                </div>
+                <div class="input-group">
+                    <label>From</label>
+                    <select id="fromCurrency" onchange="convert()"></select>
+                </div>
+                <button class="swap-btn" onclick="swap()">⇅</button>
+                <div class="input-group">
+                    <label>To</label>
+                    <select id="toCurrency" onchange="convert()"></select>
+                </div>
+
+                <div class="result" id="resultValue">Loading...</div>
+                <div class="last-updated" id="lastUpdated"></div>
+                <div class="error-msg" id="errorMsg">Failed to fetch exchange rates.</div>
+            </div>
+
+            <table class="quick-table" id="quickTable">
+                <thead>
+                    <tr>
+                        <th>Base (1 USD)</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Amazing-Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const flags = {
+            USD: '🇺🇸', EUR: '🇪🇺', GBP: '🇬🇧', JPY: '🇯🇵', AUD: '🇦🇺', CAD: '🇨🇦', CHF: '🇨🇭', CNY: '🇨🇳',
+            HKD: '🇭🇰', NZD: '🇳🇿', SEK: '🇸🇪', KRW: '🇰🇷', SGD: '🇸🇬', NOK: '🇳🇴', MXN: '🇲🇽', INR: '🇮🇳',
+            RUB: '🇷🇺', ZAR: '🇿🇦', BRL: '🇧🇷', TWD: '🇹🇼', DKK: '🇩🇰', PLN: '🇵🇱', THB: '🇹🇭', IDR: '🇮🇩',
+            HUF: '🇭🇺', CZK: '🇨🇿', ILS: '🇮🇱', CLP: '🇨🇱', PHP: '🇵🇭', AED: '🇦🇪', SAR: '🇸🇦', TRY: '🇹🇷'
+        };
+
+        let rates = {};
+
+        async function fetchRates() {
+            const cached = localStorage.getItem('currencyRates');
+            const cachedTime = localStorage.getItem('currencyRatesTime');
+            const now = Date.now();
+
+            if (cached && cachedTime && (now - cachedTime < 3600000)) {
+                rates = JSON.parse(cached).rates;
+                document.getElementById('lastUpdated').textContent = `Last updated: ${new Date(parseInt(cachedTime)).toLocaleString()}`;
+                populateSelects();
+                return;
+            }
+
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/USD');
+                if (!res.ok) throw new Error('API Error');
+                const data = await res.json();
+                rates = data.rates;
+                localStorage.setItem('currencyRates', JSON.stringify(data));
+                localStorage.setItem('currencyRatesTime', now.toString());
+                document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleString()}`;
+                populateSelects();
+            } catch (err) {
+                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('resultValue').textContent = 'Error';
+            }
+        }
+
+        function populateSelects() {
+            const from = document.getElementById('fromCurrency');
+            const to = document.getElementById('toCurrency');
+            
+            Object.keys(flags).forEach(code => {
+                if(rates[code]) {
+                    const txt = `${flags[code]} ${code}`;
+                    from.add(new Option(txt, code));
+                    to.add(new Option(txt, code));
+                }
+            });
+
+            from.value = 'USD';
+            to.value = 'EUR';
+            
+            if(!to.value) to.selectedIndex = 1;
+            
+            convert();
+            populateQuickTable();
+        }
+
+        function convert() {
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
+            const from = document.getElementById('fromCurrency').value;
+            const to = document.getElementById('toCurrency').value;
+            
+            if(!rates[from] || !rates[to]) return;
+
+            // Convert to USD first, then to target
+            const usdVal = amount / rates[from];
+            const targetVal = usdVal * rates[to];
+
+            document.getElementById('resultValue').textContent = `${targetVal.toFixed(4)} ${to}`;
+        }
+
+        function swap() {
+            const from = document.getElementById('fromCurrency');
+            const to = document.getElementById('toCurrency');
+            const temp = from.value;
+            from.value = to.value;
+            to.value = temp;
+            convert();
+        }
+
+        function populateQuickTable() {
+            const tbody = document.querySelector('#quickTable tbody');
+            const majors = ['EUR', 'GBP', 'JPY', 'INR', 'AUD', 'CAD'];
+            majors.forEach(c => {
+                if(rates[c]) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${flags[c]} ${c}</td><td>${rates[c].toFixed(4)}</td>`;
+                    tbody.appendChild(tr);
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', fetchRates);
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>
