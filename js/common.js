@@ -1,4 +1,9 @@
-/* ========================================
+/*!
+ * Amazing-Tools — https://amazing-tools.github.io/
+ * Copyright (c) 2024-2026 Amazing-Tools (tonymagical09@gmail.com)
+ * Licensed under CC BY-NC 4.0 — Non-commercial use only.
+ * Commercial use requires written permission. See LICENSE file.
+ *//* ========================================
    ToolsKart — Common JavaScript Utilities
    Shared across all pages
    ======================================== */
@@ -402,122 +407,61 @@
     });
   }
 
-  // ---- Hierarchical Treeview Accordion & State Preservation ----
-  function openSidebarTree(treeId, keepScroll) {
-    if (!portalSidebar || !treeId) return;
-    const body = document.getElementById('tree-' + treeId);
-    const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
-    if (!body || !toggle) return;
-
-    // Accordion: close all other trees (opens/expanding a new one closes the previous one)
-    portalSidebar.querySelectorAll('.sb-tree-body.is-open').forEach(el => {
-      if (el !== body) {
-        el.classList.remove('is-open');
-        const otherToggle = portalSidebar.querySelector(`[data-tree="${el.id.replace('tree-','')}"]`);
-        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Expand target tree
-    body.classList.add('is-open');
-    toggle.setAttribute('aria-expanded', 'true');
-    try { sessionStorage.setItem('active_sb_tree', treeId); } catch (_) {}
-
-    if (keepScroll) {
-      setTimeout(() => {
-        body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 120);
-    }
-  }
-
-  function closeSidebarTree(treeId) {
-    if (!portalSidebar || !treeId) return;
-    const body = document.getElementById('tree-' + treeId);
-    const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
-    if (body) body.classList.remove('is-open');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
-    try {
-      if (sessionStorage.getItem('active_sb_tree') === treeId) {
-        sessionStorage.removeItem('active_sb_tree');
-      }
-    } catch (_) {}
-  }
-
+  // ---- Hierarchical Treeview Accordion ----
   portalSidebar && portalSidebar.querySelectorAll('.sb-tree-toggle').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    btn.addEventListener('click', () => {
       const treeId = btn.dataset.tree;
       const body = document.getElementById('tree-' + treeId);
       if (!body) return;
 
       const isOpen = body.classList.contains('is-open');
-      if (isOpen) {
-        // User explicitly clicks an expanded tree header to collapse it
-        closeSidebarTree(treeId);
-      } else {
-        // User opens/expanding a new one -> closes others and opens this one
-        openSidebarTree(treeId, true);
+
+      // Close all other trees (accordion behaviour)
+      portalSidebar.querySelectorAll('.sb-tree-body.is-open').forEach(el => {
+        if (el !== body) {
+          el.classList.remove('is-open');
+          const toggle = portalSidebar.querySelector(`[data-tree="${el.id.replace('tree-','')}"]`);
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          const sec = el.closest('.sb-section');
+          if (sec) sec.classList.remove('is-open');
+        }
+      });
+
+      // Toggle this tree
+      body.classList.toggle('is-open', !isOpen);
+      btn.setAttribute('aria-expanded', (!isOpen).toString());
+      const section = btn.closest('.sb-section');
+      if (section) section.classList.toggle('is-open', !isOpen);
+
+      // Auto-scroll into view if opening
+      if (!isOpen) {
+        setTimeout(() => {
+          body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 120);
       }
     });
   });
 
-  // Restore active tree on page load or from current hash
-  function restoreActiveSidebarState() {
-    if (!portalSidebar) return;
-    const hash = window.location.hash.replace('#', '').trim();
-    let treeOpened = false;
-
-    if (hash) {
-      const activeLink = portalSidebar.querySelector(`.sb-item[data-tool="${hash}"], .sb-child[data-tool="${hash}"], [href*="${hash}"]`);
-      if (activeLink) {
-        portalSidebar.querySelectorAll('.sb-item, .sb-child, .sidebar-link, .sidebar-sublink').forEach(link => {
-          link.classList.remove('is-active', 'active');
-        });
-        activeLink.classList.add('is-active', 'active');
-        const parentTree = activeLink.closest('.sb-tree-body');
-        if (parentTree) {
-          openSidebarTree(parentTree.id.replace('tree-', ''), false);
-          treeOpened = true;
+  // Mark active sidebar item based on current URL
+  if (portalSidebar) {
+    const currentPath = window.location.pathname + window.location.search;
+    portalSidebar.querySelectorAll('.sb-item, .sb-child').forEach(link => {
+      const href = link.getAttribute('href') || '';
+      if (href && currentPath.includes(href.split('?')[0]) && href !== '/' && href !== '#') {
+        link.classList.add('is-active');
+        // Open parent tree if nested
+        const parentBody = link.closest('.sb-tree-body');
+        if (parentBody) {
+          parentBody.classList.add('is-open');
+          const treeId = parentBody.id.replace('tree-', '');
+          const toggle = portalSidebar.querySelector(`[data-tree="${treeId}"]`);
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+          const parentSec = parentBody.closest('.sb-section');
+          if (parentSec) parentSec.classList.add('is-open');
         }
       }
-    }
-
-    if (!treeOpened) {
-      const currentPath = window.location.pathname + window.location.search;
-      portalSidebar.querySelectorAll('.sb-item, .sb-child').forEach(link => {
-        const href = link.getAttribute('href') || '';
-        if (href && currentPath.includes(href.split('?')[0]) && href !== '/' && href !== '#') {
-          link.classList.add('is-active', 'active');
-          const parentTree = link.closest('.sb-tree-body');
-          if (parentTree) {
-            openSidebarTree(parentTree.id.replace('tree-', ''), false);
-            treeOpened = true;
-          }
-        }
-      });
-    }
-
-    if (!treeOpened) {
-      try {
-        const savedTree = sessionStorage.getItem('active_sb_tree');
-        if (savedTree) {
-          openSidebarTree(savedTree, false);
-        }
-      } catch (_) {}
-    }
+    });
   }
-  restoreActiveSidebarState();
-  window.addEventListener('hashchange', restoreActiveSidebarState);
-
-  // ---- Category Filter Pills (Homepage) ----
-  const filterPills = document.querySelectorAll('.filter-pill');
-  if (filterPills.length > 0) {
-    filterPills.forEach(pill => {
-      pill.addEventListener('click', function () {
-        filterPills.forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-        const filter = this.getAttribute('data-filter');
 
   // Quick search filter inside sidebar (new sb-nav classes)
   const sidebarSearch = document.getElementById('sidebarSearch');
@@ -542,14 +486,26 @@
         s.style.display = visible.length === 0 ? 'none' : '';
         // Auto-open tree body if it has results
         const body = s.querySelector('.sb-tree-body');
-        if (body && visible.length > 0) body.classList.add('is-open');
+        if (body && visible.length > 0) {
+          body.classList.add('is-open');
+          s.classList.add('is-open');
+          const toggle = s.querySelector('.sb-tree-toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+        }
       });
     });
   }
 
   // ---- Category Filter Pills (Homepage) ----
-  const featuredSec = document.getElementById('featured-section');
-  const sections = document.querySelectorAll('.category-section:not(#facilities)');
+  const filterPills = document.querySelectorAll('.filter-pill');
+  if (filterPills.length > 0) {
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', function () {
+        filterPills.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
+        const featuredSec = document.getElementById('featured-section');
+        const sections = document.querySelectorAll('.category-section:not(#facilities)');
 
         if (filter === 'all') {
           if (featuredSec) featuredSec.style.display = '';
@@ -663,14 +619,6 @@
     'url-encoder': { title: 'URL Encoder / Decoder', category: 'Developer Tools', url: 'pages/url-encoder.html' },
     'regex-tester': { title: 'Regex Tester', category: 'Developer Tools', url: 'pages/regex-tester.html' },
     'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' },
-    'unit-converter': { title: 'Unit Converter', category: 'Everyday Calculators', url: 'pages/unit-converter.html' },
-    'currency-converter': { title: 'Live Currency Converter', category: 'Financial Calculators', url: 'pages/currency-converter.html' },
-    'qr-generator': { title: 'QR Code Generator', category: 'Developer Tools', url: 'pages/qr-generator.html' },
-    'password-generator': { title: 'Password Generator', category: 'Developer Tools', url: 'pages/password-generator.html' },
-    'timezone-converter': { title: 'World Timezone Converter', category: 'Everyday Calculators', url: 'pages/timezone-converter.html' },
-    'tip-calculator': { title: 'Tip & Bill Splitter', category: 'Everyday Calculators', url: 'pages/tip-calculator.html' },
-    'bmi-calculator': { title: 'BMI & Health Calculator', category: 'Everyday Calculators', url: 'pages/bmi-calculator.html' },
-    'markdown-previewer': { title: 'Markdown Live Previewer', category: 'Developer Tools', url: 'pages/markdown-previewer.html' },
     'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
     'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
     'about': { title: 'About Us', category: 'Company', url: 'about.html' }
@@ -764,28 +712,14 @@
       window.location.hash = slug;
     }
 
-    // Update active state in sidebar and ensure parent tree remains open
-    if (portalSidebar) {
-      portalSidebar.querySelectorAll('.sb-item, .sb-child, .sidebar-link, .sidebar-sublink').forEach(link => {
-        link.classList.remove('is-active', 'active');
-      });
-
-      let matchedLink = portalSidebar.querySelector(`.sb-item[data-tool="${slug}"], .sb-child[data-tool="${slug}"]`);
-      if (!matchedLink && targetUrl) {
-        const urlWithoutLeading = targetUrl.replace(/^pages\//, '');
-        matchedLink = portalSidebar.querySelector(`[href*="${urlWithoutLeading}"], [href*="${slug}"]`);
-      }
-
-      if (matchedLink) {
-        matchedLink.classList.add('is-active', 'active');
-        const parentTree = matchedLink.closest('.sb-tree-body');
-        if (parentTree) {
-          openSidebarTree(parentTree.id.replace('tree-', ''), false);
-        }
-      }
-    }
+    // Update active state in sidebar
+    document.querySelectorAll('.sidebar-link, .sidebar-sublink').forEach(link => {
+      const linkSlug = link.getAttribute('data-tool') || extractSlugFromUrl(link.getAttribute('href'));
+      link.classList.toggle('is-active', linkSlug === slug);
+    });
 
     // Close mobile sidebar if open
+    const portalSidebar = document.getElementById('portalSidebar');
     if (portalSidebar && window.innerWidth <= 1024) {
       portalSidebar.classList.remove('open');
     }
@@ -810,7 +744,7 @@
       window.location.hash = '';
     }
     // Clear sidebar active highlights
-    document.querySelectorAll('.sidebar-link, .sidebar-sublink, .sb-item, .sb-child').forEach(link => link.classList.remove('is-active', 'active'));
+    document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('is-active'));
   }
 
   // Bind Tool Panel Buttons
@@ -848,7 +782,7 @@
       return;
     }
 
-    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .sb-item, .sb-child, .nav-quick-item');
+    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .nav-quick-item');
     if (!trigger) return;
 
     let slug = trigger.getAttribute('data-tool');

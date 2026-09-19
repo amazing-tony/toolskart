@@ -345,10 +345,12 @@
     if (loanStartDateInput) {
       loanStartDateInput.addEventListener('change', () => {
         updateStartDateDisplay();
+        updateSchedulerYearOptions(); // Refresh year/month labels when start date changes
         triggerLiveCalculation();
       });
       loanStartDateInput.addEventListener('input', () => {
         updateStartDateDisplay();
+        updateSchedulerYearOptions(); // Refresh year/month labels when start date changes
         triggerLiveCalculation();
       });
     }
@@ -604,17 +606,67 @@
   function updateSchedulerYearOptions() {
     if (!newPrepayYear) return;
     const tenureYears = Math.max(1, Math.round(parseFloat(loanTenureInput.value) || 20));
-    const currentVal = parseInt(newPrepayYear.value, 10) || 2;
+    const prevVal = parseInt(newPrepayYear.value, 10) || 1;
+    const startDate = getParsedStartDate();
+
     newPrepayYear.innerHTML = '';
     for (let y = 1; y <= tenureYears; y++) {
+      // Compute actual calendar year this loan-year starts in
+      const loanYearStartMonthOffset = (y - 1) * 12;  // 0-based month offset
+      const totalStartMonthIdx = (startDate.month - 1) + loanYearStartMonthOffset;
+      const calStartYear = startDate.year + Math.floor(totalStartMonthIdx / 12);
+      const calStartMonthIdx = totalStartMonthIdx % 12;          // 0-based
+
+      // End of loan year (month 12 of that year)
+      const totalEndMonthIdx = (startDate.month - 1) + loanYearStartMonthOffset + 11;
+      const calEndYear = startDate.year + Math.floor(totalEndMonthIdx / 12);
+      const calEndMonthIdx = totalEndMonthIdx % 12;
+
+      const labelStart = `${MONTH_NAMES_SHORT[calStartMonthIdx]} ${calStartYear}`;
+      const labelEnd   = `${MONTH_NAMES_SHORT[calEndMonthIdx]} ${calEndYear}`;
+
       const opt = document.createElement('option');
       opt.value = y;
-      opt.textContent = `Year ${y}`;
-      if (y === currentVal || (currentVal > tenureYears && y === tenureYears)) {
+      opt.textContent = `${labelStart} – ${labelEnd} (Yr ${y})`;
+      if (y === prevVal || (prevVal > tenureYears && y === tenureYears)) {
         opt.selected = true;
       }
       newPrepayYear.appendChild(opt);
     }
+
+    // Sync month dropdown for selected year
+    updateSchedulerMonthOptions();
+  }
+
+  function updateSchedulerMonthOptions() {
+    if (!newPrepayMonth || !newPrepayYear) return;
+    const selectedYear = parseInt(newPrepayYear.value, 10) || 1;
+    const prevMonthVal = parseInt(newPrepayMonth.value, 10) || 1;
+    const startDate = getParsedStartDate();
+    const tenureYears = Math.max(1, Math.round(parseFloat(loanTenureInput.value) || 20));
+    const totalMaxMonths = tenureYears * 12;
+
+    newPrepayMonth.innerHTML = '';
+    for (let m = 1; m <= 12; m++) {
+      const loanMonthNum = (selectedYear - 1) * 12 + m;
+      if (loanMonthNum > totalMaxMonths) break; // Don't list months beyond tenure
+
+      const calDate = getPeriodDate(startDate.year, startDate.month, loanMonthNum - 1);
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = `${calDate.short} (M${m})`;
+      if (m === prevMonthVal) opt.selected = true;
+      newPrepayMonth.appendChild(opt);
+    }
+    // Default to month 1 if nothing selected
+    if (newPrepayMonth.selectedIndex < 0 && newPrepayMonth.options.length > 0) {
+      newPrepayMonth.options[0].selected = true;
+    }
+  }
+
+  // Sync months when user changes year selection
+  if (newPrepayYear) {
+    newPrepayYear.addEventListener('change', updateSchedulerMonthOptions);
   }
 
   function handleAddLumpsum() {
@@ -870,6 +922,7 @@
     }
 
     renderBaselinePreview(baseEmi, baseSchedule.totalInterest, principal + baseSchedule.totalInterest);
+    updateSchedulerYearOptions(); // Refresh real calendar year/month dropdowns on every calc
     renderSchedulerTable({
       principal,
       monthlyRate,
@@ -1974,6 +2027,7 @@
   initEventListeners();
   updateWordDisplays();
   updateStartDateDisplay();
+  updateSchedulerYearOptions(); // Build real calendar year/month dropdowns on load
   updateTargetSolver();
   triggerLiveCalculation();
 
