@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="theme-09-paper">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Amazing-Tools — Buy Us a Coffee or Donate</title>
+  <meta name="description" content="Love Amazing-Tools? Support our work with a donation. 42 free tools, zero server uploads, built with heart. Every contribution helps us build more tools for the world.">
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .support-hero {
+      text-align: center;
+      padding: 3.5rem 1.5rem 2rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .support-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(135deg, #F59E0B22, #EF444422);
+      border: 1px solid #F59E0B55;
+      color: #D97706;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.03em;
+    }
+    .support-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .support-hero h1 span { color: var(--color-primary); }
+    .support-hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Impact stats */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 680px;
+      margin: 0 auto 3rem;
+    }
+    @media (max-width: 580px) { .impact-grid { grid-template-columns: 1fr 1fr; } }
+    .impact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    .impact-icon { font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .impact-num { font-size: 1.4rem; font-weight: 800; color: var(--text-primary); }
+    .impact-label { font-size: 0.74rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+    /* Donation options */
+    .donation-section { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .donation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 640px) { .donation-grid { grid-template-columns: 1fr; } }
+
+    .donation-card {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .donation-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    }
+    .donation-card.featured {
+      border-color: var(--color-primary);
+      background: linear-gradient(135deg, var(--card-bg) 0%, color-mix(in srgb, var(--color-primary) 6%, var(--card-bg)) 100%);
+    }
+    .donation-card.featured::before {
+      content: '⭐ Most Popular';
+      position: absolute;
+      top: 0; right: 0;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-bottom-left-radius: 10px;
+      letter-spacing: 0.04em;
+    }
+    .dc-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .dc-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
+    .dc-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.5; }
+    .dc-btn {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .dc-btn-primary { background: var(--color-primary); color: #fff; }
+    .dc-btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .dc-btn-upi { background: linear-gradient(135deg, #5BB3F0, #2196F3); color: #fff; }
+    .dc-btn-upi:hover { opacity: 0.88; }
+    .dc-btn-coffee { background: #FFDD00; color: #1a1a1a; }
+    .dc-btn-coffee:hover { background: #FFD000; }
+    .dc-btn-paypal { background: #003087; color: #fff; }
+    .dc-btn-paypal:hover { opacity: 0.88; }
+    .dc-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.6rem; text-align: center; }
+
+    /* UPI QR */
+    .upi-qr-wrap {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .upi-qr-wrap img { width: 160px; height: 160px; border-radius: 8px; }
+    .upi-id-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      background: #f0f0f0;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+    .upi-note { font-size: 0.7rem; color: #888; }
+
+    /* Amount presets */
+    .amount-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .amount-btn {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: var(--bg-alt);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .amount-btn:hover, .amount-btn.active {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: var(--color-primary);
+    }
+
+    /* Why support */
+    .why-section {
+      background: var(--bg-alt);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .why-section h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary); }
+    .why-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .why-item { display: flex; gap: 0.65rem; align-items: flex-start; }
+    .why-item-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .why-item-text { font-size: 0.86rem; color: var(--text-secondary, var(--text-muted)); line-height: 1.5; }
+    .why-item-text strong { color: var(--text-primary); }
+
+    /* Perks */
+    .perks-section { margin-bottom: 2.5rem; }
+    .perks-section h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary); }
+    .perks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .perk-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .perk-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+    .perk-title { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); }
+    .perk-desc { font-size: 0.74rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.4; }
+
+    /* Footer breadcrumb */
+    .support-breadcrumb {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .support-breadcrumb a { color: var(--color-primary); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header header-slim">
+    <div class="container header-content">
+      <div class="header-left">
+        <a href="index.html" class="logo" title="Amazing-tools — Free Online Tools">
+          <span class="logo-icon-bolt">⚡</span>
+          <span>Amazing-tools</span>
+        </a>
+      </div>
+      <nav style="display:flex;align-items:center;gap:1rem;">
+        <a href="index.html" style="font-size:0.85rem;color:var(--text-muted);text-decoration:none;">← All Tools</a>
+        <div class="theme-cycle-wrap">
+          <button class="theme-cycle-btn" id="themeCycleBtn" title="Change theme">◐</button>
+          <div class="theme-toast" id="themeToast" role="status" aria-live="polite"></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 1.5rem; padding-bottom: 2rem;">
+
+    <!-- Breadcrumb -->
+    <p class="support-breadcrumb">
+      <a href="index.html">Home</a> &rsaquo; Support Us
+    </p>
+
+    <!-- Hero -->
+    <div class="support-hero">
+      <div class="support-hero-badge">☕ Support Amazing-Tools</div>
+      <h1>We're free.<br><span>Help us stay free.</span></h1>
+      <p>
+        42 tools. Zero sign-ups. Zero uploads. No ads tracking you. 100% private.
+        If this portal has saved you time or money, consider buying us a coffee —
+        it keeps the lights on and the tools growing.
+      </p>
+    </div>
+
+    <!-- Impact Stats -->
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">⚡</div>
+        <div class="impact-num">42</div>
+        <div class="impact-label">Free Tools</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🔒</div>
+        <div class="impact-num">0</div>
+        <div class="impact-label">Server Uploads</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🌍</div>
+        <div class="impact-num">∞</div>
+        <div class="impact-label">Users Worldwide</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">💳</div>
+        <div class="impact-num">₹0</div>
+        <div class="impact-label">Cost to You</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">❤️</div>
+        <div class="impact-num">100%</div>
+        <div class="impact-label">Passion Project</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🛠️</div>
+        <div class="impact-num">More</div>
+        <div class="impact-label">Coming Soon</div>
+      </div>
+    </div>
+
+    <div class="donation-section">
+
+      <!-- Why Support -->
+      <div class="why-section">
+        <h3>💡 Why support us?</h3>
+        <div class="why-list">
+          <div class="why-item">
+            <span class="why-item-icon">☕</span>
+            <span class="why-item-text"><strong>No VC money, no corporate backing.</strong> This is built by one developer who genuinely wants to help people. Your support is the business model.</span>
+          </div>
+          <div class="why-item">
+            <span class="why-item-icon">🛠️</span>
+            <span class="why-item-text"><strong>Every donation funds more tools.</strong> More calculators, more converters, more features — your coffee literally becomes code.</span>
+          </div>
+          <div class="why-item">
+            <span class="why-item-icon">🔒</span>
+            <span class="why-item-text"><strong>We refuse to sell your data.</strong> No tracking pixels, no profiling. Donations let us keep it that way — no need to monetize you.</span>
+          </div>
+          <div class="why-item">
+            <span class="why-item-icon">🌍</span>
+            <span class="why-item-text"><strong>Global users, Indian heart.</strong> Tools built for the whole world, maintained by someone who cares about quality, not just clicks.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donation Cards -->
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--text-primary);">☕ Choose how to support</h3>
+      <div class="donation-grid">
+
+        <!-- UPI / India -->
+        <div class="donation-card featured">
+          <div class="dc-icon">📱</div>
+          <div class="dc-title">UPI / India Donation</div>
+          <div class="dc-subtitle">Instant, zero fees. Pay via PhonePe, GPay, Paytm, BHIM — any UPI app.</div>
+
+          <!-- Amount presets -->
+          <div class="amount-presets" id="upiAmounts">
+            <button class="amount-btn" data-amt="49">₹49</button>
+            <button class="amount-btn active" data-amt="99">₹99</button>
+            <button class="amount-btn" data-amt="199">₹199</button>
+            <button class="amount-btn" data-amt="499">₹499</button>
+            <button class="amount-btn" data-amt="custom">Custom</button>
+          </div>
+
+          <!-- UPI QR placeholder — user fills their UPI ID -->
+          <div class="upi-qr-wrap">
+            <div style="width:160px;height:160px;background:#f5f5f5;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.4rem;color:#888;font-size:0.75rem;text-align:center;padding:1rem;box-sizing:border-box;">
+              <span style="font-size:2rem;">📲</span>
+              <span>Scan with any UPI app</span>
+              <span style="font-size:0.65rem;color:#aaa;">QR code will appear after UPI ID is set</span>
+            </div>
+            <span class="upi-id-badge" id="upiIdDisplay">tonymagical09@upi</span>
+            <span class="upi-note">Scan QR or use UPI ID above</span>
+          </div>
+
+          <a href="upi://pay?pa=tonymagical09@upi&pn=Amazing-Tools&cu=INR&am=99" class="dc-btn dc-btn-upi" id="upiPayBtn">
+            📱 Pay via UPI App
+          </a>
+          <p class="dc-meta">🔒 Secure · ⚡ Instant · ₹0 Fees</p>
+        </div>
+
+        <!-- International / Buy Me a Coffee -->
+        <div class="donation-card">
+          <div class="dc-icon">☕</div>
+          <div class="dc-title">Buy Me a Coffee</div>
+          <div class="dc-subtitle">For international supporters. One-time or monthly. PayPal, cards, Apple Pay accepted.</div>
+          <a href="https://buymeacoffee.com/amazingtools" target="_blank" rel="noopener" class="dc-btn dc-btn-coffee">
+            ☕ Buy Me a Coffee
+          </a>
+          <p class="dc-meta">💳 Cards · PayPal · Apple Pay · Google Pay</p>
+
+          <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--card-border);">
+            <div class="dc-title" style="font-size:0.95rem;">🌐 PayPal (International)</div>
+            <div class="dc-subtitle" style="margin-top:0.25rem;">Send any amount in any currency.</div>
+            <a href="https://paypal.me/amazingtools" target="_blank" rel="noopener" class="dc-btn dc-btn-paypal" style="margin-top:0.5rem;">
+              PayPal · paypal.me/amazingtools
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Perks -->
+      <div class="perks-section">
+        <h3>🎁 What you get as a supporter</h3>
+        <div class="perks-grid">
+          <div class="perk-card">
+            <div class="perk-icon">🥇</div>
+            <div class="perk-title">Supporter Badge</div>
+            <div class="perk-desc">Email us your UPI ref or order ID — get a "Supporter" badge mention on our site</div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">🔮</div>
+            <div class="perk-title">Feature Priority</div>
+            <div class="perk-desc">Suggest a tool and we'll prioritize building it for supporters first</div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">📧</div>
+            <div class="perk-title">Personal Thanks</div>
+            <div class="perk-desc">We'll personally reply to thank you and note your feature request</div>
+          </div>
+          <div class="perk-card">
+            <div class="perk-icon">♾️</div>
+            <div class="perk-title">Always Free Tools</div>
+            <div class="perk-desc">Your support keeps this portal free for everyone — that's the best perk</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Not able to donate? -->
+      <div style="background:var(--bg-alt);border-radius:12px;padding:1.5rem;text-align:center;">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:var(--text-primary);">Can't donate right now? No worries. 💙</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin:0 0 1rem;line-height:1.6;">
+          You can still help enormously — for free. Share our tools with someone who needs them.
+          Leave a star on GitHub. Tell a friend. Every share helps us grow.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <a href="https://github.com/amazing-tony/toolskart" target="_blank" rel="noopener"
+             style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;border-radius:999px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);text-decoration:none;font-size:0.82rem;font-weight:600;">
+            ⭐ Star on GitHub
+          </a>
+          <button onclick="if(navigator.share){navigator.share({title:'Amazing-Tools',text:'42 free client-side tools — no ads, no uploads',url:'https://amazing-tools.github.io/'})}"
+             style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;border-radius:999px;background:var(--color-primary);color:#fff;border:none;font-size:0.82rem;font-weight:600;cursor:pointer;">
+            🔗 Share Amazing-Tools
+          </button>
+          <a href="index.html#request-tool"
+             style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;border-radius:999px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);text-decoration:none;font-size:0.82rem;font-weight:600;">
+            💡 Request a Tool
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /donation-section -->
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h4>⚡ Amazing-Tools</h4>
+        <p>42 free tools. Built with ❤️ in India for the world.</p>
+        <p class="footer-made">© 2026 Amazing-Tools. All rights reserved.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <a href="index.html">All Tools</a>
+        <a href="index.html#request-tool">Request a Tool</a>
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Amazing-Tools · <a href="LICENSE" style="color:var(--color-primary);">Non-commercial License</a> · tonymagical09@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // UPI amount selector
+    const amtBtns = document.querySelectorAll('#upiAmounts .amount-btn');
+    const upiPayBtn = document.getElementById('upiPayBtn');
+    const UPI_ID = 'tonymagical09@upi'; // ← UPDATE with real UPI ID
+    let selectedAmt = 99;
+
+    amtBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        amtBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (btn.dataset.amt === 'custom') {
+          const custom = prompt('Enter amount in ₹ (minimum ₹10):');
+          if (custom && Number(custom) >= 10) {
+            selectedAmt = Number(custom);
+            btn.textContent = `₹${selectedAmt}`;
+          }
+        } else {
+          selectedAmt = Number(btn.dataset.amt);
+        }
+        if (upiPayBtn) {
+          upiPayBtn.href = `upi://pay?pa=${UPI_ID}&pn=Amazing-Tools&cu=INR&am=${selectedAmt}`;
+        }
+      });
+    });
+  </script>
+  <script src="js/common.js"></script>
+</body>
+</html>
