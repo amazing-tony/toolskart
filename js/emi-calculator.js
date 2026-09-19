@@ -179,6 +179,7 @@
     bindPair(loanTenureInput, loanTenureSlider, () => {
       updateWordDisplays();
       updateTargetSolver();
+      updateSchedulerYearOptions();
       triggerLiveCalculation();
       syncActiveChip('loanTenure', loanTenureInput.value);
     });
@@ -272,6 +273,8 @@
         if (activePane) activePane.classList.add('active');
 
         if (mode === 'target') updateTargetSolver();
+        if (mode === 'lumpsum') updateSchedulerYearOptions();
+        saveSavedInputs();
       });
     });
   }
@@ -374,6 +377,7 @@
         if (loanStartDateInput) loanStartDateInput.value = thisMonthVal;
         setActiveStartChip(chipStartThisMonth);
         updateStartDateDisplay();
+        updateSchedulerYearOptions();
         triggerLiveCalculation();
       });
     }
@@ -383,6 +387,7 @@
         if (loanStartDateInput) loanStartDateInput.value = nextMonthVal;
         setActiveStartChip(chipStartNextMonth);
         updateStartDateDisplay();
+        updateSchedulerYearOptions();
         triggerLiveCalculation();
       });
     }
@@ -392,6 +397,7 @@
         if (loanStartDateInput) loanStartDateInput.value = janNextVal;
         setActiveStartChip(chipStartJanNext);
         updateStartDateDisplay();
+        updateSchedulerYearOptions();
         triggerLiveCalculation();
       });
     }
@@ -606,32 +612,29 @@
   function updateSchedulerYearOptions() {
     if (!newPrepayYear) return;
     const tenureYears = Math.max(1, Math.round(parseFloat(loanTenureInput.value) || 20));
-    const prevVal = parseInt(newPrepayYear.value, 10) || 1;
+    const prevVal = parseInt(newPrepayYear.value, 10);
     const startDate = getParsedStartDate();
 
+    const totalMaxMonths = tenureYears * 12;
+    // Calculate the end period of the loan
+    const endPeriod = getPeriodDate(startDate.year, startDate.month, totalMaxMonths - 1);
+    const startCalYear = startDate.year;
+    const endCalYear = endPeriod.year;
+
     newPrepayYear.innerHTML = '';
-    for (let y = 1; y <= tenureYears; y++) {
-      // Compute actual calendar year this loan-year starts in
-      const loanYearStartMonthOffset = (y - 1) * 12;  // 0-based month offset
-      const totalStartMonthIdx = (startDate.month - 1) + loanYearStartMonthOffset;
-      const calStartYear = startDate.year + Math.floor(totalStartMonthIdx / 12);
-      const calStartMonthIdx = totalStartMonthIdx % 12;          // 0-based
-
-      // End of loan year (month 12 of that year)
-      const totalEndMonthIdx = (startDate.month - 1) + loanYearStartMonthOffset + 11;
-      const calEndYear = startDate.year + Math.floor(totalEndMonthIdx / 12);
-      const calEndMonthIdx = totalEndMonthIdx % 12;
-
-      const labelStart = `${MONTH_NAMES_SHORT[calStartMonthIdx]} ${calStartYear}`;
-      const labelEnd   = `${MONTH_NAMES_SHORT[calEndMonthIdx]} ${calEndYear}`;
-
+    for (let yr = startCalYear; yr <= endCalYear; yr++) {
+      const loanYearNum = yr - startCalYear + 1;
       const opt = document.createElement('option');
-      opt.value = y;
-      opt.textContent = `${labelStart} – ${labelEnd} (Yr ${y})`;
-      if (y === prevVal || (prevVal > tenureYears && y === tenureYears)) {
+      opt.value = yr;
+      opt.textContent = `${yr} (Loan Year ${loanYearNum})`;
+      if (yr === prevVal) {
         opt.selected = true;
       }
       newPrepayYear.appendChild(opt);
+    }
+
+    if (newPrepayYear.selectedIndex < 0 && newPrepayYear.options.length > 0) {
+      newPrepayYear.options[0].selected = true;
     }
 
     // Sync month dropdown for selected year
@@ -640,25 +643,25 @@
 
   function updateSchedulerMonthOptions() {
     if (!newPrepayMonth || !newPrepayYear) return;
-    const selectedYear = parseInt(newPrepayYear.value, 10) || 1;
-    const prevMonthVal = parseInt(newPrepayMonth.value, 10) || 1;
+    const selectedCalYear = parseInt(newPrepayYear.value, 10);
+    const prevMonthVal = parseInt(newPrepayMonth.value, 10);
     const startDate = getParsedStartDate();
     const tenureYears = Math.max(1, Math.round(parseFloat(loanTenureInput.value) || 20));
     const totalMaxMonths = tenureYears * 12;
+    const endPeriod = getPeriodDate(startDate.year, startDate.month, totalMaxMonths - 1);
+
+    const minMonth = (selectedCalYear === startDate.year) ? startDate.month : 1;
+    const maxMonth = (selectedCalYear === endPeriod.year) ? endPeriod.month : 12;
 
     newPrepayMonth.innerHTML = '';
-    for (let m = 1; m <= 12; m++) {
-      const loanMonthNum = (selectedYear - 1) * 12 + m;
-      if (loanMonthNum > totalMaxMonths) break; // Don't list months beyond tenure
-
-      const calDate = getPeriodDate(startDate.year, startDate.month, loanMonthNum - 1);
+    for (let m = minMonth; m <= maxMonth; m++) {
       const opt = document.createElement('option');
       opt.value = m;
-      opt.textContent = `${calDate.short} (M${m})`;
+      opt.textContent = `${MONTH_NAMES_LONG[m - 1]} (${MONTH_NAMES_SHORT[m - 1]} ${selectedCalYear})`;
       if (m === prevMonthVal) opt.selected = true;
       newPrepayMonth.appendChild(opt);
     }
-    // Default to month 1 if nothing selected
+
     if (newPrepayMonth.selectedIndex < 0 && newPrepayMonth.options.length > 0) {
       newPrepayMonth.options[0].selected = true;
     }
@@ -670,8 +673,8 @@
   }
 
   function handleAddLumpsum() {
-    const year = parseInt(newPrepayYear ? newPrepayYear.value : '1', 10) || 1;
-    const monthInYear = parseInt(newPrepayMonth ? newPrepayMonth.value : '1', 10) || 1;
+    const calYear = parseInt(newPrepayYear ? newPrepayYear.value : '0', 10);
+    const calMonth = parseInt(newPrepayMonth ? newPrepayMonth.value : '0', 10);
     const amount = parseFloat(newPrepayAmount.value);
     const note = newPrepayNote ? newPrepayNote.value.trim() : '';
 
@@ -681,23 +684,35 @@
       return;
     }
 
+    if (!calYear || !calMonth) {
+      alert('Please select a valid calendar year and month.');
+      return;
+    }
+
+    const startDate = getParsedStartDate();
     const tenureYears = parseFloat(loanTenureInput.value) || 20;
     const totalMaxMonths = Math.round(tenureYears * 12);
-    const loanMonth = (year - 1) * 12 + monthInYear;
 
-    if (loanMonth > totalMaxMonths) {
-      alert(`Selected timing (Year ${year}, Month ${monthInYear}) is beyond your total loan tenure of ${tenureYears} years.`);
+    // Calculate absolute loan month offset from startDate
+    const loanMonth = (calYear - startDate.year) * 12 + (calMonth - startDate.month) + 1;
+    const loanYear = Math.floor((loanMonth - 1) / 12) + 1;
+    const monthInYear = ((loanMonth - 1) % 12) + 1;
+
+    if (loanMonth < 1 || loanMonth > totalMaxMonths) {
+      alert(`Selected timing (${MONTH_NAMES_SHORT[calMonth - 1] || ''} ${calYear}) is outside your loan duration of ${tenureYears} years.`);
       return;
     }
 
     customLumpsums.push({
       id: 'sched_' + Date.now() + '_' + Math.floor(Math.random() * 10000),
-      year,
+      calYear,
+      calMonth,
+      year: loanYear,
       monthInYear,
       loanMonth,
       month: loanMonth,
       amount,
-      note: note || `Year ${year} Month ${monthInYear} Prepayment`
+      note: note || `${MONTH_NAMES_SHORT[calMonth - 1] || 'Month'} ${calYear} Prepayment`
     });
 
     customLumpsums.sort((a, b) => a.loanMonth - b.loanMonth);
@@ -705,6 +720,7 @@
     if (newPrepayAmount) newPrepayAmount.value = '';
     if (newPrepayNote) newPrepayNote.value = '';
 
+    saveSavedInputs();
     triggerLiveCalculation();
   }
 
@@ -755,7 +771,7 @@
 
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><strong>Year ${item.year}, Month ${item.monthInYear}</strong> <span style="font-size:0.75rem; color:var(--color-text-muted);">(Month ${item.loanMonth})</span></td>
+        <td><strong>${calDate.short}</strong> <span style="font-size:0.75rem; color:var(--color-text-muted);">(Loan Yr ${item.year}, M${item.monthInYear})</span></td>
         <td>${calDate.long}</td>
         <td><strong style="color:var(--color-text);">₹ ${Math.round(item.amount).toLocaleString('en-IN')}</strong></td>
         <td>${item.note || 'Scheduled Prepayment'}</td>
@@ -772,6 +788,7 @@
       btn.addEventListener('click', function () {
         const idToDelete = this.getAttribute('data-id');
         customLumpsums = customLumpsums.filter(x => x.id !== idToDelete);
+        saveSavedInputs();
         triggerLiveCalculation();
       });
     });
@@ -797,7 +814,22 @@
   }
 
   // --- 10. Reset All Handler ---
+  const STORAGE_KEY = 'at_emi_saved_inputs';
+
   function handleResetAll() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      const user = (window.AT_Auth && window.AT_Auth.getUser) ? window.AT_Auth.getUser() : null;
+      if (user && user.uid) {
+        localStorage.removeItem(`at_emi_saved_inputs_${user.uid}`);
+      }
+    } catch (_) {}
+
+    const statusEl = document.getElementById('savedInputsStatus');
+    if (statusEl) {
+      statusEl.innerHTML = '↺ <span style="color:var(--color-text-muted);">Reset to defaults</span>';
+    }
+
     loanAmountInput.value = '5000000';
     loanAmountSlider.value = '5000000';
     interestRateInput.value = '8.75';
@@ -836,6 +868,130 @@
     updateWordDisplays();
     updateTargetSolver();
     triggerLiveCalculation();
+  }
+
+  // --- 10b. Input Persistence for Returning Users ---
+  function saveSavedInputs() {
+    try {
+      const activeModeBtn = document.querySelector('.prepay-mode-btn.active');
+      const activeMode = activeModeBtn ? activeModeBtn.getAttribute('data-mode') : 'monthly';
+      const impactRadio = document.querySelector('input[name="impactMode"]:checked');
+      const impactMode = impactRadio ? impactRadio.value : 'tenure';
+
+      const data = {
+        loanAmount: loanAmountInput ? loanAmountInput.value : '5000000',
+        interestRate: interestRateInput ? interestRateInput.value : '8.75',
+        loanTenure: loanTenureInput ? loanTenureInput.value : '20',
+        loanStartDate: loanStartDateInput ? loanStartDateInput.value : '',
+        monthlyPrepay: monthlyPrepayInput ? monthlyPrepayInput.value : '5000',
+        yearlyPrepay: yearlyPrepayInput ? yearlyPrepayInput.value : '0',
+        enableStepUp: enableStepUp ? enableStepUp.checked : false,
+        prepayStepUp: prepayStepUp ? prepayStepUp.value : '5',
+        investRate: investRateInput ? investRateInput.value : '12',
+        impactMode,
+        activeMode,
+        customLumpsums: customLumpsums || [],
+        savedAt: Date.now()
+      };
+
+      const serialized = JSON.stringify(data);
+      localStorage.setItem(STORAGE_KEY, serialized);
+
+      const user = (window.AT_Auth && window.AT_Auth.getUser) ? window.AT_Auth.getUser() : null;
+      if (user && user.uid) {
+        localStorage.setItem(`at_emi_saved_inputs_${user.uid}`, serialized);
+      }
+
+      const statusEl = document.getElementById('savedInputsStatus');
+      if (statusEl) {
+        statusEl.innerHTML = '💾 <span style="color:#059669;">Inputs auto-saved</span>';
+      }
+    } catch (e) {
+      console.warn('Could not save EMI inputs to localStorage', e);
+    }
+  }
+
+  function restoreSavedInputs() {
+    try {
+      const user = (window.AT_Auth && window.AT_Auth.getUser) ? window.AT_Auth.getUser() : null;
+      let raw = user && user.uid ? localStorage.getItem(`at_emi_saved_inputs_${user.uid}`) : null;
+      if (!raw) {
+        raw = localStorage.getItem(STORAGE_KEY);
+      }
+      if (!raw) return false;
+
+      const data = JSON.parse(raw);
+      if (!data || typeof data !== 'object') return false;
+
+      if (data.loanAmount && loanAmountInput) {
+        loanAmountInput.value = data.loanAmount;
+        if (loanAmountSlider) loanAmountSlider.value = data.loanAmount;
+      }
+      if (data.interestRate && interestRateInput) {
+        interestRateInput.value = data.interestRate;
+        if (interestRateSlider) interestRateSlider.value = data.interestRate;
+      }
+      if (data.loanTenure && loanTenureInput) {
+        loanTenureInput.value = data.loanTenure;
+        if (loanTenureSlider) loanTenureSlider.value = data.loanTenure;
+      }
+      if (data.loanStartDate && loanStartDateInput) {
+        loanStartDateInput.value = data.loanStartDate;
+      }
+      if (data.monthlyPrepay !== undefined && monthlyPrepayInput) {
+        monthlyPrepayInput.value = data.monthlyPrepay;
+        if (monthlyPrepaySlider) monthlyPrepaySlider.value = data.monthlyPrepay;
+      }
+      if (data.yearlyPrepay !== undefined && yearlyPrepayInput) {
+        yearlyPrepayInput.value = data.yearlyPrepay;
+        if (yearlyPrepaySlider) yearlyPrepaySlider.value = data.yearlyPrepay;
+      }
+      if (data.enableStepUp !== undefined && enableStepUp) {
+        enableStepUp.checked = !!data.enableStepUp;
+      }
+      if (data.prepayStepUp !== undefined && prepayStepUp) {
+        prepayStepUp.value = data.prepayStepUp;
+      }
+      if (data.investRate !== undefined && investRateInput) {
+        investRateInput.value = data.investRate;
+        if (investRateSlider) investRateSlider.value = data.investRate;
+      }
+      if (data.impactMode) {
+        const rad = document.querySelector(`input[name="impactMode"][value="${data.impactMode}"]`);
+        if (rad) {
+          rad.checked = true;
+          if (data.impactMode === 'tenure') {
+            if (labelImpactTenure) labelImpactTenure.classList.add('active');
+            if (labelImpactEmi) labelImpactEmi.classList.remove('active');
+          } else {
+            if (labelImpactTenure) labelImpactTenure.classList.remove('active');
+            if (labelImpactEmi) labelImpactEmi.classList.add('active');
+          }
+        }
+      }
+      if (Array.isArray(data.customLumpsums)) {
+        customLumpsums = data.customLumpsums;
+      }
+      if (data.activeMode) {
+        const targetBtn = document.querySelector(`.prepay-mode-btn[data-mode="${data.activeMode}"]`);
+        if (targetBtn) {
+          document.querySelectorAll('.prepay-mode-btn').forEach(b => b.classList.remove('active'));
+          targetBtn.classList.add('active');
+          document.querySelectorAll('.prepay-pane').forEach(p => p.classList.remove('active'));
+          const p = document.getElementById('pane-' + data.activeMode);
+          if (p) p.classList.add('active');
+        }
+      }
+
+      const statusEl = document.getElementById('savedInputsStatus');
+      if (statusEl) {
+        statusEl.innerHTML = '📂 <span style="color:var(--color-primary);">Inputs restored</span>';
+      }
+      return true;
+    } catch (e) {
+      console.warn('Could not restore EMI inputs from localStorage', e);
+      return false;
+    }
   }
 
   // --- 11. Core Mathematical Simulation ---
@@ -983,6 +1139,9 @@
 
     // Render Charts
     renderVisualCharts(latestSimulationParams);
+
+    // Auto-save inputs for returning user
+    saveSavedInputs();
   }
 
   function runSimulation(params) {
@@ -2025,6 +2184,7 @@
   initStartDateControls();
   initTrendChartControls();
   initEventListeners();
+  restoreSavedInputs(); // Restore any previously saved inputs from previous session
   updateWordDisplays();
   updateStartDateDisplay();
   updateSchedulerYearOptions(); // Build real calendar year/month dropdowns on load

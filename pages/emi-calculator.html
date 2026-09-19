@@ -71,7 +71,7 @@
             <div class="tool-container">
                 <div class="tool-main">
                     <div class="tool-header-badge">
-                        <span>⚡ 100% Free • Real-Time Calculator • Instant Visual Payoff</span>
+                        <span>⚡ Free Real-Time Calculator • Instant Visual Payoff • Unlimited Reports</span>
                     </div>
                     <h1>Loan Prepayment & Debt-Freedom Planner</h1>
                     <p class="tool-description">
@@ -341,16 +341,16 @@
                                 </div>
                                 
                                 <div class="lumpsum-entry-bar" style="background: var(--color-bg); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end;">
-                                    <div class="lumpsum-entry-item" style="min-width: 160px;">
+                                    <div class="lumpsum-entry-item" style="min-width: 170px;">
                                         <label for="newPrepayYear" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">Calendar Year:</label>
                                         <select id="newPrepayYear" class="input-field mini-select" style="width: 100%;">
-                                            <option value="1">Year 1</option>
+                                            <option value="">Select Year</option>
                                         </select>
                                     </div>
-                                    <div class="lumpsum-entry-item" style="min-width: 155px;">
-                                        <label for="newPrepayMonth" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">In Month:</label>
+                                    <div class="lumpsum-entry-item" style="min-width: 165px;">
+                                        <label for="newPrepayMonth" style="font-weight: 600; font-size: 0.82rem; margin-bottom: 0.25rem; display: block;">Calendar Month:</label>
                                         <select id="newPrepayMonth" class="input-field mini-select" style="width: 100%;">
-                                            <option value="1">Month 1</option>
+                                            <option value="">Select Month</option>
                                         </select>
                                     </div>
                                     <div class="lumpsum-entry-item" style="flex: 1; min-width: 160px;">
@@ -457,9 +457,12 @@
                                 <button type="button" class="btn btn-primary btn-lg" id="btnCalculatePlan" style="font-size: 1.05rem; padding: 0.85rem 1.85rem; font-weight: 700; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); cursor: pointer;">
                                     🚀 Calculate Debt-Freedom Plan &amp; Savings
                                 </button>
-                                <button type="button" class="btn btn-outline btn-sm" id="btnResetAll">
-                                    ↺ Reset to Default Example
-                                </button>
+                                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                                    <span id="savedInputsStatus" style="font-size: 0.82rem; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 0.3rem;">💾 Inputs auto-saved</span>
+                                    <button type="button" class="btn btn-outline btn-sm" id="btnResetAll">
+                                        ↺ Reset to Default Example
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -747,6 +750,9 @@
                                     <button type="button" class="btn btn-outline btn-sm" id="downloadCsvBtn">
                                         📥 Download CSV
                                     </button>
+                                    <span class="free-badge" style="font-size: 0.75rem; padding: 0.25rem 0.6rem; background: rgba(16, 185, 129, 0.12); color: #059669; border-radius: 9999px; font-weight: 600; border: 1px solid rgba(16, 185, 129, 0.25);">
+                                        ✨ Free Download (Unlimited)
+                                    </span>
                                 </div>
                             </div>
 
