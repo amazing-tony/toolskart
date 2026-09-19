@@ -6,7 +6,7 @@
 
 // ── Firebase SDK (v9 compat via CDN modules) ─────────────────
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, setDoc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp, query, orderBy, limit, getDocs }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -28,19 +28,46 @@ const db   = getFirestore(app);
 let currentUser = null;
 
 /* ─────────────────────────────────────────────────────────────
-   AUTH — Google Sign-In
+   AUTH — Google Sign-In (redirect flow for GitHub Pages compat)
+   signInWithPopup fails on GitHub Pages ("action invalid") because
+   the popup auth handler at firebaseapp.com/auth tries to redirect
+   back to amazing-tools.github.io which must be in Firebase's
+   authorized domains. signInWithRedirect routes entirely through
+   Firebase's own domain and avoids this restriction.
 ───────────────────────────────────────────────────────────── */
 async function signIn() {
   try {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    const result = await signInWithPopup(auth, provider);
-    return result.user;
+    // signInWithRedirect: navigates away, then returns with session on callback
+    await signInWithRedirect(auth, provider);
+    // (page will reload; result picked up by checkRedirectResult below)
   } catch (e) {
-    console.warn('[AT Auth] Sign-in failed:', e.message);
-    return null;
+    console.warn('[AT Auth] Sign-in redirect failed:', e.message);
   }
 }
+
+/**
+ * Called once on page load to pick up the result from signInWithRedirect.
+ * Firebase persists the redirect session automatically.
+ */
+async function checkRedirectResult() {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result && result.user) {
+      // Redirect sign-in just completed — profile sync handled by onAuthStateChanged
+      console.log('[AT Auth] Redirect sign-in OK:', result.user.email);
+    }
+  } catch (e) {
+    // auth/popup-closed-by-user or auth/cancelled-popup-request — silently ignore
+    if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
+      console.warn('[AT Auth] Redirect result error:', e.code, e.message);
+    }
+  }
+}
+
+// Kick off redirect-result check immediately on module load
+checkRedirectResult();
 
 async function signOutUser() {
   try {
@@ -79,11 +106,16 @@ function updateAuthUI(user) {
   } else {
     if (btn) {
       btn.innerHTML = `<span>👤</span> <span class="auth-btn-label">Sign In</span>`;
-      btn.title = 'Sign in with Google for personalized experience';
-      btn.onclick = signIn;
+      btn.title = 'Sign in with Google — you will be redirected to Google';
+      btn.onclick = async function() {
+        btn.innerHTML = `<span class="auth-btn-label">Redirecting…</span>`;
+        btn.disabled = true;
+        await signIn();
+      };
       btn.style.background = '';
       btn.style.borderColor = '';
       btn.style.color = '';
+      btn.disabled = false;
     }
   }
 }
