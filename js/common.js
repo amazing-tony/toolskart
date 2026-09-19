@@ -630,6 +630,15 @@
     'url-encoder': { title: 'URL Encoder / Decoder', category: 'Developer Tools', url: 'pages/url-encoder.html' },
     'regex-tester': { title: 'Regex Tester', category: 'Developer Tools', url: 'pages/regex-tester.html' },
     'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' },
+    'unit-converter': { title: 'Universal Unit Converter', category: 'Everyday Calculators', url: 'pages/unit-converter.html' },
+    'currency-converter': { title: 'Currency Converter (Live Rates)', category: 'Financial Calculators', url: 'pages/currency-converter.html' },
+    'qr-generator': { title: 'QR Code Generator', category: 'Developer Tools', url: 'pages/qr-generator.html' },
+    'password-generator': { title: 'Password Generator & Strength Meter', category: 'Security Tools', url: 'pages/password-generator.html' },
+    'timezone-converter': { title: 'Time Zone & World Clock', category: 'Everyday Calculators', url: 'pages/timezone-converter.html' },
+    'tip-calculator': { title: 'Tip & Bill Split Calculator', category: 'Everyday Calculators', url: 'pages/tip-calculator.html' },
+    'bmi-calculator': { title: 'BMI & Body Health Calculator', category: 'Health & Fitness', url: 'pages/bmi-calculator.html' },
+    'markdown-previewer': { title: 'Markdown Live Editor & Previewer', category: 'Developer Tools', url: 'pages/markdown-previewer.html' },
+    'support': { title: 'Support Amazing-Tools', category: 'About', url: 'support.html' },
     'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
     'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
     'about': { title: 'About Us', category: 'Company', url: 'about.html' }
@@ -960,14 +969,14 @@
     });
   }
 
-  // Intercept click on tools, cards, and sidebar links
+  // Intercept click on tools, cards, footer links, and sidebar links
   document.addEventListener('click', function (e) {
     // If inside pdf-tools sub-tool card or in-page interactive components, do not intercept
-    if (e.target.closest('.sejda-tool-card') || e.target.closest('[data-pdf-subtool]')) {
+    if (e.target.closest('.pdf-suite-card') || e.target.closest('.sejda-tool-card') || e.target.closest('[data-pdf-subtool]')) {
       return;
     }
 
-    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .nav-quick-item');
+    const trigger = e.target.closest('[data-tool], a[href*="pages/"], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .nav-quick-item, .bql-chip, .ru-chip, .footer a');
     if (!trigger) return;
 
     let slug = trigger.getAttribute('data-tool');
@@ -977,7 +986,7 @@
       slug = extractSlugFromUrl(href);
     }
 
-    if (slug) {
+    if (slug && toolRegistry[slug]) {
       const toolPanel = document.getElementById('toolContentPanel');
       if (toolPanel) {
         e.preventDefault();
@@ -987,7 +996,6 @@
         openToolInPortal(slug, title, null, href);
       } else if (window.self !== window.top) {
         // We are inside an iframe; only forward if slug is a valid registered tool or has a valid href
-        if (!toolRegistry[slug] && !href) return;
         e.preventDefault();
         try {
           if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {

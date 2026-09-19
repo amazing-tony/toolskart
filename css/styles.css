@@ -922,7 +922,7 @@ code, .code { font-family: var(--font-mono); font-size: 0.9em; background: var(-
 }
 .section-desc { color: var(--color-text-secondary); margin-bottom: 0.85rem; font-size: 0.84rem; }
 
-/* ---- 8. Sejda-Inspired Compact Tool Cards Grid ---- */
+/* ---- 8. PDF Studio-Inspired Compact Tool Cards Grid ---- */
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
@@ -4703,7 +4703,70 @@ button.sb-section-label.sb-tree-toggle[aria-expanded="true"] .sb-chevron,
 .info-box-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); font-weight: 600; margin-bottom: 0.1rem; }
 .info-box-value { font-size: 1.08rem; font-weight: 700; color: var(--color-text); margin: 0; }
 
-/* Sejda-Inspired Compact Tool Tiles */
+/* ---- Banner Quick Launch Popular Chips ---- */
+.banner-quick-launch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+.quick-launch-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-right: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bql-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.65rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.bql-chip:hover {
+  border-color: var(--color-primary);
+  background: var(--color-surface-hover, rgba(37, 99, 235, 0.08));
+  transform: translateY(-1px);
+  color: var(--color-primary);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+.bql-icon {
+  font-size: 0.88rem;
+}
+.bql-pill {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.bql-pill.teal { background: rgba(20, 184, 166, 0.15); color: #0d9488; }
+.bql-pill.green { background: rgba(16, 185, 129, 0.15); color: #059669; }
+.bql-pill.red { background: rgba(239, 68, 68, 0.15); color: #dc2626; }
+.bql-pill.blue { background: rgba(59, 130, 246, 0.15); color: #2563eb; }
+
+.sb-popular-bottom {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Compact Tool Tiles */
 .tool-card-glossy {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -5035,12 +5098,12 @@ body.is-embedded .portal-main-area {
 }
 body.is-embedded .tool-page,
 body.is-embedded .tool-container,
-body.is-embedded .sejda-suite-container,
+body.is-embedded .sejda-suite-container, .pdf-suite-suite-container,
 body.is-embedded .container {
   padding-top: 0.5rem !important;
   max-width: 1200px !important;
 }
-body.is-embedded .sejda-hero {
+body.is-embedded .sejda-hero, .pdf-suite-hero {
   padding: 1.25rem 1rem 1rem !important;
   margin-bottom: 1rem !important;
 }
@@ -6004,17 +6067,17 @@ ins.adsbygoogle iframe + .ad-placeholder {
 /* ========================================================
    SEJDA REPLICA PDF STUDIO & CLEAN COMPONENT SUITE
    Neat, clean, clearly visible components with crisp borders,
-   signature Sejda teal accents, and high readability.
+   signature PDF Studio teal accents, and high readability.
    ======================================================== */
 
-.sejda-suite-container {
+.sejda-suite-container, .pdf-suite-suite-container {
   max-width: 1240px;
   margin: 0 auto;
   padding: 1.5rem 1rem 3.5rem;
 }
 
-/* Sejda Hero & Discovery Header */
-.sejda-hero {
+/* PDF Studio Hero & Discovery Header */
+.sejda-hero, .pdf-suite-hero {
   text-align: center;
   padding: 2.5rem 1.5rem 2rem;
   background: var(--color-surface);
@@ -6023,7 +6086,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   margin-bottom: 2rem;
   position: relative;
 }
-.sejda-hero-badge {
+.sejda-hero-badge, .pdf-suite-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -6038,7 +6101,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   letter-spacing: 0.04em;
   margin-bottom: 1rem;
 }
-.sejda-hero h1 {
+.sejda-hero, .pdf-suite-hero h1 {
   font-size: 2.35rem;
   font-weight: 800;
   color: var(--color-text);
@@ -6046,7 +6109,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   line-height: 1.25;
   margin-bottom: 0.65rem;
 }
-.sejda-hero p {
+.sejda-hero, .pdf-suite-hero p {
   font-size: 1.05rem;
   color: var(--color-text-secondary);
   max-width: 680px;
@@ -6054,13 +6117,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
   line-height: 1.5;
 }
 
-/* Sejda Search Bar */
-.sejda-search-wrap {
+/* PDF Studio Search Bar */
+.sejda-search-wrap, .pdf-suite-search-wrap {
   max-width: 540px;
   margin: 0 auto 1.5rem;
   position: relative;
 }
-.sejda-search-input {
+.sejda-search-input, .pdf-suite-search-input {
   width: 100%;
   padding: 0.85rem 1.25rem 0.85rem 2.85rem;
   border: 2px solid var(--color-border);
@@ -6071,12 +6134,12 @@ ins.adsbygoogle iframe + .ad-placeholder {
   transition: all 0.2s ease;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
-.sejda-search-input:focus {
+.sejda-search-input, .pdf-suite-search-input:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 4px rgba(13, 122, 130, 0.15);
 }
-.sejda-search-icon {
+.sejda-search-icon, .pdf-suite-search-icon {
   position: absolute;
   left: 1.1rem;
   top: 50%;
@@ -6087,14 +6150,14 @@ ins.adsbygoogle iframe + .ad-placeholder {
 }
 
 /* Category Filter Tabs */
-.sejda-category-tabs {
+.sejda-category-tabs, .pdf-suite-category-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
   margin-bottom: 2rem;
 }
-.sejda-tab-btn {
+.sejda-tab-btn, .pdf-suite-tab-btn {
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   padding: 0.5rem 1.1rem;
@@ -6108,27 +6171,27 @@ ins.adsbygoogle iframe + .ad-placeholder {
   align-items: center;
   gap: 0.4rem;
 }
-.sejda-tab-btn:hover {
+.sejda-tab-btn, .pdf-suite-tab-btn:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   background: var(--color-primary-light);
   transform: translateY(-1px);
 }
-.sejda-tab-btn.active {
+.sejda-tab-btn, .pdf-suite-tab-btn.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #FFFFFF !important;
   box-shadow: 0 4px 10px rgba(13, 122, 130, 0.25);
 }
 
-/* Sejda Tools Grid (Compact & Dense) */
-.sejda-grid {
+/* PDF Studio Tools Grid (Compact & Dense) */
+.sejda-grid, .pdf-suite-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 0.85rem;
   margin-bottom: 2rem;
 }
-.sejda-tool-card {
+.sejda-tool-card, .pdf-suite-tool-card {
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -6142,18 +6205,18 @@ ins.adsbygoogle iframe + .ad-placeholder {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
-.sejda-tool-card:hover {
+.sejda-tool-card, .pdf-suite-tool-card:hover {
   transform: translateY(-3px);
   border-color: var(--color-primary);
   box-shadow: 0 10px 22px rgba(13, 122, 130, 0.12);
 }
-.sejda-card-top {
+.sejda-card-top, .pdf-suite-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
-.sejda-card-icon {
+.sejda-card-icon, .pdf-suite-card-icon {
   width: 36px;
   height: 36px;
   border-radius: 8px;
@@ -6165,7 +6228,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   font-size: 1.2rem;
   border: 1px solid rgba(13, 122, 130, 0.18);
 }
-.sejda-card-badge {
+.sejda-card-badge, .pdf-suite-card-badge {
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -6175,19 +6238,19 @@ ins.adsbygoogle iframe + .ad-placeholder {
   color: #15803D;
   border: 1px solid #86EFAC;
 }
-.sejda-card-badge.popular {
+.sejda-card-badge, .pdf-suite-card-badge.popular {
   background: #FEF3C7;
   color: #B45309;
   border-color: #FCD34D;
 }
-.sejda-tool-card h3 {
+.sejda-tool-card, .pdf-suite-tool-card h3 {
   font-size: 0.96rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.2rem;
   line-height: 1.3;
 }
-.sejda-tool-card p {
+.sejda-tool-card, .pdf-suite-tool-card p {
   font-size: 0.81rem;
   color: var(--color-text-secondary);
   line-height: 1.4;
@@ -6198,7 +6261,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.sejda-card-footer {
+.sejda-card-footer, .pdf-suite-card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6208,21 +6271,21 @@ ins.adsbygoogle iframe + .ad-placeholder {
   font-weight: 600;
   color: var(--color-primary);
 }
-.sejda-card-launch-btn {
+.sejda-card-launch-btn, .pdf-suite-card-launch-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   color: var(--color-primary);
   transition: transform 0.2s ease;
 }
-.sejda-tool-card:hover .sejda-card-launch-btn {
+.sejda-tool-card, .pdf-suite-tool-card:hover .sejda-card-launch-btn, .pdf-suite-card-launch-btn {
   transform: translateX(4px);
 }
 
 /* ========================================================
    SEJDA INTERACTIVE WORKSPACE (ACTIVE TOOL VIEW)
    ======================================================== */
-.sejda-workspace {
+.sejda-workspace, .pdf-suite-workspace {
   display: none;
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
@@ -6232,7 +6295,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   margin-bottom: 2.5rem;
   animation: sejdaFadeIn 0.25s ease forwards;
 }
-.sejda-workspace.active {
+.sejda-workspace, .pdf-suite-workspace.active {
   display: block;
 }
 @keyframes sejdaFadeIn {
@@ -6240,7 +6303,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.sejda-workspace-topbar {
+.sejda-workspace-topbar, .pdf-suite-workspace-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6250,7 +6313,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   padding-bottom: 1.25rem;
   border-bottom: 1.5px solid var(--color-border);
 }
-.sejda-back-btn {
+.sejda-back-btn, .pdf-suite-back-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -6264,12 +6327,12 @@ ins.adsbygoogle iframe + .ad-placeholder {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.sejda-back-btn:hover {
+.sejda-back-btn, .pdf-suite-back-btn:hover {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
   color: var(--color-primary);
 }
-.sejda-workspace-nav-row {
+.sejda-workspace-nav-row, .pdf-suite-workspace-nav-row {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -6322,19 +6385,19 @@ ins.adsbygoogle iframe + .ad-placeholder {
 .suite-pill-label {
   line-height: 1.2;
 }
-.sejda-workspace-title-group h2 {
+.sejda-workspace-title-group, .pdf-suite-workspace-title-group h2 {
   font-size: 1.65rem;
   font-weight: 800;
   color: var(--color-text);
   margin-bottom: 0.25rem;
 }
-.sejda-workspace-title-group p {
+.sejda-workspace-title-group, .pdf-suite-workspace-title-group p {
   font-size: 0.92rem;
   color: var(--color-text-secondary);
 }
 
-/* Sejda Signature Dropzone */
-.sejda-dropzone {
+/* PDF Studio Signature Dropzone */
+.sejda-dropzone, .pdf-suite-dropzone {
   border: 2.5px dashed var(--color-border-hover);
   background: rgba(13, 122, 130, 0.03);
   border-radius: 14px;
@@ -6345,19 +6408,19 @@ ins.adsbygoogle iframe + .ad-placeholder {
   position: relative;
   margin-bottom: 1.75rem;
 }
-.sejda-dropzone:hover,
-.sejda-dropzone.drag-over {
+.sejda-dropzone, .pdf-suite-dropzone:hover,
+.sejda-dropzone, .pdf-suite-dropzone.drag-over {
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   transform: scale(1.005);
 }
-.sejda-dropzone-icon {
+.sejda-dropzone-icon, .pdf-suite-dropzone-icon {
   font-size: 3.5rem;
   color: var(--color-primary);
   margin-bottom: 1rem;
   display: block;
 }
-.sejda-upload-btn-pill {
+.sejda-upload-btn-pill, .pdf-suite-upload-btn-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6374,17 +6437,17 @@ ins.adsbygoogle iframe + .ad-placeholder {
   transition: all 0.2s ease;
   margin-bottom: 0.85rem;
 }
-.sejda-upload-btn-pill:hover {
+.sejda-upload-btn-pill, .pdf-suite-upload-btn-pill:hover {
   background: #08545A;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(13, 122, 130, 0.4);
 }
-.sejda-dropzone-hint {
+.sejda-dropzone-hint, .pdf-suite-dropzone-hint {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   margin-bottom: 0.65rem;
 }
-.sejda-privacy-badge {
+.sejda-privacy-badge, .pdf-suite-privacy-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -6397,7 +6460,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
 }
 
 /* File Loaded Information Strip */
-.sejda-file-strip {
+.sejda-file-strip, .pdf-suite-file-strip {
   display: none;
   align-items: center;
   justify-content: space-between;
@@ -6409,34 +6472,34 @@ ins.adsbygoogle iframe + .ad-placeholder {
   padding: 0.9rem 1.25rem;
   margin-bottom: 1.5rem;
 }
-.sejda-file-strip.active {
+.sejda-file-strip, .pdf-suite-file-strip.active {
   display: flex;
 }
-.sejda-file-meta {
+.sejda-file-meta, .pdf-suite-file-meta {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
-.sejda-file-meta-icon {
+.sejda-file-meta-icon, .pdf-suite-file-meta-icon {
   font-size: 1.6rem;
 }
-.sejda-file-meta-name {
+.sejda-file-meta-name, .pdf-suite-file-meta-name {
   font-weight: 700;
   color: var(--color-text);
   font-size: 0.95rem;
 }
-.sejda-file-meta-stats {
+.sejda-file-meta-stats, .pdf-suite-file-meta-stats {
   font-size: 0.82rem;
   color: var(--color-text-secondary);
 }
-.sejda-strip-actions {
+.sejda-strip-actions, .pdf-suite-strip-actions {
   display: flex;
   align-items: center;
   gap: 0.65rem;
 }
 
-/* Sejda Action Pill Buttons */
-.sejda-btn-primary {
+/* PDF Studio Action Pill Buttons */
+.sejda-btn-primary, .pdf-suite-btn-primary {
   background: var(--color-primary);
   color: #FFFFFF !important;
   font-weight: 700;
@@ -6451,12 +6514,12 @@ ins.adsbygoogle iframe + .ad-placeholder {
   transition: all 0.2s ease;
   box-shadow: 0 4px 12px rgba(13, 122, 130, 0.25);
 }
-.sejda-btn-primary:hover {
+.sejda-btn-primary, .pdf-suite-btn-primary:hover {
   background: var(--color-primary-hover);
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(13, 122, 130, 0.35);
 }
-.sejda-btn-secondary {
+.sejda-btn-secondary, .pdf-suite-btn-secondary {
   background: var(--color-surface);
   color: var(--color-text);
   border: 1.5px solid var(--color-border);
@@ -6470,7 +6533,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   gap: 0.4rem;
   transition: all 0.2s ease;
 }
-.sejda-btn-secondary:hover {
+.sejda-btn-secondary, .pdf-suite-btn-secondary:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
   background: var(--color-primary-light);
@@ -6479,7 +6542,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
 /* ========================================================
    SEJDA PDF EDITOR WORKSPACE COMPONENTS
    ======================================================== */
-.sejda-editor-toolbar {
+.sejda-editor-toolbar, .pdf-suite-editor-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6495,13 +6558,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
   top: 10px;
   z-index: 100;
 }
-.sejda-toolbar-group {
+.sejda-toolbar-group, .pdf-suite-toolbar-group {
   display: flex;
   align-items: center;
   gap: 0.35rem;
   flex-wrap: wrap;
 }
-.sejda-tool-btn {
+.sejda-tool-btn, .pdf-suite-tool-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -6515,17 +6578,17 @@ ins.adsbygoogle iframe + .ad-placeholder {
   cursor: pointer;
   transition: all 0.18s ease;
 }
-.sejda-tool-btn:hover {
+.sejda-tool-btn, .pdf-suite-tool-btn:hover {
   background: var(--color-bg);
   color: var(--color-primary);
 }
-.sejda-tool-btn.active {
+.sejda-tool-btn, .pdf-suite-tool-btn.active {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
   color: var(--color-primary);
   font-weight: 700;
 }
-.sejda-toolbar-divider {
+.sejda-toolbar-divider, .pdf-suite-toolbar-divider {
   width: 1px;
   height: 24px;
   background: var(--color-border);
@@ -6533,7 +6596,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
 }
 
 /* Editor Stage & Canvas */
-.sejda-viewport-container {
+.sejda-viewport-container, .pdf-suite-viewport-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6545,14 +6608,14 @@ ins.adsbygoogle iframe + .ad-placeholder {
   overflow: auto;
   position: relative;
 }
-.sejda-canvas-wrapper {
+.sejda-canvas-wrapper, .pdf-suite-canvas-wrapper {
   position: relative;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   background: #FFFFFF;
   margin: 0 auto;
   cursor: crosshair;
 }
-.sejda-overlay-layer {
+.sejda-overlay-layer, .pdf-suite-overlay-layer {
   position: absolute;
   top: 0;
   left: 0;
@@ -6560,13 +6623,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
   height: 100%;
   pointer-events: auto;
 }
-.sejda-annotation-item {
+.sejda-annotation-item, .pdf-suite-annotation-item {
   position: absolute;
   cursor: move;
   user-select: none;
   padding: 2px 4px;
 }
-.sejda-annotation-text {
+.sejda-annotation-text, .pdf-suite-annotation-text {
   outline: 1px dashed rgba(13, 122, 130, 0.6);
   background: rgba(255, 255, 255, 0.85);
   border-radius: 3px;
@@ -6574,20 +6637,20 @@ ins.adsbygoogle iframe + .ad-placeholder {
   min-height: 20px;
   display: inline-block;
 }
-.sejda-annotation-text:focus {
+.sejda-annotation-text, .pdf-suite-annotation-text:focus {
   outline: 2px solid var(--color-primary);
   background: #FFFFFF;
 }
-.sejda-whiteout-box {
+.sejda-whiteout-box, .pdf-suite-whiteout-box {
   background: #FFFFFF;
   border: 1px dashed #CBD5E1;
 }
-.sejda-blackout-box {
+.sejda-blackout-box, .pdf-suite-blackout-box {
   background: #000000;
 }
 
 /* Page Navigation Strip */
-.sejda-page-nav {
+.sejda-page-nav, .pdf-suite-page-nav {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -6598,7 +6661,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   font-size: 0.84rem;
   font-weight: 600;
 }
-.sejda-page-nav button {
+.sejda-page-nav, .pdf-suite-page-nav button {
   background: transparent;
   border: none;
   cursor: pointer;
@@ -6607,7 +6670,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   padding: 0.1rem 0.35rem;
   border-radius: 4px;
 }
-.sejda-page-nav button:hover {
+.sejda-page-nav, .pdf-suite-page-nav button:hover {
   background: var(--color-bg);
   color: var(--color-primary);
 }
@@ -6615,13 +6678,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
 /* ========================================================
    SEJDA PAGE GRID (ORGANIZE, ROTATE, DELETE)
    ======================================================== */
-.sejda-page-grid {
+.sejda-page-grid, .pdf-suite-page-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 1.25rem;
   margin: 1.5rem 0 2rem;
 }
-.sejda-page-card {
+.sejda-page-card, .pdf-suite-page-card {
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -6633,17 +6696,17 @@ ins.adsbygoogle iframe + .ad-placeholder {
   transition: all 0.2s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
-.sejda-page-card:hover {
+.sejda-page-card, .pdf-suite-page-card:hover {
   border-color: var(--color-primary);
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(13, 122, 130, 0.1);
 }
-.sejda-page-card.deleted {
+.sejda-page-card, .pdf-suite-page-card.deleted {
   opacity: 0.35;
   filter: grayscale(1);
   border-style: dashed;
 }
-.sejda-page-thumb-holder {
+.sejda-page-thumb-holder, .pdf-suite-page-thumb-holder {
   width: 100%;
   aspect-ratio: 1 / 1.414;
   background: #F1F5F9;
@@ -6656,13 +6719,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
   margin-bottom: 0.65rem;
   position: relative;
 }
-.sejda-page-thumb-holder canvas {
+.sejda-page-thumb-holder, .pdf-suite-page-thumb-holder canvas {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
-.sejda-page-badge {
+.sejda-page-badge, .pdf-suite-page-badge {
   position: absolute;
   top: 6px;
   left: 6px;
@@ -6673,14 +6736,14 @@ ins.adsbygoogle iframe + .ad-placeholder {
   padding: 0.15rem 0.5rem;
   border-radius: 12px;
 }
-.sejda-page-actions {
+.sejda-page-actions, .pdf-suite-page-actions {
   display: flex;
   align-items: center;
   gap: 0.35rem;
   width: 100%;
   justify-content: center;
 }
-.sejda-page-action-btn {
+.sejda-page-action-btn, .pdf-suite-page-action-btn {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-text);
@@ -6694,12 +6757,12 @@ ins.adsbygoogle iframe + .ad-placeholder {
   font-size: 0.9rem;
   transition: all 0.15s ease;
 }
-.sejda-page-action-btn:hover {
+.sejda-page-action-btn, .pdf-suite-page-action-btn:hover {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
   color: var(--color-primary);
 }
-.sejda-page-action-btn.btn-delete:hover {
+.sejda-page-action-btn, .pdf-suite-page-action-btn.btn-delete:hover {
   background: #FEE2E2;
   border-color: #EF4444;
   color: #EF4444;
@@ -6708,13 +6771,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
 /* ========================================================
    SEJDA MERGE QUEUE
    ======================================================== */
-.sejda-merge-list {
+.sejda-merge-list, .pdf-suite-merge-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   margin: 1.5rem 0;
 }
-.sejda-merge-item {
+.sejda-merge-item, .pdf-suite-merge-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6725,20 +6788,20 @@ ins.adsbygoogle iframe + .ad-placeholder {
   gap: 1rem;
   transition: all 0.2s ease;
 }
-.sejda-merge-item:hover {
+.sejda-merge-item, .pdf-suite-merge-item:hover {
   border-color: var(--color-primary);
 }
-.sejda-merge-item-info {
+.sejda-merge-item-info, .pdf-suite-merge-item-info {
   display: flex;
   align-items: center;
   gap: 0.85rem;
 }
-.sejda-merge-item-title {
+.sejda-merge-item-title, .pdf-suite-merge-item-title {
   font-weight: 700;
   font-size: 0.92rem;
   color: var(--color-text);
 }
-.sejda-merge-item-stats {
+.sejda-merge-item-stats, .pdf-suite-merge-item-stats {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
 }
@@ -6746,13 +6809,13 @@ ins.adsbygoogle iframe + .ad-placeholder {
 /* ========================================================
    SEJDA COMPRESS & OPTION CARDS
    ======================================================== */
-.sejda-options-grid {
+.sejda-options-grid, .pdf-suite-options-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin: 1.5rem 0;
 }
-.sejda-option-card {
+.sejda-option-card, .pdf-suite-option-card {
   border: 2px solid var(--color-border);
   background: var(--color-surface);
   border-radius: var(--radius-md);
@@ -6761,28 +6824,28 @@ ins.adsbygoogle iframe + .ad-placeholder {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.sejda-option-card:hover {
+.sejda-option-card, .pdf-suite-option-card:hover {
   border-color: var(--color-primary);
   background: var(--color-primary-light);
 }
-.sejda-option-card.selected {
+.sejda-option-card, .pdf-suite-option-card.selected {
   border-color: var(--color-primary);
   background: var(--color-primary-light);
   box-shadow: 0 4px 14px rgba(13, 122, 130, 0.15);
 }
-.sejda-option-card h4 {
+.sejda-option-card, .pdf-suite-option-card h4 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.35rem;
 }
-.sejda-option-card p {
+.sejda-option-card, .pdf-suite-option-card p {
   font-size: 0.82rem;
   color: var(--color-text-secondary);
 }
 
 /* Signature Modal */
-.sejda-modal {
+.sejda-modal, .pdf-suite-modal {
   display: none;
   position: fixed;
   top: 0;
@@ -6796,10 +6859,10 @@ ins.adsbygoogle iframe + .ad-placeholder {
   justify-content: center;
   padding: 1rem;
 }
-.sejda-modal.active {
+.sejda-modal, .pdf-suite-modal.active {
   display: flex;
 }
-.sejda-modal-dialog {
+.sejda-modal-dialog, .pdf-suite-modal-dialog {
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -6813,29 +6876,29 @@ ins.adsbygoogle iframe + .ad-placeholder {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
-.sejda-modal-header {
+.sejda-modal-header, .pdf-suite-modal-header {
   padding: 1.25rem 1.5rem;
   border-bottom: 1.5px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.sejda-modal-header h3 {
+.sejda-modal-header, .pdf-suite-modal-header h3 {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--color-text);
 }
-.sejda-modal-close {
+.sejda-modal-close, .pdf-suite-modal-close {
   background: transparent;
   border: none;
   font-size: 1.35rem;
   color: var(--color-text-muted);
   cursor: pointer;
 }
-.sejda-modal-body {
+.sejda-modal-body, .pdf-suite-modal-body {
   padding: 1.5rem;
 }
-.sejda-sig-canvas {
+.sejda-sig-canvas, .pdf-suite-sig-canvas {
   width: 100%;
   height: 180px;
   background: #FFFFFF;
@@ -6843,7 +6906,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
   border-radius: 8px;
   cursor: crosshair;
 }
-.sejda-modal-footer {
+.sejda-modal-footer, .pdf-suite-modal-footer {
   padding: 1rem 1.5rem;
   border-top: 1.5px solid var(--color-border);
   display: flex;
@@ -6853,7 +6916,7 @@ ins.adsbygoogle iframe + .ad-placeholder {
 }
 
 /* Result / Output Card */
-.sejda-result-card {
+.sejda-result-card, .pdf-suite-result-card {
   background: #F0FDF4;
   border: 1.5px solid #86EFAC;
   border-radius: var(--radius-md);
@@ -6862,26 +6925,26 @@ ins.adsbygoogle iframe + .ad-placeholder {
   margin: 1.5rem 0;
   display: none;
 }
-.sejda-result-card.active {
+.sejda-result-card, .pdf-suite-result-card.active {
   display: block;
 }
-.sejda-result-title {
+.sejda-result-title, .pdf-suite-result-title {
   font-size: 1.25rem;
   font-weight: 800;
   color: #166534;
   margin-bottom: 0.5rem;
 }
-.sejda-result-stats {
+.sejda-result-stats, .pdf-suite-result-stats {
   font-size: 0.9rem;
   color: #15803D;
   margin-bottom: 1.25rem;
 }
 
 @media (max-width: 768px) {
-  .sejda-hero h1 { font-size: 1.85rem; }
-  .sejda-grid { grid-template-columns: 1fr; }
-  .sejda-workspace { padding: 1.25rem 1rem; }
-  .sejda-editor-toolbar { justify-content: center; }
+  .sejda-hero, .pdf-suite-hero h1 { font-size: 1.85rem; }
+  .sejda-grid, .pdf-suite-grid { grid-template-columns: 1fr; }
+  .sejda-workspace, .pdf-suite-workspace { padding: 1.25rem 1rem; }
+  .sejda-editor-toolbar, .pdf-suite-editor-toolbar { justify-content: center; }
 }
 
 
