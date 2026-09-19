@@ -64,25 +64,42 @@
 
   let toastTimer = null;
 
-  function showThemeToast(themeName) {
-    const toastEls = document.querySelectorAll('.theme-toast');
-    if (toastEls.length === 0) return;
+  function showThemeToast(themeName, index, total) {
+    let toastEls = document.querySelectorAll('.theme-toast');
+    if (toastEls.length === 0) {
+      const wrap = document.querySelector('.theme-cycle-wrap');
+      const newToast = document.createElement('div');
+      newToast.className = 'theme-toast';
+      newToast.setAttribute('role', 'status');
+      newToast.setAttribute('aria-live', 'polite');
+      if (wrap) {
+        wrap.appendChild(newToast);
+      } else {
+        document.body.appendChild(newToast);
+      }
+      toastEls = [newToast];
+    }
+
+    const label = (index !== undefined && total !== undefined)
+      ? `Theme (${index + 1}/${total}): ${themeName}`
+      : `Theme: ${themeName}`;
 
     toastEls.forEach(toast => {
-      toast.textContent = 'Theme: ' + themeName;
+      toast.textContent = label;
       toast.classList.add('visible');
     });
 
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       toastEls.forEach(toast => toast.classList.remove('visible'));
-    }, 1350);
+    }, 1500);
   }
 
   function applyTheme(themeId, triggerToast = false, isUserAction = false) {
     if (THEME_ALIASES[themeId]) themeId = THEME_ALIASES[themeId];
     const themeObj = THEMES.find(t => t.id === themeId) || THEMES.find(t => t.id === DEFAULT_THEME) || THEMES[0];
     const resolvedId = themeObj.id;
+    const themeIndex = THEMES.findIndex(t => t.id === resolvedId);
 
     document.documentElement.setAttribute('data-theme', resolvedId);
     
@@ -95,13 +112,24 @@
     }
 
     // Update all theme buttons title and aria-labels
-    document.querySelectorAll('.theme-cycle-btn').forEach(btn => {
-      btn.setAttribute('title', 'Theme: ' + themeObj.name + ' (Click or Shift+T to cycle)');
-      btn.setAttribute('aria-label', 'Theme: ' + themeObj.name + '. Click to cycle theme.');
+    document.querySelectorAll('.theme-cycle-btn, .theme-toggle-btn').forEach(btn => {
+      const idxText = themeIndex >= 0 ? ` (${themeIndex + 1}/${THEMES.length})` : '';
+      btn.setAttribute('title', `Theme: ${themeObj.name}${idxText} (Click or Shift+T to cycle)`);
+      btn.setAttribute('aria-label', `Theme: ${themeObj.name}${idxText}. Click to cycle theme.`);
+    });
+
+    // Update theme dropdown active option if present
+    document.querySelectorAll('.theme-option-item').forEach(item => {
+      const optTheme = item.getAttribute('data-theme');
+      if (optTheme === resolvedId || THEME_ALIASES[optTheme] === resolvedId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
     });
 
     if (triggerToast) {
-      showThemeToast(themeObj.name);
+      showThemeToast(themeObj.name, themeIndex, THEMES.length);
     }
 
     // Propagate to iframe if present
@@ -109,6 +137,13 @@
     if (toolIframe && toolIframe.contentDocument) {
       try {
         toolIframe.contentDocument.documentElement.setAttribute('data-theme', resolvedId);
+      } catch (e) {}
+    }
+
+    // If embedded in an iframe, notify top window as well
+    if (window.self !== window.top) {
+      try {
+        window.top.postMessage({ type: 'TOOLSKART_THEME_CHANGE', themeId: resolvedId }, '*');
       } catch (e) {}
     }
   }
@@ -148,13 +183,24 @@
     document.body.classList.add('is-embedded');
   }
 
-  // Theme Cycle Button listener (Single Icon ◐)
+  // Theme Cycle Button listener (Single Icon ◐, toggle buttons, and dropdown options)
   document.addEventListener('click', (e) => {
-    const cycleBtn = e.target.closest('.theme-cycle-btn');
+    const cycleBtn = e.target.closest('.theme-cycle-btn, .theme-toggle-btn, [data-action="cycle-theme"]');
     if (cycleBtn) {
       e.preventDefault();
       e.stopPropagation();
       cycleTheme();
+      return;
+    }
+
+    const themeItem = e.target.closest('.theme-option-item');
+    if (themeItem) {
+      e.preventDefault();
+      const targetTheme = themeItem.getAttribute('data-theme');
+      if (targetTheme) {
+        applyTheme(targetTheme, true, true);
+      }
+      return;
     }
   });
 
@@ -168,6 +214,25 @@
       }
     }
   });
+
+  // Cross-tab synchronization via storage event
+  window.addEventListener('storage', (e) => {
+    if (e.key === THEME_KEY && e.newValue) {
+      applyTheme(e.newValue, false, false);
+    }
+  });
+
+  // Cross-frame synchronization via postMessage
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'TOOLSKART_THEME_CHANGE' && event.data.themeId) {
+      applyTheme(event.data.themeId, false, false);
+    }
+  });
+
+  // Expose global methods for tool panels or external controls
+  window.cycleTheme = cycleTheme;
+  window.applyTheme = applyTheme;
+  window.THEMES = THEMES;
 
   const dynamicWords = [
     { text: "100% Secure", color: "#34D399", bg: "rgba(16, 185, 129, 0.15)", border: "rgba(16, 185, 129, 0.45)" },
