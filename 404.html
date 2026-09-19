@@ -24,28 +24,28 @@
                 'percentage-calculator', 'word-counter', 'case-converter', 'lorem-ipsum',
                 'slug-generator', 'json-formatter', 'base64-tool', 'image-resizer',
                 'image-compressor', 'color-picker', 'url-encoder', 'regex-tester',
-                'meta-tag-generator'
+                'meta-tag-generator', 'support', 'about', 'terms', 'privacy-policy'
             ];
 
             // Extract potential slug from path (e.g. /split, /pages/split.html, /merge/)
             var cleanPath = path.replace(/\.html$/, '').replace(/^\/+|\/+$/g, '');
             var segments = cleanPath.split('/');
             var lastSegment = segments[segments.length - 1];
+            var basePath = path.indexOf('/pages/') !== -1 
+                ? path.substring(0, path.indexOf('/pages/')) + '/'
+                : './';
 
             // If path contains a known tool slug, redirect immediately into the portal workstation
             if (knownTools.indexOf(lastSegment) !== -1) {
-                var basePath = path.indexOf('/pages/') !== -1 
-                    ? path.substring(0, path.indexOf('/pages/')) + '/'
-                    : '/';
                 window.location.replace(basePath + 'index.html#' + lastSegment);
                 return;
             }
 
-            // If hash is present (e.g. #split), redirect to index.html with the hash
+            // If hash is present (e.g. #split or #support), redirect to index.html with the hash
             if (hash && hash.length > 1) {
                 var hashSlug = hash.replace('#', '').trim();
                 if (knownTools.indexOf(hashSlug) !== -1) {
-                    window.location.replace('index.html#' + hashSlug);
+                    window.location.replace(basePath + 'index.html#' + hashSlug);
                     return;
                 }
             }
@@ -153,13 +153,23 @@
                 The requested URL does not exist or has been moved. All PDF tools have been unified inside the <strong>PDF Document Studio</strong> workspace.
             </p>
             <div class="error-actions">
-                <a href="index.html" class="btn-home">
+                <a href="index.html" class="btn-home" id="btnErrHome">
                     <span>🏠</span> Return to Tools Dashboard
                 </a>
-                <a href="index.html#pdf-tools" class="btn-home" style="background:#0D7A82;">
+                <a href="index.html#pdf-tools" class="btn-home" id="btnErrPdf" style="background:#0D7A82;">
                     <span>⚡</span> Open PDF Document Studio
                 </a>
             </div>
+            <script>
+                (function() {
+                    if (window.location.pathname.indexOf('/pages/') !== -1) {
+                        var h = document.getElementById('btnErrHome');
+                        if (h) h.href = '../index.html';
+                        var p = document.getElementById('btnErrPdf');
+                        if (p) p.href = '../index.html#pdf-tools';
+                    }
+                })();
+            </script>
 
             <div style="text-align:left;">
                 <h3 style="font-size: 1rem; font-weight:600; color:var(--color-text-secondary, #64748b);">Quick Access to Popular Tools:</h3>

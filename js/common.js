@@ -852,7 +852,13 @@
 
     // Target URL for iframe
     let targetUrl = fullUrl || tool.url;
-    if (!targetUrl.startsWith('http') && !targetUrl.startsWith('pages/') && !['terms.html', 'privacy-policy.html', 'about.html'].includes(targetUrl)) {
+    const rootLevelPages = ['terms.html', 'privacy-policy.html', 'about.html', 'support.html'];
+    if (targetUrl.startsWith('pages/')) {
+      const pageName = targetUrl.replace('pages/', '');
+      if (rootLevelPages.includes(pageName)) {
+        targetUrl = pageName;
+      }
+    } else if (!targetUrl.startsWith('http') && !rootLevelPages.includes(targetUrl)) {
       targetUrl = 'pages/' + targetUrl;
     }
 
@@ -1003,7 +1009,8 @@
             return;
           }
         } catch (err) {}
-        window.top.location.href = '../index.html#' + slug;
+        const isInPages = window.location.pathname.includes('/pages/');
+        window.top.location.href = (isInPages ? '../index.html#' : 'index.html#') + slug;
       }
     }
   });
