@@ -1,4 +1,9 @@
-/**
+/*!
+ * Amazing-Tools — https://amazing-tools.github.io/
+ * Copyright (c) 2024-2026 Amazing-Tools (tonymagical09@gmail.com)
+ * Licensed under CC BY-NC 4.0 — Non-commercial use only.
+ * Commercial use requires written permission. See LICENSE file.
+ *//**
  * Amazing-Tools — Portal Features Module
  * Handles: Recently Used, What's New strip, Command Palette (Ctrl+K),
  *          Feedback/Rating FAB, Tool Ratings (localStorage), Tool Request form

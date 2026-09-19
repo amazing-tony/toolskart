@@ -730,6 +730,9 @@
   --sidebar-input-bg: var(--theme-surface);
   --sidebar-input-border: var(--theme-border);
   --sidebar-box-bg: var(--theme-surface-alt);
+  --sidebar-submenu-bg: rgba(255, 255, 255, 0.05);
+  --sidebar-submenu-border: rgba(255, 255, 255, 0.08);
+  --sidebar-parent-active-bg: rgba(255, 255, 255, 0.07);
   --banner-bg: var(--theme-banner-bg);
   --banner-border: var(--theme-banner-border);
   --banner-text: var(--theme-banner-text);
@@ -3052,30 +3055,39 @@ select.input-field option {
   padding-bottom: 0.2rem;
   margin-bottom: 0.1rem;
 }
-[data-theme="theme-01-executive"] .sb-section,
 [data-theme="theme-02-horizon"] .sb-section,
 [data-theme="theme-03-heritage"] .sb-section,
 [data-theme="theme-09-paper"] .sb-section,
 [data-theme="theme-10-studio"] .sb-section,
-[data-theme="executive"] .sb-section,
 [data-theme="horizon"] .sb-section,
 [data-theme="heritage"] .sb-section,
 [data-theme="paper"] .sb-section,
 [data-theme="studio"] .sb-section {
   border-bottom-color: rgba(0,0,0,0.08);
+  --sidebar-submenu-bg: rgba(0, 0, 0, 0.048);
+  --sidebar-submenu-border: rgba(0, 0, 0, 0.085);
+  --sidebar-parent-active-bg: rgba(0, 0, 0, 0.05);
+}
+
+.sb-section.sb-tree {
+  transition: margin 0.2s ease, padding 0.2s ease;
+}
+.sb-section.sb-tree.is-open {
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.2rem;
 }
 
 /* Section label row (static header or accordion toggle) */
 .sb-section-label {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.38rem 0.5rem;
+  gap: 0.35rem;
+  padding: 0.38rem 0.42rem;
   border-radius: var(--radius-sm);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--sidebar-text);
   cursor: default;
   width: 100%;
@@ -3086,22 +3098,45 @@ select.input-field option {
 }
 button.sb-section-label {
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  border-left: 3px solid transparent;
 }
 button.sb-section-label:hover {
   background: rgba(255,255,255,0.06);
 }
-[data-theme="theme-01-executive"] button.sb-section-label:hover,
 [data-theme="theme-02-horizon"] button.sb-section-label:hover,
 [data-theme="theme-03-heritage"] button.sb-section-label:hover,
 [data-theme="theme-09-paper"] button.sb-section-label:hover,
 [data-theme="theme-10-studio"] button.sb-section-label:hover,
-[data-theme="executive"] button.sb-section-label:hover,
 [data-theme="horizon"] button.sb-section-label:hover,
 [data-theme="heritage"] button.sb-section-label:hover,
 [data-theme="paper"] button.sb-section-label:hover,
 [data-theme="studio"] button.sb-section-label:hover {
   background: rgba(0,0,0,0.05);
+}
+
+/* Active / expanded parent header (visually indicates which parent is open) */
+button.sb-section-label.sb-tree-toggle[aria-expanded="true"],
+.sb-section.sb-tree.is-open > button.sb-section-label.sb-tree-toggle {
+  background: var(--sidebar-parent-active-bg, rgba(255, 255, 255, 0.08));
+  border-left-color: var(--color-primary, #2563EB);
+  color: var(--color-primary, #2563EB);
+  border-radius: var(--radius-sm);
+}
+button.sb-section-label.sb-tree-toggle[aria-expanded="true"]:hover,
+.sb-section.sb-tree.is-open > button.sb-section-label.sb-tree-toggle:hover {
+  background: var(--sidebar-parent-active-bg, rgba(255, 255, 255, 0.12));
+}
+button.sb-section-label.sb-tree-toggle[aria-expanded="true"] .sb-label-text,
+.sb-section.sb-tree.is-open > button.sb-section-label.sb-tree-toggle .sb-label-text {
+  color: var(--sidebar-text);
+  font-weight: 800;
+}
+button.sb-section-label.sb-tree-toggle[aria-expanded="true"] .sb-chevron,
+.sb-section.sb-tree.is-open > button.sb-section-label.sb-tree-toggle .sb-chevron {
+  transform: rotate(90deg);
+  color: var(--color-primary, #2563EB);
+  font-weight: 700;
 }
 
 /* Icon in label */
@@ -3116,21 +3151,45 @@ button.sb-section-label:hover {
   font-size: 0.85rem;
   line-height: 1;
   color: var(--sidebar-text-muted);
-  transition: transform 0.22s ease;
+  transition: transform 0.22s ease, color 0.2s ease;
   display: inline-block;
   flex-shrink: 0;
 }
-.sb-tree-toggle[aria-expanded="true"] .sb-chevron {
-  transform: rotate(90deg);
-}
 
-/* Treeview body (collapsed by default) */
+/* Treeview sub-menu panel (collapsed by default) */
 .sb-tree-body {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  margin: 0 0 0 0.65rem;
+  padding: 0 0.35rem 0 0.55rem;
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  border-radius: 0 var(--radius-sm, 6px) var(--radius-sm, 6px) 0;
+  box-sizing: border-box;
+  transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.22s ease,
+              padding 0.22s ease,
+              margin 0.22s ease,
+              background 0.2s ease,
+              border-color 0.2s ease;
+  pointer-events: none;
 }
-.sb-tree-body.is-open { max-height: 900px; }
+
+/* Opened sub-menu panel: shaded, indented with left padding, and vertical accent guide rail */
+.sb-tree-body.is-open {
+  max-height: 1200px;
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 0.22rem;
+  margin-bottom: 0.38rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  background: var(--sidebar-submenu-bg, rgba(255, 255, 255, 0.05));
+  border-color: var(--sidebar-submenu-border, rgba(255, 255, 255, 0.08));
+  border-left-color: var(--color-primary, #2563EB);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
 
 /* Popular section items (always visible, no accordion) */
 .sb-items { display: flex; flex-direction: column; }
@@ -3148,6 +3207,10 @@ button.sb-section-label:hover {
   text-decoration: none;
   transition: background var(--transition), color var(--transition), transform 0.15s ease;
   margin-bottom: 0.06rem;
+}
+.sb-tree-body .sb-item {
+  padding: 0.32rem 0.45rem 0.32rem 0.5rem;
+  margin-bottom: 0.08rem;
 }
 .sb-item:hover {
   background: rgba(255,255,255,0.09);
@@ -3196,15 +3259,15 @@ button.sb-section-label:hover {
 
 /* Section badge (next to category label) */
 .sb-badge {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  padding: 0.08rem 0.38rem;
+  padding: 0.06rem 0.32rem;
   border-radius: var(--radius-full);
   background: rgba(255,255,255,0.18);
   color: var(--sidebar-text);
   flex-shrink: 0;
   white-space: nowrap;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 .sb-badge.hot    { background: #F59E0B; color: #fff !important; }
 .sb-badge.teal   { background: #0D7A82; color: #fff !important; }
@@ -3217,9 +3280,9 @@ button.sb-section-label:hover {
 .sb-children {
   display: flex;
   flex-direction: column;
-  padding-left: 1.2rem;
-  margin: 0.05rem 0 0.3rem 1.05rem;
-  border-left: 1.5px dashed rgba(255,255,255,0.15);
+  padding-left: 0.75rem;
+  margin: 0.08rem 0 0.28rem 0.7rem;
+  border-left: 1.5px dashed rgba(255,255,255,0.18);
 }
 [data-theme="theme-01-executive"] .sb-children,
 [data-theme="theme-02-horizon"] .sb-children,
