@@ -1,1 +1,5 @@
 _backups/
+
+firebase-debug.log
+.firebase/
+firestore.rules
