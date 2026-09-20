@@ -71,6 +71,88 @@ function showAuthModal(errorMessage = '') {
     document.body.appendChild(modal);
   }
 
+  // ── Logged In User View (Google Account or Guest) ─────────────
+  if (currentUser) {
+    const user = currentUser;
+    const isGoogle = !!user.email;
+    const avatarHtml = user.photoURL 
+      ? `<img src="${user.photoURL}" style="width:48px; height:48px; border-radius:50%; object-fit:cover; border:2px solid #3B82F6;" alt="avatar" referrerpolicy="no-referrer">`
+      : `<div style="width:48px; height:48px; border-radius:50%; background:rgba(37,99,235,0.12); display:flex; align-items:center; justify-content:center; font-size:1.6rem; border:2px solid #3B82F6;">${user.photoEmoji || '👤'}</div>`;
+
+    modal.innerHTML = `
+      <div style="background: var(--color-surface, #fff); color: var(--color-text, #1e293b); border: 1px solid var(--color-border, #cbd5e1); border-radius: 14px; max-width: 440px; width: 100%; padding: 1.5rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); font-family: inherit;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 1.25rem;">
+          <h3 style="margin:0; font-size: 1.15rem; display:flex; align-items:center; gap:0.45rem;">
+            <span>👤</span> Account Profile
+          </h3>
+          <button id="closeAuthModalBtn" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:var(--color-text-secondary, #64748b);">✕</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.9rem; padding: 1rem; background: var(--color-bg, #f8fafc); border: 1px solid var(--color-border, #e2e8f0); border-radius: 10px; margin-bottom: 1.25rem;">
+          ${avatarHtml}
+          <div style="flex:1; overflow:hidden;">
+            <div style="font-weight:700; font-size:1rem; color:var(--color-text, #0f172a); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              ${user.displayName || 'Productive User'}
+            </div>
+            <div style="font-size:0.82rem; color:var(--color-text-secondary, #64748b); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+              ${user.email || 'Local Browser Profile'}
+            </div>
+            <span style="display:inline-block; margin-top:0.3rem; font-size:0.7rem; font-weight:700; padding:0.12rem 0.5rem; border-radius:999px; background:${isGoogle ? '#DCFCE7' : '#FEF3C7'}; color:${isGoogle ? '#15803D' : '#B45309'};">
+              ${isGoogle ? '✓ Signed in via Google' : '✓ Guest Profile Active'}
+            </span>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+          <button id="modalSignOutBtn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.7rem 1rem; background: #DC2626; color: #fff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; box-shadow: 0 2px 6px rgba(220,38,38,0.25); transition: all 0.15s ease;">
+            <span>🚪</span> Sign Out / Logout
+          </button>
+          ${!isGoogle ? `
+            <button id="modalSwitchToGoogleBtn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.6rem 1rem; background: #fff; color: #374151; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+              Switch to Google Account
+            </button>
+          ` : ''}
+        </div>
+      </div>
+    `;
+
+    modal.style.display = 'flex';
+
+    const closeBtn = document.getElementById('closeAuthModalBtn');
+    if (closeBtn) closeBtn.onclick = () => { modal.style.display = 'none'; };
+    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    const signOutBtn = document.getElementById('modalSignOutBtn');
+    if (signOutBtn) {
+      signOutBtn.onclick = async () => {
+        signOutBtn.disabled = true;
+        signOutBtn.innerText = 'Signing out…';
+        await signOutUser();
+        modal.style.display = 'none';
+        const toast = document.getElementById('themeToast');
+        if (toast) {
+          toast.textContent = '👋 Signed out successfully!';
+          toast.style.display = 'block';
+          toast.style.opacity = '1';
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.style.display = 'none', 400);
+          }, 3000);
+        }
+      };
+    }
+
+    const switchToGoogle = document.getElementById('modalSwitchToGoogleBtn');
+    if (switchToGoogle) {
+      switchToGoogle.onclick = () => {
+        clearLocalGuestUser();
+        showAuthModal();
+      };
+    }
+    return;
+  }
+
+  // ── Unauthenticated / Sign-In View ────────────────────────────
   const guest = getLocalGuestUser();
   const currentGuestName = guest ? guest.displayName : '';
 
@@ -218,7 +300,7 @@ function updateAuthUI(user) {
       : (user.photoEmoji || '👤');
     if (btn) {
       btn.innerHTML = `${avatar} <span class="auth-btn-label">${label}</span>`;
-      btn.title = `Signed in as ${user.displayName || user.email} — Click to manage account`;
+      btn.title = `Signed in as ${user.displayName || user.email} — Click to view account or Sign Out`;
       btn.onclick = () => showAuthModal();
       btn.style.background = 'rgba(66,133,244,0.12)';
       btn.style.borderColor = '#4285F4';

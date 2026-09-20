@@ -267,6 +267,18 @@
     fab.addEventListener('click', () => {
       panelOpen = !panelOpen;
       panel.style.display = panelOpen ? 'block' : 'none';
+      if (panelOpen) {
+        panel.style.setProperty('background-color', '#ffffff', 'important');
+        panel.style.setProperty('background', 'var(--theme-surface, #ffffff)', 'important');
+        panel.style.setProperty('color', 'var(--theme-text, #1e293b)', 'important');
+        panel.style.setProperty('opacity', '1', 'important');
+        const bodyEl = panel.querySelector('.fp-body');
+        if (bodyEl) {
+          bodyEl.style.setProperty('background-color', '#ffffff', 'important');
+          bodyEl.style.setProperty('background', 'var(--theme-surface, #ffffff)', 'important');
+          bodyEl.style.setProperty('color', 'var(--theme-text, #1e293b)', 'important');
+        }
+      }
       fab.classList.toggle('fab-active', panelOpen);
     });
 

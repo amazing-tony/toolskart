@@ -298,34 +298,192 @@
     initDynamicUspRotator();
   }
 
-  // ---- Smart Header Category Navigation & Direct Filtering ----
-  document.querySelectorAll('.nav-category-link[data-category-target]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetCatId = this.getAttribute('data-category-target');
+  // ---- Global Portal Categories Data ----
+  const PORTAL_CATEGORIES = [
+    {
+      id: 'doc-tools',
+      title: 'Documents',
+      icon: '📄',
+      tools: [
+        { name: 'PDF Studio (14-in-1)', url: 'pdf-tools.html', icon: '⚡' },
+        { name: 'Document Converter', url: 'document-converter.html', icon: '🔄' },
+        { name: 'OCR Image to Text', url: 'ocr-tool.html', icon: '🔍' },
+        { name: 'Invoice Generator', url: 'invoice-generator.html', icon: '🧾' },
+        { name: 'Resume Builder', url: 'resume-builder.html', icon: '💼' },
+        { name: 'Markdown to PDF', url: 'markdown-to-pdf.html', icon: '📋' }
+      ]
+    },
+    {
+      id: 'media-tools',
+      title: 'Media',
+      icon: '🎥',
+      tools: [
+        { name: 'Video Downloader', url: 'video-downloader.html', icon: '📥' },
+        { name: 'Thumbnail Grabber', url: 'youtube-thumbnail.html', icon: '🖼️' },
+        { name: 'Screen Recorder', url: 'screen-recorder.html', icon: '⏺️' },
+        { name: 'Audio Converter', url: 'audio-converter.html', icon: '🎵' }
+      ]
+    },
+    {
+      id: 'calculators',
+      title: 'Finance',
+      icon: '💰',
+      tools: [
+        { name: 'EMI Calculator', url: 'emi-calculator.html', icon: '📊' },
+        { name: 'SIP Calculator', url: 'sip-calculator.html', icon: '🌱' },
+        { name: 'Income Tax Calculator', url: 'income-tax-calculator.html', icon: '🏛️' },
+        { name: 'GST Calculator', url: 'gst-calculator.html', icon: '🧾' },
+        { name: 'Buy vs Rent', url: 'buy-vs-rent-calculator.html', icon: '🏡' },
+        { name: 'Goal Planner', url: 'goal-financial-planner.html', icon: '🎯' },
+        { name: 'SWP & Pension', url: 'swp-annuity-calculator.html', icon: '💵' },
+        { name: 'Compound Interest', url: 'compound-interest.html', icon: '📈' },
+        { name: 'FD Calculator', url: 'fd-calculator.html', icon: '🏛️' },
+        { name: 'RD Calculator', url: 'rd-calculator.html', icon: '💳' },
+        { name: 'Retirement & Gratuity', url: 'retirement-benefits-calculator.html', icon: '👴' },
+        { name: 'Inflation Calculator', url: 'inflation-calculator.html', icon: '📉' },
+        { name: 'Percentage Calculator', url: 'percentage-calculator.html', icon: '🔢' }
+      ]
+    },
+    {
+      id: 'text-tools',
+      title: 'Text',
+      icon: '📝',
+      tools: [
+        { name: 'Word Counter', url: 'word-counter.html', icon: '🔢' },
+        { name: 'Case Converter', url: 'case-converter.html', icon: '🔤' },
+        { name: 'JSON Formatter', url: 'json-formatter.html', icon: '⚡' },
+        { name: 'Base64 Tool', url: 'base64-tool.html', icon: '🔐' },
+        { name: 'Lorem Ipsum', url: 'lorem-ipsum.html', icon: '📄' },
+        { name: 'Slug Generator', url: 'slug-generator.html', icon: '🔗' }
+      ]
+    },
+    {
+      id: 'image-tools',
+      title: 'Images',
+      icon: '🖼️',
+      tools: [
+        { name: 'Image Compressor', url: 'image-compressor.html', icon: '🗜️' },
+        { name: 'Image Resizer', url: 'image-resizer.html', icon: '📐' },
+        { name: 'Color Picker & Palette', url: 'color-picker.html', icon: '🎨' }
+      ]
+    },
+    {
+      id: 'dev-tools',
+      title: 'Dev',
+      icon: '💻',
+      tools: [
+        { name: 'URL Encoder / Decoder', url: 'url-encoder.html', icon: '🌐' },
+        { name: 'Regex Live Tester', url: 'regex-tester.html', icon: '🔍' },
+        { name: 'Meta Tag SEO Generator', url: 'meta-tag-generator.html', icon: '🏷️' }
+      ]
+    },
+    {
+      id: 'global-tools',
+      title: 'Global',
+      icon: '🌍',
+      tools: [
+        { name: 'Unit Converter', url: 'unit-converter.html', icon: '📏' },
+        { name: 'Currency Converter', url: 'currency-converter.html', icon: '💱' },
+        { name: 'QR Code Generator', url: 'qr-generator.html', icon: '▦' },
+        { name: 'Password Generator', url: 'password-generator.html', icon: '🔑' },
+        { name: 'Time Zone Converter', url: 'timezone-converter.html', icon: '🕐' },
+        { name: 'Tip & Bill Splitter', url: 'tip-calculator.html', icon: '🍽️' },
+        { name: 'BMI & Health', url: 'bmi-calculator.html', icon: '⚖️' },
+        { name: 'Markdown Previewer', url: 'markdown-previewer.html', icon: '✍️' }
+      ]
+    }
+  ];
 
-      // If a tool is open, close it so dashboard overview is visible
-      const toolPanel = document.getElementById('toolContentPanel');
-      if (toolPanel && toolPanel.style.display !== 'none') {
-        closeToolPanel();
-      }
+  // ---- Smart Header Category Navigation & Universal Sub-menus ----
+  function initGlobalHeaderNav() {
+    const mainNav = document.getElementById('mainNav');
+    if (!mainNav) return;
 
-      // Trigger matching category filter pill
-      const targetFilterPill = document.querySelector(`.filter-pill[data-filter="${targetCatId}"]`);
-      if (targetFilterPill) {
-        targetFilterPill.click();
-      } else {
+    // If mainNav does not already have .nav-category-item (e.g. standalone tool pages), inject full 7 categories
+    if (!mainNav.querySelector('.nav-category-item')) {
+      const isSubpage = window.location.pathname.includes('/pages/');
+      const pagePrefix = isSubpage ? '' : 'pages/';
+      const homePrefix = isSubpage ? '../index.html' : 'index.html';
+
+      let html = '';
+      PORTAL_CATEGORIES.forEach(cat => {
+        const catHref = `${homePrefix}#${cat.id}`;
+        let itemsHtml = '';
+        cat.tools.forEach(t => {
+          itemsHtml += `<a href="${pagePrefix}${t.url}" class="nav-quick-item"><span>${t.icon} ${t.name}</span></a>`;
+        });
+        html += `
+          <div class="nav-category-item">
+            <a href="${catHref}" class="nav-category-link" data-category-target="${cat.id}">
+              <span>${cat.icon} ${cat.title}</span> <span style="font-size:0.6rem; opacity:0.6;">▾</span>
+            </a>
+            <div class="nav-quick-menu">
+              ${itemsHtml}
+            </div>
+          </div>
+        `;
+      });
+      mainNav.innerHTML = html;
+    }
+
+    // Wire category link clicks
+    mainNav.querySelectorAll('.nav-category-link[data-category-target]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const targetCatId = this.getAttribute('data-category-target');
         const sec = document.getElementById(targetCatId);
-        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+        const targetFilterPill = document.querySelector(`.filter-pill[data-filter="${targetCatId}"]`);
 
-      // Close mobile navigation if active
-      if (mainNav && mainNav.classList.contains('active')) {
-        mainNav.classList.remove('active');
-        if (mobileToggle) mobileToggle.textContent = '☰';
-      }
+        // If on mobile and tapping the link for the first time, toggle submenu
+        if (window.innerWidth <= 768) {
+          const parentItem = link.closest('.nav-category-item');
+          if (parentItem && !parentItem.classList.contains('open-mobile')) {
+            e.preventDefault();
+            mainNav.querySelectorAll('.nav-category-item.open-mobile').forEach(other => {
+              if (other !== parentItem) other.classList.remove('open-mobile');
+            });
+            parentItem.classList.add('open-mobile');
+            return;
+          }
+        }
+
+        // Only preventDefault and smooth scroll if target section or filter pill exists on current page
+        if (sec || targetFilterPill) {
+          e.preventDefault();
+          const toolPanel = document.getElementById('toolContentPanel');
+          if (toolPanel && toolPanel.style.display !== 'none') {
+            closeToolPanel();
+          }
+
+          if (targetFilterPill) {
+            targetFilterPill.click();
+          } else if (sec) {
+            sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+
+        // Close mobile navigation if active
+        if (mainNav && mainNav.classList.contains('active')) {
+          mainNav.classList.remove('active');
+          const mobileToggle = document.getElementById('mobileToggle');
+          if (mobileToggle) mobileToggle.textContent = '☰';
+        }
+      });
     });
-  });
+
+    // Close mobile nav when clicking a tool link
+    mainNav.querySelectorAll('.nav-quick-item, a:not(.nav-category-link)').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mainNav.classList.contains('active')) {
+          mainNav.classList.remove('active');
+          const mobileToggle = document.getElementById('mobileToggle');
+          if (mobileToggle) mobileToggle.textContent = '☰';
+        }
+      });
+    });
+  }
+
+  // Initialize header nav
+  initGlobalHeaderNav();
 
   // ---- Mobile Navigation Toggle ----
   const mobileToggle = document.getElementById('mobileToggle');
@@ -334,13 +492,6 @@
     mobileToggle.addEventListener('click', () => {
       mainNav.classList.toggle('active');
       mobileToggle.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
-    });
-    // Close nav on link click
-    mainNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mainNav.classList.remove('active');
-        mobileToggle.textContent = '☰';
-      });
     });
   }
 
