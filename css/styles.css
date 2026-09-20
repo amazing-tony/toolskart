@@ -5081,12 +5081,17 @@ body.is-embedded .ad-slot,
 body.is-embedded .ad-slot-container,
 body.is-embedded .portal-sidebar,
 body.is-embedded .sidebar-toggle-btn,
-body.is-embedded .breadcrumb {
+body.is-embedded .breadcrumb,
+body.is-embedded .support-breadcrumb {
   display: none !important;
 }
 body.is-embedded {
   padding-top: 0 !important;
   background: var(--color-bg) !important;
+}
+body.is-embedded .support-page-main {
+  padding-top: 0.5rem !important;
+  padding-bottom: 1.5rem !important;
 }
 body.is-embedded .portal-layout {
   display: block !important;
@@ -7475,7 +7480,7 @@ body,
 
 /* ── Feedback Panel ──────────────────────────────── */
 .feedback-panel {
-  background: var(--card-bg);
+  background: var(--color-surface, #ffffff);
   border: 1px solid var(--card-border);
   border-radius: 14px;
   width: 320px;

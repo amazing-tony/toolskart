@@ -1173,7 +1173,7 @@
       const supportUrl = isInPages ? '../support.html' : 'support.html';
       const UPI_ID = 'amzto369@ptyes';
       const PAYPAL_HANDLE = 'amazingtools369';
-      const PAYPAL_URL = `https://paypal.me/${PAYPAL_HANDLE}`;
+      const PAYPAL_URL = `https://www.paypal.com/paypalme/${PAYPAL_HANDLE}`;
 
       const badgeEl = document.createElement('div');
       badgeEl.className = 'tool-success-support-badge';
