@@ -604,19 +604,19 @@
     'video-audio': { title: 'MP3 Audio Extractor', category: 'Media Tools', url: 'pages/video-downloader.html#audio' },
     'video-shorts': { title: 'Reels & Shorts Downloader', category: 'Media Tools', url: 'pages/video-downloader.html#shorts' },
     'video-youtube': { title: 'YouTube HD Video Downloader', category: 'Media Tools', url: 'pages/video-downloader.html#youtube' },
-    'income-tax-calculator': { title: 'Income Tax Optimizer (Old vs New)', category: 'Financial Calculators', url: 'pages/income-tax-calculator.html' },
-    'emi-calculator': { title: 'Loan Prepayment & Debt-Freedom Planner', category: 'Financial Calculators', url: 'pages/emi-calculator.html' },
-    'prepayment': { title: 'Loan Prepayment & Debt Planner', category: 'Financial Calculators', url: 'pages/emi-calculator.html#prepay' },
-    'gst-calculator': { title: 'GST Calculator & Tax Splitter', category: 'Financial Calculators', url: 'pages/gst-calculator.html' },
-    'sip-calculator': { title: 'SIP & Wealth Builder', category: 'Financial Calculators', url: 'pages/sip-calculator.html' },
-    'buy-vs-rent-calculator': { title: 'Buy Home vs Rent Decision', category: 'Financial Calculators', url: 'pages/buy-vs-rent-calculator.html' },
-    'goal-financial-planner': { title: 'Life Goal & Freedom Planner', category: 'Financial Calculators', url: 'pages/goal-financial-planner.html' },
-    'swp-annuity-calculator': { title: 'SWP & Pension Annuity Planner', category: 'Financial Calculators', url: 'pages/swp-annuity-calculator.html' },
-    'retirement-benefits-calculator': { title: 'Retirement Benefits & Gratuity', category: 'Financial Calculators', url: 'pages/retirement-benefits-calculator.html' },
-    'rd-calculator': { title: 'Recurring Deposit (RD) Calculator', category: 'Financial Calculators', url: 'pages/rd-calculator.html' },
+    'income-tax-calculator': { title: 'Income Tax Optimizer (Old vs New)', category: 'Finance Planner', url: 'pages/income-tax-calculator.html' },
+    'emi-calculator': { title: 'Loan Prepayment & Debt-Freedom Planner', category: 'Finance Planner', url: 'pages/emi-calculator.html' },
+    'prepayment': { title: 'Loan Prepayment & Debt Planner', category: 'Finance Planner', url: 'pages/emi-calculator.html#prepay' },
+    'gst-calculator': { title: 'GST Calculator & Tax Splitter', category: 'Finance Planner', url: 'pages/gst-calculator.html' },
+    'sip-calculator': { title: 'SIP & Wealth Builder', category: 'Finance Planner', url: 'pages/sip-calculator.html' },
+    'buy-vs-rent-calculator': { title: 'Buy Home vs Rent Decision', category: 'Finance Planner', url: 'pages/buy-vs-rent-calculator.html' },
+    'goal-financial-planner': { title: 'Life Goal & Freedom Planner', category: 'Finance Planner', url: 'pages/goal-financial-planner.html' },
+    'swp-annuity-calculator': { title: 'SWP & Pension Annuity Planner', category: 'Finance Planner', url: 'pages/swp-annuity-calculator.html' },
+    'retirement-benefits-calculator': { title: 'Retirement Benefits & Gratuity', category: 'Finance Planner', url: 'pages/retirement-benefits-calculator.html' },
+    'rd-calculator': { title: 'Recurring Deposit (RD) Calculator', category: 'Finance Planner', url: 'pages/rd-calculator.html' },
     'age-calculator': { title: 'Age Calculator', category: 'Everyday Calculators', url: 'pages/age-calculator.html' },
-    'compound-interest': { title: 'Compound Interest Calculator', category: 'Financial Calculators', url: 'pages/compound-interest.html' },
-    'fd-calculator': { title: 'Fixed Deposit (FD) Calculator', category: 'Financial Calculators', url: 'pages/fd-calculator.html' },
+    'compound-interest': { title: 'Compound Interest Calculator', category: 'Finance Planner', url: 'pages/compound-interest.html' },
+    'fd-calculator': { title: 'Fixed Deposit (FD) Calculator', category: 'Finance Planner', url: 'pages/fd-calculator.html' },
     'percentage-calculator': { title: 'Percentage Calculator', category: 'Everyday Calculators', url: 'pages/percentage-calculator.html' },
     'word-counter': { title: 'Word & Character Counter', category: 'Text Tools', url: 'pages/word-counter.html' },
     'case-converter': { title: 'Case Converter', category: 'Text Tools', url: 'pages/case-converter.html' },
@@ -631,7 +631,7 @@
     'regex-tester': { title: 'Regex Tester', category: 'Developer Tools', url: 'pages/regex-tester.html' },
     'meta-tag-generator': { title: 'Meta Tag & SEO Generator', category: 'Developer Tools', url: 'pages/meta-tag-generator.html' },
     'unit-converter': { title: 'Universal Unit Converter', category: 'Everyday Calculators', url: 'pages/unit-converter.html' },
-    'currency-converter': { title: 'Currency Converter (Live Rates)', category: 'Financial Calculators', url: 'pages/currency-converter.html' },
+    'currency-converter': { title: 'Currency Converter (Live Rates)', category: 'Finance Planner', url: 'pages/currency-converter.html' },
     'qr-generator': { title: 'QR Code Generator', category: 'Developer Tools', url: 'pages/qr-generator.html' },
     'password-generator': { title: 'Password Generator & Strength Meter', category: 'Security Tools', url: 'pages/password-generator.html' },
     'timezone-converter': { title: 'Time Zone & World Clock', category: 'Everyday Calculators', url: 'pages/timezone-converter.html' },
@@ -1133,6 +1133,9 @@
       if (el) {
         el.classList.remove('hidden');
         el.classList.add('animate-in');
+        if (this.attachSupportBadge) {
+          this.attachSupportBadge(el);
+        }
       }
     },
 
@@ -1140,6 +1143,127 @@
     hideResult: function (elementId) {
       const el = document.getElementById(elementId);
       if (el) el.classList.add('hidden');
+    },
+
+    // Attach support badge (UPI + PayPal) beside / in successful tool output
+    attachSupportBadge: function (targetEl, customMsg) {
+      if (!targetEl || targetEl.dataset.hasSupportBadge === 'true') return;
+      if (window.location.pathname.includes('support.html')) return;
+      if (targetEl.querySelector('.tool-success-support-badge') || (targetEl.parentElement && targetEl.parentElement.querySelector('.tool-success-support-badge'))) {
+        targetEl.dataset.hasSupportBadge = 'true';
+        return;
+      }
+
+      const badge = this.renderSupportBadge(customMsg);
+      if (badge) {
+        // If target contains a hero card or summary highlight, place immediately after it for maximum visibility
+        const heroCard = targetEl.querySelector('.freedom-hero-card, .result-highlight, .format-table-header');
+        if (heroCard && heroCard !== targetEl) {
+          heroCard.insertAdjacentElement('afterend', badge);
+        } else {
+          targetEl.appendChild(badge);
+        }
+        targetEl.dataset.hasSupportBadge = 'true';
+      }
+    },
+
+    // Create and return support badge element
+    renderSupportBadge: function (customMsg) {
+      const isInPages = window.location.pathname.includes('/pages/');
+      const supportUrl = isInPages ? '../support.html' : 'support.html';
+      const UPI_ID = 'amzto369@ptyes';
+      const PAYPAL_HANDLE = 'amazingtools369';
+      const PAYPAL_URL = `https://paypal.me/${PAYPAL_HANDLE}`;
+
+      const badgeEl = document.createElement('div');
+      badgeEl.className = 'tool-success-support-badge';
+      badgeEl.setAttribute('role', 'region');
+      badgeEl.setAttribute('aria-label', 'Support Amazing-Tools');
+
+      badgeEl.innerHTML = `
+        <div class="tssb-content">
+          <div class="tssb-info">
+            <span class="tssb-icon">☕</span>
+            <div class="tssb-text-wrap">
+              <span class="tssb-title">${customMsg || 'Free & Private Tool Helped You?'}</span>
+              <span class="tssb-sub">Support Amazing-Tools to keep all 42 tools free & private:</span>
+            </div>
+          </div>
+          <div class="tssb-actions">
+            <button type="button" class="tssb-btn tssb-btn-upi" title="Copy UPI ID for PhonePe, GPay, Paytm, BHIM">
+              <span>📱</span>
+              <span>UPI: <strong>${UPI_ID}</strong></span>
+              <span class="tssb-copy-tag">Copy</span>
+            </button>
+            <a href="${PAYPAL_URL}" target="_blank" rel="noopener" class="tssb-btn tssb-btn-paypal" title="Donate via PayPal (150+ Currencies & Cards)">
+              <span>🌍</span>
+              <span>PayPal: <strong>${PAYPAL_HANDLE}</strong> ↗</span>
+            </a>
+            <a href="${supportUrl}" class="tssb-btn tssb-btn-page" title="View all support options, QR code & perks">
+              <span>❤️</span>
+              <span>Support Page</span>
+            </a>
+          </div>
+        </div>
+      `;
+
+      // Copy UPI Logic
+      const upiBtn = badgeEl.querySelector('.tssb-btn-upi');
+      const copyTag = badgeEl.querySelector('.tssb-copy-tag');
+      if (upiBtn) {
+        upiBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const copyFeedback = () => {
+            if (copyTag) copyTag.textContent = 'Copied! ✓';
+            
+            let toast = document.querySelector('.tssb-toast-float');
+            if (!toast) {
+              toast = document.createElement('div');
+              toast.className = 'tssb-toast-float';
+              document.body.appendChild(toast);
+            }
+            toast.innerHTML = `<span>✓</span> <span>UPI ID copied (<strong>${UPI_ID}</strong>)! Use in PhonePe, GPay, Paytm or BHIM.</span>`;
+            toast.style.display = 'flex';
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => { toast.style.display = 'none'; }, 3200);
+
+            setTimeout(() => {
+              if (copyTag) copyTag.textContent = 'Copy';
+            }, 2500);
+          };
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(UPI_ID).then(copyFeedback).catch(() => {
+              prompt('Copy UPI ID:', UPI_ID);
+            });
+          } else {
+            prompt('Copy UPI ID:', UPI_ID);
+          }
+        });
+      }
+
+      // Support Page Navigation inside iframe or standalone
+      const pageBtn = badgeEl.querySelector('.tssb-btn-page');
+      if (pageBtn) {
+        pageBtn.addEventListener('click', (e) => {
+          if (window.self !== window.top) {
+            e.preventDefault();
+            try {
+              if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
+                window.top.ToolsKart.openTool('support', 'Support Amazing-Tools', 'About', 'support.html');
+                return;
+              }
+              window.top.location.href = supportUrl;
+            } catch (err) {
+              window.open(supportUrl, '_blank');
+            }
+          }
+        });
+      }
+
+      return badgeEl;
     },
 
     // Validate that a value is a positive number
@@ -1348,6 +1472,78 @@
     document.addEventListener('DOMContentLoaded', initPrivacyUspStrip);
   } else {
     initPrivacyUspStrip();
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // Automatic Tool Output Support Badge Inserter (UPI + PayPal)
+  // Ensures badge appears beside / within output for every tool
+  // ═══════════════════════════════════════════════════════
+  function initToolSuccessBadges() {
+    if (window.location.pathname.includes('support.html')) return;
+
+    function checkAndAttach() {
+      // Primary result container selectors across all 42 tools
+      const targets = document.querySelectorAll(
+        '#resultArea, .result-area, #resultsDashboard, .results-dashboard, #resultSection, .result-section, #downloaderResultArea, .downloader-result-card, #resultBox, .result-box, #editorArea, .stat-grid, .qr-preview'
+      );
+
+      targets.forEach(target => {
+        if (!target) return;
+        if (target.dataset.hasSupportBadge === 'true' || target.querySelector('.tool-success-support-badge')) return;
+
+        // Check if element is currently displayed / visible
+        const isHidden = target.classList.contains('hidden');
+        const computedStyle = window.getComputedStyle(target);
+        const isDisplayNone = computedStyle.display === 'none' || computedStyle.visibility === 'hidden';
+
+        if (!isHidden && !isDisplayNone) {
+          // Verify element has active results or content inside
+          const hasContent = target.textContent.trim().length > 15 || 
+                             target.querySelector('canvas, img, table, .result-row, .result-highlight, .freedom-hero-card, button, a.btn');
+          if (hasContent && window.ToolsKart && window.ToolsKart.attachSupportBadge) {
+            window.ToolsKart.attachSupportBadge(target);
+          }
+        }
+      });
+    }
+
+    // Trigger on user clicking calculation/conversion buttons
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('button, .btn, input[type="button"], input[type="submit"]');
+      if (btn) {
+        setTimeout(checkAndAttach, 100);
+        setTimeout(checkAndAttach, 400);
+        setTimeout(checkAndAttach, 1200);
+      }
+    });
+
+    // Trigger on form input/change
+    document.addEventListener('change', () => {
+      setTimeout(checkAndAttach, 300);
+    });
+
+    // Observer for DOM class/style changes when tools unhide results
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(() => {
+        checkAndAttach();
+      });
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+      });
+    }
+
+    // Run initial scan
+    setTimeout(checkAndAttach, 400);
+    setTimeout(checkAndAttach, 1200);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initToolSuccessBadges);
+  } else {
+    initToolSuccessBadges();
   }
 
 })();
