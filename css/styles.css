@@ -809,13 +809,19 @@ code, .code { font-family: var(--font-mono); font-size: 0.9em; background: var(-
 }
 .logo {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.15rem !important;
   font-weight: 700;
   color: var(--header-text, #fff) !important;
   display: flex;
   align-items: center;
   gap: 0.4rem;
   letter-spacing: -0.02em;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  text-decoration: none;
+}
+.logo span {
+  white-space: nowrap !important;
 }
 .logo:hover { color: var(--color-primary) !important; }
 .nav { display: flex; align-items: center; gap: 1.5rem; }
@@ -3474,7 +3480,194 @@ button.sb-section-label.sb-tree-toggle[aria-expanded="true"] .sb-chevron,
   body.sidebar-collapsed .sb-item,
   body.sidebar-collapsed .sb-section-label,
   .portal-sidebar.is-collapsed .sb-item,
-  .portal-sidebar.is-collapsed .sb-section-label { position: relative; }
+  .portal-sidebar.is-collapsed .sb-section-label {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.16s ease;
+  }
+  body.sidebar-collapsed .sb-section:hover .sb-section-label,
+  .portal-sidebar.is-collapsed .sb-section:hover .sb-section-label,
+  body.sidebar-collapsed .sb-section.sb-mini-active .sb-section-label,
+  .portal-sidebar.is-collapsed .sb-section.sb-mini-active .sb-section-label {
+    background: var(--color-primary, #2563EB) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.45);
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 1280px) {
+  .header-badge-tag {
+    display: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COLLAPSED MINI-SIDEBAR HOVER FLYOUT MENU
+   ═══════════════════════════════════════════════════════════════ */
+.sb-mini-flyout {
+  position: fixed;
+  z-index: 10000;
+  width: 290px;
+  max-width: 330px;
+  max-height: calc(100vh - 70px);
+  background: var(--header-dropdown-bg, #1E293B);
+  border: 1.5px solid var(--header-dropdown-border, #334155);
+  border-radius: 12px;
+  box-shadow: 0 20px 48px -4px rgba(0, 0, 0, 0.45),
+              0 0 0 1px rgba(255, 255, 255, 0.08);
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-6px);
+  transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  font-family: inherit;
+  color: var(--header-text, #F8FAFC);
+}
+
+.sb-mini-flyout.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Invisible bridge so mouse moving from 68px sidebar to 72px flyout never triggers mouseleave */
+.sb-mini-flyout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -14px;
+  width: 16px;
+  background: transparent;
+}
+
+.sb-mini-flyout-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.65rem 0.6rem;
+  border-bottom: 1px solid var(--header-dropdown-border, rgba(255, 255, 255, 0.1));
+  margin-bottom: 0.45rem;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.14s ease;
+  cursor: pointer;
+}
+
+.sb-mini-flyout-header:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sb-mini-flyout-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.sb-mini-flyout-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--header-text, #FFFFFF);
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.sb-mini-flyout-arrow {
+  font-size: 0.85rem;
+  color: var(--header-nav-text, #94A3B8);
+  opacity: 0.7;
+}
+
+.sb-mini-flyout-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 150px);
+  padding-right: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: thin;
+}
+
+.sb-mini-flyout-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.48rem 0.65rem;
+  border-radius: 8px;
+  color: var(--header-dropdown-text, #E2E8F0) !important;
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 500;
+  transition: all 0.14s ease;
+  cursor: pointer;
+}
+
+.sb-mini-flyout-item:hover,
+.sb-mini-flyout-item.is-active {
+  background: var(--header-dropdown-hover-bg, var(--color-primary, #2563EB)) !important;
+  color: var(--header-dropdown-hover-text, #FFFFFF) !important;
+  transform: translateX(2px);
+}
+
+.sb-mini-flyout-item .sb-item-icon {
+  font-size: 1.05rem;
+  min-width: 22px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.sb-mini-flyout-item .sb-item-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sb-mini-flyout-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.sb-mini-expand-arrow {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  transition: transform 0.15s ease;
+}
+
+.sb-mini-flyout-children {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 1.6rem;
+  margin: 0.2rem 0 0.35rem;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.12);
+  margin-left: 0.9rem;
+}
+
+.sb-mini-flyout-child {
+  padding: 0.35rem 0.55rem;
+  font-size: 0.78rem;
+  color: var(--header-nav-text, #94A3B8) !important;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.12s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sb-mini-flyout-child:hover,
+.sb-mini-flyout-child.is-active {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #FFFFFF !important;
+  transform: translateX(2px);
 }
 
 /* ── Mobile Drawer ──────────────────────────────────── */
@@ -4376,23 +4569,29 @@ button.sb-section-label.sb-tree-toggle[aria-expanded="true"] .sb-chevron,
 .header-left {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.65rem;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
 }
 .header-slim .logo {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.15rem !important;
   font-weight: 800;
   color: var(--header-text, #fff) !important;
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   text-decoration: none;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  word-break: keep-all !important;
 }
 .logo-icon-bolt {
   color: #F59E0B;
-  font-size: 1.35rem;
+  font-size: 1.18rem;
   filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+  flex-shrink: 0;
 }
 
 /* Header Dropdown Menus for Categories */
@@ -8115,21 +8314,27 @@ body,
 }
 /* Chip 1: ⚡ 42 Tools */
 .footer-stat:nth-child(1) {
-  color: #FEF08A !important;
-  background: rgba(245, 158, 11, 0.22) !important;
-  border: 1px solid rgba(245, 158, 11, 0.65) !important;
+  color: #FFFFFF !important;
+  background-color: #D97706 !important;
+  background: #D97706 !important;
+  border: 1.5px solid #F59E0B !important;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.4) !important;
 }
 /* Chip 2: 🔒 0 Uploads */
 .footer-stat:nth-child(2) {
-  color: #A7F3D0 !important;
-  background: rgba(16, 185, 129, 0.22) !important;
-  border: 1px solid rgba(16, 185, 129, 0.65) !important;
+  color: #FFFFFF !important;
+  background-color: #059669 !important;
+  background: #059669 !important;
+  border: 1.5px solid #10B981 !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4) !important;
 }
 /* Chip 3: ✨ Free to Use */
 .footer-stat:nth-child(3) {
-  color: #BAE6FD !important;
-  background: rgba(56, 189, 248, 0.22) !important;
-  border: 1px solid rgba(56, 189, 248, 0.65) !important;
+  color: #FFFFFF !important;
+  background-color: #2563EB !important;
+  background: #2563EB !important;
+  border: 1.5px solid #38BDF8 !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4) !important;
 }
 .footer-license-link,
 .footer-section a[href*="LICENSE"] {

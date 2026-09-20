@@ -109,40 +109,89 @@
       margin: 0 0 0.85rem;
     }
 
-    /* Colored Statement Box (Dignified Civic Pride Callout) */
-    .civic-statement-box {
+    /* ── High-Impact Patron & Beneficiary Cards Grid ── */
+    .support-patron-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 0.85rem 0 1rem;
+    }
+    @media (max-width: 820px) {
+      .support-patron-grid {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+    }
+    .patron-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
       display: flex;
-      gap: 0.85rem;
-      align-items: flex-start;
-      background: color-mix(in srgb, #0284C7 8%, var(--card-bg));
-      border: 1px solid color-mix(in srgb, #0284C7 28%, var(--card-border));
-      border-left: 4px solid #0284C7;
-      border-radius: 10px;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.85rem;
+      flex-direction: column;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .csb-icon {
-      font-size: 1.45rem;
+    .patron-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .patron-card.card-prosperous {
+      border-color: rgba(245, 158, 11, 0.45);
+      background: linear-gradient(145deg, color-mix(in srgb, #F59E0B 9%, var(--card-bg)), var(--card-bg));
+    }
+    .patron-card.card-benefited {
+      border-color: rgba(37, 99, 235, 0.45);
+      background: linear-gradient(145deg, color-mix(in srgb, #2563EB 9%, var(--card-bg)), var(--card-bg));
+    }
+    .patron-card.card-society {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: linear-gradient(145deg, color-mix(in srgb, #10B981 9%, var(--card-bg)), var(--card-bg));
+    }
+    .patron-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .patron-icon {
+      font-size: 1.35rem;
       line-height: 1;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
     }
-    .csb-content {
-      flex: 1 1 auto;
-    }
-    .csb-title {
-      font-size: 0.88rem;
+    .patron-title {
+      font-size: 0.92rem;
       font-weight: 800;
       color: var(--text-primary);
-      margin-bottom: 0.2rem;
-    }
-    .csb-text {
-      font-size: 0.81rem;
-      color: var(--text-secondary, var(--text-muted));
-      line-height: 1.55;
       margin: 0;
     }
-    .csb-text strong {
+    .patron-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin: 0.15rem 0;
+    }
+    .patron-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+    .tag-amber { background: rgba(245, 158, 11, 0.18); color: #B45309; border: 1px solid rgba(245, 158, 11, 0.4); }
+    [data-theme*="dark"] .tag-amber, [data-theme*="midnight"] .tag-amber, [data-theme*="graphite"] .tag-amber { color: #FCD34D; }
+    .tag-blue { background: rgba(37, 99, 235, 0.16); color: #1D4ED8; border: 1px solid rgba(37, 99, 235, 0.4); }
+    [data-theme*="dark"] .tag-blue, [data-theme*="midnight"] .tag-blue, [data-theme*="graphite"] .tag-blue { color: #93C5FD; }
+    .tag-emerald { background: rgba(16, 185, 129, 0.16); color: #047857; border: 1px solid rgba(16, 185, 129, 0.4); }
+    [data-theme*="dark"] .tag-emerald, [data-theme*="midnight"] .tag-emerald, [data-theme*="graphite"] .tag-emerald { color: #6EE7B7; }
+    .patron-text {
+      font-size: 0.8rem;
+      color: var(--text-secondary, var(--text-muted));
+      line-height: 1.45;
+      margin: 0;
+    }
+    .patron-text strong {
       color: var(--text-primary);
     }
 
@@ -581,9 +630,9 @@
   <header class="header header-slim">
     <div class="container header-content">
       <div class="header-left">
-        <a href="index.html" class="logo" title="Amazing-tools — Free Client-Side Tools">
+        <a href="index.html" class="logo" title="Amazing-Tools — Free Client-Side Tools">
           <span class="logo-icon-bolt">⚡</span>
-          <span>Amazing-tools</span>
+          <span>Amazing-Tools</span>
         </a>
       </div>
       <nav style="display:flex;align-items:center;gap:1rem;">
@@ -614,23 +663,53 @@
       </div>
 
       <h1 class="chc-title">
-        Technology Built to Serve Society — <span class="chc-highlight">Sustained by Conscious People.</span>
+        Powering Free Digital Freedom — <span class="chc-highlight">Sustained by Generous Patrons &amp; Benefited Users.</span>
       </h1>
 
-      <p class="chc-description">
-        In an online ecosystem dominated by paywalls, tracking cookies, and recurring subscriptions, 
-        <strong>Amazing-Tools was built on an uncompromising principle: essential digital tools should remain free, completely private, and accessible to every student, freelancer, and creator on Earth.</strong>
-      </p>
+      <!-- High-Impact Keyword-Rich Appeal Cards (No long text walls!) -->
+      <div class="support-patron-grid">
+        <div class="patron-card card-benefited">
+          <div class="patron-header">
+            <span class="patron-icon">💼</span>
+            <h4 class="patron-title">Benefited from Our Tools?</h4>
+          </div>
+          <div class="patron-tags">
+            <span class="patron-tag tag-blue">⏱️ Saved Hours</span>
+            <span class="patron-tag tag-blue">💰 Skipped Paywalls</span>
+            <span class="patron-tag tag-blue">💼 Pro Work Done</span>
+          </div>
+          <p class="patron-text">
+            Saved ₹2,000+ ($20–$50) on costly monthly subscriptions? <strong>Reinvest a small fraction of what you saved</strong> to keep these tools free, fast, and 100% private.
+          </p>
+        </div>
 
-      <!-- Colored Highlight Box: Responsibility, Dignity & Pride -->
-      <div class="civic-statement-box">
-        <div class="csb-icon">🤝</div>
-        <div class="csb-content">
-          <div class="csb-title">Shared Responsibility for a Free &amp; Honest Internet</div>
-          <p class="csb-text">
-            Every meaningful public good thrives because thoughtful people take pride in keeping it alive. 
-            <strong>Your contribution is not charity — it is a dignified partnership in preserving honest, open-access tools for millions.</strong>
-            If our work saved your valuable time or money, we warmly invite you to stand with this initiative.
+        <div class="patron-card card-prosperous">
+          <div class="patron-header">
+            <span class="patron-icon">👑</span>
+            <h4 class="patron-title">Prosperous Patrons &amp; Leaders</h4>
+          </div>
+          <div class="patron-tags">
+            <span class="patron-tag tag-amber">🌟 Civic Legacy</span>
+            <span class="patron-tag tag-amber">🎓 Empower Students</span>
+            <span class="patron-tag tag-amber">🥇 Wall of Honor</span>
+          </div>
+          <p class="patron-text">
+            Blessed with abundance? <strong>Sponsor open digital freedom for millions.</strong> Your partnership empowers students, creators, and freelancers across 100+ countries.
+          </p>
+        </div>
+
+        <div class="patron-card card-society">
+          <div class="patron-header">
+            <span class="patron-icon">🛡️</span>
+            <h4 class="patron-title">Keep Technology Honest</h4>
+          </div>
+          <div class="patron-tags">
+            <span class="patron-tag tag-emerald">🚫 Zero Tracking</span>
+            <span class="patron-tag tag-emerald">🔒 0 Server Uploads</span>
+            <span class="patron-tag tag-emerald">🌍 Public Good</span>
+          </div>
+          <p class="patron-text">
+            No forced subscriptions, no tracking cookies, no data harvesting. <strong>Your support directly covers high-speed infrastructure</strong> so public digital tools remain free forever.
           </p>
         </div>
       </div>
@@ -821,19 +900,19 @@
       <div class="why-list">
         <div class="why-item">
           <span class="why-item-icon">🏛️</span>
-          <div class="why-item-text"><strong>100% Conflict-Free &amp; Independent:</strong> Free from corporate investors or advertisers who force aggressive monetization and user tracking.</div>
+          <div class="why-item-text"><strong>100% Conflict-Free &amp; Independent:</strong> Zero corporate or venture capital pressure to monetize or track you.</div>
         </div>
         <div class="why-item">
           <span class="why-item-icon">🛠️</span>
-          <div class="why-item-text"><strong>Directly Powers Development:</strong> Every contribution directly covers high-speed domain hosting, SSL, and full-time hours building new tools.</div>
+          <div class="why-item-text"><strong>Direct Infrastructure:</strong> 100% funds high-speed domains, SSL certificates &amp; building new tools.</div>
         </div>
         <div class="why-item">
           <span class="why-item-icon">🔒</span>
-          <div class="why-item-text"><strong>Uncompromised Privacy Pledge:</strong> We never sell data, run fingerprinting, or inspect files. Your support allows us to remain 100% in-browser.</div>
+          <div class="why-item-text"><strong>Guaranteed Privacy:</strong> Your data never uploads. All processing stays 100% in your browser.</div>
         </div>
         <div class="why-item">
           <span class="why-item-icon">🌍</span>
-          <div class="why-item-text"><strong>Built for the Global Common Good:</strong> High performance, client-side tools built with pride in India to serve users across 100+ countries.</div>
+          <div class="why-item-text"><strong>Universal Equal Access:</strong> Pro-grade tools accessible to every student &amp; creator worldwide.</div>
         </div>
       </div>
     </div>

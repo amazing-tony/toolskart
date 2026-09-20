@@ -499,6 +499,7 @@
   const sidebarToggle = document.getElementById('sidebarToggle');
   const portalSidebar = document.getElementById('portalSidebar');
   const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+  let closeSidebarMiniFlyout = () => {};
 
   if (sidebarToggle && portalSidebar) {
     // Restore desktop collapsed preference
@@ -523,6 +524,7 @@
 
     sidebarToggle.addEventListener('click', (e) => {
       e.stopPropagation();
+      closeSidebarMiniFlyout();
       if (window.innerWidth <= 1024) {
         const isOpen = portalSidebar.classList.toggle('open');
         if (sidebarBackdrop) sidebarBackdrop.classList.toggle('active', isOpen);
@@ -646,6 +648,291 @@
       });
     });
   }
+
+  // ---- Collapsed Mini-Sidebar Hover Flyout Menu ----
+  function initSidebarMiniFlyout() {
+    const portalSidebar = document.getElementById('portalSidebar');
+    if (!portalSidebar) return;
+
+    let flyout = document.getElementById('sbMiniFlyout');
+    if (!flyout) {
+      flyout = document.createElement('div');
+      flyout.id = 'sbMiniFlyout';
+      flyout.className = 'sb-mini-flyout';
+      flyout.setAttribute('role', 'region');
+      flyout.setAttribute('aria-label', 'Collapsed Sidebar Menu');
+      document.body.appendChild(flyout);
+    }
+
+    let hideTimeout = null;
+    let activeSection = null;
+
+    const CATEGORY_SECTION_MAP = {
+      'docs': '#doc-tools',
+      'media': '#media-tools',
+      'finance': '#calculators',
+      'text': '#text-tools',
+      'images': '#image-tools',
+      'dev': '#dev-tools',
+      'global': '#global-tools'
+    };
+
+    const isMini = () => {
+      return (
+        window.innerWidth > 1024 &&
+        (document.body.classList.contains('sidebar-collapsed') || portalSidebar.classList.contains('is-collapsed'))
+      );
+    };
+
+    closeSidebarMiniFlyout = () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+      flyout.classList.remove('is-visible');
+      if (activeSection) {
+        activeSection.classList.remove('sb-mini-active');
+        activeSection = null;
+      }
+    };
+
+    function buildFlyoutItemsHtml(container) {
+      if (!container) return '';
+      let html = '';
+      const children = Array.from(container.children);
+      for (let i = 0; i < children.length; i++) {
+        const el = children[i];
+        if (el.classList.contains('sb-item')) {
+          const href = el.getAttribute('href') || '#';
+          const dataTool = el.getAttribute('data-tool') || '';
+          const iconEl = el.querySelector('.sb-item-icon');
+          const textEl = el.querySelector('.sb-item-text');
+          const pillEl = el.querySelector('.sb-pill');
+          const icon = iconEl ? iconEl.textContent.trim() : '';
+          const text = textEl ? textEl.textContent.trim() : el.textContent.trim();
+          const pillHtml = pillEl ? pillEl.outerHTML : '';
+          const isActive = el.classList.contains('is-active') ? 'is-active' : '';
+
+          const nextEl = children[i + 1];
+          if (nextEl && nextEl.classList.contains('sb-children')) {
+            const childLinks = nextEl.querySelectorAll('.sb-child');
+            let subHtml = '';
+            childLinks.forEach(c => {
+              const cHref = c.getAttribute('href') || '#';
+              const cTool = c.getAttribute('data-tool') || '';
+              const cText = c.textContent.trim();
+              const cActive = c.classList.contains('is-active') ? 'is-active' : '';
+              subHtml += `<a href="${cHref}" data-tool="${cTool}" class="sb-mini-flyout-child ${cActive}">${cText}</a>`;
+            });
+
+            html += `
+              <div class="sb-mini-flyout-group">
+                <a href="${href}" data-tool="${dataTool}" class="sb-mini-flyout-item ${isActive}">
+                  <span class="sb-item-icon">${icon}</span>
+                  <span class="sb-item-text">${text}</span>
+                  ${pillHtml}
+                  <span class="sb-mini-expand-arrow">▾</span>
+                </a>
+                <div class="sb-mini-flyout-children">
+                  ${subHtml}
+                </div>
+              </div>
+            `;
+            i++; // skip child container
+          } else {
+            html += `
+              <a href="${href}" data-tool="${dataTool}" class="sb-mini-flyout-item ${isActive}">
+                <span class="sb-item-icon">${icon}</span>
+                <span class="sb-item-text">${text}</span>
+                ${pillHtml}
+              </a>
+            `;
+          }
+        }
+      }
+      return html;
+    }
+
+    const showFlyoutFor = (section) => {
+      if (!isMini()) return;
+      if (hideTimeout) clearTimeout(hideTimeout);
+
+      if (activeSection === section && flyout.classList.contains('is-visible')) {
+        return;
+      }
+
+      if (activeSection && activeSection !== section) {
+        activeSection.classList.remove('sb-mini-active');
+      }
+      activeSection = section;
+      activeSection.classList.add('sb-mini-active');
+
+      let title = '';
+      let icon = '';
+      let badgeText = '';
+      let badgeClass = 'sb-badge';
+      let treeId = '';
+
+      const labelBtn = section.querySelector('.sb-section-label');
+      if (labelBtn) {
+        treeId = labelBtn.getAttribute('data-tree') || '';
+        const iconEl = labelBtn.querySelector('.sb-icon');
+        const textEl = labelBtn.querySelector('.sb-label-text');
+        const badgeEl = labelBtn.querySelector('.sb-badge');
+        if (iconEl) icon = iconEl.textContent.trim();
+        if (textEl) title = textEl.textContent.trim();
+        if (badgeEl) {
+          badgeText = badgeEl.textContent.trim();
+          badgeClass = badgeEl.className;
+        }
+      }
+
+      const treeBody = section.querySelector('.sb-tree-body');
+      const directItems = section.querySelector('.sb-items');
+      const itemsHtml = treeBody ? buildFlyoutItemsHtml(treeBody) : (directItems ? buildFlyoutItemsHtml(directItems) : '');
+
+      if (!itemsHtml) {
+        closeSidebarMiniFlyout();
+        return;
+      }
+
+      const targetHash = CATEGORY_SECTION_MAP[treeId] || (section.classList.contains('sb-popular-bottom') ? '#featured-section' : '');
+
+      flyout.innerHTML = `
+        <a href="${targetHash || '#'}" class="sb-mini-flyout-header" title="Jump to ${title}">
+          <span class="sb-mini-flyout-icon">${icon}</span>
+          <span class="sb-mini-flyout-title">${title}</span>
+          ${badgeText ? `<span class="${badgeClass}">${badgeText}</span>` : ''}
+          ${targetHash ? `<span class="sb-mini-flyout-arrow">↗</span>` : ''}
+        </a>
+        <div class="sb-mini-flyout-body">
+          ${itemsHtml}
+        </div>
+      `;
+
+      // Position flyout
+      const rect = section.getBoundingClientRect();
+      flyout.style.left = '70px';
+      flyout.classList.add('is-visible');
+
+      const flyoutHeight = flyout.offsetHeight || 300;
+      const viewportHeight = window.innerHeight;
+      let top = rect.top;
+
+      if (top + flyoutHeight > viewportHeight - 16) {
+        top = Math.max(54, viewportHeight - flyoutHeight - 16);
+      } else {
+        top = Math.max(54, top - 4);
+      }
+      flyout.style.top = top + 'px';
+
+      // Click handling for category header
+      const headerLink = flyout.querySelector('.sb-mini-flyout-header');
+      if (headerLink && targetHash && targetHash.startsWith('#')) {
+        headerLink.addEventListener('click', (e) => {
+          const targetEl = document.querySelector(targetHash);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            closeSidebarMiniFlyout();
+          }
+        });
+      }
+
+      // Close flyout on clicking any tool link
+      flyout.querySelectorAll('a').forEach(a => {
+        if (a !== headerLink) {
+          a.addEventListener('click', () => {
+            closeSidebarMiniFlyout();
+          });
+        }
+      });
+    };
+
+    const scheduleHide = () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        closeSidebarMiniFlyout();
+      }, 190);
+    };
+
+    // Attach hover listeners to all sidebar sections
+    const sections = portalSidebar.querySelectorAll('.sb-section');
+    sections.forEach(section => {
+      section.addEventListener('mouseenter', () => {
+        if (isMini()) showFlyoutFor(section);
+      });
+
+      section.addEventListener('mouseleave', (e) => {
+        if (isMini()) {
+          const toEl = e.relatedTarget;
+          if (toEl && (flyout.contains(toEl) || toEl === flyout)) return;
+          scheduleHide();
+        }
+      });
+
+      // Also allow clicking section label in mini mode to toggle flyout
+      section.querySelectorAll('.sb-section-label, .sb-tree-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if (isMini()) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (activeSection === section && flyout.classList.contains('is-visible')) {
+              closeSidebarMiniFlyout();
+            } else {
+              showFlyoutFor(section);
+            }
+          }
+        });
+      });
+    });
+
+    flyout.addEventListener('mouseenter', () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+    });
+
+    flyout.addEventListener('mouseleave', (e) => {
+      const toEl = e.relatedTarget;
+      if (toEl && activeSection && (activeSection.contains(toEl) || toEl === activeSection)) return;
+      scheduleHide();
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isMini()) closeSidebarMiniFlyout();
+    });
+
+    portalSidebar.addEventListener('scroll', () => {
+      if (isMini() && flyout.classList.contains('is-visible') && activeSection) {
+        const rect = activeSection.getBoundingClientRect();
+        const flyoutHeight = flyout.offsetHeight || 300;
+        let top = rect.top;
+        if (top < 50 || top > window.innerHeight) {
+          closeSidebarMiniFlyout();
+        } else {
+          if (top + flyoutHeight > window.innerHeight - 16) {
+            top = Math.max(54, window.innerHeight - flyoutHeight - 16);
+          } else {
+            top = Math.max(54, top - 4);
+          }
+          flyout.style.top = top + 'px';
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (flyout.classList.contains('is-visible')) {
+        if (!flyout.contains(e.target) && (!activeSection || !activeSection.contains(e.target))) {
+          closeSidebarMiniFlyout();
+        }
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && flyout.classList.contains('is-visible')) {
+        closeSidebarMiniFlyout();
+      }
+    });
+  }
+
+  // Initialize mini sidebar flyout menu
+  initSidebarMiniFlyout();
 
   // ---- Category Filter Pills (Homepage) ----
   const filterPills = document.querySelectorAll('.filter-pill');
