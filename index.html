@@ -552,48 +552,8 @@
         <!-- Main Portal Content -->
         <div class="portal-main-area">
 
-            <!-- Lean & Quiet Command Center Hero -->
-            <div class="container">
-                <div class="premium-banner">
-                    <div class="premium-banner-top">
-                        <div class="premium-banner-title" style="text-align:center; margin: 0 auto;">
-                            <div class="live-ai-badge" style="margin: 0 auto 0.75rem;"><span class="pulse-dot"></span> 100% Private in Your Browser • Zero Server Uploads</div>
-                            <h1 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.5rem; color: var(--theme-banner-text, #0F172A);">Useful Tools. Nothing Unnecessary.</h1>
-                            <p style="font-size: 0.95rem; color: var(--theme-banner-text-muted, #64748B); max-width: 640px; margin: 0 auto; line-height: 1.5;">Fast, client-side document converters, financial planners, and developer utilities. Your numbers and files never touch an external server.</p>
-                        </div>
-                    </div>
-
-                    <!-- Command Center Search -->
-                    <div class="banner-search-row" style="margin-top: 1.25rem;">
-                        <div class="banner-search-wrapper">
-                            <span class="banner-search-icon">🔍</span>
-                            <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search 42 tools… (e.g. PDF, Tax, EMI, JSON, SIP, Resize)" autocomplete="off">
-                            <span class="banner-kbd-shortcut">Press Ctrl+K or /</span>
-                        </div>
-                    </div>
-
-                    <!-- Quick Launch Popular Chips -->
-                    <div class="banner-quick-launch">
-                        <span class="quick-launch-label">⚡ Direct Access:</span>
-                        <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="bql-chip">
-                            <span class="bql-icon">⚡</span> PDF Studio <span class="bql-pill teal">14-in-1</span>
-                        </a>
-                        <a href="pages/document-converter.html" data-tool="document-converter" class="bql-chip">
-                            <span class="bql-icon">🔄</span> Doc Converter <span class="bql-pill green">Private</span>
-                        </a>
-                        <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="bql-chip">
-                            <span class="bql-icon">📑</span> Income Tax <span class="bql-pill green">FY26</span>
-                        </a>
-                        <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="bql-chip">
-                            <span class="bql-icon">🏦</span> Loan &amp; EMI <span class="bql-pill blue">Save ₹</span>
-                        </a>
-                        <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="bql-chip">
-                            <span class="bql-icon">📈</span> SIP Wealth <span class="bql-pill teal">Compound</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Single-Portal Tool Content Panel (Integrated Workstation) -->
+            <!-- Single-Portal Tool Content Panel (Integrated Workstation) -->
+            <div class="container" id="toolWorkstationContainer">
                 <div id="toolContentPanel" class="tool-content-panel" style="display: none;">
                     <div class="tool-panel-header">
                         <div class="tool-breadcrumb-bar">
@@ -622,6 +582,48 @@
 
             <!-- Dashboard Overview Container (Hidden when a tool is opened in-portal) -->
             <div id="dashboardOverview">
+
+                <!-- Lean & Quiet Command Center Hero (Visible on Dashboard Only) -->
+                <div class="container" id="portalHeroContainer">
+                    <div class="premium-banner">
+                        <div class="premium-banner-top">
+                            <div class="premium-banner-title" style="text-align:center; margin: 0 auto;">
+                                <div class="live-ai-badge" style="margin: 0 auto 0.75rem;"><span class="pulse-dot"></span> 100% Private in Your Browser • Zero Server Uploads</div>
+                                <h1 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.5rem; color: var(--theme-banner-text, #0F172A);">Useful Tools. Nothing Unnecessary.</h1>
+                                <p style="font-size: 0.95rem; color: var(--theme-banner-text-muted, #64748B); max-width: 640px; margin: 0 auto; line-height: 1.5;">Fast, client-side document converters, financial planners, and developer utilities. Your numbers and files never touch an external server.</p>
+                            </div>
+                        </div>
+
+                        <!-- Command Center Search -->
+                        <div class="banner-search-row" style="margin-top: 1.25rem;">
+                            <div class="banner-search-wrapper">
+                                <span class="banner-search-icon">🔍</span>
+                                <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search 42 tools… (e.g. PDF, Tax, EMI, JSON, SIP, Resize)" autocomplete="off">
+                                <span class="banner-kbd-shortcut">Press Ctrl+K or /</span>
+                            </div>
+                        </div>
+
+                        <!-- Quick Launch Popular Chips -->
+                        <div class="banner-quick-launch">
+                            <span class="quick-launch-label">⚡ Direct Access:</span>
+                            <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="bql-chip">
+                                <span class="bql-icon">⚡</span> PDF Studio <span class="bql-pill teal">14-in-1</span>
+                            </a>
+                            <a href="pages/document-converter.html" data-tool="document-converter" class="bql-chip">
+                                <span class="bql-icon">🔄</span> Doc Converter <span class="bql-pill green">Private</span>
+                            </a>
+                            <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="bql-chip">
+                                <span class="bql-icon">📑</span> Income Tax <span class="bql-pill green">FY26</span>
+                            </a>
+                            <a href="pages/emi-calculator.html" data-tool="emi-calculator" class="bql-chip">
+                                <span class="bql-icon">🏦</span> Loan &amp; EMI <span class="bql-pill blue">Save ₹</span>
+                            </a>
+                            <a href="pages/sip-calculator.html" data-tool="sip-calculator" class="bql-chip">
+                                <span class="bql-icon">📈</span> SIP Wealth <span class="bql-pill teal">Compound</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
 
             <!-- Category Filter Bar -->

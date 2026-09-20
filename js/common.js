@@ -1285,8 +1285,10 @@
     if (breadcrumbCat) breadcrumbCat.textContent = tool.category;
     if (breadcrumbTitle) breadcrumbTitle.textContent = tool.title;
 
-    // Show tool panel and hide overview
+    // Show tool panel and hide overview & hero banner
     if (dashboardOverview) dashboardOverview.style.display = 'none';
+    const heroBanner = document.getElementById('portalHeroContainer') || document.querySelector('.premium-banner');
+    if (heroBanner) heroBanner.style.display = 'none';
     toolPanel.style.display = 'flex';
 
     // Target URL for iframe
@@ -1360,10 +1362,14 @@
   function closeToolPanel() {
     const dashboardOverview = document.getElementById('dashboardOverview');
     const toolPanel = document.getElementById('toolContentPanel');
+    const heroBanner = document.getElementById('portalHeroContainer') || document.querySelector('.premium-banner');
 
     if (toolPanel) {
       toolPanel.style.display = 'none';
       toolPanel.classList.remove('is-fullscreen');
+    }
+    if (heroBanner) {
+      heroBanner.style.display = '';
     }
     if (dashboardOverview) {
       dashboardOverview.style.display = '';
@@ -1462,6 +1468,11 @@
       const search = window.location.search || '';
       const fullUrl = tool.url.includes('?') ? tool.url : (tool.url + search);
       openToolInPortal(hash, tool.title, tool.category, fullUrl);
+    } else if (!hash) {
+      const toolPanel = document.getElementById('toolContentPanel');
+      if (toolPanel && toolPanel.style.display !== 'none') {
+        closeToolPanel();
+      }
     }
   }
   window.addEventListener('load', checkUrlHash);
