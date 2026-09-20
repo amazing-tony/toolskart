@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Amazing-Tools — Donate via UPI or PayPal</title>
-  <meta name="description" content="Support Amazing-Tools with UPI or PayPal. 42 free client-side tools, zero server uploads, 100% private. Every contribution keeps the portal free and independent.">
+  <title>Support Amazing-Tools — A Public Digital Initiative for Society</title>
+  <meta name="description" content="Support Amazing-Tools. 42 free client-side tools running in your browser with zero data collection and zero server uploads. Partner with us to keep honest digital tools free for humanity.">
   <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* Compact, Viewport-Optimized Support Page Styles */
+    /* Support Page - Modern, Dignified, Above-The-Fold Styles */
     .support-page-main {
       max-width: 980px;
       margin: 0 auto;
-      padding: 1rem 1.25rem 3rem;
+      padding: 0.85rem 1.25rem 3rem;
     }
     body.is-embedded .support-page-main {
-      padding: 0.4rem 0.85rem 1.5rem !important;
+      padding: 0.35rem 0.85rem 1.5rem !important;
     }
 
     /* Support Breadcrumb */
@@ -30,75 +30,138 @@
       font-weight: 600;
     }
 
-    /* Compact Hero */
-    .support-hero-compact {
-      text-align: center;
-      padding: 0.6rem 1rem 0.5rem;
-      margin: 0 auto 0.75rem;
-      max-width: 760px;
+    /* ── Colored Compelling Mission & Civic Responsibility Card ── */
+    .civic-hero-card {
+      background: linear-gradient(135deg, 
+        color-mix(in srgb, var(--color-primary) 8%, var(--card-bg)) 0%, 
+        color-mix(in srgb, #0284C7 8%, var(--card-bg)) 50%,
+        color-mix(in srgb, #10B981 7%, var(--card-bg)) 100%
+      );
+      border: 1.5px solid color-mix(in srgb, var(--color-primary) 32%, var(--card-border));
+      border-radius: 16px;
+      padding: 1.25rem 1.4rem 1.15rem;
+      margin-bottom: 1.1rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+      position: relative;
+      overflow: hidden;
       animation: supportHeroFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .support-badge-pill {
+    .civic-hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3.5px;
+      background: linear-gradient(90deg, var(--color-primary), #0284C7, #10B981, #F59E0B);
+    }
+
+    .chc-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .chc-status-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: color-mix(in srgb, var(--color-primary) 10%, var(--card-bg));
-      border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
-      color: var(--color-primary);
-      padding: 0.25rem 0.85rem;
+      background: var(--card-bg);
+      border: 1px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+      color: var(--text-primary);
+      padding: 0.22rem 0.75rem;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
       letter-spacing: 0.02em;
     }
-    .pulse-dot-green {
-      width: 8px;
-      height: 8px;
+    .pulse-dot-cyan {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #22C55E;
+      background: #06B6D4;
       display: inline-block;
       animation: pulseGreen 1.8s infinite;
     }
-    .support-hero-h1 {
-      font-size: 1.75rem;
+    .chc-meta-tag {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .chc-title {
+      font-size: 1.55rem;
       font-weight: 800;
       color: var(--text-primary);
-      line-height: 1.22;
-      margin-bottom: 0.35rem;
-      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin: 0 0 0.45rem;
+      letter-spacing: -0.015em;
     }
-    .support-hero-h1 span {
+    .chc-highlight {
       background: linear-gradient(135deg, var(--color-primary), #0284C7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .support-hero-lead {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      max-width: 620px;
-      margin: 0 auto 0.6rem;
+    .chc-description {
+      font-size: 0.86rem;
+      color: var(--text-secondary, var(--text-muted));
+      line-height: 1.55;
+      margin: 0 0 0.85rem;
     }
 
-    /* Inline micro trust pills */
-    .support-trust-row {
+    /* Colored Statement Box (Dignified Civic Pride Callout) */
+    .civic-statement-box {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: flex-start;
+      background: color-mix(in srgb, #0284C7 8%, var(--card-bg));
+      border: 1px solid color-mix(in srgb, #0284C7 28%, var(--card-border));
+      border-left: 4px solid #0284C7;
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
       margin-bottom: 0.85rem;
     }
-    .trust-micro-pill {
+    .csb-icon {
+      font-size: 1.45rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .csb-content {
+      flex: 1 1 auto;
+    }
+    .csb-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+    .csb-text {
+      font-size: 0.81rem;
+      color: var(--text-secondary, var(--text-muted));
+      line-height: 1.55;
+      margin: 0;
+    }
+    .csb-text strong {
+      color: var(--text-primary);
+    }
+
+    /* Trust Pillars */
+    .chc-pillars {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .chc-pillar {
       display: inline-flex;
       align-items: center;
-      gap: 0.28rem;
-      background: var(--bg-alt);
+      gap: 0.25rem;
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 999px;
-      padding: 0.18rem 0.6rem;
-      font-size: 0.72rem;
+      padding: 0.18rem 0.55rem;
+      font-size: 0.71rem;
       font-weight: 600;
       color: var(--text-primary);
     }
@@ -208,7 +271,7 @@
       margin-bottom: 0.85rem;
     }
 
-    /* Amount presets */
+    /* ── Amount Presets (Dignified Tiers) ── */
     .amount-presets {
       display: flex;
       flex-wrap: wrap;
@@ -216,34 +279,60 @@
       margin-bottom: 0.95rem;
     }
     .amount-btn {
-      padding: 0.35rem 0.6rem;
-      border-radius: 8px;
-      border: 1px solid var(--card-border);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem 0.55rem;
+      border-radius: 9px;
+      border: 1.5px solid var(--card-border);
       background: var(--bg-alt);
       color: var(--text-primary);
-      font-size: 0.78rem;
-      font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       flex: 1 1 auto;
       text-align: center;
+      min-width: 66px;
+    }
+    .amount-btn .amt-num {
+      font-size: 0.88rem;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+    .amount-btn .amt-tier {
+      font-size: 0.64rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-top: 0.12rem;
     }
     .amount-btn:hover {
       border-color: var(--color-primary);
       color: var(--color-primary);
       transform: translateY(-1px);
     }
+    .donation-card.featured .amount-btn:hover,
     .donation-card.featured .amount-btn.active {
       background: #0284C7;
       border-color: #0284C7;
       color: #fff;
-      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.28);
     }
+    .donation-card.featured .amount-btn:hover .amt-tier,
+    .donation-card.featured .amount-btn.active .amt-tier {
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .donation-card.paypal-card .amount-btn:hover,
     .donation-card.paypal-card .amount-btn.active {
       background: #0070BA;
       border-color: #0070BA;
       color: #fff;
-      box-shadow: 0 2px 8px rgba(0, 112, 186, 0.3);
+      box-shadow: 0 3px 10px rgba(0, 112, 186, 0.28);
+    }
+    .donation-card.paypal-card .amount-btn:hover .amt-tier,
+    .donation-card.paypal-card .amount-btn.active .amt-tier {
+      color: rgba(255, 255, 255, 0.92);
     }
 
     /* UPI Flex Split (QR + Details side-by-side) */
@@ -511,27 +600,47 @@
 
     <!-- Breadcrumb (Auto-hidden inside portal workstation iframe) -->
     <p class="support-breadcrumb">
-      <a href="index.html">Home</a> &rsaquo; Support Us
+      <a href="index.html">Home</a> &rsaquo; Support Public Initiative
     </p>
 
-    <!-- Compact Above-the-Fold Hero Banner -->
-    <div class="support-hero-compact">
-      <div class="support-badge-pill">
-        <span class="pulse-dot-green"></span>
-        <span>☕ Support Amazing-Tools · 100% Free · 42 Tools</span>
+    <!-- Colored Compelling Mission & Civic Responsibility Card (Above the fold) -->
+    <div class="civic-hero-card">
+      <div class="chc-badge-row">
+        <span class="chc-status-pill">
+          <span class="pulse-dot-cyan"></span>
+          <span>🏛️ A Free Public Digital Utility for Humanity</span>
+        </span>
+        <span class="chc-meta-tag">⚡ 42 Client-Side Tools · 100% In-Browser</span>
       </div>
-      <h1 class="support-hero-h1">Keep Amazing-Tools <span>Free &amp; Independent</span></h1>
-      <p class="support-hero-lead">
-        42 tools. Zero user tracking. Zero server uploads. Built by one developer with care.
-        If our tools save your time, buy us a coffee to keep development alive!
+
+      <h1 class="chc-title">
+        Technology Built to Serve Society — <span class="chc-highlight">Sustained by Conscious People.</span>
+      </h1>
+
+      <p class="chc-description">
+        In an online ecosystem dominated by paywalls, tracking cookies, and recurring subscriptions, 
+        <strong>Amazing-Tools was built on an uncompromising principle: essential digital tools should remain free, completely private, and accessible to every student, freelancer, and creator on Earth.</strong>
       </p>
 
-      <!-- Inline Trust Pills -->
-      <div class="support-trust-row">
-        <span class="trust-micro-pill">⚡ 42 Client-Side Tools</span>
-        <span class="trust-micro-pill">🔒 Zero Server Uploads</span>
-        <span class="trust-micro-pill">💎 100% Free to Use</span>
-        <span class="trust-micro-pill">❤️ Direct Creator Support</span>
+      <!-- Colored Highlight Box: Responsibility, Dignity & Pride -->
+      <div class="civic-statement-box">
+        <div class="csb-icon">🤝</div>
+        <div class="csb-content">
+          <div class="csb-title">Shared Responsibility for a Free &amp; Honest Internet</div>
+          <p class="csb-text">
+            Every meaningful public good thrives because thoughtful people take pride in keeping it alive. 
+            <strong>Your contribution is not charity — it is a dignified partnership in preserving honest, open-access tools for millions.</strong>
+            If our work saved your valuable time or money, we warmly invite you to stand with this initiative.
+          </p>
+        </div>
+      </div>
+
+      <!-- Trust Pillars -->
+      <div class="chc-pillars">
+        <span class="chc-pillar">🛡️ Strict 0-Upload Privacy</span>
+        <span class="chc-pillar">🚫 Zero Ads or User Tracking</span>
+        <span class="chc-pillar">🌍 Universally Free for Society</span>
+        <span class="chc-pillar">🌱 Independent &amp; Community-Powered</span>
       </div>
     </div>
 
@@ -542,7 +651,7 @@
       <button type="button" class="pay-tab-btn" data-tab="paypal">🌍 PayPal / Global Cards</button>
     </div>
 
-    <!-- Interactive Donation Cards Grid (Immediately visible above the fold) -->
+    <!-- Interactive Contribution Cards Grid (Immediately visible above the fold) -->
     <div class="donation-grid" id="donationGrid">
 
       <!-- 🇮🇳 CARD 1: UPI / INDIA -->
@@ -552,24 +661,39 @@
         <div class="dc-header-row">
           <div class="dc-icon">📱</div>
           <div>
-            <h3 class="dc-title">UPI / India Donation</h3>
+            <h3 class="dc-title">UPI / India Contribution</h3>
           </div>
         </div>
-        <div class="dc-subtitle">Pay instantly from PhonePe, Google Pay, Paytm, BHIM, Cred or any bank UPI app. Zero middleman fees.</div>
+        <div class="dc-subtitle">Contribute directly via PhonePe, Google Pay, Paytm, BHIM, Cred or any bank UPI app. Zero middleman deductions.</div>
 
-        <!-- UPI Amount Presets -->
+        <!-- UPI Amount Presets (Dignified Tiers) -->
         <div class="amount-presets" id="upiAmounts">
-          <button type="button" class="amount-btn" data-amt="49">₹49 <small>(Chai)</small></button>
-          <button type="button" class="amount-btn active" data-amt="99">₹99 <small>(Coffee)</small></button>
-          <button type="button" class="amount-btn" data-amt="199">₹199 <small>(Hero)</small></button>
-          <button type="button" class="amount-btn" data-amt="499">₹499 <small>(Super)</small></button>
-          <button type="button" class="amount-btn" data-amt="custom">Custom</button>
+          <button type="button" class="amount-btn" data-amt="49">
+            <span class="amt-num">₹49</span>
+            <span class="amt-tier">Supporter</span>
+          </button>
+          <button type="button" class="amount-btn active" data-amt="99">
+            <span class="amt-num">₹99</span>
+            <span class="amt-tier">Contributor</span>
+          </button>
+          <button type="button" class="amount-btn" data-amt="199">
+            <span class="amt-num">₹199</span>
+            <span class="amt-tier">Champion</span>
+          </button>
+          <button type="button" class="amount-btn" data-amt="499">
+            <span class="amt-num">₹499</span>
+            <span class="amt-tier">Patron</span>
+          </button>
+          <button type="button" class="amount-btn" data-amt="custom">
+            <span class="amt-num">Custom</span>
+            <span class="amt-tier">Any Amount</span>
+          </button>
         </div>
 
         <!-- UPI Interactive Flex Body (QR + ID + Instant Pay) -->
         <div class="upi-flex-body">
           <div class="upi-qr-box">
-            <img src="img/upi-qr.png" alt="Scan to donate via UPI" width="105" height="105">
+            <img src="img/upi-qr.png" alt="Scan to contribute via UPI" width="105" height="105">
             <span class="qr-hint">Scan with any UPI app</span>
           </div>
 
@@ -582,12 +706,12 @@
             </div>
             
             <a href="upi://pay?pa=amzto369@ptyes&pn=Amazing-Tools&cu=INR&am=99" class="dc-btn dc-btn-upi" id="upiPayBtn">
-              📱 Pay ₹99 via UPI App
+              🇮🇳 Stand with Us — Contribute ₹99
             </a>
           </div>
         </div>
 
-        <p class="dc-meta">🔒 Direct Bank Transfer · ⚡ 0% Fees · Instant Credit</p>
+        <p class="dc-meta">🔒 Direct Bank Transfer · ⚡ 0% Fees · 100% Funds Tool Infrastructure</p>
       </div>
 
       <!-- 🌍 CARD 2: PAYPAL / INTERNATIONAL -->
@@ -602,13 +726,28 @@
         </div>
         <div class="dc-subtitle">Support from USA, Europe, UK, Canada, Australia or worldwide safely using Credit Card, Debit Card or PayPal.</div>
 
-        <!-- PayPal Amount Presets -->
+        <!-- PayPal Amount Presets (Dignified Tiers) -->
         <div class="amount-presets" id="paypalAmounts">
-          <button type="button" class="amount-btn" data-amt="3">$3 <small>(Coffee)</small></button>
-          <button type="button" class="amount-btn active" data-amt="5">$5 <small>(Snack)</small></button>
-          <button type="button" class="amount-btn" data-amt="10">$10 <small>(Lunch)</small></button>
-          <button type="button" class="amount-btn" data-amt="25">$25 <small>(Hero)</small></button>
-          <button type="button" class="amount-btn" data-amt="custom">Custom</button>
+          <button type="button" class="amount-btn" data-amt="3">
+            <span class="amt-num">$3</span>
+            <span class="amt-tier">Supporter</span>
+          </button>
+          <button type="button" class="amount-btn active" data-amt="5">
+            <span class="amt-num">$5</span>
+            <span class="amt-tier">Contributor</span>
+          </button>
+          <button type="button" class="amount-btn" data-amt="10">
+            <span class="amt-num">$10</span>
+            <span class="amt-tier">Champion</span>
+          </button>
+          <button type="button" class="amount-btn" data-amt="25">
+            <span class="amt-num">$25</span>
+            <span class="amt-tier">Patron</span>
+          </button>
+          <button type="button" class="amount-btn" data-amt="custom">
+            <span class="amt-num">Custom</span>
+            <span class="amt-tier">Any Amount</span>
+          </button>
         </div>
 
         <!-- PayPal Handle Box -->
@@ -623,7 +762,7 @@
         <div class="paypal-perks-box">
           <div class="paypal-perk-item">
             <span class="chk">✓</span>
-            <span>No PayPal account required to donate with Credit/Debit Cards</span>
+            <span>No PayPal account required to contribute with Credit/Debit Cards</span>
           </div>
           <div class="paypal-perk-item">
             <span class="chk">✓</span>
@@ -637,7 +776,7 @@
 
         <!-- Direct Canonical PayPal Pay Button -->
         <a href="https://www.paypal.com/paypalme/amazingtools369/5USD" target="_blank" rel="noopener" class="dc-btn dc-btn-paypal" id="paypalPayBtn">
-          💙 Pay $5 via PayPal / Card
+          🌍 Stand with Us — Contribute $5
         </a>
         <p class="dc-meta">💳 Visa · MasterCard · Amex · PayPal Balance · Bank</p>
       </div>
@@ -646,64 +785,64 @@
 
     <!-- Scroll cue divider for secondary info -->
     <div class="scroll-cue-divider">
-      <span class="scroll-cue-badge">↓ Why Support &amp; Perks</span>
+      <span class="scroll-cue-badge">↓ Patron Recognition &amp; Mission Details</span>
     </div>
 
     <!-- Supporter Perks Grid -->
     <div class="perks-section">
-      <h3>🎁 Supporter Recognition &amp; Perks</h3>
+      <h3>🎖️ Patron Recognition &amp; Privileges</h3>
       <div class="perks-grid">
         <div class="perk-card">
           <div class="perk-icon">🥇</div>
-          <div class="perk-title">Supporter Badge</div>
-          <div class="perk-desc">Email us your UPI or PayPal reference to get honored in our supporter hall.</div>
+          <div class="perk-title">Supporter Mention</div>
+          <div class="perk-desc">Email us your reference to be honored on our public community recognition wall.</div>
         </div>
         <div class="perk-card">
           <div class="perk-icon">🔮</div>
           <div class="perk-title">Feature Priority</div>
-          <div class="perk-desc">Need a specific converter or tool? Your requests get prioritized directly.</div>
+          <div class="perk-desc">Need a specific converter or tool for your workflow? Your requests take top priority.</div>
         </div>
         <div class="perk-card">
           <div class="perk-icon">📧</div>
-          <div class="perk-title">Personal Thanks</div>
-          <div class="perk-desc">We personally write back to thank you and take your direct feedback.</div>
+          <div class="perk-title">Direct Dialogue</div>
+          <div class="perk-desc">We personally write back to hear your thoughts, feedback, and ideas for the portal.</div>
         </div>
         <div class="perk-card">
           <div class="perk-icon">♾️</div>
-          <div class="perk-title">Free for Everyone</div>
-          <div class="perk-desc">Your donation keeps high-utility tools free for students and creators worldwide.</div>
+          <div class="perk-title">Digital Freedom</div>
+          <div class="perk-desc">Your partnership ensures students and creators worldwide have access to free, private tools.</div>
         </div>
       </div>
     </div>
 
     <!-- Why Support Us Section -->
     <div class="why-section">
-      <h3>💡 Why Your Support Matters</h3>
+      <h3>💡 Why Community Support Keeps Technology Honest</h3>
       <div class="why-list">
         <div class="why-item">
-          <span class="why-item-icon">☕</span>
-          <div class="why-item-text"><strong>Zero VC or Corporate Backing:</strong> Maintained by an independent developer who cares about quality over monetizing users.</div>
+          <span class="why-item-icon">🏛️</span>
+          <div class="why-item-text"><strong>100% Conflict-Free &amp; Independent:</strong> Free from corporate investors or advertisers who force aggressive monetization and user tracking.</div>
         </div>
         <div class="why-item">
           <span class="why-item-icon">🛠️</span>
-          <div class="why-item-text"><strong>Directly Funds New Tools:</strong> Every donation funds server costs, domain hosting, and hours spent coding new tools.</div>
+          <div class="why-item-text"><strong>Directly Powers Development:</strong> Every contribution directly covers high-speed domain hosting, SSL, and full-time hours building new tools.</div>
         </div>
         <div class="why-item">
           <span class="why-item-icon">🔒</span>
-          <div class="why-item-text"><strong>We Refuse to Sell Data:</strong> Zero tracking pixels, zero profile selling. Donations let us preserve complete user privacy.</div>
+          <div class="why-item-text"><strong>Uncompromised Privacy Pledge:</strong> We never sell data, run fingerprinting, or inspect files. Your support allows us to remain 100% in-browser.</div>
         </div>
         <div class="why-item">
           <span class="why-item-icon">🌍</span>
-          <div class="why-item-text"><strong>Built for the World:</strong> High performance, 100% in-browser tools built with ❤️ in India for users across 100+ countries.</div>
+          <div class="why-item-text"><strong>Built for the Global Common Good:</strong> High performance, client-side tools built with pride in India to serve users across 100+ countries.</div>
         </div>
       </div>
     </div>
 
     <!-- Can't donate right now? Free ways to help -->
     <div class="free-help-box">
-      <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:0.35rem;color:var(--text-primary);">Can't donate right now? You can still help for free! 💙</h3>
+      <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:0.35rem;color:var(--text-primary);">Can't contribute financially right now? You can still help for free! 💙</h3>
       <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 0.85rem;line-height:1.5;">
-        Every share and GitHub star introduces someone to fast, free, private tools.
+        Sharing our tools with friends, colleagues, or starring on GitHub helps millions discover fast, private tools.
       </p>
       <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
         <a href="https://github.com/amazing-tony/toolskart" target="_blank" rel="noopener"
@@ -760,17 +899,17 @@
         upiAmtBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (btn.dataset.amt === 'custom') {
-          const custom = prompt('Enter amount in ₹ (minimum ₹10):', '150');
+          const custom = prompt('Enter your contribution amount in ₹ (minimum ₹10):', '150');
           if (custom && Number(custom) >= 10) {
             selectedUpiAmt = Math.round(Number(custom));
-            btn.innerHTML = `₹${selectedUpiAmt} <small>(Custom)</small>`;
+            btn.innerHTML = `<span class="amt-num">₹${selectedUpiAmt}</span> <span class="amt-tier">Custom</span>`;
           }
         } else {
           selectedUpiAmt = Number(btn.dataset.amt);
         }
         if (upiPayBtn) {
           upiPayBtn.href = `upi://pay?pa=${UPI_ID}&pn=Amazing-Tools&cu=INR&am=${selectedUpiAmt}`;
-          upiPayBtn.innerHTML = `📱 Pay ₹${selectedUpiAmt} via UPI App`;
+          upiPayBtn.innerHTML = `🇮🇳 Stand with Us — Contribute ₹${selectedUpiAmt}`;
           upiPayBtn.style.transform = 'scale(1.02)';
           setTimeout(() => { upiPayBtn.style.transform = 'none'; }, 180);
         }
@@ -812,17 +951,17 @@
         paypalAmtBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         if (btn.dataset.amt === 'custom') {
-          const custom = prompt('Enter USD amount (minimum $1):', '15');
+          const custom = prompt('Enter your contribution amount in USD (minimum $1):', '15');
           if (custom && Number(custom) >= 1) {
             selectedPaypalAmt = Math.round(Number(custom));
-            btn.innerHTML = `$${selectedPaypalAmt} <small>(Custom)</small>`;
+            btn.innerHTML = `<span class="amt-num">$${selectedPaypalAmt}</span> <span class="amt-tier">Custom</span>`;
           }
         } else {
           selectedPaypalAmt = Number(btn.dataset.amt);
         }
         if (paypalPayBtn) {
           paypalPayBtn.href = `${PAYPAL_CANONICAL_URL}/${selectedPaypalAmt}USD`;
-          paypalPayBtn.innerHTML = `💙 Pay $${selectedPaypalAmt} via PayPal / Card`;
+          paypalPayBtn.innerHTML = `🌍 Stand with Us — Contribute $${selectedPaypalAmt}`;
           paypalPayBtn.style.transform = 'scale(1.02)';
           setTimeout(() => { paypalPayBtn.style.transform = 'none'; }, 180);
         }
