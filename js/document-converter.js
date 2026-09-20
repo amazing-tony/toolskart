@@ -951,7 +951,7 @@
         pdf.setFontSize(22);
         pdf.text('PowerPoint Presentation Export', 50, 80);
         pdf.setFontSize(12);
-        pdf.text('Processed by ToolsKart Document Engine.', 50, 120);
+        pdf.text('Processed by Amazing-Tools Document Engine.', 50, 120);
         pdf.text('Tip: For 100% native vector font rendering with master slides,', 50, 160);
         pdf.text('use the included desktop tool: python tools/document_converter.py', 50, 180);
 
@@ -977,7 +977,7 @@
                 if (h1) h1.textContent = '📄 ' + pairTitles[pairKey];
                 const uploadPrompt = document.querySelector('#uploadArea h3');
                 if (uploadPrompt) uploadPrompt.textContent = `Upload .${fromParam} file to convert to .${toParam}`;
-                document.title = `${pairTitles[pairKey]} — 100% Free & Private | ToolsKart`;
+                document.title = `${pairTitles[pairKey]} — 100% Free & Private | Amazing-Tools`;
             }
         }
     } catch (_) {}

@@ -972,11 +972,12 @@
   // ---- Tool Search (Homepage) ----
   const toolSearch = document.getElementById('toolSearch');
   if (toolSearch) {
-    // Keyboard shortcut '/' to search
+    // Keyboard shortcut '/' or 'Ctrl+K' / 'Cmd+K' to focus search
     document.addEventListener('keydown', function (e) {
-      if (e.key === '/' && document.activeElement !== toolSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      if (((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') || (e.key === '/' && document.activeElement !== toolSearch && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
         e.preventDefault();
         toolSearch.focus();
+        toolSearch.select();
       }
     });
 
@@ -1791,6 +1792,7 @@
       return result.trim();
     }
   };
+  window.AmazingTools = window.ToolsKart;
 
   // ---- Smooth scroll for anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
