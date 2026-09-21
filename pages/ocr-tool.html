@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Image to Text — Free Client-Side Text Extractor | Amazing-Tools</title>
+    <meta name="description" content="Free online OCR image to text extractor. Convert scanned documents, receipts, screenshots, and photos to editable text 100% in your browser. Zero server uploads.">
+    <meta name="keywords" content="ocr online, image to text, extract text from image, photo to text converter, free ocr tool, client side ocr, receipt to text">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/ocr-tool.html">
+    <meta property="og:title" content="OCR Image to Text — Free Client-Side Text Extractor | Amazing-Tools">
+    <meta property="og:description" content="Extract text from images, scans, and screenshots with 100% client-side privacy. Zero server uploads.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "OCR Image to Text Extractor",
+      "url": "https://amazing-tools.github.io/pages/ocr-tool.html",
+      "description": "Extract text from images, receipts, and screenshots 100% in-browser with zero server uploads.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .ocr-drop-zone {
+            border: 2px dashed var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: var(--color-bg-alt, #F8FAFC);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .ocr-drop-zone:hover, .ocr-drop-zone.dragover {
+            border-color: var(--color-primary, #2563EB);
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateY(-2px);
+        }
+        .ocr-drop-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .ocr-drop-text { font-size: 1.05rem; font-weight: 700; color: var(--color-text, #0F172A); margin-bottom: 0.25rem; }
+        .ocr-drop-hint { font-size: 0.85rem; color: var(--color-text-secondary, #64748B); }
+        .ocr-preview-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .ocr-preview-container { grid-template-columns: 1fr; }
+        }
+        .ocr-image-preview {
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            max-height: 480px;
+            overflow: hidden;
+        }
+        .ocr-image-preview img {
+            max-width: 100%;
+            max-height: 380px;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .ocr-result-card {
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .ocr-textarea {
+            width: 100%;
+            flex: 1;
+            min-height: 260px;
+            padding: 0.85rem;
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--color-text, #0F172A);
+            background: var(--color-bg, #FFFFFF);
+            resize: vertical;
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+        }
+        .ocr-textarea:focus { border-color: var(--color-primary, #2563EB); }
+        .ocr-progress-box {
+            display: none;
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+        .ocr-progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--color-border, #CBD5E1);
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .ocr-progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--color-primary, #2563EB);
+            transition: width 0.2s ease;
+        }
+        .ocr-action-bar {
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .ocr-stats-badge {
+            font-size: 0.82rem;
+            color: var(--color-text-secondary, #64748B);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#image-tools">Image Tools</a>
+                <a href="../index.html#calculators">Finance</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Documents</a> &raquo; OCR Image to Text
+            </nav>
+
+            <div class="tool-container">
+                <div class="tool-main">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 0.5rem; flex-wrap:wrap; gap:0.5rem;">
+                        <div>
+                            <h1 style="font-size:1.85rem; font-weight:800; margin:0 0 0.35rem; letter-spacing:-0.02em;">OCR Image to Text Extractor</h1>
+                            <p class="tool-description" style="margin:0; font-size:0.95rem;">Extract text from images, receipts, handwritten notes, and scans 100% inside your browser.</p>
+                        </div>
+                        <span style="display:inline-flex; align-items:center; gap:0.35rem; background:rgba(16,185,129,0.12); color:#059669; border:1px solid rgba(16,185,129,0.3); padding:0.3rem 0.75rem; border-radius:999px; font-size:0.75rem; font-weight:700;">
+                            🔒 100% Client-Side Private
+                        </span>
+                    </div>
+
+                    <!-- Drop Zone -->
+                    <div class="ocr-drop-zone" id="ocrDropZone">
+                        <input type="file" id="ocrFileInput" accept="image/*" style="display:none;">
+                        <div class="ocr-drop-icon">🔍</div>
+                        <div class="ocr-drop-text">Click to choose image or drag &amp; drop here</div>
+                        <div class="ocr-drop-hint">Supports PNG, JPG, JPEG, WEBP, BMP · High-res recommended</div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="ocr-progress-box" id="ocrProgressBox">
+                        <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700;">
+                            <span id="ocrStatusText">Initializing In-Browser OCR Engine...</span>
+                            <span id="ocrPercentText">0%</span>
+                        </div>
+                        <div class="ocr-progress-bar-wrap">
+                            <div class="ocr-progress-bar-fill" id="ocrProgressBarFill"></div>
+                        </div>
+                        <div style="font-size:0.75rem; color:var(--color-text-secondary);">Processed locally with WebAssembly · Zero bytes sent to any server</div>
+                    </div>
+
+                    <!-- Results Workspace -->
+                    <div class="ocr-preview-container" id="ocrWorkspace" style="display:none;">
+                        <div class="ocr-image-preview">
+                            <img id="ocrPreviewImg" alt="OCR Source Preview">
+                            <button type="button" class="btn" id="reUploadBtn" style="margin-top:1rem; font-size:0.8rem; padding:0.4rem 0.8rem;">Change Image</button>
+                        </div>
+
+                        <div class="ocr-result-card">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                                <span style="font-weight:700; font-size:0.95rem;">Extracted Text:</span>
+                                <span class="ocr-stats-badge" id="ocrStatsBadge">0 words · 0 chars</span>
+                            </div>
+                            <textarea class="ocr-textarea" id="ocrTextOutput" placeholder="Recognized text will appear here... You can edit or refine it directly."></textarea>
+                            <div class="ocr-action-bar">
+                                <div style="display:flex; gap:0.5rem;">
+                                    <button type="button" class="btn btn-primary" id="copyTextBtn">📋 Copy Text</button>
+                                    <button type="button" class="btn" id="downloadTxtBtn">💾 Download .TXT</button>
+                                </div>
+                                <button type="button" class="btn" id="clearTextBtn" style="color:#EF4444;">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Tesseract.js v5 from Fast CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script>
+    (function() {
+        const dropZone = document.getElementById('ocrDropZone');
+        const fileInput = document.getElementById('ocrFileInput');
+        const progressBox = document.getElementById('ocrProgressBox');
+        const statusText = document.getElementById('ocrStatusText');
+        const percentText = document.getElementById('ocrPercentText');
+        const progressFill = document.getElementById('ocrProgressBarFill');
+        const workspace = document.getElementById('ocrWorkspace');
+        const previewImg = document.getElementById('ocrPreviewImg');
+        const textOutput = document.getElementById('ocrTextOutput');
+        const statsBadge = document.getElementById('ocrStatsBadge');
+        const copyBtn = document.getElementById('copyTextBtn');
+        const downloadBtn = document.getElementById('downloadTxtBtn');
+        const clearBtn = document.getElementById('clearTextBtn');
+        const reUploadBtn = document.getElementById('reUploadBtn');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        reUploadBtn.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                processImage(e.dataTransfer.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files && fileInput.files[0]) {
+                processImage(fileInput.files[0]);
+            }
+        });
+
+        function updateStats(text) {
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            statsBadge.textContent = `${words} words · ${chars} chars`;
+        }
+
+        textOutput.addEventListener('input', () => updateStats(textOutput.value));
+
+        async function processImage(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Please upload a valid image file (PNG, JPG, WEBP).');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const imgDataUrl = e.target.result;
+                previewImg.src = imgDataUrl;
+
+                dropZone.style.display = 'none';
+                progressBox.style.display = 'block';
+                workspace.style.display = 'none';
+                statusText.textContent = 'Loading Tesseract AI engine...';
+                progressFill.style.width = '10%';
+                percentText.textContent = '10%';
+
+                try {
+                    const result = await Tesseract.recognize(
+                        imgDataUrl,
+                        'eng',
+                        {
+                            logger: m => {
+                                if (m.status === 'recognizing text') {
+                                    const pct = Math.round((m.progress || 0) * 100);
+                                    statusText.textContent = `Recognizing text: ${pct}%`;
+                                    percentText.textContent = `${pct}%`;
+                                    progressFill.style.width = `${Math.max(10, pct)}%`;
+                                } else {
+                                    statusText.textContent = m.status;
+                                }
+                            }
+                        }
+                    );
+
+                    progressBox.style.display = 'none';
+                    workspace.style.display = 'grid';
+                    textOutput.value = result.data.text || '';
+                    updateStats(textOutput.value);
+
+                    // Attach support badge
+                    if (window.AmazingTools && window.AmazingTools.attachSupportBadge) {
+                        window.AmazingTools.attachSupportBadge(workspace, 'Extracted your text with 100% privacy?');
+                    }
+                } catch (err) {
+                    console.error('OCR Error:', err);
+                    progressBox.style.display = 'none';
+                    dropZone.style.display = 'block';
+                    alert('Error performing OCR on image. Please check your image format and try again.');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        copyBtn.addEventListener('click', () => {
+            if (!textOutput.value) return;
+            navigator.clipboard.writeText(textOutput.value).then(() => {
+                const oldText = copyBtn.textContent;
+                copyBtn.textContent = '✓ Copied!';
+                setTimeout(() => copyBtn.textContent = oldText, 2000);
+            });
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            if (!textOutput.value) return;
+            const blob = new Blob([textOutput.value], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ocr-extracted-text-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            textOutput.value = '';
+            updateStats('');
+            dropZone.style.display = 'block';
+            workspace.style.display = 'none';
+            fileInput.value = '';
+        });
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

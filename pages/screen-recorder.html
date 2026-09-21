@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Screen Recorder — No Download &amp; No Watermark | Amazing-Tools</title>
+    <meta name="description" content="Record your computer screen, browser tabs, or application windows with system and microphone audio directly in your browser. 100% private, zero uploads, no watermark.">
+    <meta name="keywords" content="screen recorder online, free screen recorder, record screen no download, browser screen capture, record tab audio, screen recorder no watermark, free video recorder">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/screen-recorder.html">
+    <meta property="og:title" content="Free Online Screen Recorder — No Download &amp; No Watermark | Amazing-Tools">
+    <meta property="og:description" content="100% private browser screen recorder. System &amp; mic audio, high quality, zero server uploads.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free Online Screen Recorder",
+      "url": "https://amazing-tools.github.io/pages/screen-recorder.html",
+      "description": "Capture screen and audio directly in browser with zero watermark and zero uploads.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .sr-box {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        .sr-config-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #E2E8F0);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .sr-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .sr-field label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-text-secondary, #64748B);
+        }
+        .sr-field select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 6px;
+            background: var(--color-bg, #FFFFFF);
+            color: var(--color-text, #0F172A);
+            font-size: 0.88rem;
+        }
+        .sr-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .sr-record-btn {
+            background: #EF4444;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 999px;
+            padding: 0.85rem 2rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+            transition: all 0.2s;
+        }
+        .sr-record-btn:hover {
+            background: #DC2626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+        .sr-pause-btn, .sr-stop-btn {
+            border-radius: 999px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .sr-pause-btn {
+            background: var(--color-bg-alt, #F1F5F9);
+            border: 1px solid var(--color-border, #CBD5E1);
+            color: var(--color-text, #0F172A);
+        }
+        .sr-stop-btn {
+            background: #0F172A;
+            color: #FFFFFF;
+            border: none;
+        }
+        .sr-timer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #FEE2E2;
+            color: #DC2626;
+            border-radius: 999px;
+            padding: 0.45rem 1.1rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .sr-pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: #DC2626;
+            border-radius: 50%;
+            animation: srPulse 1.2s infinite;
+        }
+        @keyframes srPulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.4; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+        .sr-viewport {
+            background: #0F172A;
+            border-radius: 10px;
+            overflow: hidden;
+            min-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        .sr-viewport video {
+            width: 100%;
+            max-height: 540px;
+            display: block;
+            background: #000;
+        }
+        .sr-placeholder-state {
+            text-align: center;
+            color: #94A3B8;
+            padding: 2rem;
+        }
+        .sr-placeholder-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.8;
+        }
+        .sr-download-bar {
+            display: none;
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1.5px solid #10B981;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#media-tools">Media</a>
+                <a href="../index.html#calculators">Finance</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; Screen Recorder
+            </nav>
+
+            <div class="sr-box">
+                <div style="text-align:center; margin-bottom:1.5rem;">
+                    <h1 style="font-size:1.8rem; font-weight:800; margin:0 0 0.35rem;">Free In-Browser Screen Recorder</h1>
+                    <p style="color:var(--color-text-secondary); font-size:0.92rem; margin:0;">Record full screen, windows, or tabs with system &amp; mic audio. 100% private, no software install, no watermark.</p>
+                </div>
+
+                <!-- Settings -->
+                <div class="sr-config-bar" id="srConfigBar">
+                    <div class="sr-field">
+                        <label>Audio Source</label>
+                        <select id="audioOption">
+                            <option value="both">System Audio + Microphone</option>
+                            <option value="system">System / Tab Audio Only</option>
+                            <option value="mic">Microphone Only</option>
+                            <option value="none">No Audio (Mute)</option>
+                        </select>
+                    </div>
+                    <div class="sr-field">
+                        <label>Resolution Quality</label>
+                        <select id="qualityOption">
+                            <option value="1080">1080p Full HD (Crisp)</option>
+                            <option value="720">720p HD (Balanced)</option>
+                            <option value="native">Native Screen Resolution</option>
+                        </select>
+                    </div>
+                    <div class="sr-field">
+                        <label>Frame Rate</label>
+                        <select id="fpsOption">
+                            <option value="60">60 FPS (Smooth Motion)</option>
+                            <option value="30" selected>30 FPS (Standard)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="sr-controls">
+                    <button type="button" id="startBtn" class="sr-record-btn">
+                        <span>🔴</span> Start Recording
+                    </button>
+                    <button type="button" id="pauseBtn" class="sr-pause-btn" style="display:none;">
+                        <span>⏸️</span> Pause
+                    </button>
+                    <button type="button" id="resumeBtn" class="sr-pause-btn" style="display:none;">
+                        <span>▶️</span> Resume
+                    </button>
+                    <button type="button" id="stopBtn" class="sr-stop-btn" style="display:none;">
+                        <span>⏹️</span> Finish Recording
+                    </button>
+                    <div class="sr-timer-badge" id="timerBadge" style="display:none;">
+                        <span class="sr-pulse-dot"></span>
+                        <span id="timerText">00:00:00</span>
+                    </div>
+                </div>
+
+                <!-- Video Viewport -->
+                <div class="sr-viewport">
+                    <div id="srPlaceholder" class="sr-placeholder-state">
+                        <div class="sr-placeholder-icon">🖥️</div>
+                        <h3 style="color:#F8FAFC; margin:0 0 0.5rem; font-size:1.15rem;">Ready to Record</h3>
+                        <p style="margin:0; font-size:0.85rem; max-width:420px; line-height:1.5;">Click "Start Recording" above. Your browser will prompt you to pick which window, screen, or browser tab to capture.</p>
+                    </div>
+                    <video id="previewVideo" autoplay playsinline muted style="display:none;"></video>
+                </div>
+
+                <!-- Post-Recording Action Strip -->
+                <div class="sr-download-bar" id="downloadBar">
+                    <div>
+                        <h4 style="margin:0 0 0.25rem; font-size:1.05rem; color:#0F172A;">🎉 Recording Complete!</h4>
+                        <p id="fileMetaLabel" style="margin:0; font-size:0.82rem; color:var(--color-text-secondary);">Your video is ready to save.</p>
+                    </div>
+                    <div style="display:flex; gap:0.65rem; flex-wrap:wrap;">
+                        <button type="button" class="btn btn-primary" id="downloadWebmBtn">💾 Download Video (.webm)</button>
+                        <button type="button" class="btn" id="recordAgainBtn">Record Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div class="tool-description">
+                <h2>Why Use Amazing-Tools Online Screen Recorder?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Absolute Privacy</h3>
+                        <p>Your video streams and audio are encoded purely in your browser memory. Nothing is ever uploaded to remote servers or cloud storage.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🚫</div>
+                        <h3>Zero Watermarks &amp; No Limits</h3>
+                        <p>Enjoy clean, unrestricted recordings without annoying brand watermarks, artificial time limits, or quality downgrades.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎙️</div>
+                        <h3>System &amp; Mic Audio Mixing</h3>
+                        <p>Simultaneously record game sound, Zoom/Meet meetings, video tutorials, or system audio while narrating with your microphone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing-Tools. Free Client-Side Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let screenStream = null;
+        let micStream = null;
+        let combinedStream = null;
+        let startTime = null;
+        let timerInterval = null;
+        let elapsedBeforePause = 0;
+        let isPaused = false;
+        let recordedBlob = null;
+
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resumeBtn = document.getElementById('resumeBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const timerBadge = document.getElementById('timerBadge');
+        const timerText = document.getElementById('timerText');
+        const srPlaceholder = document.getElementById('srPlaceholder');
+        const previewVideo = document.getElementById('previewVideo');
+        const downloadBar = document.getElementById('downloadBar');
+        const downloadWebmBtn = document.getElementById('downloadWebmBtn');
+        const recordAgainBtn = document.getElementById('recordAgainBtn');
+        const fileMetaLabel = document.getElementById('fileMetaLabel');
+        const srConfigBar = document.getElementById('srConfigBar');
+
+        const audioOption = document.getElementById('audioOption');
+        const qualityOption = document.getElementById('qualityOption');
+        const fpsOption = document.getElementById('fpsOption');
+
+        function formatTimer(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const hrs = String(Math.floor(totalSec / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((totalSec % 3600) / 60)).padStart(2, '0');
+            const secs = String(totalSec % 60).padStart(2, '0');
+            return `${hrs}:${mins}:${secs}`;
+        }
+
+        function startTimer() {
+            startTime = Date.now() - elapsedBeforePause;
+            timerInterval = setInterval(() => {
+                if (!isPaused) {
+                    const elapsed = Date.now() - startTime;
+                    timerText.textContent = formatTimer(elapsed);
+                }
+            }, 500);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            elapsedBeforePause = 0;
+        }
+
+        async function startRecording() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+                alert('Your browser does not support screen recording. Please use modern Chrome, Edge, Firefox, or Safari.');
+                return;
+            }
+
+            recordedChunks = [];
+            recordedBlob = null;
+            downloadBar.style.display = 'none';
+
+            // Configure video constraints
+            const fps = parseInt(fpsOption.value, 10) || 30;
+            const videoConstraints = {
+                frameRate: { ideal: fps, max: fps }
+            };
+
+            if (qualityOption.value === '1080') {
+                videoConstraints.width = { ideal: 1920 };
+                videoConstraints.height = { ideal: 1080 };
+            } else if (qualityOption.value === '720') {
+                videoConstraints.width = { ideal: 1280 };
+                videoConstraints.height = { ideal: 720 };
+            }
+
+            const audioMode = audioOption.value;
+            const wantSystemAudio = audioMode === 'both' || audioMode === 'system';
+            const wantMicAudio = audioMode === 'both' || audioMode === 'mic';
+
+            try {
+                // 1. Get Screen Stream
+                screenStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: videoConstraints,
+                    audio: wantSystemAudio ? { echoCancellation: true, noiseSuppression: true } : false
+                });
+
+                // User stopped screen sharing via browser native floating bar
+                screenStream.getVideoTracks()[0].onended = () => {
+                    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                        stopRecording();
+                    }
+                };
+
+                // 2. Handle Audio Mixing
+                const tracks = [...screenStream.getVideoTracks()];
+
+                if (wantMicAudio) {
+                    try {
+                        micStream = await navigator.mediaDevices.getUserMedia({
+                            audio: { echoCancellation: true, noiseSuppression: true }
+                        });
+                    } catch (e) {
+                        console.warn('Microphone permission denied or unavailable:', e);
+                    }
+                }
+
+                if (wantSystemAudio && screenStream.getAudioTracks().length > 0 && micStream) {
+                    // Mix both with Web Audio API
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const dest = audioCtx.createMediaStreamDestination();
+
+                    const sysSource = audioCtx.createMediaStreamSource(new MediaStream(screenStream.getAudioTracks()));
+                    const micSource = audioCtx.createMediaStreamSource(micStream);
+
+                    sysSource.connect(dest);
+                    micSource.connect(dest);
+
+                    dest.stream.getAudioTracks().forEach(t => tracks.push(t));
+                } else if (micStream && micStream.getAudioTracks().length > 0) {
+                    micStream.getAudioTracks().forEach(t => tracks.push(t));
+                } else if (wantSystemAudio && screenStream.getAudioTracks().length > 0) {
+                    screenStream.getAudioTracks().forEach(t => tracks.push(t));
+                }
+
+                combinedStream = new MediaStream(tracks);
+
+                // Preview screen
+                previewVideo.srcObject = screenStream;
+                previewVideo.muted = true;
+                previewVideo.style.display = 'block';
+                srPlaceholder.style.display = 'none';
+
+                // Codec selection
+                let options = { mimeType: 'video/webm;codecs=vp9,opus' };
+                if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                    options = { mimeType: 'video/webm;codecs=vp8,opus' };
+                }
+                if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                    options = { mimeType: 'video/webm' };
+                }
+
+                mediaRecorder = new MediaRecorder(combinedStream, options);
+
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    recordedBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
+                    previewVideo.srcObject = null;
+                    previewVideo.src = URL.createObjectURL(recordedBlob);
+                    previewVideo.muted = false;
+                    previewVideo.controls = true;
+
+                    const sizeMb = (recordedBlob.size / (1024 * 1024)).toFixed(2);
+                    fileMetaLabel.textContent = `Size: ${sizeMb} MB • Format: WebM (${mediaRecorder.mimeType})`;
+                    downloadBar.style.display = 'flex';
+                    downloadBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    // Cleanup streams
+                    if (screenStream) screenStream.getTracks().forEach(t => t.stop());
+                    if (micStream) micStream.getTracks().forEach(t => t.stop());
+                };
+
+                mediaRecorder.start(1000); // 1-second chunks
+
+                // Update UI State
+                startBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-flex';
+                stopBtn.style.display = 'inline-flex';
+                timerBadge.style.display = 'inline-flex';
+                srConfigBar.style.opacity = '0.5';
+                srConfigBar.style.pointerEvents = 'none';
+
+                startTimer();
+
+            } catch (err) {
+                console.error('Screen capture error:', err);
+                resetUi();
+            }
+        }
+
+        function pauseRecording() {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.pause();
+                isPaused = true;
+                elapsedBeforePause = Date.now() - startTime;
+                pauseBtn.style.display = 'none';
+                resumeBtn.style.display = 'inline-flex';
+            }
+        }
+
+        function resumeRecording() {
+            if (mediaRecorder && mediaRecorder.state === 'paused') {
+                mediaRecorder.resume();
+                isPaused = false;
+                startTime = Date.now() - elapsedBeforePause;
+                resumeBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-flex';
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+                stopTimer();
+                resetUi();
+            }
+        }
+
+        function resetUi() {
+            startBtn.style.display = 'inline-flex';
+            pauseBtn.style.display = 'none';
+            resumeBtn.style.display = 'none';
+            stopBtn.style.display = 'none';
+            timerBadge.style.display = 'none';
+            timerText.textContent = '00:00:00';
+            srConfigBar.style.opacity = '1';
+            srConfigBar.style.pointerEvents = 'auto';
+            isPaused = false;
+        }
+
+        startBtn.addEventListener('click', startRecording);
+        pauseBtn.addEventListener('click', pauseRecording);
+        resumeBtn.addEventListener('click', resumeRecording);
+        stopBtn.addEventListener('click', stopRecording);
+
+        downloadWebmBtn.addEventListener('click', () => {
+            if (!recordedBlob) return;
+            const url = URL.createObjectURL(recordedBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `screen-recording-${Date.now()}.webm`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        recordAgainBtn.addEventListener('click', () => {
+            previewVideo.style.display = 'none';
+            previewVideo.src = '';
+            srPlaceholder.style.display = 'block';
+            downloadBar.style.display = 'none';
+            resetUi();
+        });
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

@@ -335,7 +335,7 @@
       }
 
       // Show confirmation toast
-      const toast = document.getElementById('themeToast');
+      const toast = document.getElementById('generalToast') || document.getElementById('themeToast');
       if (toast) {
         toast.textContent = '✅ Thanks for your feedback!';
         toast.style.display = 'block';

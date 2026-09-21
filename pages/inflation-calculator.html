@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflation &amp; Purchasing Power Calculator — Future Value Loss | Amazing-Tools</title>
+    <meta name="description" content="Calculate how inflation impacts your money's purchasing power over time. Compare future value depreciation, lifestyle cost escalation, and yearly compound schedule.">
+    <meta name="keywords" content="inflation calculator, purchasing power calculator, money value loss, future value inflation, cost of living calculator, cpi calculator, financial planner">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/inflation-calculator.html">
+    <meta property="og:title" content="Inflation &amp; Purchasing Power Calculator — Future Value Loss | Amazing-Tools">
+    <meta property="og:description" content="Simulate inflation impact on savings and retirement. 100% private in-browser financial calculator.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Inflation & Purchasing Power Calculator",
+      "url": "https://amazing-tools.github.io/pages/inflation-calculator.html",
+      "description": "Calculate inflation and purchasing power decay with compounding yearly schedules.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .inf-container {
+            max-width: 1040px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        @media (max-width: 850px) {
+            .inf-container { grid-template-columns: 1fr; }
+        }
+        .inf-card {
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+        }
+        .inf-mode-selector {
+            display: flex;
+            background: var(--color-bg-alt, #F1F5F9);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+            gap: 4px;
+        }
+        .inf-mode-btn {
+            flex: 1;
+            padding: 0.5rem 0.6rem;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--color-text-secondary, #64748B);
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .inf-mode-btn.active {
+            background: var(--color-bg, #FFFFFF);
+            color: var(--color-primary, #2563EB);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            font-weight: 700;
+        }
+        .inf-form-group {
+            margin-bottom: 1.25rem;
+        }
+        .inf-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--color-text, #0F172A);
+            margin-bottom: 0.35rem;
+        }
+        .inf-input-wrap {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 8px;
+            background: var(--color-bg, #FFFFFF);
+            overflow: hidden;
+        }
+        .inf-currency-symbol {
+            padding: 0.55rem 0.85rem;
+            background: var(--color-bg-alt, #F8FAFC);
+            border-right: 1px solid var(--color-border, #CBD5E1);
+            font-weight: 700;
+            color: var(--color-text-secondary, #64748B);
+        }
+        .inf-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.55rem 0.85rem;
+            font-size: 1rem;
+            font-family: inherit;
+            background: transparent;
+            color: var(--color-text, #0F172A);
+        }
+        .inf-slider {
+            width: 100%;
+            margin-top: 0.45rem;
+        }
+        .inf-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.4rem;
+        }
+        .inf-preset-chip {
+            font-size: 0.74rem;
+            background: var(--color-bg-alt, #F1F5F9);
+            border: 1px solid var(--color-border, #E2E8F0);
+            padding: 0.2rem 0.5rem;
+            border-radius: 999px;
+            cursor: pointer;
+            color: var(--color-text-secondary, #475569);
+            transition: all 0.15s;
+        }
+        .inf-preset-chip:hover, .inf-preset-chip.active {
+            background: var(--color-primary-light, #EFF6FF);
+            border-color: var(--color-primary, #2563EB);
+            color: var(--color-primary, #2563EB);
+            font-weight: 600;
+        }
+
+        /* Results Display */
+        .inf-stat-highlight {
+            background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(16,185,129,0.06));
+            border: 1.5px solid var(--color-primary, #2563EB);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .inf-stat-label {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-text-secondary, #64748B);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .inf-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'Fira Code', monospace;
+            color: var(--color-text, #0F172A);
+            letter-spacing: -0.02em;
+        }
+        .inf-stat-sub {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary, #64748B);
+            margin-top: 0.25rem;
+        }
+        .inf-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .inf-mini-stat {
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #E2E8F0);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .inf-mini-val {
+            font-size: 1.25rem;
+            font-weight: 800;
+            font-family: 'Fira Code', monospace;
+            color: #DC2626;
+            margin-top: 0.2rem;
+        }
+        .inf-table-wrap {
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 8px;
+            scrollbar-width: thin;
+        }
+        .inf-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+        }
+        .inf-table th {
+            position: sticky;
+            top: 0;
+            background: var(--color-bg-alt, #F1F5F9);
+            padding: 0.55rem 0.75rem;
+            border-bottom: 1.5px solid var(--color-border, #CBD5E1);
+            font-weight: 700;
+            text-align: right;
+        }
+        .inf-table th:first-child, .inf-table td:first-child { text-align: left; }
+        .inf-table td {
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid var(--color-border, #E2E8F0);
+            text-align: right;
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#calculators">Finance</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Financial Tools</a> &raquo; Inflation &amp; Purchasing Power
+            </nav>
+
+            <div style="text-align:center; max-width:700px; margin:0 auto 2rem;">
+                <h1 style="font-size:1.8rem; font-weight:800; margin:0 0 0.35rem;">Inflation &amp; Purchasing Power Calculator</h1>
+                <p style="color:var(--color-text-secondary); font-size:0.92rem; margin:0;">Understand how annual inflation silently erodes your wealth over 5, 10, 20, or 30 years.</p>
+            </div>
+
+            <div class="inf-container">
+                <!-- Inputs -->
+                <div class="inf-card">
+                    <div class="inf-mode-selector">
+                        <button type="button" class="inf-mode-btn active" data-mode="decay">Loss of Purchasing Power</button>
+                        <button type="button" class="inf-mode-btn" data-mode="target">Future Cost of Lifestyle</button>
+                    </div>
+
+                    <div class="inf-form-group">
+                        <div class="inf-label">
+                            <span>Starting Amount</span>
+                            <select id="currencyPicker" style="border:none; background:transparent; color:var(--color-primary); font-weight:700; cursor:pointer;">
+                                <option value="₹">₹ INR</option>
+                                <option value="$">$ USD</option>
+                                <option value="€">€ EUR</option>
+                                <option value="£">£ GBP</option>
+                                <option value="C$">C$ CAD</option>
+                                <option value="A$">A$ AUD</option>
+                            </select>
+                        </div>
+                        <div class="inf-input-wrap">
+                            <span class="inf-currency-symbol" id="currSymLabel">₹</span>
+                            <input type="number" id="principalInput" class="inf-input" value="1000000" step="10000" min="100">
+                        </div>
+                    </div>
+
+                    <div class="inf-form-group">
+                        <div class="inf-label">
+                            <span>Annual Inflation Rate</span>
+                            <span id="rateLabel" style="font-family:'Fira Code', monospace; color:var(--color-primary);">6.0%</span>
+                        </div>
+                        <input type="range" id="rateSlider" class="inf-slider" min="1.0" max="15.0" step="0.1" value="6.0">
+                        <div class="inf-presets">
+                            <span class="inf-preset-chip" data-rate="2.0">US Fed Target (2.0%)</span>
+                            <span class="inf-preset-chip" data-rate="3.2">US Historical (3.2%)</span>
+                            <span class="inf-preset-chip active" data-rate="6.0">India Average (6.0%)</span>
+                            <span class="inf-preset-chip" data-rate="8.0">High Inflation (8.0%)</span>
+                        </div>
+                    </div>
+
+                    <div class="inf-form-group">
+                        <div class="inf-label">
+                            <span>Time Horizon</span>
+                            <span id="yearsLabel" style="font-family:'Fira Code', monospace; color:var(--color-primary);">15 Years</span>
+                        </div>
+                        <input type="range" id="yearsSlider" class="inf-slider" min="1" max="40" step="1" value="15">
+                        <div class="inf-presets">
+                            <span class="inf-preset-chip" data-years="5">5 Yrs</span>
+                            <span class="inf-preset-chip" data-years="10">10 Yrs</span>
+                            <span class="inf-preset-chip active" data-years="15">15 Yrs</span>
+                            <span class="inf-preset-chip" data-years="25">25 Yrs</span>
+                            <span class="inf-preset-chip" data-years="30">30 Yrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outputs -->
+                <div class="inf-card">
+                    <div class="inf-stat-highlight">
+                        <div class="inf-stat-label" id="mainStatTitle">Purchasing Power in 15 Years</div>
+                        <div class="inf-stat-number" id="mainStatNum">₹ 4,17,265</div>
+                        <div class="inf-stat-sub" id="mainStatDesc">Equals only 41.7% of today's initial purchasing power</div>
+                    </div>
+
+                    <div class="inf-stats-grid">
+                        <div class="inf-mini-stat">
+                            <div class="inf-stat-label">Value Destroyed by Inflation</div>
+                            <div class="inf-mini-val" id="lossPctNum">-58.3%</div>
+                        </div>
+                        <div class="inf-mini-stat">
+                            <div class="inf-stat-label">Cost Escalation Multiplier</div>
+                            <div class="inf-mini-val" id="multiplierNum" style="color:#2563EB;">2.40x</div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin:0 0 0.5rem; font-size:0.9rem; font-weight:700;">Year-by-Year Depreciation Schedule</h4>
+                    <div class="inf-table-wrap">
+                        <table class="inf-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Real Value</th>
+                                    <th>Value Lost</th>
+                                    <th>Retained Power</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div class="tool-description">
+                <h2>Why Factor In Inflation for Long-Term Planning?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">📉</div>
+                        <h3>The Silent Wealth Destroyer</h3>
+                        <p>At 6% annual inflation, money loses over 50% of its purchasing power in roughly 12 years (Rule of 72). A corpus of ₹1 Crore today will only buy ₹40 Lakhs worth of goods in 15 years.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Target Future Expenses Accurately</h3>
+                        <p>Switch to "Future Cost of Lifestyle" mode to calculate how much income your retirement savings or investments must generate to maintain your current standard of living.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% In-Browser &amp; Private</h3>
+                        <p>None of your personal investment amounts, savings balances, or financial calculations are stored or shared on external servers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing-Tools. Free Client-Side Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        let currentMode = 'decay'; // 'decay' or 'target'
+        const principalInput = document.getElementById('principalInput');
+        const rateSlider = document.getElementById('rateSlider');
+        const yearsSlider = document.getElementById('yearsSlider');
+        const rateLabel = document.getElementById('rateLabel');
+        const yearsLabel = document.getElementById('yearsLabel');
+        const currencyPicker = document.getElementById('currencyPicker');
+        const currSymLabel = document.getElementById('currSymLabel');
+
+        const mainStatTitle = document.getElementById('mainStatTitle');
+        const mainStatNum = document.getElementById('mainStatNum');
+        const mainStatDesc = document.getElementById('mainStatDesc');
+        const lossPctNum = document.getElementById('lossPctNum');
+        const multiplierNum = document.getElementById('multiplierNum');
+        const scheduleTableBody = document.getElementById('scheduleTableBody');
+
+        function formatMoney(amount, sym) {
+            if (sym === '₹') {
+                return sym + ' ' + formatIndian(Math.round(amount));
+            }
+            return sym + ' ' + Math.round(amount).toLocaleString();
+        }
+
+        function formatIndian(num) {
+            const str = String(num);
+            if (str.length <= 3) return str;
+            let lastThree = str.substring(str.length - 3);
+            let otherNumbers = str.substring(0, str.length - 3);
+            if (otherNumbers !== '') lastThree = ',' + lastThree;
+            return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThree;
+        }
+
+        function calculate() {
+            const P = parseFloat(principalInput.value) || 0;
+            const r = (parseFloat(rateSlider.value) || 0) / 100;
+            const t = parseInt(yearsSlider.value, 10) || 1;
+            const sym = currencyPicker.value;
+
+            rateLabel.textContent = `${(r * 100).toFixed(1)}%`;
+            yearsLabel.textContent = `${t} Year${t > 1 ? 's' : ''}`;
+            currSymLabel.textContent = sym;
+
+            if (currentMode === 'decay') {
+                // Real Value after t years = P / ((1 + r) ^ t)
+                const realValue = P / Math.pow(1 + r, t);
+                const lostValue = P - realValue;
+                const lostPct = ((lostValue / P) * 100).toFixed(1);
+                const retainedPct = ((realValue / P) * 100).toFixed(1);
+                const multiplier = Math.pow(1 + r, t).toFixed(2);
+
+                mainStatTitle.textContent = `Purchasing Power in ${t} Years`;
+                mainStatNum.textContent = formatMoney(realValue, sym);
+                mainStatDesc.textContent = `Equals only ${retainedPct}% of today's initial purchasing power`;
+                lossPctNum.textContent = `-${lostPct}%`;
+                lossPctNum.style.color = '#DC2626';
+                multiplierNum.textContent = `${multiplier}x`;
+
+                // Schedule table
+                let rowsHtml = '';
+                for (let y = 1; y <= t; y++) {
+                    const yVal = P / Math.pow(1 + r, y);
+                    const yLost = P - yVal;
+                    const yRetained = ((yVal / P) * 100).toFixed(1);
+                    rowsHtml += `
+                        <tr>
+                            <td>Year ${y}</td>
+                            <td>${formatMoney(yVal, sym)}</td>
+                            <td style="color:#DC2626;">-${formatMoney(yLost, sym)}</td>
+                            <td style="color:#10B981;">${yRetained}%</td>
+                        </tr>
+                    `;
+                }
+                scheduleTableBody.innerHTML = rowsHtml;
+
+            } else {
+                // Target future expense = P * ((1 + r) ^ t)
+                const neededFuture = P * Math.pow(1 + r, t);
+                const extraNeeded = neededFuture - P;
+                const extraPct = ((extraNeeded / P) * 100).toFixed(1);
+                const multiplier = Math.pow(1 + r, t).toFixed(2);
+
+                mainStatTitle.textContent = `Future Amount Needed in ${t} Years`;
+                mainStatNum.textContent = formatMoney(neededFuture, sym);
+                mainStatDesc.textContent = `You will need ${extraPct}% more money to buy the exact same goods`;
+                lossPctNum.textContent = `+${extraPct}%`;
+                lossPctNum.style.color = '#2563EB';
+                multiplierNum.textContent = `${multiplier}x`;
+
+                // Schedule table
+                let rowsHtml = '';
+                for (let y = 1; y <= t; y++) {
+                    const yNeeded = P * Math.pow(1 + r, y);
+                    const yExtra = yNeeded - P;
+                    const yMult = Math.pow(1 + r, y).toFixed(2);
+                    rowsHtml += `
+                        <tr>
+                            <td>Year ${y}</td>
+                            <td>${formatMoney(yNeeded, sym)}</td>
+                            <td style="color:#2563EB;">+${formatMoney(yExtra, sym)}</td>
+                            <td>${yMult}x</td>
+                        </tr>
+                    `;
+                }
+                scheduleTableBody.innerHTML = rowsHtml;
+            }
+        }
+
+        principalInput.addEventListener('input', calculate);
+        rateSlider.addEventListener('input', calculate);
+        yearsSlider.addEventListener('input', calculate);
+        currencyPicker.addEventListener('change', calculate);
+
+        document.querySelectorAll('.inf-mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.inf-mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+                calculate();
+            });
+        });
+
+        // Preset rate chips
+        document.querySelectorAll('.inf-preset-chip[data-rate]').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.inf-preset-chip[data-rate]').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                rateSlider.value = chip.dataset.rate;
+                calculate();
+            });
+        });
+
+        // Preset years chips
+        document.querySelectorAll('.inf-preset-chip[data-years]').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.inf-preset-chip[data-years]').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                yearsSlider.value = chip.dataset.years;
+                calculate();
+            });
+        });
+
+        calculate();
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

@@ -678,9 +678,11 @@
     };
 
     const isMini = () => {
+      if (!portalSidebar) return false;
       return (
-        window.innerWidth > 1024 &&
-        (document.body.classList.contains('sidebar-collapsed') || portalSidebar.classList.contains('is-collapsed'))
+        document.body.classList.contains('sidebar-collapsed') ||
+        portalSidebar.classList.contains('is-collapsed') ||
+        portalSidebar.offsetWidth <= 80
       );
     };
 
@@ -809,7 +811,8 @@
 
       // Position flyout
       const rect = section.getBoundingClientRect();
-      flyout.style.left = '70px';
+      const sidebarRect = portalSidebar.getBoundingClientRect();
+      flyout.style.left = (sidebarRect.right + 4) + 'px';
       flyout.classList.add('is-visible');
 
       const flyoutHeight = flyout.offsetHeight || 300;
@@ -850,7 +853,7 @@
       if (hideTimeout) clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
         closeSidebarMiniFlyout();
-      }, 190);
+      }, 320);
     };
 
     // Attach hover listeners to all sidebar sections
@@ -859,6 +862,13 @@
       section.addEventListener('mouseenter', () => {
         if (isMini()) showFlyoutFor(section);
       });
+
+      const labelBtn = section.querySelector('.sb-section-label');
+      if (labelBtn) {
+        labelBtn.addEventListener('mouseenter', () => {
+          if (isMini()) showFlyoutFor(section);
+        });
+      }
 
       section.addEventListener('mouseleave', (e) => {
         if (isMini()) {
@@ -1077,6 +1087,14 @@
     'tip-calculator': { title: 'Tip & Bill Split Calculator', category: 'Everyday Calculators', url: 'pages/tip-calculator.html' },
     'bmi-calculator': { title: 'BMI & Body Health Calculator', category: 'Health & Fitness', url: 'pages/bmi-calculator.html' },
     'markdown-previewer': { title: 'Markdown Live Editor & Previewer', category: 'Developer Tools', url: 'pages/markdown-previewer.html' },
+    'ocr-tool': { title: 'OCR Image to Text Extractor', category: 'Document Tools', url: 'pages/ocr-tool.html' },
+    'invoice-generator': { title: 'Free Invoice Generator', category: 'Document Tools', url: 'pages/invoice-generator.html' },
+    'resume-builder': { title: 'ATS Resume Builder & CV Maker', category: 'Document Tools', url: 'pages/resume-builder.html' },
+    'markdown-to-pdf': { title: 'Markdown to PDF Converter', category: 'Document Tools', url: 'pages/markdown-to-pdf.html' },
+    'youtube-thumbnail': { title: 'YouTube Thumbnail Downloader', category: 'Media Tools', url: 'pages/youtube-thumbnail.html' },
+    'screen-recorder': { title: 'In-Browser Screen Recorder', category: 'Media Tools', url: 'pages/screen-recorder.html' },
+    'audio-converter': { title: 'Audio Cutter & Converter', category: 'Media Tools', url: 'pages/audio-converter.html' },
+    'inflation-calculator': { title: 'Inflation & Purchasing Power Calculator', category: 'Finance Planner', url: 'pages/inflation-calculator.html' },
     'support': { title: 'Support Amazing-Tools', category: 'About', url: 'support.html' },
     'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
     'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
@@ -1141,23 +1159,27 @@
       badge: '🎥 Video & Media Suite',
       tools: [
         { slug: 'video-downloader', name: 'Universal Downloader', icon: '📥', url: 'pages/video-downloader.html' },
+        { slug: 'screen-recorder', name: 'Screen Recorder', icon: '📹', url: 'pages/screen-recorder.html' },
+        { slug: 'youtube-thumbnail', name: 'Thumbnail Grabber', icon: '🖼️', url: 'pages/youtube-thumbnail.html' },
+        { slug: 'audio-converter', name: 'Audio Cutter', icon: '🎵', url: 'pages/audio-converter.html' },
         { slug: 'video-audio', name: 'MP3 Extract', icon: '🎵', url: 'pages/video-downloader.html#audio' },
         { slug: 'video-shorts', name: 'Reels & Shorts', icon: '📱', url: 'pages/video-downloader.html#shorts' },
         { slug: 'video-youtube', name: 'YouTube HD', icon: '▶️', url: 'pages/video-downloader.html#youtube' }
       ],
-      matches: ['video-downloader', 'video-audio', 'video-shorts', 'video-youtube']
+      matches: ['video-downloader', 'screen-recorder', 'youtube-thumbnail', 'audio-converter', 'video-audio', 'video-shorts', 'video-youtube']
     },
     {
       id: 'loans',
-      badge: '🏦 Loans & Debt Suite',
+      badge: '🏦 Loans & Wealth Suite',
       tools: [
         { slug: 'emi-calculator', name: 'EMI Calculator', icon: '📊', url: 'pages/emi-calculator.html' },
         { slug: 'prepayment', name: 'Prepayment Planner', icon: '💰', url: 'pages/emi-calculator.html#prepay' },
+        { slug: 'inflation-calculator', name: 'Inflation Planner', icon: '📉', url: 'pages/inflation-calculator.html' },
         { slug: 'buy-vs-rent-calculator', name: 'Buy vs Rent', icon: '🏡', url: 'pages/buy-vs-rent-calculator.html' },
         { slug: 'fd-calculator', name: 'FD Calculator', icon: '🏛️', url: 'pages/fd-calculator.html' },
         { slug: 'rd-calculator', name: 'RD Calculator', icon: '💳', url: 'pages/rd-calculator.html' }
       ],
-      matches: ['emi-calculator', 'prepayment', 'buy-vs-rent-calculator', 'fd-calculator', 'rd-calculator']
+      matches: ['emi-calculator', 'prepayment', 'inflation-calculator', 'buy-vs-rent-calculator', 'fd-calculator', 'rd-calculator']
     },
     {
       id: 'tax',
@@ -1474,6 +1496,11 @@
         closeToolPanel();
       }
     }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkUrlHash);
+  } else {
+    checkUrlHash();
   }
   window.addEventListener('load', checkUrlHash);
   window.addEventListener('hashchange', checkUrlHash);

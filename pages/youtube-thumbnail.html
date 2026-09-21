@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Downloader — Free HD &amp; 1080p Grabber | Amazing-Tools</title>
+    <meta name="description" content="Download high resolution YouTube video thumbnails in Max Res (1080p), HD (720p), SD, and MQ. Free, instant, zero ads, no login required.">
+    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, youtube thumbnail grabber, youtube cover downloader, hd youtube thumbnail, 1080p thumbnail download">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/youtube-thumbnail.html">
+    <meta property="og:title" content="YouTube Thumbnail Downloader — Free HD &amp; 1080p Grabber | Amazing-Tools">
+    <meta property="og:description" content="Download full quality YouTube thumbnails in 1080p, 720p, and SD. 100% free and instant.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "YouTube Thumbnail Downloader",
+      "url": "https://amazing-tools.github.io/pages/youtube-thumbnail.html",
+      "description": "Download high quality YouTube thumbnails in 1080p, 720p, and 480p with zero ads.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .yt-box {
+            max-width: 860px;
+            margin: 0 auto 2.5rem;
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        .yt-input-wrap {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 600px) {
+            .yt-input-wrap { flex-direction: column; }
+        }
+        .yt-url-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            border: 1.5px solid var(--color-border, #CBD5E1);
+            border-radius: 8px;
+            background: var(--color-bg, #FFFFFF);
+            color: var(--color-text, #0F172A);
+        }
+        .yt-url-input:focus {
+            outline: none;
+            border-color: #EF4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+        .yt-get-btn {
+            background: #EF4444;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .yt-get-btn:hover {
+            background: #DC2626;
+            transform: translateY(-1px);
+        }
+        .yt-samples-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary, #64748B);
+            margin-bottom: 1.5rem;
+        }
+        .yt-sample-chip {
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #E2E8F0);
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            cursor: pointer;
+            color: var(--color-text, #0F172A);
+            font-size: 0.76rem;
+            transition: all 0.15s;
+        }
+        .yt-sample-chip:hover {
+            border-color: #EF4444;
+            color: #EF4444;
+        }
+
+        /* Results Grid */
+        .yt-results-container {
+            display: none;
+            margin-top: 1.5rem;
+            border-top: 1.5px solid var(--color-border, #E2E8F0);
+            padding-top: 1.75rem;
+        }
+        .yt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 700px) {
+            .yt-grid { grid-template-columns: 1fr; }
+        }
+        .yt-card {
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .yt-card-header {
+            padding: 0.65rem 0.85rem;
+            background: var(--color-surface, #FFFFFF);
+            border-bottom: 1px solid var(--color-border, #E2E8F0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .yt-card-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-text, #0F172A);
+        }
+        .yt-card-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+        .yt-img-wrap {
+            position: relative;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            overflow: hidden;
+        }
+        .yt-img-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .yt-img-wrap:hover img {
+            transform: scale(1.02);
+        }
+        .yt-card-actions {
+            padding: 0.75rem;
+            display: flex;
+            gap: 0.5rem;
+            background: var(--color-surface, #FFFFFF);
+            border-top: 1px solid var(--color-border, #E2E8F0);
+        }
+        .yt-card-btn {
+            flex: 1;
+            padding: 0.45rem 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            border: 1px solid var(--color-border, #CBD5E1);
+            background: var(--color-bg, #FFFFFF);
+            color: var(--color-text, #0F172A);
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            transition: all 0.15s;
+        }
+        .yt-card-btn.primary {
+            background: #EF4444;
+            color: #FFFFFF;
+            border-color: #EF4444;
+        }
+        .yt-card-btn:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#media-tools">Media</a>
+                <a href="../index.html#calculators">Finance</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; YouTube Thumbnail Downloader
+            </nav>
+
+            <div class="yt-box">
+                <div style="text-align:center; margin-bottom:1.5rem;">
+                    <h1 style="font-size:1.8rem; font-weight:800; margin:0 0 0.4rem;">YouTube Thumbnail Downloader</h1>
+                    <p style="color:var(--color-text-secondary); font-size:0.92rem; margin:0;">Download high-resolution video thumbnails (1080p, 720p, 480p) instantly in your browser.</p>
+                </div>
+
+                <div class="yt-input-wrap">
+                    <input type="text" id="ytUrlInput" class="yt-url-input" placeholder="Paste YouTube link here (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ)">
+                    <button type="button" id="ytFetchBtn" class="yt-get-btn">Get Thumbnails 🚀</button>
+                </div>
+
+                <div class="yt-samples-row">
+                    <span>Try sample:</span>
+                    <span class="yt-sample-chip" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Rick Astley - Never Gonna Give You Up</span>
+                    <span class="yt-sample-chip" data-url="https://youtu.be/M7lc1UVf-VE">YouTube Developers Demo</span>
+                </div>
+
+                <div id="ytErrorMessage" style="display:none; padding:0.75rem 1rem; background:#FEE2E2; border:1px solid #FCA5A5; color:#DC2626; border-radius:8px; font-size:0.88rem; margin-bottom:1rem;"></div>
+
+                <div class="yt-results-container" id="ytResults">
+                    <div style="margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;">
+                        <h3 style="margin:0; font-size:1.1rem; font-weight:700;">Available Thumbnail Resolutions:</h3>
+                        <span id="videoIdLabel" style="font-family:monospace; font-size:0.8rem; background:var(--color-bg-alt); padding:0.2rem 0.5rem; border-radius:4px;"></span>
+                    </div>
+
+                    <div class="yt-grid">
+                        <!-- Max Res 1080p -->
+                        <div class="yt-card">
+                            <div class="yt-card-header">
+                                <span class="yt-card-title">Maximum Resolution (1080p HD)</span>
+                                <span class="yt-card-badge">1920 × 1080</span>
+                            </div>
+                            <div class="yt-img-wrap">
+                                <img id="imgMaxRes" alt="1080p YouTube Thumbnail">
+                            </div>
+                            <div class="yt-card-actions">
+                                <button type="button" class="yt-card-btn primary download-thumb-btn" data-img="imgMaxRes" data-res="1080p">💾 Download 1080p</button>
+                                <button type="button" class="yt-card-btn copy-url-btn" data-img="imgMaxRes">📋 Copy URL</button>
+                            </div>
+                        </div>
+
+                        <!-- Standard High Quality 720p / HQ -->
+                        <div class="yt-card">
+                            <div class="yt-card-header">
+                                <span class="yt-card-title">High Quality (HQ)</span>
+                                <span class="yt-card-badge">480 × 360</span>
+                            </div>
+                            <div class="yt-img-wrap">
+                                <img id="imgHq" alt="High Quality YouTube Thumbnail">
+                            </div>
+                            <div class="yt-card-actions">
+                                <button type="button" class="yt-card-btn primary download-thumb-btn" data-img="imgHq" data-res="hq">💾 Download HQ</button>
+                                <button type="button" class="yt-card-btn copy-url-btn" data-img="imgHq">📋 Copy URL</button>
+                            </div>
+                        </div>
+
+                        <!-- Standard Definition -->
+                        <div class="yt-card">
+                            <div class="yt-card-header">
+                                <span class="yt-card-title">Standard Definition (SD)</span>
+                                <span class="yt-card-badge">640 × 480</span>
+                            </div>
+                            <div class="yt-img-wrap">
+                                <img id="imgSd" alt="Standard Definition YouTube Thumbnail">
+                            </div>
+                            <div class="yt-card-actions">
+                                <button type="button" class="yt-card-btn primary download-thumb-btn" data-img="imgSd" data-res="sd">💾 Download SD</button>
+                                <button type="button" class="yt-card-btn copy-url-btn" data-img="imgSd">📋 Copy URL</button>
+                            </div>
+                        </div>
+
+                        <!-- Medium Quality -->
+                        <div class="yt-card">
+                            <div class="yt-card-header">
+                                <span class="yt-card-title">Medium Quality (MQ)</span>
+                                <span class="yt-card-badge">320 × 180</span>
+                            </div>
+                            <div class="yt-img-wrap">
+                                <img id="imgMq" alt="Medium Quality YouTube Thumbnail">
+                            </div>
+                            <div class="yt-card-actions">
+                                <button type="button" class="yt-card-btn primary download-thumb-btn" data-img="imgMq" data-res="mq">💾 Download MQ</button>
+                                <button type="button" class="yt-card-btn copy-url-btn" data-img="imgMq">📋 Copy URL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div class="tool-description">
+                <h2>How to Download High-Resolution YouTube Thumbnails</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Instant In-Browser Grabber</h3>
+                        <p>No software installations, browser extensions, or account sign-ups required. Simply paste the YouTube video link and download thumbnails directly.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Highest Possible Resolution</h3>
+                        <p>Automatically grabs YouTube's uncompressed <code>maxresdefault.jpg</code> source image so you get full 1080p and 4K quality as uploaded by the creator.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📱</div>
+                        <h3>Supports All YouTube Formats</h3>
+                        <p>Works seamlessly with standard YouTube watch links, youtu.be short links, YouTube Shorts, and embedded player URLs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing-Tools. Free Client-Side Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        const ytUrlInput = document.getElementById('ytUrlInput');
+        const ytFetchBtn = document.getElementById('ytFetchBtn');
+        const ytResults = document.getElementById('ytResults');
+        const ytErrorMessage = document.getElementById('ytErrorMessage');
+        const videoIdLabel = document.getElementById('videoIdLabel');
+
+        const imgMaxRes = document.getElementById('imgMaxRes');
+        const imgHq = document.getElementById('imgHq');
+        const imgSd = document.getElementById('imgSd');
+        const imgMq = document.getElementById('imgMq');
+
+        function extractVideoId(url) {
+            if (!url) return null;
+            url = url.trim();
+            // Direct ID
+            if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+
+            try {
+                // youtu.be/ID
+                const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+                if (shortMatch) return shortMatch[1];
+
+                // youtube.com/watch?v=ID
+                const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+                if (watchMatch) return watchMatch[1];
+
+                // youtube.com/shorts/ID
+                const shortsMatch = url.match(/shorts\/([a-zA-Z0-9_-]{11})/);
+                if (shortsMatch) return shortsMatch[1];
+
+                // youtube.com/embed/ID
+                const embedMatch = url.match(/embed\/([a-zA-Z0-9_-]{11})/);
+                if (embedMatch) return embedMatch[1];
+            } catch (e) {}
+
+            return null;
+        }
+
+        function loadThumbnails() {
+            const url = ytUrlInput.value.trim();
+            ytErrorMessage.style.display = 'none';
+
+            if (!url) {
+                showError('Please paste a valid YouTube video link or video ID.');
+                return;
+            }
+
+            const vidId = extractVideoId(url);
+            if (!vidId) {
+                showError('Could not recognize a valid YouTube Video ID. Please check the URL format and try again.');
+                return;
+            }
+
+            videoIdLabel.textContent = `Video ID: ${vidId}`;
+
+            imgMaxRes.src = `https://img.youtube.com/vi/${vidId}/maxresdefault.jpg`;
+            imgHq.src = `https://img.youtube.com/vi/${vidId}/hqdefault.jpg`;
+            imgSd.src = `https://img.youtube.com/vi/${vidId}/sddefault.jpg`;
+            imgMq.src = `https://img.youtube.com/vi/${vidId}/mqdefault.jpg`;
+
+            ytResults.style.display = 'block';
+            ytResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showError(msg) {
+            ytErrorMessage.textContent = msg;
+            ytErrorMessage.style.display = 'block';
+            ytResults.style.display = 'none';
+        }
+
+        ytFetchBtn.addEventListener('click', loadThumbnails);
+        ytUrlInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') loadThumbnails();
+        });
+
+        // Sample chips
+        document.querySelectorAll('.yt-sample-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                ytUrlInput.value = chip.getAttribute('data-url');
+                loadThumbnails();
+            });
+        });
+
+        // Copy URL
+        document.querySelectorAll('.copy-url-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetImg = document.getElementById(btn.getAttribute('data-img'));
+                if (targetImg && targetImg.src) {
+                    navigator.clipboard.writeText(targetImg.src).then(() => {
+                        const old = btn.textContent;
+                        btn.textContent = '✓ Copied URL';
+                        setTimeout(() => btn.textContent = old, 1800);
+                    });
+                }
+            });
+        });
+
+        // Download via client-side Canvas Blob
+        document.querySelectorAll('.download-thumb-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetImg = document.getElementById(btn.getAttribute('data-img'));
+                const resName = btn.getAttribute('data-res');
+                if (!targetImg || !targetImg.src) return;
+
+                const prev = btn.textContent;
+                btn.textContent = '⏳ Saving...';
+
+                // Fetch image as blob or draw to canvas
+                fetch(targetImg.src)
+                    .then(r => r.blob())
+                    .then(blob => {
+                        const blobUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = blobUrl;
+                        a.download = `youtube-thumbnail-${resName}-${Date.now()}.jpg`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(blobUrl);
+                        btn.textContent = '✓ Saved!';
+                        setTimeout(() => btn.textContent = prev, 2000);
+                    })
+                    .catch(() => {
+                        // If CORS prevents fetch, fallback to window.open
+                        window.open(targetImg.src, '_blank');
+                        btn.textContent = prev;
+                    });
+            });
+        });
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

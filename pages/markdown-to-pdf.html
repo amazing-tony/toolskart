@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Markdown to PDF Converter — Live Editor &amp; Export | Amazing-Tools</title>
+    <meta name="description" content="Convert Markdown into beautiful, styled PDF documents instantly in your browser. Real-time split preview, syntax toolbar, document templates, and 100% private PDF export.">
+    <meta name="keywords" content="markdown to pdf, convert markdown to pdf, markdown editor online, free markdown pdf, print markdown to pdf, client side markdown">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/markdown-to-pdf.html">
+    <meta property="og:title" content="Free Markdown to PDF Converter — Live Editor &amp; Export | Amazing-Tools">
+    <meta property="og:description" content="100% private in-browser Markdown to PDF editor and converter. Zero server uploads.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Marked.js for fast Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Markdown to PDF Converter",
+      "url": "https://amazing-tools.github.io/pages/markdown-to-pdf.html",
+      "description": "Convert Markdown text to beautifully formatted PDF documents 100% client-side.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .md-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+            align-items: stretch;
+            min-height: calc(100vh - 280px);
+        }
+        @media (max-width: 900px) {
+            .md-layout { grid-template-columns: 1fr; }
+        }
+        .md-pane {
+            display: flex;
+            flex-direction: column;
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .md-toolbar {
+            background: var(--color-bg-alt, #F8FAFC);
+            border-bottom: 1px solid var(--color-border, #E2E8F0);
+            padding: 0.45rem 0.65rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+        .md-tool-btn {
+            background: var(--color-bg, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--color-text, #0F172A);
+            transition: all 0.15s ease;
+        }
+        .md-tool-btn:hover {
+            border-color: var(--color-primary, #2563EB);
+            color: var(--color-primary, #2563EB);
+            background: rgba(37,99,235,0.04);
+        }
+        .md-editor-textarea {
+            width: 100%;
+            flex: 1;
+            min-height: 480px;
+            padding: 1rem 1.25rem;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--color-text, #0F172A);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            resize: none;
+            box-sizing: border-box;
+        }
+        .md-preview-pane {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            overflow-y: auto;
+            background: #FFFFFF !important;
+            color: #1E293B !important;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 0.94rem;
+            line-height: 1.65;
+        }
+        .md-preview-pane h1, .md-preview-pane h2, .md-preview-pane h3 {
+            color: #0F172A !important;
+            border-bottom: 1px solid #E2E8F0;
+            padding-bottom: 0.35rem;
+            margin-top: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .md-preview-pane h1 { font-size: 1.65rem; }
+        .md-preview-pane h2 { font-size: 1.35rem; }
+        .md-preview-pane h3 { font-size: 1.15rem; }
+        .md-preview-pane p { margin: 0 0 1rem; color: #334155; }
+        .md-preview-pane ul, .md-preview-pane ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+        .md-preview-pane li { margin-bottom: 0.35rem; }
+        .md-preview-pane blockquote {
+            border-left: 4px solid #3B82F6;
+            padding: 0.5rem 1rem;
+            margin: 1rem 0;
+            background: #F8FAFC;
+            color: #475569;
+            font-style: italic;
+        }
+        .md-preview-pane pre {
+            background: #0F172A;
+            color: #F8FAFC;
+            padding: 0.85rem 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.84rem;
+            margin-bottom: 1rem;
+        }
+        .md-preview-pane code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.86em;
+            background: #F1F5F9;
+            color: #0F172A;
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+        }
+        .md-preview-pane pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .md-preview-pane table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.88rem;
+        }
+        .md-preview-pane th, .md-preview-pane td {
+            border: 1px solid #CBD5E1;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+        }
+        .md-preview-pane th {
+            background: #F1F5F9;
+            font-weight: 700;
+        }
+        .md-preview-pane hr {
+            border: none;
+            border-top: 1.5px solid #E2E8F0;
+            margin: 1.5rem 0;
+        }
+        .md-status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            font-size: 0.76rem;
+            color: var(--color-text-secondary, #64748B);
+            background: var(--color-bg-alt, #F8FAFC);
+            border-top: 1px solid var(--color-border, #E2E8F0);
+        }
+
+        /* ── Print PDF Stylesheet ── */
+        @media print {
+            body {
+                background: #FFFFFF !important;
+                color: #000000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .header, .footer, .breadcrumb, .md-toolbar, .md-editor-pane, .md-control-bar, .md-status-bar, .tool-description {
+                display: none !important;
+            }
+            .md-layout {
+                display: block !important;
+                border: none !important;
+            }
+            .md-preview-pane {
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                overflow: visible !important;
+            }
+            @page {
+                margin: 1.5cm;
+                size: A4 portrait;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#calculators">Finance</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Documents</a> &raquo; Markdown to PDF
+            </nav>
+
+            <div class="md-control-bar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem;">
+                <div>
+                    <h1 style="font-size:1.6rem; font-weight:800; margin:0 0 0.2rem;">Markdown to PDF Converter</h1>
+                    <p style="margin:0; font-size:0.85rem; color:var(--color-text-secondary);">Write Markdown, preview live, and generate publication-quality PDFs with zero server uploads.</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                    <select id="templatePicker" class="btn" style="padding:0.45rem 0.75rem; font-size:0.85rem; cursor:pointer;">
+                        <option value="report">📄 Project Report</option>
+                        <option value="readme">📖 Readme Docs</option>
+                        <option value="meeting">📝 Meeting Minutes</option>
+                        <option value="blank">✨ Blank Page</option>
+                    </select>
+                    <button type="button" class="btn btn-primary" id="printPdfBtn">🖨️ Print / Save as PDF</button>
+                    <button type="button" class="btn" id="downloadMdBtn">💾 Download .md</button>
+                    <button type="button" class="btn" id="copyHtmlBtn">📋 Copy HTML</button>
+                </div>
+            </div>
+
+            <div class="md-layout">
+                <!-- Editor Pane -->
+                <div class="md-pane md-editor-pane">
+                    <div class="md-toolbar">
+                        <button type="button" class="md-tool-btn" data-syntax="**" title="Bold"><b>B</b></button>
+                        <button type="button" class="md-tool-btn" data-syntax="*" title="Italic"><i>I</i></button>
+                        <button type="button" class="md-tool-btn" data-prefix="# " title="Heading 1">H1</button>
+                        <button type="button" class="md-tool-btn" data-prefix="## " title="Heading 2">H2</button>
+                        <button type="button" class="md-tool-btn" data-prefix="### " title="Heading 3">H3</button>
+                        <button type="button" class="md-tool-btn" data-prefix="- " title="Bulleted List">• List</button>
+                        <button type="button" class="md-tool-btn" data-prefix="1. " title="Numbered List">1. List</button>
+                        <button type="button" class="md-tool-btn" data-prefix="> " title="Blockquote">Quote</button>
+                        <button type="button" class="md-tool-btn" data-syntax="`" title="Inline Code">Code</button>
+                        <button type="button" class="md-tool-btn" id="insertTableBtn" title="Insert Table">Table</button>
+                        <button type="button" class="md-tool-btn" id="insertHrBtn" title="Horizontal Line">— Line</button>
+                    </div>
+                    <textarea id="markdownInput" class="md-editor-textarea" placeholder="Type or paste your Markdown here..."></textarea>
+                    <div class="md-status-bar">
+                        <span id="wordCountStats">0 words • 0 characters</span>
+                        <span id="readTimeStats">~1 min read</span>
+                    </div>
+                </div>
+
+                <!-- Live Styled PDF Preview Pane -->
+                <div class="md-pane">
+                    <div class="md-toolbar" style="justify-content:space-between;">
+                        <span style="font-size:0.8rem; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.04em;">PDF Print Preview</span>
+                        <span style="font-size:0.75rem; color:#10B981; font-weight:600;">✓ Formatted Real-Time</span>
+                    </div>
+                    <div class="md-preview-pane" id="markdownPreview"></div>
+                </div>
+            </div>
+
+            <!-- Features & Info -->
+            <div class="tool-description" style="margin-top:2.5rem;">
+                <h2>Professional Markdown to PDF Conversion</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Zero Server Transmission</h3>
+                        <p>Unlike online converters that send your confidential documents, meeting notes, and source code to remote servers, all conversion happens 100% locally in your browser.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <h3>Tables, Code Blocks &amp; Math</h3>
+                        <p>Fully supports GitHub Flavored Markdown (GFM) including multi-column tables, styled code blocks, task lists, blockquotes, and nested lists.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🖨️</div>
+                        <h3>Pixel-Perfect Print Style</h3>
+                        <p>Optimized with CSS print media queries ensuring clean page margins, no clipped text, proper heading pagination, and crisp vector typography.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing-Tools. Free Client-Side Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        const STORAGE_KEY = 'amazing_markdown_editor_content';
+
+        const templates = {
+            report: `# Technical Architecture & Feasibility Report
+**Author:** Engineering Team  
+**Date:** March 2026  
+**Status:** Approved for Implementation  
+
+---
+
+## Executive Summary
+This document details the architectural migration towards a zero-latency, 100% client-side tool ecosystem. By leveraging **WebAssembly**, the **Web Audio API**, and **modern canvas rendering**, the application achieves maximum data privacy without infrastructure overhead.
+
+## Key Performance Indicators
+| Metric | Previous Architecture | In-Browser Architecture | Improvement |
+| :--- | :--- | :--- | :--- |
+| Server Upload Latency | 1,420 ms | **0 ms** | 100% Elimination |
+| Data Breach Exposure | Moderate | **Zero** | Absolute Privacy |
+| Infrastructure Cost | \$420 / mo | **\$0 / mo** | Pure Static Edge |
+
+## System Specifications
+- **Client Engine:** Web Worker Thread Execution
+- **Rendering Engine:** Native Browser Print Vectorization
+- **Security Boundary:** Zero external network sockets utilized during file processing
+
+> *"The fastest server call is the one you never make."*
+
+## Next Milestones
+1. Complete automated integration test suite.
+2. Publish zero-telemetry privacy audit documentation.
+3. Deploy global content delivery cache updates.
+`,
+            readme: `# Project Documentation: Core Engine
+A fast, lightweight, and completely private browser utility suite.
+
+## Installation
+\`\`\`bash
+git clone https://github.com/amazing-tools/amazing-tools.github.io.git
+cd amazing-tools.github.io
+# No server build required! Pure static HTML/CSS/JS.
+\`\`\`
+
+## Features
+- **Zero Dependencies:** Pure standards-based web components.
+- **Client-Side Encryption:** No credentials leave your machine.
+- **Cross-Platform:** Works on desktop, tablet, and mobile browsers.
+
+## License
+MIT License. Free for personal and commercial usage.
+`,
+            meeting: `# Weekly Engineering Sync Minutes
+**Meeting Date:** March 21, 2026  
+**Attendees:** Rahul, Priya, Alex, Daniel  
+
+---
+
+### Key Discussion Items
+- **Tool Suite Expansion:** Added 8 new native in-browser applications.
+- **UI Refinements:** Streamlined navigation drawer and eliminated duplicate toolbar strips.
+- **SEO & Discoverability:** Updated OpenGraph cards and search schema.
+
+### Action Items
+- [x] Complete ATS Resume Builder module
+- [x] Verify client-side OCR extraction accuracy
+- [ ] Review cross-browser video recording codecs
+- [ ] Deploy weekly release tag
+`,
+            blank: `# Untitled Document
+
+Start writing your markdown here...
+`
+        };
+
+        const markdownInput = document.getElementById('markdownInput');
+        const markdownPreview = document.getElementById('markdownPreview');
+        const wordCountStats = document.getElementById('wordCountStats');
+        const readTimeStats = document.getElementById('readTimeStats');
+        const templatePicker = document.getElementById('templatePicker');
+
+        function updatePreview() {
+            const raw = markdownInput.value;
+            let html = '';
+            if (typeof marked !== 'undefined' && marked.parse) {
+                html = marked.parse(raw);
+            } else {
+                // Fallback basic parser
+                html = raw
+                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+                    .replace(/\*(.*)\*/gim, '<i>$1</i>')
+                    .replace(/\n$/gim, '<br />');
+            }
+            markdownPreview.innerHTML = html;
+
+            // Stats
+            const text = raw.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            const chars = text.length;
+            wordCountStats.textContent = `${words} words • ${chars} characters`;
+            const minutes = Math.ceil(words / 200);
+            readTimeStats.textContent = `~${minutes} min read`;
+
+            // Auto-save
+            try {
+                localStorage.setItem(STORAGE_KEY, raw);
+            } catch (e) {}
+        }
+
+        markdownInput.addEventListener('input', updatePreview);
+
+        // Toolbar actions
+        document.querySelectorAll('.md-tool-btn[data-syntax]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const syntax = btn.dataset.syntax;
+                const start = markdownInput.selectionStart;
+                const end = markdownInput.selectionEnd;
+                const sel = markdownInput.value.substring(start, end);
+                const rep = `${syntax}${sel || 'text'}${syntax}`;
+                markdownInput.setRangeText(rep, start, end, 'select');
+                updatePreview();
+                markdownInput.focus();
+            });
+        });
+
+        document.querySelectorAll('.md-tool-btn[data-prefix]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const prefix = btn.dataset.prefix;
+                const start = markdownInput.selectionStart;
+                const end = markdownInput.selectionEnd;
+                const sel = markdownInput.value.substring(start, end);
+                const rep = `${prefix}${sel || 'Item'}`;
+                markdownInput.setRangeText(rep, start, end, 'end');
+                updatePreview();
+                markdownInput.focus();
+            });
+        });
+
+        document.getElementById('insertTableBtn').addEventListener('click', () => {
+            const tableSample = `\n| Column 1 | Column 2 | Column 3 |\n| :--- | :--- | :--- |\n| Value A | Value B | Value C |\n| Value D | Value E | Value F |\n\n`;
+            const start = markdownInput.selectionStart;
+            markdownInput.setRangeText(tableSample, start, start, 'end');
+            updatePreview();
+            markdownInput.focus();
+        });
+
+        document.getElementById('insertHrBtn').addEventListener('click', () => {
+            const hr = `\n\n---\n\n`;
+            const start = markdownInput.selectionStart;
+            markdownInput.setRangeText(hr, start, start, 'end');
+            updatePreview();
+            markdownInput.focus();
+        });
+
+        // Template picker
+        templatePicker.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (templates[val]) {
+                if (markdownInput.value.trim() && !confirm('Replace current editor text with chosen template?')) {
+                    return;
+                }
+                markdownInput.value = templates[val];
+                updatePreview();
+            }
+        });
+
+        // Print to PDF
+        document.getElementById('printPdfBtn').addEventListener('click', () => {
+            window.print();
+        });
+
+        // Download .md
+        document.getElementById('downloadMdBtn').addEventListener('click', () => {
+            const blob = new Blob([markdownInput.value], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `document-${Date.now()}.md`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // Copy HTML
+        document.getElementById('copyHtmlBtn').addEventListener('click', () => {
+            navigator.clipboard.writeText(markdownPreview.innerHTML).then(() => {
+                const btn = document.getElementById('copyHtmlBtn');
+                const prev = btn.textContent;
+                btn.textContent = '✓ Copied HTML!';
+                setTimeout(() => btn.textContent = prev, 2000);
+            });
+        });
+
+        // Init
+        const saved = localStorage.getItem(STORAGE_KEY);
+        markdownInput.value = saved || templates.report;
+        updatePreview();
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

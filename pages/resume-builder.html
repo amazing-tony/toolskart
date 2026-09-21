@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free ATS Resume Builder — Clean CV Maker &amp; PDF Export | Amazing-Tools</title>
+    <meta name="description" content="Build clean, ATS-compliant resumes and CVs 100% in your browser. Real-time live preview, instant Print to PDF, zero server uploads, completely private and free.">
+    <meta name="keywords" content="resume builder, free cv maker, ats resume builder, markdown resume, online resume generator, free pdf resume, professional resume creator">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/resume-builder.html">
+    <meta property="og:title" content="Free ATS Resume Builder — Clean CV Maker &amp; PDF Export | Amazing-Tools">
+    <meta property="og:description" content="100% private in-browser resume and CV builder. Real-time preview, ATS friendly, instant PDF download.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ATS Resume Builder",
+      "url": "https://amazing-tools.github.io/pages/resume-builder.html",
+      "description": "Free, 100% client-side ATS resume creator with instant PDF export.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .rb-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 1.75rem;
+            align-items: start;
+        }
+        @media (max-width: 960px) {
+            .rb-container { grid-template-columns: 1fr; }
+        }
+        .rb-form-card {
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .rb-section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-text, #0F172A);
+            margin: 1.25rem 0 0.75rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 1.5px solid var(--color-border, #E2E8F0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rb-section-title:first-of-type { margin-top: 0; }
+        .rb-input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        @media (max-width: 600px) {
+            .rb-input-grid { grid-template-columns: 1fr; }
+        }
+        .rb-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .rb-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-text-secondary, #64748B);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .rb-input, .rb-textarea {
+            padding: 0.5rem 0.65rem;
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 6px;
+            font-size: 0.88rem;
+            background: var(--color-bg, #FFFFFF);
+            color: var(--color-text, #0F172A);
+            font-family: inherit;
+        }
+        .rb-textarea {
+            min-height: 70px;
+            resize: vertical;
+            line-height: 1.45;
+        }
+        .rb-input:focus, .rb-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary, #2563EB);
+            box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+        }
+        .rb-item-block {
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #E2E8F0);
+            border-radius: 8px;
+            padding: 0.85rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+        .rb-item-delete-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #EF4444;
+            cursor: pointer;
+            font-size: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .rb-item-delete-btn:hover { opacity: 1; }
+        .rb-add-btn {
+            background: var(--color-bg, #FFFFFF);
+            border: 1.5px dashed var(--color-primary, #2563EB);
+            color: var(--color-primary, #2563EB);
+            border-radius: 6px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 0.35rem;
+            transition: all 0.2s;
+        }
+        .rb-add-btn:hover {
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* ── Resume Paper Preview ── */
+        .rb-preview-wrap {
+            position: sticky;
+            top: 1.5rem;
+        }
+        .rb-paper {
+            background: #FFFFFF !important;
+            color: #1E293B !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 2.5rem 2.75rem;
+            min-height: 750px;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.86rem;
+            line-height: 1.5;
+        }
+        .rb-preview-name {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #0F172A;
+            margin: 0 0 0.25rem;
+            text-align: center;
+        }
+        .rb-preview-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #2563EB;
+            text-align: center;
+            margin: 0 0 0.5rem;
+        }
+        .rb-preview-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.85rem;
+            font-size: 0.8rem;
+            color: #64748B;
+            padding-bottom: 0.85rem;
+            border-bottom: 2px solid #0F172A;
+            margin-bottom: 1.25rem;
+        }
+        .rb-preview-contacts a {
+            color: #64748B;
+            text-decoration: none;
+        }
+        .rb-prev-section-h {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #0F172A;
+            margin: 1.1rem 0 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid #CBD5E1;
+        }
+        .rb-prev-role-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.15rem;
+        }
+        .rb-prev-role {
+            font-weight: 700;
+            color: #0F172A;
+            font-size: 0.88rem;
+        }
+        .rb-prev-company {
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.84rem;
+        }
+        .rb-prev-date {
+            font-size: 0.78rem;
+            color: #64748B;
+            font-style: italic;
+        }
+        .rb-prev-bullets {
+            margin: 0.35rem 0 0.75rem 1.15rem;
+            padding: 0;
+            color: #334155;
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+        .rb-prev-bullets li {
+            margin-bottom: 0.2rem;
+        }
+        .rb-prev-skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.35rem;
+        }
+        .rb-prev-skill-tag {
+            background: #F1F5F9;
+            color: #1E293B;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            border: 1px solid #E2E8F0;
+        }
+
+        /* ── Print Stylesheet (Pure ATS Clean Sheet) ── */
+        @media print {
+            body {
+                background: #FFFFFF !important;
+                color: #000000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .header, .footer, .breadcrumb, .rb-form-card, .rb-top-bar, .tool-description, .ad-slot-container {
+                display: none !important;
+            }
+            .rb-container {
+                display: block !important;
+                max-width: 100% !important;
+            }
+            .rb-preview-wrap {
+                position: static !important;
+            }
+            .rb-paper {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                width: 100% !important;
+                min-height: auto !important;
+            }
+            @page {
+                margin: 1.25cm;
+                size: A4 portrait;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#calculators">Finance</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Documents</a> &raquo; ATS Resume Builder
+            </nav>
+
+            <div class="rb-top-bar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.5rem;">
+                <div>
+                    <h1 style="font-size:1.6rem; font-weight:800; margin:0 0 0.2rem;">Free ATS Resume Builder</h1>
+                    <p style="margin:0; font-size:0.85rem; color:var(--color-text-secondary);">Clean, applicant-tracking-system compliant resumes. Real-time preview &amp; 1-click PDF download.</p>
+                </div>
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <button type="button" class="btn btn-primary" id="printResumeBtn">🖨️ Print / Save as PDF</button>
+                    <button type="button" class="btn" id="loadSampleBtn">Sample Data</button>
+                    <button type="button" class="btn" id="clearResumeBtn">Reset</button>
+                </div>
+            </div>
+
+            <div class="rb-container">
+                <!-- Edit Form -->
+                <div class="rb-form-card">
+                    <!-- Personal Info -->
+                    <div class="rb-section-title">👤 Contact Information</div>
+                    <div class="rb-input-grid">
+                        <div class="rb-input-group">
+                            <label class="rb-label">Full Name</label>
+                            <input type="text" id="rbName" class="rb-input" placeholder="e.g. Rahul Sharma">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Professional Title</label>
+                            <input type="text" id="rbTitle" class="rb-input" placeholder="e.g. Senior Software Engineer">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Email</label>
+                            <input type="email" id="rbEmail" class="rb-input" placeholder="rahul@example.com">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Phone</label>
+                            <input type="tel" id="rbPhone" class="rb-input" placeholder="+91 98765 43210">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Location (City, Country)</label>
+                            <input type="text" id="rbLocation" class="rb-input" placeholder="Bangalore, India">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">LinkedIn / Website</label>
+                            <input type="text" id="rbWebsite" class="rb-input" placeholder="linkedin.com/in/rahul">
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="rb-section-title">📝 Executive Summary</div>
+                    <div class="rb-input-group" style="margin-bottom:1rem;">
+                        <textarea id="rbSummary" class="rb-textarea" placeholder="Results-driven professional with 5+ years experience building scalable web applications..."></textarea>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <div class="rb-section-title">
+                        <span>💼 Work Experience</span>
+                    </div>
+                    <div id="experienceList"></div>
+                    <button type="button" class="rb-add-btn" id="addExpBtn">+ Add Work Experience</button>
+
+                    <!-- Education -->
+                    <div class="rb-section-title" style="margin-top:1.5rem;">
+                        <span>🎓 Education</span>
+                    </div>
+                    <div id="educationList"></div>
+                    <button type="button" class="rb-add-btn" id="addEduBtn">+ Add Education</button>
+
+                    <!-- Skills -->
+                    <div class="rb-section-title" style="margin-top:1.5rem;">
+                        <span>⚡ Core Skills</span>
+                    </div>
+                    <div class="rb-input-group">
+                        <label class="rb-label">Comma Separated Skills</label>
+                        <textarea id="rbSkills" class="rb-textarea" style="min-height:55px;" placeholder="JavaScript, Python, React, Node.js, Cloud Architecture, PostgreSQL, Docker, Git"></textarea>
+                    </div>
+
+                    <!-- Projects & Certifications -->
+                    <div class="rb-section-title" style="margin-top:1.5rem;">
+                        <span>🏆 Projects &amp; Certifications (Optional)</span>
+                    </div>
+                    <div class="rb-input-group">
+                        <textarea id="rbProjects" class="rb-textarea" placeholder="• AWS Certified Solutions Architect (2024)&#10;• Built open-source data analytics engine with 15k GitHub stars"></textarea>
+                    </div>
+                </div>
+
+                <!-- Live Preview Paper -->
+                <div class="rb-preview-wrap">
+                    <div class="rb-paper" id="resumePaper">
+                        <div class="rb-preview-name" id="prevName">Rahul Sharma</div>
+                        <div class="rb-preview-title" id="prevTitle">Senior Software Engineer</div>
+                        <div class="rb-preview-contacts" id="prevContacts">
+                            <span id="prevEmail">rahul@example.com</span>
+                            <span>•</span>
+                            <span id="prevPhone">+91 98765 43210</span>
+                            <span>•</span>
+                            <span id="prevLocation">Bangalore, India</span>
+                            <span>•</span>
+                            <span id="prevWebsite">linkedin.com/in/rahul</span>
+                        </div>
+
+                        <div id="prevSummarySection">
+                            <div class="rb-prev-section-h">Professional Summary</div>
+                            <p id="prevSummary" style="margin:0 0 0.85rem; color:#334155; line-height:1.5;"></p>
+                        </div>
+
+                        <div id="prevExperienceSection">
+                            <div class="rb-prev-section-h">Experience</div>
+                            <div id="prevExperienceList"></div>
+                        </div>
+
+                        <div id="prevEducationSection">
+                            <div class="rb-prev-section-h">Education</div>
+                            <div id="prevEducationList"></div>
+                        </div>
+
+                        <div id="prevSkillsSection">
+                            <div class="rb-prev-section-h">Skills &amp; Technologies</div>
+                            <div class="rb-prev-skills-tags" id="prevSkillsTags"></div>
+                        </div>
+
+                        <div id="prevProjectsSection" style="display:none;">
+                            <div class="rb-prev-section-h">Projects &amp; Certifications</div>
+                            <ul class="rb-prev-bullets" id="prevProjectsList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO & FAQ Section -->
+            <div class="tool-description" style="margin-top:3.5rem;">
+                <h2>Why Choose Amazing-Tools ATS Resume Builder?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🤖</div>
+                        <h3>100% ATS Compliant</h3>
+                        <p>Formatted specifically for Applicant Tracking Systems. Uses clean semantic hierarchies without complex columns or tables that trip up recruitment parsers.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% In-Browser Privacy</h3>
+                        <p>Your confidential career history, contact details, and employer information are processed entirely inside your browser. Never transmitted to external servers.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🖨️</div>
+                        <h3>Vector-Clean PDF Output</h3>
+                        <p>Generate razor-sharp, print-ready PDF resumes using high-grade typography that looks stunning on recruiter screens and printed paper.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing-Tools. Free Client-Side Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        const STORAGE_KEY = 'amazing_resume_builder_data';
+
+        const defaultSample = {
+            name: 'Rahul Sharma',
+            title: 'Senior Software Engineer & Tech Lead',
+            email: 'rahul.sharma@example.com',
+            phone: '+91 98765 43210',
+            location: 'Bangalore, India',
+            website: 'linkedin.com/in/rahulsharma',
+            summary: 'Experienced Software Engineer with 6+ years of expertise in architecting high-throughput distributed systems, React web apps, and cloud native microservices. Proven track record of reducing latency by 40% and mentoring high-performing engineering teams.',
+            experiences: [
+                {
+                    role: 'Lead Full Stack Engineer',
+                    company: 'FinTech Innovations Inc.',
+                    location: 'Bangalore, India',
+                    dates: '2022 — Present',
+                    bullets: 'Architected real-time transaction processing pipeline serving 1.2M daily active users with 99.99% uptime.\nLed cross-functional team of 8 engineers delivering enterprise payment integration across 5 international rails.\nReduced cloud compute and bandwidth infrastructure costs by 32% via query optimization and redis caching.'
+                },
+                {
+                    role: 'Software Engineer II',
+                    company: 'DataScale Technologies',
+                    location: 'Hyderabad, India',
+                    dates: '2019 — 2022',
+                    bullets: 'Developed user-facing analytics dashboards using React, TypeScript, and Tailwind CSS with sub-second page loads.\nMigrated monolithic backend to modular Node.js microservices with automated CI/CD pipelines.\nCollaborated closely with product designers to implement responsive WCAG 2.1 AA compliant UI.'
+                }
+            ],
+            educations: [
+                {
+                    degree: 'B.Tech in Computer Science & Engineering',
+                    school: 'National Institute of Technology (NIT)',
+                    location: 'India',
+                    year: '2015 — 2019',
+                    details: 'First Class with Distinction • Secretary of Coding Society'
+                }
+            ],
+            skills: 'JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Redis, Docker, Kubernetes, AWS, Git, System Design',
+            projects: '• AWS Certified Solutions Architect — Associate (2024)\n• Contributed core performance improvements to open-source state management library with 12k GitHub stars'
+        };
+
+        let currentData = JSON.parse(JSON.stringify(defaultSample));
+
+        // Form elements
+        const rbName = document.getElementById('rbName');
+        const rbTitle = document.getElementById('rbTitle');
+        const rbEmail = document.getElementById('rbEmail');
+        const rbPhone = document.getElementById('rbPhone');
+        const rbLocation = document.getElementById('rbLocation');
+        const rbWebsite = document.getElementById('rbWebsite');
+        const rbSummary = document.getElementById('rbSummary');
+        const rbSkills = document.getElementById('rbSkills');
+        const rbProjects = document.getElementById('rbProjects');
+        const experienceList = document.getElementById('experienceList');
+        const educationList = document.getElementById('educationList');
+
+        // Preview elements
+        const prevName = document.getElementById('prevName');
+        const prevTitle = document.getElementById('prevTitle');
+        const prevEmail = document.getElementById('prevEmail');
+        const prevPhone = document.getElementById('prevPhone');
+        const prevLocation = document.getElementById('prevLocation');
+        const prevWebsite = document.getElementById('prevWebsite');
+        const prevSummary = document.getElementById('prevSummary');
+        const prevSummarySection = document.getElementById('prevSummarySection');
+        const prevExperienceList = document.getElementById('prevExperienceList');
+        const prevExperienceSection = document.getElementById('prevExperienceSection');
+        const prevEducationList = document.getElementById('prevEducationList');
+        const prevEducationSection = document.getElementById('prevEducationSection');
+        const prevSkillsTags = document.getElementById('prevSkillsTags');
+        const prevSkillsSection = document.getElementById('prevSkillsSection');
+        const prevProjectsList = document.getElementById('prevProjectsList');
+        const prevProjectsSection = document.getElementById('prevProjectsSection');
+
+        function loadFromStorage() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    currentData = JSON.parse(saved);
+                }
+            } catch (e) {}
+        }
+
+        function saveToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(currentData));
+            } catch (e) {}
+        }
+
+        function renderForm() {
+            rbName.value = currentData.name || '';
+            rbTitle.value = currentData.title || '';
+            rbEmail.value = currentData.email || '';
+            rbPhone.value = currentData.phone || '';
+            rbLocation.value = currentData.location || '';
+            rbWebsite.value = currentData.website || '';
+            rbSummary.value = currentData.summary || '';
+            rbSkills.value = currentData.skills || '';
+            rbProjects.value = currentData.projects || '';
+
+            renderExperienceForm();
+            renderEducationForm();
+        }
+
+        function renderExperienceForm() {
+            experienceList.innerHTML = '';
+            (currentData.experiences || []).forEach((exp, idx) => {
+                const item = document.createElement('div');
+                item.className = 'rb-item-block';
+                item.innerHTML = `
+                    <button type="button" class="rb-item-delete-btn" data-exp-del="${idx}" title="Delete this experience">✕</button>
+                    <div class="rb-input-grid">
+                        <div class="rb-input-group">
+                            <label class="rb-label">Job Title</label>
+                            <input type="text" class="rb-input exp-role" data-idx="${idx}" value="${escapeHtml(exp.role || '')}" placeholder="Lead Software Engineer">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Company Name</label>
+                            <input type="text" class="rb-input exp-company" data-idx="${idx}" value="${escapeHtml(exp.company || '')}" placeholder="Acme Corp">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Location</label>
+                            <input type="text" class="rb-input exp-location" data-idx="${idx}" value="${escapeHtml(exp.location || '')}" placeholder="Bangalore, India">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Dates / Period</label>
+                            <input type="text" class="rb-input exp-dates" data-idx="${idx}" value="${escapeHtml(exp.dates || '')}" placeholder="2022 — Present">
+                        </div>
+                    </div>
+                    <div class="rb-input-group">
+                        <label class="rb-label">Key Achievements (one per line)</label>
+                        <textarea class="rb-textarea exp-bullets" data-idx="${idx}" placeholder="• Increased performance by 30%...">${escapeHtml(exp.bullets || '')}</textarea>
+                    </div>
+                `;
+                experienceList.appendChild(item);
+            });
+        }
+
+        function renderEducationForm() {
+            educationList.innerHTML = '';
+            (currentData.educations || []).forEach((edu, idx) => {
+                const item = document.createElement('div');
+                item.className = 'rb-item-block';
+                item.innerHTML = `
+                    <button type="button" class="rb-item-delete-btn" data-edu-del="${idx}" title="Delete this education">✕</button>
+                    <div class="rb-input-grid">
+                        <div class="rb-input-group">
+                            <label class="rb-label">Degree / Qualification</label>
+                            <input type="text" class="rb-input edu-degree" data-idx="${idx}" value="${escapeHtml(edu.degree || '')}" placeholder="B.S. in Computer Science">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">College / University</label>
+                            <input type="text" class="rb-input edu-school" data-idx="${idx}" value="${escapeHtml(edu.school || '')}" placeholder="University of Technology">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Year / Dates</label>
+                            <input type="text" class="rb-input edu-year" data-idx="${idx}" value="${escapeHtml(edu.year || '')}" placeholder="2016 — 2020">
+                        </div>
+                        <div class="rb-input-group">
+                            <label class="rb-label">Honors / GPA / Notes</label>
+                            <input type="text" class="rb-input edu-details" data-idx="${idx}" value="${escapeHtml(edu.details || '')}" placeholder="Graduated with First Class Honors">
+                        </div>
+                    </div>
+                `;
+                educationList.appendChild(item);
+            });
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+        }
+
+        function renderPreview() {
+            prevName.textContent = currentData.name || 'Your Full Name';
+            prevTitle.textContent = currentData.title || 'Professional Title';
+
+            prevEmail.textContent = currentData.email || '';
+            prevPhone.textContent = currentData.phone || '';
+            prevLocation.textContent = currentData.location || '';
+            prevWebsite.textContent = currentData.website || '';
+
+            // Summary
+            if (currentData.summary && currentData.summary.trim()) {
+                prevSummary.textContent = currentData.summary;
+                prevSummarySection.style.display = 'block';
+            } else {
+                prevSummarySection.style.display = 'none';
+            }
+
+            // Experience
+            if (currentData.experiences && currentData.experiences.length > 0) {
+                prevExperienceList.innerHTML = currentData.experiences.map(exp => {
+                    const bullets = (exp.bullets || '').split('\n').filter(b => b.trim()).map(b => {
+                        const clean = b.replace(/^[•\-\*]\s*/, '');
+                        return `<li>${escapeHtml(clean)}</li>`;
+                    }).join('');
+
+                    return `
+                        <div style="margin-bottom:0.85rem;">
+                            <div class="rb-prev-role-row">
+                                <div>
+                                    <span class="rb-prev-role">${escapeHtml(exp.role || '')}</span>
+                                    ${exp.company ? ` • <span class="rb-prev-company">${escapeHtml(exp.company)}</span>` : ''}
+                                    ${exp.location ? ` <span style="font-size:0.76rem; color:#64748B;">(${escapeHtml(exp.location)})</span>` : ''}
+                                </div>
+                                <div class="rb-prev-date">${escapeHtml(exp.dates || '')}</div>
+                            </div>
+                            ${bullets ? `<ul class="rb-prev-bullets">${bullets}</ul>` : ''}
+                        </div>
+                    `;
+                }).join('');
+                prevExperienceSection.style.display = 'block';
+            } else {
+                prevExperienceSection.style.display = 'none';
+            }
+
+            // Education
+            if (currentData.educations && currentData.educations.length > 0) {
+                prevEducationList.innerHTML = currentData.educations.map(edu => {
+                    return `
+                        <div style="margin-bottom:0.65rem;">
+                            <div class="rb-prev-role-row">
+                                <div>
+                                    <span class="rb-prev-role">${escapeHtml(edu.degree || '')}</span>
+                                    ${edu.school ? ` • <span class="rb-prev-company">${escapeHtml(edu.school)}</span>` : ''}
+                                </div>
+                                <div class="rb-prev-date">${escapeHtml(edu.year || '')}</div>
+                            </div>
+                            ${edu.details ? `<div style="font-size:0.78rem; color:#475569; margin-top:0.15rem;">${escapeHtml(edu.details)}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+                prevEducationSection.style.display = 'block';
+            } else {
+                prevEducationSection.style.display = 'none';
+            }
+
+            // Skills
+            if (currentData.skills && currentData.skills.trim()) {
+                const skillsArr = currentData.skills.split(',').map(s => s.trim()).filter(Boolean);
+                prevSkillsTags.innerHTML = skillsArr.map(s => `<span class="rb-prev-skill-tag">${escapeHtml(s)}</span>`).join('');
+                prevSkillsSection.style.display = 'block';
+            } else {
+                prevSkillsSection.style.display = 'none';
+            }
+
+            // Projects
+            if (currentData.projects && currentData.projects.trim()) {
+                const projBullets = currentData.projects.split('\n').filter(p => p.trim()).map(p => {
+                    const clean = p.replace(/^[•\-\*]\s*/, '');
+                    return `<li>${escapeHtml(clean)}</li>`;
+                }).join('');
+                prevProjectsList.innerHTML = projBullets;
+                prevProjectsSection.style.display = 'block';
+            } else {
+                prevProjectsSection.style.display = 'none';
+            }
+        }
+
+        // Live input bindings
+        [
+            [rbName, 'name'],
+            [rbTitle, 'title'],
+            [rbEmail, 'email'],
+            [rbPhone, 'phone'],
+            [rbLocation, 'location'],
+            [rbWebsite, 'website'],
+            [rbSummary, 'summary'],
+            [rbSkills, 'skills'],
+            [rbProjects, 'projects']
+        ].forEach(([el, key]) => {
+            el.addEventListener('input', () => {
+                currentData[key] = el.value;
+                renderPreview();
+                saveToStorage();
+            });
+        });
+
+        // Dynamic Experience events
+        experienceList.addEventListener('input', (e) => {
+            const idx = parseInt(e.target.dataset.idx, 10);
+            if (isNaN(idx) || !currentData.experiences[idx]) return;
+
+            if (e.target.classList.contains('exp-role')) currentData.experiences[idx].role = e.target.value;
+            if (e.target.classList.contains('exp-company')) currentData.experiences[idx].company = e.target.value;
+            if (e.target.classList.contains('exp-location')) currentData.experiences[idx].location = e.target.value;
+            if (e.target.classList.contains('exp-dates')) currentData.experiences[idx].dates = e.target.value;
+            if (e.target.classList.contains('exp-bullets')) currentData.experiences[idx].bullets = e.target.value;
+
+            renderPreview();
+            saveToStorage();
+        });
+
+        experienceList.addEventListener('click', (e) => {
+            if (e.target.hasAttribute('data-exp-del')) {
+                const idx = parseInt(e.target.getAttribute('data-exp-del'), 10);
+                currentData.experiences.splice(idx, 1);
+                renderExperienceForm();
+                renderPreview();
+                saveToStorage();
+            }
+        });
+
+        document.getElementById('addExpBtn').addEventListener('click', () => {
+            currentData.experiences = currentData.experiences || [];
+            currentData.experiences.push({ role: '', company: '', location: '', dates: '', bullets: '' });
+            renderExperienceForm();
+            renderPreview();
+            saveToStorage();
+        });
+
+        // Dynamic Education events
+        educationList.addEventListener('input', (e) => {
+            const idx = parseInt(e.target.dataset.idx, 10);
+            if (isNaN(idx) || !currentData.educations[idx]) return;
+
+            if (e.target.classList.contains('edu-degree')) currentData.educations[idx].degree = e.target.value;
+            if (e.target.classList.contains('edu-school')) currentData.educations[idx].school = e.target.value;
+            if (e.target.classList.contains('edu-year')) currentData.educations[idx].year = e.target.value;
+            if (e.target.classList.contains('edu-details')) currentData.educations[idx].details = e.target.value;
+
+            renderPreview();
+            saveToStorage();
+        });
+
+        educationList.addEventListener('click', (e) => {
+            if (e.target.hasAttribute('data-edu-del')) {
+                const idx = parseInt(e.target.getAttribute('data-edu-del'), 10);
+                currentData.educations.splice(idx, 1);
+                renderEducationForm();
+                renderPreview();
+                saveToStorage();
+            }
+        });
+
+        document.getElementById('addEduBtn').addEventListener('click', () => {
+            currentData.educations = currentData.educations || [];
+            currentData.educations.push({ degree: '', school: '', year: '', details: '' });
+            renderEducationForm();
+            renderPreview();
+            saveToStorage();
+        });
+
+        // Top bar buttons
+        document.getElementById('printResumeBtn').addEventListener('click', () => {
+            window.print();
+        });
+
+        document.getElementById('loadSampleBtn').addEventListener('click', () => {
+            currentData = JSON.parse(JSON.stringify(defaultSample));
+            renderForm();
+            renderPreview();
+            saveToStorage();
+        });
+
+        document.getElementById('clearResumeBtn').addEventListener('click', () => {
+            if (confirm('Reset resume to blank form?')) {
+                currentData = {
+                    name: '',
+                    title: '',
+                    email: '',
+                    phone: '',
+                    location: '',
+                    website: '',
+                    summary: '',
+                    experiences: [],
+                    educations: [],
+                    skills: '',
+                    projects: ''
+                };
+                renderForm();
+                renderPreview();
+                saveToStorage();
+            }
+        });
+
+        // Init
+        loadFromStorage();
+        renderForm();
+        renderPreview();
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>

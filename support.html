@@ -32,12 +32,26 @@
       padding: 1.5rem 1.25rem 3.5rem;
     }
     body.is-embedded .support-page-main {
-      padding: 0.75rem 0.85rem 2rem !important;
+      padding: 0.35rem 0.65rem 1.5rem !important;
     }
     body.is-embedded .header,
     body.is-embedded .footer,
     body.is-embedded .support-breadcrumb {
       display: none !important;
+    }
+    body.is-embedded .support-hero-box {
+      margin-bottom: 0.65rem !important;
+    }
+    body.is-embedded .support-hero-box h1 {
+      font-size: 1.35rem !important;
+      margin-bottom: 0.15rem !important;
+    }
+    body.is-embedded .support-hero-box p {
+      font-size: 0.82rem !important;
+      line-height: 1.35 !important;
+    }
+    body.is-embedded .payment-tabs-bar {
+      margin-bottom: 0.85rem !important;
     }
 
     .support-breadcrumb {
@@ -439,23 +453,26 @@
 
   <main class="support-page-main">
 
-    <!-- Breadcrumb (Auto-hidden inside portal workstation iframe) -->
-    <p class="support-breadcrumb">
-      <a href="index.html">Home</a> &rsaquo; Support Amazing-Tools
-    </p>
+    <!-- Standalone Back Link (Auto-hidden inside portal workstation iframe) -->
+    <div class="support-breadcrumb" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
+      <a href="index.html" style="display:inline-flex; align-items:center; gap:0.35rem;">
+        <span>←</span> <span>Back to Tools Dashboard</span>
+      </a>
+      <span style="font-size:0.75rem; color:var(--text-muted);">Amazing-Tools Non-Profit Mission</span>
+    </div>
 
-    <!-- Lean & Compelling Hero Pitch -->
-    <div class="support-hero-box">
-      <div class="support-pill-badge">
-        <span>🛡️ Community Supported · 0% Ads · 0% Tracking</span>
+    <!-- Ultra-Lean Immediate Donation Header -->
+    <div class="support-hero-box" style="margin-bottom: 1rem;">
+      <div class="support-pill-badge" style="margin-bottom: 0.45rem;">
+        <span>🛡️ Direct Support · 0% Intermediary Fees · 100% Client-Side Privacy</span>
       </div>
-      <h1>Support Amazing-Tools</h1>
-      <p>
-        42 fast, private browser tools with zero server uploads and zero paywalls. Your contribution directly covers our high-bandwidth hosting, domain, and open development.
+      <h1 style="font-size: 1.65rem; margin: 0 0 0.25rem;">Support Amazing-Tools</h1>
+      <p style="font-size: 0.88rem; max-width: 580px; line-height: 1.45;">
+        Select an option below to fund high-speed servers, domain &amp; new free tools. Every contribution keeps all 42 tools free and 100% private for humanity.
       </p>
     </div>
 
-    <!-- Payment Method Selector Tabs -->
+    <!-- Payment Method Selector Tabs (Right at the Top) -->
     <div class="payment-tabs-bar" id="paymentTabs">
       <button type="button" class="pay-tab-btn active" data-tab="all">✨ Both Options</button>
       <button type="button" class="pay-tab-btn" data-tab="upi">🇮🇳 UPI / India (0% Fees)</button>

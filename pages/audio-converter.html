@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Audio Cutter &amp; Converter — In-Browser Audio Editor | Amazing-Tools</title>
+    <meta name="description" content="Trim, cut, and convert audio files directly in your browser. Decode MP3, WAV, OGG, AAC, M4A, FLAC, and export clean WAV audio with zero server uploads.">
+    <meta name="keywords" content="audio cutter, audio converter, trim mp3 online, cut audio file, wav converter, free sound trimmer, client side audio editor">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/audio-converter.html">
+    <meta property="og:title" content="Free Audio Cutter &amp; Converter — In-Browser Audio Editor | Amazing-Tools">
+    <meta property="og:description" content="100% private in-browser audio cutter, trimmer, and converter. Zero server uploads.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Audio Cutter & Converter",
+      "url": "https://amazing-tools.github.io/pages/audio-converter.html",
+      "description": "Trim and convert audio files 100% client-side with interactive waveform preview.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .ac-box {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            background: var(--color-surface, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        .ac-dropzone {
+            border: 2px dashed var(--color-border, #CBD5E1);
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: var(--color-bg-alt, #F8FAFC);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 1.5rem;
+        }
+        .ac-dropzone:hover, .ac-dropzone.dragover {
+            border-color: var(--color-primary, #2563EB);
+            background: rgba(37,99,235,0.04);
+        }
+        .ac-waveform-wrap {
+            position: relative;
+            background: #0F172A;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            height: 140px;
+        }
+        #waveformCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .ac-time-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (max-width: 600px) {
+            .ac-time-row { grid-template-columns: 1fr; }
+        }
+        .ac-time-card {
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #E2E8F0);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .ac-time-card label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-text-secondary, #64748B);
+        }
+        .ac-time-input {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-text, #0F172A);
+            background: var(--color-bg, #FFFFFF);
+            border: 1px solid var(--color-border, #CBD5E1);
+            border-radius: 4px;
+            padding: 0.35rem 0.5rem;
+        }
+        .ac-modifiers {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: var(--color-bg-alt, #F8FAFC);
+            border: 1px solid var(--color-border, #E2E8F0);
+            border-radius: 8px;
+            padding: 0.85rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .ac-mod-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--color-text, #0F172A);
+        }
+        .ac-mod-group select {
+            padding: 0.35rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--color-border, #CBD5E1);
+            background: var(--color-bg, #FFFFFF);
+        }
+        .ac-action-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .ac-playback-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.65rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .ac-playback-btn.primary {
+            background: var(--color-primary, #2563EB);
+            color: #FFFFFF;
+            border: none;
+        }
+        .ac-playback-btn.secondary {
+            background: var(--color-bg, #FFFFFF);
+            border: 1.5px solid var(--color-border, #CBD5E1);
+            color: var(--color-text, #0F172A);
+        }
+        .ac-meta-strip {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-secondary, #64748B);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-Tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Documents</a>
+                <a href="../index.html#media-tools">Media</a>
+                <a href="../index.html#calculators">Finance</a>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; Audio Cutter &amp; Converter
+            </nav>
+
+            <div class="ac-box">
+                <div style="text-align:center; margin-bottom:1.5rem;">
+                    <h1 style="font-size:1.8rem; font-weight:800; margin:0 0 0.35rem;">Audio Cutter &amp; Converter</h1>
+                    <p style="color:var(--color-text-secondary); font-size:0.92rem; margin:0;">Trim audio files, adjust speed, and export uncompressed audio 100% in your browser.</p>
+                </div>
+
+                <!-- Dropzone -->
+                <div class="ac-dropzone" id="acDropzone">
+                    <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎵</div>
+                    <div style="font-size:1.05rem; font-weight:700; color:var(--color-text);">Select or Drag &amp; Drop an Audio File</div>
+                    <div style="font-size:0.84rem; color:var(--color-text-secondary); margin-top:0.25rem;">Supports MP3, WAV, AAC, M4A, OGG, FLAC, WebM (Zero server uploads)</div>
+                    <input type="file" id="audioFileInput" accept="audio/*" style="display:none;">
+                </div>
+
+                <!-- Audio Workspace -->
+                <div id="audioWorkspace" style="display:none;">
+                    <!-- Visual Waveform -->
+                    <div class="ac-waveform-wrap">
+                        <canvas id="waveformCanvas"></canvas>
+                    </div>
+
+                    <!-- Range selection -->
+                    <div class="ac-time-row">
+                        <div class="ac-time-card">
+                            <label>Start Time (Seconds)</label>
+                            <input type="number" id="startTimeInput" class="ac-time-input" step="0.1" min="0" value="0.0">
+                        </div>
+                        <div class="ac-time-card">
+                            <label>End Time (Seconds)</label>
+                            <input type="number" id="endTimeInput" class="ac-time-input" step="0.1" min="0" value="0.0">
+                        </div>
+                        <div class="ac-time-card">
+                            <label>Clip Duration</label>
+                            <div id="clipDurationLabel" style="font-family:'Fira Code', monospace; font-size:1.05rem; font-weight:700; padding:0.35rem 0; color:var(--color-primary);">0.0s</div>
+                        </div>
+                    </div>
+
+                    <!-- Modifiers -->
+                    <div class="ac-modifiers">
+                        <div class="ac-mod-group">
+                            <label>Playback Speed:</label>
+                            <select id="speedSelect">
+                                <option value="0.5">0.5x (Slow)</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1.0" selected>1.0x (Normal)</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2.0">2.0x (Double)</option>
+                            </select>
+                        </div>
+                        <div class="ac-mod-group">
+                            <label>Volume Boost:</label>
+                            <select id="volumeSelect">
+                                <option value="0.5">50% (-6dB)</option>
+                                <option value="1.0" selected>100% (Original)</option>
+                                <option value="1.5">150% (+3.5dB)</option>
+                                <option value="2.0">200% (+6dB Boost)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Playback & Export -->
+                    <div class="ac-action-bar">
+                        <button type="button" class="ac-playback-btn secondary" id="playPauseBtn">
+                            <span>▶️</span> Play Preview
+                        </button>
+                        <button type="button" class="ac-playback-btn secondary" id="stopPreviewBtn">
+                            <span>⏹️</span> Stop
+                        </button>
+                        <button type="button" class="ac-playback-btn primary" id="exportWavBtn">
+                            <span>💾</span> Export Selected Clip (.WAV)
+                        </button>
+                        <button type="button" class="ac-playback-btn secondary" id="loadNewAudioBtn">
+                            <span>🔄</span> Choose Another File
+                        </button>
+                    </div>
+
+                    <div class="ac-meta-strip" id="audioMetaStrip"></div>
+                </div>
+            </div>
+
+            <!-- SEO Content -->
+            <div class="tool-description">
+                <h2>Fast, 100% Client-Side Audio Editing</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% Private &amp; Offline</h3>
+                        <p>All waveform rendering, slicing, and PCM audio decoding execute inside your browser using the HTML5 Web Audio API. Your voice notes and tracks never leave your computer.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎵</div>
+                        <h3>High-Fidelity Lossless WAV</h3>
+                        <p>Exports directly to clean 16-bit PCM WAV audio, ideal for podcasts, ringtones, music sampling, video voiceovers, and presentations.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Zero Waiting or Queueing</h3>
+                        <p>No waiting in cloud conversion queues or server processing delays. Audio trimming and exporting finish in milliseconds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Amazing-Tools. Free Client-Side Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        let audioCtx = null;
+        let originalAudioBuffer = null;
+        let activeSourceNode = null;
+        let gainNode = null;
+        let isPlaying = false;
+        let playStartTime = 0;
+
+        const acDropzone = document.getElementById('acDropzone');
+        const audioFileInput = document.getElementById('audioFileInput');
+        const audioWorkspace = document.getElementById('audioWorkspace');
+        const waveformCanvas = document.getElementById('waveformCanvas');
+        const startTimeInput = document.getElementById('startTimeInput');
+        const endTimeInput = document.getElementById('endTimeInput');
+        const clipDurationLabel = document.getElementById('clipDurationLabel');
+        const speedSelect = document.getElementById('speedSelect');
+        const volumeSelect = document.getElementById('volumeSelect');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const stopPreviewBtn = document.getElementById('stopPreviewBtn');
+        const exportWavBtn = document.getElementById('exportWavBtn');
+        const loadNewAudioBtn = document.getElementById('loadNewAudioBtn');
+        const audioMetaStrip = document.getElementById('audioMetaStrip');
+
+        acDropzone.addEventListener('click', () => audioFileInput.click());
+        acDropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            acDropzone.classList.add('dragover');
+        });
+        acDropzone.addEventListener('dragleave', () => acDropzone.classList.remove('dragover'));
+        acDropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            acDropzone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                handleAudioFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        audioFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleAudioFile(e.target.files[0]);
+            }
+        });
+
+        function handleAudioFile(file) {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    if (!audioCtx) {
+                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    const arrayBuffer = e.target.result;
+                    originalAudioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+
+                    startTimeInput.value = '0.0';
+                    endTimeInput.value = originalAudioBuffer.duration.toFixed(1);
+                    startTimeInput.max = originalAudioBuffer.duration.toFixed(1);
+                    endTimeInput.max = originalAudioBuffer.duration.toFixed(1);
+                    updateClipDuration();
+
+                    drawWaveform(originalAudioBuffer);
+
+                    audioMetaStrip.textContent = `File: ${file.name} • Duration: ${originalAudioBuffer.duration.toFixed(1)}s • Sample Rate: ${originalAudioBuffer.sampleRate} Hz • Channels: ${originalAudioBuffer.numberOfChannels}`;
+
+                    acDropzone.style.display = 'none';
+                    audioWorkspace.style.display = 'block';
+                } catch (err) {
+                    console.error('Audio decode error:', err);
+                    alert('Could not decode this audio file. Please ensure it is a valid audio format.');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function updateClipDuration() {
+            const start = parseFloat(startTimeInput.value) || 0;
+            const end = parseFloat(endTimeInput.value) || 0;
+            const dur = Math.max(0, end - start);
+            clipDurationLabel.textContent = `${dur.toFixed(1)}s`;
+        }
+
+        startTimeInput.addEventListener('input', updateClipDuration);
+        endTimeInput.addEventListener('input', updateClipDuration);
+
+        function drawWaveform(buffer) {
+            const canvas = waveformCanvas;
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth * window.devicePixelRatio;
+            canvas.height = canvas.parentElement.clientHeight * window.devicePixelRatio;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const rawData = buffer.getChannelData(0);
+            const samples = 200;
+            const blockSize = Math.floor(rawData.length / samples);
+            const filteredData = [];
+
+            for (let i = 0; i < samples; i++) {
+                const blockStart = blockSize * i;
+                let sum = 0;
+                for (let j = 0; j < blockSize; j++) {
+                    sum += Math.abs(rawData[blockStart + j]);
+                }
+                filteredData.push(sum / blockSize);
+            }
+
+            const width = canvas.width;
+            const height = canvas.height;
+            const barWidth = width / samples;
+
+            ctx.fillStyle = '#38BDF8';
+            for (let i = 0; i < samples; i++) {
+                const barHeight = Math.max(4, filteredData[i] * height * 1.6);
+                const x = i * barWidth;
+                const y = (height - barHeight) / 2;
+                ctx.fillRect(x, y, barWidth - 1, barHeight);
+            }
+        }
+
+        function stopPlayback() {
+            if (activeSourceNode) {
+                try { activeSourceNode.stop(); } catch (e) {}
+                activeSourceNode.disconnect();
+                activeSourceNode = null;
+            }
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<span>▶️</span> Play Preview';
+        }
+
+        function playPreview() {
+            if (!originalAudioBuffer || !audioCtx) return;
+            if (isPlaying) {
+                stopPlayback();
+                return;
+            }
+
+            const start = Math.max(0, parseFloat(startTimeInput.value) || 0);
+            const end = Math.min(originalAudioBuffer.duration, parseFloat(endTimeInput.value) || originalAudioBuffer.duration);
+            const dur = end - start;
+            if (dur <= 0) return;
+
+            activeSourceNode = audioCtx.createBufferSource();
+            activeSourceNode.buffer = originalAudioBuffer;
+            activeSourceNode.playbackRate.value = parseFloat(speedSelect.value) || 1.0;
+
+            gainNode = audioCtx.createGain();
+            gainNode.gain.value = parseFloat(volumeSelect.value) || 1.0;
+
+            activeSourceNode.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            activeSourceNode.start(0, start, dur);
+            isPlaying = true;
+            playPauseBtn.innerHTML = '<span>⏸️</span> Pause';
+
+            activeSourceNode.onended = () => {
+                stopPlayback();
+            };
+        }
+
+        playPauseBtn.addEventListener('click', playPreview);
+        stopPreviewBtn.addEventListener('click', stopPlayback);
+
+        // Convert AudioBuffer portion to 16-bit WAV PCM
+        function exportWav() {
+            if (!originalAudioBuffer) return;
+
+            const start = Math.max(0, parseFloat(startTimeInput.value) || 0);
+            const end = Math.min(originalAudioBuffer.duration, parseFloat(endTimeInput.value) || originalAudioBuffer.duration);
+            const dur = end - start;
+            if (dur <= 0) {
+                alert('Invalid start/end time range.');
+                return;
+            }
+
+            const sampleRate = originalAudioBuffer.sampleRate;
+            const numChannels = originalAudioBuffer.numberOfChannels;
+            const startOffset = Math.floor(start * sampleRate);
+            const endOffset = Math.floor(end * sampleRate);
+            const numFrames = endOffset - startOffset;
+
+            const volume = parseFloat(volumeSelect.value) || 1.0;
+
+            // Create WAV Buffer
+            const wavBytes = 44 + numFrames * numChannels * 2;
+            const wavBuffer = new ArrayBuffer(wavBytes);
+            const view = new DataView(wavBuffer);
+
+            // RIFF chunk descriptor
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + numFrames * numChannels * 2, true);
+            writeString(view, 8, 'WAVE');
+
+            // FMT sub-chunk
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true); // SubChunk1Size (16 for PCM)
+            view.setUint16(20, 1, true);  // AudioFormat (1 for PCM)
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * numChannels * 2, true); // ByteRate
+            view.setUint16(32, numChannels * 2, true); // BlockAlign
+            view.setUint16(34, 16, true); // BitsPerSample
+
+            // Data sub-chunk
+            writeString(view, 36, 'data');
+            view.setUint32(40, numFrames * numChannels * 2, true);
+
+            // Write 16-bit PCM samples
+            let offset = 44;
+            const channelData = [];
+            for (let ch = 0; ch < numChannels; ch++) {
+                channelData.push(originalAudioBuffer.getChannelData(ch));
+            }
+
+            for (let i = 0; i < numFrames; i++) {
+                for (let ch = 0; ch < numChannels; ch++) {
+                    const sample = channelData[ch][startOffset + i] * volume;
+                    const clamped = Math.max(-1, Math.min(1, sample));
+                    const intSample = clamped < 0 ? clamped * 0x8000 : clamped * 0x7FFF;
+                    view.setInt16(offset, intSample, true);
+                    offset += 2;
+                }
+            }
+
+            const blob = new Blob([view], { type: 'audio/wav' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `audio-cut-${Date.now()}.wav`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        exportWavBtn.addEventListener('click', exportWav);
+
+        loadNewAudioBtn.addEventListener('click', () => {
+            stopPlayback();
+            originalAudioBuffer = null;
+            audioFileInput.value = '';
+            audioWorkspace.style.display = 'none';
+            acDropzone.style.display = 'block';
+        });
+    })();
+    </script>
+    <script src="../js/common.js"></script>
+</body>
+</html>
