@@ -1,0 +1,2178 @@
+{
+  "workspace_root": "\\\\192.168.137.244\\FreelanceReady\\tools-website",
+  "files": {
+    ".firebaserc": {
+      "extension": "",
+      "size_bytes": 46
+    },
+    ".gitignore": {
+      "extension": "",
+      "size_bytes": 93
+    },
+    "404.html": {
+      "extension": ".html",
+      "size_bytes": 10422
+    },
+    "about.html": {
+      "extension": ".html",
+      "size_bytes": 8744
+    },
+    "firebase.json": {
+      "extension": ".json",
+      "size_bytes": 545
+    },
+    "firestore.indexes.json": {
+      "extension": ".json",
+      "size_bytes": 34
+    },
+    "firestore.rules": {
+      "extension": ".rules",
+      "size_bytes": 959
+    },
+    "google3871a1e1cde7e269.html": {
+      "extension": ".html",
+      "size_bytes": 54
+    },
+    "index.html": {
+      "extension": ".html",
+      "size_bytes": 135123
+    },
+    "LICENSE": {
+      "extension": "",
+      "size_bytes": 3652
+    },
+    "live_common.js": {
+      "extension": ".js",
+      "size_bytes": 87239,
+      "classes": [
+        {
+          "name": "markers"
+        }
+      ],
+      "functions": [
+        {
+          "name": "closeMobileSidebar"
+        },
+        {
+          "name": "typeStep"
+        },
+        {
+          "name": "isMini"
+        },
+        {
+          "name": "hasAdPlacedInLeaderboard"
+        },
+        {
+          "name": "checkAndAttach"
+        },
+        {
+          "name": "copyFeedback"
+        },
+        {
+          "name": "buildFlyoutItemsHtml"
+        },
+        {
+          "name": "scheduleHide"
+        },
+        {
+          "name": "initPrivacyUspStrip"
+        },
+        {
+          "name": "initSidebarMiniFlyout"
+        },
+        {
+          "name": "showFlyoutFor"
+        },
+        {
+          "name": "extractSlugFromUrl"
+        },
+        {
+          "name": "checkUrlHash"
+        },
+        {
+          "name": "initDynamicUspRotator"
+        },
+        {
+          "name": "dismissNotice"
+        },
+        {
+          "name": "convertHundreds"
+        },
+        {
+          "name": "cycleTheme"
+        },
+        {
+          "name": "updatePortalSuiteStrip"
+        },
+        {
+          "name": "initToolSuccessBadges"
+        },
+        {
+          "name": "showThemeToast"
+        },
+        {
+          "name": "initGlobalHeaderNav"
+        },
+        {
+          "name": "applyTheme"
+        },
+        {
+          "name": "closeToolPanel"
+        },
+        {
+          "name": "closeSidebarMiniFlyout"
+        },
+        {
+          "name": "openToolInPortal"
+        }
+      ],
+      "imports": []
+    },
+    "live_index.html": {
+      "extension": ".html",
+      "size_bytes": 125163
+    },
+    "live_pdf_tools.html": {
+      "extension": ".html",
+      "size_bytes": 154664
+    },
+    "matches.txt": {
+      "extension": ".txt",
+      "size_bytes": 3788
+    },
+    "NOTICE.md": {
+      "extension": ".md",
+      "size_bytes": 1731
+    },
+    "output-home-desktop.png": {
+      "extension": ".png",
+      "size_bytes": 228398
+    },
+    "output-home-mobile.png": {
+      "extension": ".png",
+      "size_bytes": 78541
+    },
+    "output-tax-desktop.png": {
+      "extension": ".png",
+      "size_bytes": 137252
+    },
+    "privacy-policy.html": {
+      "extension": ".html",
+      "size_bytes": 7611
+    },
+    "robots.txt": {
+      "extension": ".txt",
+      "size_bytes": 203
+    },
+    "scratch_dom.txt": {
+      "extension": ".txt",
+      "size_bytes": 960
+    },
+    "scratch_iframe_dom.txt": {
+      "extension": ".txt",
+      "size_bytes": 1663
+    },
+    "scratch_live_index.txt": {
+      "extension": ".txt",
+      "size_bytes": 920
+    },
+    "sitemap.xml": {
+      "extension": ".xml",
+      "size_bytes": 6977
+    },
+    "support.html": {
+      "extension": ".html",
+      "size_bytes": 19930
+    },
+    "terms.html": {
+      "extension": ".html",
+      "size_bytes": 8277
+    },
+    "css/styles.css": {
+      "extension": ".css",
+      "size_bytes": 236448
+    },
+    "graphify-out/.graphify_labels.json": {
+      "extension": ".json",
+      "size_bytes": 2366
+    },
+    "graphify-out/.graphify_python": {
+      "extension": "",
+      "size_bytes": 37
+    },
+    "graphify-out/.graphify_root": {
+      "extension": "",
+      "size_bytes": 26
+    },
+    "graphify-out/graph.html": {
+      "extension": ".html",
+      "size_bytes": 564310
+    },
+    "graphify-out/graph.json": {
+      "extension": ".json",
+      "size_bytes": 709951
+    },
+    "graphify-out/GRAPH_REPORT.md": {
+      "extension": ".md",
+      "size_bytes": 9550
+    },
+    "graphify-out/cache/stat-index.json": {
+      "extension": ".json",
+      "size_bytes": 8487
+    },
+    "graphify-out/cache/ast/v0.9.50-s2/b08662c8dff2b941579610a602cbc66aad3d06ea7e2b13461c6b18d72e909d3c.json": {
+      "extension": ".json",
+      "size_bytes": 4863
+    },
+    "img/upi-qr.png": {
+      "extension": ".png",
+      "size_bytes": 120928
+    },
+    "js/age-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 4437,
+      "classes": [],
+      "functions": [
+        {
+          "name": "calculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/base64-tool.js": {
+      "extension": ".js",
+      "size_bytes": 3336,
+      "classes": [],
+      "functions": [
+        {
+          "name": "updateInputStats"
+        },
+        {
+          "name": "utf8_to_b64"
+        },
+        {
+          "name": "getByteSize"
+        },
+        {
+          "name": "b64_to_utf8"
+        },
+        {
+          "name": "formatBytes"
+        },
+        {
+          "name": "updateOutputStats"
+        }
+      ],
+      "imports": []
+    },
+    "js/buy-vs-rent-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 34667,
+      "classes": [],
+      "functions": [
+        {
+          "name": "recalculateAll"
+        },
+        {
+          "name": "syncSliderAndInput"
+        },
+        {
+          "name": "formatLakhCrore"
+        },
+        {
+          "name": "updateTable"
+        },
+        {
+          "name": "updateSecurityDepositBadge"
+        },
+        {
+          "name": "updateCharts"
+        },
+        {
+          "name": "formatINR"
+        },
+        {
+          "name": "updateDownPaymentBadge"
+        }
+      ],
+      "imports": []
+    },
+    "js/case-converter.js": {
+      "extension": ".js",
+      "size_bytes": 3248,
+      "classes": [],
+      "functions": [
+        {
+          "name": "toSnakeCase"
+        },
+        {
+          "name": "toToggleCase"
+        },
+        {
+          "name": "toTitleCase"
+        },
+        {
+          "name": "toCamelCase"
+        },
+        {
+          "name": "toKebabCase"
+        },
+        {
+          "name": "toSentenceCase"
+        }
+      ],
+      "imports": []
+    },
+    "js/color-picker.js": {
+      "extension": ".js",
+      "size_bytes": 5702,
+      "classes": [],
+      "functions": [
+        {
+          "name": "rgbToHsl"
+        },
+        {
+          "name": "generatePalettes"
+        },
+        {
+          "name": "hslToRgb"
+        },
+        {
+          "name": "createSwatch"
+        },
+        {
+          "name": "hexToRgb"
+        },
+        {
+          "name": "updateAllFromHex"
+        },
+        {
+          "name": "rgbToHex"
+        },
+        {
+          "name": "showToast"
+        },
+        {
+          "name": "hue2rgb"
+        }
+      ],
+      "imports": []
+    },
+    "js/common.js": {
+      "extension": ".js",
+      "size_bytes": 70485,
+      "classes": [
+        {
+          "name": "markers"
+        }
+      ],
+      "functions": [
+        {
+          "name": "closeMobileSidebar"
+        },
+        {
+          "name": "typeStep"
+        },
+        {
+          "name": "isMini"
+        },
+        {
+          "name": "hasAdPlacedInLeaderboard"
+        },
+        {
+          "name": "buildFlyoutItemsHtml"
+        },
+        {
+          "name": "scheduleHide"
+        },
+        {
+          "name": "initPrivacyUspStrip"
+        },
+        {
+          "name": "initSidebarMiniFlyout"
+        },
+        {
+          "name": "showFlyoutFor"
+        },
+        {
+          "name": "extractSlugFromUrl"
+        },
+        {
+          "name": "checkUrlHash"
+        },
+        {
+          "name": "initDynamicUspRotator"
+        },
+        {
+          "name": "openSidebarTree"
+        },
+        {
+          "name": "dismissNotice"
+        },
+        {
+          "name": "convertHundreds"
+        },
+        {
+          "name": "cycleTheme"
+        },
+        {
+          "name": "updatePortalSuiteStrip"
+        },
+        {
+          "name": "restoreActiveSidebarState"
+        },
+        {
+          "name": "showThemeToast"
+        },
+        {
+          "name": "closeSidebarTree"
+        },
+        {
+          "name": "applyTheme"
+        },
+        {
+          "name": "closeToolPanel"
+        },
+        {
+          "name": "openToolInPortal"
+        }
+      ],
+      "imports": []
+    },
+    "js/compound-interest.js": {
+      "extension": ".js",
+      "size_bytes": 3839,
+      "classes": [],
+      "functions": [
+        {
+          "name": "calculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/currency.js": {
+      "extension": ".js",
+      "size_bytes": 7208,
+      "classes": [],
+      "functions": [
+        {
+          "name": "formatCurrency"
+        },
+        {
+          "name": "setPreferred"
+        },
+        {
+          "name": "loadCache"
+        },
+        {
+          "name": "fetchRates"
+        },
+        {
+          "name": "init"
+        },
+        {
+          "name": "convert"
+        },
+        {
+          "name": "renderHeaderToggle"
+        },
+        {
+          "name": "getPreferred"
+        },
+        {
+          "name": "saveCache"
+        }
+      ],
+      "imports": []
+    },
+    "js/document-converter.js": {
+      "extension": ".js",
+      "size_bytes": 52242,
+      "classes": [],
+      "functions": [
+        {
+          "name": "convertPptxToPdf"
+        },
+        {
+          "name": "ensureScriptLoaded"
+        },
+        {
+          "name": "convertPdfToDocx"
+        },
+        {
+          "name": "getFileExtension"
+        },
+        {
+          "name": "findCleanSliceY"
+        },
+        {
+          "name": "convertPdfToPptx"
+        },
+        {
+          "name": "convertXlsxToDocx"
+        },
+        {
+          "name": "escapeHtml"
+        },
+        {
+          "name": "formatBytes"
+        },
+        {
+          "name": "addCanvasPagesToPdf"
+        },
+        {
+          "name": "convertXlsxToPdf"
+        },
+        {
+          "name": "convertDocxToPdf"
+        },
+        {
+          "name": "convertPdfToXlsx"
+        },
+        {
+          "name": "startConversion"
+        },
+        {
+          "name": "ensureDocxPreviewEngine"
+        },
+        {
+          "name": "extractTextFromBinaryDoc"
+        },
+        {
+          "name": "updateTargetDescription"
+        },
+        {
+          "name": "handleFileSelection"
+        },
+        {
+          "name": "updateProgress"
+        },
+        {
+          "name": "triggerDownload"
+        },
+        {
+          "name": "resetConverter"
+        },
+        {
+          "name": "convertDocxToXlsx"
+        }
+      ],
+      "imports": []
+    },
+    "js/docx-preview.min.js": {
+      "extension": ".js",
+      "size_bytes": 72267,
+      "classes": [
+        {
+          "name": "u"
+        },
+        {
+          "name": "de"
+        },
+        {
+          "name": "oe"
+        },
+        {
+          "name": "K"
+        },
+        {
+          "name": "S"
+        },
+        {
+          "name": "X"
+        },
+        {
+          "name": "ce"
+        },
+        {
+          "name": "be"
+        },
+        {
+          "name": "re"
+        },
+        {
+          "name": "z"
+        },
+        {
+          "name": "U"
+        },
+        {
+          "name": "V"
+        },
+        {
+          "name": "he"
+        },
+        {
+          "name": "j"
+        },
+        {
+          "name": "me"
+        },
+        {
+          "name": "ne"
+        },
+        {
+          "name": "_"
+        },
+        {
+          "name": "ae"
+        },
+        {
+          "name": "c"
+        },
+        {
+          "name": "xe"
+        },
+        {
+          "name": "Z"
+        },
+        {
+          "name": "se"
+        },
+        {
+          "name": "Be"
+        },
+        {
+          "name": "Re"
+        },
+        {
+          "name": "W"
+        },
+        {
+          "name": "we"
+        },
+        {
+          "name": "pe"
+        },
+        {
+          "name": "le"
+        },
+        {
+          "name": "o"
+        },
+        {
+          "name": "Se"
+        },
+        {
+          "name": "q"
+        },
+        {
+          "name": "Pe"
+        },
+        {
+          "name": "te"
+        },
+        {
+          "name": "_e"
+        },
+        {
+          "name": "P"
+        },
+        {
+          "name": "J"
+        }
+      ],
+      "functions": [
+        {
+          "name": "D"
+        },
+        {
+          "name": "Le"
+        },
+        {
+          "name": "I"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "v"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "O"
+        },
+        {
+          "name": "ye"
+        },
+        {
+          "name": "G"
+        },
+        {
+          "name": "n"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "m"
+        },
+        {
+          "name": "M"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "ke"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "Ve"
+        },
+        {
+          "name": "ee"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "b"
+        },
+        {
+          "name": "d"
+        },
+        {
+          "name": "x"
+        },
+        {
+          "name": "T"
+        },
+        {
+          "name": "We"
+        },
+        {
+          "name": "Q"
+        },
+        {
+          "name": "ve"
+        },
+        {
+          "name": "Ie"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "y"
+        },
+        {
+          "name": "g"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "B"
+        },
+        {
+          "name": "L"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "k"
+        },
+        {
+          "name": "ze"
+        },
+        {
+          "name": "Xe"
+        },
+        {
+          "name": "w"
+        },
+        {
+          "name": "ge"
+        }
+      ],
+      "imports": []
+    },
+    "js/emi-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 81448,
+      "classes": [],
+      "functions": [
+        {
+          "name": "initEventListeners"
+        },
+        {
+          "name": "format"
+        },
+        {
+          "name": "renderTrajectoryChart"
+        },
+        {
+          "name": "handleDownloadCsv"
+        },
+        {
+          "name": "handleApplyTargetGoal"
+        },
+        {
+          "name": "bindPair"
+        },
+        {
+          "name": "calculateAndRender"
+        },
+        {
+          "name": "renderBaselinePreview"
+        },
+        {
+          "name": "renderSchedulerTable"
+        },
+        {
+          "name": "initQuickChips"
+        },
+        {
+          "name": "renderVisualCharts"
+        },
+        {
+          "name": "initStartDateControls"
+        },
+        {
+          "name": "handleDownloadReport"
+        },
+        {
+          "name": "getPeriodDate"
+        },
+        {
+          "name": "handleAddLumpsum"
+        },
+        {
+          "name": "initImpactRadios"
+        },
+        {
+          "name": "updateSchedulerYearOptions"
+        },
+        {
+          "name": "renderAmortizationTable"
+        },
+        {
+          "name": "renderKpiCards"
+        },
+        {
+          "name": "renderPrincipalInterestChart"
+        },
+        {
+          "name": "handleCopySummary"
+        },
+        {
+          "name": "runSimulation"
+        },
+        {
+          "name": "renderDecisionArena"
+        },
+        {
+          "name": "setScheduleView"
+        },
+        {
+          "name": "renderWealthChart"
+        },
+        {
+          "name": "handleResetAll"
+        },
+        {
+          "name": "setTrendView"
+        },
+        {
+          "name": "syncActiveChip"
+        },
+        {
+          "name": "getParsedStartDate"
+        },
+        {
+          "name": "updateTargetSolver"
+        },
+        {
+          "name": "renderHeroFreedomCard"
+        },
+        {
+          "name": "updateStartDateDisplay"
+        },
+        {
+          "name": "formatLakhsCrores"
+        },
+        {
+          "name": "updateWordDisplays"
+        },
+        {
+          "name": "handleOneExtraEmiHack"
+        },
+        {
+          "name": "triggerLiveCalculation"
+        },
+        {
+          "name": "computeBreakEvenRate"
+        },
+        {
+          "name": "initDualSyncSliders"
+        },
+        {
+          "name": "computeEmi"
+        },
+        {
+          "name": "setActiveStartChip"
+        },
+        {
+          "name": "initPrepayModeTabs"
+        },
+        {
+          "name": "initTrendChartControls"
+        }
+      ],
+      "imports": []
+    },
+    "js/fd-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 3188,
+      "classes": [],
+      "functions": [
+        {
+          "name": "calculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/firebase-auth.js": {
+      "extension": ".js",
+      "size_bytes": 22570,
+      "classes": [],
+      "functions": [
+        {
+          "name": "getTopToolRequests"
+        },
+        {
+          "name": "renderSharedRatings"
+        },
+        {
+          "name": "signIn"
+        },
+        {
+          "name": "syncUserProfile"
+        },
+        {
+          "name": "signOutUser"
+        },
+        {
+          "name": "submitRating"
+        },
+        {
+          "name": "setLocalGuestUser"
+        },
+        {
+          "name": "updateAuthUI"
+        },
+        {
+          "name": "submitToolRequest"
+        },
+        {
+          "name": "clearLocalGuestUser"
+        },
+        {
+          "name": "getLocalGuestUser"
+        },
+        {
+          "name": "showAuthModal"
+        },
+        {
+          "name": "getToolRating"
+        }
+      ],
+      "imports": [
+        "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"
+      ]
+    },
+    "js/goal-financial-planner.js": {
+      "extension": ".js",
+      "size_bytes": 33850,
+      "classes": [],
+      "functions": [
+        {
+          "name": "updateGoalsTable"
+        },
+        {
+          "name": "addChild"
+        },
+        {
+          "name": "formatLakhCrore"
+        },
+        {
+          "name": "removeChild"
+        },
+        {
+          "name": "renderChildren"
+        },
+        {
+          "name": "calculateAllGoals"
+        },
+        {
+          "name": "updateCharts"
+        },
+        {
+          "name": "formatINR"
+        },
+        {
+          "name": "bindChildEvents"
+        },
+        {
+          "name": "calculateSipForTarget"
+        }
+      ],
+      "imports": []
+    },
+    "js/gst-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 5466,
+      "classes": [],
+      "functions": [
+        {
+          "name": "calculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/html2canvas.min.js": {
+      "extension": ".js",
+      "size_bytes": 198689,
+      "classes": [],
+      "functions": [
+        {
+          "name": "oe"
+        },
+        {
+          "name": "sn"
+        },
+        {
+          "name": "re"
+        },
+        {
+          "name": "ye"
+        },
+        {
+          "name": "zA"
+        },
+        {
+          "name": "bB"
+        },
+        {
+          "name": "Fs"
+        },
+        {
+          "name": "hA"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "XA"
+        },
+        {
+          "name": "Ye"
+        },
+        {
+          "name": "EB"
+        },
+        {
+          "name": "WA"
+        },
+        {
+          "name": "ZA"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "ee"
+        },
+        {
+          "name": "Xt"
+        },
+        {
+          "name": "SB"
+        },
+        {
+          "name": "Be"
+        },
+        {
+          "name": "se"
+        },
+        {
+          "name": "Bs"
+        },
+        {
+          "name": "gs"
+        },
+        {
+          "name": "Ie"
+        },
+        {
+          "name": "rs"
+        },
+        {
+          "name": "Hn"
+        },
+        {
+          "name": "rB"
+        },
+        {
+          "name": "fn"
+        },
+        {
+          "name": "us"
+        },
+        {
+          "name": "KB"
+        },
+        {
+          "name": "mr"
+        },
+        {
+          "name": "xB"
+        },
+        {
+          "name": "Ns"
+        },
+        {
+          "name": "TB"
+        },
+        {
+          "name": "ms"
+        },
+        {
+          "name": "sB"
+        },
+        {
+          "name": "uA"
+        },
+        {
+          "name": "lB"
+        },
+        {
+          "name": "Vs"
+        },
+        {
+          "name": "fA"
+        },
+        {
+          "name": "n"
+        },
+        {
+          "name": "a"
+        },
+        {
+          "name": "YA"
+        },
+        {
+          "name": "Xs"
+        },
+        {
+          "name": "He"
+        },
+        {
+          "name": "Vn"
+        },
+        {
+          "name": "qn"
+        },
+        {
+          "name": "QB"
+        },
+        {
+          "name": "pe"
+        },
+        {
+          "name": "_n"
+        },
+        {
+          "name": "fr"
+        },
+        {
+          "name": "qA"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "Ds"
+        },
+        {
+          "name": "w"
+        },
+        {
+          "name": "pr"
+        },
+        {
+          "name": "de"
+        },
+        {
+          "name": "MB"
+        },
+        {
+          "name": "dA"
+        },
+        {
+          "name": "I"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "nn"
+        },
+        {
+          "name": "ls"
+        },
+        {
+          "name": "Gn"
+        },
+        {
+          "name": "ws"
+        },
+        {
+          "name": "jA"
+        },
+        {
+          "name": "ts"
+        },
+        {
+          "name": "Lr"
+        },
+        {
+          "name": "Ae"
+        },
+        {
+          "name": "_A"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "e"
+        },
+        {
+          "name": "an"
+        },
+        {
+          "name": "Qn"
+        },
+        {
+          "name": "zn"
+        },
+        {
+          "name": "gA"
+        },
+        {
+          "name": "Qe"
+        },
+        {
+          "name": "Us"
+        },
+        {
+          "name": "lA"
+        },
+        {
+          "name": "FA"
+        },
+        {
+          "name": "CA"
+        },
+        {
+          "name": "Ee"
+        },
+        {
+          "name": "ns"
+        },
+        {
+          "name": "t"
+        },
+        {
+          "name": "Kr"
+        },
+        {
+          "name": "gr"
+        },
+        {
+          "name": "ne"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "Pt"
+        },
+        {
+          "name": "cn"
+        },
+        {
+          "name": "B"
+        },
+        {
+          "name": "gB"
+        },
+        {
+          "name": "wA"
+        },
+        {
+          "name": "te"
+        },
+        {
+          "name": "Cs"
+        },
+        {
+          "name": "UA"
+        }
+      ],
+      "imports": []
+    },
+    "js/image-compressor.js": {
+      "extension": ".js",
+      "size_bytes": 5189,
+      "classes": [],
+      "functions": [
+        {
+          "name": "compressImage"
+        },
+        {
+          "name": "formatBytes"
+        },
+        {
+          "name": "handleFile"
+        }
+      ],
+      "imports": []
+    },
+    "js/image-resizer.js": {
+      "extension": ".js",
+      "size_bytes": 4907,
+      "classes": [],
+      "functions": [
+        {
+          "name": "handleFile"
+        }
+      ],
+      "imports": []
+    },
+    "js/income-tax-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 29053,
+      "classes": [],
+      "functions": [
+        {
+          "name": "computeBreakEvenDeductions"
+        },
+        {
+          "name": "fmt"
+        },
+        {
+          "name": "initQuickChips"
+        },
+        {
+          "name": "handleMaxDeductions"
+        },
+        {
+          "name": "initEventListeners"
+        },
+        {
+          "name": "formatLakhsCrores"
+        },
+        {
+          "name": "updateWordDisplays"
+        },
+        {
+          "name": "calculateHraExemption"
+        },
+        {
+          "name": "initSyncSliders"
+        },
+        {
+          "name": "handleClearDeductions"
+        },
+        {
+          "name": "triggerLiveCalculation"
+        },
+        {
+          "name": "computeOldRegimeTax"
+        },
+        {
+          "name": "syncActiveChip"
+        },
+        {
+          "name": "calculateTaxAndRender"
+        },
+        {
+          "name": "bindPair"
+        },
+        {
+          "name": "computeNewRegimeTax"
+        },
+        {
+          "name": "renderResultsUI"
+        }
+      ],
+      "imports": []
+    },
+    "js/json-formatter.js": {
+      "extension": ".js",
+      "size_bytes": 4216,
+      "classes": [],
+      "functions": [
+        {
+          "name": "getByteSize"
+        },
+        {
+          "name": "processJSON"
+        },
+        {
+          "name": "formatBytes"
+        },
+        {
+          "name": "updateStats"
+        }
+      ],
+      "imports": []
+    },
+    "js/jszip.min.js": {
+      "extension": ".js",
+      "size_bytes": 97642,
+      "classes": [
+        {
+          "name": "for"
+        }
+      ],
+      "functions": [
+        {
+          "name": "u"
+        },
+        {
+          "name": "s"
+        },
+        {
+          "name": "D"
+        },
+        {
+          "name": "K"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "X"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "h"
+        },
+        {
+          "name": "G"
+        },
+        {
+          "name": "n"
+        },
+        {
+          "name": "a"
+        },
+        {
+          "name": "U"
+        },
+        {
+          "name": "V"
+        },
+        {
+          "name": "j"
+        },
+        {
+          "name": "M"
+        },
+        {
+          "name": "i"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "c"
+        },
+        {
+          "name": "Z"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "d"
+        },
+        {
+          "name": "N"
+        },
+        {
+          "name": "T"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "W"
+        },
+        {
+          "name": "o"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "L"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "P"
+        },
+        {
+          "name": "J"
+        }
+      ],
+      "imports": []
+    },
+    "js/lorem-ipsum.js": {
+      "extension": ".js",
+      "size_bytes": 7023,
+      "classes": [],
+      "functions": [
+        {
+          "name": "getSentences"
+        },
+        {
+          "name": "getRandomParagraph"
+        },
+        {
+          "name": "getWords"
+        }
+      ],
+      "imports": []
+    },
+    "js/meta-tag-generator.js": {
+      "extension": ".js",
+      "size_bytes": 5044,
+      "classes": [],
+      "functions": [
+        {
+          "name": "updatePreview"
+        },
+        {
+          "name": "handleChange"
+        },
+        {
+          "name": "generateTags"
+        }
+      ],
+      "imports": []
+    },
+    "js/percentage-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 3751,
+      "classes": [],
+      "functions": [
+        {
+          "name": "displayResult"
+        }
+      ],
+      "imports": []
+    },
+    "js/portal-features.js": {
+      "extension": ".js",
+      "size_bytes": 22213,
+      "classes": [],
+      "functions": [
+        {
+          "name": "getRecentlyUsed"
+        },
+        {
+          "name": "getRating"
+        },
+        {
+          "name": "setRating"
+        },
+        {
+          "name": "renderWishlist"
+        },
+        {
+          "name": "initWhatsNew"
+        },
+        {
+          "name": "closeCmdPalette"
+        },
+        {
+          "name": "getRatings"
+        },
+        {
+          "name": "init"
+        },
+        {
+          "name": "initRecentlyUsed"
+        },
+        {
+          "name": "renderRecentlyUsed"
+        },
+        {
+          "name": "initFeedbackFAB"
+        },
+        {
+          "name": "openCmdPalette"
+        },
+        {
+          "name": "addRecentlyUsed"
+        },
+        {
+          "name": "initCmdPalette"
+        },
+        {
+          "name": "showAnnouncement"
+        },
+        {
+          "name": "escapeHtml"
+        },
+        {
+          "name": "timeAgo"
+        },
+        {
+          "name": "renderCmdResults"
+        }
+      ],
+      "imports": []
+    },
+    "js/rd-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 4291,
+      "classes": [],
+      "functions": [
+        {
+          "name": "renderChart"
+        },
+        {
+          "name": "formatINR"
+        },
+        {
+          "name": "recalculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/regex-tester.js": {
+      "extension": ".js",
+      "size_bytes": 4465,
+      "classes": [],
+      "functions": [
+        {
+          "name": "syncScroll"
+        },
+        {
+          "name": "syncInputToFlags"
+        },
+        {
+          "name": "escapeHtml"
+        },
+        {
+          "name": "evaluateRegex"
+        },
+        {
+          "name": "syncFlagsToInput"
+        }
+      ],
+      "imports": []
+    },
+    "js/retirement-benefits-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 7516,
+      "classes": [],
+      "functions": [
+        {
+          "name": "renderChart"
+        },
+        {
+          "name": "formatINR"
+        },
+        {
+          "name": "recalculate"
+        },
+        {
+          "name": "formatLakhCrore"
+        }
+      ],
+      "imports": []
+    },
+    "js/sip-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 9733,
+      "classes": [],
+      "functions": [
+        {
+          "name": "calculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/slug-generator.js": {
+      "extension": ".js",
+      "size_bytes": 2821,
+      "classes": [],
+      "functions": [
+        {
+          "name": "generateSlug"
+        }
+      ],
+      "imports": []
+    },
+    "js/swp-annuity-calculator.js": {
+      "extension": ".js",
+      "size_bytes": 14011,
+      "classes": [],
+      "functions": [
+        {
+          "name": "renderChart"
+        },
+        {
+          "name": "syncSlider"
+        },
+        {
+          "name": "formatLakhCrore"
+        },
+        {
+          "name": "updateBadge"
+        },
+        {
+          "name": "bindChips"
+        },
+        {
+          "name": "formatINR"
+        },
+        {
+          "name": "recalculate"
+        }
+      ],
+      "imports": []
+    },
+    "js/url-encoder.js": {
+      "extension": ".js",
+      "size_bytes": 2548,
+      "classes": [],
+      "functions": [
+        {
+          "name": "clearError"
+        },
+        {
+          "name": "showError"
+        }
+      ],
+      "imports": []
+    },
+    "js/video-downloader.js": {
+      "extension": ".js",
+      "size_bytes": 12611,
+      "classes": [],
+      "functions": [
+        {
+          "name": "generateFallbackStreamUrl"
+        },
+        {
+          "name": "showProgressBar"
+        },
+        {
+          "name": "handleFormatDownload"
+        },
+        {
+          "name": "triggerBrowserDownload"
+        },
+        {
+          "name": "fetchOembedInfo"
+        },
+        {
+          "name": "showError"
+        },
+        {
+          "name": "extractFallbackTitle"
+        },
+        {
+          "name": "initEvents"
+        },
+        {
+          "name": "hideError"
+        },
+        {
+          "name": "isValidMediaUrl"
+        },
+        {
+          "name": "switchTab"
+        },
+        {
+          "name": "resolveDownloadStream"
+        },
+        {
+          "name": "extractYouTubeId"
+        },
+        {
+          "name": "handleFetchMedia"
+        },
+        {
+          "name": "generateThumbnail"
+        },
+        {
+          "name": "setLoadingState"
+        },
+        {
+          "name": "detectPlatform"
+        }
+      ],
+      "imports": []
+    },
+    "js/word-counter.js": {
+      "extension": ".js",
+      "size_bytes": 3741,
+      "classes": [],
+      "functions": [
+        {
+          "name": "analyzeText"
+        }
+      ],
+      "imports": []
+    },
+    "pages/age-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 11083
+    },
+    "pages/audio-converter.html": {
+      "extension": ".html",
+      "size_bytes": 22617
+    },
+    "pages/base64-tool.html": {
+      "extension": ".html",
+      "size_bytes": 11710
+    },
+    "pages/bmi-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 9321
+    },
+    "pages/buy-vs-rent-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 67847
+    },
+    "pages/case-converter.html": {
+      "extension": ".html",
+      "size_bytes": 12091
+    },
+    "pages/color-picker.html": {
+      "extension": ".html",
+      "size_bytes": 14413
+    },
+    "pages/compound-interest.html": {
+      "extension": ".html",
+      "size_bytes": 16395
+    },
+    "pages/compress.html": {
+      "extension": ".html",
+      "size_bytes": 877
+    },
+    "pages/crop.html": {
+      "extension": ".html",
+      "size_bytes": 853
+    },
+    "pages/currency-converter.html": {
+      "extension": ".html",
+      "size_bytes": 8308
+    },
+    "pages/document-converter.html": {
+      "extension": ".html",
+      "size_bytes": 23995
+    },
+    "pages/edit.html": {
+      "extension": ".html",
+      "size_bytes": 867
+    },
+    "pages/emi-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 72209
+    },
+    "pages/extract-text.html": {
+      "extension": ".html",
+      "size_bytes": 911
+    },
+    "pages/fd-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 15152
+    },
+    "pages/goal-financial-planner.html": {
+      "extension": ".html",
+      "size_bytes": 30323
+    },
+    "pages/gst-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 18346
+    },
+    "pages/image-compressor.html": {
+      "extension": ".html",
+      "size_bytes": 12533
+    },
+    "pages/image-resizer.html": {
+      "extension": ".html",
+      "size_bytes": 13944
+    },
+    "pages/img-to-pdf.html": {
+      "extension": ".html",
+      "size_bytes": 887
+    },
+    "pages/income-tax-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 47998
+    },
+    "pages/inflation-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 19900
+    },
+    "pages/invoice-generator.html": {
+      "extension": ".html",
+      "size_bytes": 24964
+    },
+    "pages/json-formatter.html": {
+      "extension": ".html",
+      "size_bytes": 10901
+    },
+    "pages/lorem-ipsum.html": {
+      "extension": ".html",
+      "size_bytes": 10975
+    },
+    "pages/markdown-previewer.html": {
+      "extension": ".html",
+      "size_bytes": 7383
+    },
+    "pages/markdown-to-pdf.html": {
+      "extension": ".html",
+      "size_bytes": 19288
+    },
+    "pages/merge.html": {
+      "extension": ".html",
+      "size_bytes": 859
+    },
+    "pages/meta-tag-generator.html": {
+      "extension": ".html",
+      "size_bytes": 15210
+    },
+    "pages/metadata.html": {
+      "extension": ".html",
+      "size_bytes": 891
+    },
+    "pages/ocr-tool.html": {
+      "extension": ".html",
+      "size_bytes": 24455
+    },
+    "pages/organize.html": {
+      "extension": ".html",
+      "size_bytes": 895
+    },
+    "pages/page-numbers.html": {
+      "extension": ".html",
+      "size_bytes": 915
+    },
+    "pages/password-generator.html": {
+      "extension": ".html",
+      "size_bytes": 14548
+    },
+    "pages/pdf-to-img.html": {
+      "extension": ".html",
+      "size_bytes": 905
+    },
+    "pages/pdf-tools.html": {
+      "extension": ".html",
+      "size_bytes": 155609
+    },
+    "pages/percentage-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 14575
+    },
+    "pages/protect.html": {
+      "extension": ".html",
+      "size_bytes": 885
+    },
+    "pages/qr-generator.html": {
+      "extension": ".html",
+      "size_bytes": 12582
+    },
+    "pages/rd-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 16148
+    },
+    "pages/regex-tester.html": {
+      "extension": ".html",
+      "size_bytes": 12980
+    },
+    "pages/resume-builder.html": {
+      "extension": ".html",
+      "size_bytes": 32839
+    },
+    "pages/retirement-benefits-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 24665
+    },
+    "pages/screen-recorder.html": {
+      "extension": ".html",
+      "size_bytes": 20457
+    },
+    "pages/sip-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 17327
+    },
+    "pages/slug-generator.html": {
+      "extension": ".html",
+      "size_bytes": 11865
+    },
+    "pages/split.html": {
+      "extension": ".html",
+      "size_bytes": 859
+    },
+    "pages/support.html": {
+      "extension": ".html",
+      "size_bytes": 635
+    },
+    "pages/swp-annuity-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 24083
+    },
+    "pages/timezone-converter.html": {
+      "extension": ".html",
+      "size_bytes": 7504
+    },
+    "pages/tip-calculator.html": {
+      "extension": ".html",
+      "size_bytes": 13614
+    },
+    "pages/unit-converter.html": {
+      "extension": ".html",
+      "size_bytes": 12733
+    },
+    "pages/unlock.html": {
+      "extension": ".html",
+      "size_bytes": 865
+    },
+    "pages/url-encoder.html": {
+      "extension": ".html",
+      "size_bytes": 10947
+    },
+    "pages/video-downloader.html": {
+      "extension": ".html",
+      "size_bytes": 20138
+    },
+    "pages/watermark.html": {
+      "extension": ".html",
+      "size_bytes": 883
+    },
+    "pages/word-counter.html": {
+      "extension": ".html",
+      "size_bytes": 12896
+    },
+    "pages/youtube-thumbnail.html": {
+      "extension": ".html",
+      "size_bytes": 16525
+    },
+    "tools/converter_app.py": {
+      "extension": ".py",
+      "size_bytes": 2652,
+      "classes": [],
+      "functions": [
+        {
+          "name": "convert_to_pdf_word",
+          "lineno": 12
+        },
+        {
+          "name": "main",
+          "lineno": 47
+        }
+      ],
+      "imports": [
+        "os",
+        "sys",
+        "argparse",
+        "win32com.client",
+        "tkinter",
+        "tkinter.filedialog",
+        "tkinter.messagebox",
+        "docx2pdf.convert"
+      ]
+    },
+    "_backups/common.backup.js": {
+      "extension": ".js",
+      "size_bytes": 33161,
+      "classes": [],
+      "functions": [
+        {
+          "name": "closeMobileSidebar"
+        },
+        {
+          "name": "typeStep"
+        },
+        {
+          "name": "convertHundreds"
+        },
+        {
+          "name": "applyTheme"
+        },
+        {
+          "name": "extractSlugFromUrl"
+        },
+        {
+          "name": "closeToolPanel"
+        },
+        {
+          "name": "checkUrlHash"
+        },
+        {
+          "name": "initDynamicUspRotator"
+        },
+        {
+          "name": "openToolInPortal"
+        }
+      ],
+      "imports": []
+    },
+    "_backups/index.backup.html": {
+      "extension": ".html",
+      "size_bytes": 83408
+    },
+    "_backups/styles.backup.css": {
+      "extension": ".css",
+      "size_bytes": 162141
+    }
+  },
+  "summary": {
+    "total_files": 133,
+    "python_files": 1,
+    "js_ts_files": 36,
+    "other_files": 96
+  }
+}
