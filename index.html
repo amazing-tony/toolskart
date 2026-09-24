@@ -588,40 +588,110 @@
             <!-- Dashboard Overview Container (Hidden when a tool is opened in-portal) -->
             <div id="dashboardOverview">
 
-                <!-- Lean & Quiet Command Center Hero (Visible on Dashboard Only) -->
+                <!-- Yii-Inspired Animated Feature Display Hero Banner -->
                 <div class="container" id="portalHeroContainer">
-                    <div class="premium-banner">
+                    <div class="premium-banner hero-yiistyle-banner" id="heroBanner">
+                        <!-- Floating Ambient Petals / Depth Elements (Yii-Style Math & Parallax) -->
+                        <div class="hero-petals" aria-hidden="true">
+                            <svg class="hero-petal hero-petal--green" data-depth="0.75" viewBox="0 0 100 100" focusable="false">
+                                <path fill="currentColor" d="M96 72c-1.2-15-5.9-24.8-8.2-30.3C85.5 36.2 82 31 82 31l-.8-1.3C62.8 5.6 27.4-7.7 0 4.6c-1.3 18.7 7.2 50.8 38 59.8 12.5 3.9 22.4 2.9 34.6 6.3 7.3 6.7 13.5 13.9 13.3 18.6 1-11.2.7-14.6.4-19z"/>
+                            </svg>
+                            <svg class="hero-petal hero-petal--orange" data-depth="0.45" viewBox="0 0 50 100" focusable="false">
+                                <path fill="currentColor" fill-rule="evenodd" d="M2.3 44C-1.5 32.6.1 25 7 14.3 10.3 9.2 16 3.3 21 0c20.3 13 27.8 37.3 20.3 59.8C36 76.2 31 83 18 100c1.5-18-4.7-30.6-10.8-44.5C5.7 52 3.5 48 2.3 44z"/>
+                            </svg>
+                            <svg class="hero-petal hero-petal--blue" data-depth="0.25" viewBox="0 0 50 100" focusable="false">
+                                <path fill="currentColor" d="M44 40.8c-1.1-15-5.9-24.7-8.2-30.2C33.5 5.1 30 0 30 0c0 0-3.2 17.5-9 30.2-1 2.1-2.2 4.7-3.5 6.9-4 7.1-9.8 14-13.2 20.8C.4 64.7-.2 71.5.1 79.2c.3 7.7 2.1 15.3 3.8 22.8 6.4-1.4 12-3.8 16.8-6.8 12.6-8.1 20.3-21 22.5-34.8.9-10.7.6-14.1.3-18.4z"/>
+                            </svg>
+                            <svg class="hero-petal hero-petal--purple" data-depth="0.6" viewBox="0 0 80 80" focusable="false">
+                                <path fill="currentColor" d="M40 0C17.9 0 0 17.9 0 40c0 14.8 8.1 27.8 20.1 34.7 1.8-6.4 5.2-14.1 10.4-21.2 5.5-7.5 13-13.6 21.6-17.7C59.9 23.3 60 11.2 52.4 4.5 48.7 1.6 44.5 0 40 0z"/>
+                            </svg>
+                        </div>
+
+                        <!-- Top Title & Animated Feature Typist -->
                         <div class="premium-banner-top">
-                            <div class="premium-banner-title" style="text-align:center; margin: 0 auto; width:100%;">
-                                <div class="live-ai-badge" style="margin: 0 auto 0.6rem; display:inline-flex;">
-                                    <span class="pulse-dot"></span> Trusted by 10,000+ users &bull; Zero Data Sent to Server
+                            <div class="premium-banner-title">
+                                <div class="live-ai-badge">
+                                    <span class="pulse-dot"></span>
+                                    <span class="badge-text"><strong>100% In-Browser Workstation</strong> &bull; Zero Server Uploads &bull; Trusted by 10,000+ Users</span>
                                 </div>
-                                <h1 id="heroBannerH1" style="font-size: clamp(1.45rem,3.5vw,2rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.5rem; color: var(--theme-banner-text, #0F172A);">
-                                    <span id="heroTypingTarget">Tools that Work.</span>
+                                <h1 class="hero-title" aria-label="Amazing-Tools. 100% Private. Zero Uploads. Instant and Fast. Browser-Native. 50 Free Tools.">
+                                    <span class="hero-lead">Amazing-Tools.</span><span class="hero-dynamic" aria-hidden="true">&nbsp;<span class="hero-word" id="heroDynamicWord" data-words='[["100% Private.", "text-green", "heroCardPdf"], ["Zero Uploads.", "text-blue", "heroCardConverter"], ["Instant & Fast.", "text-orange", "heroCardFinance"], ["Browser-Native.", "text-purple", "heroCardMedia"], ["50 Free Tools.", "text-teal", "heroCardDev"]]'></span><em class="hero-cursor">_</em></span>
                                 </h1>
-                                <!-- USP Pills Row — concise, self-explanatory -->
-                                <div class="hero-usp-pills" style="display:flex; flex-wrap:wrap; gap:0.4rem; justify-content:center; margin: 0.55rem 0 0.75rem;">
-                                    <span class="hero-pill hero-pill-green">🔒 Zero Uploads</span>
-                                    <span class="hero-pill hero-pill-blue">🌐 100% Browser</span>
-                                    <span class="hero-pill hero-pill-purple">⚡ Instant Results</span>
-                                    <span class="hero-pill hero-pill-orange">🚫 No Sign-Up</span>
-                                    <span class="hero-pill hero-pill-teal">💸 Always Free</span>
-                                    <span class="hero-pill hero-pill-red">🇮🇳 Built for India</span>
-                                </div>
+                                <p class="hero-tagline">
+                                    High-performance client-side suite for documents, finance, media &amp; code. Zero tracking, zero server uploads, 100% private in your browser.
+                                </p>
                             </div>
                         </div>
 
+                        <!-- Animated Feature Display Showcase (Interactive & Synchronized) -->
+                        <div class="hero-feature-showcase" id="heroFeatureShowcase" role="region" aria-label="Featured Tools Showcase">
+                            <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="hero-feat-card active" id="heroCardPdf" data-index="0">
+                                <div class="hfc-glow"></div>
+                                <div class="hfc-top">
+                                    <span class="hfc-icon">⚡</span>
+                                    <span class="hfc-pill pill-emerald">14-in-1 Suite</span>
+                                </div>
+                                <div class="hfc-title">PDF Document Studio</div>
+                                <div class="hfc-desc">Merge, Split, Compress, Sign &amp; Edit</div>
+                                <div class="hfc-indicator"></div>
+                            </a>
+
+                            <a href="pages/document-converter.html" data-tool="document-converter" class="hero-feat-card" id="heroCardConverter" data-index="1">
+                                <div class="hfc-glow"></div>
+                                <div class="hfc-top">
+                                    <span class="hfc-icon">🔄</span>
+                                    <span class="hfc-pill pill-blue">Zero Upload</span>
+                                </div>
+                                <div class="hfc-title">Universal Doc Converter</div>
+                                <div class="hfc-desc">Word, Excel, PPTX, PDF &amp; Images</div>
+                                <div class="hfc-indicator"></div>
+                            </a>
+
+                            <a href="pages/income-tax-calculator.html" data-tool="income-tax-calculator" class="hero-feat-card" id="heroCardFinance" data-index="2">
+                                <div class="hfc-glow"></div>
+                                <div class="hfc-top">
+                                    <span class="hfc-icon">📊</span>
+                                    <span class="hfc-pill pill-amber">FY26 Tax &amp; Wealth</span>
+                                </div>
+                                <div class="hfc-title">Finance &amp; Tax Planner</div>
+                                <div class="hfc-desc">Old vs New Tax, Loan Prepay &amp; SIP</div>
+                                <div class="hfc-indicator"></div>
+                            </a>
+
+                            <a href="pages/video-downloader.html" data-tool="video-downloader" class="hero-feat-card" id="heroCardMedia" data-index="3">
+                                <div class="hfc-glow"></div>
+                                <div class="hfc-top">
+                                    <span class="hfc-icon">🎥</span>
+                                    <span class="hfc-pill pill-purple">HD WebRTC</span>
+                                </div>
+                                <div class="hfc-title">HD Media &amp; Audio</div>
+                                <div class="hfc-desc">Video Grabber, Audio Ripper &amp; Recorder</div>
+                                <div class="hfc-indicator"></div>
+                            </a>
+
+                            <a href="pages/ocr-tool.html" data-tool="ocr-tool" class="hero-feat-card" id="heroCardDev" data-index="4">
+                                <div class="hfc-glow"></div>
+                                <div class="hfc-top">
+                                    <span class="hfc-icon">🔍</span>
+                                    <span class="hfc-pill pill-teal">Client AI</span>
+                                </div>
+                                <div class="hfc-title">OCR &amp; Dev Utilities</div>
+                                <div class="hfc-desc">OCR Image-to-Text, Regex &amp; QR Studio</div>
+                                <div class="hfc-indicator"></div>
+                            </a>
+                        </div>
+
                         <!-- Command Center Search -->
-                        <div class="banner-search-row" style="margin-top: 0.85rem; max-width:600px; margin-left:auto; margin-right:auto;">
+                        <div class="banner-search-row">
                             <div class="banner-search-wrapper">
                                 <span class="banner-search-icon">🔍</span>
-                                <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search 44 tools… PDF, Tax, EMI, SIP, JSON, Resize…" autocomplete="off">
+                                <input type="text" class="banner-search-input" id="toolSearch" placeholder="Search 50 tools… PDF, Tax, EMI, SIP, JSON, Resize…" autocomplete="off">
                                 <span class="banner-kbd-shortcut">Ctrl+K</span>
                             </div>
                         </div>
 
                         <!-- Quick Launch Popular Chips -->
-                        <div class="banner-quick-launch" style="margin-top:0.75rem;">
+                        <div class="banner-quick-launch">
                             <span class="quick-launch-label">⚡ Jump to:</span>
                             <a href="pages/pdf-tools.html" data-tool="pdf-tools" class="bql-chip">
                                 <span class="bql-icon">⚡</span> PDF Studio <span class="bql-pill teal">14-in-1</span>
@@ -639,37 +709,167 @@
                                 <span class="bql-icon">📈</span> SIP Wealth <span class="bql-pill teal">Compound</span>
                             </a>
                         </div>
+
+                        <!-- USP Badges Row -->
+                        <div class="hero-usp-pills">
+                            <span class="hero-pill hero-pill-green">🔒 Zero Uploads</span>
+                            <span class="hero-pill hero-pill-blue">🌐 100% In-Browser</span>
+                            <span class="hero-pill hero-pill-purple">⚡ Instant Results</span>
+                            <span class="hero-pill hero-pill-orange">🚫 No Sign-Up</span>
+                            <span class="hero-pill hero-pill-teal">💸 100% Free Forever</span>
+                            <span class="hero-pill hero-pill-red">🇮🇳 Built for India</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Typewriter animation script -->
+                <!-- Yii-Style Animated Feature Display Engine -->
                 <script>
                 (function() {
-                  const phrases = [
-                    'Tools that Work.',
-                    'Zero Uploads. Total Privacy.',
-                    'Finance. Documents. Dev.',
-                    '44 Free Tools. One Portal.',
-                    'Your Files Stay Yours.',
-                  ];
-                  const el = document.getElementById('heroTypingTarget');
-                  if (!el) return;
-                  let pi = 0, ci = 0, deleting = false;
-                  function tick() {
-                    const phrase = phrases[pi];
-                    if (!deleting) {
-                      el.textContent = phrase.slice(0, ++ci);
-                      if (ci === phrase.length) { deleting = true; setTimeout(tick, 1800); return; }
-                      setTimeout(tick, 55);
+                  // 1. Floating Petals Animation Engine (Trigonometric harmonic drift + Parallax)
+                  const petals = document.querySelectorAll('.hero-petal[data-depth]');
+                  const banner = document.getElementById('heroBanner');
+                  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+                  let mouseX = 0, mouseY = 0;
+                  let targetMouseX = 0, targetMouseY = 0;
+
+                  if (banner && !prefersReducedMotion.matches) {
+                    banner.addEventListener('mousemove', function(e) {
+                      const rect = banner.getBoundingClientRect();
+                      targetMouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 40;
+                      targetMouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 40;
+                    }, { passive: true });
+
+                    banner.addEventListener('mouseleave', function() {
+                      targetMouseX = 0;
+                      targetMouseY = 0;
+                    }, { passive: true });
+                  }
+
+                  function animatePetals(startTime) {
+                    const t = Date.now();
+                    mouseX += (targetMouseX - mouseX) * 0.05;
+                    mouseY += (targetMouseY - mouseY) * 0.05;
+
+                    const o = 0.5 * Math.sin(0.001 * t);
+                    const a = 0.5 * Math.cos(0.001 * t);
+
+                    const elapsed = Math.max(0, Math.min(1, (t - startTime - 300) / 1500));
+                    const ease = 1 + 2.70158 * Math.pow(elapsed - 1, 3) + 1.70158 * Math.pow(elapsed - 1, 2);
+
+                    petals.forEach(function(el) {
+                      const depth = Number(el.getAttribute('data-depth')) || 0.5;
+                      if (prefersReducedMotion.matches) {
+                        el.style.opacity = '0.35';
+                        el.style.filter = 'blur(10px)';
+                        el.style.transform = 'none';
+                        return;
+                      }
+                      const x = (o * depth * 70) + (mouseX * depth);
+                      const y = (a * depth * 70) + (mouseY * depth);
+                      const rot = 90 * (1 - ease) + (o * 12 * depth);
+                      const scale = 0.65 + (0.35 * ease) + (a * 0.08);
+
+                      el.style.opacity = String(0.48 * ease);
+                      el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotate(' + rot.toFixed(1) + 'deg) scale(' + scale.toFixed(2) + ')';
+                    });
+
+                    window.requestAnimationFrame(function() {
+                      animatePetals(startTime);
+                    });
+                  }
+
+                  if (petals.length) {
+                    animatePetals(Date.now());
+                  }
+
+                  // 2. Animated Feature Word Typist & Showcase Synchronizer
+                  const wordEl = document.getElementById('heroDynamicWord');
+                  const cards = document.querySelectorAll('.hero-feat-card');
+                  if (!wordEl) return;
+
+                  let wordsData = [];
+                  try {
+                    wordsData = JSON.parse(wordEl.getAttribute('data-words') || '[]');
+                  } catch(e) {
+                    wordsData = [["100% Private.", "text-green", "heroCardPdf"]];
+                  }
+                  if (!wordsData.length) return;
+
+                  let wordIdx = 0;
+                  let charIdx = 0;
+                  let isDeleting = false;
+                  let isUserHoveringCard = false;
+                  let cycleTimer = null;
+
+                  function setActiveCard(cardId) {
+                    cards.forEach(function(c) {
+                      if (c.id === cardId) {
+                        c.classList.add('active');
+                      } else {
+                        c.classList.remove('active');
+                      }
+                    });
+                  }
+
+                  function typeTick() {
+                    if (isUserHoveringCard) {
+                      cycleTimer = setTimeout(typeTick, 400);
+                      return;
+                    }
+
+                    const currentItem = wordsData[wordIdx];
+                    const text = currentItem[0];
+                    const colorClass = currentItem[1];
+                    const linkedCardId = currentItem[2];
+
+                    wordEl.className = 'hero-word ' + colorClass;
+
+                    if (!isDeleting) {
+                      charIdx++;
+                      wordEl.textContent = text.slice(0, charIdx);
+                      if (charIdx === 1) {
+                        setActiveCard(linkedCardId);
+                      }
+                      if (charIdx === text.length) {
+                        isDeleting = true;
+                        cycleTimer = setTimeout(typeTick, 2200);
+                        return;
+                      }
+                      cycleTimer = setTimeout(typeTick, 52);
                     } else {
-                      el.textContent = phrase.slice(0, --ci);
-                      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 300); return; }
-                      setTimeout(tick, 28);
+                      charIdx--;
+                      wordEl.textContent = text.slice(0, charIdx);
+                      if (charIdx === 0) {
+                        isDeleting = false;
+                        wordIdx = (wordIdx + 1) % wordsData.length;
+                        cycleTimer = setTimeout(typeTick, 320);
+                        return;
+                      }
+                      cycleTimer = setTimeout(typeTick, 28);
                     }
                   }
-                  setTimeout(tick, 600);
+
+                  cards.forEach(function(card) {
+                    card.addEventListener('mouseenter', function() {
+                      isUserHoveringCard = true;
+                      setActiveCard(card.id);
+                    });
+                    card.addEventListener('mouseleave', function() {
+                      isUserHoveringCard = false;
+                    });
+                  });
+
+                  if (prefersReducedMotion.matches) {
+                    wordEl.textContent = wordsData[0][0];
+                    wordEl.className = 'hero-word ' + wordsData[0][1];
+                    setActiveCard(wordsData[0][2]);
+                  } else {
+                    setTimeout(typeTick, 500);
+                  }
                 })();
                 </script>
+
 
 
             <!-- Category Filter Bar -->
