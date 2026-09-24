@@ -51,79 +51,79 @@
       ],
       "functions": [
         {
-          "name": "closeMobileSidebar"
-        },
-        {
-          "name": "typeStep"
-        },
-        {
-          "name": "isMini"
-        },
-        {
-          "name": "hasAdPlacedInLeaderboard"
-        },
-        {
-          "name": "checkAndAttach"
-        },
-        {
-          "name": "copyFeedback"
-        },
-        {
-          "name": "buildFlyoutItemsHtml"
-        },
-        {
-          "name": "scheduleHide"
-        },
-        {
-          "name": "initPrivacyUspStrip"
-        },
-        {
-          "name": "initSidebarMiniFlyout"
-        },
-        {
           "name": "showFlyoutFor"
-        },
-        {
-          "name": "extractSlugFromUrl"
-        },
-        {
-          "name": "checkUrlHash"
-        },
-        {
-          "name": "initDynamicUspRotator"
-        },
-        {
-          "name": "dismissNotice"
-        },
-        {
-          "name": "convertHundreds"
-        },
-        {
-          "name": "cycleTheme"
         },
         {
           "name": "updatePortalSuiteStrip"
         },
         {
-          "name": "initToolSuccessBadges"
+          "name": "typeStep"
         },
         {
-          "name": "showThemeToast"
+          "name": "extractSlugFromUrl"
         },
         {
           "name": "initGlobalHeaderNav"
         },
         {
-          "name": "applyTheme"
+          "name": "initPrivacyUspStrip"
+        },
+        {
+          "name": "initDynamicUspRotator"
+        },
+        {
+          "name": "convertHundreds"
+        },
+        {
+          "name": "checkUrlHash"
         },
         {
           "name": "closeToolPanel"
         },
         {
-          "name": "closeSidebarMiniFlyout"
+          "name": "checkAndAttach"
+        },
+        {
+          "name": "showThemeToast"
+        },
+        {
+          "name": "isMini"
         },
         {
           "name": "openToolInPortal"
+        },
+        {
+          "name": "buildFlyoutItemsHtml"
+        },
+        {
+          "name": "closeMobileSidebar"
+        },
+        {
+          "name": "dismissNotice"
+        },
+        {
+          "name": "initSidebarMiniFlyout"
+        },
+        {
+          "name": "scheduleHide"
+        },
+        {
+          "name": "hasAdPlacedInLeaderboard"
+        },
+        {
+          "name": "applyTheme"
+        },
+        {
+          "name": "closeSidebarMiniFlyout"
+        },
+        {
+          "name": "initToolSuccessBadges"
+        },
+        {
+          "name": "copyFeedback"
+        },
+        {
+          "name": "cycleTheme"
         }
       ],
       "imports": []
@@ -190,7 +190,7 @@
     },
     "css/styles.css": {
       "extension": ".css",
-      "size_bytes": 236448
+      "size_bytes": 261159
     },
     "graphify-out/.graphify_labels.json": {
       "extension": ".json",
@@ -245,22 +245,22 @@
       "classes": [],
       "functions": [
         {
-          "name": "updateInputStats"
-        },
-        {
-          "name": "utf8_to_b64"
-        },
-        {
-          "name": "getByteSize"
+          "name": "formatBytes"
         },
         {
           "name": "b64_to_utf8"
         },
         {
-          "name": "formatBytes"
+          "name": "updateOutputStats"
         },
         {
-          "name": "updateOutputStats"
+          "name": "updateInputStats"
+        },
+        {
+          "name": "getByteSize"
+        },
+        {
+          "name": "utf8_to_b64"
         }
       ],
       "imports": []
@@ -271,19 +271,10 @@
       "classes": [],
       "functions": [
         {
-          "name": "recalculateAll"
-        },
-        {
-          "name": "syncSliderAndInput"
-        },
-        {
-          "name": "formatLakhCrore"
+          "name": "updateSecurityDepositBadge"
         },
         {
           "name": "updateTable"
-        },
-        {
-          "name": "updateSecurityDepositBadge"
         },
         {
           "name": "updateCharts"
@@ -292,7 +283,16 @@
           "name": "formatINR"
         },
         {
+          "name": "syncSliderAndInput"
+        },
+        {
           "name": "updateDownPaymentBadge"
+        },
+        {
+          "name": "recalculateAll"
+        },
+        {
+          "name": "formatLakhCrore"
         }
       ],
       "imports": []
@@ -303,22 +303,22 @@
       "classes": [],
       "functions": [
         {
-          "name": "toSnakeCase"
-        },
-        {
-          "name": "toToggleCase"
-        },
-        {
-          "name": "toTitleCase"
-        },
-        {
-          "name": "toCamelCase"
+          "name": "toSentenceCase"
         },
         {
           "name": "toKebabCase"
         },
         {
-          "name": "toSentenceCase"
+          "name": "toTitleCase"
+        },
+        {
+          "name": "toSnakeCase"
+        },
+        {
+          "name": "toCamelCase"
+        },
+        {
+          "name": "toToggleCase"
         }
       ],
       "imports": []
@@ -329,31 +329,31 @@
       "classes": [],
       "functions": [
         {
-          "name": "rgbToHsl"
-        },
-        {
-          "name": "generatePalettes"
-        },
-        {
-          "name": "hslToRgb"
+          "name": "rgbToHex"
         },
         {
           "name": "createSwatch"
         },
         {
-          "name": "hexToRgb"
-        },
-        {
-          "name": "updateAllFromHex"
-        },
-        {
-          "name": "rgbToHex"
+          "name": "rgbToHsl"
         },
         {
           "name": "showToast"
         },
         {
+          "name": "hslToRgb"
+        },
+        {
+          "name": "generatePalettes"
+        },
+        {
+          "name": "hexToRgb"
+        },
+        {
           "name": "hue2rgb"
+        },
+        {
+          "name": "updateAllFromHex"
         }
       ],
       "imports": []
@@ -368,40 +368,46 @@
       ],
       "functions": [
         {
-          "name": "closeMobileSidebar"
+          "name": "showFlyoutFor"
+        },
+        {
+          "name": "updatePortalSuiteStrip"
         },
         {
           "name": "typeStep"
         },
         {
-          "name": "isMini"
-        },
-        {
-          "name": "hasAdPlacedInLeaderboard"
-        },
-        {
-          "name": "buildFlyoutItemsHtml"
-        },
-        {
-          "name": "scheduleHide"
+          "name": "extractSlugFromUrl"
         },
         {
           "name": "initPrivacyUspStrip"
         },
         {
-          "name": "initSidebarMiniFlyout"
+          "name": "initDynamicUspRotator"
         },
         {
-          "name": "showFlyoutFor"
+          "name": "convertHundreds"
         },
         {
-          "name": "extractSlugFromUrl"
+          "name": "closeSidebarTree"
         },
         {
           "name": "checkUrlHash"
         },
         {
-          "name": "initDynamicUspRotator"
+          "name": "closeToolPanel"
+        },
+        {
+          "name": "showThemeToast"
+        },
+        {
+          "name": "isMini"
+        },
+        {
+          "name": "openToolInPortal"
+        },
+        {
+          "name": "buildFlyoutItemsHtml"
         },
         {
           "name": "openSidebarTree"
@@ -410,31 +416,25 @@
           "name": "dismissNotice"
         },
         {
-          "name": "convertHundreds"
+          "name": "closeMobileSidebar"
         },
         {
-          "name": "cycleTheme"
+          "name": "initSidebarMiniFlyout"
         },
         {
-          "name": "updatePortalSuiteStrip"
+          "name": "scheduleHide"
+        },
+        {
+          "name": "hasAdPlacedInLeaderboard"
         },
         {
           "name": "restoreActiveSidebarState"
         },
         {
-          "name": "showThemeToast"
-        },
-        {
-          "name": "closeSidebarTree"
-        },
-        {
           "name": "applyTheme"
         },
         {
-          "name": "closeToolPanel"
-        },
-        {
-          "name": "openToolInPortal"
+          "name": "cycleTheme"
         }
       ],
       "imports": []
@@ -456,31 +456,31 @@
       "classes": [],
       "functions": [
         {
-          "name": "formatCurrency"
-        },
-        {
           "name": "setPreferred"
-        },
-        {
-          "name": "loadCache"
-        },
-        {
-          "name": "fetchRates"
-        },
-        {
-          "name": "init"
-        },
-        {
-          "name": "convert"
         },
         {
           "name": "renderHeaderToggle"
         },
         {
-          "name": "getPreferred"
+          "name": "convert"
+        },
+        {
+          "name": "formatCurrency"
         },
         {
           "name": "saveCache"
+        },
+        {
+          "name": "loadCache"
+        },
+        {
+          "name": "init"
+        },
+        {
+          "name": "fetchRates"
+        },
+        {
+          "name": "getPreferred"
         }
       ],
       "imports": []
@@ -491,70 +491,70 @@
       "classes": [],
       "functions": [
         {
-          "name": "convertPptxToPdf"
-        },
-        {
-          "name": "ensureScriptLoaded"
-        },
-        {
-          "name": "convertPdfToDocx"
-        },
-        {
-          "name": "getFileExtension"
-        },
-        {
-          "name": "findCleanSliceY"
-        },
-        {
-          "name": "convertPdfToPptx"
-        },
-        {
-          "name": "convertXlsxToDocx"
-        },
-        {
-          "name": "escapeHtml"
-        },
-        {
-          "name": "formatBytes"
-        },
-        {
-          "name": "addCanvasPagesToPdf"
-        },
-        {
           "name": "convertXlsxToPdf"
         },
         {
-          "name": "convertDocxToPdf"
-        },
-        {
-          "name": "convertPdfToXlsx"
-        },
-        {
-          "name": "startConversion"
-        },
-        {
-          "name": "ensureDocxPreviewEngine"
-        },
-        {
-          "name": "extractTextFromBinaryDoc"
-        },
-        {
-          "name": "updateTargetDescription"
-        },
-        {
-          "name": "handleFileSelection"
-        },
-        {
-          "name": "updateProgress"
+          "name": "convertDocxToXlsx"
         },
         {
           "name": "triggerDownload"
         },
         {
+          "name": "convertPdfToPptx"
+        },
+        {
+          "name": "escapeHtml"
+        },
+        {
+          "name": "convertPptxToPdf"
+        },
+        {
+          "name": "extractTextFromBinaryDoc"
+        },
+        {
+          "name": "findCleanSliceY"
+        },
+        {
+          "name": "convertXlsxToDocx"
+        },
+        {
+          "name": "updateProgress"
+        },
+        {
+          "name": "startConversion"
+        },
+        {
+          "name": "convertDocxToPdf"
+        },
+        {
+          "name": "addCanvasPagesToPdf"
+        },
+        {
           "name": "resetConverter"
         },
         {
-          "name": "convertDocxToXlsx"
+          "name": "ensureDocxPreviewEngine"
+        },
+        {
+          "name": "getFileExtension"
+        },
+        {
+          "name": "convertPdfToXlsx"
+        },
+        {
+          "name": "updateTargetDescription"
+        },
+        {
+          "name": "ensureScriptLoaded"
+        },
+        {
+          "name": "formatBytes"
+        },
+        {
+          "name": "convertPdfToDocx"
+        },
+        {
+          "name": "handleFileSelection"
         }
       ],
       "imports": []
@@ -564,237 +564,237 @@
       "size_bytes": 72267,
       "classes": [
         {
-          "name": "u"
-        },
-        {
-          "name": "de"
-        },
-        {
-          "name": "oe"
-        },
-        {
-          "name": "K"
-        },
-        {
-          "name": "S"
-        },
-        {
-          "name": "X"
-        },
-        {
-          "name": "ce"
-        },
-        {
-          "name": "be"
-        },
-        {
-          "name": "re"
-        },
-        {
-          "name": "z"
-        },
-        {
-          "name": "U"
-        },
-        {
-          "name": "V"
-        },
-        {
-          "name": "he"
-        },
-        {
-          "name": "j"
-        },
-        {
-          "name": "me"
-        },
-        {
-          "name": "ne"
+          "name": "_e"
         },
         {
           "name": "_"
         },
         {
+          "name": "z"
+        },
+        {
+          "name": "ne"
+        },
+        {
           "name": "ae"
         },
         {
-          "name": "c"
-        },
-        {
-          "name": "xe"
-        },
-        {
-          "name": "Z"
-        },
-        {
-          "name": "se"
+          "name": "u"
         },
         {
           "name": "Be"
         },
         {
-          "name": "Re"
+          "name": "me"
         },
         {
-          "name": "W"
+          "name": "U"
         },
         {
-          "name": "we"
-        },
-        {
-          "name": "pe"
+          "name": "be"
         },
         {
           "name": "le"
         },
         {
+          "name": "he"
+        },
+        {
+          "name": "Re"
+        },
+        {
+          "name": "X"
+        },
+        {
+          "name": "de"
+        },
+        {
           "name": "o"
+        },
+        {
+          "name": "we"
+        },
+        {
+          "name": "se"
+        },
+        {
+          "name": "J"
         },
         {
           "name": "Se"
         },
         {
+          "name": "Z"
+        },
+        {
+          "name": "K"
+        },
+        {
           "name": "q"
         },
         {
-          "name": "Pe"
+          "name": "re"
+        },
+        {
+          "name": "oe"
         },
         {
           "name": "te"
         },
         {
-          "name": "_e"
+          "name": "xe"
+        },
+        {
+          "name": "W"
+        },
+        {
+          "name": "Pe"
+        },
+        {
+          "name": "pe"
+        },
+        {
+          "name": "j"
+        },
+        {
+          "name": "S"
+        },
+        {
+          "name": "V"
         },
         {
           "name": "P"
         },
         {
-          "name": "J"
+          "name": "c"
+        },
+        {
+          "name": "ce"
         }
       ],
       "functions": [
         {
-          "name": "D"
-        },
-        {
-          "name": "Le"
-        },
-        {
-          "name": "I"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "v"
-        },
-        {
-          "name": "Y"
-        },
-        {
-          "name": "O"
-        },
-        {
-          "name": "ye"
-        },
-        {
-          "name": "G"
-        },
-        {
-          "name": "n"
-        },
-        {
-          "name": "ie"
-        },
-        {
-          "name": "E"
-        },
-        {
           "name": "m"
-        },
-        {
-          "name": "M"
-        },
-        {
-          "name": "fe"
-        },
-        {
-          "name": "ke"
-        },
-        {
-          "name": "F"
-        },
-        {
-          "name": "Ve"
-        },
-        {
-          "name": "ee"
-        },
-        {
-          "name": "A"
-        },
-        {
-          "name": "l"
-        },
-        {
-          "name": "b"
-        },
-        {
-          "name": "d"
-        },
-        {
-          "name": "x"
-        },
-        {
-          "name": "T"
-        },
-        {
-          "name": "We"
-        },
-        {
-          "name": "Q"
-        },
-        {
-          "name": "ve"
-        },
-        {
-          "name": "Ie"
-        },
-        {
-          "name": "f"
-        },
-        {
-          "name": "y"
-        },
-        {
-          "name": "g"
-        },
-        {
-          "name": "R"
-        },
-        {
-          "name": "B"
-        },
-        {
-          "name": "L"
-        },
-        {
-          "name": "p"
-        },
-        {
-          "name": "k"
-        },
-        {
-          "name": "ze"
-        },
-        {
-          "name": "Xe"
         },
         {
           "name": "w"
         },
         {
+          "name": "O"
+        },
+        {
+          "name": "x"
+        },
+        {
+          "name": "y"
+        },
+        {
+          "name": "n"
+        },
+        {
+          "name": "g"
+        },
+        {
+          "name": "ze"
+        },
+        {
+          "name": "ee"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "v"
+        },
+        {
+          "name": "M"
+        },
+        {
+          "name": "B"
+        },
+        {
+          "name": "k"
+        },
+        {
+          "name": "d"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "Q"
+        },
+        {
+          "name": "Ve"
+        },
+        {
+          "name": "ke"
+        },
+        {
+          "name": "T"
+        },
+        {
+          "name": "L"
+        },
+        {
+          "name": "b"
+        },
+        {
+          "name": "Le"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "G"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "l"
+        },
+        {
           "name": "ge"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "We"
+        },
+        {
+          "name": "ye"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "ve"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "D"
+        },
+        {
+          "name": "I"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "Xe"
+        },
+        {
+          "name": "Ie"
         }
       ],
       "imports": []
@@ -805,16 +805,58 @@
       "classes": [],
       "functions": [
         {
-          "name": "initEventListeners"
+          "name": "getPeriodDate"
+        },
+        {
+          "name": "initDualSyncSliders"
+        },
+        {
+          "name": "handleCopySummary"
+        },
+        {
+          "name": "initTrendChartControls"
+        },
+        {
+          "name": "updateWordDisplays"
+        },
+        {
+          "name": "handleResetAll"
+        },
+        {
+          "name": "renderSchedulerTable"
+        },
+        {
+          "name": "initPrepayModeTabs"
+        },
+        {
+          "name": "setScheduleView"
+        },
+        {
+          "name": "syncActiveChip"
         },
         {
           "name": "format"
         },
         {
-          "name": "renderTrajectoryChart"
+          "name": "setTrendView"
         },
         {
-          "name": "handleDownloadCsv"
+          "name": "computeBreakEvenRate"
+        },
+        {
+          "name": "renderPrincipalInterestChart"
+        },
+        {
+          "name": "getParsedStartDate"
+        },
+        {
+          "name": "renderVisualCharts"
+        },
+        {
+          "name": "triggerLiveCalculation"
+        },
+        {
+          "name": "initStartDateControls"
         },
         {
           "name": "handleApplyTargetGoal"
@@ -823,112 +865,70 @@
           "name": "bindPair"
         },
         {
+          "name": "handleDownloadReport"
+        },
+        {
+          "name": "setActiveStartChip"
+        },
+        {
+          "name": "handleDownloadCsv"
+        },
+        {
+          "name": "handleOneExtraEmiHack"
+        },
+        {
+          "name": "updateSchedulerYearOptions"
+        },
+        {
+          "name": "initQuickChips"
+        },
+        {
           "name": "calculateAndRender"
         },
         {
           "name": "renderBaselinePreview"
         },
         {
-          "name": "renderSchedulerTable"
+          "name": "computeEmi"
         },
         {
-          "name": "initQuickChips"
-        },
-        {
-          "name": "renderVisualCharts"
-        },
-        {
-          "name": "initStartDateControls"
-        },
-        {
-          "name": "handleDownloadReport"
-        },
-        {
-          "name": "getPeriodDate"
-        },
-        {
-          "name": "handleAddLumpsum"
-        },
-        {
-          "name": "initImpactRadios"
-        },
-        {
-          "name": "updateSchedulerYearOptions"
-        },
-        {
-          "name": "renderAmortizationTable"
-        },
-        {
-          "name": "renderKpiCards"
-        },
-        {
-          "name": "renderPrincipalInterestChart"
-        },
-        {
-          "name": "handleCopySummary"
-        },
-        {
-          "name": "runSimulation"
-        },
-        {
-          "name": "renderDecisionArena"
-        },
-        {
-          "name": "setScheduleView"
+          "name": "initEventListeners"
         },
         {
           "name": "renderWealthChart"
         },
         {
-          "name": "handleResetAll"
-        },
-        {
-          "name": "setTrendView"
-        },
-        {
-          "name": "syncActiveChip"
-        },
-        {
-          "name": "getParsedStartDate"
-        },
-        {
-          "name": "updateTargetSolver"
+          "name": "renderAmortizationTable"
         },
         {
           "name": "renderHeroFreedomCard"
         },
         {
+          "name": "renderTrajectoryChart"
+        },
+        {
           "name": "updateStartDateDisplay"
+        },
+        {
+          "name": "initImpactRadios"
+        },
+        {
+          "name": "handleAddLumpsum"
+        },
+        {
+          "name": "runSimulation"
         },
         {
           "name": "formatLakhsCrores"
         },
         {
-          "name": "updateWordDisplays"
+          "name": "renderDecisionArena"
         },
         {
-          "name": "handleOneExtraEmiHack"
+          "name": "updateTargetSolver"
         },
         {
-          "name": "triggerLiveCalculation"
-        },
-        {
-          "name": "computeBreakEvenRate"
-        },
-        {
-          "name": "initDualSyncSliders"
-        },
-        {
-          "name": "computeEmi"
-        },
-        {
-          "name": "setActiveStartChip"
-        },
-        {
-          "name": "initPrepayModeTabs"
-        },
-        {
-          "name": "initTrendChartControls"
+          "name": "renderKpiCards"
         }
       ],
       "imports": []
@@ -950,43 +950,43 @@
       "classes": [],
       "functions": [
         {
-          "name": "getTopToolRequests"
-        },
-        {
-          "name": "renderSharedRatings"
-        },
-        {
-          "name": "signIn"
-        },
-        {
-          "name": "syncUserProfile"
-        },
-        {
           "name": "signOutUser"
-        },
-        {
-          "name": "submitRating"
-        },
-        {
-          "name": "setLocalGuestUser"
-        },
-        {
-          "name": "updateAuthUI"
         },
         {
           "name": "submitToolRequest"
         },
         {
+          "name": "signIn"
+        },
+        {
+          "name": "updateAuthUI"
+        },
+        {
+          "name": "submitRating"
+        },
+        {
+          "name": "getTopToolRequests"
+        },
+        {
           "name": "clearLocalGuestUser"
         },
         {
-          "name": "getLocalGuestUser"
+          "name": "renderSharedRatings"
+        },
+        {
+          "name": "getToolRating"
         },
         {
           "name": "showAuthModal"
         },
         {
-          "name": "getToolRating"
+          "name": "setLocalGuestUser"
+        },
+        {
+          "name": "getLocalGuestUser"
+        },
+        {
+          "name": "syncUserProfile"
         }
       ],
       "imports": [
@@ -999,22 +999,19 @@
       "classes": [],
       "functions": [
         {
-          "name": "updateGoalsTable"
+          "name": "bindChildEvents"
+        },
+        {
+          "name": "calculateAllGoals"
         },
         {
           "name": "addChild"
         },
         {
-          "name": "formatLakhCrore"
-        },
-        {
-          "name": "removeChild"
-        },
-        {
           "name": "renderChildren"
         },
         {
-          "name": "calculateAllGoals"
+          "name": "updateGoalsTable"
         },
         {
           "name": "updateCharts"
@@ -1023,10 +1020,13 @@
           "name": "formatINR"
         },
         {
-          "name": "bindChildEvents"
+          "name": "removeChild"
         },
         {
           "name": "calculateSipForTarget"
+        },
+        {
+          "name": "formatLakhCrore"
         }
       ],
       "imports": []
@@ -1048,64 +1048,262 @@
       "classes": [],
       "functions": [
         {
-          "name": "oe"
+          "name": "qn"
         },
         {
-          "name": "sn"
+          "name": "Vs"
         },
         {
-          "name": "re"
+          "name": "ne"
         },
         {
-          "name": "ye"
+          "name": "rs"
         },
         {
-          "name": "zA"
+          "name": "nn"
         },
         {
-          "name": "bB"
+          "name": "fA"
         },
         {
-          "name": "Fs"
-        },
-        {
-          "name": "hA"
-        },
-        {
-          "name": "ie"
-        },
-        {
-          "name": "E"
-        },
-        {
-          "name": "XA"
-        },
-        {
-          "name": "Ye"
-        },
-        {
-          "name": "EB"
-        },
-        {
-          "name": "WA"
-        },
-        {
-          "name": "ZA"
-        },
-        {
-          "name": "on"
-        },
-        {
-          "name": "ee"
-        },
-        {
-          "name": "Xt"
+          "name": "MB"
         },
         {
           "name": "SB"
         },
         {
+          "name": "Xs"
+        },
+        {
+          "name": "_n"
+        },
+        {
+          "name": "sn"
+        },
+        {
+          "name": "uA"
+        },
+        {
+          "name": "qA"
+        },
+        {
+          "name": "gs"
+        },
+        {
+          "name": "ZA"
+        },
+        {
+          "name": "mr"
+        },
+        {
+          "name": "pr"
+        },
+        {
+          "name": "us"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "Ie"
+        },
+        {
+          "name": "cn"
+        },
+        {
+          "name": "YA"
+        },
+        {
+          "name": "Gn"
+        },
+        {
+          "name": "Cs"
+        },
+        {
+          "name": "n"
+        },
+        {
           "name": "Be"
+        },
+        {
+          "name": "ee"
+        },
+        {
+          "name": "_A"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "de"
+        },
+        {
+          "name": "fn"
+        },
+        {
+          "name": "Lr"
+        },
+        {
+          "name": "ms"
+        },
+        {
+          "name": "He"
+        },
+        {
+          "name": "re"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "KB"
+        },
+        {
+          "name": "Hn"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "Ae"
+        },
+        {
+          "name": "zA"
+        },
+        {
+          "name": "a"
+        },
+        {
+          "name": "Ns"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "xB"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "I"
+        },
+        {
+          "name": "an"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "Ds"
+        },
+        {
+          "name": "gA"
+        },
+        {
+          "name": "gB"
+        },
+        {
+          "name": "fr"
+        },
+        {
+          "name": "ns"
+        },
+        {
+          "name": "dA"
+        },
+        {
+          "name": "B"
+        },
+        {
+          "name": "Qn"
+        },
+        {
+          "name": "gr"
+        },
+        {
+          "name": "UA"
+        },
+        {
+          "name": "wA"
+        },
+        {
+          "name": "Ye"
+        },
+        {
+          "name": "rB"
+        },
+        {
+          "name": "Kr"
+        },
+        {
+          "name": "XA"
+        },
+        {
+          "name": "te"
+        },
+        {
+          "name": "oe"
+        },
+        {
+          "name": "WA"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "pe"
+        },
+        {
+          "name": "Xt"
+        },
+        {
+          "name": "ye"
+        },
+        {
+          "name": "TB"
+        },
+        {
+          "name": "lB"
+        },
+        {
+          "name": "hA"
+        },
+        {
+          "name": "e"
+        },
+        {
+          "name": "Vn"
+        },
+        {
+          "name": "w"
+        },
+        {
+          "name": "Us"
+        },
+        {
+          "name": "ls"
+        },
+        {
+          "name": "QB"
+        },
+        {
+          "name": "jA"
+        },
+        {
+          "name": "CA"
+        },
+        {
+          "name": "Pt"
+        },
+        {
+          "name": "Qe"
+        },
+        {
+          "name": "t"
+        },
+        {
+          "name": "Ee"
         },
         {
           "name": "se"
@@ -1114,232 +1312,34 @@
           "name": "Bs"
         },
         {
-          "name": "gs"
-        },
-        {
-          "name": "Ie"
-        },
-        {
-          "name": "rs"
-        },
-        {
-          "name": "Hn"
-        },
-        {
-          "name": "rB"
-        },
-        {
-          "name": "fn"
-        },
-        {
-          "name": "us"
-        },
-        {
-          "name": "KB"
-        },
-        {
-          "name": "mr"
-        },
-        {
-          "name": "xB"
-        },
-        {
-          "name": "Ns"
-        },
-        {
-          "name": "TB"
-        },
-        {
-          "name": "ms"
-        },
-        {
           "name": "sB"
-        },
-        {
-          "name": "uA"
-        },
-        {
-          "name": "lB"
-        },
-        {
-          "name": "Vs"
-        },
-        {
-          "name": "fA"
-        },
-        {
-          "name": "n"
-        },
-        {
-          "name": "a"
-        },
-        {
-          "name": "YA"
-        },
-        {
-          "name": "Xs"
-        },
-        {
-          "name": "He"
-        },
-        {
-          "name": "Vn"
-        },
-        {
-          "name": "qn"
-        },
-        {
-          "name": "QB"
-        },
-        {
-          "name": "pe"
-        },
-        {
-          "name": "_n"
-        },
-        {
-          "name": "fr"
-        },
-        {
-          "name": "qA"
-        },
-        {
-          "name": "p"
-        },
-        {
-          "name": "Ds"
-        },
-        {
-          "name": "w"
-        },
-        {
-          "name": "pr"
-        },
-        {
-          "name": "de"
-        },
-        {
-          "name": "MB"
-        },
-        {
-          "name": "dA"
-        },
-        {
-          "name": "I"
-        },
-        {
-          "name": "r"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "nn"
-        },
-        {
-          "name": "ls"
-        },
-        {
-          "name": "Gn"
         },
         {
           "name": "ws"
         },
         {
-          "name": "jA"
-        },
-        {
-          "name": "ts"
-        },
-        {
-          "name": "Lr"
-        },
-        {
-          "name": "Ae"
-        },
-        {
-          "name": "_A"
-        },
-        {
-          "name": "A"
+          "name": "FA"
         },
         {
           "name": "l"
         },
         {
-          "name": "e"
-        },
-        {
-          "name": "an"
-        },
-        {
-          "name": "Qn"
-        },
-        {
           "name": "zn"
         },
         {
-          "name": "gA"
-        },
-        {
-          "name": "Qe"
-        },
-        {
-          "name": "Us"
+          "name": "bB"
         },
         {
           "name": "lA"
         },
         {
-          "name": "FA"
+          "name": "EB"
         },
         {
-          "name": "CA"
+          "name": "Fs"
         },
         {
-          "name": "Ee"
-        },
-        {
-          "name": "ns"
-        },
-        {
-          "name": "t"
-        },
-        {
-          "name": "Kr"
-        },
-        {
-          "name": "gr"
-        },
-        {
-          "name": "ne"
-        },
-        {
-          "name": "fe"
-        },
-        {
-          "name": "Pt"
-        },
-        {
-          "name": "cn"
-        },
-        {
-          "name": "B"
-        },
-        {
-          "name": "gB"
-        },
-        {
-          "name": "wA"
-        },
-        {
-          "name": "te"
-        },
-        {
-          "name": "Cs"
-        },
-        {
-          "name": "UA"
+          "name": "ts"
         }
       ],
       "imports": []
@@ -1350,13 +1350,13 @@
       "classes": [],
       "functions": [
         {
+          "name": "handleFile"
+        },
+        {
           "name": "compressImage"
         },
         {
           "name": "formatBytes"
-        },
-        {
-          "name": "handleFile"
         }
       ],
       "imports": []
@@ -1378,55 +1378,55 @@
       "classes": [],
       "functions": [
         {
-          "name": "computeBreakEvenDeductions"
-        },
-        {
-          "name": "fmt"
-        },
-        {
-          "name": "initQuickChips"
-        },
-        {
-          "name": "handleMaxDeductions"
-        },
-        {
-          "name": "initEventListeners"
-        },
-        {
-          "name": "formatLakhsCrores"
-        },
-        {
-          "name": "updateWordDisplays"
-        },
-        {
-          "name": "calculateHraExemption"
-        },
-        {
           "name": "initSyncSliders"
-        },
-        {
-          "name": "handleClearDeductions"
-        },
-        {
-          "name": "triggerLiveCalculation"
-        },
-        {
-          "name": "computeOldRegimeTax"
-        },
-        {
-          "name": "syncActiveChip"
         },
         {
           "name": "calculateTaxAndRender"
         },
         {
-          "name": "bindPair"
+          "name": "formatLakhsCrores"
+        },
+        {
+          "name": "computeBreakEvenDeductions"
+        },
+        {
+          "name": "renderResultsUI"
+        },
+        {
+          "name": "updateWordDisplays"
+        },
+        {
+          "name": "triggerLiveCalculation"
+        },
+        {
+          "name": "initEventListeners"
+        },
+        {
+          "name": "handleClearDeductions"
+        },
+        {
+          "name": "computeOldRegimeTax"
         },
         {
           "name": "computeNewRegimeTax"
         },
         {
-          "name": "renderResultsUI"
+          "name": "syncActiveChip"
+        },
+        {
+          "name": "handleMaxDeductions"
+        },
+        {
+          "name": "bindPair"
+        },
+        {
+          "name": "initQuickChips"
+        },
+        {
+          "name": "fmt"
+        },
+        {
+          "name": "calculateHraExemption"
         }
       ],
       "imports": []
@@ -1437,16 +1437,16 @@
       "classes": [],
       "functions": [
         {
-          "name": "getByteSize"
+          "name": "updateStats"
         },
         {
           "name": "processJSON"
         },
         {
-          "name": "formatBytes"
+          "name": "getByteSize"
         },
         {
-          "name": "updateStats"
+          "name": "formatBytes"
         }
       ],
       "imports": []
@@ -1461,103 +1461,103 @@
       ],
       "functions": [
         {
-          "name": "u"
-        },
-        {
-          "name": "s"
-        },
-        {
-          "name": "D"
-        },
-        {
-          "name": "K"
-        },
-        {
-          "name": "r"
-        },
-        {
-          "name": "X"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "Y"
-        },
-        {
-          "name": "h"
-        },
-        {
-          "name": "G"
-        },
-        {
           "name": "n"
         },
         {
-          "name": "a"
+          "name": "u"
         },
         {
           "name": "U"
         },
         {
-          "name": "V"
-        },
-        {
-          "name": "j"
-        },
-        {
-          "name": "M"
+          "name": "f"
         },
         {
           "name": "i"
         },
         {
-          "name": "F"
+          "name": "N"
         },
         {
-          "name": "c"
+          "name": "M"
         },
         {
-          "name": "Z"
-        },
-        {
-          "name": "A"
-        },
-        {
-          "name": "l"
+          "name": "H"
         },
         {
           "name": "d"
         },
         {
-          "name": "N"
+          "name": "X"
         },
         {
-          "name": "T"
-        },
-        {
-          "name": "f"
-        },
-        {
-          "name": "W"
+          "name": "s"
         },
         {
           "name": "o"
         },
         {
-          "name": "R"
+          "name": "T"
+        },
+        {
+          "name": "J"
         },
         {
           "name": "L"
         },
         {
+          "name": "Z"
+        },
+        {
+          "name": "K"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "G"
+        },
+        {
           "name": "p"
+        },
+        {
+          "name": "h"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "W"
+        },
+        {
+          "name": "a"
+        },
+        {
+          "name": "j"
         },
         {
           "name": "P"
         },
         {
-          "name": "J"
+          "name": "F"
+        },
+        {
+          "name": "D"
+        },
+        {
+          "name": "V"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "c"
         }
       ],
       "imports": []
@@ -1585,10 +1585,10 @@
       "classes": [],
       "functions": [
         {
-          "name": "updatePreview"
+          "name": "handleChange"
         },
         {
-          "name": "handleChange"
+          "name": "updatePreview"
         },
         {
           "name": "generateTags"
@@ -1613,58 +1613,58 @@
       "classes": [],
       "functions": [
         {
-          "name": "getRecentlyUsed"
+          "name": "showAnnouncement"
         },
         {
           "name": "getRating"
         },
         {
-          "name": "setRating"
-        },
-        {
-          "name": "renderWishlist"
-        },
-        {
-          "name": "initWhatsNew"
+          "name": "addRecentlyUsed"
         },
         {
           "name": "closeCmdPalette"
         },
         {
-          "name": "getRatings"
-        },
-        {
-          "name": "init"
-        },
-        {
-          "name": "initRecentlyUsed"
-        },
-        {
-          "name": "renderRecentlyUsed"
-        },
-        {
-          "name": "initFeedbackFAB"
-        },
-        {
-          "name": "openCmdPalette"
-        },
-        {
-          "name": "addRecentlyUsed"
-        },
-        {
           "name": "initCmdPalette"
-        },
-        {
-          "name": "showAnnouncement"
-        },
-        {
-          "name": "escapeHtml"
         },
         {
           "name": "timeAgo"
         },
         {
+          "name": "initFeedbackFAB"
+        },
+        {
+          "name": "getRatings"
+        },
+        {
+          "name": "renderRecentlyUsed"
+        },
+        {
+          "name": "initWhatsNew"
+        },
+        {
+          "name": "openCmdPalette"
+        },
+        {
           "name": "renderCmdResults"
+        },
+        {
+          "name": "initRecentlyUsed"
+        },
+        {
+          "name": "init"
+        },
+        {
+          "name": "renderWishlist"
+        },
+        {
+          "name": "getRecentlyUsed"
+        },
+        {
+          "name": "escapeHtml"
+        },
+        {
+          "name": "setRating"
         }
       ],
       "imports": []
@@ -1678,10 +1678,10 @@
           "name": "renderChart"
         },
         {
-          "name": "formatINR"
+          "name": "recalculate"
         },
         {
-          "name": "recalculate"
+          "name": "formatINR"
         }
       ],
       "imports": []
@@ -1692,6 +1692,12 @@
       "classes": [],
       "functions": [
         {
+          "name": "evaluateRegex"
+        },
+        {
+          "name": "syncFlagsToInput"
+        },
+        {
           "name": "syncScroll"
         },
         {
@@ -1699,12 +1705,6 @@
         },
         {
           "name": "escapeHtml"
-        },
-        {
-          "name": "evaluateRegex"
-        },
-        {
-          "name": "syncFlagsToInput"
         }
       ],
       "imports": []
@@ -1718,13 +1718,13 @@
           "name": "renderChart"
         },
         {
-          "name": "formatINR"
-        },
-        {
           "name": "recalculate"
         },
         {
           "name": "formatLakhCrore"
+        },
+        {
+          "name": "formatINR"
         }
       ],
       "imports": []
@@ -1757,25 +1757,25 @@
       "classes": [],
       "functions": [
         {
-          "name": "renderChart"
-        },
-        {
           "name": "syncSlider"
-        },
-        {
-          "name": "formatLakhCrore"
-        },
-        {
-          "name": "updateBadge"
         },
         {
           "name": "bindChips"
         },
         {
+          "name": "recalculate"
+        },
+        {
           "name": "formatINR"
         },
         {
-          "name": "recalculate"
+          "name": "formatLakhCrore"
+        },
+        {
+          "name": "renderChart"
+        },
+        {
+          "name": "updateBadge"
         }
       ],
       "imports": []
@@ -1800,55 +1800,55 @@
       "classes": [],
       "functions": [
         {
-          "name": "generateFallbackStreamUrl"
-        },
-        {
-          "name": "showProgressBar"
+          "name": "fetchOembedInfo"
         },
         {
           "name": "handleFormatDownload"
         },
         {
-          "name": "triggerBrowserDownload"
-        },
-        {
-          "name": "fetchOembedInfo"
-        },
-        {
-          "name": "showError"
-        },
-        {
-          "name": "extractFallbackTitle"
-        },
-        {
-          "name": "initEvents"
-        },
-        {
-          "name": "hideError"
-        },
-        {
-          "name": "isValidMediaUrl"
+          "name": "showProgressBar"
         },
         {
           "name": "switchTab"
         },
         {
+          "name": "handleFetchMedia"
+        },
+        {
+          "name": "initEvents"
+        },
+        {
           "name": "resolveDownloadStream"
+        },
+        {
+          "name": "generateFallbackStreamUrl"
+        },
+        {
+          "name": "isValidMediaUrl"
         },
         {
           "name": "extractYouTubeId"
         },
         {
-          "name": "handleFetchMedia"
-        },
-        {
-          "name": "generateThumbnail"
+          "name": "detectPlatform"
         },
         {
           "name": "setLoadingState"
         },
         {
-          "name": "detectPlatform"
+          "name": "showError"
+        },
+        {
+          "name": "hideError"
+        },
+        {
+          "name": "triggerBrowserDownload"
+        },
+        {
+          "name": "generateThumbnail"
+        },
+        {
+          "name": "extractFallbackTitle"
         }
       ],
       "imports": []
@@ -2131,13 +2131,19 @@
       "classes": [],
       "functions": [
         {
+          "name": "convertHundreds"
+        },
+        {
+          "name": "checkUrlHash"
+        },
+        {
           "name": "closeMobileSidebar"
         },
         {
-          "name": "typeStep"
+          "name": "closeToolPanel"
         },
         {
-          "name": "convertHundreds"
+          "name": "typeStep"
         },
         {
           "name": "applyTheme"
@@ -2146,16 +2152,10 @@
           "name": "extractSlugFromUrl"
         },
         {
-          "name": "closeToolPanel"
-        },
-        {
-          "name": "checkUrlHash"
+          "name": "openToolInPortal"
         },
         {
           "name": "initDynamicUspRotator"
-        },
-        {
-          "name": "openToolInPortal"
         }
       ],
       "imports": []
