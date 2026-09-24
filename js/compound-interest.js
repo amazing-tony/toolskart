@@ -1,4 +1,4 @@
-/* Compound Interest Calculator - ToolsKart */
+﻿/* Compound Interest Calculator - Amazing-Tools */
 (function () {
     'use strict';
   
@@ -25,11 +25,11 @@
       timeInput.value = '';
       frequencySelect.value = '1';
       resultArea.classList.add('hidden');
-      ToolsKart.clearAllErrors(document.querySelector('.tool-interface'));
+      Amazing-Tools.clearAllErrors(document.querySelector('.tool-interface'));
     });
   
     function calculate() {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       TK.clearAllErrors(document.querySelector('.tool-interface'));
   
       const p = parseFloat(principalInput.value);

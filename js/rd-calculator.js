@@ -1,5 +1,5 @@
-/* =========================================================
-   ToolsKart — RD (Recurring Deposit) Calculator
+﻿/* =========================================================
+   Amazing-Tools — RD (Recurring Deposit) Calculator
    Quarterly & Monthly Compounding Engine
    ========================================================= */
 

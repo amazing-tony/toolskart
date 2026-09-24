@@ -1,5 +1,5 @@
-/* =========================================================
-   ToolsKart — User-Friendly Loan Prepayment & Debt-Freedom Planner
+﻿/* =========================================================
+   Amazing-Tools — User-Friendly Loan Prepayment & Debt-Freedom Planner
    - Dual-input sliders with 2-way sync
    - Real-time Indian currency words (Lakhs & Crores)
    - Quick preset chips (₹25L, ₹50L, 8.5%, 10Yrs, etc.)
@@ -1754,10 +1754,10 @@
     csvContent += '# This calculation output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
     csvContent += '# All calculations must be independently verified at user level with your lending institution or bank statement.\n';
     csvContent += '# Amazing-tools is not responsible or liable for any miscalculations, bank differences, or financial decisions made.\n';
-    csvContent += '# Please report any miscalculations on our portal (hello@toolskart.com) for future corrections.\n';
+    csvContent += '# Please report any miscalculations on our portal (hello@Amazing-Tools.com) for future corrections.\n';
     const filename = `loan_prepayment_schedule_${currentScheduleView}.csv`;
-    if (window.ToolsKart) {
-      window.ToolsKart.downloadFile(csvContent, filename, 'text/csv');
+    if (window.Amazing-Tools) {
+      window.Amazing-Tools.downloadFile(csvContent, filename, 'text/csv');
     } else {
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
@@ -1925,7 +1925,7 @@
       "or official loan statement before executing any prepayment or binding financial decision. Amazing-tools and its operators assume no legal or financial liability for any " +
       "miscalculations, bank policy differences, or financial decisions made.\n\n" +
       "Report Miscalculations: We continuously strive for 100% mathematical precision. If you spot any calculation discrepancy or difference from your bank statement, " +
-      "please report it on our portal (hello@toolskart.com) for prompt verification and future portal updates.";
+      "please report it on our portal (hello@Amazing-Tools.com) for prompt verification and future portal updates.";
 
     const splitDeclaration = doc.splitTextToSize(declarationText, 510);
     doc.text(splitDeclaration, 42, curY + 28);
@@ -1952,10 +1952,10 @@
     text += `🎉 Time Saved: ${timeSaved}\n`;
     text += `💰 Interest Saved: ${intSaved}\n`;
     text += `📈 Option B Mutual Fund Corpus: ${sipCorpus}\n\n`;
-    text += 'Calculated at ToolsKart (https://amazing-tools.github.io/pages/emi-calculator.html)';
+    text += 'Calculated at Amazing-Tools (https://amazing-tools.github.io/pages/emi-calculator.html)';
 
-    if (window.ToolsKart) {
-      window.ToolsKart.copyToClipboard(text, btnCopySummary);
+    if (window.Amazing-Tools) {
+      window.Amazing-Tools.copyToClipboard(text, btnCopySummary);
     } else {
       navigator.clipboard.writeText(text).then(() => {
         btnCopySummary.textContent = '✓ Copied!';

@@ -1,4 +1,4 @@
-/* GST Calculator — ToolsKart */
+﻿/* GST Calculator — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -42,11 +42,11 @@
     resultArea.classList.add('hidden');
     document.querySelectorAll('input[name="calcType"]')[0].checked = true;
     document.querySelectorAll('input[name="taxType"]')[0].checked = true;
-    ToolsKart.clearAllErrors(document.querySelector('.tool-interface'));
+    Amazing-Tools.clearAllErrors(document.querySelector('.tool-interface'));
   });
 
   function calculate() {
-    const TK = window.ToolsKart;
+    const TK = window.Amazing-Tools;
     TK.clearAllErrors(document.querySelector('.tool-interface'));
 
     // Get values

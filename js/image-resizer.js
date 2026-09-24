@@ -1,4 +1,4 @@
-/* Image Resizer — ToolsKart */
+﻿/* Image Resizer — Amazing-Tools */
 (function () {
   'use strict';
 

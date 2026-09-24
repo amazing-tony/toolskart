@@ -1,5 +1,5 @@
-/* =========================================================
-   ToolsKart — Universal Video & Audio Downloader Controller
+﻿/* =========================================================
+   Amazing-Tools — Universal Video & Audio Downloader Controller
    Supports YouTube, Shorts, Instagram Reels, Facebook, TikTok
    ========================================================= */
 

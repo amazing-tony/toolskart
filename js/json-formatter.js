@@ -1,4 +1,4 @@
-/* JSON Formatter — ToolsKart */
+﻿/* JSON Formatter — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -103,7 +103,7 @@
 
   copyBtn.addEventListener('click', function () {
     if (jsonOutput.value) {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       if (TK && TK.copyToClipboard) {
         TK.copyToClipboard(jsonOutput.value, this);
       } else {

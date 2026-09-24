@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free YouTube Thumbnail Downloader (1080p, 4K, HD) | Amazing-Tools</title>
+    <meta name="description" content="Download YouTube video & Shorts thumbnails in Full HD (1080p), High Definition (720p), and standard resolutions for free. Instant, private, zero software needed.">
+    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, get youtube thumbnail, save youtube cover image, 1080p thumbnail download">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/youtube-thumbnail.html">
+    <meta property="og:title" content="Free YouTube Thumbnail Downloader | Amazing-Tools">
+    <meta property="og:description" content="Grab and download high-resolution YouTube thumbnails in 1080p, 720p, and 480p instantly.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "YouTube Thumbnail Downloader",
+      "url": "https://amazing-tools.github.io/pages/youtube-thumbnail.html",
+      "description": "Download YouTube video thumbnails in 1080p HD for free with zero software.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .yt-hero {
+            background: linear-gradient(135deg, #FF0000 0%, #B20710 50%, #1E3A5F 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .yt-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .yt-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .search-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .url-input-row {
+            display: flex;
+            gap: 0.75rem;
+        }
+        @media (max-width: 600px) {
+            .url-input-row { flex-direction: column; }
+        }
+
+        .thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .thumb-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+        .thumb-card:hover { transform: translateY(-2px); }
+
+        .thumb-img-wrap {
+            position: relative;
+            background: #0f172a;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .thumb-img-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .thumb-badge {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            backdrop-filter: blur(4px);
+        }
+
+        .thumb-info {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+        }
+        .thumb-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.25rem; }
+        .thumb-sub { font-size: 0.82rem; color: #64748b; margin-bottom: 1rem; }
+
+        .btn-thumb-download {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #2563eb;
+            color: #fff;
+            padding: 0.6rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-thumb-download:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; YouTube Thumbnail Downloader
+            </nav>
+
+            <div class="yt-hero">
+                <h1>📺 Free YouTube Thumbnail Downloader</h1>
+                <p>Download full-resolution YouTube video and Shorts cover images in <strong>Full HD 1080p, 720p, and 480p</strong> for free.</p>
+            </div>
+
+            <div class="search-card">
+                <label for="ytUrlInput" style="font-weight:600; font-size:0.95rem; display:block; margin-bottom:0.5rem;">Enter YouTube Video or Shorts URL:</label>
+                <div class="url-input-row">
+                    <input type="text" id="ytUrlInput" class="input-field" placeholder="e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ or youtu.be/..." value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="flex:1;">
+                    <button id="btnGetThumbs" class="btn btn-primary" style="padding:0.6rem 1.5rem;">🔍 Get Thumbnails</button>
+                </div>
+                <div style="font-size:0.8rem; color:#64748b; margin-top:0.6rem;">
+                    Supports <code>youtube.com/watch?v=...</code>, <code>youtu.be/...</code>, and <code>youtube.com/shorts/...</code>
+                </div>
+            </div>
+
+            <!-- Results Grid -->
+            <div id="thumbResultsArea" class="thumb-grid"></div>
+
+            <!-- SEO FAQ -->
+            <section class="info-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3 class="faq-question">What resolutions are available?</h3>
+                    <p class="faq-answer">YouTube generates up to five standard thumbnail sizes for uploaded videos: Maximum Resolution (1080p, 1920x1080), High Quality (720p, 1280x720), Medium (480p, 640x480), Standard Definition (480x360), and Small Preview (120x90).</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is it free to download YouTube thumbnails?</h3>
+                    <p class="faq-answer">Yes, this tool is 100% free with no registration or limits. The images are fetched directly from YouTube's official public image CDN.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="video-downloader.html">Video Downloader</a>
+                <a href="youtube-thumbnail.html">YouTube Thumbnail</a>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+                <a href="document-converter.html">Document Converter</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        const input = document.getElementById('ytUrlInput');
+        const btn = document.getElementById('btnGetThumbs');
+        const resultsArea = document.getElementById('thumbResultsArea');
+
+        function extractVideoId(url) {
+            if (!url) return null;
+            url = url.trim();
+
+            // Direct ID (11 chars)
+            if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+
+            // youtu.be/<id>
+            const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/);
+            if (shortMatch) return shortMatch[1];
+
+            // youtube.com/shorts/<id>
+            const shortsMatch = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);
+            if (shortsMatch) return shortsMatch[1];
+
+            // youtube.com/embed/<id>
+            const embedMatch = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
+            if (embedMatch) return embedMatch[1];
+
+            // youtube.com/watch?v=<id>
+            const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+            if (watchMatch) return watchMatch[1];
+
+            return null;
+        }
+
+        async function downloadImage(url, filename) {
+            try {
+                // Fetch image as blob to trigger direct download
+                const resp = await fetch(url);
+                const blob = await resp.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(blobUrl);
+                }, 150);
+            } catch(e) {
+                // Fallback direct open
+                window.open(url, '_blank');
+            }
+        }
+
+        function renderThumbnails(videoId) {
+            resultsArea.innerHTML = '';
+            if (!videoId) {
+                resultsArea.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; background:#fff; border-radius:8px; border:1px solid var(--border-color); color:#dc2626;">Invalid YouTube URL. Please enter a valid YouTube video link.</div>`;
+                return;
+            }
+
+            const qualities = [
+                {
+                    title: 'Maximum Resolution (1080p HD)',
+                    sub: '1920 × 1080 • Best for Wallpapers, Posters & Editing',
+                    badge: '1080p HD',
+                    url: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                    file: `yt_${videoId}_1080p.jpg`
+                },
+                {
+                    title: 'High Definition (720p HQ)',
+                    sub: '1280 × 720 • Standard High Definition',
+                    badge: '720p HQ',
+                    url: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+                    file: `yt_${videoId}_720p.jpg`
+                },
+                {
+                    title: 'Medium Quality (480p MQ)',
+                    sub: '640 × 480 • Balanced for Web and Social',
+                    badge: '480p MQ',
+                    url: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+                    file: `yt_${videoId}_480p.jpg`
+                },
+                {
+                    title: 'Standard Definition (SD)',
+                    sub: '640 × 480 • Standard Video Snapshot',
+                    badge: 'SD',
+                    url: `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+                    file: `yt_${videoId}_sd.jpg`
+                }
+            ];
+
+            qualities.forEach(q => {
+                const card = document.createElement('div');
+                card.className = 'thumb-card';
+                card.innerHTML = `
+                    <div class="thumb-img-wrap">
+                        <img src="${q.url}" alt="${q.title}" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';">
+                        <span class="thumb-badge">${q.badge}</span>
+                    </div>
+                    <div class="thumb-info">
+                        <div>
+                            <div class="thumb-title">${q.title}</div>
+                            <div class="thumb-sub">${q.sub}</div>
+                        </div>
+                        <div style="display:flex; gap:0.5rem;">
+                            <button class="btn-thumb-download btn-dl" data-url="${q.url}" data-file="${q.file}">📥 Download Image</button>
+                            <button class="btn btn-outline btn-copy" data-url="${q.url}" style="padding:0.6rem 0.9rem; font-size:0.85rem;" title="Copy Image URL">🔗 Copy</button>
+                        </div>
+                    </div>
+                `;
+                resultsArea.appendChild(card);
+            });
+        }
+
+        btn.addEventListener('click', () => {
+            const vid = extractVideoId(input.value);
+            renderThumbnails(vid);
+        });
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const vid = extractVideoId(input.value);
+                renderThumbnails(vid);
+            }
+        });
+
+        resultsArea.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-dl')) {
+                const url = e.target.dataset.url;
+                const file = e.target.dataset.file;
+                downloadImage(url, file);
+            } else if (e.target.classList.contains('btn-copy')) {
+                const url = e.target.dataset.url;
+                navigator.clipboard.writeText(url);
+                const orig = e.target.textContent;
+                e.target.textContent = '✓ Copied!';
+                setTimeout(() => e.target.textContent = orig, 1500);
+            }
+        });
+
+        // Initialize with default video
+        renderThumbnails('dQw4w9WgXcQ');
+    })();
+    </script>
+</body>
+</html>

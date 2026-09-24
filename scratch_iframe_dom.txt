@@ -1,0 +1,13 @@
+65:                         <a href="pages/pdf-tools.html?tool=edit" data-tool="edit" class="nav-quick-item"><span>✏️ Edit &amp; Sign</span></a>
+66:                         <a href="pages/pdf-tools.html?tool=merge" data-tool="merge" class="nav-quick-item"><span>🔀 Merge PDF</span></a>
+67:                         <a href="pages/pdf-tools.html?tool=split" data-tool="split" class="nav-quick-item"><span>✂️ Split PDF</span></a>
+69:                         <a href="pages/pdf-tools.html?tool=organize" data-tool="organize" class="nav-quick-item"><span>🔄 Organize &amp; Rotate</span><
+219:                         <span class="sb-item-text">PDF Studio Suite</span>
+223:                         <a href="pages/pdf-tools.html?tool=edit" data-tool="edit" class="sb-child">✏️ Edit &amp; Sign</a>
+224:                         <a href="pages/pdf-tools.html?tool=merge" data-tool="merge" class="sb-child">🔀 Merge PDF</a>
+225:                         <a href="pages/pdf-tools.html?tool=split" data-tool="split" class="sb-child">✂️ Split PDF</a>
+510:                         <span class="sb-item-text">PDF Studio</span>
+607:                                 <span class="bql-icon">⚡</span> PDF Studio <span class="bql-pill teal">14-in-1</span>
+674:                                 <span class="featured-tag" style="background:#E6F5F6; color:#0D7A82;">Edit &amp; Sign</span>
+1568:                         <a href="pages/pdf-tools.html" data-tool="pdf-tools">PDF Studio Suite</a>
+1643:                 <select class="fp-select" id="fpToolSelect"><option value="">Select a tool (optional)</option><option value="pdf-tools">⚡ PDF Studio S

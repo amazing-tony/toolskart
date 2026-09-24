@@ -1,4 +1,4 @@
-/* Percentage Calculator - ToolsKart */
+﻿/* Percentage Calculator - Amazing-Tools */
 (function () {
     'use strict';
   
@@ -20,7 +20,7 @@
         });
     });
   
-    const TK = window.ToolsKart;
+    const TK = window.Amazing-Tools;
   
     function displayResult(text, formula) {
         mainResultText.innerHTML = text;

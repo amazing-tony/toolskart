@@ -38,6 +38,15 @@
   <url><loc>https://amazing-tools.github.io/pages/tip-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://amazing-tools.github.io/pages/bmi-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://amazing-tools.github.io/pages/markdown-previewer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <!-- Brand New Utilities & Converters -->
+  <url><loc>https://amazing-tools.github.io/pages/ocr-tool.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/invoice-generator.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/resume-builder.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/markdown-to-pdf.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/youtube-thumbnail.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/screen-recorder.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/audio-converter.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://amazing-tools.github.io/pages/inflation-calculator.html</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <!-- Pages -->
   <url><loc>https://amazing-tools.github.io/about.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
   <url><loc>https://amazing-tools.github.io/privacy-policy.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Screen Recorder — Record Screen & Audio Without Watermark | Amazing-Tools</title>
+    <meta name="description" content="Record your entire screen, browser tab, or application window with internal audio and microphone. 100% free, private in-browser screen recorder with zero software installation.">
+    <meta name="keywords" content="screen recorder, online screen recorder, record screen with audio, free screen recorder no watermark, browser screen capture">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/screen-recorder.html">
+    <meta property="og:title" content="Free Online Screen Recorder | Amazing-Tools">
+    <meta property="og:description" content="Record your screen, tab, and microphone directly in your browser. 100% private with no watermarks.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Screen Recorder",
+      "url": "https://amazing-tools.github.io/pages/screen-recorder.html",
+      "description": "Free in-browser screen and audio recorder with zero software installation.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .rec-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #dc2626 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .rec-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .rec-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .recorder-stage {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rec-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+        .rec-dot {
+            width: 10px;
+            height: 10px;
+            background: #dc2626;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        .rec-timer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .rec-options-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .rec-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-rec-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #dc2626;
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 700;
+            padding: 0.85rem 2.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.35);
+            transition: all 0.2s ease;
+        }
+        .btn-rec-main:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        .video-preview-wrap {
+            display: none;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .video-preview-wrap video {
+            width: 100%;
+            max-height: 450px;
+            background: #000;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; Screen Recorder
+            </nav>
+
+            <div class="rec-hero">
+                <h1>📹 Free Online Screen Recorder</h1>
+                <p>Capture your screen, browser tabs, and desktop with internal audio and microphone. <strong>No download, no watermark, 100% private</strong> in your browser.</p>
+            </div>
+
+            <!-- Interactive Recorder Canvas -->
+            <div class="recorder-stage">
+                
+                <div id="recStatusIndicator" class="rec-indicator" style="display:none;">
+                    <span class="rec-dot"></span>
+                    <span id="recStatusText">RECORDING</span>
+                </div>
+
+                <div class="rec-timer" id="recTimer">00:00:00</div>
+
+                <!-- Settings before recording -->
+                <div id="recSettings" class="rec-options-row">
+                    <label class="rec-checkbox-label">
+                        <input type="checkbox" id="chkAudioSystem" checked>
+                        <span>Include System / Tab Audio</span>
+                    </label>
+                    <label class="rec-checkbox-label">
+                        <input type="checkbox" id="chkAudioMic">
+                        <span>Include Microphone Audio</span>
+                    </label>
+                </div>
+
+                <!-- Controls -->
+                <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+                    <button type="button" id="btnStartRecord" class="btn-rec-main">
+                        <span>●</span> <span>Start Recording</span>
+                    </button>
+                    <button type="button" id="btnPauseRecord" class="btn btn-outline" style="display:none; padding:0.85rem 1.5rem;">⏸️ Pause</button>
+                    <button type="button" id="btnStopRecord" class="btn btn-primary" style="display:none; background:#0f172a; padding:0.85rem 1.75rem;">⏹️ Stop & Save</button>
+                </div>
+
+                <!-- Video Preview & Download Area -->
+                <div id="videoResultWrap" class="video-preview-wrap">
+                    <h3 style="margin-bottom:0.75rem;">Recording Complete</h3>
+                    <video id="playbackVideo" controls></video>
+                    
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                        <span id="recordedStats" style="font-size:0.9rem; color:#64748b;">Duration: 00:00 • Size: 0 MB</span>
+                        <div style="display:flex; gap:0.75rem;">
+                            <button id="btnDownloadVideo" class="btn btn-primary" style="padding:0.6rem 1.5rem;">📥 Download Video (.webm)</button>
+                            <button id="btnRecordAgain" class="btn btn-outline" style="padding:0.6rem 1rem;">↺ Record Again</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SEO FAQ -->
+            <section class="info-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3 class="faq-question">Are there any recording limits or watermarks?</h3>
+                    <p class="faq-answer">No! You can record high-definition video for as long as your system memory allows. There are no watermarks, no limits, and no accounts required.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is my screen recording private?</h3>
+                    <p class="faq-answer">Yes, 100%. The video stream is recorded entirely in your browser using the MediaRecorder API. The footage never leaves your computer and is never sent to any server.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I record sound from browser tabs or applications?</h3>
+                    <p class="faq-answer">Yes. When your browser displays the screen-sharing prompt, check the "Share tab audio" or "Share system audio" box to record sound from YouTube, Zoom, games, or presentations.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="screen-recorder.html">Screen Recorder</a>
+                <a href="video-downloader.html">Video Downloader</a>
+                <a href="audio-converter.html">Audio Converter</a>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        const btnStart = document.getElementById('btnStartRecord');
+        const btnPause = document.getElementById('btnPauseRecord');
+        const btnStop = document.getElementById('btnStopRecord');
+        const timerEl = document.getElementById('recTimer');
+        const statusIndicator = document.getElementById('recStatusIndicator');
+        const statusText = document.getElementById('recStatusText');
+        const settingsWrap = document.getElementById('recSettings');
+        const chkMic = document.getElementById('chkAudioMic');
+        const chkSystem = document.getElementById('chkAudioSystem');
+        const resultWrap = document.getElementById('videoResultWrap');
+        const playbackVideo = document.getElementById('playbackVideo');
+        const statsEl = document.getElementById('recordedStats');
+        const btnDownload = document.getElementById('btnDownloadVideo');
+        const btnRecordAgain = document.getElementById('btnRecordAgain');
+
+        let mediaStream = null;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let timerInterval = null;
+        let elapsedSeconds = 0;
+        let isPaused = false;
+        let recordedBlob = null;
+
+        function formatTime(totalSecs) {
+            const hrs = Math.floor(totalSecs / 3600).toString().padStart(2, '0');
+            const mins = Math.floor((totalSecs % 3600) / 60).toString().padStart(2, '0');
+            const secs = (totalSecs % 60).toString().padStart(2, '0');
+            return `${hrs}:${mins}:${secs}`;
+        }
+
+        async function startRecording() {
+            try {
+                const wantSystem = chkSystem.checked;
+                const wantMic = chkMic.checked;
+
+                // 1. Get Screen Stream
+                const displayStream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { cursor: 'always', frameRate: { ideal: 30 } },
+                    audio: wantSystem
+                });
+
+                let combinedTracks = [...displayStream.getVideoTracks()];
+
+                // 2. Mix Mic Audio if selected
+                if (wantMic) {
+                    try {
+                        const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const dest = audioCtx.createMediaStreamDestination();
+
+                        if (displayStream.getAudioTracks().length > 0) {
+                            const sysSource = audioCtx.createMediaStreamSource(new MediaStream(displayStream.getAudioTracks()));
+                            sysSource.connect(dest);
+                        }
+
+                        const micSource = audioCtx.createMediaStreamSource(micStream);
+                        micSource.connect(dest);
+
+                        combinedTracks.push(...dest.stream.getAudioTracks());
+                    } catch(micErr) {
+                        console.warn('Microphone permission denied or unavailable:', micErr);
+                        combinedTracks.push(...displayStream.getAudioTracks());
+                    }
+                } else {
+                    combinedTracks.push(...displayStream.getAudioTracks());
+                }
+
+                mediaStream = new MediaStream(combinedTracks);
+                recordedChunks = [];
+
+                // Detect supported mimeType
+                let mimeType = 'video/webm;codecs=vp9,opus';
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                    mimeType = 'video/webm;codecs=vp8,opus';
+                    if (!MediaRecorder.isTypeSupported(mimeType)) {
+                        mimeType = 'video/webm';
+                    }
+                }
+
+                mediaRecorder = new MediaRecorder(mediaStream, { mimeType });
+
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data && e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    clearInterval(timerInterval);
+                    recordedBlob = new Blob(recordedChunks, { type: mimeType });
+                    playbackVideo.src = URL.createObjectURL(recordedBlob);
+                    
+                    const sizeMB = (recordedBlob.size / (1024 * 1024)).toFixed(2);
+                    statsEl.textContent = `Duration: ${formatTime(elapsedSeconds)} • File Size: ${sizeMB} MB`;
+
+                    // Cleanup tracks
+                    mediaStream.getTracks().forEach(t => t.stop());
+
+                    // UI update
+                    statusIndicator.style.display = 'none';
+                    btnPause.style.display = 'none';
+                    btnStop.style.display = 'none';
+                    resultWrap.style.display = 'block';
+                };
+
+                // Stop if user stops sharing via browser bar
+                displayStream.getVideoTracks()[0].onended = () => {
+                    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                        mediaRecorder.stop();
+                    }
+                };
+
+                mediaRecorder.start(1000); // 1-second chunks
+
+                // UI updates
+                elapsedSeconds = 0;
+                timerEl.textContent = '00:00:00';
+                timerInterval = setInterval(() => {
+                    if (!isPaused) {
+                        elapsedSeconds++;
+                        timerEl.textContent = formatTime(elapsedSeconds);
+                    }
+                }, 1000);
+
+                btnStart.style.display = 'none';
+                settingsWrap.style.display = 'none';
+                btnPause.style.display = 'inline-block';
+                btnStop.style.display = 'inline-block';
+                statusIndicator.style.display = 'inline-flex';
+                statusText.textContent = 'RECORDING';
+                resultWrap.style.display = 'none';
+
+            } catch(err) {
+                console.error(err);
+                if (err.name !== 'NotAllowedError') {
+                    alert('Could not start screen recording: ' + err.message);
+                }
+            }
+        }
+
+        btnStart.addEventListener('click', startRecording);
+
+        btnPause.addEventListener('click', () => {
+            if (!mediaRecorder) return;
+            if (!isPaused) {
+                mediaRecorder.pause();
+                isPaused = true;
+                btnPause.textContent = '▶️ Resume';
+                statusText.textContent = 'PAUSED';
+            } else {
+                mediaRecorder.resume();
+                isPaused = false;
+                btnPause.textContent = '⏸️ Pause';
+                statusText.textContent = 'RECORDING';
+            }
+        });
+
+        btnStop.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+        });
+
+        btnDownload.addEventListener('click', () => {
+            if (!recordedBlob) return;
+            const url = URL.createObjectURL(recordedBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `screen-recording-${new Date().toISOString().slice(0,10)}.webm`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 200);
+        });
+
+        btnRecordAgain.addEventListener('click', () => {
+            resultWrap.style.display = 'none';
+            btnStart.style.display = 'inline-flex';
+            settingsWrap.style.display = 'flex';
+            timerEl.textContent = '00:00:00';
+            playbackVideo.src = '';
+            recordedBlob = null;
+        });
+
+    })();
+    </script>
+</body>
+</html>

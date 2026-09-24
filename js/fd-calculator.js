@@ -1,4 +1,4 @@
-/* FD Calculator - ToolsKart */
+﻿/* FD Calculator - Amazing-Tools */
 (function () {
     'use strict';
   
@@ -26,11 +26,11 @@
       tenureMonthsInput.value = '';
       compoundingFrequencySelect.value = '4';
       resultArea.classList.add('hidden');
-      ToolsKart.clearAllErrors(document.querySelector('.tool-interface'));
+      Amazing-Tools.clearAllErrors(document.querySelector('.tool-interface'));
     });
   
     function calculate() {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       TK.clearAllErrors(document.querySelector('.tool-interface'));
   
       const p = parseFloat(depositAmountInput.value);

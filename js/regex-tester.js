@@ -1,4 +1,4 @@
-/* Regex Tester — ToolsKart */
+﻿/* Regex Tester — Amazing-Tools */
 (function () {
   'use strict';
 

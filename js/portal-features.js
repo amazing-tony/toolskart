@@ -51,6 +51,14 @@
     { id:'tip-calculator',    name:'Tip Calculator',           emoji:'🍽️', cat:'Everyday',    href:'pages/tip-calculator.html' },
     { id:'bmi-calculator',    name:'BMI Calculator',           emoji:'⚖️', cat:'Health',      href:'pages/bmi-calculator.html' },
     { id:'markdown-previewer',name:'Markdown Previewer',       emoji:'✍️', cat:'Dev',         href:'pages/markdown-previewer.html' },
+    { id:'ocr-tool',          name:'OCR Image to Text',        emoji:'🔍', cat:'Documents',   href:'pages/ocr-tool.html' },
+    { id:'invoice-generator', name:'Invoice Generator',        emoji:'🧾', cat:'Business',    href:'pages/invoice-generator.html' },
+    { id:'resume-builder',    name:'Resume Builder',           emoji:'📝', cat:'Business',    href:'pages/resume-builder.html' },
+    { id:'markdown-to-pdf',   name:'Markdown to PDF',          emoji:'📑', cat:'Documents',   href:'pages/markdown-to-pdf.html' },
+    { id:'youtube-thumbnail', name:'YouTube Thumbnail Saver',  emoji:'📺', cat:'Media',       href:'pages/youtube-thumbnail.html' },
+    { id:'screen-recorder',   name:'Online Screen Recorder',   emoji:'📹', cat:'Media',       href:'pages/screen-recorder.html' },
+    { id:'audio-converter',   name:'Audio Converter',          emoji:'🎵', cat:'Media',       href:'pages/audio-converter.html' },
+    { id:'inflation-calculator',name:'Inflation Calculator',   emoji:'📈', cat:'Finance',     href:'pages/inflation-calculator.html' },
   ];
   window.AT_TOOLS = ALL_TOOLS;
 

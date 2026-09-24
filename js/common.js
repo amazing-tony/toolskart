@@ -4,7 +4,7 @@
  * Licensed under CC BY-NC 4.0 — Non-commercial use only.
  * Commercial use requires written permission. See LICENSE file.
  *//* ========================================
-   ToolsKart — Common JavaScript Utilities
+   Amazing-Tools — Common JavaScript Utilities
    Shared across all pages
    ======================================== */
 
@@ -12,8 +12,8 @@
   'use strict';
 
   // ---- Multi-Theme Architecture: 11 Distinct Design Systems ----
-  const THEME_KEY = 'toolskart_theme';
-  const THEME_USER_SET_KEY = 'toolskart_theme_user_set';
+  const THEME_KEY = 'Amazing-Tools_theme';
+  const THEME_USER_SET_KEY = 'Amazing-Tools_theme_user_set';
   const DEFAULT_THEME = 'theme-09-paper';
 
   const THEMES = [
@@ -148,7 +148,7 @@
     // If embedded in an iframe, notify top window as well
     if (window.self !== window.top) {
       try {
-        window.top.postMessage({ type: 'TOOLSKART_THEME_CHANGE', themeId: resolvedId }, '*');
+        window.top.postMessage({ type: 'Amazing-Tools_THEME_CHANGE', themeId: resolvedId }, '*');
       } catch (e) {}
     }
   }
@@ -229,7 +229,7 @@
 
   // Cross-frame synchronization via postMessage
   window.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'TOOLSKART_THEME_CHANGE' && event.data.themeId) {
+    if (event.data && event.data.type === 'Amazing-Tools_THEME_CHANGE' && event.data.themeId) {
       applyTheme(event.data.themeId, false, false);
     }
   });
@@ -515,14 +515,291 @@
   restoreActiveSidebarState();
   window.addEventListener('hashchange', restoreActiveSidebarState);
 
-  // ---- Category Filter Pills (Homepage) ----
-  const filterPills = document.querySelectorAll('.filter-pill');
-  if (filterPills.length > 0) {
-    filterPills.forEach(pill => {
-      pill.addEventListener('click', function () {
-        filterPills.forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-        const filter = this.getAttribute('data-filter');
+  // ---- Collapsed Mini-Sidebar Hover Flyout Menu ----
+  function initSidebarMiniFlyout() {
+    const portalSidebar = document.getElementById('portalSidebar');
+    if (!portalSidebar) return;
+
+    let flyout = document.getElementById('sbMiniFlyout');
+    if (!flyout) {
+      flyout = document.createElement('div');
+      flyout.id = 'sbMiniFlyout';
+      flyout.className = 'sb-mini-flyout';
+      flyout.setAttribute('role', 'region');
+      flyout.setAttribute('aria-label', 'Collapsed Sidebar Menu');
+      document.body.appendChild(flyout);
+    }
+
+    let hideTimeout = null;
+    let activeSection = null;
+
+    const CATEGORY_SECTION_MAP = {
+      'docs': '#doc-tools',
+      'media': '#media-tools',
+      'finance': '#calculators',
+      'text': '#text-tools',
+      'images': '#image-tools',
+      'dev': '#dev-tools',
+      'global': '#global-tools'
+    };
+
+    const isMini = () => {
+      return (
+        window.innerWidth > 1024 &&
+        (document.body.classList.contains('sidebar-collapsed') || portalSidebar.classList.contains('is-collapsed'))
+      );
+    };
+
+    closeSidebarMiniFlyout = () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+      flyout.classList.remove('is-visible');
+      if (activeSection) {
+        activeSection.classList.remove('sb-mini-active');
+        activeSection = null;
+      }
+    };
+
+    function buildFlyoutItemsHtml(container) {
+      if (!container) return '';
+      let html = '';
+      const children = Array.from(container.children);
+      for (let i = 0; i < children.length; i++) {
+        const el = children[i];
+        if (el.classList.contains('sb-item')) {
+          const href = el.getAttribute('href') || '#';
+          const dataTool = el.getAttribute('data-tool') || '';
+          const iconEl = el.querySelector('.sb-item-icon');
+          const textEl = el.querySelector('.sb-item-text');
+          const pillEl = el.querySelector('.sb-pill');
+          const icon = iconEl ? iconEl.textContent.trim() : '';
+          const text = textEl ? textEl.textContent.trim() : el.textContent.trim();
+          const pillHtml = pillEl ? pillEl.outerHTML : '';
+          const isActive = el.classList.contains('is-active') ? 'is-active' : '';
+
+          const nextEl = children[i + 1];
+          if (nextEl && nextEl.classList.contains('sb-children')) {
+            const childLinks = nextEl.querySelectorAll('.sb-child');
+            let subHtml = '';
+            childLinks.forEach(c => {
+              const cHref = c.getAttribute('href') || '#';
+              const cTool = c.getAttribute('data-tool') || '';
+              const cText = c.textContent.trim();
+              const cActive = c.classList.contains('is-active') ? 'is-active' : '';
+              subHtml += `<a href="${cHref}" data-tool="${cTool}" class="sb-mini-flyout-child ${cActive}">${cText}</a>`;
+            });
+
+            html += `
+              <div class="sb-mini-flyout-group">
+                <a href="${href}" data-tool="${dataTool}" class="sb-mini-flyout-item ${isActive}">
+                  <span class="sb-item-icon">${icon}</span>
+                  <span class="sb-item-text">${text}</span>
+                  ${pillHtml}
+                  <span class="sb-mini-expand-arrow">▾</span>
+                </a>
+                <div class="sb-mini-flyout-children">
+                  ${subHtml}
+                </div>
+              </div>
+            `;
+            i++; // skip child container
+          } else {
+            html += `
+              <a href="${href}" data-tool="${dataTool}" class="sb-mini-flyout-item ${isActive}">
+                <span class="sb-item-icon">${icon}</span>
+                <span class="sb-item-text">${text}</span>
+                ${pillHtml}
+              </a>
+            `;
+          }
+        }
+      }
+      return html;
+    }
+
+    const showFlyoutFor = (section) => {
+      if (!isMini()) return;
+      if (hideTimeout) clearTimeout(hideTimeout);
+
+      if (activeSection === section && flyout.classList.contains('is-visible')) {
+        return;
+      }
+
+      if (activeSection && activeSection !== section) {
+        activeSection.classList.remove('sb-mini-active');
+      }
+      activeSection = section;
+      activeSection.classList.add('sb-mini-active');
+
+      let title = '';
+      let icon = '';
+      let badgeText = '';
+      let badgeClass = 'sb-badge';
+      let treeId = '';
+
+      const labelBtn = section.querySelector('.sb-section-label');
+      if (labelBtn) {
+        treeId = labelBtn.getAttribute('data-tree') || '';
+        const iconEl = labelBtn.querySelector('.sb-icon');
+        const textEl = labelBtn.querySelector('.sb-label-text');
+        const badgeEl = labelBtn.querySelector('.sb-badge');
+        if (iconEl) icon = iconEl.textContent.trim();
+        if (textEl) title = textEl.textContent.trim();
+        if (badgeEl) {
+          badgeText = badgeEl.textContent.trim();
+          badgeClass = badgeEl.className;
+        }
+      }
+
+      const treeBody = section.querySelector('.sb-tree-body');
+      const directItems = section.querySelector('.sb-items');
+      const itemsHtml = treeBody ? buildFlyoutItemsHtml(treeBody) : (directItems ? buildFlyoutItemsHtml(directItems) : '');
+
+      if (!itemsHtml) {
+        closeSidebarMiniFlyout();
+        return;
+      }
+
+      const targetHash = CATEGORY_SECTION_MAP[treeId] || (section.classList.contains('sb-popular-bottom') ? '#featured-section' : '');
+
+      flyout.innerHTML = `
+        <a href="${targetHash || '#'}" class="sb-mini-flyout-header" title="Jump to ${title}">
+          <span class="sb-mini-flyout-icon">${icon}</span>
+          <span class="sb-mini-flyout-title">${title}</span>
+          ${badgeText ? `<span class="${badgeClass}">${badgeText}</span>` : ''}
+          ${targetHash ? `<span class="sb-mini-flyout-arrow">↗</span>` : ''}
+        </a>
+        <div class="sb-mini-flyout-body">
+          ${itemsHtml}
+        </div>
+      `;
+
+      // Position flyout
+      const rect = section.getBoundingClientRect();
+      flyout.style.left = '70px';
+      flyout.classList.add('is-visible');
+
+      const flyoutHeight = flyout.offsetHeight || 300;
+      const viewportHeight = window.innerHeight;
+      let top = rect.top;
+
+      if (top + flyoutHeight > viewportHeight - 16) {
+        top = Math.max(54, viewportHeight - flyoutHeight - 16);
+      } else {
+        top = Math.max(54, top - 4);
+      }
+      flyout.style.top = top + 'px';
+
+      // Click handling for category header
+      const headerLink = flyout.querySelector('.sb-mini-flyout-header');
+      if (headerLink && targetHash && targetHash.startsWith('#')) {
+        headerLink.addEventListener('click', (e) => {
+          const targetEl = document.querySelector(targetHash);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            closeSidebarMiniFlyout();
+          }
+        });
+      }
+
+      // Close flyout on clicking any tool link
+      flyout.querySelectorAll('a').forEach(a => {
+        if (a !== headerLink) {
+          a.addEventListener('click', () => {
+            closeSidebarMiniFlyout();
+          });
+        }
+      });
+    };
+
+    const scheduleHide = () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        closeSidebarMiniFlyout();
+      }, 190);
+    };
+
+    // Attach hover listeners to all sidebar sections
+    const sections = portalSidebar.querySelectorAll('.sb-section');
+    sections.forEach(section => {
+      section.addEventListener('mouseenter', () => {
+        if (isMini()) showFlyoutFor(section);
+      });
+
+      section.addEventListener('mouseleave', (e) => {
+        if (isMini()) {
+          const toEl = e.relatedTarget;
+          if (toEl && (flyout.contains(toEl) || toEl === flyout)) return;
+          scheduleHide();
+        }
+      });
+
+      // Also allow clicking section label in mini mode to toggle flyout
+      section.querySelectorAll('.sb-section-label, .sb-tree-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if (isMini()) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (activeSection === section && flyout.classList.contains('is-visible')) {
+              closeSidebarMiniFlyout();
+            } else {
+              showFlyoutFor(section);
+            }
+          }
+        });
+      });
+    });
+
+    flyout.addEventListener('mouseenter', () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+    });
+
+    flyout.addEventListener('mouseleave', (e) => {
+      const toEl = e.relatedTarget;
+      if (toEl && activeSection && (activeSection.contains(toEl) || toEl === activeSection)) return;
+      scheduleHide();
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isMini()) closeSidebarMiniFlyout();
+    });
+
+    portalSidebar.addEventListener('scroll', () => {
+      if (isMini() && flyout.classList.contains('is-visible') && activeSection) {
+        const rect = activeSection.getBoundingClientRect();
+        const flyoutHeight = flyout.offsetHeight || 300;
+        let top = rect.top;
+        if (top < 50 || top > window.innerHeight) {
+          closeSidebarMiniFlyout();
+        } else {
+          if (top + flyoutHeight > window.innerHeight - 16) {
+            top = Math.max(54, window.innerHeight - flyoutHeight - 16);
+          } else {
+            top = Math.max(54, top - 4);
+          }
+          flyout.style.top = top + 'px';
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (flyout.classList.contains('is-visible')) {
+        if (!flyout.contains(e.target) && (!activeSection || !activeSection.contains(e.target))) {
+          closeSidebarMiniFlyout();
+        }
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && flyout.classList.contains('is-visible')) {
+        closeSidebarMiniFlyout();
+      }
+    });
+  }
+
+  // Initialize mini sidebar flyout menu
+  initSidebarMiniFlyout();
+
 
   // Quick search filter inside sidebar (new sb-nav classes)
   const sidebarSearch = document.getElementById('sidebarSearch');
@@ -553,8 +830,16 @@
   }
 
   // ---- Category Filter Pills (Homepage) ----
-  const featuredSec = document.getElementById('featured-section');
-  const sections = document.querySelectorAll('.category-section:not(#facilities)');
+  const filterPills = document.querySelectorAll('.filter-pill');
+  if (filterPills.length > 0) {
+    const featuredSec = document.getElementById('featured-section');
+    const sections = document.querySelectorAll('.category-section:not(#facilities)');
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', function () {
+        filterPills.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
 
         if (filter === 'all') {
           if (featuredSec) featuredSec.style.display = '';
@@ -689,9 +974,154 @@
     return match ? match[1] : null;
   }
 
+  // ---- Suite Facilities Quick Switcher Definitions ----
+  const PORTAL_SUITES = [
+    {
+      id: 'pdf',
+      badge: '📄 PDF Studio (14 Tools)',
+      tools: [
+        { slug: 'edit', name: 'Edit & Sign', icon: '✏️', url: 'pages/pdf-tools.html?tool=edit' },
+        { slug: 'merge', name: 'Merge PDF', icon: '🔀', url: 'pages/pdf-tools.html?tool=merge' },
+        { slug: 'split', name: 'Split PDF', icon: '✂️', url: 'pages/pdf-tools.html?tool=split' },
+        { slug: 'compress', name: 'Compress PDF', icon: '🗜️', url: 'pages/pdf-tools.html?tool=compress' },
+        { slug: 'organize', name: 'Organize', icon: '🔄', url: 'pages/pdf-tools.html?tool=organize' },
+        { slug: 'pdf-to-img', name: 'PDF → JPG', icon: '🖼️', url: 'pages/pdf-tools.html?tool=pdf-to-img' },
+        { slug: 'img-to-pdf', name: 'JPG → PDF', icon: '📄', url: 'pages/pdf-tools.html?tool=img-to-pdf' },
+        { slug: 'watermark', name: 'Watermark', icon: '💧', url: 'pages/pdf-tools.html?tool=watermark' },
+        { slug: 'page-numbers', name: 'Page No.', icon: '🔢', url: 'pages/pdf-tools.html?tool=page-numbers' },
+        { slug: 'protect', name: 'Protect', icon: '🔒', url: 'pages/pdf-tools.html?tool=protect' },
+        { slug: 'unlock', name: 'Unlock', icon: '🔓', url: 'pages/pdf-tools.html?tool=unlock' },
+        { slug: 'crop', name: 'Crop Margins', icon: '📐', url: 'pages/pdf-tools.html?tool=crop' },
+        { slug: 'extract-text', name: 'Extract Text', icon: '📝', url: 'pages/pdf-tools.html?tool=extract-text' },
+        { slug: 'metadata', name: 'Metadata', icon: '🏷️', url: 'pages/pdf-tools.html?tool=metadata' }
+      ],
+      matches: ['pdf-tools', 'edit', 'merge', 'split', 'compress', 'organize', 'pdf-to-img', 'img-to-pdf', 'watermark', 'page-numbers', 'protect', 'unlock', 'crop', 'extract-text', 'metadata']
+    },
+    {
+      id: 'converter',
+      badge: '🔄 Doc Converter Suite',
+      tools: [
+        { slug: 'document-converter', name: 'Universal', icon: '🔄', url: 'pages/document-converter.html' },
+        { slug: 'pdf-to-word', name: 'PDF → Word', icon: '📄', url: 'pages/document-converter.html?from=pdf&to=docx' },
+        { slug: 'word-to-pdf', name: 'Word → PDF', icon: '📝', url: 'pages/document-converter.html?from=docx&to=pdf' },
+        { slug: 'pdf-to-excel', name: 'PDF → Excel', icon: '📊', url: 'pages/document-converter.html?from=pdf&to=xlsx' },
+        { slug: 'excel-to-pdf', name: 'Excel → PDF', icon: '📈', url: 'pages/document-converter.html?from=xlsx&to=pdf' },
+        { slug: 'pptx-to-pdf', name: 'PPTX → PDF', icon: '📽️', url: 'pages/document-converter.html?from=pptx&to=pdf' }
+      ],
+      matches: ['document-converter', 'pdf-to-word', 'word-to-pdf', 'pdf-to-excel', 'excel-to-pdf', 'pptx-to-pdf']
+    },
+    {
+      id: 'media',
+      badge: '🎥 Video & Media Suite',
+      tools: [
+        { slug: 'video-downloader', name: 'Universal Downloader', icon: '📥', url: 'pages/video-downloader.html' },
+        { slug: 'screen-recorder', name: 'Screen Recorder', icon: '📹', url: 'pages/screen-recorder.html' },
+        { slug: 'youtube-thumbnail', name: 'Thumbnail Grabber', icon: '🖼️', url: 'pages/youtube-thumbnail.html' },
+        { slug: 'audio-converter', name: 'Audio Cutter', icon: '🎵', url: 'pages/audio-converter.html' }
+      ],
+      matches: ['video-downloader', 'screen-recorder', 'youtube-thumbnail', 'audio-converter']
+    },
+    {
+      id: 'loans',
+      badge: '🏦 Loans & Wealth Suite',
+      tools: [
+        { slug: 'emi-calculator', name: 'EMI Calculator', icon: '📊', url: 'pages/emi-calculator.html' },
+        { slug: 'inflation-calculator', name: 'Inflation Planner', icon: '📉', url: 'pages/inflation-calculator.html' },
+        { slug: 'buy-vs-rent-calculator', name: 'Buy vs Rent', icon: '🏡', url: 'pages/buy-vs-rent-calculator.html' },
+        { slug: 'fd-calculator', name: 'FD Calculator', icon: '🏛️', url: 'pages/fd-calculator.html' },
+        { slug: 'rd-calculator', name: 'RD Calculator', icon: '💳', url: 'pages/rd-calculator.html' }
+      ],
+      matches: ['emi-calculator', 'inflation-calculator', 'buy-vs-rent-calculator', 'fd-calculator', 'rd-calculator']
+    },
+    {
+      id: 'tax',
+      badge: '🧾 Tax & Income Suite',
+      tools: [
+        { slug: 'income-tax-calculator', name: 'Income Tax (FY26)', icon: '🏛️', url: 'pages/income-tax-calculator.html' },
+        { slug: 'gst-calculator', name: 'GST Calculator', icon: '🧾', url: 'pages/gst-calculator.html' },
+        { slug: 'percentage-calculator', name: 'Percentage Calc', icon: '%', url: 'pages/percentage-calculator.html' }
+      ],
+      matches: ['income-tax-calculator', 'gst-calculator', 'percentage-calculator']
+    },
+    {
+      id: 'wealth',
+      badge: '📈 Wealth & Investments',
+      tools: [
+        { slug: 'sip-calculator', name: 'SIP Builder', icon: '🌱', url: 'pages/sip-calculator.html' },
+        { slug: 'swp-annuity-calculator', name: 'SWP & Pension', icon: '💵', url: 'pages/swp-annuity-calculator.html' },
+        { slug: 'goal-financial-planner', name: 'Goal Planner', icon: '🎯', url: 'pages/goal-financial-planner.html' },
+        { slug: 'retirement-benefits-calculator', name: 'Retirement & Gratuity', icon: '👴', url: 'pages/retirement-benefits-calculator.html' },
+        { slug: 'compound-interest', name: 'Compound Interest', icon: '📈', url: 'pages/compound-interest.html' }
+      ],
+      matches: ['sip-calculator', 'swp-annuity-calculator', 'goal-financial-planner', 'retirement-benefits-calculator', 'compound-interest']
+    },
+    {
+      id: 'text',
+      badge: '📝 Text & Content Suite',
+      tools: [
+        { slug: 'word-counter', name: 'Word Counter', icon: '🔢', url: 'pages/word-counter.html' },
+        { slug: 'case-converter', name: 'Case Converter', icon: '🔤', url: 'pages/case-converter.html' },
+        { slug: 'json-formatter', name: 'JSON Formatter', icon: '⚡', url: 'pages/json-formatter.html' },
+        { slug: 'base64-tool', name: 'Base64 Tool', icon: '🔐', url: 'pages/base64-tool.html' },
+        { slug: 'lorem-ipsum', name: 'Lorem Ipsum', icon: '📄', url: 'pages/lorem-ipsum.html' },
+        { slug: 'slug-generator', name: 'Slug Generator', icon: '🔗', url: 'pages/slug-generator.html' }
+      ],
+      matches: ['word-counter', 'case-converter', 'json-formatter', 'base64-tool', 'lorem-ipsum', 'slug-generator']
+    },
+    {
+      id: 'dev',
+      badge: '💻 Dev & Media Suite',
+      tools: [
+        { slug: 'image-compressor', name: 'Image Compressor', icon: '🖼️', url: 'pages/image-compressor.html' },
+        { slug: 'image-resizer', name: 'Image Resizer', icon: '📐', url: 'pages/image-resizer.html' },
+        { slug: 'regex-tester', name: 'Regex Tester', icon: '🔍', url: 'pages/regex-tester.html' },
+        { slug: 'color-picker', name: 'Color Picker', icon: '🎨', url: 'pages/color-picker.html' },
+        { slug: 'url-encoder', name: 'URL Encoder', icon: '🌐', url: 'pages/url-encoder.html' },
+        { slug: 'meta-tag-generator', name: 'Meta Tag SEO', icon: '🏷️', url: 'pages/meta-tag-generator.html' }
+      ],
+      matches: ['image-compressor', 'image-resizer', 'regex-tester', 'color-picker', 'url-encoder', 'meta-tag-generator']
+    }
+  ];
+
+  function updatePortalSuiteStrip(activeSlug) {
+    const strip = document.getElementById('portalSuiteStrip');
+    if (!strip) return;
+
+    const matchedSuite = PORTAL_SUITES.find(s => s.matches.includes(activeSlug));
+    if (!matchedSuite) {
+      strip.style.display = 'none';
+      strip.innerHTML = '';
+      return;
+    }
+
+    let html = `<span class="portal-suite-badge">${matchedSuite.badge}:</span>`;
+    html += '<div class="portal-suite-items">';
+    matchedSuite.tools.forEach(t => {
+      const isCurrent = t.slug === activeSlug || (activeSlug === 'pdf-tools' && t.slug === 'edit');
+      html += `<button type="button" class="portal-suite-chip ${isCurrent ? 'active' : ''}" data-tool="${t.slug}" data-url="${t.url}" title="${t.name}">
+        <span>${t.icon}</span><span>${t.name}</span>
+      </button>`;
+    });
+    html += '</div>';
+
+    strip.innerHTML = html;
+    strip.style.display = 'flex';
+
+    strip.querySelectorAll('.portal-suite-chip').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = btn.getAttribute('data-tool');
+        const url = btn.getAttribute('data-url');
+        const title = btn.getAttribute('title');
+        openToolInPortal(slug, title, null, url);
+      });
+    });
+  }
+
   function openToolInPortal(slug, customTitle, customCat, fullUrl) {
     const dashboardOverview = document.getElementById('dashboardOverview');
     const toolPanel = document.getElementById('toolContentPanel');
+    updatePortalSuiteStrip(slug);
     const toolIframe = document.getElementById('toolIframe');
     const breadcrumbCat = document.getElementById('panelBreadcrumbCategory');
     const breadcrumbTitle = document.getElementById('panelBreadcrumbTitle');
@@ -700,8 +1130,8 @@
       // If outside index.html or inside an iframe, navigate parent to index.html#slug
       if (window.self !== window.top) {
         try {
-          if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
-            window.top.ToolsKart.openTool(slug, customTitle, customCat, fullUrl);
+          if (window.top && window.top.Amazing-Tools && window.top.Amazing-Tools.openTool) {
+            window.top.Amazing-Tools.openTool(slug, customTitle, customCat, fullUrl);
             return;
           }
         } catch (e) {}
@@ -799,7 +1229,12 @@
   function closeToolPanel() {
     const dashboardOverview = document.getElementById('dashboardOverview');
     const toolPanel = document.getElementById('toolContentPanel');
+    const strip = document.getElementById('portalSuiteStrip');
 
+    if (strip) {
+      strip.style.display = 'none';
+      strip.innerHTML = '';
+    }
     if (toolPanel) {
       toolPanel.style.display = 'none';
       toolPanel.classList.remove('is-fullscreen');
@@ -876,8 +1311,8 @@
         if (!toolRegistry[slug] && !href) return;
         e.preventDefault();
         try {
-          if (window.top && window.top.ToolsKart && window.top.ToolsKart.openTool) {
-            window.top.ToolsKart.openTool(slug, null, null, href);
+          if (window.top && window.top.Amazing-Tools && window.top.Amazing-Tools.openTool) {
+            window.top.Amazing-Tools.openTool(slug, null, null, href);
             return;
           }
         } catch (err) {}
@@ -914,7 +1349,7 @@
   }
 
   // ---- Utility Functions (globally available) ----
-  window.ToolsKart = {
+  window.Amazing-Tools = {
     openTool: openToolInPortal,
     closeTool: closeToolPanel,
     setTheme: function (themeId, triggerToast = false) {

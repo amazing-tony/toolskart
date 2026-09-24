@@ -11,11 +11,11 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Document Studio — Free Online PDF Editor, Merge, Split &amp; Compress Tools | ToolsKart</title>
+    <title>PDF Document Studio — Free Online PDF Editor, Merge, Split &amp; Compress Tools | Amazing-Tools</title>
     <meta name="description" content="All-in-one PDF tools: edit PDF text &amp; sign, merge, split, compress, organize &amp; rotate pages, watermark, convert to images and more. 100% private client-side processing with zero server uploads.">
     <meta name="keywords" content="pdf editor, edit pdf online, merge pdf, split pdf, compress pdf, rotate pdf pages, pdf to jpg, watermark pdf, fill and sign pdf, free online pdf tools">
     <link rel="canonical" href="https://amazing-tools.github.io/pages/pdf-tools.html">
-    <meta property="og:title" content="PDF Document Studio — Free Online PDF Suite | ToolsKart">
+    <meta property="og:title" content="PDF Document Studio — Free Online PDF Suite | Amazing-Tools">
     <meta property="og:description" content="Edit, Merge, Split, Compress, Organize, Sign and Convert PDFs directly in your browser with 100% privacy.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +38,38 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are my PDF files uploaded?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The PDF tools are designed for client-side processing, so files are handled in your browser wherever possible. Avoid using sensitive documents on any online tool unless you are comfortable with the workflow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which PDF tools are included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The suite includes edit and sign, merge, split, compress, organize, PDF to image, image to PDF, watermark, page numbers, protect, crop, extract text, metadata and unlock tools."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use PDF Document Studio on mobile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The interface is responsive, though larger PDF files are usually easier to manage on desktop because browser memory and screen space are better."
+          }
+        }
+      ]
     }
     </script>
 </head>
@@ -400,6 +432,23 @@
             </div>
 
         </div>
+
+        <section class="info-section" style="max-width: 1180px; margin: 1.5rem auto 0;">
+            <h2>Private Online PDF Tools</h2>
+            <p>Use PDF Document Studio to edit, sign, merge, split, compress, organize, watermark, protect and convert PDF files in one browser-based workspace. Most PDF actions are processed locally in your browser so your files do not need to be uploaded to a server.</p>
+            <div class="faq-item">
+                <h3 class="faq-question">Are my PDF files uploaded?</h3>
+                <p class="faq-answer">The PDF tools are designed for client-side processing, so files are handled in your browser wherever possible. Avoid using sensitive documents on any online tool unless you are comfortable with the workflow.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Which PDF tools are included?</h3>
+                <p class="faq-answer">The suite includes edit and sign, merge, split, compress, organize, PDF to image, image to PDF, watermark, page numbers, protect, crop, extract text, metadata and unlock tools.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Can I use PDF Document Studio on mobile?</h3>
+                <p class="faq-answer">Yes. The interface is responsive, though larger PDF files are usually easier to manage on desktop because browser memory and screen space are better.</p>
+            </div>
+        </section>
 
     </main>
 
@@ -820,43 +869,158 @@
 
         // Handle Incoming Files
         async function handleIncomingFiles(fileList) {
-            if (currentTool === 'merge') {
-                await handleMergeFiles(fileList);
-            } else if (currentTool === 'img-to-pdf') {
-                await handleImageFiles(fileList);
-            } else {
-                const file = fileList[0];
-                if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
-                    alert('Please select a valid PDF file.');
-                    return;
+            try {
+                if (currentTool === 'merge') {
+                    await handleMergeFiles(fileList);
+                } else if (currentTool === 'img-to-pdf') {
+                    await handleImageFiles(fileList);
+                } else {
+                    const file = fileList[0];
+                    if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+                        alert('Please select a valid PDF file.');
+                        return;
+                    }
+                    await handleSinglePdfFile(file);
                 }
-                await handleSinglePdfFile(file);
+            } catch (err) {
+                console.error('File upload error:', err);
+                alert('Could not open the selected PDF file: ' + err.message);
             }
+        }
+
+        // Ensure valid PDF header by trimming any leading BOM or whitespace
+        function cleanPdfBytes(u8) {
+            if (!u8 || u8.length < 5) return u8;
+            // Scan up to 256KB for %PDF- or %pdf- (case-insensitive)
+            const maxScan = Math.min(u8.length - 4, 262144);
+            for (let i = 0; i < maxScan; i++) {
+                if (u8[i] === 0x25 && 
+                    (u8[i+1] === 0x50 || u8[i+1] === 0x70) && 
+                    (u8[i+2] === 0x44 || u8[i+2] === 0x64) && 
+                    (u8[i+3] === 0x46 || u8[i+3] === 0x66) && 
+                    u8[i+4] === 0x2D) {
+                    const cleaned = i === 0 ? u8 : u8.slice(i);
+                    cleaned[0] = 0x25;
+                    cleaned[1] = 0x50;
+                    cleaned[2] = 0x44;
+                    cleaned[3] = 0x46;
+                    cleaned[4] = 0x2D;
+                    return cleaned;
+                }
+            }
+            return u8;
+        }
+
+        // Resilient PDF document loader with automatic PDF.js reconstruction fallback
+        async function loadOrReconstructPdfDoc(bytes) {
+            if (!bytes || bytes.length < 5) {
+                throw new Error('Please select or upload a valid PDF file first.');
+            }
+            const cleaned = cleanPdfBytes(bytes);
+
+            // 1. Direct PDF-Lib load
+            try {
+                return await PDFLib.PDFDocument.load(cleaned.slice(), { ignoreEncryption: true });
+            } catch (libErr) {
+                console.warn('PDF-Lib standard load notice, initiating PDF.js fallback reconstruction:', libErr);
+            }
+
+            // 2. Fallback reconstruction via PDF.js rendering
+            try {
+                let docToRender = pdfJsDoc;
+                if (!docToRender) {
+                    const task = pdfjsLib.getDocument({ data: cleaned.slice() });
+                    docToRender = await task.promise;
+                }
+
+                if (docToRender && docToRender.numPages > 0) {
+                    const reconstructed = await PDFLib.PDFDocument.create();
+                    const total = docToRender.numPages;
+                    for (let pNum = 1; pNum <= total; pNum++) {
+                        const page = await docToRender.getPage(pNum);
+                        const viewport = page.getViewport({ scale: 2.0 });
+                        const canvas = document.createElement('canvas');
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+                        const ctx = canvas.getContext('2d');
+                        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+                        const pngDataUrl = canvas.toDataURL('image/png');
+                        const pngImage = await reconstructed.embedPng(pngDataUrl);
+                        const pdfPage = reconstructed.addPage([viewport.width / 2.0, viewport.height / 2.0]);
+                        pdfPage.drawImage(pngImage, {
+                            x: 0,
+                            y: 0,
+                            width: viewport.width / 2.0,
+                            height: viewport.height / 2.0
+                        });
+                    }
+                    return reconstructed;
+                }
+            } catch (reconErr) {
+                console.error('PDF.js reconstruction error:', reconErr);
+            }
+
+            throw new Error('Could not parse PDF document. Please ensure the file is a valid PDF.');
+        }
+
+        // Sanitize string to prevent WinAnsi encoding crashes in Standard PDF Fonts
+        function sanitizeForStandardFont(str) {
+            if (!str) return '';
+            return str
+                .replace(/[\u2018\u2019]/g, "'")
+                .replace(/[\u201C\u201D]/g, '"')
+                .replace(/[\u2013\u2014]/g, '-')
+                .replace(/\u2026/g, '...')
+                .replace(/[^\x20-\x7E\xA0-\xFF]/g, '?');
         }
 
         // Handle Single PDF
         async function handleSinglePdfFile(file) {
             originalFile = file;
             const buffer = await file.arrayBuffer();
-            originalBytes = new Uint8Array(buffer);
+            originalBytes = cleanPdfBytes(new Uint8Array(buffer));
 
-            // Load with PDF-Lib
-            pdfDocLib = await PDFLib.PDFDocument.load(originalBytes, { ignoreEncryption: true });
-            totalPages = pdfDocLib.getPageCount();
+            let isEncrypted = false;
+            totalPages = 0;
 
-            // Load with PDF.js
-            const loadingTask = pdfjsLib.getDocument({ data: originalBytes });
-            pdfJsDoc = await loadingTask.promise;
+            // Load with PDF-Lib (pass slice to avoid potential mutations)
+            try {
+                pdfDocLib = await loadOrReconstructPdfDoc(originalBytes);
+                totalPages = pdfDocLib.getPageCount();
+            } catch (err) {
+                console.warn('PDF-Lib notice on load:', err);
+                isEncrypted = true;
+            }
+
+            // Load with PDF.js (pass slice so worker transfer does NOT detach originalBytes)
+            try {
+                const loadingTask = pdfjsLib.getDocument({ data: originalBytes.slice() });
+                pdfJsDoc = await loadingTask.promise;
+                if (!totalPages && pdfJsDoc) {
+                    totalPages = pdfJsDoc.numPages;
+                }
+            } catch (err) {
+                console.warn('PDF.js notice on load:', err);
+                const msg = (err && err.message ? err.message : '').toLowerCase();
+                const isPass = (err && err.name === 'PasswordException') || msg.includes('password') || msg.includes('encrypt') || msg.includes('security');
+                if (isPass || currentTool === 'unlock') {
+                    isEncrypted = true;
+                    if (!totalPages) totalPages = 1;
+                } else if (!pdfDocLib) {
+                    throw err;
+                }
+            }
 
             // Initialize page collections
-            pageOrder = Array.from({ length: totalPages }, (_, i) => i + 1);
+            pageOrder = Array.from({ length: Math.max(1, totalPages) }, (_, i) => i + 1);
             pageRotations = {};
             deletedPages.clear();
 
             // Update file info strip
-            loadedFileName.textContent = file.name;
+            loadedFileName.textContent = file.name + (isEncrypted ? ' 🔒 (Password Protected)' : '');
             const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
-            loadedFileStats.textContent = `${totalPages} page${totalPages > 1 ? 's' : ''} • ${sizeMb} MB`;
+            loadedFileStats.textContent = totalPages ? `${totalPages} page${totalPages > 1 ? 's' : ''} • ${sizeMb} MB` : `${sizeMb} MB`;
 
             workspaceDropzone.style.display = 'none';
             fileInfoStrip.classList.add('active');
@@ -871,8 +1035,8 @@
                 if (file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') {
                     try {
                         const buffer = await file.arrayBuffer();
-                        const bytes = new Uint8Array(buffer);
-                        const doc = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+                        const bytes = cleanPdfBytes(new Uint8Array(buffer));
+                        const doc = await PDFLib.PDFDocument.load(bytes.slice(), { ignoreEncryption: true });
                         mergeFiles.push({
                             name: file.name,
                             size: (file.size / 1024).toFixed(1) + ' KB',
@@ -2175,14 +2339,15 @@
            ======================================================== */
         function renderUnlockStage() {
             workspaceContentStage.innerHTML = `
-                <div style="max-width: 480px; margin: 0 auto; text-align: left;">
-                    <div style="margin-bottom: 1rem;">
-                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Enter Document Password to Unlock:</label>
-                        <input type="password" id="unlockPassword" class="sejda-search-input" placeholder="Password...">
+                <div style="max-width: 500px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Enter Document Password (if required):</label>
+                        <input type="password" id="unlockPassword" class="sejda-search-input" placeholder="Enter open password (or leave blank if owner-restricted)...">
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--color-text-secondary);">
-                        Entering the password allows exporting an unprotected copy that can be opened anywhere without restrictions.
-                    </p>
+                    <div style="background: var(--color-bg-alt, #f8fafc); border: 1px solid var(--color-border); border-radius: 8px; padding: 0.85rem 1rem; font-size: 0.83rem; color: var(--color-text-secondary); line-height: 1.5;">
+                        <p style="margin-bottom: 0.4rem;">💡 <strong>Password Protected:</strong> If the PDF requires a password to open, enter it above.</p>
+                        <p>🔒 <strong>Permission Restricted:</strong> If the PDF opens freely but restricts printing or copying, leave the password blank and click <em>Unlock & Download</em>.</p>
+                    </div>
                 </div>
             `;
         }
@@ -2191,6 +2356,13 @@
            MAIN EXECUTE HANDLER (THE ACTUAL CLIENT-SIDE PROCESSING)
            ======================================================== */
         mainExecuteBtn.addEventListener('click', async () => {
+            if (currentTool !== 'merge' && currentTool !== 'img-to-pdf') {
+                if (!originalBytes || originalBytes.length < 5) {
+                    alert('Please upload a PDF file first before applying.');
+                    return;
+                }
+            }
+
             mainExecuteBtn.disabled = true;
             mainExecuteBtn.textContent = 'Processing...';
 
@@ -2251,7 +2423,7 @@
 
         // 1. Execute PDF Editor
         async function executePdfEditor() {
-            const modifiedPdf = await PDFLib.PDFDocument.load(originalBytes);
+            const modifiedPdf = await loadOrReconstructPdfDoc(originalBytes);
             const helveticaFont = await modifiedPdf.embedFont(PDFLib.StandardFonts.Helvetica);
             const pages = modifiedPdf.getPages();
 
@@ -2275,7 +2447,7 @@
                 if (targetPageIndices.length === 0) continue;
 
                 if (annot.type === 'text') {
-                    const text = (annot.el ? annot.el.textContent : '') || annot.text;
+                    const text = sanitizeForStandardFont((annot.el ? annot.el.textContent : '') || annot.text);
                     const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
                     const elTop = annot.el ? annot.el.offsetTop : annot.y;
                     const elH = annot.el ? annot.el.offsetHeight : 20;
@@ -2369,7 +2541,7 @@
             }
             const mergedPdf = await PDFLib.PDFDocument.create();
             for (const file of mergeFiles) {
-                const pdf = await PDFLib.PDFDocument.load(file.bytes);
+                const pdf = await PDFLib.PDFDocument.load(file.bytes.slice(), { ignoreEncryption: true });
                 const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
                 copiedPages.forEach(p => mergedPdf.addPage(p));
             }
@@ -2458,9 +2630,7 @@
         // 4. Execute Compress
         async function executeCompressPdf() {
             // pdf-lib stream and structure compression
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes, {
-                updateMetadata: false
-            });
+            const newDoc = await loadOrReconstructPdfDoc(originalBytes);
             const outputBytes = await newDoc.save({ useObjectStreams: true });
             const origKb = (originalBytes.length / 1024).toFixed(0);
             const newKb = (outputBytes.length / 1024).toFixed(0);
@@ -2550,14 +2720,14 @@
 
                 page.drawImage(embedded, { x, y, width: drawW, height: drawH });
             }
-
-            const outputBytes = await newDoc.save();
+const outputBytes = await newDoc.save();
             showResultDownload(outputBytes, 'images_combined.pdf');
         }
 
         // 8. Execute Watermark PDF
         async function executeWatermarkPdf() {
-            const text = document.getElementById('watermarkTextInput').value || 'CONFIDENTIAL';
+            const rawText = document.getElementById('watermarkTextInput').value || 'CONFIDENTIAL';
+            const text = sanitizeForStandardFont(rawText);
             const angle = parseInt(document.getElementById('watermarkAngle').value) || 45;
             const opacity = (parseInt(document.getElementById('watermarkOpacity').value) || 30) / 100;
             const fontSize = parseInt(document.getElementById('watermarkFontSize').value) || 48;
@@ -2567,9 +2737,10 @@
             const g = parseInt(colorHex.slice(3, 5), 16) / 255;
             const b = parseInt(colorHex.slice(5, 7), 16) / 255;
 
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const newDoc = await loadOrReconstructPdfDoc(originalBytes);
             const font = await newDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
             const pages = newDoc.getPages();
+            const rad = (angle * Math.PI) / 180;
 
             pages.forEach(page => {
                 const { width, height } = page.getSize();
@@ -2578,9 +2749,13 @@
                 const centerX = width / 2;
                 const centerY = height / 2;
 
+                // Center rotated text precisely
+                const x = centerX - (textW / 2) * Math.cos(rad) + (textH / 2) * Math.sin(rad);
+                const y = centerY - (textW / 2) * Math.sin(rad) - (textH / 2) * Math.cos(rad);
+
                 page.drawText(text, {
-                    x: centerX - (textW / 2) * Math.cos(angle * Math.PI / 180),
-                    y: centerY - (textW / 2) * Math.sin(angle * Math.PI / 180),
+                    x: x,
+                    y: y,
                     size: fontSize,
                     font: font,
                     color: PDFLib.rgb(r, g, b),
@@ -2599,7 +2774,7 @@
             const pos = document.getElementById('pageNumberPosition').value;
             const startNum = parseInt(document.getElementById('pageNumberStart').value) || 1;
 
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const newDoc = await loadOrReconstructPdfDoc(originalBytes);
             const font = await newDoc.embedFont(PDFLib.StandardFonts.Helvetica);
             const pages = newDoc.getPages();
             const total = pages.length;
@@ -2607,7 +2782,7 @@
             pages.forEach((page, i) => {
                 const { width, height } = page.getSize();
                 const n = startNum + i;
-                const text = formatStr.replace('{n}', n).replace('{total}', total);
+                const text = sanitizeForStandardFont(formatStr.replace('{n}', n).replace('{total}', total));
                 const size = 10;
                 const textW = font.widthOfTextAtSize(text, size);
                 let x = 36;
@@ -2644,8 +2819,8 @@
                 return;
             }
 
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
-            newDoc.setTitle((pdfDocLib.getTitle() || '') + ' [Protected]');
+            const newDoc = await loadOrReconstructPdfDoc(originalBytes);
+            newDoc.setTitle(((pdfDocLib && pdfDocLib.getTitle()) || '') + ' [Protected]');
             const outputBytes = await newDoc.save();
             showResultDownload(outputBytes, 'protected_document.pdf', 'Document protected successfully with 100% privacy.');
         }
@@ -2657,7 +2832,7 @@
             const left = parseFloat(document.getElementById('cropLeft').value) || 0;
             const right = parseFloat(document.getElementById('cropRight').value) || 0;
 
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const newDoc = await loadOrReconstructPdfDoc(originalBytes);
             const pages = newDoc.getPages();
 
             pages.forEach(page => {
@@ -2678,7 +2853,7 @@
 
         // 13. Execute Metadata PDF
         async function executeMetadataPdf() {
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const newDoc = await loadOrReconstructPdfDoc(originalBytes);
             newDoc.setTitle(document.getElementById('metaTitle').value);
             newDoc.setAuthor(document.getElementById('metaAuthor').value);
             newDoc.setSubject(document.getElementById('metaSubject').value);
@@ -2691,9 +2866,60 @@
 
         // 14. Execute Unlock PDF
         async function executeUnlockPdf() {
-            const newDoc = await PDFLib.PDFDocument.load(originalBytes, { ignoreEncryption: true });
-            const outputBytes = await newDoc.save();
-            showResultDownload(outputBytes, 'unlocked_document.pdf', 'Password restrictions removed successfully.');
+            const enteredPassword = (document.getElementById('unlockPassword') ? document.getElementById('unlockPassword').value : '') || '';
+
+            // Approach A: If document only has permission restrictions without user open password
+            if (!enteredPassword && pdfDocLib) {
+                try {
+                    const newDoc = await PDFLib.PDFDocument.create();
+                    const indices = pdfDocLib.getPageIndices();
+                    if (indices.length > 0) {
+                        const copied = await newDoc.copyPages(pdfDocLib, indices);
+                        copied.forEach(p => newDoc.addPage(p));
+                        const outputBytes = await newDoc.save();
+                        showResultDownload(outputBytes, 'unlocked_document.pdf', 'Permissions and editing restrictions removed successfully.');
+                        return;
+                    }
+                } catch (permErr) {
+                    console.log('Permission copy not applicable, trying PDF.js unlock:', permErr);
+                }
+            }
+
+            // Approach B: Decrypt using PDF.js with the provided password
+            try {
+                const loadingTask = pdfjsLib.getDocument({
+                    data: originalBytes.slice(),
+                    password: enteredPassword
+                });
+                const unlockedDoc = await loadingTask.promise;
+                const total = unlockedDoc.numPages;
+
+                const newDoc = await PDFLib.PDFDocument.create();
+                for (let i = 1; i <= total; i++) {
+                    const page = await unlockedDoc.getPage(i);
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    const ctx = canvas.getContext('2d');
+                    await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+                    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.95));
+                    const imgBytes = await blob.arrayBuffer();
+                    const embedded = await newDoc.embedJpg(imgBytes);
+                    const p = newDoc.addPage([viewport.width / 2, viewport.height / 2]);
+                    p.drawImage(embedded, { x: 0, y: 0, width: viewport.width / 2, height: viewport.height / 2 });
+                }
+
+                const outputBytes = await newDoc.save();
+                showResultDownload(outputBytes, 'unlocked_document.pdf', 'Password restrictions and encryption removed successfully.');
+            } catch (err) {
+                if (err.name === 'PasswordException' || (err.message && err.message.toLowerCase().includes('password'))) {
+                    alert('Incorrect or missing password. Please enter the correct password to unlock this PDF.');
+                } else {
+                    throw err;
+                }
+            }
         }
 
         // Show Output Download Card

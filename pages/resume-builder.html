@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Resume Builder — Create ATS-Friendly Resumes | Amazing-Tools</title>
+    <meta name="description" content="Build professional, ATS-friendly resumes and CVs with instant live preview. 100% free, private in-browser editing with print-ready PDF export.">
+    <meta name="keywords" content="resume builder, free cv maker, create resume online, ats friendly resume, professional resume template, curriculum vitae generator">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/resume-builder.html">
+    <meta property="og:title" content="Free Online Resume Builder | Amazing-Tools">
+    <meta property="og:description" content="Create an ATS-friendly resume with live preview and download as PDF instantly.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free Online Resume Builder",
+      "url": "https://amazing-tools.github.io/pages/resume-builder.html",
+      "description": "Create professional, ATS-friendly resumes online with 100% privacy.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .resume-hero {
+            background: linear-gradient(135deg, #1E3A5F 0%, #2A5298 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .resume-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .resume-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin-bottom: 2.5rem;
+        }
+        @media (max-width: 992px) {
+            .builder-layout { grid-template-columns: 1fr; }
+        }
+
+        .editor-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .editor-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .editor-section:last-child { border-bottom: none; }
+        .editor-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1E3A5F;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        @media (max-width: 576px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .rb-input, .rb-textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+            background: #fff;
+        }
+        .rb-input:focus, .rb-textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Live Preview Document Styling */
+        .preview-pane {
+            position: sticky;
+            top: 2rem;
+        }
+        .resume-paper {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #1f2937;
+            min-height: 700px;
+        }
+        .cv-header {
+            border-bottom: 2px solid #1E3A5F;
+            padding-bottom: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .cv-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1E3A5F;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .cv-title {
+            font-size: 1.05rem;
+            color: #4b5563;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        .cv-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        .cv-section-heading {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1E3A5F;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1.5px solid #e5e7eb;
+            padding-bottom: 0.25rem;
+            margin: 1.25rem 0 0.6rem;
+        }
+        .cv-item {
+            margin-bottom: 0.85rem;
+        }
+        .cv-item-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        .cv-item-sub {
+            color: #4b5563;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-bottom: 0.35rem;
+        }
+        .cv-item-desc {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #374151;
+            margin: 0;
+        }
+        .cv-skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .cv-skill-pill {
+            background: #f3f4f6;
+            color: #1f2937;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #e5e7eb;
+        }
+
+        .dyn-item-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+        .btn-del-dyn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            border-radius: 4px;
+            padding: 0.2rem 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        @media print {
+            body * { visibility: hidden; }
+            .header, .footer, .resume-hero, .editor-card, .breadcrumb, .info-section, .theme-cycle-wrap, .btn-toolbar { display: none !important; }
+            #resumePreviewPaper, #resumePreviewPaper * { visibility: visible; }
+            #resumePreviewPaper {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; Resume Builder
+            </nav>
+
+            <div class="resume-hero">
+                <h1>📝 Free Online Resume Builder</h1>
+                <p>Create professional, ATS-friendly resumes and CVs with real-time live preview. Free, private, and instant PDF download.</p>
+            </div>
+
+            <div style="display:flex; justify-content:center; gap:0.75rem; margin-bottom:1.5rem;" class="btn-toolbar">
+                <button id="btnDownloadResumePdf" class="btn btn-primary" style="padding:0.6rem 1.5rem;">📥 Download PDF</button>
+                <button id="btnPrintResume" class="btn btn-outline" style="padding:0.6rem 1.25rem;">🖨️ Print Resume</button>
+                <button id="btnLoadSampleResume" class="btn btn-outline" style="padding:0.6rem 1.25rem;">📄 Load Sample</button>
+                <button id="btnResetResume" class="btn btn-outline" style="padding:0.6rem 1rem;">✕ Clear</button>
+            </div>
+
+            <div class="builder-layout">
+                
+                <!-- Left: Editor Controls -->
+                <div class="editor-card">
+                    
+                    <!-- Contact / Personal -->
+                    <div class="editor-section">
+                        <div class="editor-title">👤 Personal Information</div>
+                        <div class="form-row">
+                            <input type="text" id="rbFullName" class="rb-input" placeholder="Full Name" value="Alex Morgan">
+                            <input type="text" id="rbJobTitle" class="rb-input" placeholder="Job Title / Specialty" value="Senior Software Engineer">
+                        </div>
+                        <div class="form-row">
+                            <input type="email" id="rbEmail" class="rb-input" placeholder="Email Address" value="alex.morgan@example.com">
+                            <input type="tel" id="rbPhone" class="rb-input" placeholder="Phone Number" value="+1 (555) 349-2810">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="rbLocation" class="rb-input" placeholder="City, Country" value="Seattle, WA">
+                            <input type="text" id="rbLinkedin" class="rb-input" placeholder="LinkedIn / Portfolio" value="linkedin.com/in/alexmorgan">
+                        </div>
+                    </div>
+
+                    <!-- Professional Summary -->
+                    <div class="editor-section">
+                        <div class="editor-title">🎯 Professional Summary</div>
+                        <textarea id="rbSummary" class="rb-textarea" rows="3" placeholder="Briefly describe your career focus, core strengths, and achievements...">Results-driven software engineer with 6+ years of experience designing high-throughput distributed systems, scalable web applications, and privacy-first client-side architectures. Proven track record of improving latency by 40% and mentoring high-performing teams.</textarea>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <div class="editor-section">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                            <div class="editor-title" style="margin:0;">💼 Work Experience</div>
+                            <button type="button" id="btnAddExp" class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.8rem;">+ Add Experience</button>
+                        </div>
+                        <div id="expContainer"></div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="editor-section">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                            <div class="editor-title" style="margin:0;">🎓 Education</div>
+                            <button type="button" id="btnAddEdu" class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.8rem;">+ Add Education</button>
+                        </div>
+                        <div id="eduContainer"></div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="editor-section">
+                        <div class="editor-title">⚡ Skills (Comma-separated)</div>
+                        <input type="text" id="rbSkills" class="rb-input" placeholder="e.g. JavaScript, Python, React, Cloud Architecture, SQL, Docker" value="JavaScript (ES6+), TypeScript, Node.js, Python, React, WebAssembly, AWS, Docker, Microservices, CI/CD">
+                    </div>
+
+                </div>
+
+                <!-- Right: Live A4 Resume Preview -->
+                <div class="preview-pane">
+                    <div class="resume-paper" id="resumePreviewPaper">
+                        
+                        <div class="cv-header">
+                            <h2 class="cv-name" id="prevName">Alex Morgan</h2>
+                            <div class="cv-title" id="prevTitle">Senior Software Engineer</div>
+                            <div class="cv-contacts">
+                                <span id="prevEmail">📧 alex.morgan@example.com</span>
+                                <span id="prevPhone">📱 +1 (555) 349-2810</span>
+                                <span id="prevLocation">📍 Seattle, WA</span>
+                                <span id="prevLinkedin">🔗 linkedin.com/in/alexmorgan</span>
+                            </div>
+                        </div>
+
+                        <div id="prevSummarySection">
+                            <div class="cv-section-heading">Summary</div>
+                            <p class="cv-item-desc" id="prevSummaryText"></p>
+                        </div>
+
+                        <div id="prevExpSection">
+                            <div class="cv-section-heading">Experience</div>
+                            <div id="prevExpList"></div>
+                        </div>
+
+                        <div id="prevEduSection">
+                            <div class="cv-section-heading">Education</div>
+                            <div id="prevEduList"></div>
+                        </div>
+
+                        <div id="prevSkillsSection">
+                            <div class="cv-section-heading">Skills & Technologies</div>
+                            <div class="cv-skills-wrap" id="prevSkillsList"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SEO FAQ -->
+            <section class="info-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3 class="faq-question">What makes a resume ATS-friendly?</h3>
+                    <p class="faq-answer">Applicant Tracking Systems (ATS) scan for clean, standard typography, distinct section headings (Experience, Education, Skills), simple layouts without complex graphical tables, and text that can be parsed directly. This tool generates clean, standard ATS-friendly PDF outputs.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Are my resume details stored on any server?</h3>
+                    <p class="faq-answer">No. All data is processed entirely in your web browser. Nothing is uploaded to any remote server or third-party database.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+                <a href="resume-builder.html">Resume Builder</a>
+                <a href="invoice-generator.html">Invoice Generator</a>
+                <a href="document-converter.html">Document Converter</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Libraries for PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        let experiences = [
+            { role: 'Lead Architect & Senior Engineer', company: 'CloudScale Inc.', date: '2022 - Present', desc: 'Led engineering for core distributed microservices handling 10M+ daily events. Spearheaded migration to containerized infrastructure, cutting compute costs by 32%.' },
+            { role: 'Software Engineer', company: 'Nexus Digital', date: '2019 - 2022', desc: 'Built high-performance web applications and internal telemetry tooling. Partnered with product and design teams to deliver low-latency responsive client dashboards.' }
+        ];
+
+        let educations = [
+            { degree: 'B.S. in Computer Science', school: 'University of Washington', date: '2015 - 2019', desc: 'Dean\'s List, Focus on Distributed Systems and Software Architecture' }
+        ];
+
+        const expContainer = document.getElementById('expContainer');
+        const eduContainer = document.getElementById('eduContainer');
+
+        function renderExpEditors() {
+            expContainer.innerHTML = '';
+            experiences.forEach((exp, idx) => {
+                const box = document.createElement('div');
+                box.className = 'dyn-item-box';
+                box.innerHTML = `
+                    <button type="button" class="btn-del-dyn" data-exp-del="${idx}">&times; Remove</button>
+                    <div class="form-row">
+                        <input type="text" class="rb-input exp-role" data-idx="${idx}" value="${escapeHtml(exp.role)}" placeholder="Role / Job Title">
+                        <input type="text" class="rb-input exp-company" data-idx="${idx}" value="${escapeHtml(exp.company)}" placeholder="Company / Organization">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" class="rb-input exp-date" data-idx="${idx}" value="${escapeHtml(exp.date)}" placeholder="Dates (e.g. 2021 - Present)">
+                    </div>
+                    <textarea class="rb-textarea exp-desc" data-idx="${idx}" rows="2" placeholder="Key responsibilities and achievements...">${escapeHtml(exp.desc)}</textarea>
+                `;
+                expContainer.appendChild(box);
+            });
+            updatePreview();
+        }
+
+        function renderEduEditors() {
+            eduContainer.innerHTML = '';
+            educations.forEach((edu, idx) => {
+                const box = document.createElement('div');
+                box.className = 'dyn-item-box';
+                box.innerHTML = `
+                    <button type="button" class="btn-del-dyn" data-edu-del="${idx}">&times; Remove</button>
+                    <div class="form-row">
+                        <input type="text" class="rb-input edu-degree" data-idx="${idx}" value="${escapeHtml(edu.degree)}" placeholder="Degree / Certificate">
+                        <input type="text" class="rb-input edu-school" data-idx="${idx}" value="${escapeHtml(edu.school)}" placeholder="School / University">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" class="rb-input edu-date" data-idx="${idx}" value="${escapeHtml(edu.date)}" placeholder="Dates (e.g. 2018 - 2022)">
+                    </div>
+                    <textarea class="rb-textarea edu-desc" data-idx="${idx}" rows="2" placeholder="Honors, thesis, activities...">${escapeHtml(edu.desc)}</textarea>
+                `;
+                eduContainer.appendChild(box);
+            });
+            updatePreview();
+        }
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function updatePreview() {
+            document.getElementById('prevName').textContent = document.getElementById('rbFullName').value || 'Your Name';
+            document.getElementById('prevTitle').textContent = document.getElementById('rbJobTitle').value || 'Professional Title';
+            document.getElementById('prevEmail').textContent = '📧 ' + (document.getElementById('rbEmail').value || 'email@example.com');
+            document.getElementById('prevPhone').textContent = '📱 ' + (document.getElementById('rbPhone').value || '+1 (555) 000-0000');
+            document.getElementById('prevLocation').textContent = '📍 ' + (document.getElementById('rbLocation').value || 'City, Country');
+            document.getElementById('prevLinkedin').textContent = '🔗 ' + (document.getElementById('rbLinkedin').value || 'linkedin.com');
+
+            const sum = document.getElementById('rbSummary').value.trim();
+            document.getElementById('prevSummaryText').textContent = sum;
+            document.getElementById('prevSummarySection').style.display = sum ? 'block' : 'none';
+
+            // Exp preview
+            const prevExpList = document.getElementById('prevExpList');
+            prevExpList.innerHTML = '';
+            experiences.forEach(exp => {
+                if (!exp.role && !exp.company) return;
+                const div = document.createElement('div');
+                div.className = 'cv-item';
+                div.innerHTML = `
+                    <div class="cv-item-header">
+                        <span>${escapeHtml(exp.role)}</span>
+                        <span style="font-weight:500; font-size:0.85rem; color:#6b7280;">${escapeHtml(exp.date)}</span>
+                    </div>
+                    <div class="cv-item-sub">${escapeHtml(exp.company)}</div>
+                    <p class="cv-item-desc">${escapeHtml(exp.desc)}</p>
+                `;
+                prevExpList.appendChild(div);
+            });
+            document.getElementById('prevExpSection').style.display = experiences.length ? 'block' : 'none';
+
+            // Edu preview
+            const prevEduList = document.getElementById('prevEduList');
+            prevEduList.innerHTML = '';
+            educations.forEach(edu => {
+                if (!edu.degree && !edu.school) return;
+                const div = document.createElement('div');
+                div.className = 'cv-item';
+                div.innerHTML = `
+                    <div class="cv-item-header">
+                        <span>${escapeHtml(edu.degree)}</span>
+                        <span style="font-weight:500; font-size:0.85rem; color:#6b7280;">${escapeHtml(edu.date)}</span>
+                    </div>
+                    <div class="cv-item-sub">${escapeHtml(edu.school)}</div>
+                    <p class="cv-item-desc">${escapeHtml(edu.desc)}</p>
+                `;
+                prevEduList.appendChild(div);
+            });
+            document.getElementById('prevEduSection').style.display = educations.length ? 'block' : 'none';
+
+            // Skills preview
+            const rawSkills = document.getElementById('rbSkills').value;
+            const skills = rawSkills.split(',').map(s => s.trim()).filter(Boolean);
+            const prevSkillsList = document.getElementById('prevSkillsList');
+            prevSkillsList.innerHTML = '';
+            skills.forEach(skill => {
+                const span = document.createElement('span');
+                span.className = 'cv-skill-pill';
+                span.textContent = skill;
+                prevSkillsList.appendChild(span);
+            });
+            document.getElementById('prevSkillsSection').style.display = skills.length ? 'block' : 'none';
+        }
+
+        // Event listeners for static inputs
+        ['rbFullName', 'rbJobTitle', 'rbEmail', 'rbPhone', 'rbLocation', 'rbLinkedin', 'rbSummary', 'rbSkills'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', updatePreview);
+        });
+
+        // Dynamic Exp inputs
+        expContainer.addEventListener('input', (e) => {
+            const idx = parseInt(e.target.dataset.idx, 10);
+            if (isNaN(idx)) return;
+            if (e.target.classList.contains('exp-role')) experiences[idx].role = e.target.value;
+            if (e.target.classList.contains('exp-company')) experiences[idx].company = e.target.value;
+            if (e.target.classList.contains('exp-date')) experiences[idx].date = e.target.value;
+            if (e.target.classList.contains('exp-desc')) experiences[idx].desc = e.target.value;
+            updatePreview();
+        });
+
+        expContainer.addEventListener('click', (e) => {
+            if (e.target.dataset.expDel !== undefined) {
+                const idx = parseInt(e.target.dataset.expDel, 10);
+                experiences.splice(idx, 1);
+                renderExpEditors();
+            }
+        });
+
+        document.getElementById('btnAddExp').addEventListener('click', () => {
+            experiences.push({ role: '', company: '', date: '', desc: '' });
+            renderExpEditors();
+        });
+
+        // Dynamic Edu inputs
+        eduContainer.addEventListener('input', (e) => {
+            const idx = parseInt(e.target.dataset.idx, 10);
+            if (isNaN(idx)) return;
+            if (e.target.classList.contains('edu-degree')) educations[idx].degree = e.target.value;
+            if (e.target.classList.contains('edu-school')) educations[idx].school = e.target.value;
+            if (e.target.classList.contains('edu-date')) educations[idx].date = e.target.value;
+            if (e.target.classList.contains('edu-desc')) educations[idx].desc = e.target.value;
+            updatePreview();
+        });
+
+        eduContainer.addEventListener('click', (e) => {
+            if (e.target.dataset.eduDel !== undefined) {
+                const idx = parseInt(e.target.dataset.eduDel, 10);
+                educations.splice(idx, 1);
+                renderEduEditors();
+            }
+        });
+
+        document.getElementById('btnAddEdu').addEventListener('click', () => {
+            educations.push({ degree: '', school: '', date: '', desc: '' });
+            renderEduEditors();
+        });
+
+        document.getElementById('btnPrintResume').addEventListener('click', () => {
+            window.print();
+        });
+
+        document.getElementById('btnDownloadResumePdf').addEventListener('click', async () => {
+            const paper = document.getElementById('resumePreviewPaper');
+            const name = (document.getElementById('rbFullName').value || 'Resume').replace(/\s+/g, '_');
+            const btn = document.getElementById('btnDownloadResumePdf');
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ Rendering PDF...';
+            btn.disabled = true;
+
+            try {
+                const canvas = await html2canvas(paper, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+                const pdfW = pdf.internal.pageSize.getWidth();
+                const pdfH = pdf.internal.pageSize.getHeight();
+                const imgH = (canvas.height * pdfW) / canvas.width;
+
+                pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, pdfW, Math.min(pdfH, imgH));
+                pdf.save(`${name}_Resume.pdf`);
+            } catch(e) {
+                alert('PDF generation error: ' + e.message);
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        document.getElementById('btnLoadSampleResume').addEventListener('click', () => {
+            document.getElementById('rbFullName').value = 'Alex Morgan';
+            document.getElementById('rbJobTitle').value = 'Senior Software Engineer';
+            document.getElementById('rbEmail').value = 'alex.morgan@example.com';
+            document.getElementById('rbPhone').value = '+1 (555) 349-2810';
+            document.getElementById('rbLocation').value = 'Seattle, WA';
+            document.getElementById('rbLinkedin').value = 'linkedin.com/in/alexmorgan';
+            document.getElementById('rbSummary').value = 'Results-driven software engineer with 6+ years of experience designing high-throughput distributed systems, scalable web applications, and privacy-first client-side architectures. Proven track record of improving latency by 40% and mentoring high-performing teams.';
+            document.getElementById('rbSkills').value = 'JavaScript (ES6+), TypeScript, Node.js, Python, React, WebAssembly, AWS, Docker, Microservices, CI/CD';
+            experiences = [
+                { role: 'Lead Architect & Senior Engineer', company: 'CloudScale Inc.', date: '2022 - Present', desc: 'Led engineering for core distributed microservices handling 10M+ daily events. Spearheaded migration to containerized infrastructure, cutting compute costs by 32%.' },
+                { role: 'Software Engineer', company: 'Nexus Digital', date: '2019 - 2022', desc: 'Built high-performance web applications and internal telemetry tooling. Partnered with product and design teams to deliver low-latency responsive client dashboards.' }
+            ];
+            educations = [
+                { degree: 'B.S. in Computer Science', school: 'University of Washington', date: '2015 - 2019', desc: 'Dean\'s List, Focus on Distributed Systems and Software Architecture' }
+            ];
+            renderExpEditors();
+            renderEduEditors();
+        });
+
+        document.getElementById('btnResetResume').addEventListener('click', () => {
+            document.getElementById('rbFullName').value = '';
+            document.getElementById('rbJobTitle').value = '';
+            document.getElementById('rbEmail').value = '';
+            document.getElementById('rbPhone').value = '';
+            document.getElementById('rbLocation').value = '';
+            document.getElementById('rbLinkedin').value = '';
+            document.getElementById('rbSummary').value = '';
+            document.getElementById('rbSkills').value = '';
+            experiences = [{ role: '', company: '', date: '', desc: '' }];
+            educations = [{ degree: '', school: '', date: '', desc: '' }];
+            renderExpEditors();
+            renderEduEditors();
+        });
+
+        renderExpEditors();
+        renderEduEditors();
+    })();
+    </script>
+</body>
+</html>

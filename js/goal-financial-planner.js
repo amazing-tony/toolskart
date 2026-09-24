@@ -1,5 +1,5 @@
-/* =========================================================
-   ToolsKart — Life Goal & Financial Freedom Planner
+﻿/* =========================================================
+   Amazing-Tools — Life Goal & Financial Freedom Planner
    Multi-Goal Inflation-Adjusted SIP Engine with Multi-Child Support
    ========================================================= */
 
@@ -713,10 +713,10 @@
       csv += '# Life goal milestones and required SIP contributions are subject to market returns and inflation variability.\n';
       csv += '# All computations must be independently verified at user level with your certified financial planner.\n';
       csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
-      csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
+      csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
 
-      if (window.ToolsKart && window.ToolsKart.downloadFile) {
-        window.ToolsKart.downloadFile(csv, 'Life_Goals_Financial_Roadmap.csv', 'text/csv');
+      if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
+        window.Amazing-Tools.downloadFile(csv, 'Life_Goals_Financial_Roadmap.csv', 'text/csv');
       } else {
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);

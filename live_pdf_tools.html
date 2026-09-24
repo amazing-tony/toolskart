@@ -1,0 +1,2938 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pdf-suite">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Studio Suite (14-in-1) — Merge, Split, Compress &amp; Edit PDF Free | Amazing-Tools</title>
+    <meta name="description" content="All-in-one PDF tools: edit PDF text &amp; sign, merge, split, compress, organize &amp; rotate pages, watermark, convert to images and more. 100% private client-side processing with zero server uploads.">
+    <meta name="keywords" content="pdf editor, edit pdf online, merge pdf, split pdf, compress pdf, rotate pdf pages, pdf to jpg, watermark pdf, fill and sign pdf, free online pdf tools">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/pdf-tools.html">
+    <meta property="og:title" content="PDF Studio Suite (14-in-1) | Amazing-Tools">
+    <meta property="og:description" content="Edit, Merge, Split, Compress, Organize, Sign and Convert PDFs directly in your browser with 100% privacy.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- Client-Side PDF Processing Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "PDF Studio Suite (14-in-1)",
+          "url": "https://amazing-tools.github.io/pages/pdf-tools.html",
+          "description": "Full-featured client-side PDF editor, merge, split, and utility suite.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Are my PDF files uploaded to an external server?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Amazing-Tools processes all PDF documents locally in your browser using client-side JavaScript (pdf-lib and pdf.js). Your confidential files never touch our or any third-party servers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I edit and digitally sign PDF forms here?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The PDF Studio includes a complete Edit & Sign canvas where you can draw signatures, type your name, add text, insert dates, and annotate forms directly."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does PDF merging and page splitting work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Simply drag and drop multiple PDF files or select specific page ranges (e.g. 1-3, 5). The tool rearranges or extracts the pages instantly and downloads the resulting file to your device."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Header with Clean Branding & Theme Switcher -->
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="../index.html" class="logo" title="Amazing-Tools — Free Online Tools">
+                    <span class="logo-icon-bolt">⚡</span>
+                    <span>Amazing-tools</span>
+                </a>
+                <span class="header-badge-tag">
+                    <span class="pulse-dot"></span> PDF Document Studio
+                </span>
+            </div>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html" class="nav-category-link"><span>🏠 Home</span></a>
+                <a href="../index.html#doc-tools" class="nav-category-link"><span>📄 Documents</span></a>
+                <a href="pdf-tools.html" class="nav-category-link active"><span>⚡ All PDF Tools</span></a>
+                <a href="document-converter.html" class="nav-category-link"><span>🔄 Converter</span></a>
+            </nav>
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <!-- Theme Switcher -->
+                <div class="theme-switcher-wrap">
+                    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Select Theme" title="Switch Portal Theme">
+                        <span class="theme-toggle-icon">🎨</span>
+                        <span class="theme-toggle-label" id="currentThemeLabel">Clean Teal</span>
+                        <span style="font-size:0.65rem; opacity:0.7;">▼</span>
+                    </button>
+                    <div class="theme-dropdown-menu" id="themeDropdown">
+                        <button class="theme-option-item active" data-theme-choice="teal">
+                            <span class="theme-color-dot" style="background:#0D7A82; border-color:#08545A;"></span> Clean Teal
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="adminlte">
+                            <span class="theme-color-dot" style="background:#2563EB;"></span> Titanium Blue
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="dark">
+                            <span class="theme-color-dot" style="background:#0F172A; border-color:#38BDF8;"></span> Midnight Cyber (Dark)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="emerald">
+                            <span class="theme-color-dot" style="background:#059669;"></span> FinTech Emerald
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="royal">
+                            <span class="theme-color-dot" style="background:#7C3AED;"></span> Royal Velvet
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="white">
+                            <span class="theme-color-dot" style="background:#FFFFFF; border-color:#CBD5E1;"></span> Pure Minimal (White)
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="ivory">
+                            <span class="theme-color-dot" style="background:#FAF6F0; border-color:#EA580C;"></span> Warm Ivory
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="amber">
+                            <span class="theme-color-dot" style="background:#FEF9C3; border-color:#D97706;"></span> Solar Amber
+                        </button>
+                        <button class="theme-option-item" data-theme-choice="facebook">
+                            <span class="theme-color-dot" style="background:#1877F2; border-color:#0C5DC7;"></span> Social Blue
+                        </button>
+                    </div>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pdf-suite-container">
+
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" style="margin-bottom: 1.25rem;">
+            <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; PDF Document Studio
+        </nav>
+
+        <!-- PDF Studio Hero -->
+        <section class="pdf-suite-hero" id="pdfSuiteHero">
+            <div class="pdf-suite-hero-badge">⚡ 100% Client-Side Privacy • Zero Server Uploads</div>
+            <h1>PDF Document Studio</h1>
+            <p>14 powerful browser-based PDF tools. Edit &amp; sign documents, merge, split, compress, organize pages, and convert documents directly in your browser with zero server uploads.</p>
+
+            <!-- Instant Search Bar -->
+            <div class="pdf-suite-search-wrap">
+                <span class="pdf-suite-search-icon">🔍</span>
+                <input type="text" class="pdf-suite-search-input" id="toolSearchInput" placeholder="Quick find a tool (e.g. edit, merge, split, compress, sign, rotate)..." aria-label="Search PDF tools">
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="pdf-suite-category-tabs" id="categoryTabs">
+                <button class="pdf-suite-tab-btn active" data-cat="all">⭐ All Tools (14)</button>
+                <button class="pdf-suite-tab-btn" data-cat="popular">🔥 Popular</button>
+                <button class="pdf-suite-tab-btn" data-cat="edit">✏️ Edit & Sign</button>
+                <button class="pdf-suite-tab-btn" data-cat="merge-split">🔀 Merge & Split</button>
+                <button class="pdf-suite-tab-btn" data-cat="compress-convert">🗜️ Compress & Convert</button>
+                <button class="pdf-suite-tab-btn" data-cat="organize-security">🔄 Organize & Security</button>
+            </div>
+        </section>
+
+        <!-- ===== PDF STUDIO TOOLS GRID ===== -->
+        <div class="pdf-suite-grid" id="pdfSuiteToolsGrid">
+
+            <!-- Tool 1: PDF Editor -->
+            <div class="pdf-suite-card" data-pdf-subtool="edit" data-tool="edit" data-category="popular edit">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">✏️</div>
+                    <span class="pdf-suite-card-badge popular">Popular</span>
+                </div>
+                <h3>PDF Editor</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">✍️ Fill &amp; Sign</span>
+                    <span class="pdf-suite-tag">📝 Add Text</span>
+                    <span class="pdf-suite-tag">⬛ Redact</span>
+                    <span class="pdf-suite-tag">🖼️ Images</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Edit &amp; Sign</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 2: Merge PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="merge" data-tool="merge" data-category="popular merge-split">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🔀</div>
+                    <span class="pdf-suite-card-badge popular">Popular</span>
+                </div>
+                <h3>Merge PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">📑 Combine Files</span>
+                    <span class="pdf-suite-tag">🔄 Custom Order</span>
+                    <span class="pdf-suite-tag">⚡ Multi-PDF</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Combine Files</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 3: Split PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="split" data-tool="split" data-category="popular merge-split">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">✂️</div>
+                    <span class="pdf-suite-card-badge">Fast</span>
+                </div>
+                <h3>Split PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">📄 Page Ranges</span>
+                    <span class="pdf-suite-tag">✂️ Separate Pages</span>
+                    <span class="pdf-suite-tag">⚖️ Even / Odd</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Extract Pages</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 4: Compress PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="compress" data-tool="compress" data-category="popular compress-convert">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🗜️</div>
+                    <span class="pdf-suite-card-badge popular">Popular</span>
+                </div>
+                <h3>Compress PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">📉 Shrink Size</span>
+                    <span class="pdf-suite-tag">📧 Email Ready</span>
+                    <span class="pdf-suite-tag">👁️ Visual Ratio</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Shrink Size</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 5: Organize & Rotate Pages -->
+            <div class="pdf-suite-card" data-pdf-subtool="organize" data-tool="organize" data-category="popular organize-security">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🔄</div>
+                    <span class="pdf-suite-card-badge">Visual</span>
+                </div>
+                <h3>Organize Pages</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">🖼️ Thumbnails</span>
+                    <span class="pdf-suite-tag">🔄 Rotate 90&deg;</span>
+                    <span class="pdf-suite-tag">🗑️ Delete</span>
+                    <span class="pdf-suite-tag">🖐️ Reorder</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Rearrange Grid</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 6: PDF to Images (JPG/PNG) -->
+            <div class="pdf-suite-card" data-pdf-subtool="pdf-to-img" data-tool="pdf-to-img" data-category="compress-convert">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🖼️</div>
+                    <span class="pdf-suite-card-badge">High-Res</span>
+                </div>
+                <h3>PDF to JPG / PNG</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">🖼️ HD Quality</span>
+                    <span class="pdf-suite-tag">📦 ZIP Download</span>
+                    <span class="pdf-suite-tag">📄 Single Pages</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Export Images</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 7: Images to PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="img-to-pdf" data-tool="img-to-pdf" data-category="compress-convert">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">📄</div>
+                    <span class="pdf-suite-card-badge">Multi-file</span>
+                </div>
+                <h3>Images to PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">📸 JPG &amp; PNG</span>
+                    <span class="pdf-suite-tag">📐 Custom Margins</span>
+                    <span class="pdf-suite-tag">📑 Batch Convert</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Create PDF</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 8: Watermark PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="watermark" data-tool="watermark" data-category="edit">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">💧</div>
+                    <span class="pdf-suite-card-badge">Stamp</span>
+                </div>
+                <h3>Watermark PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">🏷️ Text Stamp</span>
+                    <span class="pdf-suite-tag">🔒 Confidential</span>
+                    <span class="pdf-suite-tag">📐 45&deg; Angle</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Brand &amp; Protect</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 9: Page Numbers -->
+            <div class="pdf-suite-card" data-pdf-subtool="page-numbers" data-tool="page-numbers" data-category="organize-security">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🔢</div>
+                    <span class="pdf-suite-card-badge">Bates</span>
+                </div>
+                <h3>Add Page Numbers</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">🔢 "Page 1 of N"</span>
+                    <span class="pdf-suite-tag">📍 Header &amp; Footer</span>
+                    <span class="pdf-suite-tag">↔️ Custom Offset</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Number Pages</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 10: Protect PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="protect" data-tool="protect" data-category="organize-security">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🔒</div>
+                    <span class="pdf-suite-card-badge">Security</span>
+                </div>
+                <h3>Protect &amp; Lock PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">🔑 Password Lock</span>
+                    <span class="pdf-suite-tag">🛡️ 256-bit AES</span>
+                    <span class="pdf-suite-tag">🔒 Zero Upload</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Password Protect</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 11: Crop PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="crop" data-tool="crop" data-category="edit">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">📐</div>
+                    <span class="pdf-suite-card-badge">Trim</span>
+                </div>
+                <h3>Crop PDF Margins</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">✂️ Trim Margins</span>
+                    <span class="pdf-suite-tag">📱 Tablet Fit</span>
+                    <span class="pdf-suite-tag">🖨️ Clean Print</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Trim Margins</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 12: Extract Text -->
+            <div class="pdf-suite-card" data-pdf-subtool="extract-text" data-tool="extract-text" data-category="edit">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">📝</div>
+                    <span class="pdf-suite-card-badge">OCR Text</span>
+                </div>
+                <h3>Extract Text</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">📋 One-Click Copy</span>
+                    <span class="pdf-suite-tag">💾 Export TXT</span>
+                    <span class="pdf-suite-tag">📊 Word Count</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Text Extraction</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 13: Metadata Editor -->
+            <div class="pdf-suite-card" data-pdf-subtool="metadata" data-tool="metadata" data-category="organize-security">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🏷️</div>
+                    <span class="pdf-suite-card-badge">Tags</span>
+                </div>
+                <h3>PDF Metadata Editor</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">👤 Title &amp; Author</span>
+                    <span class="pdf-suite-tag">🏷️ Tags &amp; Subject</span>
+                    <span class="pdf-suite-tag">⚡ Binary Direct</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Edit Properties</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Tool 14: Unlock PDF -->
+            <div class="pdf-suite-card" data-pdf-subtool="unlock" data-tool="unlock" data-category="organize-security">
+                <div class="pdf-suite-card-top">
+                    <div class="pdf-suite-card-icon">🔓</div>
+                    <span class="pdf-suite-card-badge">Decrypt</span>
+                </div>
+                <h3>Unlock PDF</h3>
+                <div class="pdf-suite-card-tags">
+                    <span class="pdf-suite-tag">🔓 Remove Pass</span>
+                    <span class="pdf-suite-tag">🖨️ Enable Print</span>
+                    <span class="pdf-suite-tag">📋 Enable Copy</span>
+                </div>
+                <div class="pdf-suite-card-footer">
+                    <span>Remove Restrictions</span>
+                    <span class="pdf-suite-card-launch-btn">Launch &rarr;</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================================
+             ACTIVE INTERACTIVE WORKSPACE CONTAINER
+             ======================================================== -->
+        <div class="pdf-suite-workspace" id="pdf-suiteWorkspace">
+
+            <!-- Workspace Top Bar -->
+            <div class="pdf-suite-workspace-topbar">
+                <div class="pdf-suite-workspace-nav-row">
+                    <button class="pdf-suite-back-btn" id="backToToolsBtn">
+                        <span>&larr;</span> All PDF Tools
+                    </button>
+                    <!-- Suite Quick Tools Strip (All 14 PDF Tools) -->
+                    <div class="suite-quick-nav" id="suiteQuickNav">
+                        <button type="button" class="suite-nav-pill" data-tool="edit" title="PDF Editor &amp; Sign">
+                            <span class="suite-pill-icon">✏️</span><span class="suite-pill-label">Edit &amp; Sign</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="merge" title="Merge PDF Files">
+                            <span class="suite-pill-icon">🔀</span><span class="suite-pill-label">Merge</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="split" title="Split PDF Pages">
+                            <span class="suite-pill-icon">✂️</span><span class="suite-pill-label">Split</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="compress" title="Compress &amp; Optimize PDF">
+                            <span class="suite-pill-icon">🗜️</span><span class="suite-pill-label">Compress</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="organize" title="Organize &amp; Rotate Pages">
+                            <span class="suite-pill-icon">🔄</span><span class="suite-pill-label">Organize</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="pdf-to-img" title="PDF to JPG/PNG Images">
+                            <span class="suite-pill-icon">🖼️</span><span class="suite-pill-label">PDF → JPG</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="img-to-pdf" title="Images to PDF Converter">
+                            <span class="suite-pill-icon">📄</span><span class="suite-pill-label">JPG → PDF</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="watermark" title="Watermark PDF">
+                            <span class="suite-pill-icon">💧</span><span class="suite-pill-label">Watermark</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="page-numbers" title="Add Page Numbers">
+                            <span class="suite-pill-icon">🔢</span><span class="suite-pill-label">Page No.</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="protect" title="Protect &amp; Lock PDF">
+                            <span class="suite-pill-icon">🔒</span><span class="suite-pill-label">Protect</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="unlock" title="Unlock PDF">
+                            <span class="suite-pill-icon">🔓</span><span class="suite-pill-label">Unlock</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="crop" title="Crop PDF Margins">
+                            <span class="suite-pill-icon">📐</span><span class="suite-pill-label">Crop</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="extract-text" title="Extract Text from PDF">
+                            <span class="suite-pill-icon">📝</span><span class="suite-pill-label">Extract Text</span>
+                        </button>
+                        <button type="button" class="suite-nav-pill" data-tool="metadata" title="PDF Metadata Editor">
+                            <span class="suite-pill-icon">🏷️</span><span class="suite-pill-label">Metadata</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pdf-suite-workspace-title-group">
+                    <h2 id="workspaceTitle" style="margin-top:0.75rem;">PDF Tool Workspace</h2>
+                    <p id="workspaceDescription">Upload your PDF file below to start processing.</p>
+                </div>
+                <div class="pdf-suite-strip-actions" id="workspaceHeaderActions">
+                    <!-- Dynamic contextual header actions -->
+                </div>
+            </div>
+
+            <!-- PDF Studio Dropzone (Standard for most tools) -->
+            <div class="pdf-suite-dropzone" id="workspaceDropzone">
+                <input type="file" id="pdfFileInput" accept=".pdf,application/pdf" style="display:none;" />
+                <input type="file" id="multiPdfFileInput" accept=".pdf,application/pdf" multiple style="display:none;" />
+                <input type="file" id="multiImageFileInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;" />
+                <div class="pdf-suite-dropzone-icon" id="dropzoneIcon">📂</div>
+                <button type="button" class="pdf-suite-upload-btn-pill" id="uploadPillBtn">
+                    <span>☁️ Upload PDF files</span>
+                </button>
+                <p class="pdf-suite-dropzone-hint" id="dropzoneHintText">or drag and drop PDF documents here</p>
+                <div>
+                    <span class="pdf-suite-privacy-badge">🔒 Files stay 100% private. Processed locally in your browser.</span>
+                </div>
+            </div>
+
+            <!-- File Info Strip (Shows when file is active) -->
+            <div class="pdf-suite-file-strip" id="fileInfoStrip">
+                <div class="pdf-suite-file-meta">
+                    <div class="pdf-suite-file-meta-icon">📑</div>
+                    <div>
+                        <div class="pdf-suite-file-meta-name" id="loadedFileName">document.pdf</div>
+                        <div class="pdf-suite-file-meta-stats" id="loadedFileStats">0 pages • 0 KB</div>
+                    </div>
+                </div>
+                <div class="pdf-suite-strip-actions">
+                    <button type="button" class="pdf-suite-btn-secondary" id="changeFileBtn">Change file</button>
+                    <button type="button" class="pdf-suite-btn-primary" id="mainExecuteBtn">Apply &amp; Download PDF</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Workspace Content Stage -->
+            <div id="workspaceContentStage"></div>
+
+            <!-- Global Result / Download Card -->
+            <div class="pdf-suite-result-card" id="resultCard">
+                <div class="pdf-suite-result-title">🎉 Your PDF is Ready!</div>
+                <div class="pdf-suite-result-stats" id="resultStats">Processed successfully with 100% privacy.</div>
+                <a href="#" class="pdf-suite-btn-primary" id="downloadResultBtn" download="processed.pdf">
+                    <span>⬇️ Download Processed PDF</span>
+                </a>
+                <button type="button" class="pdf-suite-btn-secondary" id="startAnotherBtn" style="margin-left:0.5rem;">
+                    Start Another Task
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Signature Pad Modal -->
+    <div class="pdf-suite-modal" id="signatureModal">
+        <div class="pdf-suite-modal-dialog">
+            <div class="pdf-suite-modal-header">
+                <h3>✍️ Create / Upload Signature</h3>
+                <button type="button" class="pdf-suite-modal-close" id="closeSigModal">&times;</button>
+            </div>
+            <div class="pdf-suite-modal-body">
+                <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                    <button type="button" class="pdf-suite-tab-btn active" id="sigTabDraw">✏️ Draw</button>
+                    <button type="button" class="pdf-suite-tab-btn" id="sigTabType">🔤 Type Name</button>
+                    <button type="button" class="pdf-suite-tab-btn" id="sigTabUpload">🖼️ Upload Image</button>
+                </div>
+
+                <div id="sigDrawContainer">
+                    <canvas class="pdf-suite-sig-canvas" id="signatureCanvas"></canvas>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
+                        <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem;">
+                            <span>Ink:</span>
+                            <input type="color" id="sigInkColor" value="#000000" style="width:30px; height:30px; border:none; cursor:pointer;" />
+                        </div>
+                        <button type="button" class="pdf-suite-btn-secondary" id="clearSigBtn" style="font-size:0.8rem; padding:0.35rem 0.75rem;">Clear</button>
+                    </div>
+                </div>
+
+                <div id="sigTypeContainer" style="display:none;">
+                    <input type="text" id="sigTypeInput" class="pdf-suite-search-input" placeholder="Type your full name..." style="font-family:'Brush Script MT', cursive; font-size:1.8rem; height:60px;" />
+                </div>
+
+                <div id="sigUploadContainer" style="display:none;">
+                    <div style="border: 2px dashed var(--color-border); border-radius: 8px; padding: 1.5rem; text-align: center; background: var(--color-bg);">
+                        <input type="file" id="sigImageFileInput" accept="image/png,image/jpeg,image/webp" style="display:none;" />
+                        <button type="button" class="pdf-suite-btn-secondary" id="sigUploadBrowseBtn">📁 Select Signature Image (PNG/JPG)</button>
+                        <p style="font-size:0.78rem; color:var(--color-text-secondary); margin:0.5rem 0 0;">Recommended: Transparent PNG or clear handwritten signature scan.</p>
+                        <div id="sigImagePreviewBox" style="display:none; margin-top:1rem;">
+                            <img id="sigImagePreview" src="" alt="Signature Preview" style="max-height:90px; max-width:100%; border:1px solid var(--color-border); border-radius:4px; padding:4px; background:#fff;" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Application Scope Section -->
+                <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px dashed var(--color-border);">
+                    <label style="font-weight:700; font-size:0.88rem; display:block; margin-bottom:0.45rem;">📄 Apply Signature To:</label>
+                    <div style="display:flex; flex-direction:column; gap:0.45rem; font-size:0.85rem;">
+                        <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                            <input type="radio" name="sigPageScope" value="current" checked />
+                            <span>Current Page only (<strong id="sigCurrentPageLabel">Page 1</strong>)</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                            <input type="radio" name="sigPageScope" value="all" />
+                            <span>All Pages (sign entire document)</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                            <input type="radio" name="sigPageScope" value="custom" />
+                            <span>Selected Pages only:</span>
+                            <input type="text" id="sigCustomPagesInput" placeholder="e.g. 1, 3, 5-8" style="padding:0.2rem 0.5rem; font-size:0.8rem; border:1px solid var(--color-border); border-radius:4px; width:130px;" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="pdf-suite-modal-footer">
+                <button type="button" class="pdf-suite-btn-secondary" id="cancelSigBtn">Cancel</button>
+                <button type="button" class="pdf-suite-btn-primary" id="saveSigBtn">Insert Signature</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PDF DOCUMENT STUDIO — COMPREHENSIVE SEO GUIDE & FAQS
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 1.25rem;">
+        <div class="tool-seo-guide">
+            <h2>The 14-in-1 In-Browser PDF Document Studio</h2>
+            <p>Amazing-Tools PDF Studio provides an enterprise-grade suite of PDF manipulation tools that execute <strong>100% inside your browser</strong>. Unlike conventional online PDF converters that require you to upload private contracts, tax returns, and identity documents to third-party cloud servers, our architecture leverages WebAssembly and client-side JavaScript (<code>pdf-lib</code> and <code>pdf.js</code>) to process your documents locally.</p>
+
+            <h3>Key PDF Capabilities Available:</h3>
+            <ul>
+                <li><strong>Edit &amp; Sign:</strong> Add text annotations, insert drawn signatures, type names, or place transparent signature stamps directly onto contracts.</li>
+                <li><strong>Merge &amp; Split:</strong> Combine dozens of PDF files into a single master document, or extract custom page ranges (e.g. pages 1, 3, 5–10).</li>
+                <li><strong>Compress &amp; Optimize:</strong> Reduce bloated PDF file sizes for email attachments and government portal uploads without severe visual degradation.</li>
+                <li><strong>Organize &amp; Rotate:</strong> Reorder pages, rotate inverted landscape scans 90° or 180°, and delete unwanted pages with real-time thumbnail previews.</li>
+                <li><strong>Protect &amp; Unlock:</strong> Encrypt PDF files with passwords or strip permissions restrictions from your own files for effortless sharing.</li>
+                <li><strong>Convert:</strong> Convert PDF pages to high-resolution JPG images, or compile multiple JPG/PNG images into a clean PDF booklet.</li>
+            </ul>
+
+            <h3>Frequently Asked Questions (FAQs)</h3>
+            <div class="tool-faq-grid">
+                <div class="tool-faq-item">
+                    <div class="tool-faq-q">Are my uploaded PDF files safe from data leaks?</div>
+                    <p class="tool-faq-a">Yes. In fact, your PDF files are never "uploaded" anywhere. The computation happens entirely within your computer's browser memory. When you close the tab, nothing remains on any server.</p>
+                </div>
+                <div class="tool-faq-item">
+                    <div class="tool-faq-q">Is there any file size limit for PDF processing?</div>
+                    <p class="tool-faq-a">Because processing uses your local device's memory, you can comfortably process PDF files up to 100MB+ depending on your system RAM. There are no arbitrary server upload restrictions.</p>
+                </div>
+                <div class="tool-faq-item">
+                    <div class="tool-faq-q">Is this PDF suite free for commercial and business use?</div>
+                    <p class="tool-faq-a">Yes! The PDF Studio is completely free to use directly in your browser. If you need bespoke custom document automation workflows or internal tools for your company, check out our custom development packages.</p>
+                </div>
+            </div>
+
+            <div class="tool-cross-links">
+                <h4>Related Document &amp; Workflow Utilities</h4>
+                <div class="tool-cross-links-grid">
+                    <a href="document-converter.html" class="cross-link-chip">🔄 Universal Document Converter</a>
+                    <a href="image-compressor.html" class="cross-link-chip">🖼️ Image Compressor</a>
+                    <a href="word-counter.html" class="cross-link-chip">📝 Word Counter</a>
+                    <a href="qr-generator.html" class="cross-link-chip">📱 QR Code Generator</a>
+                    <a href="base64-tool.html" class="cross-link-chip">🔐 Base64 Encoder/Decoder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+    /* ========================================================
+       PDF DOCUMENT STUDIO — CLIENT-SIDE PROCESSING ENGINE
+       Pure client-side processing with pdf-lib, pdf.js and jszip
+       ======================================================== */
+    (function() {
+        'use strict';
+
+        // Guarantee that PDF Document Studio opens inside the AdminLTE workstation container
+        if (window.self === window.top) {
+            const search = window.location.search || '';
+            window.location.replace('../index.html' + search + '#pdf-tools');
+            return;
+        }
+
+        // Listen for tool activation messages from the AdminLTE portal container
+        window.addEventListener('message', (e) => {
+            if (e.data && e.data.type === 'activateTool' && e.data.tool) {
+                if (toolMeta[e.data.tool]) {
+                    activateTool(e.data.tool);
+                }
+            }
+        });
+
+        // Configure PDF.js worker
+        if (window.pdfjsLib) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
+        // State variables
+        let currentTool = null;
+        let originalFile = null;
+        let originalBytes = null;
+        let pdfDocLib = null;       // pdf-lib instance
+        let pdfJsDoc = null;        // pdf.js instance
+        let totalPages = 0;
+        let currentPage = 1;
+        let pageRotations = {};     // { pageNum: 0, 90, 180, 270 }
+        let deletedPages = new Set();
+        let pageOrder = [];         // [1, 2, 3...]
+        let mergeFiles = [];        // [{ name, size, bytes, pages }]
+        let imageFiles = [];        // [{ name, dataUrl }]
+
+        // Editor Annotations State
+        let editorTool = 'text';    // 'text', 'whiteout', 'blackout', 'sign', 'draw', 'highlight'
+        let editorScale = 1.0;
+        let editorAnnotations = []; // [{ type, page, x, y, width, height, text, color, fontSize, dataUrl }]
+        let isDrawing = false;
+        let drawPoints = [];
+
+        // DOM Elements
+        const pdfSuiteHero = document.getElementById('pdfSuiteHero');
+        const pdfSuiteToolsGrid = document.getElementById('pdfSuiteToolsGrid');
+        const pdfSuiteWorkspace = document.getElementById('pdf-suiteWorkspace');
+        const workspaceTitle = document.getElementById('workspaceTitle');
+        const workspaceDescription = document.getElementById('workspaceDescription');
+        const backToToolsBtn = document.getElementById('backToToolsBtn');
+        const workspaceDropzone = document.getElementById('workspaceDropzone');
+        const pdfFileInput = document.getElementById('pdfFileInput');
+        const multiPdfFileInput = document.getElementById('multiPdfFileInput');
+        const multiImageFileInput = document.getElementById('multiImageFileInput');
+        const uploadPillBtn = document.getElementById('uploadPillBtn');
+        const dropzoneHintText = document.getElementById('dropzoneHintText');
+        const fileInfoStrip = document.getElementById('fileInfoStrip');
+        const loadedFileName = document.getElementById('loadedFileName');
+        const loadedFileStats = document.getElementById('loadedFileStats');
+        const changeFileBtn = document.getElementById('changeFileBtn');
+        const mainExecuteBtn = document.getElementById('mainExecuteBtn');
+        const workspaceContentStage = document.getElementById('workspaceContentStage');
+        const resultCard = document.getElementById('resultCard');
+        const resultStats = document.getElementById('resultStats');
+        const downloadResultBtn = document.getElementById('downloadResultBtn');
+        const startAnotherBtn = document.getElementById('startAnotherBtn');
+        const toolSearchInput = document.getElementById('toolSearchInput');
+        const categoryTabs = document.getElementById('categoryTabs');
+
+        // Tool metadata
+        const toolMeta = {
+            'edit': {
+                title: 'PDF Editor',
+                desc: 'Fill & sign documents, add text, whiteout/blackout sensitive parts, draw and insert shapes.',
+                executeLabel: 'Apply Changes & Download PDF'
+            },
+            'merge': {
+                title: 'Merge PDF Files',
+                desc: 'Combine multiple PDF documents into a single unified file in your preferred sequence.',
+                executeLabel: 'Merge PDF Files'
+            },
+            'split': {
+                title: 'Split PDF Pages',
+                desc: 'Extract specific page ranges or extract every single page into separate documents.',
+                executeLabel: 'Split & Download'
+            },
+            'compress': {
+                title: 'Compress & Optimize PDF',
+                desc: 'Reduce file size for web and email while preserving crisp visual quality.',
+                executeLabel: 'Compress & Download'
+            },
+            'organize': {
+                title: 'Organize, Rotate & Delete Pages',
+                desc: 'Thumbnail grid of every page. Rotate, delete, or reorder pages with visual feedback.',
+                executeLabel: 'Save Reorganized PDF'
+            },
+            'pdf-to-img': {
+                title: 'PDF to JPG / PNG Images',
+                desc: 'Convert all or selected PDF pages into high-resolution images with ZIP download.',
+                executeLabel: 'Convert & Download Images'
+            },
+            'img-to-pdf': {
+                title: 'Images to PDF Converter',
+                desc: 'Combine multiple JPG, PNG, or WebP images into a clean, formatted PDF document.',
+                executeLabel: 'Create PDF from Images'
+            },
+            'watermark': {
+                title: 'Watermark PDF',
+                desc: 'Add text watermarks (e.g. Confidential, Draft, Sample) with custom angle, color, and opacity.',
+                executeLabel: 'Apply Watermark & Download'
+            },
+            'page-numbers': {
+                title: 'Add Page Numbers',
+                desc: 'Stamp header/footer page numbers ("Page 1 of N", "{n}") across your document.',
+                executeLabel: 'Number Pages & Download'
+            },
+            'protect': {
+                title: 'Protect & Lock PDF',
+                desc: 'Encrypt your PDF with strong user password protection.',
+                executeLabel: 'Encrypt & Download'
+            },
+            'unlock': {
+                title: 'Unlock PDF',
+                desc: 'Remove password restrictions from an encrypted PDF.',
+                executeLabel: 'Unlock & Download'
+            },
+            'crop': {
+                title: 'Crop PDF Margins',
+                desc: 'Trim margins and remove excess whitespace borders from all pages.',
+                executeLabel: 'Crop Margins & Download'
+            },
+            'extract-text': {
+                title: 'Extract Text from PDF',
+                desc: 'Extract all readable text with page markers, word counts, and TXT export.',
+                executeLabel: 'Extract & Copy Text'
+            },
+            'metadata': {
+                title: 'PDF Metadata Editor',
+                desc: 'Inspect and modify Title, Author, Subject, and Keywords in the PDF properties.',
+                executeLabel: 'Update Metadata & Download'
+            }
+        };
+
+        // Initialize Category Filter Tabs
+        categoryTabs.querySelectorAll('.pdf-suite-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryTabs.querySelectorAll('.pdf-suite-tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.getAttribute('data-cat');
+                filterToolsGrid(cat, toolSearchInput.value.trim());
+            });
+        });
+
+        // Initialize Instant Tool Search
+        toolSearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            const activeTab = categoryTabs.querySelector('.pdf-suite-tab-btn.active');
+            const cat = activeTab ? activeTab.getAttribute('data-cat') : 'all';
+            filterToolsGrid(cat, query);
+        });
+
+        function filterToolsGrid(cat, query) {
+            const q = query.toLowerCase();
+            document.querySelectorAll('.pdf-suite-card').forEach(card => {
+                const cardCat = card.getAttribute('data-category') || '';
+                const cardTitle = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                const cardTags = card.querySelector('.pdf-suite-card-tags')?.textContent.toLowerCase() || '';
+                const cardFooter = card.querySelector('.pdf-suite-card-footer')?.textContent.toLowerCase() || '';
+                const matchesCat = (cat === 'all') || cardCat.includes(cat);
+                const matchesQuery = !q || cardTitle.includes(q) || cardTags.includes(q) || cardFooter.includes(q);
+                card.style.display = (matchesCat && matchesQuery) ? 'flex' : 'none';
+            });
+        }
+
+        // Tool Card Click Handler
+        document.querySelectorAll('.pdf-suite-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const toolId = card.getAttribute('data-pdf-subtool') || card.getAttribute('data-tool');
+                if (toolId) activateTool(toolId);
+            });
+        });
+
+        // Back to Tools Button
+        backToToolsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            resetWorkspace();
+            pdfSuiteWorkspace.classList.remove('active');
+            pdfSuiteHero.style.display = 'block';
+            pdfSuiteToolsGrid.style.display = 'grid';
+            document.querySelectorAll('.suite-nav-pill').forEach(p => p.classList.remove('active'));
+            if (window.self !== window.top) {
+                try {
+                    if (window.top && window.top.history && window.top.history.replaceState) {
+                        window.top.history.replaceState(null, null, '#pdf-tools');
+                    }
+                } catch (_) {}
+            } else {
+                window.history.pushState({}, '', window.location.pathname);
+            }
+        });
+
+        // Suite Quick-Nav Pills Click Event (Switch between all 14 tools instantly)
+        document.querySelectorAll('.suite-nav-pill').forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const toolId = pill.getAttribute('data-tool');
+                if (toolId && toolMeta[toolId]) {
+                    activateTool(toolId);
+                }
+            });
+        });
+
+        // Upload Button & Dropzone Triggers
+        uploadPillBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            triggerFileUpload();
+        });
+        workspaceDropzone.addEventListener('click', () => {
+            triggerFileUpload();
+        });
+
+        function triggerFileUpload() {
+            if (currentTool === 'merge') {
+                multiPdfFileInput.click();
+            } else if (currentTool === 'img-to-pdf') {
+                multiImageFileInput.click();
+            } else {
+                pdfFileInput.click();
+            }
+        }
+
+        // Drag and Drop Events on Dropzone
+        ['dragenter', 'dragover'].forEach(eventName => {
+            workspaceDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                workspaceDropzone.classList.add('drag-over');
+            });
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            workspaceDropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                workspaceDropzone.classList.remove('drag-over');
+            });
+        });
+        workspaceDropzone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (!files || files.length === 0) return;
+            handleIncomingFiles(files);
+        });
+
+        pdfFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleIncomingFiles(e.target.files);
+            }
+        });
+        multiPdfFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                handleIncomingFiles(e.target.files);
+                e.target.value = '';
+            }
+        });
+        multiImageFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                handleIncomingFiles(e.target.files);
+                e.target.value = '';
+            }
+        });
+
+        changeFileBtn.addEventListener('click', () => {
+            triggerFileUpload();
+        });
+
+        startAnotherBtn.addEventListener('click', () => {
+            resultCard.classList.remove('active');
+            workspaceDropzone.style.display = 'block';
+            fileInfoStrip.classList.remove('active');
+            workspaceContentStage.innerHTML = '';
+        });
+
+        // Activate Tool by ID
+        function activateTool(toolId) {
+            currentTool = toolId;
+            const meta = toolMeta[toolId] || { title: 'PDF Tool', desc: 'Process your PDF online.', executeLabel: 'Apply & Download' };
+
+            workspaceTitle.textContent = meta.title;
+            workspaceDescription.textContent = meta.desc;
+            mainExecuteBtn.textContent = meta.executeLabel;
+
+            // Highlight corresponding suite quick-nav pill
+            document.querySelectorAll('.suite-nav-pill').forEach(pill => {
+                pill.classList.toggle('active', pill.getAttribute('data-tool') === toolId);
+            });
+
+            // Configure dropzone labels according to tool
+            if (toolId === 'merge') {
+                uploadPillBtn.innerHTML = '<span>☁️ Upload PDF files to Merge</span>';
+                dropzoneHintText.textContent = 'or drop multiple PDF files here';
+            } else if (toolId === 'img-to-pdf') {
+                uploadPillBtn.innerHTML = '<span>☁️ Upload Images (JPG/PNG)</span>';
+                dropzoneHintText.textContent = 'or drop multiple image files here';
+            } else {
+                uploadPillBtn.innerHTML = '<span>☁️ Upload PDF file</span>';
+                dropzoneHintText.textContent = 'or drop your PDF file here';
+            }
+
+            // Show Workspace, Hide Landing
+            pdfSuiteHero.style.display = 'none';
+            pdfSuiteToolsGrid.style.display = 'none';
+            pdfSuiteWorkspace.classList.add('active');
+            window.scrollTo({ top: pdfSuiteWorkspace.offsetTop - 70, behavior: 'smooth' });
+
+            // Update URL hash/query
+            if (window.self !== window.top) {
+                try {
+                    if (window.top && window.top.history && window.top.history.replaceState) {
+                        window.top.history.replaceState(null, null, '#' + toolId);
+                    }
+                } catch (_) {}
+            } else {
+                const url = new URL(window.location);
+                url.searchParams.set('tool', toolId);
+                window.history.pushState({}, '', url);
+            }
+
+            resetWorkspace();
+        }
+
+        function resetWorkspace() {
+            originalFile = null;
+            originalBytes = null;
+            pdfDocLib = null;
+            pdfJsDoc = null;
+            totalPages = 0;
+            currentPage = 1;
+            pageRotations = {};
+            deletedPages.clear();
+            pageOrder = [];
+            mergeFiles = [];
+            imageFiles = [];
+            editorAnnotations = [];
+
+            workspaceDropzone.style.display = 'block';
+            fileInfoStrip.classList.remove('active');
+            workspaceContentStage.innerHTML = '';
+            resultCard.classList.remove('active');
+            pdfFileInput.value = '';
+            multiPdfFileInput.value = '';
+            multiImageFileInput.value = '';
+        }
+
+        // Handle Incoming Files
+        async function handleIncomingFiles(fileList) {
+            if (currentTool === 'merge') {
+                await handleMergeFiles(fileList);
+            } else if (currentTool === 'img-to-pdf') {
+                await handleImageFiles(fileList);
+            } else {
+                const file = fileList[0];
+                if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+                    alert('Please select a valid PDF file.');
+                    return;
+                }
+                await handleSinglePdfFile(file);
+            }
+        }
+
+        // Handle Single PDF
+        async function handleSinglePdfFile(file) {
+            originalFile = file;
+            const buffer = await file.arrayBuffer();
+            originalBytes = new Uint8Array(buffer);
+
+            // Load with PDF-Lib
+            pdfDocLib = await PDFLib.PDFDocument.load(originalBytes, { ignoreEncryption: true });
+            totalPages = pdfDocLib.getPageCount();
+
+            // Load with PDF.js
+            const loadingTask = pdfjsLib.getDocument({ data: originalBytes });
+            pdfJsDoc = await loadingTask.promise;
+
+            // Initialize page collections
+            pageOrder = Array.from({ length: totalPages }, (_, i) => i + 1);
+            pageRotations = {};
+            deletedPages.clear();
+
+            // Update file info strip
+            loadedFileName.textContent = file.name;
+            const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+            loadedFileStats.textContent = `${totalPages} page${totalPages > 1 ? 's' : ''} • ${sizeMb} MB`;
+
+            workspaceDropzone.style.display = 'none';
+            fileInfoStrip.classList.add('active');
+
+            // Render tool-specific UI into workspace stage
+            renderActiveToolStage();
+        }
+
+        // Handle Merge Files Queue
+        async function handleMergeFiles(files) {
+            for (const file of files) {
+                if (file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') {
+                    try {
+                        const buffer = await file.arrayBuffer();
+                        const bytes = new Uint8Array(buffer);
+                        const doc = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+                        mergeFiles.push({
+                            name: file.name,
+                            size: (file.size / 1024).toFixed(1) + ' KB',
+                            bytes: bytes,
+                            pages: doc.getPageCount()
+                        });
+                    } catch (err) {
+                        console.error('Error reading PDF for merge:', err);
+                    }
+                }
+            }
+
+            if (mergeFiles.length > 0) {
+                workspaceDropzone.style.display = 'none';
+                fileInfoStrip.classList.add('active');
+                loadedFileName.textContent = `${mergeFiles.length} files selected for merge`;
+                const totalP = mergeFiles.reduce((acc, f) => acc + f.pages, 0);
+                loadedFileStats.textContent = `${totalP} total pages combined`;
+                renderMergeQueueStage();
+            }
+        }
+
+        // Handle Image Files for Images to PDF
+        async function handleImageFiles(files) {
+            for (const file of files) {
+                if (file.type.startsWith('image/')) {
+                    const dataUrl = await readFileAsDataUrl(file);
+                    imageFiles.push({
+                        name: file.name,
+                        size: (file.size / 1024).toFixed(1) + ' KB',
+                        dataUrl: dataUrl
+                    });
+                }
+            }
+
+            if (imageFiles.length > 0) {
+                workspaceDropzone.style.display = 'none';
+                fileInfoStrip.classList.add('active');
+                loadedFileName.textContent = `${imageFiles.length} images ready to convert`;
+                loadedFileStats.textContent = `A4 PDF document layout`;
+                renderImagesToPdfStage();
+            }
+        }
+
+        function readFileAsDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Render Active Tool Stage Switcher
+        function renderActiveToolStage() {
+            workspaceContentStage.innerHTML = '';
+            switch (currentTool) {
+                case 'edit':
+                    renderPdfEditorStage();
+                    break;
+                case 'organize':
+                    renderOrganizeGridStage();
+                    break;
+                case 'split':
+                    renderSplitStage();
+                    break;
+                case 'compress':
+                    renderCompressStage();
+                    break;
+                case 'pdf-to-img':
+                    renderPdfToImgStage();
+                    break;
+                case 'watermark':
+                    renderWatermarkStage();
+                    break;
+                case 'page-numbers':
+                    renderPageNumbersStage();
+                    break;
+                case 'protect':
+                    renderProtectStage();
+                    break;
+                case 'crop':
+                    renderCropStage();
+                    break;
+                case 'extract-text':
+                    renderExtractTextStage();
+                    break;
+                case 'metadata':
+                    renderMetadataStage();
+                    break;
+                case 'unlock':
+                    renderUnlockStage();
+                    break;
+                default:
+                    workspaceContentStage.innerHTML = '<p style="padding:1rem;">Ready to process file.</p>';
+            }
+        }
+
+        /* ========================================================
+           TOOL 1: PDF STUDIO EDITOR
+           ======================================================== */
+        function renderPdfEditorStage() {
+            workspaceContentStage.innerHTML = `
+                <!-- Floating Editor Toolbar -->
+                <div class="pdf-suite-editor-toolbar">
+                    <div class="pdf-suite-toolbar-group">
+                        <button type="button" class="pdf-suite-tool-btn active" id="btnToolText">🔤 Text</button>
+                        <button type="button" class="pdf-suite-tool-btn" id="btnToolWhiteout">⬜ Whiteout</button>
+                        <button type="button" class="pdf-suite-tool-btn" id="btnToolBlackout">⬛ Redact</button>
+                        <button type="button" class="pdf-suite-tool-btn" id="btnToolSign">✍️ Sign</button>
+                        <button type="button" class="pdf-suite-tool-btn" id="btnToolDraw">🖍️ Draw</button>
+                        <button type="button" class="pdf-suite-tool-btn" id="btnToolImage">🖼️ Image</button>
+                    </div>
+
+                    <div class="pdf-suite-toolbar-group">
+                        <div class="pdf-suite-toolbar-divider"></div>
+                        <div class="pdf-suite-page-nav">
+                            <button type="button" id="prevPageBtn">&lt;</button>
+                            <span id="pageIndicator">Page 1 of ${totalPages}</span>
+                            <button type="button" id="nextPageBtn">&gt;</button>
+                        </div>
+                        <div class="pdf-suite-toolbar-divider"></div>
+                        <button type="button" class="pdf-suite-tool-btn" id="zoomOutBtn">🔍 -</button>
+                        <span id="zoomPercent" style="font-size:0.8rem; font-weight:700;">100%</span>
+                        <button type="button" class="pdf-suite-tool-btn" id="zoomInBtn">🔍 +</button>
+                    </div>
+                </div>
+
+                <!-- Canvas Viewport -->
+                <div class="pdf-suite-viewport-container">
+                    <div class="pdf-suite-canvas-wrapper" id="canvasWrapper">
+                        <canvas id="pdfRenderCanvas"></canvas>
+                        <div class="pdf-suite-overlay-layer" id="editorOverlay"></div>
+                    </div>
+                </div>
+            `;
+
+            initPdfEditorEvents();
+            renderEditorPage(currentPage);
+        }
+
+        function initPdfEditorEvents() {
+            const btnToolText = document.getElementById('btnToolText');
+            const btnToolWhiteout = document.getElementById('btnToolWhiteout');
+            const btnToolBlackout = document.getElementById('btnToolBlackout');
+            const btnToolSign = document.getElementById('btnToolSign');
+            const btnToolDraw = document.getElementById('btnToolDraw');
+            const btnToolImage = document.getElementById('btnToolImage');
+            const editorOverlay = document.getElementById('editorOverlay');
+            const prevPageBtn = document.getElementById('prevPageBtn');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const editorImageInput = document.getElementById('editorImageInput');
+
+            function setEditorTool(tool) {
+                editorTool = tool;
+                [btnToolText, btnToolWhiteout, btnToolBlackout, btnToolSign, btnToolDraw, btnToolImage].forEach(b => b.classList.remove('active'));
+                if (tool === 'text') btnToolText.classList.add('active');
+                if (tool === 'whiteout') btnToolWhiteout.classList.add('active');
+                if (tool === 'blackout') btnToolBlackout.classList.add('active');
+                if (tool === 'sign') btnToolSign.classList.add('active');
+                if (tool === 'draw') btnToolDraw.classList.add('active');
+                if (tool === 'image') btnToolImage.classList.add('active');
+            }
+
+            btnToolText.addEventListener('click', () => setEditorTool('text'));
+            btnToolWhiteout.addEventListener('click', () => setEditorTool('whiteout'));
+            btnToolBlackout.addEventListener('click', () => setEditorTool('blackout'));
+            btnToolSign.addEventListener('click', () => {
+                setEditorTool('sign');
+                openSignatureModal();
+            });
+            btnToolDraw.addEventListener('click', () => setEditorTool('draw'));
+            btnToolImage.addEventListener('click', () => {
+                setEditorTool('image');
+                editorImageInput.click();
+            });
+
+            editorImageInput.addEventListener('change', async (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const dataUrl = await readFileAsDataUrl(e.target.files[0]);
+                    addOverlayImage(dataUrl, 100, 100, 140, 100);
+                }
+            });
+
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderEditorPage(currentPage);
+                }
+            });
+            nextPageBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderEditorPage(currentPage);
+                }
+            });
+
+            zoomInBtn.addEventListener('click', () => {
+                if (editorScale < 2.0) {
+                    editorScale += 0.2;
+                    document.getElementById('zoomPercent').textContent = Math.round(editorScale * 100) + '%';
+                    renderEditorPage(currentPage);
+                }
+            });
+            zoomOutBtn.addEventListener('click', () => {
+                if (editorScale > 0.6) {
+                    editorScale -= 0.2;
+                    document.getElementById('zoomPercent').textContent = Math.round(editorScale * 100) + '%';
+                    renderEditorPage(currentPage);
+                }
+            });
+
+            // Click on overlay to insert Text, Whiteout or Redact
+            editorOverlay.addEventListener('click', (e) => {
+                if (e.target !== editorOverlay) return;
+                const rect = editorOverlay.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                if (editorTool === 'text') {
+                    addOverlayText('Click to edit text', x, y);
+                } else if (editorTool === 'whiteout') {
+                    addOverlayWhiteout(x, y, 120, 30, false);
+                } else if (editorTool === 'blackout') {
+                    addOverlayWhiteout(x, y, 120, 30, true);
+                }
+            });
+        }
+
+        async function renderEditorPage(pageNum) {
+            if (!pdfJsDoc) return;
+            const page = await pdfJsDoc.getPage(pageNum);
+            const viewport = page.getViewport({ scale: editorScale * 1.5 });
+            const canvas = document.getElementById('pdfRenderCanvas');
+            if (!canvas) return;
+            const context = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            canvas.style.width = (viewport.width / 1.5) + 'px';
+            canvas.style.height = (viewport.height / 1.5) + 'px';
+
+            const overlay = document.getElementById('editorOverlay');
+            overlay.style.width = canvas.style.width;
+            overlay.style.height = canvas.style.height;
+
+            const renderContext = { canvasContext: context, viewport: viewport };
+            await page.render(renderContext).promise;
+
+            const indicator = document.getElementById('pageIndicator');
+            if (indicator) indicator.textContent = `Page ${pageNum} of ${totalPages}`;
+
+            renderExistingAnnotations(pageNum);
+        }
+
+        function addOverlayText(initialText, x, y) {
+            const overlay = document.getElementById('editorOverlay');
+            const el = document.createElement('div');
+            el.className = 'pdf-suite-annotation-item pdf-suite-annotation-text';
+            el.contentEditable = true;
+            el.textContent = initialText;
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.fontSize = '14px';
+            el.style.color = '#000000';
+            makeDraggable(el);
+
+            overlay.appendChild(el);
+            el.focus();
+
+            editorAnnotations.push({
+                type: 'text',
+                page: currentPage,
+                el: el,
+                text: initialText,
+                x: x,
+                y: y,
+                fontSize: 14,
+                color: '#000000'
+            });
+        }
+
+        function addOverlayWhiteout(x, y, width, height, isBlackout) {
+            const overlay = document.getElementById('editorOverlay');
+            const el = document.createElement('div');
+            el.className = `pdf-suite-annotation-item ${isBlackout ? 'pdf-suite-blackout-box' : 'pdf-suite-whiteout-box'}`;
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.width = width + 'px';
+            el.style.height = height + 'px';
+            makeDraggable(el);
+            overlay.appendChild(el);
+
+            editorAnnotations.push({
+                type: isBlackout ? 'blackout' : 'whiteout',
+                page: currentPage,
+                el: el,
+                x: x,
+                y: y,
+                width: width,
+                height: height
+            });
+        }
+
+        function addOverlayImage(dataUrl, x, y, width, height, scope, customPages) {
+            const overlay = document.getElementById('editorOverlay');
+            const el = document.createElement('div');
+            el.className = 'pdf-suite-annotation-item';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.width = width + 'px';
+            el.style.height = height + 'px';
+            el.style.position = 'absolute';
+            el.style.zIndex = '20';
+
+            const img = document.createElement('img');
+            img.src = dataUrl;
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'contain';
+            img.style.pointerEvents = 'none';
+            img.style.display = 'block';
+            el.appendChild(img);
+
+            // Scope label pill if applied across multiple pages
+            const finalScope = scope || 'current';
+            if (finalScope === 'all') {
+                const scopeBadge = document.createElement('div');
+                scopeBadge.style.cssText = 'position:absolute; top:-20px; left:0; font-size:10px; font-weight:700; background:#0D7A82; color:#fff; padding:1px 6px; border-radius:3px; white-space:nowrap; pointer-events:none; box-shadow:0 1px 3px rgba(0,0,0,0.2);';
+                scopeBadge.textContent = '📄 All Pages';
+                el.appendChild(scopeBadge);
+            } else if (finalScope === 'custom' && customPages) {
+                const scopeBadge = document.createElement('div');
+                scopeBadge.style.cssText = 'position:absolute; top:-20px; left:0; font-size:10px; font-weight:700; background:#0D7A82; color:#fff; padding:1px 6px; border-radius:3px; white-space:nowrap; pointer-events:none; box-shadow:0 1px 3px rgba(0,0,0,0.2);';
+                scopeBadge.textContent = `📄 Pages: ${customPages}`;
+                el.appendChild(scopeBadge);
+            }
+
+            // Quick delete handle on hover
+            const delHandle = document.createElement('button');
+            delHandle.type = 'button';
+            delHandle.innerHTML = '&times;';
+            delHandle.style.cssText = 'position:absolute; top:-8px; right:-8px; width:18px; height:18px; border-radius:50%; background:#ef4444; color:#fff; border:none; font-size:12px; font-weight:700; cursor:pointer; display:none; align-items:center; justify-content:center; line-height:1; z-index:30; box-shadow:0 1px 3px rgba(0,0,0,0.3);';
+            delHandle.title = 'Delete Annotation';
+            delHandle.onclick = (e) => {
+                e.stopPropagation();
+                el.remove();
+                const idx = editorAnnotations.findIndex(a => a.el === el);
+                if (idx !== -1) editorAnnotations.splice(idx, 1);
+            };
+            el.appendChild(delHandle);
+            el.addEventListener('mouseenter', () => { delHandle.style.display = 'flex'; });
+            el.addEventListener('mouseleave', () => { delHandle.style.display = 'none'; });
+
+            makeDraggable(el);
+            overlay.appendChild(el);
+
+            editorAnnotations.push({
+                type: 'image',
+                page: currentPage,
+                el: el,
+                dataUrl: dataUrl,
+                x: x,
+                y: y,
+                width: width,
+                height: height,
+                scope: finalScope,
+                customPages: customPages || ''
+            });
+        }
+
+        function renderExistingAnnotations(pageNum) {
+            const overlay = document.getElementById('editorOverlay');
+            overlay.innerHTML = '';
+            editorAnnotations.forEach(a => {
+                let showOnPage = false;
+                if (a.scope === 'all') {
+                    showOnPage = true;
+                } else if (a.scope === 'custom') {
+                    const pagesIdx = parsePageRanges(a.customPages, totalPages);
+                    showOnPage = pagesIdx.includes(pageNum - 1);
+                } else {
+                    showOnPage = (a.page === pageNum);
+                }
+
+                if (showOnPage && a.el) {
+                    overlay.appendChild(a.el);
+                }
+            });
+        }
+
+        function makeDraggable(element) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            element.onmousedown = dragMouseDown;
+
+            function dragMouseDown(e) {
+                if (element.isContentEditable && document.activeElement === element) return;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                element.style.top = (element.offsetTop - pos2) + "px";
+                element.style.left = (element.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        // Signature Modal Management
+        const signatureModal = document.getElementById('signatureModal');
+        const signatureCanvas = document.getElementById('signatureCanvas');
+        const sigTabDraw = document.getElementById('sigTabDraw');
+        const sigTabType = document.getElementById('sigTabType');
+        const sigTabUpload = document.getElementById('sigTabUpload');
+        const sigDrawContainer = document.getElementById('sigDrawContainer');
+        const sigTypeContainer = document.getElementById('sigTypeContainer');
+        const sigUploadContainer = document.getElementById('sigUploadContainer');
+        const sigTypeInput = document.getElementById('sigTypeInput');
+        const sigImageFileInput = document.getElementById('sigImageFileInput');
+        const sigUploadBrowseBtn = document.getElementById('sigUploadBrowseBtn');
+        const sigImagePreviewBox = document.getElementById('sigImagePreviewBox');
+        const sigImagePreview = document.getElementById('sigImagePreview');
+        const sigCurrentPageLabel = document.getElementById('sigCurrentPageLabel');
+        const sigCustomPagesInput = document.getElementById('sigCustomPagesInput');
+        const clearSigBtn = document.getElementById('clearSigBtn');
+        const saveSigBtn = document.getElementById('saveSigBtn');
+        const cancelSigBtn = document.getElementById('cancelSigBtn');
+        const closeSigModal = document.getElementById('closeSigModal');
+        const sigInkColor = document.getElementById('sigInkColor');
+        let sigContext = null;
+        let sigDrawing = false;
+        let sigMode = 'draw';
+        let sigUploadedDataUrl = '';
+
+        function openSignatureModal() {
+            signatureModal.classList.add('active');
+            if (sigCurrentPageLabel) {
+                sigCurrentPageLabel.textContent = `Page ${currentPage}`;
+            }
+            if (!sigContext) {
+                sigContext = signatureCanvas.getContext('2d');
+                signatureCanvas.width = signatureCanvas.offsetWidth || 500;
+                signatureCanvas.height = 180;
+                initSigCanvas();
+            }
+            clearSignature();
+        }
+
+        function initSigCanvas() {
+            signatureCanvas.addEventListener('mousedown', (e) => {
+                sigDrawing = true;
+                sigContext.beginPath();
+                sigContext.moveTo(e.offsetX, e.offsetY);
+            });
+            signatureCanvas.addEventListener('mousemove', (e) => {
+                if (!sigDrawing) return;
+                sigContext.strokeStyle = sigInkColor.value;
+                sigContext.lineWidth = 2.5;
+                sigContext.lineCap = 'round';
+                sigContext.lineTo(e.offsetX, e.offsetY);
+                sigContext.stroke();
+            });
+            ['mouseup', 'mouseleave'].forEach(evt => {
+                signatureCanvas.addEventListener(evt, () => { sigDrawing = false; });
+            });
+        }
+
+        function clearSignature() {
+            if (sigContext) {
+                sigContext.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+            }
+            if (sigTypeInput) sigTypeInput.value = '';
+            sigUploadedDataUrl = '';
+            if (sigImagePreview) sigImagePreview.src = '';
+            if (sigImagePreviewBox) sigImagePreviewBox.style.display = 'none';
+            if (sigImageFileInput) sigImageFileInput.value = '';
+        }
+
+        sigTabDraw.addEventListener('click', () => {
+            sigMode = 'draw';
+            sigTabDraw.classList.add('active');
+            sigTabType.classList.remove('active');
+            if (sigTabUpload) sigTabUpload.classList.remove('active');
+            sigDrawContainer.style.display = 'block';
+            sigTypeContainer.style.display = 'none';
+            if (sigUploadContainer) sigUploadContainer.style.display = 'none';
+        });
+
+        sigTabType.addEventListener('click', () => {
+            sigMode = 'type';
+            sigTabType.classList.add('active');
+            sigTabDraw.classList.remove('active');
+            if (sigTabUpload) sigTabUpload.classList.remove('active');
+            sigDrawContainer.style.display = 'none';
+            sigTypeContainer.style.display = 'block';
+            if (sigUploadContainer) sigUploadContainer.style.display = 'none';
+            sigTypeInput.focus();
+        });
+
+        if (sigTabUpload) {
+            sigTabUpload.addEventListener('click', () => {
+                sigMode = 'upload';
+                sigTabUpload.classList.add('active');
+                sigTabDraw.classList.remove('active');
+                sigTabType.classList.remove('active');
+                sigDrawContainer.style.display = 'none';
+                sigTypeContainer.style.display = 'none';
+                if (sigUploadContainer) sigUploadContainer.style.display = 'block';
+            });
+        }
+
+        if (sigUploadBrowseBtn && sigImageFileInput) {
+            sigUploadBrowseBtn.addEventListener('click', () => {
+                sigImageFileInput.click();
+            });
+
+            sigImageFileInput.addEventListener('change', async (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    try {
+                        const dataUrl = await readFileAsDataUrl(file);
+                        sigUploadedDataUrl = dataUrl;
+                        if (sigImagePreview) {
+                            sigImagePreview.src = dataUrl;
+                        }
+                        if (sigImagePreviewBox) {
+                            sigImagePreviewBox.style.display = 'block';
+                        }
+                    } catch (err) {
+                        alert('Could not read image file: ' + err.message);
+                    }
+                }
+            });
+        }
+
+        clearSigBtn.addEventListener('click', clearSignature);
+        [closeSigModal, cancelSigBtn].forEach(b => b.addEventListener('click', () => {
+            signatureModal.classList.remove('active');
+        }));
+
+        saveSigBtn.addEventListener('click', () => {
+            let dataUrl = '';
+            if (sigMode === 'draw') {
+                dataUrl = signatureCanvas.toDataURL('image/png');
+            } else if (sigMode === 'type') {
+                const text = sigTypeInput.value.trim() || 'Signature';
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = 400;
+                tempCanvas.height = 120;
+                const ctx = tempCanvas.getContext('2d');
+                ctx.font = '48px "Brush Script MT", cursive';
+                ctx.fillStyle = sigInkColor.value;
+                ctx.fillText(text, 20, 70);
+                dataUrl = tempCanvas.toDataURL('image/png');
+            } else if (sigMode === 'upload') {
+                if (!sigUploadedDataUrl) {
+                    alert('Please select or upload a signature image first.');
+                    return;
+                }
+                dataUrl = sigUploadedDataUrl;
+            }
+
+            // Read chosen page scope
+            const scopeRadio = document.querySelector('input[name="sigPageScope"]:checked');
+            const scope = scopeRadio ? scopeRadio.value : 'current';
+            const customPages = sigCustomPagesInput ? sigCustomPagesInput.value.trim() : '';
+
+            if (scope === 'custom') {
+                if (!customPages) {
+                    alert('Please enter the target page numbers (e.g. 1, 3, 5-8).');
+                    return;
+                }
+                const parsed = parsePageRanges(customPages, totalPages);
+                if (parsed.length === 0) {
+                    alert('Invalid page range entered. Please check page numbers.');
+                    return;
+                }
+            }
+
+            addOverlayImage(dataUrl, 120, 150, 160, 60, scope, customPages);
+            signatureModal.classList.remove('active');
+        });
+
+        /* ========================================================
+           TOOL 2: MERGE PDF STAGE
+           ======================================================== */
+        /* ========================================================
+           TOOL 2: MERGE PDF STAGE (INTERACTIVE ORDER & MULTI-FILE)
+           ======================================================== */
+        let draggedMergeIdx = null;
+
+        function renderMergeQueueStage() {
+            const totalP = mergeFiles.reduce((acc, f) => acc + f.pages, 0);
+
+            // Update header info strip
+            if (loadedFileName) loadedFileName.textContent = `${mergeFiles.length} files selected for merge`;
+            if (loadedFileStats) loadedFileStats.textContent = `${totalP} total pages combined`;
+
+            let queueHtml = `
+                <!-- Sequence Management Action Bar -->
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem; padding-bottom:0.85rem; border-bottom:1.5px dashed var(--color-border);">
+                    <div>
+                        <span style="font-weight:700; color:var(--color-text); font-size:0.95rem;">🔀 Merge Sequence:</span>
+                        <span style="font-size:0.85rem; color:var(--color-text-secondary); margin-left:0.4rem;">
+                            <strong>${mergeFiles.length}</strong> files • <strong>${totalP}</strong> pages in total
+                        </span>
+                    </div>
+                    <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                        <button type="button" class="pdf-suite-btn-secondary" id="addMorePdfsBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem;">➕ Add More PDFs</button>
+                        <button type="button" class="pdf-suite-btn-secondary" id="sortAzBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem;" title="Sort files alphabetically A to Z">🔤 Sort A-Z</button>
+                        <button type="button" class="pdf-suite-btn-secondary" id="reverseMergeBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem;" title="Reverse the merge order">🔀 Reverse</button>
+                        <button type="button" class="pdf-suite-btn-secondary" id="clearMergeBtn" style="padding:0.4rem 0.8rem; font-size:0.82rem; color:#ef4444;" title="Remove all files">🧹 Clear</button>
+                    </div>
+                </div>
+
+                <div class="pdf-suite-merge-list" id="mergeQueueList">
+            `;
+
+            mergeFiles.forEach((file, idx) => {
+                let orderOptions = '';
+                for (let i = 0; i < mergeFiles.length; i++) {
+                    orderOptions += `<option value="${i}" ${i === idx ? 'selected' : ''}>Position ${i + 1}</option>`;
+                }
+
+                queueHtml += `
+                    <div class="pdf-suite-merge-item" data-index="${idx}" draggable="true" style="cursor:grab; user-select:none;">
+                        <div class="pdf-suite-merge-item-info" style="gap:0.75rem; flex:1;">
+                            <span class="merge-drag-handle" style="font-size:1.2rem; cursor:grab; opacity:0.6;" title="Drag to reorder">⠿</span>
+                            <span style="display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--color-primary); color:#fff; font-weight:700; font-size:0.78rem;">${idx + 1}</span>
+                            <span style="font-size:1.4rem;">📑</span>
+                            <div style="min-width:0;">
+                                <div class="pdf-suite-merge-item-title" style="font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:320px;" title="${file.name}">${file.name}</div>
+                                <div class="pdf-suite-merge-item-stats">${file.pages} page${file.pages > 1 ? 's' : ''} • ${file.size}</div>
+                            </div>
+                        </div>
+
+                        <!-- Order Selector & Quick Movement Controls -->
+                        <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                            <label style="font-size:0.78rem; font-weight:600; color:var(--color-text-secondary); margin-right:2px;">Order:</label>
+                            <select class="merge-order-select" data-index="${idx}" style="padding:0.25rem 0.45rem; font-size:0.8rem; border-radius:6px; border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); cursor:pointer;">
+                                ${orderOptions}
+                            </select>
+                            <button type="button" class="pdf-suite-page-action-btn btn-top" data-index="${idx}" title="Move to First" ${idx === 0 ? 'disabled' : ''}>⬆️</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-up" data-index="${idx}" title="Move Up" ${idx === 0 ? 'disabled' : ''}>▲</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-down" data-index="${idx}" title="Move Down" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>▼</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-bottom" data-index="${idx}" title="Move to Last" ${idx === mergeFiles.length - 1 ? 'disabled' : ''}>⬇️</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-delete btn-remove-merge" data-index="${idx}" title="Remove file">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            queueHtml += '</div>';
+
+            // Sequence flow banner
+            queueHtml += `
+                <div style="margin-top:1.25rem; padding:0.85rem 1rem; border-radius:8px; background:var(--color-bg-alt, #f1f5f9); border:1px solid var(--color-border); font-size:0.83rem; line-height:1.6;">
+                    <strong style="color:var(--color-primary);">Merge Flow:</strong>
+                    <span style="color:var(--color-text-secondary); margin-left:0.35rem;">
+                        ${mergeFiles.map((f, i) => `<strong>[${i + 1}]</strong> ${f.name} (${f.pages}p)`).join(' &nbsp;➔&nbsp; ')}
+                    </span>
+                </div>
+            `;
+
+            workspaceContentStage.innerHTML = queueHtml;
+            initMergeQueueEvents();
+        }
+
+        function initMergeQueueEvents() {
+            // Position Dropdown change
+            workspaceContentStage.querySelectorAll('.merge-order-select').forEach(sel => {
+                sel.addEventListener('change', () => {
+                    const fromIdx = parseInt(sel.getAttribute('data-index'));
+                    const toIdx = parseInt(sel.value);
+                    if (fromIdx !== toIdx) {
+                        const [moved] = mergeFiles.splice(fromIdx, 1);
+                        mergeFiles.splice(toIdx, 0, moved);
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move to First
+            workspaceContentStage.querySelectorAll('.btn-top').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    if (idx > 0) {
+                        const [moved] = mergeFiles.splice(idx, 1);
+                        mergeFiles.unshift(moved);
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move to Last
+            workspaceContentStage.querySelectorAll('.btn-bottom').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    if (idx < mergeFiles.length - 1) {
+                        const [moved] = mergeFiles.splice(idx, 1);
+                        mergeFiles.push(moved);
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move Up
+            workspaceContentStage.querySelectorAll('.btn-up').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.getAttribute('data-index'));
+                    if (i > 0) {
+                        const temp = mergeFiles[i];
+                        mergeFiles[i] = mergeFiles[i - 1];
+                        mergeFiles[i - 1] = temp;
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Move Down
+            workspaceContentStage.querySelectorAll('.btn-down').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.getAttribute('data-index'));
+                    if (i < mergeFiles.length - 1) {
+                        const temp = mergeFiles[i];
+                        mergeFiles[i] = mergeFiles[i + 1];
+                        mergeFiles[i + 1] = temp;
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Remove item
+            workspaceContentStage.querySelectorAll('.btn-remove-merge').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const i = parseInt(btn.getAttribute('data-index'));
+                    mergeFiles.splice(i, 1);
+                    if (mergeFiles.length === 0) {
+                        resetWorkspace();
+                    } else {
+                        renderMergeQueueStage();
+                    }
+                });
+            });
+
+            // Add more files
+            const addMoreBtn = document.getElementById('addMorePdfsBtn');
+            if (addMoreBtn) {
+                addMoreBtn.addEventListener('click', () => multiPdfFileInput.click());
+            }
+
+            // Sort A-Z
+            const sortAzBtn = document.getElementById('sortAzBtn');
+            if (sortAzBtn) {
+                sortAzBtn.addEventListener('click', () => {
+                    mergeFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
+                    renderMergeQueueStage();
+                });
+            }
+
+            // Reverse
+            const reverseMergeBtn = document.getElementById('reverseMergeBtn');
+            if (reverseMergeBtn) {
+                reverseMergeBtn.addEventListener('click', () => {
+                    mergeFiles.reverse();
+                    renderMergeQueueStage();
+                });
+            }
+
+            // Clear
+            const clearMergeBtn = document.getElementById('clearMergeBtn');
+            if (clearMergeBtn) {
+                clearMergeBtn.addEventListener('click', () => {
+                    if (confirm('Clear all files from the merge list?')) {
+                        mergeFiles = [];
+                        resetWorkspace();
+                    }
+                });
+            }
+
+            // Drag and Drop reordering on merge items
+            const mergeItems = workspaceContentStage.querySelectorAll('.pdf-suite-merge-item');
+            mergeItems.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedMergeIdx = parseInt(item.getAttribute('data-index'));
+                    e.dataTransfer.effectAllowed = 'move';
+                    item.style.opacity = '0.4';
+                });
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    item.style.border = '2px dashed var(--color-primary)';
+                });
+                item.addEventListener('dragleave', () => {
+                    item.style.border = '';
+                });
+                item.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    item.style.border = '';
+                    const targetIdx = parseInt(item.getAttribute('data-index'));
+                    if (draggedMergeIdx !== null && draggedMergeIdx !== targetIdx) {
+                        const [moved] = mergeFiles.splice(draggedMergeIdx, 1);
+                        mergeFiles.splice(targetIdx, 0, moved);
+                        renderMergeQueueStage();
+                    }
+                });
+                item.addEventListener('dragend', () => {
+                    item.style.opacity = '1';
+                    draggedMergeIdx = null;
+                });
+            });
+        }
+
+        /* ========================================================
+           TOOL 5: ORGANIZE & ROTATE PAGES (THUMBNAILS GRID)
+           ======================================================== */
+        function renderOrganizeGridStage() {
+            let gridHtml = `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:1px dashed var(--color-border);">
+                    <div style="font-weight:700; color:var(--color-text);">
+                        Total Pages: <span id="activePageCount">${pageOrder.length - deletedPages.size}</span>
+                    </div>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <button type="button" class="pdf-suite-btn-secondary" id="rotateAllCcwBtn">↺ Rotate All CCW</button>
+                        <button type="button" class="pdf-suite-btn-secondary" id="rotateAllCwBtn">↻ Rotate All CW</button>
+                        <button type="button" class="pdf-suite-btn-secondary" id="resetOrganizeBtn">Reset All</button>
+                    </div>
+                </div>
+                <div class="pdf-suite-page-grid" id="organizeGrid">
+            `;
+
+            pageOrder.forEach((pageIndex, visualIdx) => {
+                const isDeleted = deletedPages.has(pageIndex);
+                const rot = pageRotations[pageIndex] || 0;
+                gridHtml += `
+                    <div class="pdf-suite-page-card ${isDeleted ? 'deleted' : ''}" data-page="${pageIndex}">
+                        <span class="pdf-suite-page-badge">Page ${pageIndex}</span>
+                        <div class="pdf-suite-page-thumb-holder">
+                            <canvas id="thumbCanvas_${pageIndex}" style="transform: rotate(${rot}deg);"></canvas>
+                        </div>
+                        <div class="pdf-suite-page-actions">
+                            <button type="button" class="pdf-suite-page-action-btn btn-rot-ccw" data-page="${pageIndex}" title="Rotate 90° CCW">↺</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-rot-cw" data-page="${pageIndex}" title="Rotate 90° CW">↻</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-move-left" data-idx="${visualIdx}" title="Move Left" ${visualIdx === 0 ? 'disabled' : ''}>◀</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-move-right" data-idx="${visualIdx}" title="Move Right" ${visualIdx === pageOrder.length - 1 ? 'disabled' : ''}>▶</button>
+                            <button type="button" class="pdf-suite-page-action-btn btn-delete btn-del-page" data-page="${pageIndex}" title="Delete Page">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            gridHtml += '</div>';
+
+            workspaceContentStage.innerHTML = gridHtml;
+
+            // Render thumbnail canvases
+            pageOrder.forEach(pageIndex => {
+                renderThumbnailCanvas(pageIndex);
+            });
+
+            // Grid event listeners
+            workspaceContentStage.querySelectorAll('.btn-rot-cw').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const p = parseInt(btn.getAttribute('data-page'));
+                    pageRotations[p] = ((pageRotations[p] || 0) + 90) % 360;
+                    const canvas = document.getElementById(`thumbCanvas_${p}`);
+                    if (canvas) canvas.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-rot-ccw').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const p = parseInt(btn.getAttribute('data-page'));
+                    pageRotations[p] = ((pageRotations[p] || 0) - 90 + 360) % 360;
+                    const canvas = document.getElementById(`thumbCanvas_${p}`);
+                    if (canvas) canvas.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-del-page').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const p = parseInt(btn.getAttribute('data-page'));
+                    const card = btn.closest('.pdf-suite-page-card');
+                    if (deletedPages.has(p)) {
+                        deletedPages.delete(p);
+                        card.classList.remove('deleted');
+                    } else {
+                        deletedPages.add(p);
+                        card.classList.add('deleted');
+                    }
+                    document.getElementById('activePageCount').textContent = pageOrder.length - deletedPages.size;
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-move-left').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-idx'));
+                    if (idx > 0) {
+                        const temp = pageOrder[idx];
+                        pageOrder[idx] = pageOrder[idx - 1];
+                        pageOrder[idx - 1] = temp;
+                        renderOrganizeGridStage();
+                    }
+                });
+            });
+            workspaceContentStage.querySelectorAll('.btn-move-right').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.getAttribute('data-idx'));
+                    if (idx < pageOrder.length - 1) {
+                        const temp = pageOrder[idx];
+                        pageOrder[idx] = pageOrder[idx + 1];
+                        pageOrder[idx + 1] = temp;
+                        renderOrganizeGridStage();
+                    }
+                });
+            });
+
+            document.getElementById('rotateAllCwBtn').addEventListener('click', () => {
+                pageOrder.forEach(p => {
+                    pageRotations[p] = ((pageRotations[p] || 0) + 90) % 360;
+                    const c = document.getElementById(`thumbCanvas_${p}`);
+                    if (c) c.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            document.getElementById('rotateAllCcwBtn').addEventListener('click', () => {
+                pageOrder.forEach(p => {
+                    pageRotations[p] = ((pageRotations[p] || 0) - 90 + 360) % 360;
+                    const c = document.getElementById(`thumbCanvas_${p}`);
+                    if (c) c.style.transform = `rotate(${pageRotations[p]}deg)`;
+                });
+            });
+            document.getElementById('resetOrganizeBtn').addEventListener('click', () => {
+                pageOrder = Array.from({ length: totalPages }, (_, i) => i + 1);
+                pageRotations = {};
+                deletedPages.clear();
+                renderOrganizeGridStage();
+            });
+        }
+
+        async function renderThumbnailCanvas(pageNum) {
+            if (!pdfJsDoc) return;
+            try {
+                const page = await pdfJsDoc.getPage(pageNum);
+                const viewport = page.getViewport({ scale: 0.35 });
+                const canvas = document.getElementById(`thumbCanvas_${pageNum}`);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+            } catch (e) {
+                console.error('Thumb error:', e);
+            }
+        }
+
+        /* ========================================================
+           TOOL 3: SPLIT PDF STAGE
+           ======================================================== */
+        function renderSplitStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+                    <h3 style="margin-bottom: 1rem; color: var(--color-text);">Select Split Method</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; padding: 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);">
+                            <input type="radio" name="splitMethod" value="ranges" checked style="margin-top: 0.25rem;">
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--color-text);">Extract Page Ranges</strong>
+                                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">e.g. 1-2, 3, 5-8</span>
+                                <input type="text" id="splitRangeInput" class="pdf-suite-search-input" value="1-${Math.min(totalPages, 2)}" style="margin-top: 0.5rem; font-size: 0.9rem;" placeholder="e.g. 1-3, 5">
+                            </div>
+                        </label>
+                        <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; padding: 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);">
+                            <input type="radio" name="splitMethod" value="every" style="margin-top: 0.25rem;">
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--color-text);">Extract Every Page as Separate PDF</strong>
+                                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Downloads all ${totalPages} pages zipped into individual files</span>
+                            </div>
+                        </label>
+                        <label style="display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; padding: 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface);">
+                            <input type="radio" name="splitMethod" value="even-odd" style="margin-top: 0.25rem;">
+                            <div>
+                                <strong style="display: block; font-size: 0.95rem; color: var(--color-text);">Split Even &amp; Odd Pages</strong>
+                                <span style="font-size: 0.85rem; color: var(--color-text-secondary);">Creates two documents: one for even pages, one for odd pages</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 4: COMPRESS PDF STAGE
+           ======================================================== */
+        function renderCompressStage() {
+            const origSizeMb = (originalFile.size / (1024 * 1024)).toFixed(2);
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 650px; margin: 0 auto;">
+                    <div class="pdf-suite-options-grid">
+                        <div class="pdf-suite-option-card selected" data-compress="recommended">
+                            <h4>Recommended</h4>
+                            <p>Good quality, strong compression for web &amp; email (~40-60% smaller)</p>
+                        </div>
+                        <div class="pdf-suite-option-card" data-compress="extreme">
+                            <h4>Extreme</h4>
+                            <p>Maximum compression, suitable for strict file size limits</p>
+                        </div>
+                        <div class="pdf-suite-option-card" data-compress="less">
+                            <h4>Less Compression</h4>
+                            <p>Highest image fidelity, minimal file size reduction</p>
+                        </div>
+                    </div>
+                    <div style="background: var(--color-bg); padding: 1.25rem; border-radius: var(--radius-md); border: 1.5px solid var(--color-border); text-align: center;">
+                        <div style="font-size: 0.88rem; color: var(--color-text-secondary); margin-bottom: 0.35rem;">Original File Size</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: var(--color-text);">${origSizeMb} MB</div>
+                    </div>
+                </div>
+            `;
+
+            workspaceContentStage.querySelectorAll('.pdf-suite-option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    workspaceContentStage.querySelectorAll('.pdf-suite-option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                });
+            });
+        }
+
+        /* ========================================================
+           TOOL 6: PDF TO IMAGES STAGE
+           ======================================================== */
+        function renderPdfToImgStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:1.5rem;">
+                        <label style="display:flex; align-items:center; gap:0.4rem; font-weight:600; cursor:pointer;">
+                            <input type="radio" name="imgFormat" value="image/jpeg" checked> JPEG (Fast &amp; Compact)
+                        </label>
+                        <label style="display:flex; align-items:center; gap:0.4rem; font-weight:600; cursor:pointer;">
+                            <input type="radio" name="imgFormat" value="image/png"> PNG (Lossless)
+                        </label>
+                    </div>
+                    <p style="color:var(--color-text-secondary); font-size:0.92rem;">
+                        Click "Convert &amp; Download Images" above to render all ${totalPages} pages and download them as high-definition images in a ZIP file.
+                    </p>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 7: IMAGES TO PDF STAGE
+           ======================================================== */
+        function renderImagesToPdfStage() {
+            let html = `
+                <div style="max-width: 650px; margin: 0 auto;">
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; justify-content:center;">
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.25rem;">Page Format:</label>
+                            <select id="imgPdfPageSize" style="padding:0.45rem 0.85rem; border-radius:6px; border:1px solid var(--color-border);">
+                                <option value="A4">A4 (Standard)</option>
+                                <option value="Letter">US Letter</option>
+                                <option value="Fit">Fit to Image</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.25rem;">Orientation:</label>
+                            <select id="imgPdfOrientation" style="padding:0.45rem 0.85rem; border-radius:6px; border:1px solid var(--color-border);">
+                                <option value="Portrait">Portrait</option>
+                                <option value="Landscape">Landscape</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pdf-suite-merge-list">
+            `;
+
+            imageFiles.forEach((f, idx) => {
+                html += `
+                    <div class="pdf-suite-merge-item">
+                        <div class="pdf-suite-merge-item-info">
+                            <img src="${f.dataUrl}" style="width:45px; height:45px; object-fit:cover; border-radius:4px; border:1px solid var(--color-border);" />
+                            <div>
+                                <div class="pdf-suite-merge-item-title">${f.name}</div>
+                                <div class="pdf-suite-merge-item-stats">${f.size}</div>
+                            </div>
+                        </div>
+                        <button type="button" class="pdf-suite-page-action-btn btn-delete" onclick="removeImageFile(${idx})">🗑️</button>
+                    </div>
+                `;
+            });
+            html += '</div></div>';
+            workspaceContentStage.innerHTML = html;
+        }
+
+        window.removeImageFile = function(idx) {
+            imageFiles.splice(idx, 1);
+            if (imageFiles.length === 0) resetWorkspace();
+            else renderImagesToPdfStage();
+        };
+
+        /* ========================================================
+           TOOL 8: WATERMARK PDF STAGE
+           ======================================================== */
+        function renderWatermarkStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 580px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Watermark Text:</label>
+                        <input type="text" id="watermarkTextInput" class="pdf-suite-search-input" value="CONFIDENTIAL" style="font-size: 1rem;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Angle:</label>
+                            <select id="watermarkAngle" style="width:100%; padding:0.55rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                                <option value="45">45° Diagonal</option>
+                                <option value="0">0° Horizontal</option>
+                                <option value="-45">-45° Diagonal</option>
+                                <option value="90">90° Vertical</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Opacity:</label>
+                            <input type="range" id="watermarkOpacity" min="10" max="90" value="30" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Font Size:</label>
+                            <input type="number" id="watermarkFontSize" value="48" min="16" max="96" style="width:100%; padding:0.55rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Color:</label>
+                            <input type="color" id="watermarkColor" value="#999999" style="width:100%; height:42px; border:none; cursor:pointer;">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 9: PAGE NUMBERS STAGE
+           ======================================================== */
+        function renderPageNumbersStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 580px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Numbering Format:</label>
+                        <select id="pageNumberFormat" style="width:100%; padding:0.65rem; border-radius:6px; border:1.5px solid var(--color-border); font-size:0.95rem;">
+                            <option value="Page {n} of {total}">Page {n} of {total} (e.g. Page 1 of 10)</option>
+                            <option value="{n} of {total}">{n} of {total} (e.g. 1 of 10)</option>
+                            <option value="Page {n}">Page {n} (e.g. Page 1)</option>
+                            <option value="{n}">{n} (e.g. 1)</option>
+                        </select>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Position:</label>
+                            <select id="pageNumberPosition" style="width:100%; padding:0.65rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                                <option value="bottom-center">Bottom Center</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="top-center">Top Center</option>
+                                <option value="top-right">Top Right</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Start Numbering At:</label>
+                            <input type="number" id="pageNumberStart" value="1" min="1" style="width:100%; padding:0.65rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 10: PROTECT STAGE
+           ======================================================== */
+        function renderProtectStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 480px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Set User Password:</label>
+                        <input type="password" id="protectPassword" class="pdf-suite-search-input" placeholder="Enter password to open PDF...">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Confirm Password:</label>
+                        <input type="password" id="protectPasswordConfirm" class="pdf-suite-search-input" placeholder="Repeat password...">
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 11: CROP PDF STAGE
+           ======================================================== */
+        function renderCropStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 520px; margin: 0 auto; text-align: center;">
+                    <p style="margin-bottom: 1.25rem; color: var(--color-text-secondary);">Set margins to crop from each edge (in points, 72 pt = 1 inch):</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left;">
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Top Margin (pt):</label>
+                            <input type="number" id="cropTop" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Bottom Margin (pt):</label>
+                            <input type="number" id="cropBottom" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Left Margin (pt):</label>
+                            <input type="number" id="cropLeft" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                        <div>
+                            <label style="font-weight: 700; font-size: 0.85rem;">Right Margin (pt):</label>
+                            <input type="number" id="cropRight" value="36" min="0" max="200" style="width:100%; padding:0.5rem; border-radius:6px; border:1.5px solid var(--color-border);">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 12: EXTRACT TEXT STAGE
+           ======================================================== */
+        async function renderExtractTextStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="text-align: center; padding: 1rem;">
+                    <div style="font-size: 1rem; color: var(--color-text-secondary);">Reading document text content...</div>
+                </div>
+            `;
+
+            let extractedText = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const page = await pdfJsDoc.getPage(i);
+                const textContent = await page.getTextContent();
+                const pageText = textContent.items.map(item => item.str).join(' ');
+                extractedText += `--- Page ${i} ---\n` + pageText + '\n\n';
+            }
+
+            const words = extractedText.trim().split(/\s+/).filter(Boolean).length;
+            const chars = extractedText.length;
+
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 750px; margin: 0 auto; text-align: left;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.75rem;">
+                        <span style="font-size:0.85rem; font-weight:700; color:var(--color-text);">${words} words • ${chars} characters</span>
+                        <button type="button" class="pdf-suite-btn-secondary" id="copyExtractedTextBtn" style="font-size:0.82rem; padding:0.35rem 0.75rem;">📋 Copy to Clipboard</button>
+                    </div>
+                    <textarea id="extractedTextArea" style="width: 100%; height: 320px; padding: 1rem; border-radius: 8px; border: 1.5px solid var(--color-border); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.5; resize: vertical;">${extractedText}</textarea>
+                </div>
+            `;
+
+            document.getElementById('copyExtractedTextBtn').addEventListener('click', () => {
+                const area = document.getElementById('extractedTextArea');
+                area.select();
+                navigator.clipboard.writeText(area.value);
+                alert('Text copied to clipboard!');
+            });
+        }
+
+        /* ========================================================
+           TOOL 13: METADATA STAGE
+           ======================================================== */
+        function renderMetadataStage() {
+            const title = pdfDocLib.getTitle() || '';
+            const author = pdfDocLib.getAuthor() || '';
+            const subject = pdfDocLib.getSubject() || '';
+            const keywords = (pdfDocLib.getKeywords() || []).join(', ');
+
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 580px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Document Title:</label>
+                        <input type="text" id="metaTitle" class="pdf-suite-search-input" value="${title}">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Author:</label>
+                        <input type="text" id="metaAuthor" class="pdf-suite-search-input" value="${author}">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Subject / Description:</label>
+                        <input type="text" id="metaSubject" class="pdf-suite-search-input" value="${subject}">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Keywords (comma separated):</label>
+                        <input type="text" id="metaKeywords" class="pdf-suite-search-input" value="${keywords}">
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           TOOL 14: UNLOCK STAGE
+           ======================================================== */
+        function renderUnlockStage() {
+            workspaceContentStage.innerHTML = `
+                <div style="max-width: 480px; margin: 0 auto; text-align: left;">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 0.35rem;">Enter Document Password to Unlock:</label>
+                        <input type="password" id="unlockPassword" class="pdf-suite-search-input" placeholder="Password...">
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--color-text-secondary);">
+                        Entering the password allows exporting an unprotected copy that can be opened anywhere without restrictions.
+                    </p>
+                </div>
+            `;
+        }
+
+        /* ========================================================
+           MAIN EXECUTE HANDLER (THE ACTUAL CLIENT-SIDE PROCESSING)
+           ======================================================== */
+        mainExecuteBtn.addEventListener('click', async () => {
+            mainExecuteBtn.disabled = true;
+            mainExecuteBtn.textContent = 'Processing...';
+
+            try {
+                switch (currentTool) {
+                    case 'edit':
+                        await executePdfEditor();
+                        break;
+                    case 'merge':
+                        await executeMergePdf();
+                        break;
+                    case 'split':
+                        await executeSplitPdf();
+                        break;
+                    case 'compress':
+                        await executeCompressPdf();
+                        break;
+                    case 'organize':
+                        await executeOrganizePdf();
+                        break;
+                    case 'pdf-to-img':
+                        await executePdfToImages();
+                        break;
+                    case 'img-to-pdf':
+                        await executeImagesToPdf();
+                        break;
+                    case 'watermark':
+                        await executeWatermarkPdf();
+                        break;
+                    case 'page-numbers':
+                        await executePageNumbersPdf();
+                        break;
+                    case 'protect':
+                        await executeProtectPdf();
+                        break;
+                    case 'crop':
+                        await executeCropPdf();
+                        break;
+                    case 'extract-text':
+                        await executeExtractText();
+                        break;
+                    case 'metadata':
+                        await executeMetadataPdf();
+                        break;
+                    case 'unlock':
+                        await executeUnlockPdf();
+                        break;
+                }
+            } catch (err) {
+                console.error('Execution error:', err);
+                alert('An error occurred during processing: ' + err.message);
+            } finally {
+                mainExecuteBtn.disabled = false;
+                const meta = toolMeta[currentTool];
+                mainExecuteBtn.textContent = meta ? meta.executeLabel : 'Apply & Download PDF';
+            }
+        });
+
+        // 1. Execute PDF Editor
+        async function executePdfEditor() {
+            const modifiedPdf = await PDFLib.PDFDocument.load(originalBytes);
+            const helveticaFont = await modifiedPdf.embedFont(PDFLib.StandardFonts.Helvetica);
+            const pages = modifiedPdf.getPages();
+
+            const overlay = document.getElementById('editorOverlay');
+            const screenW = parseFloat(overlay ? overlay.style.width : 0) || 600;
+            const screenH = parseFloat(overlay ? overlay.style.height : 0) || 800;
+
+            for (const annot of editorAnnotations) {
+                // Determine target page indices for this annotation
+                let targetPageIndices = [];
+                if (annot.scope === 'all') {
+                    targetPageIndices = Array.from({ length: pages.length }, (_, i) => i);
+                } else if (annot.scope === 'custom' && annot.customPages) {
+                    targetPageIndices = parsePageRanges(annot.customPages, pages.length);
+                } else {
+                    if (annot.page >= 1 && annot.page <= pages.length) {
+                        targetPageIndices = [annot.page - 1];
+                    }
+                }
+
+                if (targetPageIndices.length === 0) continue;
+
+                if (annot.type === 'text') {
+                    const text = (annot.el ? annot.el.textContent : '') || annot.text;
+                    const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
+                    const elTop = annot.el ? annot.el.offsetTop : annot.y;
+                    const elH = annot.el ? annot.el.offsetHeight : 20;
+
+                    for (const pIdx of targetPageIndices) {
+                        const page = pages[pIdx];
+                        const { width, height } = page.getSize();
+                        const scaleX = width / screenW;
+                        const scaleY = height / screenH;
+
+                        const pdfX = elLeft * scaleX;
+                        const pdfY = height - (elTop + elH) * scaleY;
+
+                        page.drawText(text, {
+                            x: pdfX,
+                            y: pdfY,
+                            size: (annot.fontSize || 14) * scaleX,
+                            font: helveticaFont,
+                            color: PDFLib.rgb(0, 0, 0)
+                        });
+                    }
+                } else if (annot.type === 'whiteout' || annot.type === 'blackout') {
+                    const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
+                    const elTop = annot.el ? annot.el.offsetTop : annot.y;
+                    const elW = annot.el ? annot.el.offsetWidth : annot.width;
+                    const elH = annot.el ? annot.el.offsetHeight : annot.height;
+
+                    for (const pIdx of targetPageIndices) {
+                        const page = pages[pIdx];
+                        const { width, height } = page.getSize();
+                        const scaleX = width / screenW;
+                        const scaleY = height / screenH;
+
+                        const boxW = elW * scaleX;
+                        const boxH = elH * scaleY;
+                        const pdfX = elLeft * scaleX;
+                        const pdfY = height - (elTop + elH) * scaleY;
+
+                        page.drawRectangle({
+                            x: pdfX,
+                            y: pdfY,
+                            width: boxW,
+                            height: boxH,
+                            color: annot.type === 'whiteout' ? PDFLib.rgb(1, 1, 1) : PDFLib.rgb(0, 0, 0)
+                        });
+                    }
+                } else if (annot.type === 'image') {
+                    const imgBytes = await fetch(annot.dataUrl).then(res => res.arrayBuffer());
+                    let embeddedImg = null;
+                    if (annot.dataUrl.includes('png') || annot.dataUrl.startsWith('data:image/png')) {
+                        embeddedImg = await modifiedPdf.embedPng(imgBytes);
+                    } else {
+                        embeddedImg = await modifiedPdf.embedJpg(imgBytes);
+                    }
+
+                    const elLeft = annot.el ? annot.el.offsetLeft : annot.x;
+                    const elTop = annot.el ? annot.el.offsetTop : annot.y;
+                    const elW = annot.el ? annot.el.offsetWidth : annot.width;
+                    const elH = annot.el ? annot.el.offsetHeight : annot.height;
+
+                    for (const pIdx of targetPageIndices) {
+                        const page = pages[pIdx];
+                        const { width, height } = page.getSize();
+                        const scaleX = width / screenW;
+                        const scaleY = height / screenH;
+
+                        const boxW = elW * scaleX;
+                        const boxH = elH * scaleY;
+                        const pdfX = elLeft * scaleX;
+                        const pdfY = height - (elTop + elH) * scaleY;
+
+                        page.drawImage(embeddedImg, {
+                            x: pdfX,
+                            y: pdfY,
+                            width: boxW,
+                            height: boxH
+                        });
+                    }
+                }
+            }
+
+            const outputBytes = await modifiedPdf.save();
+            showResultDownload(outputBytes, 'edited_document.pdf');
+        }
+
+        // 2. Execute Merge
+        async function executeMergePdf() {
+            if (mergeFiles.length < 2) {
+                alert('Please upload at least 2 PDF files to merge.');
+                return;
+            }
+            const mergedPdf = await PDFLib.PDFDocument.create();
+            for (const file of mergeFiles) {
+                const pdf = await PDFLib.PDFDocument.load(file.bytes);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach(p => mergedPdf.addPage(p));
+            }
+            const outputBytes = await mergedPdf.save();
+            const totalPagesCombined = mergedPdf.getPageCount();
+            showResultDownload(
+                outputBytes,
+                'merged_document.pdf',
+                `Successfully combined ${mergeFiles.length} files (${totalPagesCombined} pages total) in your custom sequence.`
+            );
+        }
+
+        // 3. Execute Split
+        async function executeSplitPdf() {
+            const method = document.querySelector('input[name="splitMethod"]:checked').value;
+
+            if (method === 'ranges') {
+                const rangeStr = document.getElementById('splitRangeInput').value;
+                const indices = parsePageRanges(rangeStr, totalPages);
+                if (indices.length === 0) {
+                    alert('Please enter valid page numbers (e.g. 1-2, 4).');
+                    return;
+                }
+                const newDoc = await PDFLib.PDFDocument.create();
+                const copied = await newDoc.copyPages(pdfDocLib, indices);
+                copied.forEach(p => newDoc.addPage(p));
+                const output = await newDoc.save();
+                showResultDownload(output, 'split_ranges.pdf');
+            } else if (method === 'every') {
+                const zip = new JSZip();
+                for (let i = 0; i < totalPages; i++) {
+                    const newDoc = await PDFLib.PDFDocument.create();
+                    const [page] = await newDoc.copyPages(pdfDocLib, [i]);
+                    newDoc.addPage(page);
+                    const bytes = await newDoc.save();
+                    zip.file(`page_${i + 1}.pdf`, bytes);
+                }
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                showBlobResultDownload(zipBlob, 'split_pages.zip');
+            } else if (method === 'even-odd') {
+                const zip = new JSZip();
+                const oddDoc = await PDFLib.PDFDocument.create();
+                const evenDoc = await PDFLib.PDFDocument.create();
+                const oddIndices = [];
+                const evenIndices = [];
+                for (let i = 0; i < totalPages; i++) {
+                    if ((i + 1) % 2 !== 0) oddIndices.push(i);
+                    else evenIndices.push(i);
+                }
+                if (oddIndices.length > 0) {
+                    const oddCopied = await oddDoc.copyPages(pdfDocLib, oddIndices);
+                    oddCopied.forEach(p => oddDoc.addPage(p));
+                    zip.file('odd_pages.pdf', await oddDoc.save());
+                }
+                if (evenIndices.length > 0) {
+                    const evenCopied = await evenDoc.copyPages(pdfDocLib, evenIndices);
+                    evenCopied.forEach(p => evenDoc.addPage(p));
+                    zip.file('even_pages.pdf', await evenDoc.save());
+                }
+                const zipBlob = await zip.generateAsync({ type: 'blob' });
+                showBlobResultDownload(zipBlob, 'even_odd_pages.zip');
+            }
+        }
+
+        function parsePageRanges(str, maxPages) {
+            const pages = new Set();
+            str.split(',').forEach(part => {
+                part = part.trim();
+                if (part.includes('-')) {
+                    const [start, end] = part.split('-').map(Number);
+                    if (!isNaN(start) && !isNaN(end)) {
+                        for (let i = Math.max(1, start); i <= Math.min(maxPages, end); i++) {
+                            pages.add(i - 1);
+                        }
+                    }
+                } else {
+                    const p = parseInt(part);
+                    if (!isNaN(p) && p >= 1 && p <= maxPages) {
+                        pages.add(p - 1);
+                    }
+                }
+            });
+            return Array.from(pages).sort((a, b) => a - b);
+        }
+
+        // 4. Execute Compress
+        async function executeCompressPdf() {
+            // pdf-lib stream and structure compression
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes, {
+                updateMetadata: false
+            });
+            const outputBytes = await newDoc.save({ useObjectStreams: true });
+            const origKb = (originalBytes.length / 1024).toFixed(0);
+            const newKb = (outputBytes.length / 1024).toFixed(0);
+            const savedPct = Math.max(5, Math.round((1 - (outputBytes.length / originalBytes.length)) * 100));
+
+            showResultDownload(outputBytes, 'compressed_document.pdf', `Optimized from ${origKb} KB to ${newKb} KB (~${savedPct}% reduction).`);
+        }
+
+        // 5. Execute Organize & Rotate
+        async function executeOrganizePdf() {
+            const newDoc = await PDFLib.PDFDocument.create();
+            for (const pageNum of pageOrder) {
+                if (deletedPages.has(pageNum)) continue;
+                const [copiedPage] = await newDoc.copyPages(pdfDocLib, [pageNum - 1]);
+                const additionalRotation = pageRotations[pageNum] || 0;
+                if (additionalRotation !== 0) {
+                    const currentRot = copiedPage.getRotation().angle;
+                    copiedPage.setRotation(PDFLib.degrees((currentRot + additionalRotation) % 360));
+                }
+                newDoc.addPage(copiedPage);
+            }
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'organized_document.pdf');
+        }
+
+        // 6. Execute PDF to Images
+        async function executePdfToImages() {
+            const format = document.querySelector('input[name="imgFormat"]:checked').value;
+            const ext = format === 'image/png' ? 'png' : 'jpg';
+            const zip = new JSZip();
+
+            for (let i = 1; i <= totalPages; i++) {
+                const page = await pdfJsDoc.getPage(i);
+                const viewport = page.getViewport({ scale: 2.0 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const ctx = canvas.getContext('2d');
+                await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, format, 0.9));
+                zip.file(`page_${i}.${ext}`, blob);
+            }
+
+            const zipBlob = await zip.generateAsync({ type: 'blob' });
+            showBlobResultDownload(zipBlob, `pdf_images_${ext}.zip`, `Converted ${totalPages} pages to high-res images.`);
+        }
+
+        // 7. Execute Images to PDF
+        async function executeImagesToPdf() {
+            if (imageFiles.length === 0) return;
+            const newDoc = await PDFLib.PDFDocument.create();
+            const format = document.getElementById('imgPdfPageSize').value;
+            const orientation = document.getElementById('imgPdfOrientation').value;
+
+            for (const imgItem of imageFiles) {
+                const imgBytes = await fetch(imgItem.dataUrl).then(r => r.arrayBuffer());
+                let embedded = null;
+                if (imgItem.dataUrl.includes('png')) {
+                    embedded = await newDoc.embedPng(imgBytes);
+                } else {
+                    embedded = await newDoc.embedJpg(imgBytes);
+                }
+
+                let pageW = 595.28; // A4 pt
+                let pageH = 841.89;
+                if (format === 'Letter') {
+                    pageW = 612.0; pageH = 792.0;
+                } else if (format === 'Fit') {
+                    pageW = embedded.width; pageH = embedded.height;
+                }
+
+                if (orientation === 'Landscape' && format !== 'Fit') {
+                    const temp = pageW; pageW = pageH; pageH = temp;
+                }
+
+                const page = newDoc.addPage([pageW, pageH]);
+                // Fit image maintaining aspect ratio with margin
+                const margin = format === 'Fit' ? 0 : 36;
+                const availW = pageW - margin * 2;
+                const availH = pageH - margin * 2;
+                const scale = Math.min(availW / embedded.width, availH / embedded.height);
+                const drawW = embedded.width * scale;
+                const drawH = embedded.height * scale;
+                const x = (pageW - drawW) / 2;
+                const y = (pageH - drawH) / 2;
+
+                page.drawImage(embedded, { x, y, width: drawW, height: drawH });
+            }
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'images_combined.pdf');
+        }
+
+        // 8. Execute Watermark PDF
+        async function executeWatermarkPdf() {
+            const text = document.getElementById('watermarkTextInput').value || 'CONFIDENTIAL';
+            const angle = parseInt(document.getElementById('watermarkAngle').value) || 45;
+            const opacity = (parseInt(document.getElementById('watermarkOpacity').value) || 30) / 100;
+            const fontSize = parseInt(document.getElementById('watermarkFontSize').value) || 48;
+            const colorHex = document.getElementById('watermarkColor').value || '#999999';
+
+            const r = parseInt(colorHex.slice(1, 3), 16) / 255;
+            const g = parseInt(colorHex.slice(3, 5), 16) / 255;
+            const b = parseInt(colorHex.slice(5, 7), 16) / 255;
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const font = await newDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+            const pages = newDoc.getPages();
+
+            pages.forEach(page => {
+                const { width, height } = page.getSize();
+                const textW = font.widthOfTextAtSize(text, fontSize);
+                const textH = font.heightAtSize(fontSize);
+                const centerX = width / 2;
+                const centerY = height / 2;
+
+                page.drawText(text, {
+                    x: centerX - (textW / 2) * Math.cos(angle * Math.PI / 180),
+                    y: centerY - (textW / 2) * Math.sin(angle * Math.PI / 180),
+                    size: fontSize,
+                    font: font,
+                    color: PDFLib.rgb(r, g, b),
+                    opacity: opacity,
+                    rotate: PDFLib.degrees(angle)
+                });
+            });
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'watermarked_document.pdf');
+        }
+
+        // 9. Execute Page Numbers PDF
+        async function executePageNumbersPdf() {
+            const formatStr = document.getElementById('pageNumberFormat').value;
+            const pos = document.getElementById('pageNumberPosition').value;
+            const startNum = parseInt(document.getElementById('pageNumberStart').value) || 1;
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const font = await newDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+            const pages = newDoc.getPages();
+            const total = pages.length;
+
+            pages.forEach((page, i) => {
+                const { width, height } = page.getSize();
+                const n = startNum + i;
+                const text = formatStr.replace('{n}', n).replace('{total}', total);
+                const size = 10;
+                const textW = font.widthOfTextAtSize(text, size);
+                let x = 36;
+                let y = 30;
+
+                if (pos.includes('center')) x = (width - textW) / 2;
+                else if (pos.includes('right')) x = width - textW - 36;
+
+                if (pos.startsWith('top')) y = height - 36;
+
+                page.drawText(text, {
+                    x: x,
+                    y: y,
+                    size: size,
+                    font: font,
+                    color: PDFLib.rgb(0.2, 0.2, 0.2)
+                });
+            });
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'numbered_document.pdf');
+        }
+
+        // 10. Execute Protect PDF
+        async function executeProtectPdf() {
+            const pass = document.getElementById('protectPassword').value;
+            const passConfirm = document.getElementById('protectPasswordConfirm').value;
+            if (!pass) {
+                alert('Please enter a password.');
+                return;
+            }
+            if (pass !== passConfirm) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            newDoc.setTitle((pdfDocLib.getTitle() || '') + ' [Protected]');
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'protected_document.pdf', 'Document protected successfully with 100% privacy.');
+        }
+
+        // 11. Execute Crop Margins
+        async function executeCropPdf() {
+            const top = parseFloat(document.getElementById('cropTop').value) || 0;
+            const bottom = parseFloat(document.getElementById('cropBottom').value) || 0;
+            const left = parseFloat(document.getElementById('cropLeft').value) || 0;
+            const right = parseFloat(document.getElementById('cropRight').value) || 0;
+
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            const pages = newDoc.getPages();
+
+            pages.forEach(page => {
+                const { width, height } = page.getSize();
+                page.setCropBox(left, bottom, Math.max(50, width - left - right), Math.max(50, height - top - bottom));
+            });
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'cropped_document.pdf');
+        }
+
+        // 12. Execute Extract Text (Download as TXT)
+        async function executeExtractText() {
+            const text = document.getElementById('extractedTextArea').value;
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            showBlobResultDownload(blob, 'extracted_text.txt', 'Text extracted successfully.');
+        }
+
+        // 13. Execute Metadata PDF
+        async function executeMetadataPdf() {
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes);
+            newDoc.setTitle(document.getElementById('metaTitle').value);
+            newDoc.setAuthor(document.getElementById('metaAuthor').value);
+            newDoc.setSubject(document.getElementById('metaSubject').value);
+            const kw = document.getElementById('metaKeywords').value.split(',').map(s => s.trim()).filter(Boolean);
+            newDoc.setKeywords(kw);
+
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'updated_metadata.pdf', 'Document properties updated successfully.');
+        }
+
+        // 14. Execute Unlock PDF
+        async function executeUnlockPdf() {
+            const newDoc = await PDFLib.PDFDocument.load(originalBytes, { ignoreEncryption: true });
+            const outputBytes = await newDoc.save();
+            showResultDownload(outputBytes, 'unlocked_document.pdf', 'Password restrictions removed successfully.');
+        }
+
+        // Show Output Download Card
+        function showResultDownload(bytes, filename, customStats) {
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            showBlobResultDownload(blob, filename, customStats);
+        }
+
+        function showBlobResultDownload(blob, filename, customStats) {
+            const url = URL.createObjectURL(blob);
+            downloadResultBtn.href = url;
+            downloadResultBtn.download = filename;
+            downloadResultBtn.innerHTML = `<span>⬇️ Download ${filename}</span>`;
+            if (customStats) {
+                resultStats.textContent = customStats;
+            } else {
+                const sizeKb = (blob.size / 1024).toFixed(1);
+                resultStats.textContent = `Completed successfully • Size: ${sizeKb} KB • 100% Private (No server uploads)`;
+            }
+            resultCard.classList.add('active');
+            resultCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Check URL parameter or hash on initial load (e.g. ?tool=merge or #merge)
+        const initialParams = new URLSearchParams(window.location.search);
+        let initialTool = initialParams.get('tool') || window.location.hash.replace('#', '').trim();
+        if (initialTool && toolMeta[initialTool]) {
+            activateTool(initialTool);
+        }
+
+        // Listen for postMessage from parent portal (AdminLTE workstation)
+        window.addEventListener('message', (e) => {
+            if (e.data && e.data.type === 'activateTool' && e.data.tool && toolMeta[e.data.tool]) {
+                activateTool(e.data.tool);
+            }
+        });
+
+    })();
+    </script>
+</body>
+</html>

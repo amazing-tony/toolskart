@@ -1,4 +1,4 @@
-/* Image Compressor — ToolsKart */
+﻿/* Image Compressor — Amazing-Tools */
 (function () {
   'use strict';
 

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online OCR Tool — Extract Text from Images & Scanned PDFs | Amazing-Tools</title>
+    <meta name="description" content="Extract editable text from images, photos, screenshots and scanned PDF documents with free online OCR. 100% private, client-side processing in your browser.">
+    <meta name="keywords" content="ocr tool, image to text, extract text from image, picture to text, photo to text converter, scanned pdf to text, free online ocr">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/ocr-tool.html">
+    <meta property="og:title" content="Free Online OCR Tool — Image & PDF to Text | Amazing-Tools">
+    <meta property="og:description" content="Convert images and scanned documents into editable text instantly. 100% private in your browser.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online OCR Tool",
+      "url": "https://amazing-tools.github.io/pages/ocr-tool.html",
+      "description": "Extract text from images, photos, and scanned PDFs directly in browser with 100% privacy.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .ocr-hero {
+            background: linear-gradient(135deg, #1E3A5F 0%, #2A5298 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .ocr-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .ocr-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .upload-area {
+            border: 2.5px dashed var(--border-color);
+            background: var(--bg-alt);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-bottom: 1.5rem;
+        }
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: var(--primary-color);
+            background: #f0f7ff;
+            transform: scale(1.005);
+        }
+        .upload-icon { font-size: 3.5rem; margin-bottom: 0.75rem; }
+
+        .ocr-controls-card {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .ocr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .ocr-grid { grid-template-columns: 1fr; }
+        }
+
+        .preview-box {
+            background: var(--bg-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .preview-box img {
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .result-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .result-textarea {
+            width: 100%;
+            height: 250px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            background: #ffffff;
+            color: #1f2937;
+        }
+
+        .ocr-stats-strip {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .ocr-stat-tag {
+            background: var(--bg-alt);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .progress-box {
+            display: none;
+            margin: 1.25rem 0;
+            background: #f8fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .progress-bar-track {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 0.75rem 0 0.5rem;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1E3A5F, #2563eb);
+            transition: width 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; OCR Tool
+            </nav>
+
+            <div class="ocr-hero">
+                <h1>🔍 Free Online OCR Image to Text</h1>
+                <p>Instantly extract text from photos, screenshots, and scanned documents. <strong>100% Private, Client-Side OCR</strong> with zero server uploads.</p>
+            </div>
+
+            <div class="tool-container">
+                <div class="tool-main">
+
+                    <!-- Dropzone -->
+                    <div id="ocrUploadArea" class="upload-area">
+                        <div class="upload-icon">📷</div>
+                        <h3>Click or Drop Image or Scanned PDF Here</h3>
+                        <p class="text-muted" style="margin-top:0.4rem;">Supports <strong>PNG, JPG, WEBP, BMP, GIF, PDF</strong></p>
+                        <input type="file" id="ocrFileInput" accept="image/*,application/pdf" style="display:none;">
+                    </div>
+
+                    <!-- OCR Configuration & Workspace -->
+                    <div id="ocrWorkspace" class="ocr-controls-card" style="display:none;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <label for="ocrLanguage" style="font-weight:600; font-size:0.9rem;">Document Language:</label>
+                                <select id="ocrLanguage" class="input-field" style="width:auto; padding:0.4rem 0.8rem;">
+                                    <option value="eng" selected>English</option>
+                                    <option value="spa">Spanish (Español)</option>
+                                    <option value="fra">French (Français)</option>
+                                    <option value="deu">German (Deutsch)</option>
+                                    <option value="hin">Hindi (हिन्दी)</option>
+                                    <option value="ita">Italian (Italiano)</option>
+                                    <option value="por">Portuguese (Português)</option>
+                                    <option value="chi_sim">Chinese Simplified (简体中文)</option>
+                                    <option value="jpn">Japanese (日本語)</option>
+                                </select>
+                            </div>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button id="btnStartOcr" class="btn btn-primary" style="padding:0.5rem 1.25rem;">⚡ Extract Text</button>
+                                <button id="btnResetOcr" class="btn btn-outline" style="padding:0.5rem 1rem;">✕ Clear</button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div id="ocrProgressBox" class="progress-box">
+                            <div id="ocrProgressStatus" style="font-weight:600; font-size:0.95rem; color:#1E3A5F;">Initializing OCR Engine...</div>
+                            <div class="progress-bar-track">
+                                <div id="ocrProgressBar" class="progress-bar-fill"></div>
+                            </div>
+                            <div id="ocrProgressPercent" style="font-size:0.85rem; color:#64748b;">0%</div>
+                        </div>
+
+                        <!-- Side by Side Preview & Result -->
+                        <div class="ocr-grid">
+                            <div>
+                                <h4 style="margin-bottom:0.5rem;">Source Preview</h4>
+                                <div class="preview-box">
+                                    <img id="ocrImgPreview" src="" alt="OCR Target Preview" style="display:none;">
+                                    <div id="ocrPreviewPlaceholder" class="text-muted">No image loaded</div>
+                                </div>
+                            </div>
+
+                            <div class="result-box">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+                                    <h4 style="margin:0;">Extracted Text</h4>
+                                    <div style="display:flex; gap:0.4rem;">
+                                        <button id="btnCopyText" class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.82rem;" title="Copy to Clipboard">📋 Copy</button>
+                                        <button id="btnDownloadTxt" class="btn btn-outline" style="padding:0.25rem 0.6rem; font-size:0.82rem;" title="Download as .txt">💾 Download</button>
+                                    </div>
+                                </div>
+                                <textarea id="ocrResultText" class="result-textarea" placeholder="Recognized text will appear here..."></textarea>
+                                
+                                <div class="ocr-stats-strip">
+                                    <span class="ocr-stat-tag">Words: <span id="ocrWordCount">0</span></span>
+                                    <span class="ocr-stat-tag">Characters: <span id="ocrCharCount">0</span></span>
+                                    <span class="ocr-stat-tag">Confidence: <span id="ocrConfidence">--</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEO Educational / FAQ Section -->
+                    <section class="info-section" style="margin-top:2.5rem;">
+                        <h2>How Optical Character Recognition (OCR) Works</h2>
+                        <p>OCR uses computer vision and neural networks to recognize character shapes, glyphs, and typography within bitmap images and converts them into searchable, editable Unicode text.</p>
+                        
+                        <div class="faq-item">
+                            <h3 class="faq-question">Is my uploaded document private?</h3>
+                            <p class="faq-answer">Yes, 100%. All optical character recognition is executed directly in your web browser using WebAssembly and Web Workers. Your files are never sent to any remote server.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-question">What file formats are supported?</h3>
+                            <p class="faq-answer">You can upload all standard image types including PNG, JPG, JPEG, WEBP, BMP, and GIF, as well as scanned PDF files.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-question">How can I improve OCR accuracy?</h3>
+                            <p class="faq-answer">For highest accuracy, use sharp, high-contrast images without glare or motion blur, and select the correct language matching the document text.</p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+                <a href="document-converter.html">Document Converter</a>
+                <a href="video-downloader.html">Video Downloader</a>
+                <a href="ocr-tool.html">OCR Image to Text</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tesseract.js & PDF.js for Client-Side OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+    </script>
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        const uploadArea = document.getElementById('ocrUploadArea');
+        const fileInput = document.getElementById('ocrFileInput');
+        const workspace = document.getElementById('ocrWorkspace');
+        const imgPreview = document.getElementById('ocrImgPreview');
+        const placeholder = document.getElementById('ocrPreviewPlaceholder');
+        const languageSelect = document.getElementById('ocrLanguage');
+        const btnStart = document.getElementById('btnStartOcr');
+        const btnReset = document.getElementById('btnResetOcr');
+        const progressBox = document.getElementById('ocrProgressBox');
+        const progressStatus = document.getElementById('ocrProgressStatus');
+        const progressBar = document.getElementById('ocrProgressBar');
+        const progressPercent = document.getElementById('ocrProgressPercent');
+        const resultText = document.getElementById('ocrResultText');
+        const wordCountEl = document.getElementById('ocrWordCount');
+        const charCountEl = document.getElementById('ocrCharCount');
+        const confidenceEl = document.getElementById('ocrConfidence');
+        const btnCopy = document.getElementById('btnCopyText');
+        const btnDownload = document.getElementById('btnDownloadTxt');
+
+        let currentImageSource = null;
+
+        if (uploadArea && fileInput) {
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+            });
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) handleFile(e.target.files[0]);
+            });
+        }
+
+        async function handleFile(file) {
+            if (!file) return;
+            uploadArea.style.display = 'none';
+            workspace.style.display = 'block';
+            resultText.value = '';
+            updateCounts('');
+
+            if (file.type === 'application/pdf') {
+                // Render first page of PDF using PDF.js
+                try {
+                    progressStatus.textContent = 'Rendering PDF page...';
+                    progressBox.style.display = 'block';
+                    progressBar.style.width = '30%';
+                    const arrayBuf = await file.arrayBuffer();
+                    const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuf }).promise;
+                    const page = await pdfDoc.getPage(1);
+                    const viewport = page.getViewport({ scale: 2.0 });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+                    currentImageSource = canvas.toDataURL('image/png');
+                    imgPreview.src = currentImageSource;
+                    imgPreview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    progressBox.style.display = 'none';
+                } catch(e) {
+                    alert('Could not render PDF: ' + e.message);
+                    resetAll();
+                }
+            } else {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    currentImageSource = ev.target.result;
+                    imgPreview.src = currentImageSource;
+                    imgPreview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        btnStart.addEventListener('click', runOCR);
+        btnReset.addEventListener('click', resetAll);
+
+        async function runOCR() {
+            if (!currentImageSource) {
+                alert('Please upload an image first.');
+                return;
+            }
+            if (typeof Tesseract === 'undefined') {
+                alert('Tesseract OCR engine is still loading. Please wait a moment.');
+                return;
+            }
+
+            btnStart.disabled = true;
+            progressBox.style.display = 'block';
+            progressBar.style.width = '5%';
+            progressPercent.textContent = '5%';
+            progressStatus.textContent = 'Initializing Tesseract OCR engine...';
+
+            const lang = languageSelect.value || 'eng';
+
+            try {
+                const result = await Tesseract.recognize(
+                    currentImageSource,
+                    lang,
+                    {
+                        logger: m => {
+                            if (m.status && m.progress !== undefined) {
+                                const pct = Math.round(m.progress * 100);
+                                progressBar.style.width = pct + '%';
+                                progressPercent.textContent = pct + '%';
+                                progressStatus.textContent = m.status.charAt(0).toUpperCase() + m.status.slice(1) + '...';
+                            }
+                        }
+                    }
+                );
+
+                const text = result.data.text || '';
+                resultText.value = text;
+                updateCounts(text);
+                const conf = Math.round(result.data.confidence || 0);
+                confidenceEl.textContent = conf + '%';
+
+                progressStatus.textContent = 'Recognition complete!';
+                progressBar.style.width = '100%';
+                progressPercent.textContent = '100%';
+                setTimeout(() => { progressBox.style.display = 'none'; }, 1200);
+
+            } catch(err) {
+                console.error(err);
+                alert('OCR Error: ' + err.message);
+                progressBox.style.display = 'none';
+            } finally {
+                btnStart.disabled = false;
+            }
+        }
+
+        function updateCounts(text) {
+            const trimmed = text.trim();
+            const words = trimmed ? trimmed.split(/\s+/).length : 0;
+            const chars = text.length;
+            wordCountEl.textContent = words;
+            charCountEl.textContent = chars;
+        }
+
+        resultText.addEventListener('input', () => updateCounts(resultText.value));
+
+        btnCopy.addEventListener('click', () => {
+            if (!resultText.value) return;
+            navigator.clipboard.writeText(resultText.value);
+            const orig = btnCopy.textContent;
+            btnCopy.textContent = '✓ Copied!';
+            setTimeout(() => btnCopy.textContent = orig, 1500);
+        });
+
+        btnDownload.addEventListener('click', () => {
+            if (!resultText.value) return;
+            const blob = new Blob([resultText.value], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ocr-extracted-text.txt';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+
+        function resetAll() {
+            currentImageSource = null;
+            imgPreview.src = '';
+            imgPreview.style.display = 'none';
+            placeholder.style.display = 'block';
+            resultText.value = '';
+            updateCounts('');
+            confidenceEl.textContent = '--';
+            progressBox.style.display = 'none';
+            workspace.style.display = 'none';
+            uploadArea.style.display = 'block';
+            fileInput.value = '';
+        }
+    })();
+    </script>
+</body>
+</html>

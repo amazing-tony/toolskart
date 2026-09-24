@@ -1,4 +1,4 @@
-/* Meta Tag Generator — ToolsKart */
+﻿/* Meta Tag Generator — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -128,7 +128,7 @@
 
   copyBtn.addEventListener('click', function () {
     if (outputArea.value) {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       if (TK && TK.copyToClipboard) {
         TK.copyToClipboard(outputArea.value, this);
       } else {

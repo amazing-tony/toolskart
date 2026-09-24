@@ -1,4 +1,4 @@
-# ToolsKart Robots.txt
+﻿# Amazing-Tools Robots.txt
 # https://amazing-tools.github.io/
 
 User-agent: *

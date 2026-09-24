@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Markdown to PDF Converter — Beautiful Documents Online | Amazing-Tools</title>
+    <meta name="description" content="Convert Markdown (.md) to styled, publication-ready PDF documents instantly. Dual-pane live preview, GitHub & Academic styles, 100% private in your browser.">
+    <meta name="keywords" content="markdown to pdf, convert md to pdf, markdown pdf generator, github markdown to pdf, online markdown to pdf converter">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/markdown-to-pdf.html">
+    <meta property="og:title" content="Free Markdown to PDF Converter | Amazing-Tools">
+    <meta property="og:description" content="Convert Markdown to beautiful PDF documents with live preview and custom themes.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Markdown to PDF Converter",
+      "url": "https://amazing-tools.github.io/pages/markdown-to-pdf.html",
+      "description": "Convert Markdown (.md) to PDF documents with 100% privacy.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .md-hero {
+            background: linear-gradient(135deg, #1E3A5F 0%, #2A5298 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .md-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .md-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .md-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .md-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        @media (max-width: 900px) {
+            .md-grid { grid-template-columns: 1fr; }
+        }
+
+        .editor-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+        .md-textarea {
+            width: 100%;
+            height: 650px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            resize: vertical;
+            background: #ffffff;
+            color: #1f2937;
+            box-sizing: border-box;
+        }
+        .md-textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .preview-paper {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            min-height: 650px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            overflow-y: auto;
+            color: #1f2937;
+        }
+
+        /* Markdown Render Typography Styles */
+        .preview-paper h1 { font-size: 2rem; font-weight: 800; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.4rem; margin-top: 0; }
+        .preview-paper h2 { font-size: 1.45rem; font-weight: 700; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3rem; margin-top: 1.5rem; }
+        .preview-paper h3 { font-size: 1.2rem; font-weight: 600; margin-top: 1.25rem; }
+        .preview-paper p { line-height: 1.7; margin-bottom: 1rem; }
+        .preview-paper code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; }
+        .preview-paper pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 1rem; overflow-x: auto; }
+        .preview-paper pre code { background: none; padding: 0; }
+        .preview-paper blockquote { border-left: 4px solid #2563eb; margin: 1rem 0; padding-left: 1rem; color: #4b5563; font-style: italic; }
+        .preview-paper table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.92rem; }
+        .preview-paper th, .preview-paper td { border: 1px solid #e2e8f0; padding: 0.55rem 0.75rem; text-align: left; }
+        .preview-paper th { background: #f8fafc; font-weight: 600; }
+        .preview-paper ul, .preview-paper ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+        .preview-paper li { margin-bottom: 0.35rem; line-height: 1.6; }
+        .preview-paper hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
+
+        /* Themes */
+        .theme-academic { font-family: 'Newsreader', Georgia, serif; }
+        .theme-academic h1, .theme-academic h2 { font-family: 'Newsreader', serif; }
+        .theme-github { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+        .theme-modern { font-family: 'Inter', system-ui, sans-serif; }
+
+        @media print {
+            body * { visibility: hidden; }
+            .header, .footer, .md-hero, .md-toolbar, .editor-wrap, .breadcrumb, .info-section, .theme-cycle-wrap { display: none !important; }
+            #mdPreviewPaper, #mdPreviewPaper * { visibility: visible; }
+            #mdPreviewPaper {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#doc-tools">Document Tools</a> &raquo; Markdown to PDF
+            </nav>
+
+            <div class="md-hero">
+                <h1>✍️ Free Markdown to PDF Converter</h1>
+                <p>Convert Markdown documents into beautiful, publication-ready PDF files. <strong>Dual-pane live preview</strong> with zero server uploads.</p>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="md-toolbar">
+                <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+                    <label for="themeSelect" style="font-weight:600; font-size:0.85rem;">Document Theme:</label>
+                    <select id="themeSelect" class="input-field" style="width:auto; padding:0.35rem 0.75rem;">
+                        <option value="theme-github" selected>GitHub Classic</option>
+                        <option value="theme-modern">Modern Tech (Inter)</option>
+                        <option value="theme-academic">Academic Paper (Serif)</option>
+                    </select>
+
+                    <button id="btnLoadSampleMd" class="btn btn-outline" style="padding:0.35rem 0.75rem; font-size:0.85rem;">📄 Sample</button>
+                    <button id="btnClearMd" class="btn btn-outline" style="padding:0.35rem 0.75rem; font-size:0.85rem;">✕ Clear</button>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                    <button id="btnDownloadMdPdf" class="btn btn-primary" style="padding:0.5rem 1.25rem;">📥 Download PDF</button>
+                    <button id="btnPrintMd" class="btn btn-outline" style="padding:0.5rem 1rem;">🖨️ Print</button>
+                </div>
+            </div>
+
+            <!-- Dual Pane Layout -->
+            <div class="md-grid">
+                
+                <!-- Editor Pane -->
+                <div class="editor-wrap">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-weight:600; font-size:0.9rem;">
+                        <span>Markdown Input</span>
+                        <span id="mdStats" style="font-weight:normal; color:#64748b; font-size:0.8rem;">0 words • 0 chars</span>
+                    </div>
+                    <textarea id="mdInput" class="md-textarea" placeholder="Type or paste Markdown here..."></textarea>
+                </div>
+
+                <!-- Live Rendered Preview Pane -->
+                <div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem; font-weight:600; font-size:0.9rem;">
+                        <span>PDF Document Preview</span>
+                        <span style="font-weight:normal; color:#64748b; font-size:0.8rem;">A4 Page Layout</span>
+                    </div>
+                    <div id="mdPreviewPaper" class="preview-paper theme-github"></div>
+                </div>
+
+            </div>
+
+            <!-- SEO FAQ -->
+            <section class="info-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h3 class="faq-question">What Markdown features are supported?</h3>
+                    <p class="faq-answer">All GitHub Flavored Markdown (GFM) features are supported including tables, checklists, inline code, code blocks with syntax styling, blockquotes, and auto-linked URLs.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is my document private?</h3>
+                    <p class="faq-answer">Yes, 100%. Markdown rendering and PDF generation are performed locally in your browser without transmitting your content to any third-party server.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+                <a href="markdown-to-pdf.html">Markdown to PDF</a>
+                <a href="document-converter.html">Document Converter</a>
+                <a href="ocr-tool.html">OCR Image to Text</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Marked parser, html2canvas, and jsPDF -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        const mdInput = document.getElementById('mdInput');
+        const mdPreviewPaper = document.getElementById('mdPreviewPaper');
+        const themeSelect = document.getElementById('themeSelect');
+        const mdStats = document.getElementById('mdStats');
+        const btnDownload = document.getElementById('btnDownloadMdPdf');
+        const btnPrint = document.getElementById('btnPrintMd');
+        const btnSample = document.getElementById('btnLoadSampleMd');
+        const btnClear = document.getElementById('btnClearMd');
+
+        const SAMPLE_MD = `# Technical Architecture & System Design Document
+
+## Executive Summary
+This document specifies the distributed microservice architecture, API contracts, and privacy guarantees for **Amazing-Tools Portal 2.0**.
+
+### Key Architectural Pillars
+- **Zero Server Uploads**: Client-side WebAssembly, Web Audio, and PDF.js pipelines.
+- **Sub-100ms Latency**: Native DOM acceleration and responsive design systems.
+- **Universal Cross-Platform**: Full desktop, tablet, and mobile support.
+
+---
+
+## Service Matrix & Latency SLA
+
+| Service Layer | Engine | Latency SLA | Privacy Guarantee |
+| :--- | :--- | :--- | :--- |
+| **PDF Processing** | \`pdf-lib\` + \`pdf.js\` | < 150 ms | 100% Client-Side |
+| **Document Converter** | \`docx-preview\` + \`docx.js\` | < 250 ms | Zero Uploads |
+| **OCR Text Extraction** | \`tesseract.js\` (WASM) | Real-time | In-Browser Worker |
+| **Screen Recording** | \`MediaRecorder\` API | Native FPS | Local Sandbox |
+
+---
+
+## Code Example: Safe ArrayBuffer Transfer
+
+\`\`\`javascript
+// Prevent neutering buffer during Web Worker postMessage
+const loadingTask = pdfjsLib.getDocument({
+    data: originalBytes.slice() // Preserve original byte stream
+});
+const pdfDoc = await loadingTask.promise;
+console.log('Pages loaded successfully:', pdfDoc.numPages);
+\`\`\`
+
+> *"Architecture is about the important stuff. Whatever that is."* — Martin Fowler
+
+### Verification Checklist
+- [x] Automated Headless Chrome E2E test suite passing
+- [x] All 11 design themes tested across desktop and mobile
+- [x] High-DPI canvas rasterization at scale 2.0
+`;
+
+        function renderMarkdown() {
+            const raw = mdInput.value;
+            if (typeof marked !== 'undefined') {
+                mdPreviewPaper.innerHTML = marked.parse(raw);
+            } else {
+                mdPreviewPaper.textContent = raw;
+            }
+
+            const words = raw.trim() ? raw.trim().split(/\s+/).length : 0;
+            const chars = raw.length;
+            mdStats.textContent = `${words} words • ${chars} chars`;
+        }
+
+        mdInput.addEventListener('input', renderMarkdown);
+
+        themeSelect.addEventListener('change', () => {
+            mdPreviewPaper.className = 'preview-paper ' + themeSelect.value;
+        });
+
+        btnSample.addEventListener('click', () => {
+            mdInput.value = SAMPLE_MD;
+            renderMarkdown();
+        });
+
+        btnClear.addEventListener('click', () => {
+            mdInput.value = '';
+            renderMarkdown();
+        });
+
+        btnPrint.addEventListener('click', () => {
+            window.print();
+        });
+
+        btnDownload.addEventListener('click', async () => {
+            const btn = btnDownload;
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ Rendering PDF...';
+            btn.disabled = true;
+
+            try {
+                const canvas = await html2canvas(mdPreviewPaper, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+                const pdfW = pdf.internal.pageSize.getWidth();
+                const pdfH = pdf.internal.pageSize.getHeight();
+                const pageCanvasHeight = Math.round(canvas.width * (pdfH / pdfW));
+
+                if (canvas.height <= pageCanvasHeight * 1.05) {
+                    pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, pdfW, (canvas.height * pdfW) / canvas.width);
+                } else {
+                    let yOffset = 0;
+                    let pageNum = 0;
+                    while (yOffset < canvas.height) {
+                        if (pageNum > 0) pdf.addPage('a4', 'portrait');
+                        const pCanvas = document.createElement('canvas');
+                        pCanvas.width = canvas.width;
+                        pCanvas.height = pageCanvasHeight;
+                        const pCtx = pCanvas.getContext('2d');
+                        pCtx.fillStyle = '#ffffff';
+                        pCtx.fillRect(0, 0, pCanvas.width, pCanvas.height);
+                        pCtx.drawImage(canvas, 0, yOffset, canvas.width, Math.min(pageCanvasHeight, canvas.height - yOffset), 0, 0, canvas.width, Math.min(pageCanvasHeight, canvas.height - yOffset));
+
+                        pdf.addImage(pCanvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, pdfW, pdfH);
+                        yOffset += pageCanvasHeight;
+                        pageNum++;
+                    }
+                }
+
+                pdf.save('document.pdf');
+            } catch(e) {
+                alert('PDF generation error: ' + e.message);
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        mdInput.value = SAMPLE_MD;
+        renderMarkdown();
+    })();
+    </script>
+</body>
+</html>

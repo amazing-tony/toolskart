@@ -1,5 +1,5 @@
-/* ========================================================
-   ToolsKart — Buy Home vs. Rent Calculator & Decision Engine
+﻿/* ========================================================
+   Amazing-Tools — Buy Home vs. Rent Calculator & Decision Engine
    Indian Real Estate & Wealth Compounding Model
    ======================================================== */
 
@@ -645,14 +645,14 @@
       cachedYearlyData.forEach(d => {
         csv += `${d.year},${Math.round(d.propertyValue)},${Math.round(d.loanBalance)},${Math.round(d.buyerNetWorth)},${Math.round(d.monthlyRent)},${Math.round(d.renterNetWorth)},${d.winner}\n`;
       });
-      if (window.ToolsKart && window.ToolsKart.downloadFile) {
+      if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
         csv += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
       csv += '# This output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
       csv += '# Real estate appreciation, rental yield, and investment returns vary widely by locality and macroeconomic factors.\n';
       csv += '# All figures must be independently verified at user level with legal and financial advisors before buying or leasing.\n';
       csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
-      csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
-      window.ToolsKart.downloadFile(csv, 'Buy_vs_Rent_30Year_Comparison.csv', 'text/csv');
+      csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
+      window.Amazing-Tools.downloadFile(csv, 'Buy_vs_Rent_30Year_Comparison.csv', 'text/csv');
       }
     });
   }
@@ -769,7 +769,7 @@
         "Real estate appreciation, rental inflation, maintenance charges, and equity returns are subject to market volatility and local city regulations.\n\n" +
         "Mandatory Verification: Users must independently verify all assumptions, property appreciation rates, and mortgage quotes with local real estate experts and banks. " +
         "Amazing-tools and its operators assume no legal or financial liability for any discrepancies, differences, or financial decisions made based on this output.\n\n" +
-        "Report Miscalculations: If you notice any calculation discrepancy, please report it directly on our portal (hello@toolskart.com) for prompt verification and correction.";
+        "Report Miscalculations: If you notice any calculation discrepancy, please report it directly on our portal (hello@Amazing-Tools.com) for prompt verification and correction.";
       
       doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
       doc.save(`Buy_vs_Rent_Report_30Year.pdf`);

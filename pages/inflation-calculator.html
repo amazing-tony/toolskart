@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflation Calculator — Calculate Purchasing Power & Future Value | Amazing-Tools</title>
+    <meta name="description" content="Calculate the impact of inflation on your money and future cost of living. See how purchasing power decreases over time with year-by-year projections.">
+    <meta name="keywords" content="inflation calculator, purchasing power calculator, cost of living calculator, future value inflation, money depreciation calculator">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/inflation-calculator.html">
+    <meta property="og:title" content="Inflation & Purchasing Power Calculator | Amazing-Tools">
+    <meta property="og:description" content="Calculate the future cost of goods and loss in purchasing power over time.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Inflation Calculator",
+      "url": "https://amazing-tools.github.io/pages/inflation-calculator.html",
+      "description": "Calculate purchasing power and future costs based on annual inflation rates.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    }
+    </script>
+    <style>
+        .calc-hero {
+            background: linear-gradient(135deg, #1E3A5F 0%, #2A5298 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .calc-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .calc-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .calc-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .metric-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .metric-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .metric-label { font-size: 0.82rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 0.35rem; }
+        .metric-val { font-size: 1.6rem; font-weight: 800; color: #1E3A5F; }
+        .metric-sub { font-size: 0.78rem; color: #64748b; margin-top: 0.25rem; }
+
+        .preset-pill-row {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-top: 0.4rem;
+        }
+        .preset-pill {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .preset-pill:hover { background: #e2e8f0; }
+
+        .progression-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .progression-table th, .progression-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem 0.75rem;
+            text-align: right;
+        }
+        .progression-table th { background: #f8fafc; font-weight: 600; text-align: right; }
+        .progression-table td:first-child, .progression-table th:first-child { text-align: left; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#calculators">Calculators</a> &raquo; Inflation Calculator
+            </nav>
+
+            <div class="calc-hero">
+                <h1>📈 Inflation &amp; Purchasing Power Calculator</h1>
+                <p>Calculate the true impact of inflation on your money, savings, and future cost of living with year-by-year projections.</p>
+            </div>
+
+            <div class="tool-container">
+                <div class="tool-main">
+
+                    <div class="calc-card">
+                        
+                        <!-- Calculation Mode Selector -->
+                        <div style="display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+                            <label style="font-weight:600; cursor:pointer; display:flex; align-items:center; gap:0.4rem;">
+                                <input type="radio" name="calcMode" value="future" checked>
+                                <span>Future Cost Projection (What will ₹X cost in N years?)</span>
+                            </label>
+                            <label style="font-weight:600; cursor:pointer; display:flex; align-items:center; gap:0.4rem;">
+                                <input type="radio" name="calcMode" value="past">
+                                <span>Past Purchasing Power (What was ₹X worth N years ago?)</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="baseAmount" id="lblBaseAmount">Current Amount / Cost</label>
+                            <div class="input-with-unit" style="display:flex;">
+                                <select id="calcCurrency" class="input-field" style="width:90px; border-top-right-radius:0; border-bottom-right-radius:0; border-right:none;">
+                                    <option value="₹" selected>₹ INR</option>
+                                    <option value="$">$ USD</option>
+                                    <option value="€">€ EUR</option>
+                                    <option value="£">£ GBP</option>
+                                </select>
+                                <input type="number" id="baseAmount" class="input-field" value="100000" min="1" step="any" style="border-top-left-radius:0; border-bottom-left-radius:0;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inflationRate">Average Annual Inflation Rate (%)</label>
+                            <input type="number" id="inflationRate" class="input-field" value="6" min="0" max="100" step="0.1">
+                            <div class="preset-pill-row">
+                                <span style="font-size:0.75rem; color:#64748b; align-self:center;">Presets:</span>
+                                <button type="button" class="preset-pill rate-pill" data-rate="6">🇮🇳 India (6.0%)</button>
+                                <button type="button" class="preset-pill rate-pill" data-rate="3">🇺🇸 US (3.0%)</button>
+                                <button type="button" class="preset-pill rate-pill" data-rate="2">Target (2.0%)</button>
+                                <button type="button" class="preset-pill rate-pill" data-rate="8">High (8.0%)</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeYears">Time Horizon (Years)</label>
+                            <input type="number" id="timeYears" class="input-field" value="10" min="1" max="100" step="1">
+                            <div class="preset-pill-row">
+                                <span style="font-size:0.75rem; color:#64748b; align-self:center;">Years:</span>
+                                <button type="button" class="preset-pill yr-pill" data-yr="5">5 Yrs</button>
+                                <button type="button" class="preset-pill yr-pill" data-yr="10">10 Yrs</button>
+                                <button type="button" class="preset-pill yr-pill" data-yr="15">15 Yrs</button>
+                                <button type="button" class="preset-pill yr-pill" data-yr="20">20 Yrs</button>
+                                <button type="button" class="preset-pill yr-pill" data-yr="30">30 Yrs</button>
+                            </div>
+                        </div>
+
+                        <!-- Results Area -->
+                        <div class="metric-cards-grid">
+                            <div class="metric-card">
+                                <div class="metric-label" id="resTargetLabel">Future Cost / Value</div>
+                                <div class="metric-val" id="resFutureCost">₹179,085</div>
+                                <div class="metric-sub" id="resTargetSub">Required in 10 years</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Loss in Purchasing Power</div>
+                                <div class="metric-val" id="resPowerLoss" style="color:#dc2626;">44.2%</div>
+                                <div class="metric-sub">Value erosion over period</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Inflation Multiplier</div>
+                                <div class="metric-val" id="resMultiplier">1.79x</div>
+                                <div class="metric-sub">Price increase factor</div>
+                            </div>
+                        </div>
+
+                        <!-- Year-by-Year Breakdown Table -->
+                        <h4 style="margin-top:2rem; margin-bottom:0.5rem;">Year-by-Year Progression Schedule</h4>
+                        <div style="overflow-x:auto;">
+                            <table class="progression-table">
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th id="thFutureCost">Future Cost</th>
+                                        <th>Purchasing Power Remaining</th>
+                                        <th>Inflation Factor</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="progressionBody"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- SEO & Formula Section -->
+                    <section class="info-section">
+                        <h2>Inflation &amp; Purchasing Power Formulas</h2>
+                        <div class="formula-box">
+                            <strong>Future Cost:</strong> F = P &times; (1 + r)<sup>n</sup><br><br>
+                            <strong>Past Purchasing Power:</strong> P = F / (1 + r)<sup>n</sup><br><br>
+                            Where:<br>
+                            <strong>P</strong> = Present amount<br>
+                            <strong>r</strong> = Annual inflation rate (as a decimal, e.g. 6% = 0.06)<br>
+                            <strong>n</strong> = Number of years
+                        </div>
+
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-item">
+                            <h3 class="faq-question">What is purchasing power risk?</h3>
+                            <p class="faq-answer">Purchasing power risk is the danger that cash, fixed deposits, or conservative returns will not keep pace with rising inflation, eroding the real basket of goods and services your money can buy over time.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-question">How can I beat inflation?</h3>
+                            <p class="faq-answer">Equities, index mutual funds, diversified real estate, and inflation-indexed bonds historically offer returns that outpace inflation over long 10+ year horizons.</p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="sip-calculator.html">SIP Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+                <a href="document-converter.html">Document Converter</a>
+                <a href="video-downloader.html">Video Downloader</a>
+                <a href="ocr-tool.html">OCR Image to Text</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        const baseAmountInput = document.getElementById('baseAmount');
+        const inflationRateInput = document.getElementById('inflationRate');
+        const timeYearsInput = document.getElementById('timeYears');
+        const currencySelect = document.getElementById('calcCurrency');
+        const modeRadios = document.querySelectorAll('input[name="calcMode"]');
+        const resFutureCost = document.getElementById('resFutureCost');
+        const resPowerLoss = document.getElementById('resPowerLoss');
+        const resMultiplier = document.getElementById('resMultiplier');
+        const progressionBody = document.getElementById('progressionBody');
+        const resTargetLabel = document.getElementById('resTargetLabel');
+        const resTargetSub = document.getElementById('resTargetSub');
+
+        function formatCurrency(num, curr) {
+            return `${curr}${Math.round(num).toLocaleString('en-US')}`;
+        }
+
+        function calculate() {
+            const P = parseFloat(baseAmountInput.value) || 0;
+            const r = (parseFloat(inflationRateInput.value) || 0) / 100;
+            const n = Math.min(60, Math.max(1, parseInt(timeYearsInput.value, 10) || 1));
+            const curr = currencySelect.value;
+            const mode = document.querySelector('input[name="calcMode"]:checked').value;
+
+            if (mode === 'future') {
+                resTargetLabel.textContent = 'Future Equivalent Cost';
+                resTargetSub.textContent = `Required in ${n} years for same basket`;
+                
+                const multiplier = Math.pow(1 + r, n);
+                const F = P * multiplier;
+                const powerLoss = (1 - (1 / multiplier)) * 100;
+
+                resFutureCost.textContent = formatCurrency(F, curr);
+                resPowerLoss.textContent = `${powerLoss.toFixed(1)}%`;
+                resMultiplier.textContent = `${multiplier.toFixed(2)}x`;
+
+                renderTable(P, r, n, curr, 'future');
+            } else {
+                resTargetLabel.textContent = 'Past Value Equivalent';
+                resTargetSub.textContent = `Purchasing power ${n} years ago`;
+
+                const multiplier = Math.pow(1 + r, n);
+                const pastVal = P / multiplier;
+                const powerLoss = (1 - (pastVal / P)) * 100;
+
+                resFutureCost.textContent = formatCurrency(pastVal, curr);
+                resPowerLoss.textContent = `${powerLoss.toFixed(1)}%`;
+                resMultiplier.textContent = `${(1/multiplier).toFixed(2)}x`;
+
+                renderTable(P, r, n, curr, 'past');
+            }
+        }
+
+        function renderTable(P, r, n, curr, mode) {
+            progressionBody.innerHTML = '';
+            for (let yr = 1; yr <= n; yr++) {
+                const tr = document.createElement('tr');
+                const mult = Math.pow(1 + r, yr);
+                const cost = mode === 'future' ? P * mult : P / mult;
+                const remaining = (1 / mult) * 100;
+
+                tr.innerHTML = `
+                    <td>Year ${yr}</td>
+                    <td><strong>${formatCurrency(cost, curr)}</strong></td>
+                    <td style="color:${remaining < 50 ? '#dc2626' : '#16a34a'}; font-weight:600;">${remaining.toFixed(1)}%</td>
+                    <td>${mult.toFixed(2)}x</td>
+                `;
+                progressionBody.appendChild(tr);
+            }
+        }
+
+        [baseAmountInput, inflationRateInput, timeYearsInput, currencySelect].forEach(el => {
+            el.addEventListener('input', calculate);
+        });
+        modeRadios.forEach(r => r.addEventListener('change', calculate));
+
+        document.querySelectorAll('.rate-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                inflationRateInput.value = btn.dataset.rate;
+                calculate();
+            });
+        });
+
+        document.querySelectorAll('.yr-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                timeYearsInput.value = btn.dataset.yr;
+                calculate();
+            });
+        });
+
+        calculate();
+    })();
+    </script>
+</body>
+</html>

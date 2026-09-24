@@ -1,4 +1,4 @@
-/* Lorem Ipsum Generator — ToolsKart */
+﻿/* Lorem Ipsum Generator — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -73,7 +73,7 @@
 
   copyBtn.addEventListener('click', function () {
     if (outputArea.value.trim() !== '') {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       if (TK && TK.copyToClipboard) {
         TK.copyToClipboard(outputArea.value, this);
       } else {

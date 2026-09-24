@@ -1,4 +1,4 @@
-/* Case Converter — ToolsKart */
+﻿/* Case Converter — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -17,7 +17,7 @@
 
   copyBtn.addEventListener('click', function () {
     if (textOutput.value) {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       if (TK && TK.copyToClipboard) {
         TK.copyToClipboard(textOutput.value, this);
       } else {

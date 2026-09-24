@@ -1,5 +1,5 @@
-/* =========================================================
-   ToolsKart — Comprehensive Income Tax Calculator (FY 2025-26)
+﻿/* =========================================================
+   Amazing-Tools — Comprehensive Income Tax Calculator (FY 2025-26)
    - Old vs New Regime Side-by-Side Comparison
    - Full Old Regime Deductions Suite (80C, NPS, 80D, HRA, Sec 24b, 80EEA, 80TTA)
    - Interactive HRA Exemption Calculator
@@ -556,10 +556,10 @@
       csv += '# Income tax calculations, exemptions, and slab interpretations are subject to the Finance Act and official IT Department rules.\n';
       csv += '# All computations must be independently verified at user level with your Form 16, AIS, or Chartered Accountant.\n';
       csv += '# Amazing-tools is not responsible or liable for any miscalculations or tax filing decisions.\n';
-      csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
+      csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
 
-      if (window.ToolsKart && window.ToolsKart.downloadFile) {
-        window.ToolsKart.downloadFile(csv, 'Income_Tax_Comparison_Report.csv', 'text/csv');
+      if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
+        window.Amazing-Tools.downloadFile(csv, 'Income_Tax_Comparison_Report.csv', 'text/csv');
       }
     });
   }
@@ -627,7 +627,7 @@
         "Tax laws, standard deductions, rebates u/s 87A, surcharge rates, and slab thresholds are determined by the Ministry of Finance / Income Tax Department.\n\n" +
         "Mandatory Verification: Users must independently verify all calculations, slab computations, and allowable deductions with their official AIS/TIS, Form 16, or a certified Chartered Accountant before filing returns. " +
         "Amazing-tools and its operators assume no legal or financial liability for any miscalculations, penalties, or tax decisions made based on this output.\n\n" +
-        "Report Miscalculations: If you notice any calculation discrepancy or wish to suggest tax updates, please report it directly on our portal (hello@toolskart.com) for prompt verification and correction.";
+        "Report Miscalculations: If you notice any calculation discrepancy or wish to suggest tax updates, please report it directly on our portal (hello@Amazing-Tools.com) for prompt verification and correction.";
       
       doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
       doc.save(`Income_Tax_Report_${Math.round(gross/100000)}L.pdf`);

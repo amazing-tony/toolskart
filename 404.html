@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - ToolsKart</title>
+    <title>Page Not Found - Amazing-Tools</title>
     <link rel="stylesheet" href="css/styles.css">
     <script>
         // Automatic SPA / Subpath Routing Recovery for GitHub Pages
@@ -24,7 +24,26 @@
                 'percentage-calculator', 'word-counter', 'case-converter', 'lorem-ipsum',
                 'slug-generator', 'json-formatter', 'base64-tool', 'image-resizer',
                 'image-compressor', 'color-picker', 'url-encoder', 'regex-tester',
-                'meta-tag-generator'
+                'meta-tag-generator', 'unit-converter', 'currency-converter', 'qr-generator',
+                'password-generator', 'timezone-converter', 'tip-calculator', 'bmi-calculator',
+                'markdown-previewer', 'ocr-tool', 'invoice-generator', 'resume-builder',
+                'markdown-to-pdf', 'youtube-thumbnail', 'screen-recorder', 'audio-converter',
+                'inflation-calculator'
+            ];
+
+            var standaloneTools = [
+                'ocr-tool', 'invoice-generator', 'resume-builder', 'markdown-to-pdf',
+                'youtube-thumbnail', 'screen-recorder', 'audio-converter', 'inflation-calculator',
+                'document-converter', 'video-downloader', 'income-tax-calculator',
+                'emi-calculator', 'gst-calculator', 'sip-calculator', 'buy-vs-rent-calculator',
+                'goal-financial-planner', 'swp-annuity-calculator', 'retirement-benefits-calculator',
+                'rd-calculator', 'age-calculator', 'compound-interest', 'fd-calculator',
+                'percentage-calculator', 'word-counter', 'case-converter', 'lorem-ipsum',
+                'slug-generator', 'json-formatter', 'base64-tool', 'image-resizer',
+                'image-compressor', 'color-picker', 'url-encoder', 'regex-tester',
+                'meta-tag-generator', 'unit-converter', 'currency-converter', 'qr-generator',
+                'password-generator', 'timezone-converter', 'tip-calculator', 'bmi-calculator',
+                'markdown-previewer', 'pdf-tools'
             ];
 
             // Extract potential slug from path (e.g. /split, /pages/split.html, /merge/)
@@ -32,7 +51,16 @@
             var segments = cleanPath.split('/');
             var lastSegment = segments[segments.length - 1];
 
-            // If path contains a known tool slug, redirect immediately into the portal workstation
+            // If path contains a known standalone tool slug, redirect directly to its page
+            if (standaloneTools.indexOf(lastSegment) !== -1) {
+                var basePath = path.indexOf('/pages/') !== -1 
+                    ? path.substring(0, path.indexOf('/pages/')) + '/'
+                    : '/';
+                window.location.replace(basePath + 'pages/' + lastSegment + '.html');
+                return;
+            }
+
+            // If path contains a known sub-tool slug, redirect into portal workstation
             if (knownTools.indexOf(lastSegment) !== -1) {
                 var basePath = path.indexOf('/pages/') !== -1 
                     ? path.substring(0, path.indexOf('/pages/')) + '/'
@@ -139,7 +167,7 @@
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <a href="index.html" class="portal-brand" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:inherit;">
                 <span class="brand-badge">TK</span>
-                <span class="brand-title">ToolsKart</span>
+                <span class="brand-title">Amazing-Tools</span>
             </a>
             <a href="index.html" class="btn-home" style="padding: 0.45rem 1rem; font-size:0.88rem;">Home Dashboard</a>
         </div>
@@ -178,7 +206,7 @@
     </main>
 
     <footer style="text-align:center; padding:1.5rem; color:var(--color-text-secondary, #64748b); font-size:0.85rem;">
-        &copy; 2026 ToolsKart. All processing runs 100% locally in your browser.
+        &copy; 2026 Amazing-Tools. All processing runs 100% locally in your browser.
     </footer>
 </body>
 </html>

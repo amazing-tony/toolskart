@@ -1,5 +1,5 @@
-    let lastCalculation = null;
-/* SIP Calculator - ToolsKart */
+﻿    let lastCalculation = null;
+/* SIP Calculator - Amazing-Tools */
 (function () {
     'use strict';
   
@@ -24,11 +24,11 @@
       returnRateInput.value = '';
       investmentPeriodInput.value = '';
       resultArea.classList.add('hidden');
-      ToolsKart.clearAllErrors(document.querySelector('.tool-interface'));
+      Amazing-Tools.clearAllErrors(document.querySelector('.tool-interface'));
     });
   
     function calculate() {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       TK.clearAllErrors(document.querySelector('.tool-interface'));
   
       const p = parseFloat(monthlyInvestmentInput.value);
@@ -123,10 +123,10 @@
         csv += '# This output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
         csv += '# All calculations must be independently verified at user level with your financial advisor or fund house.\n';
         csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
-        csv += '# Please report any discrepancies on our portal (hello@toolskart.com) for future corrections.\n';
+        csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
 
-        if (window.ToolsKart && window.ToolsKart.downloadFile) {
-          window.ToolsKart.downloadFile(csv, 'SIP_Growth_Schedule.csv', 'text/csv');
+        if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
+          window.Amazing-Tools.downloadFile(csv, 'SIP_Growth_Schedule.csv', 'text/csv');
         }
       });
     }
@@ -206,7 +206,7 @@
           "Mutual fund investments are subject to market risks, and actual returns may fluctuate based on macroeconomic market conditions, fund NAVs, and expense ratios.\n\n" +
           "Mandatory Verification: Users must independently verify all returns, compounding projections, and tax implications with their certified financial planner or fund house before making investment commitments. " +
           "Amazing-tools and its operators assume no legal or financial liability for any discrepancies or financial decisions made based on this output.\n\n" +
-          "Report Miscalculations: If you notice any calculation discrepancy, please report it directly on our portal (hello@toolskart.com) for prompt verification and correction.";
+          "Report Miscalculations: If you notice any calculation discrepancy, please report it directly on our portal (hello@Amazing-Tools.com) for prompt verification and correction.";
         
         doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
         doc.save(`SIP_Wealth_Report_${Math.round(lastCalculation.p)}pm_${lastCalculation.years}yr.pdf`);

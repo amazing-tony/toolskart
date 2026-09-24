@@ -1,0 +1,15 @@
+ion) -->
+            <div class="container" id="toolWorkstationContainer">
+                <div id="toolContentPanel" class="tool-content-panel" style="display: none;">
+                    <div class="tool-panel-header">
+                        <div class="tool-breadcrumb-bar">
+                            <a href="#" id="breadcrumbDashboardLink">🏠 Dashboard</a>
+                            <span>/</span>
+                            <span id="panelBreadcrumbCategory">Category</span>
+                            <span>/</span>
+                            <span class="tool-breadcrumb-current" id="panelBreadcrumbTitle">Tool Name</span>
+                        </div>
+                        <div class="tool-panel-actions">
+                            <button class="tool-action-btn" id="toolFullscreenBtn" title="Toggle Fullscreen">
+                                <span>🗖</span> Fullscreen
+      

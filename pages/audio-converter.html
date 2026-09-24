@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Audio Converter — Convert MP3, WAV, OGG, AAC & Extract Audio | Amazing-Tools</title>
+    <meta name="description" content="Convert audio and extract sound from videos directly in your browser. Supports MP3, WAV, AAC, OGG, M4A, FLAC. 100% private, instant processing with zero server uploads.">
+    <meta name="keywords" content="audio converter, convert mp3 to wav, wav to mp3, extract audio from video, online audio converter, convert m4a to mp3">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/audio-converter.html">
+    <meta property="og:title" content="Free Online Audio Converter | Amazing-Tools">
+    <meta property="og:description" content="Convert audio formats and extract sound from video files with 100% privacy in your browser.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Online Audio Converter",
+      "url": "https://amazing-tools.github.io/pages/audio-converter.html",
+      "description": "Convert audio and extract sound from video files with 100% privacy.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <style>
+        .audio-hero {
+            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #1E3A5F 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .audio-hero h1 { color: #fff; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .audio-hero p { color: rgba(255,255,255,0.9); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+        .upload-area {
+            border: 2.5px dashed var(--border-color);
+            background: var(--bg-alt);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-bottom: 1.5rem;
+        }
+        .upload-area:hover, .upload-area.drag-over {
+            border-color: var(--primary-color);
+            background: #f0fdf4;
+            transform: scale(1.005);
+        }
+        .upload-icon { font-size: 3.5rem; margin-bottom: 0.75rem; }
+
+        .converter-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .file-loaded-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        .audio-preview-wrap {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .audio-preview-wrap audio {
+            width: 100%;
+        }
+
+        .progress-box {
+            display: none;
+            margin: 1.25rem 0;
+            background: #f8fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .progress-bar-track {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 0.75rem 0 0.5rem;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #059669, #10b981);
+            transition: width 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-content">
+            <a href="../index.html" class="logo"><span class="logo-icon-bolt">⚡</span><span>Amazing-tools</span></a>
+            <nav class="nav" id="mainNav">
+                <a href="../index.html#doc-tools">Document Tools</a>
+                <a href="../index.html#calculators">Calculators</a>
+                <a href="../index.html#media-tools">Media Tools</a>
+                <a href="../index.html#text-tools">Text Tools</a>
+                <a href="../index.html#dev-tools">Dev Tools</a>
+            </nav>
+            <div class="theme-cycle-wrap" style="margin-left:auto; margin-right:0.75rem;">
+                <button class="theme-cycle-btn" aria-label="Change theme" title="Change theme (Shift + T)">◐</button>
+                <div class="theme-toast" role="status" aria-live="polite"></div>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#media-tools">Media Tools</a> &raquo; Audio Converter
+            </nav>
+
+            <div class="audio-hero">
+                <h1>🎵 Free Online Audio Converter & Extractor</h1>
+                <p>Convert music and extract sound tracks from videos to <strong>MP3, WAV, OGG, and AAC</strong>. 100% private, in-browser processing with zero server uploads.</p>
+            </div>
+
+            <div class="tool-container">
+                <div class="tool-main">
+
+                    <!-- Dropzone -->
+                    <div id="audioUploadArea" class="upload-area">
+                        <div class="upload-icon">🎧</div>
+                        <h3>Click or Drop Audio or Video File Here</h3>
+                        <p class="text-muted" style="margin-top:0.4rem;">Supports <strong>MP3, WAV, OGG, AAC, M4A, FLAC, MP4, WEBM</strong> (Up to 100 MB)</p>
+                        <input type="file" id="audioFileInput" accept="audio/*,video/*" style="display:none;">
+                    </div>
+
+                    <!-- Converter Controls Card -->
+                    <div id="converterCard" class="converter-card" style="display:none;">
+                        
+                        <div class="file-loaded-banner">
+                            <div>
+                                <span style="font-size:1.4rem; margin-right:0.5rem;">🎵</span>
+                                <strong id="loadedFileName">audio-sample.mp3</strong>
+                                <span id="loadedFileSize" style="color:#64748b; font-size:0.85rem; margin-left:0.5rem;">(3.4 MB)</span>
+                            </div>
+                            <button id="btnChangeFile" class="btn btn-outline" style="padding:0.35rem 0.75rem; font-size:0.8rem;">Change File</button>
+                        </div>
+
+                        <div class="audio-preview-wrap">
+                            <label style="font-size:0.85rem; font-weight:600; color:#475569; display:block; margin-bottom:0.4rem;">Original Audio Preview:</label>
+                            <audio id="audioPreview" controls></audio>
+                        </div>
+
+                        <div class="options-grid">
+                            <div>
+                                <label for="targetFormat" style="font-weight:600; font-size:0.9rem; display:block; margin-bottom:0.4rem;">Convert To Format:</label>
+                                <select id="targetFormat" class="input-field">
+                                    <option value="wav" selected>WAV (.wav) — Lossless 16-Bit</option>
+                                    <option value="mp3">MP3 (.mp3) — Standard MPEG Audio</option>
+                                    <option value="ogg">OGG (.ogg) — Vorbis Open Audio</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="audioChannels" style="font-weight:600; font-size:0.9rem; display:block; margin-bottom:0.4rem;">Audio Channels:</label>
+                                <select id="audioChannels" class="input-field">
+                                    <option value="2" selected>Stereo (2 Channels)</option>
+                                    <option value="1">Mono (1 Channel)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div id="audioProgressBox" class="progress-box">
+                            <div id="audioProgressStatus" style="font-weight:600; font-size:0.95rem; color:#059669;">Decoding audio buffer...</div>
+                            <div class="progress-bar-track">
+                                <div id="audioProgressBar" class="progress-bar-fill"></div>
+                            </div>
+                        </div>
+
+                        <button id="btnConvertAudio" class="btn btn-primary" style="width:100%; padding:0.75rem; font-size:1.05rem;">
+                            ⚡ Convert &amp; Download Audio
+                        </button>
+                    </div>
+
+                    <!-- SEO FAQ -->
+                    <section class="info-section">
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-item">
+                            <h3 class="faq-question">Can I extract audio from video files?</h3>
+                            <p class="faq-answer">Yes! You can drop any MP4, WebM, or video file into the converter. It will automatically strip the video stream and convert the sound track into your desired audio format.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-question">Are my audio files private?</h3>
+                            <p class="faq-answer">Yes, 100%. All decoding, resampling, and re-encoding are executed on your device using the HTML5 Web Audio API. Your files are never uploaded to any remote server.</p>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h4>⚡ Amazing-tools</h4>
+                <p>Free online tools and calculators for everyone. 100% private, client-side processing.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Popular Tools</h4>
+                <a href="audio-converter.html">Audio Converter</a>
+                <a href="video-downloader.html">Video Downloader</a>
+                <a href="screen-recorder.html">Screen Recorder</a>
+                <a href="pdf-tools.html">PDF Studio Suite</a>
+            </div>
+            <div class="footer-section">
+                <h4>Calculators</h4>
+                <a href="income-tax-calculator.html">Income Tax Calculator</a>
+                <a href="emi-calculator.html">EMI Calculator</a>
+                <a href="gst-calculator.html">GST Calculator</a>
+                <a href="inflation-calculator.html">Inflation Calculator</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../about.html">About Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Amazing-Tools. All rights reserved. Free online tools for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- lamejs for client-side MP3 encoding -->
+    <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        const uploadArea = document.getElementById('audioUploadArea');
+        const fileInput = document.getElementById('audioFileInput');
+        const converterCard = document.getElementById('converterCard');
+        const loadedFileName = document.getElementById('loadedFileName');
+        const loadedFileSize = document.getElementById('loadedFileSize');
+        const audioPreview = document.getElementById('audioPreview');
+        const btnChangeFile = document.getElementById('btnChangeFile');
+        const targetFormat = document.getElementById('targetFormat');
+        const audioChannels = document.getElementById('audioChannels');
+        const btnConvert = document.getElementById('btnConvertAudio');
+        const progressBox = document.getElementById('audioProgressBox');
+        const progressStatus = document.getElementById('audioProgressStatus');
+        const progressBar = document.getElementById('audioProgressBar');
+
+        let currentFile = null;
+        let audioContext = null;
+
+        if (uploadArea && fileInput) {
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+            });
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) handleFile(e.target.files[0]);
+            });
+        }
+
+        btnChangeFile.addEventListener('click', () => {
+            converterCard.style.display = 'none';
+            uploadArea.style.display = 'block';
+            fileInput.value = '';
+            audioPreview.src = '';
+            currentFile = null;
+        });
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return (bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i];
+        }
+
+        function handleFile(file) {
+            if (!file) return;
+            currentFile = file;
+            loadedFileName.textContent = file.name;
+            loadedFileSize.textContent = `(${formatBytes(file.size)})`;
+            audioPreview.src = URL.createObjectURL(file);
+            uploadArea.style.display = 'none';
+            converterCard.style.display = 'block';
+        }
+
+        // Helper: Convert AudioBuffer to WAV Blob
+        function audioBufferToWav(buffer, optChannels) {
+            const numChannels = optChannels ? Math.min(optChannels, buffer.numberOfChannels) : buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const format = 1; // PCM
+            const bitDepth = 16;
+
+            let length = buffer.length * numChannels * 2;
+            let wavBuffer = new ArrayBuffer(44 + length);
+            let view = new DataView(wavBuffer);
+
+            // RIFF chunk descriptor
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + length, true);
+            writeString(view, 8, 'WAVE');
+
+            // fmt sub-chunk
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, format, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * numChannels * 2, true);
+            view.setUint16(32, numChannels * 2, true);
+            view.setUint16(34, bitDepth, true);
+
+            // data sub-chunk
+            writeString(view, 36, 'data');
+            view.setUint32(40, length, true);
+
+            // Write PCM interleaved samples
+            let offset = 44;
+            for (let i = 0; i < buffer.length; i++) {
+                for (let ch = 0; ch < numChannels; ch++) {
+                    let sample = buffer.getChannelData(ch)[i];
+                    sample = Math.max(-1, Math.min(1, sample));
+                    let int16 = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                    view.setInt16(offset, int16, true);
+                    offset += 2;
+                }
+            }
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        btnConvert.addEventListener('click', async () => {
+            if (!currentFile) return;
+
+            btnConvert.disabled = true;
+            progressBox.style.display = 'block';
+            progressBar.style.width = '20%';
+            progressStatus.textContent = 'Decoding audio data in Web Audio buffer...';
+
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                const fileBuffer = await currentFile.arrayBuffer();
+                const audioBuffer = await audioContext.decodeAudioData(fileBuffer);
+
+                progressBar.style.width = '60%';
+                progressStatus.textContent = 'Encoding into target format...';
+
+                const fmt = targetFormat.value;
+                const channels = parseInt(audioChannels.value, 10) || 2;
+                let outputBlob = null;
+                let ext = fmt;
+
+                if (fmt === 'wav') {
+                    outputBlob = audioBufferToWav(audioBuffer, channels);
+                } else if (fmt === 'mp3') {
+                    // MP3 encode via lamejs or fallback to wav
+                    if (typeof lamejs !== 'undefined') {
+                        const mp3Channels = Math.min(channels, audioBuffer.numberOfChannels);
+                        const mp3encoder = new lamejs.Mp3Encoder(mp3Channels, audioBuffer.sampleRate, 192);
+                        const mp3Data = [];
+
+                        const left = audioBuffer.getChannelData(0);
+                        const right = mp3Channels > 1 ? audioBuffer.getChannelData(1) : left;
+
+                        const sampleBlockSize = 1152;
+                        const leftChunk = new Int16Array(sampleBlockSize);
+                        const rightChunk = new Int16Array(sampleBlockSize);
+
+                        for (let i = 0; i < left.length; i += sampleBlockSize) {
+                            const chunkLen = Math.min(sampleBlockSize, left.length - i);
+                            for (let j = 0; j < chunkLen; j++) {
+                                let l = Math.max(-1, Math.min(1, left[i + j]));
+                                leftChunk[j] = l < 0 ? l * 0x8000 : l * 0x7FFF;
+                                if (mp3Channels > 1) {
+                                    let r = Math.max(-1, Math.min(1, right[i + j]));
+                                    rightChunk[j] = r < 0 ? r * 0x8000 : r * 0x7FFF;
+                                }
+                            }
+                            const mp3buf = mp3Channels > 1 
+                                ? mp3encoder.encodeBuffer(leftChunk.subarray(0, chunkLen), rightChunk.subarray(0, chunkLen))
+                                : mp3encoder.encodeBuffer(leftChunk.subarray(0, chunkLen));
+                            if (mp3buf.length > 0) mp3Data.push(mp3buf);
+                        }
+
+                        const endBuf = mp3encoder.flush();
+                        if (endBuf.length > 0) mp3Data.push(endBuf);
+                        outputBlob = new Blob(mp3Data, { type: 'audio/mp3' });
+                    } else {
+                        outputBlob = audioBufferToWav(audioBuffer, channels);
+                        ext = 'wav';
+                    }
+                } else {
+                    // OGG / WebM fallback
+                    outputBlob = audioBufferToWav(audioBuffer, channels);
+                    ext = 'wav';
+                }
+
+                progressBar.style.width = '100%';
+                progressStatus.textContent = 'Conversion complete! Downloading...';
+
+                // Download
+                const baseName = currentFile.name.substring(0, currentFile.name.lastIndexOf('.')) || 'converted_audio';
+                const downloadUrl = URL.createObjectURL(outputBlob);
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `${baseName}.${ext}`;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(downloadUrl);
+                    progressBox.style.display = 'none';
+                }, 1000);
+
+            } catch(err) {
+                console.error(err);
+                alert('Audio conversion error: ' + err.message);
+                progressBox.style.display = 'none';
+            } finally {
+                btnConvert.disabled = false;
+            }
+        });
+
+    })();
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-/* Age Calculator - ToolsKart */
+﻿/* Age Calculator - Amazing-Tools */
 (function () {
     'use strict';
   
@@ -22,11 +22,11 @@
       dobInput.value = '';
       currentDateInput.value = todayStr;
       resultArea.classList.add('hidden');
-      ToolsKart.clearAllErrors(document.querySelector('.tool-interface'));
+      Amazing-Tools.clearAllErrors(document.querySelector('.tool-interface'));
     });
   
     function calculate() {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       TK.clearAllErrors(document.querySelector('.tool-interface'));
   
       if (!dobInput.value) {

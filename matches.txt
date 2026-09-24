@@ -1,0 +1,32 @@
+l:\tools-website\404.html [197]: <a href="index.html#edit" class="quick-tool-link">✏️ Edit & Sign PDF</a>
+l:\tools-website\index.html [18]: <meta name="keywords" content="online tools, pdf studio, income tax calculator, emi calculator, sip calculator, gst calculator, json formatt
+l:\tools-website\index.html [222]: <span class="sb-item-text">PDF Studio Suite</span>
+l:\tools-website\index.html [513]: <span class="sb-item-text">PDF Studio</span>
+l:\tools-website\index.html [610]: <span class="bql-icon">⚡</span> PDF Studio <span class="bql-pill teal">14-in-1</span>
+l:\tools-website\index.html [1571]: <a href="pages/pdf-tools.html" data-tool="pdf-tools">PDF Studio Suite</a>
+l:\tools-website\js\common.js [1202]: 'edit': { title: 'PDF Editor & Sign', category: 'Document Tools', url: 'pages/pdf-tools.html?tool=edit' },
+l:\tools-website\js\portal-features.js [18]: { id:'pdf-tools',         name:'PDF Studio Suite',         emoji:'⚡', cat:'Documents',   href:'pages/pdf-tools.html' },
+l:\tools-website\pages\audio-converter.html [254]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\edit.html [6]: <title>Edit & Sign PDF - Amazing-Tools</title>
+l:\tools-website\pages\edit.html [17]: <h2>Loading Edit & Sign PDF...</h2>
+l:\tools-website\pages\inflation-calculator.html [274]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\invoice-generator.html [336]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\markdown-to-pdf.html [243]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\ocr-tool.html [295]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\pdf-tools.html [14]: <title>PDF Document Studio — Free Online PDF Editor, Merge, Split &amp; Compress Tools | Amazing-Tools</title>
+l:\tools-website\pages\pdf-tools.html [146]: <!-- PDF Studio Hero -->
+l:\tools-website\pages\pdf-tools.html [162]: <button class="sejda-tab-btn" data-cat="edit">✏️ Edit & Sign</button>
+l:\tools-website\pages\pdf-tools.html [172]: <!-- Tool 1: PDF Editor -->
+l:\tools-website\pages\pdf-tools.html [178]: <h3>PDF Editor</h3>
+l:\tools-website\pages\pdf-tools.html [605]: title: 'PDF Editor',
+l:\tools-website\pages\pdf-tools.html [2352]: // 1. Execute PDF Editor
+l:\tools-website\pages\resume-builder.html [390]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\screen-recorder.html [255]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\pages\youtube-thumbnail.html [213]: <a href="pdf-tools.html">PDF Studio Suite</a>
+l:\tools-website\_backups\index.backup.html [73]: <a href="pages/pdf-tools.html?tool=edit" data-tool="pdf-tools" class="nav-quick-item"><span>✏️ PDF Editor (Sign, Text, Draw)</span></a>
+l:\tools-website\_backups\index.backup.html [239]: <a href="pages/pdf-tools.html?tool=edit" data-tool="pdf-tools" class="sidebar-sublink"><span>✏️ PDF Editor &amp; Sign</span></a>
+l:\tools-website\_backups\index.backup.html [511]: <span class="featured-badge" style="background:#0D7A82; color:#fff;">PDF Studio • 14-in-1</span>
+l:\tools-website\_backups\index.backup.html [514]: <p>Full-featured browser PDF studio: Edit &amp; sign documents, merge, split, compress, organize pages, convert to images, and protect files
+l:\tools-website\_backups\index.backup.html [516]: <span class="featured-tag" style="background:#E6F5F6; color:#0D7A82;">PDF Editor &amp; Sign</span>
+l:\tools-website\_backups\index.backup.html [520]: <div class="featured-cta" style="color:#0D7A82;">Launch PDF Studio <span>&rarr;</span></div>
+l:\tools-website\_backups\index.backup.html [650]: <p>Complete client-side PDF suite: Full PDF Editor (Sign, Text, Draw, Redact), Merge, Split, Compress, Organize &amp; Rotate, Watermark, Con

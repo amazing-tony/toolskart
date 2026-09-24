@@ -1,4 +1,4 @@
-/* Word Counter — ToolsKart */
+﻿/* Word Counter — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -29,7 +29,7 @@
 
   copyBtn.addEventListener('click', function () {
     if (textInput.value.trim() !== '') {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       if (TK && TK.copyToClipboard) {
         TK.copyToClipboard(textInput.value, this);
       } else {

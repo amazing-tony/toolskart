@@ -1,4 +1,4 @@
-/* Color Picker — ToolsKart */
+﻿/* Color Picker — Amazing-Tools */
 (function () {
   'use strict';
 

@@ -1,4 +1,4 @@
-/* URL Slug Generator — ToolsKart */
+﻿/* URL Slug Generator — Amazing-Tools */
 (function () {
   'use strict';
 
@@ -73,7 +73,7 @@
 
   copyBtn.addEventListener('click', function () {
     if (slugOutput.value) {
-      const TK = window.ToolsKart;
+      const TK = window.Amazing-Tools;
       if (TK && TK.copyToClipboard) {
         TK.copyToClipboard(slugOutput.value, this);
       } else {
