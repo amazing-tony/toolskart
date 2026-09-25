@@ -12,7 +12,7 @@
             var hash = window.location.hash;
             var search = window.location.search;
 
-            // List of known tool slugs
+            // List of all known tool & info slugs
             var knownTools = [
                 'pdf-tools', 'edit', 'merge', 'split', 'compress', 'organize',
                 'pdf-to-img', 'img-to-pdf', 'watermark', 'page-numbers', 'protect',
@@ -28,52 +28,30 @@
                 'password-generator', 'timezone-converter', 'tip-calculator', 'bmi-calculator',
                 'markdown-previewer', 'ocr-tool', 'invoice-generator', 'resume-builder',
                 'markdown-to-pdf', 'youtube-thumbnail', 'screen-recorder', 'audio-converter',
-                'inflation-calculator'
-            ];
-
-            var standaloneTools = [
-                'ocr-tool', 'invoice-generator', 'resume-builder', 'markdown-to-pdf',
-                'youtube-thumbnail', 'screen-recorder', 'audio-converter', 'inflation-calculator',
-                'document-converter', 'video-downloader', 'income-tax-calculator',
-                'emi-calculator', 'gst-calculator', 'sip-calculator', 'buy-vs-rent-calculator',
-                'goal-financial-planner', 'swp-annuity-calculator', 'retirement-benefits-calculator',
-                'rd-calculator', 'age-calculator', 'compound-interest', 'fd-calculator',
-                'percentage-calculator', 'word-counter', 'case-converter', 'lorem-ipsum',
-                'slug-generator', 'json-formatter', 'base64-tool', 'image-resizer',
-                'image-compressor', 'color-picker', 'url-encoder', 'regex-tester',
-                'meta-tag-generator', 'unit-converter', 'currency-converter', 'qr-generator',
-                'password-generator', 'timezone-converter', 'tip-calculator', 'bmi-calculator',
-                'markdown-previewer', 'pdf-tools'
+                'inflation-calculator', 'pdf-to-word', 'word-to-pdf', 'pdf-to-excel',
+                'excel-to-pdf', 'pptx-to-pdf', 'video-audio', 'video-shorts', 'video-youtube',
+                'prepayment', 'support', 'about', 'terms', 'privacy-policy'
             ];
 
             // Extract potential slug from path (e.g. /split, /pages/split.html, /merge/)
             var cleanPath = path.replace(/\.html$/, '').replace(/^\/+|\/+$/g, '');
             var segments = cleanPath.split('/');
             var lastSegment = segments[segments.length - 1];
+            var basePath = path.indexOf('/pages/') !== -1 
+                ? path.substring(0, path.indexOf('/pages/')) + '/'
+                : './';
 
-            // If path contains a known standalone tool slug, redirect directly to its page
-            if (standaloneTools.indexOf(lastSegment) !== -1) {
-                var basePath = path.indexOf('/pages/') !== -1 
-                    ? path.substring(0, path.indexOf('/pages/')) + '/'
-                    : '/';
-                window.location.replace(basePath + 'pages/' + lastSegment + '.html');
-                return;
-            }
-
-            // If path contains a known sub-tool slug, redirect into portal workstation
+            // If path contains a known tool slug, redirect immediately into the portal workstation
             if (knownTools.indexOf(lastSegment) !== -1) {
-                var basePath = path.indexOf('/pages/') !== -1 
-                    ? path.substring(0, path.indexOf('/pages/')) + '/'
-                    : '/';
                 window.location.replace(basePath + 'index.html#' + lastSegment);
                 return;
             }
 
-            // If hash is present (e.g. #split), redirect to index.html with the hash
+            // If hash is present (e.g. #split or #support), redirect to index.html with the hash
             if (hash && hash.length > 1) {
                 var hashSlug = hash.replace('#', '').trim();
                 if (knownTools.indexOf(hashSlug) !== -1) {
-                    window.location.replace('index.html#' + hashSlug);
+                    window.location.replace(basePath + 'index.html#' + hashSlug);
                     return;
                 }
             }

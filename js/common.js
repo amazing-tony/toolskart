@@ -573,7 +573,12 @@
           const pillEl = el.querySelector('.sb-pill');
           const icon = iconEl ? iconEl.textContent.trim() : '';
           const text = textEl ? textEl.textContent.trim() : el.textContent.trim();
-          const pillHtml = pillEl ? pillEl.outerHTML : '';
+          let pillHtml = '';
+          if (pillEl) {
+            const pClone = pillEl.cloneNode(true);
+            pClone.classList.add('sb-flyout-pill');
+            pillHtml = pClone.outerHTML;
+          }
           const isActive = el.classList.contains('is-active') ? 'is-active' : '';
 
           const nextEl = children[i + 1];
@@ -592,7 +597,7 @@
               <div class="sb-mini-flyout-group">
                 <a href="${href}" data-tool="${dataTool}" class="sb-mini-flyout-item ${isActive}">
                   <span class="sb-item-icon">${icon}</span>
-                  <span class="sb-item-text">${text}</span>
+                  <span class="sb-item-text sb-flyout-item-text">${text}</span>
                   ${pillHtml}
                   <span class="sb-mini-expand-arrow">▾</span>
                 </a>
@@ -606,7 +611,7 @@
             html += `
               <a href="${href}" data-tool="${dataTool}" class="sb-mini-flyout-item ${isActive}">
                 <span class="sb-item-icon">${icon}</span>
-                <span class="sb-item-text">${text}</span>
+                <span class="sb-item-text sb-flyout-item-text">${text}</span>
                 ${pillHtml}
               </a>
             `;
@@ -665,7 +670,7 @@
         <a href="${targetHash || '#'}" class="sb-mini-flyout-header" title="Jump to ${title}">
           <span class="sb-mini-flyout-icon">${icon}</span>
           <span class="sb-mini-flyout-title">${title}</span>
-          ${badgeText ? `<span class="${badgeClass}">${badgeText}</span>` : ''}
+          ${badgeText ? `<span class="${badgeClass} sb-flyout-badge">${badgeText}</span>` : ''}
           ${targetHash ? `<span class="sb-mini-flyout-arrow">↗</span>` : ''}
         </a>
         <div class="sb-mini-flyout-body">
@@ -964,15 +969,61 @@
     'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
     'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
     'about': { title: 'About Us', category: 'Company', url: 'about.html' },
-    'support': { title: 'Support Amazing-Tools', category: 'Support', url: 'support.html' }
+    'support': { title: 'Support Amazing-Tools', category: 'Support', url: 'support.html' },
+
+    // Additional Specialized & Suite Tools
+    'ocr-tool': { title: 'OCR Image to Text Extractor', category: 'Document Tools', url: 'pages/ocr-tool.html' },
+    'invoice-generator': { title: 'Free Invoice Generator', category: 'Document Tools', url: 'pages/invoice-generator.html' },
+    'resume-builder': { title: 'ATS Resume Builder & CV Maker', category: 'Document Tools', url: 'pages/resume-builder.html' },
+    'markdown-to-pdf': { title: 'Markdown to PDF Converter', category: 'Document Tools', url: 'pages/markdown-to-pdf.html' },
+    'youtube-thumbnail': { title: 'YouTube Thumbnail Grabber', category: 'Media Tools', url: 'pages/youtube-thumbnail.html' },
+    'screen-recorder': { title: 'Screen & Audio Recorder', category: 'Media Tools', url: 'pages/screen-recorder.html' },
+    'audio-converter': { title: 'Audio Cutter & Converter', category: 'Media Tools', url: 'pages/audio-converter.html' },
+    'inflation-calculator': { title: 'Inflation & Purchasing Power', category: 'Financial Calculators', url: 'pages/inflation-calculator.html' },
+    'pdf-to-word': { title: 'PDF to Word Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=pdf&to=docx' },
+    'word-to-pdf': { title: 'Word to PDF Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=docx&to=pdf' },
+    'pdf-to-excel': { title: 'PDF to Excel Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=pdf&to=xlsx' },
+    'excel-to-pdf': { title: 'Excel to PDF Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=xlsx&to=pdf' },
+    'pptx-to-pdf': { title: 'PowerPoint to PDF Converter', category: 'Document Tools', url: 'pages/document-converter.html?from=pptx&to=pdf' },
+    'video-audio': { title: 'Extract MP3 Audio', category: 'Media Tools', url: 'pages/video-downloader.html#audio' },
+    'video-shorts': { title: 'YouTube Shorts Saver', category: 'Media Tools', url: 'pages/video-downloader.html#shorts' },
+    'video-youtube': { title: 'YouTube Downloader', category: 'Media Tools', url: 'pages/video-downloader.html#youtube' },
+    'prepayment': { title: 'Loan Prepayment Calculator', category: 'Financial Calculators', url: 'pages/emi-calculator.html#prepay' }
   };
 
   function extractSlugFromUrl(url) {
     if (!url) return null;
+    if (url.includes('from=pdf&to=docx')) return 'pdf-to-word';
+    if (url.includes('from=docx&to=pdf')) return 'word-to-pdf';
+    if (url.includes('from=pdf&to=xlsx')) return 'pdf-to-excel';
+    if (url.includes('from=xlsx&to=pdf')) return 'excel-to-pdf';
+    if (url.includes('from=pptx&to=pdf')) return 'pptx-to-pdf';
+    if (url.includes('#prepay')) return 'prepayment';
+    if (url.includes('#audio')) return 'video-audio';
+    if (url.includes('#shorts')) return 'video-shorts';
+    if (url.includes('#youtube')) return 'video-youtube';
     const toolParam = url.match(/[?&]tool=([\w-]+)/);
     if (toolParam) return toolParam[1];
     const match = url.match(/(?:pages\/|^|\/)([\w-]+)\.html(?:\?|#|$)/);
     return match ? match[1] : null;
+  }
+
+  // Automatic Standalone Page Recovery:
+  // If a tool or info page is accessed directly as standalone (not inside the portal workstation iframe),
+  // automatically redirect into the master portal workstation (index.html#slug)
+  if (window.self === window.top) {
+    const curPath = window.location.pathname;
+    const isPages = curPath.includes('/pages/');
+    const isInfoPage = curPath.endsWith('support.html') || curPath.endsWith('about.html') || curPath.endsWith('terms.html') || curPath.endsWith('privacy-policy.html');
+
+    if (isPages || isInfoPage) {
+      const directSlug = extractSlugFromUrl(window.location.href);
+      if (directSlug && toolRegistry[directSlug]) {
+        const search = window.location.search || '';
+        const homeUrl = (isPages ? '../index.html' : 'index.html') + search + '#' + directSlug;
+        window.location.replace(homeUrl);
+      }
+    }
   }
 
   // ---- Suite Facilities Quick Switcher Definitions ----
@@ -1131,8 +1182,9 @@
       // If outside index.html or inside an iframe, navigate parent to index.html#slug
       if (window.self !== window.top) {
         try {
-          if (window.top && window.top.Amazing-Tools && window.top.Amazing-Tools.openTool) {
-            window.top.Amazing-Tools.openTool(slug, customTitle, customCat, fullUrl);
+          const topAt = window.top.AmazingTools || window.top.ToolsKart || window.top['Amazing-Tools'];
+          if (topAt && topAt.openTool) {
+            topAt.openTool(slug, customTitle, customCat, fullUrl);
             return;
           }
         } catch (e) {}
@@ -1282,42 +1334,109 @@
     });
   }
 
-  // Intercept click on tools, cards, and sidebar links
+  // Intercept click on tools, cards, header menus, footer links, cross-links, and sidebar links
   document.addEventListener('click', function (e) {
-    // If inside pdf-tools sub-tool card or in-page interactive components, do not intercept
-    if (e.target.closest('.sejda-tool-card') || e.target.closest('[data-pdf-subtool]')) {
+    // If inside interactive form inputs, canvas, or subtool actions, do not intercept
+    if (e.target.closest('.pdf-suite-card') || e.target.closest('.sejda-tool-card') || e.target.closest('[data-pdf-subtool]')) {
       return;
     }
 
-    const trigger = e.target.closest('[data-tool], .tool-card, .featured-card, .sidebar-link, .sidebar-sublink, .sb-item, .sb-child, .nav-quick-item');
+    const trigger = e.target.closest('a');
     if (!trigger) return;
 
-    let slug = trigger.getAttribute('data-tool');
     const href = trigger.getAttribute('href');
+    if (!href || href === '#' || href.startsWith('javascript:')) return;
 
+    // External links (e.g. WhatsApp, GitHub, PayPal, mailto, tel) -> allow standard external navigation
+    if (href.startsWith('http') && !href.includes(window.location.hostname)) return;
+    if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('https://wa.me')) return;
+
+    let slug = trigger.getAttribute('data-tool');
     if (!slug && href) {
       slug = extractSlugFromUrl(href);
     }
 
-    if (slug) {
+    // 1. If target is a registered tool or internal tool page -> Open in content div!
+    if (slug && toolRegistry[slug]) {
+      e.preventDefault();
       const toolPanel = document.getElementById('toolContentPanel');
+      const title = trigger.querySelector('h3')?.textContent?.trim() || 
+                    trigger.querySelector('span')?.textContent?.trim() || 
+                    trigger.textContent?.trim() || 
+                    (toolRegistry[slug] && toolRegistry[slug].title);
+
       if (toolPanel) {
-        e.preventDefault();
-        const title = trigger.querySelector('h3')?.textContent?.trim() || 
-                      trigger.querySelector('span')?.textContent?.trim() || 
-                      (toolRegistry[slug] && toolRegistry[slug].title);
+        // We are on index.html: open in the content workstation panel!
         openToolInPortal(slug, title, null, href);
       } else if (window.self !== window.top) {
-        // We are inside an iframe; only forward if slug is a valid registered tool or has a valid href
-        if (!toolRegistry[slug] && !href) return;
-        e.preventDefault();
+        // We are inside an iframe: forward to top portal window!
         try {
-          if (window.top && window.top.Amazing-Tools && window.top.Amazing-Tools.openTool) {
-            window.top.Amazing-Tools.openTool(slug, null, null, href);
+          const topAt = window.top.AmazingTools || window.top.ToolsKart || window.top['Amazing-Tools'];
+          if (topAt && topAt.openTool) {
+            topAt.openTool(slug, title, null, href);
             return;
           }
         } catch (err) {}
-        window.top.location.href = '../index.html#' + slug;
+        const isInPages = window.location.pathname.includes('/pages/');
+        window.top.location.href = (isInPages ? '../index.html#' : 'index.html#') + slug;
+      }
+      return;
+    }
+
+    // 2. If target is Dashboard / Home link (e.g. "index.html", "../index.html")
+    const isHomeLink = href === 'index.html' || href === '../index.html' || href === './' || href === '../' || href === '/';
+    if (isHomeLink) {
+      e.preventDefault();
+      const toolPanel = document.getElementById('toolContentPanel');
+      if (toolPanel) {
+        closeToolPanel();
+      } else if (window.self !== window.top) {
+        try {
+          const topAt = window.top.AmazingTools || window.top.ToolsKart || window.top['Amazing-Tools'];
+          if (topAt && topAt.closeTool) {
+            topAt.closeTool();
+            return;
+          }
+        } catch (err) {}
+        const isInPages = window.location.pathname.includes('/pages/');
+        window.top.location.href = isInPages ? '../index.html' : 'index.html';
+      }
+      return;
+    }
+
+    // 3. If target is an in-page section / category hash (e.g. #calculators, #doc-tools, #services-section)
+    if (href.startsWith('#') || href.includes('index.html#')) {
+      const targetHash = href.split('#')[1];
+      if (targetHash && !toolRegistry[targetHash]) {
+        const sec = document.getElementById(targetHash);
+        const filterPill = document.querySelector(`.filter-pill[data-filter="${targetHash}"]`);
+
+        if (sec || filterPill) {
+          e.preventDefault();
+          const toolPanel = document.getElementById('toolContentPanel');
+          if (toolPanel && toolPanel.style.display !== 'none') {
+            closeToolPanel();
+          }
+          if (filterPill) {
+            filterPill.click();
+          } else if (sec) {
+            sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else if (window.self !== window.top) {
+          // Inside iframe: tell parent window to close tool and navigate to section
+          e.preventDefault();
+          try {
+            const topAt = window.top.AmazingTools || window.top.ToolsKart || window.top['Amazing-Tools'];
+            if (topAt && topAt.closeTool) {
+              topAt.closeTool();
+              const parentSec = window.top.document.getElementById(targetHash);
+              if (parentSec) parentSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              return;
+            }
+          } catch (err) {}
+          const isInPages = window.location.pathname.includes('/pages/');
+          window.top.location.href = (isInPages ? '../index.html#' : 'index.html#') + targetHash;
+        }
       }
     }
   });
