@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="theme-09-paper">
 <head>
   <meta charset="UTF-8">
@@ -387,18 +387,14 @@
             <button class="amount-btn" data-amt="custom">Custom</button>
           </div>
 
-          <!-- UPI QR placeholder — user fills their UPI ID -->
+          <!-- UPI QR Code & ID -->
           <div class="upi-qr-wrap">
-            <div style="width:160px;height:160px;background:#f5f5f5;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.4rem;color:#888;font-size:0.75rem;text-align:center;padding:1rem;box-sizing:border-box;">
-              <span style="font-size:2rem;">📲</span>
-              <span>Scan with any UPI app</span>
-              <span style="font-size:0.65rem;color:#aaa;">QR code will appear after UPI ID is set</span>
-            </div>
-            <span class="upi-id-badge" id="upiIdDisplay">tonymagical09@upi</span>
-            <span class="upi-note">Scan QR or use UPI ID above</span>
+            <img src="img/upi-qr.png" alt="UPI QR Code - Scan to Donate" style="width:160px;height:160px;object-fit:contain;border-radius:10px;border:1.5px solid var(--card-border, #E2E8F0);background:#FFFFFF;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+            <span class="upi-id-badge" id="upiIdDisplay" title="Click to copy UPI ID" style="cursor:pointer;" onclick="navigator.clipboard.writeText('amzto369@ptyes');const orig=this.innerHTML;this.innerHTML='Copied! ✅';setTimeout(()=>this.innerHTML=orig,2000);">amzto369@ptyes 📋</span>
+            <span class="upi-note">Scan QR with any UPI app or copy UPI ID</span>
           </div>
 
-          <a href="upi://pay?pa=tonymagical09@upi&pn=Amazing-Tools&cu=INR&am=99" class="dc-btn dc-btn-upi" id="upiPayBtn">
+          <a href="upi://pay?pa=amzto369@ptyes&pn=Amazing-Tools&cu=INR&am=99" class="dc-btn dc-btn-upi" id="upiPayBtn">
             📱 Pay via UPI App
           </a>
           <p class="dc-meta">🔒 Secure · ⚡ Instant · ₹0 Fees</p>
@@ -506,7 +502,7 @@
     // UPI amount selector
     const amtBtns = document.querySelectorAll('#upiAmounts .amount-btn');
     const upiPayBtn = document.getElementById('upiPayBtn');
-    const UPI_ID = 'tonymagical09@upi'; // ← UPDATE with real UPI ID
+    const UPI_ID = 'amzto369@ptyes';
     let selectedAmt = 99;
 
     amtBtns.forEach(btn => {

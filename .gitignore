@@ -8,3 +8,4 @@ output-*.png
 matches.txt
 live_*.html
 live_*.js
+scratch/
