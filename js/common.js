@@ -541,6 +541,7 @@
 
     let hideTimeout = null;
     let activeSection = null;
+    let isPinned = false; // When true, stays locked open until explicit re-click, outside click, or ESC
 
     const CATEGORY_SECTION_MAP = {
       'docs': '#doc-tools',
@@ -559,13 +560,18 @@
       );
     };
 
-    const closeSidebarMiniFlyout = () => {
-      if (hideTimeout) clearTimeout(hideTimeout);
+    const closeSidebarMiniFlyout = (force = false) => {
+      if (isPinned && !force) return;
+      if (hideTimeout) {
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+      }
       flyout.classList.remove('is-visible');
       if (activeSection) {
-        activeSection.classList.remove('sb-mini-active');
+        activeSection.classList.remove('sb-mini-active', 'sb-mini-pinned');
         activeSection = null;
       }
+      isPinned = false;
     };
 
     function buildFlyoutItemsHtml(container) {
@@ -630,19 +636,33 @@
       return html;
     }
 
-    const showFlyoutFor = (section) => {
+    const showFlyoutFor = (section, pin = false) => {
       if (!isMini()) return;
-      if (hideTimeout) clearTimeout(hideTimeout);
+      if (hideTimeout) {
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+      }
 
+      if (pin) {
+        isPinned = true;
+      }
+
+      // If already open on this section
       if (activeSection === section && flyout.classList.contains('is-visible')) {
+        if (pin) {
+          activeSection.classList.add('sb-mini-pinned');
+        }
         return;
       }
 
       if (activeSection && activeSection !== section) {
-        activeSection.classList.remove('sb-mini-active');
+        activeSection.classList.remove('sb-mini-active', 'sb-mini-pinned');
       }
       activeSection = section;
       activeSection.classList.add('sb-mini-active');
+      if (isPinned) {
+        activeSection.classList.add('sb-mini-pinned');
+      }
 
       let title = '';
       let icon = '';
@@ -669,7 +689,7 @@
       const itemsHtml = treeBody ? buildFlyoutItemsHtml(treeBody) : (directItems ? buildFlyoutItemsHtml(directItems) : '');
 
       if (!itemsHtml) {
-        closeSidebarMiniFlyout();
+        closeSidebarMiniFlyout(true);
         return;
       }
 
@@ -687,11 +707,11 @@
         </div>
       `;
 
-      // Position flyout
-      const rect = section.getBoundingClientRect();
-      flyout.style.left = '70px';
+      // Flush position at 68px (sidebar boundary)
+      flyout.style.left = '68px';
       flyout.classList.add('is-visible');
 
+      const rect = section.getBoundingClientRect();
       const flyoutHeight = flyout.offsetHeight || 300;
       const viewportHeight = window.innerHeight;
       let top = rect.top;
@@ -711,7 +731,7 @@
           if (targetEl) {
             e.preventDefault();
             targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            closeSidebarMiniFlyout();
+            closeSidebarMiniFlyout(true);
           }
         });
       }
@@ -720,44 +740,51 @@
       flyout.querySelectorAll('a').forEach(a => {
         if (a !== headerLink) {
           a.addEventListener('click', () => {
-            closeSidebarMiniFlyout();
+            closeSidebarMiniFlyout(true);
           });
         }
       });
     };
 
     const scheduleHide = () => {
+      if (isPinned) return; // Do not hide when pinned
       if (hideTimeout) clearTimeout(hideTimeout);
       hideTimeout = setTimeout(() => {
         closeSidebarMiniFlyout();
-      }, 190);
+      }, 350); // 350ms buffer for seamless cursor traversal
     };
 
-    // Attach hover listeners to all sidebar sections
+    // Attach hover and click listeners to all sidebar sections
     const sections = portalSidebar.querySelectorAll('.sb-section');
     sections.forEach(section => {
       section.addEventListener('mouseenter', () => {
-        if (isMini()) showFlyoutFor(section);
+        if (isMini()) {
+          if (hideTimeout) clearTimeout(hideTimeout);
+          // Only switch flyout on hover if not currently pinned to another section
+          if (!isPinned || activeSection === section) {
+            showFlyoutFor(section, false);
+          }
+        }
       });
 
       section.addEventListener('mouseleave', (e) => {
-        if (isMini()) {
+        if (isMini() && !isPinned) {
           const toEl = e.relatedTarget;
           if (toEl && (flyout.contains(toEl) || toEl === flyout)) return;
           scheduleHide();
         }
       });
 
-      // Also allow clicking section label in mini mode to toggle flyout
+      // Clicking any section trigger in mini mode toggles / pins the flyout
       section.querySelectorAll('.sb-section-label, .sb-tree-toggle').forEach(btn => {
         btn.addEventListener('click', (e) => {
           if (isMini()) {
             e.preventDefault();
             e.stopPropagation();
-            if (activeSection === section && flyout.classList.contains('is-visible')) {
-              closeSidebarMiniFlyout();
+            if (activeSection === section && isPinned && flyout.classList.contains('is-visible')) {
+              closeSidebarMiniFlyout(true);
             } else {
-              showFlyoutFor(section);
+              showFlyoutFor(section, true);
             }
           }
         });
@@ -769,13 +796,14 @@
     });
 
     flyout.addEventListener('mouseleave', (e) => {
+      if (isPinned) return;
       const toEl = e.relatedTarget;
       if (toEl && activeSection && (activeSection.contains(toEl) || toEl === activeSection)) return;
       scheduleHide();
     });
 
     window.addEventListener('resize', () => {
-      if (!isMini()) closeSidebarMiniFlyout();
+      if (!isMini()) closeSidebarMiniFlyout(true);
     });
 
     portalSidebar.addEventListener('scroll', () => {
@@ -784,7 +812,7 @@
         const flyoutHeight = flyout.offsetHeight || 300;
         let top = rect.top;
         if (top < 50 || top > window.innerHeight) {
-          closeSidebarMiniFlyout();
+          closeSidebarMiniFlyout(true);
         } else {
           if (top + flyoutHeight > window.innerHeight - 16) {
             top = Math.max(54, window.innerHeight - flyoutHeight - 16);
@@ -799,14 +827,14 @@
     document.addEventListener('click', (e) => {
       if (flyout.classList.contains('is-visible')) {
         if (!flyout.contains(e.target) && (!activeSection || !activeSection.contains(e.target))) {
-          closeSidebarMiniFlyout();
+          closeSidebarMiniFlyout(true);
         }
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && flyout.classList.contains('is-visible')) {
-        closeSidebarMiniFlyout();
+        closeSidebarMiniFlyout(true);
       }
     });
   }

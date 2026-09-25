@@ -6402,7 +6402,7 @@ select.input-field option {
 
 .sb-section {
 
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid var(--sidebar-border, rgba(0,0,0,0.08));
 
   padding-bottom: 0.2rem;
 
@@ -7024,7 +7024,11 @@ button.sb-section-label:hover {
 
   body.sidebar-collapsed .portal-sidebar .sidebar-trust-box,
 
-  .portal-sidebar.is-collapsed .sidebar-trust-box {
+  .portal-sidebar.is-collapsed .sidebar-trust-box,
+
+  body.sidebar-collapsed .portal-sidebar .sidebar-hire-card,
+
+  .portal-sidebar.is-collapsed .sidebar-hire-card {
 
     display: none !important;
 
@@ -7220,9 +7224,9 @@ button.sb-section-label:hover {
 
   bottom: 0;
 
-  left: -14px;
+  left: -24px;
 
-  width: 16px;
+  width: 26px;
 
   background: transparent;
 
@@ -7498,7 +7502,11 @@ body.sidebar-collapsed .portal-sidebar .sb-section:hover .sb-section-label,
 
 body.sidebar-collapsed .portal-sidebar .sb-section.sb-mini-active .sb-section-label,
 
-.portal-sidebar.is-collapsed .sb-section.sb-mini-active .sb-section-label {
+.portal-sidebar.is-collapsed .sb-section.sb-mini-active .sb-section-label,
+
+body.sidebar-collapsed .portal-sidebar .sb-section.sb-mini-pinned .sb-section-label,
+
+.portal-sidebar.is-collapsed .sb-section.sb-mini-pinned .sb-section-label {
 
   background: var(--sidebar-hover, var(--theme-surface-alt, rgba(0, 0, 0, 0.06))) !important;
 

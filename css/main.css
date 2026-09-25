@@ -6402,7 +6402,7 @@ select.input-field option {
 
 .sb-section {
 
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid var(--sidebar-border, rgba(0,0,0,0.08));
 
   padding-bottom: 0.2rem;
 
@@ -7024,7 +7024,11 @@ button.sb-section-label:hover {
 
   body.sidebar-collapsed .portal-sidebar .sidebar-trust-box,
 
-  .portal-sidebar.is-collapsed .sidebar-trust-box {
+  .portal-sidebar.is-collapsed .sidebar-trust-box,
+
+  body.sidebar-collapsed .portal-sidebar .sidebar-hire-card,
+
+  .portal-sidebar.is-collapsed .sidebar-hire-card {
 
     display: none !important;
 
@@ -7220,9 +7224,9 @@ button.sb-section-label:hover {
 
   bottom: 0;
 
-  left: -14px;
+  left: -24px;
 
-  width: 16px;
+  width: 26px;
 
   background: transparent;
 
@@ -7498,7 +7502,11 @@ body.sidebar-collapsed .portal-sidebar .sb-section:hover .sb-section-label,
 
 body.sidebar-collapsed .portal-sidebar .sb-section.sb-mini-active .sb-section-label,
 
-.portal-sidebar.is-collapsed .sb-section.sb-mini-active .sb-section-label {
+.portal-sidebar.is-collapsed .sb-section.sb-mini-active .sb-section-label,
+
+body.sidebar-collapsed .portal-sidebar .sb-section.sb-mini-pinned .sb-section-label,
+
+.portal-sidebar.is-collapsed .sb-section.sb-mini-pinned .sb-section-label {
 
   background: var(--sidebar-hover, var(--theme-surface-alt, rgba(0, 0, 0, 0.06))) !important;
 
@@ -18398,4 +18406,154 @@ body,
 [data-theme="dark"] .at-toast-footer,
 [data-theme="minimal-dark"] .at-toast-footer {
   border-top-color: #1E293B;
+}
+
+
+/* Embedded support page overrides */
+body.is-embedded .support-breadcrumb {
+  display: none !important;
+}
+body.is-embedded .support-page-main {
+  padding-top: 0.35rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+/* ── Tool Success Support Badge (beside successful output) ── */
+.tool-success-support-badge {
+  display: block;
+  margin: 1.25rem 0 0.5rem 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--card-bg, #ffffff) 92%, #F59E0B 8%), color-mix(in srgb, var(--card-bg, #ffffff) 95%, #3B82F6 5%));
+  border: 1.5px dashed color-mix(in srgb, var(--card-border, #E2E8F0) 60%, #F59E0B 40%);
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+  animation: tssbFadeIn 0.35s ease-out;
+  position: relative;
+  overflow: visible;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+}
+
+@keyframes tssbFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tssb-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+.tssb-info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.tssb-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.tssb-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.tssb-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+}
+.tssb-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted, #64748B);
+}
+.tssb-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.tssb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+}
+.tssb-btn-upi {
+  background: #E0F2FE;
+  color: #0369A1;
+  border-color: #BAE6FD;
+}
+.tssb-btn-upi:hover {
+  background: #0284C7;
+  color: #ffffff;
+  border-color: #0284C7;
+  transform: translateY(-1px);
+}
+.tssb-btn-upi .tssb-copy-tag {
+  background: rgba(2, 132, 199, 0.15);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.tssb-btn-paypal {
+  background: #003087;
+  color: #ffffff;
+  border-color: #00256c;
+}
+.tssb-btn-paypal:hover {
+  background: #004dc5;
+  color: #ffffff;
+  border-color: #004dc5;
+  transform: translateY(-1px);
+}
+.tssb-btn-page {
+  background: var(--card-bg, #ffffff);
+  color: var(--text-primary, #0F172A);
+  border-color: var(--card-border, #E2E8F0);
+}
+.tssb-btn-page:hover {
+  background: var(--bg-alt, #F8FAFC);
+  color: var(--color-primary, #0D7A82);
+  border-color: var(--color-primary, #0D7A82);
+  transform: translateY(-1px);
+}
+.tssb-toast-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 99999;
+  background: #0F172A;
+  color: #F8FAFC;
+  padding: 0.65rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: tssbToastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+@keyframes tssbToastIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 640px) {
+  .tool-success-support-badge { padding: 0.65rem 0.75rem; }
+  .tssb-content { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+  .tssb-actions { justify-content: flex-start; }
+  .tssb-btn { flex: 1 1 auto; justify-content: center; font-size: 0.74rem; }
 }
