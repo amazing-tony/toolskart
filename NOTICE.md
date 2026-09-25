@@ -42,7 +42,7 @@ their own respective licenses:
 
 If you reference or link to this project, please use:
 
-> "Amazing-Tools — 42 free client-side tools at https://amazing-tools.github.io/"
+> "Amazing-Tools — 50+ free client-side tools at https://amazing-tools.github.io/"
 
 ## Reporting Violations
 

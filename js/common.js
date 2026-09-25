@@ -372,6 +372,11 @@
 
     sidebarToggle.addEventListener('click', (e) => {
       e.stopPropagation();
+      const miniFlyout = document.getElementById('sbMiniFlyout');
+      if (miniFlyout) miniFlyout.classList.remove('is-visible');
+      if (portalSidebar) {
+        portalSidebar.querySelectorAll('.sb-section').forEach(s => s.classList.remove('sb-mini-active', 'sb-mini-pinned'));
+      }
       if (window.innerWidth <= 1024) {
         const isOpen = portalSidebar.classList.toggle('open');
         if (sidebarBackdrop) sidebarBackdrop.classList.toggle('active', isOpen);
@@ -450,6 +455,10 @@
 
   portalSidebar && portalSidebar.querySelectorAll('.sb-tree-toggle').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      // In desktop collapsed rail mode, the mini flyout handles click/hover. Bypass accordion tree expansion.
+      if (window.innerWidth > 1024 && (document.body.classList.contains('sidebar-collapsed') || portalSidebar.classList.contains('is-collapsed'))) {
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       const treeId = btn.dataset.tree;
@@ -839,6 +848,24 @@
   if (filterPills.length > 0) {
     const featuredSec = document.getElementById('featured-section');
     const sections = document.querySelectorAll('.category-section:not(#facilities)');
+
+    // Dynamically synchronize filter pill badges with exact cards rendered in DOM
+    let totalCardsCount = 0;
+    sections.forEach(sec => {
+      const cardCount = sec.querySelectorAll('.tool-card').length;
+      totalCardsCount += cardCount;
+      const catPill = document.querySelector(`.filter-pill[data-filter="${sec.id}"] .pill-count`);
+      if (catPill) catPill.textContent = cardCount;
+    });
+
+    const allPill = document.querySelector('.filter-pill[data-filter="all"] .pill-count');
+    if (allPill && totalCardsCount > 0) allPill.textContent = totalCardsCount;
+
+    if (featuredSec) {
+      const featCount = featuredSec.querySelectorAll('.featured-card').length;
+      const featPill = document.querySelector('.filter-pill[data-filter="featured"] .pill-count');
+      if (featPill) featPill.textContent = featCount;
+    }
 
     filterPills.forEach(pill => {
       pill.addEventListener('click', function () {
