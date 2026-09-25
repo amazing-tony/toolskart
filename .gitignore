@@ -1,10 +1,10 @@
 _backups/
-
+graphify-out/
 firebase-debug.log
 .firebase/
 firestore.rules
-
-
-firebase-debug.log
-.firebase/
-
+scratch_*.txt
+output-*.png
+matches.txt
+live_*.html
+live_*.js
