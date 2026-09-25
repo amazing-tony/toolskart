@@ -1553,7 +1553,7 @@
       const supportUrl = opts.supportUrl || (isPagesDir ? '../support.html?ref=task-complete' : 'support.html?ref=task-complete');
       const title = opts.title || 'Did Amazing-Tools add value to your work?';
       const desc = opts.desc || 'Amazing-Tools is 100% free, private & without ads. If this saved you time, you can support our mission — or simply keep using our tools with our best wishes!';
-      const btnText = opts.btnText || '☕ Support Our Work';
+      const btnText = opts.btnText || '❤️ Support Our Mission';
 
       return `
         <div class="gratitude-result-badge" data-gratitude-badge="true">
@@ -1587,6 +1587,102 @@
       const badge = temp.firstElementChild;
       target.appendChild(badge);
       return badge;
+    },
+
+    attachSupportBadge: function (target, customMsg) {
+      const targetEl = typeof target === 'string' ? document.querySelector(target) : target;
+      if (!targetEl) return;
+      if (targetEl.dataset.hasSupportBadge === 'true') return;
+      if (targetEl.querySelector('.tool-success-support-badge') || (targetEl.parentElement && targetEl.parentElement.querySelector('.tool-success-support-badge'))) {
+        targetEl.dataset.hasSupportBadge = 'true';
+        return;
+      }
+      const badge = this.renderSupportBadge(customMsg);
+      if (badge) {
+        const heroCard = targetEl.querySelector('.freedom-hero-card, .result-highlight, .format-table-header');
+        if (heroCard && heroCard !== targetEl) {
+          heroCard.insertAdjacentElement('afterend', badge);
+        } else {
+          targetEl.appendChild(badge);
+        }
+        targetEl.dataset.hasSupportBadge = 'true';
+      }
+    },
+
+    renderSupportBadge: function (customMsg) {
+      const isInPages = window.location.pathname.includes('/pages/');
+      const supportUrl = isInPages ? '../support.html' : 'support.html';
+      const UPI_ID = 'amzto369@ptyes';
+      const PAYPAL_HANDLE = 'amazingtools369';
+      const PAYPAL_URL = `https://www.paypal.com/paypalme/${PAYPAL_HANDLE}`;
+
+      const badgeEl = document.createElement('div');
+      badgeEl.className = 'tool-success-support-badge';
+      badgeEl.setAttribute('role', 'region');
+      badgeEl.setAttribute('aria-label', 'Support Amazing-Tools');
+
+      badgeEl.innerHTML = `
+        <div class="tssb-content">
+          <div class="tssb-info">
+            <span class="tssb-icon">🏛️</span>
+            <div class="tssb-text-wrap">
+              <span class="tssb-title">${customMsg || 'Free & Private Tool Helped You?'}</span>
+              <span class="tssb-sub">Support Amazing-Tools to keep all 50+ tools free & private for society:</span>
+            </div>
+          </div>
+          <div class="tssb-actions">
+            <button type="button" class="tssb-btn tssb-btn-upi" title="Copy UPI ID for PhonePe, GPay, Paytm, BHIM">
+              <span>📱</span>
+              <span>UPI: <strong>${UPI_ID}</strong></span>
+              <span class="tssb-copy-tag">Copy</span>
+            </button>
+            <a href="${PAYPAL_URL}" target="_blank" rel="noopener" class="tssb-btn tssb-btn-paypal" title="Donate via PayPal (150+ Currencies & Cards)">
+              <span>🌍</span>
+              <span>PayPal: <strong>${PAYPAL_HANDLE}</strong> ↗</span>
+            </a>
+            <a href="${supportUrl}" class="tssb-btn tssb-btn-page" title="View all support options, QR code & perks">
+              <span>❤️</span>
+              <span>Support Page</span>
+            </a>
+          </div>
+        </div>
+      `;
+
+      const upiBtn = badgeEl.querySelector('.tssb-btn-upi');
+      if (upiBtn) {
+        upiBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const copyTag = upiBtn.querySelector('.tssb-copy-tag');
+          const doCopy = () => {
+            if (copyTag) copyTag.textContent = 'Copied! ✓';
+            setTimeout(() => { if (copyTag) copyTag.textContent = 'Copy'; }, 2000);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(UPI_ID).then(doCopy).catch(() => prompt('Copy UPI ID:', UPI_ID));
+          } else {
+            prompt('Copy UPI ID:', UPI_ID);
+          }
+        });
+      }
+
+      const pageLink = badgeEl.querySelector('.tssb-btn-page');
+      if (pageLink) {
+        pageLink.addEventListener('click', (e) => {
+          if (window.self !== window.top) {
+            e.preventDefault();
+            try {
+              if (window.top.AmazingTools && window.top.AmazingTools.openTool) {
+                window.top.AmazingTools.openTool('support', 'Support Amazing-Tools', 'About', 'support.html');
+                return;
+              }
+            } catch (err) {}
+            window.top.location.href = supportUrl;
+          }
+        });
+      }
+
+      return badgeEl;
     },
     openTool: openToolInPortal,
     closeTool: closeToolPanel,
@@ -1671,7 +1767,7 @@
       });
     },
 
-    // Show result area with animation and gratitude badge
+    // Show result area with animation and gratitude/support badge
     showResult: function (elementId, options) {
       const el = document.getElementById(elementId);
       if (el) {
@@ -1679,6 +1775,9 @@
         el.classList.add('animate-in');
         if (typeof this.attachGratitudeBadge === 'function') {
           this.attachGratitudeBadge(el, options);
+        }
+        if (typeof this.attachSupportBadge === 'function') {
+          this.attachSupportBadge(el);
         }
       }
     },
@@ -1898,10 +1997,60 @@
     });
   }
 
+  // ---- Automatic Tool Success Badge Attachment ----
+  function initToolSuccessBadges() {
+    if (window.location.pathname.endsWith('support.html') || window.location.hash === '#support') return;
+
+    const api = window.AmazingTools || window.ToolsKart;
+    if (!api || typeof api.attachSupportBadge !== 'function') return;
+
+    const resultSelectors = [
+      '#resultArea',
+      '#resultBox',
+      '#resultsDashboard',
+      '#resultSection',
+      '#outputContainer',
+      '#outputArea',
+      '.result-area',
+      '.results-dashboard',
+      '.output-box',
+      '.result-box'
+    ];
+
+    function checkAndAttach() {
+      resultSelectors.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((el) => {
+          const isHidden = el.classList.contains('hidden') || el.style.display === 'none' || el.hasAttribute('hidden');
+          if (!isHidden && el.innerText && el.innerText.trim().length > 10 && !el.dataset.hasSupportBadge) {
+            api.attachSupportBadge(el);
+          }
+        });
+      });
+    }
+
+    checkAndAttach();
+
+    if (window.MutationObserver) {
+      const observer = new MutationObserver(() => {
+        checkAndAttach();
+      });
+      observer.observe(document.body || document.documentElement, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style', 'hidden']
+      });
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPrivacyUspStrip);
+    document.addEventListener('DOMContentLoaded', () => {
+      initPrivacyUspStrip();
+      initToolSuccessBadges();
+    });
   } else {
     initPrivacyUspStrip();
+    initToolSuccessBadges();
   }
 
 
