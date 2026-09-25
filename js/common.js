@@ -550,7 +550,7 @@
       );
     };
 
-    closeSidebarMiniFlyout = () => {
+    const closeSidebarMiniFlyout = () => {
       if (hideTimeout) clearTimeout(hideTimeout);
       flyout.classList.remove('is-visible');
       if (activeSection) {
@@ -1016,7 +1016,7 @@
     const isPages = curPath.includes('/pages/');
     const isInfoPage = curPath.endsWith('support.html') || curPath.endsWith('about.html') || curPath.endsWith('terms.html') || curPath.endsWith('privacy-policy.html');
 
-    if (isPages || isInfoPage) {
+    if ((isPages || isInfoPage) && !window.location.search.includes('standalone=true')) {
       const directSlug = extractSlugFromUrl(window.location.href);
       if (directSlug && toolRegistry[directSlug]) {
         const search = window.location.search || '';

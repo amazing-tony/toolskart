@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
@@ -181,6 +181,112 @@
                                         <button type="button" class="quick-chip" data-target="loanTenure" data-val="25">25 Yrs</button>
                                         <button type="button" class="quick-chip" data-target="loanTenure" data-val="30">30 Yrs</button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Rate Revisions / Multiple Rates Timeline -->
+                            <div class="rate-timeline-wrapper" style="margin-top: 1.25rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); padding: 1rem 1.25rem; background: var(--color-surface);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                                    <div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-size: 1.2rem;">📉</span>
+                                            <strong style="font-size: 0.98rem; color: var(--color-text);">Floating Interest Rate Timeline (Multiple Loan % Over Tenure)</strong>
+                                            <span class="calc-val-badge" id="rateRevisionsCountBadge" style="background: rgba(37,99,235,0.1); color: var(--color-primary); font-weight: 700; font-size: 0.75rem;">1 Base Rate</span>
+                                        </div>
+                                        <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin-top: 0.25rem; margin-bottom: 0;">
+                                            Floating home loan rates change over time (e.g. 8.75% &rarr; 8.25% after few quarters &rarr; 7.50% later). Add your rate changes to calculate exact revised yearly Principal &amp; Interest and Prepay vs. SIP comparisons.
+                                        </p>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline" id="btnToggleRateTimeline" style="font-size: 0.82rem; font-weight: 600; padding: 0.4rem 0.95rem; border-radius: var(--radius-full); cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                                        <span id="toggleRateTimelineIcon">➕</span> <span id="toggleRateTimelineText">Add Rate Revision</span>
+                                    </button>
+                                </div>
+
+                                <!-- Collapsible Rate Timeline Container -->
+                                <div id="rateTimelineContainer" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--color-border);">
+                                    <!-- Input Form for New Rate Revision -->
+                                    <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.85rem 1rem; margin-bottom: 0.85rem;">
+                                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.6rem;">
+                                            ➕ Schedule an Interest Rate Revision:
+                                        </div>
+                                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-end;">
+                                            <div style="min-width: 130px; flex: 1;">
+                                                <label for="newRateYear" style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-secondary); display: block; margin-bottom: 0.25rem;">Effective in Year:</label>
+                                                <select id="newRateYear" class="input-field mini-select" style="width: 100%; height: 38px;">
+                                                    <!-- Dynamic options -->
+                                                </select>
+                                            </div>
+                                            <div style="min-width: 140px; flex: 1;">
+                                                <label for="newRateMonth" style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-secondary); display: block; margin-bottom: 0.25rem;">In Month / Quarter:</label>
+                                                <select id="newRateMonth" class="input-field mini-select" style="width: 100%; height: 38px;">
+                                                    <option value="1">Month 1 (Jan/Q1)</option>
+                                                    <option value="2">Month 2</option>
+                                                    <option value="3">Month 3</option>
+                                                    <option value="4">Month 4 (Apr/Q2)</option>
+                                                    <option value="5">Month 5</option>
+                                                    <option value="6">Month 6</option>
+                                                    <option value="7">Month 7 (Jul/Q3)</option>
+                                                    <option value="8">Month 8</option>
+                                                    <option value="9">Month 9</option>
+                                                    <option value="10">Month 10 (Oct/Q4)</option>
+                                                    <option value="11">Month 11</option>
+                                                    <option value="12">Month 12</option>
+                                                </select>
+                                            </div>
+                                            <div style="min-width: 140px; flex: 1;">
+                                                <label for="newRateValue" style="font-weight: 600; font-size: 0.78rem; color: var(--color-text-secondary); margin-bottom: 0.25rem; display: block;">New Rate (% p.a.):</label>
+                                                <div class="input-with-unit" style="height: 38px;">
+                                                    <input type="number" id="newRateValue" class="input-field" value="8.25" min="4" max="25" step="0.05" style="height: 38px;">
+                                                    <span class="input-unit">%</span>
+                                                </div>
+                                            </div>
+                                            <div style="min-width: 210px; flex: 1.5;">
+                                                <label for="newRatePolicy" style="font-weight: 600; font-size: 0.78rem; color: var(--color-text-secondary); margin-bottom: 0.25rem; display: block;">Bank Policy on Rate Change:</label>
+                                                <select id="newRatePolicy" class="input-field mini-select" style="width: 100%; height: 38px;">
+                                                    <option value="tenure" selected>Adjust Tenure (Keep Regular EMI Same) • Bank Default</option>
+                                                    <option value="emi">Recalculate Monthly EMI (Keep Remaining Tenure Fixed)</option>
+                                                </select>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" id="btnAddRateRevision" style="height: 38px; padding: 0 1.25rem; white-space: nowrap; font-weight: 600;">
+                                                + Apply Rate Revision
+                                            </button>
+                                        </div>
+
+                                        <!-- Quick Presets -->
+                                        <div style="margin-top: 0.65rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+                                            <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600;">Preset Scenarios:</span>
+                                            <button type="button" class="quick-chip" id="chipPresetUserJourney" style="font-size: 0.75rem; padding: 0.25rem 0.65rem;">
+                                                ⭐ User Example: 8.75% &rarr; 8.25% (Q4) &rarr; 7.5% (Yr 3)
+                                            </button>
+                                            <button type="button" class="quick-chip" id="chipPresetRateCutCycle" style="font-size: 0.75rem; padding: 0.25rem 0.65rem;">
+                                                📉 Rate Cuts: -0.5% in Yr 2 &amp; -0.5% in Yr 3
+                                            </button>
+                                            <button type="button" class="quick-chip" id="chipPresetRateHikeCycle" style="font-size: 0.75rem; padding: 0.25rem 0.65rem;">
+                                                📈 Rate Hikes: +0.5% in Yr 2 &amp; +0.5% in Yr 3
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table of Active Rate Phases -->
+                                    <div class="scheduler-table-wrap" style="margin-top: 0.75rem;">
+                                        <table class="scheduler-table" id="rateScheduleTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Loan Phase</th>
+                                                    <th>Effective Timeline</th>
+                                                    <th>Calendar Month</th>
+                                                    <th>Interest Rate</th>
+                                                    <th>Change vs. Prev</th>
+                                                    <th>Bank Treatment</th>
+                                                    <th style="text-align: center;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="rateScheduleTableBody">
+                                                <!-- Dynamic rows -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="rateTimelineSummaryStrip" style="margin-top: 0.75rem; font-size: 0.86rem; color: var(--color-text-secondary);"></div>
                                 </div>
                             </div>
 
@@ -604,6 +710,9 @@
                             <div class="arena-header">
                                 <h3>⚖️ Prepay Loan vs. Invest in Mutual Fund SIP</h3>
                                 <p>Which strategy creates better value for your hard-earned money?</p>
+                                <div id="arenaFloatingRateNotice" style="display: none; margin-top: 0.75rem; padding: 0.5rem 0.85rem; background: rgba(59, 130, 246, 0.08); border-left: 3px solid #3B82F6; border-radius: 4px; font-size: 0.82rem; color: var(--color-text-secondary); text-align: left;">
+                                    <strong>📈 Floating Rate Timeline Active:</strong> Prepayment savings and SIP comparisons are dynamically calculated using your floating interest rate phases (Weighted average loan rate: <span id="arenaAvgRateVal" style="font-weight: 700; color: var(--color-primary);">8.25%</span>).
+                                </div>
                             </div>
 
                             <div class="arena-grid">
@@ -797,6 +906,7 @@
                                         <tr>
                                             <th id="periodHeader">Year</th>
                                             <th>Opening Balance</th>
+                                            <th>Interest Rate</th>
                                             <th>Regular EMI</th>
                                             <th>Prepayment</th>
                                             <th>Principal Paid</th>

@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    Amazing-Tools — User-Friendly Loan Prepayment & Debt-Freedom Planner
    - Dual-input sliders with 2-way sync
    - Real-time Indian currency words (Lakhs & Crores)
@@ -71,6 +71,25 @@
   const liveSyncStatus = document.getElementById('liveSyncStatus');
   const liveSyncText = document.getElementById('liveSyncText');
   const btnDownloadReport = document.getElementById('btnDownloadReport');
+
+  // Floating Interest Rate Timeline elements
+  const rateTimelineContainer = document.getElementById('rateTimelineContainer');
+  const btnToggleRateTimeline = document.getElementById('btnToggleRateTimeline');
+  const toggleRateTimelineIcon = document.getElementById('toggleRateTimelineIcon');
+  const toggleRateTimelineText = document.getElementById('toggleRateTimelineText');
+  const rateRevisionsCountBadge = document.getElementById('rateRevisionsCountBadge');
+  const newRateYear = document.getElementById('newRateYear');
+  const newRateMonth = document.getElementById('newRateMonth');
+  const newRateValue = document.getElementById('newRateValue');
+  const newRatePolicy = document.getElementById('newRatePolicy');
+  const btnAddRateRevision = document.getElementById('btnAddRateRevision');
+  const chipPresetUserJourney = document.getElementById('chipPresetUserJourney');
+  const chipPresetRateCutCycle = document.getElementById('chipPresetRateCutCycle');
+  const chipPresetRateHikeCycle = document.getElementById('chipPresetRateHikeCycle');
+  const rateScheduleTableBody = document.getElementById('rateScheduleTableBody');
+  const rateTimelineSummaryStrip = document.getElementById('rateTimelineSummaryStrip');
+  const arenaFloatingRateNotice = document.getElementById('arenaFloatingRateNotice');
+  const arenaAvgRateVal = document.getElementById('arenaAvgRateVal');
 
   // Impact mode & SIP
   const labelImpactTenure = document.getElementById('labelImpactTenure');
@@ -153,6 +172,7 @@
 
   // State
   let customLumpsums = [];
+  let rateRevisions = [];
   let currentScheduleView = 'yearly';
   let currentYearlySchedule = [];
   let currentMonthlySchedule = [];
@@ -177,6 +197,8 @@
     });
 
     bindPair(loanTenureInput, loanTenureSlider, () => {
+      updateSchedulerYearOptions();
+      updateRateYearOptions();
       updateWordDisplays();
       updateTargetSolver();
       triggerLiveCalculation();
@@ -439,6 +461,23 @@
     // Lumpsum Add Button
     if (btnAddLumpsum) {
       btnAddLumpsum.addEventListener('click', handleAddLumpsum);
+    }
+
+    // Floating Interest Rate Timeline Listeners
+    if (btnToggleRateTimeline) {
+      btnToggleRateTimeline.addEventListener('click', toggleRateTimeline);
+    }
+    if (btnAddRateRevision) {
+      btnAddRateRevision.addEventListener('click', handleAddRateRevision);
+    }
+    if (chipPresetUserJourney) {
+      chipPresetUserJourney.addEventListener('click', applyPresetUserJourney);
+    }
+    if (chipPresetRateCutCycle) {
+      chipPresetRateCutCycle.addEventListener('click', applyPresetRateCutCycle);
+    }
+    if (chipPresetRateHikeCycle) {
+      chipPresetRateHikeCycle.addEventListener('click', applyPresetRateHikeCycle);
     }
 
     // Reset button
@@ -744,6 +783,326 @@
     }
   }
 
+  // --- 9b. Floating Interest Rate Timeline Handlers ---
+  function updateRateYearOptions() {
+    if (!newRateYear) return;
+    const tenureYears = Math.max(1, Math.round(parseFloat(loanTenureInput.value) || 20));
+    const currentVal = parseInt(newRateYear.value, 10) || 1;
+    newRateYear.innerHTML = '';
+    for (let y = 1; y <= tenureYears; y++) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = `Year ${y}`;
+      if (y === currentVal || (currentVal > tenureYears && y === tenureYears)) {
+        opt.selected = true;
+      }
+      newRateYear.appendChild(opt);
+    }
+  }
+
+  function toggleRateTimeline() {
+    if (!rateTimelineContainer) return;
+    const isHidden = rateTimelineContainer.style.display === 'none' || !rateTimelineContainer.style.display;
+    if (isHidden) {
+      rateTimelineContainer.style.display = 'block';
+      if (toggleRateTimelineIcon) toggleRateTimelineIcon.textContent = '▲';
+      if (toggleRateTimelineText) toggleRateTimelineText.textContent = 'Hide Rate Timeline';
+    } else {
+      rateTimelineContainer.style.display = 'none';
+      if (toggleRateTimelineIcon) toggleRateTimelineIcon.textContent = '➕';
+      if (toggleRateTimelineText) toggleRateTimelineText.textContent = 'Add Rate Revision';
+    }
+  }
+
+  function handleAddRateRevision() {
+    const year = parseInt(newRateYear ? newRateYear.value : '1', 10) || 1;
+    const monthInYear = parseInt(newRateMonth ? newRateMonth.value : '1', 10) || 1;
+    const newRate = parseFloat(newRateValue ? newRateValue.value : '0');
+    const policy = (newRatePolicy && newRatePolicy.value === 'emi') ? 'emi' : 'tenure';
+
+    if (isNaN(newRate) || newRate <= 0 || newRate > 35) {
+      alert('Please enter a valid annual interest rate (e.g. 8.25%).');
+      if (newRateValue) newRateValue.focus();
+      return;
+    }
+
+    const tenureYears = parseFloat(loanTenureInput.value) || 20;
+    const totalMaxMonths = Math.round(tenureYears * 12);
+    const loanMonth = (year - 1) * 12 + monthInYear;
+
+    if (loanMonth === 1) {
+      interestRateInput.value = newRate;
+      if (interestRateSlider) interestRateSlider.value = newRate;
+      syncActiveChip('interestRate', newRate);
+      updateWordDisplays();
+      triggerLiveCalculation();
+      return;
+    }
+
+    if (loanMonth > totalMaxMonths) {
+      alert(`Selected timing (Year ${year}, Month ${monthInYear}) is beyond your total loan tenure of ${tenureYears} years.`);
+      return;
+    }
+
+    const existingIdx = rateRevisions.findIndex(r => r.loanMonth === loanMonth);
+    if (existingIdx >= 0) {
+      rateRevisions[existingIdx].rate = newRate;
+      rateRevisions[existingIdx].policy = policy;
+    } else {
+      rateRevisions.push({
+        id: 'rate_' + Date.now() + '_' + Math.floor(Math.random() * 10000),
+        year,
+        monthInYear,
+        loanMonth,
+        rate: newRate,
+        policy
+      });
+    }
+
+    rateRevisions.sort((a, b) => a.loanMonth - b.loanMonth);
+    triggerLiveCalculation();
+  }
+
+  function applyPresetUserJourney() {
+    interestRateInput.value = '8.75';
+    if (interestRateSlider) interestRateSlider.value = '8.75';
+    syncActiveChip('interestRate', 8.75);
+
+    rateRevisions = [
+      {
+        id: 'rev_user_1',
+        year: 1,
+        monthInYear: 10,
+        loanMonth: 10,
+        rate: 8.25,
+        policy: 'tenure'
+      },
+      {
+        id: 'rev_user_2',
+        year: 3,
+        monthInYear: 1,
+        loanMonth: 25,
+        rate: 7.5,
+        policy: 'tenure'
+      }
+    ];
+
+    if (rateTimelineContainer) {
+      rateTimelineContainer.style.display = 'block';
+      if (toggleRateTimelineIcon) toggleRateTimelineIcon.textContent = '▲';
+      if (toggleRateTimelineText) toggleRateTimelineText.textContent = 'Hide Rate Timeline';
+    }
+
+    updateWordDisplays();
+    triggerLiveCalculation();
+  }
+
+  function applyPresetRateCutCycle() {
+    const baseR = parseFloat(interestRateInput.value) || 8.75;
+    const cut1 = Math.max(4, parseFloat((baseR - 0.5).toFixed(2)));
+    const cut2 = Math.max(4, parseFloat((cut1 - 0.5).toFixed(2)));
+
+    rateRevisions = [
+      {
+        id: 'rev_cut_1',
+        year: 2,
+        monthInYear: 1,
+        loanMonth: 13,
+        rate: cut1,
+        policy: 'tenure'
+      },
+      {
+        id: 'rev_cut_2',
+        year: 3,
+        monthInYear: 1,
+        loanMonth: 25,
+        rate: cut2,
+        policy: 'tenure'
+      }
+    ];
+
+    if (rateTimelineContainer) {
+      rateTimelineContainer.style.display = 'block';
+      if (toggleRateTimelineIcon) toggleRateTimelineIcon.textContent = '▲';
+      if (toggleRateTimelineText) toggleRateTimelineText.textContent = 'Hide Rate Timeline';
+    }
+
+    triggerLiveCalculation();
+  }
+
+  function applyPresetRateHikeCycle() {
+    const baseR = parseFloat(interestRateInput.value) || 8.75;
+    const hike1 = parseFloat((baseR + 0.5).toFixed(2));
+    const hike2 = parseFloat((hike1 + 0.5).toFixed(2));
+
+    rateRevisions = [
+      {
+        id: 'rev_hike_1',
+        year: 2,
+        monthInYear: 1,
+        loanMonth: 13,
+        rate: hike1,
+        policy: 'tenure'
+      },
+      {
+        id: 'rev_hike_2',
+        year: 3,
+        monthInYear: 1,
+        loanMonth: 25,
+        rate: hike2,
+        policy: 'tenure'
+      }
+    ];
+
+    if (rateTimelineContainer) {
+      rateTimelineContainer.style.display = 'block';
+      if (toggleRateTimelineIcon) toggleRateTimelineIcon.textContent = '▲';
+      if (toggleRateTimelineText) toggleRateTimelineText.textContent = 'Hide Rate Timeline';
+    }
+
+    triggerLiveCalculation();
+  }
+
+  function renderRateTimelineTable(currentParams) {
+    if (!rateScheduleTableBody) return;
+    rateScheduleTableBody.innerHTML = '';
+
+    const baseRate = parseFloat(interestRateInput.value) || 8.75;
+    const startDate = getParsedStartDate();
+    const tenureYears = parseFloat(loanTenureInput.value) || 20;
+    const totalMonths = Math.round(tenureYears * 12);
+
+    const phases = [];
+    if (rateRevisions.length === 0) {
+      phases.push({
+        phaseNum: 1,
+        isBase: true,
+        startMonth: 1,
+        endMonth: totalMonths,
+        rate: baseRate,
+        policy: 'tenure',
+        changeText: 'Initial Base Rate'
+      });
+    } else {
+      phases.push({
+        phaseNum: 1,
+        isBase: true,
+        startMonth: 1,
+        endMonth: rateRevisions[0].loanMonth - 1,
+        rate: baseRate,
+        policy: 'tenure',
+        changeText: 'Initial Base Rate'
+      });
+
+      let prevRate = baseRate;
+      rateRevisions.forEach((rev, idx) => {
+        const nextRev = rateRevisions[idx + 1];
+        const endM = nextRev ? nextRev.loanMonth - 1 : totalMonths;
+        const diff = rev.rate - prevRate;
+        let diffStr = '';
+        if (diff < -0.001) {
+          diffStr = `${diff.toFixed(2)}% 📉 (Rate Cut)`;
+        } else if (diff > 0.001) {
+          diffStr = `+${diff.toFixed(2)}% 📈 (Rate Hike)`;
+        } else {
+          diffStr = `0.00% (Unchanged)`;
+        }
+
+        phases.push({
+          id: rev.id,
+          phaseNum: idx + 2,
+          isBase: false,
+          year: rev.year,
+          monthInYear: rev.monthInYear,
+          startMonth: rev.loanMonth,
+          endMonth: endM,
+          rate: rev.rate,
+          policy: rev.policy,
+          changeText: diffStr
+        });
+        prevRate = rev.rate;
+      });
+    }
+
+    phases.forEach(ph => {
+      const startCal = getPeriodDate(startDate.year, startDate.month, ph.startMonth - 1);
+      const endCal = getPeriodDate(startDate.year, startDate.month, Math.max(ph.startMonth - 1, ph.endMonth - 1));
+      const calRangeText = ph.startMonth >= ph.endMonth
+        ? startCal.short
+        : `${startCal.short} – ${endCal.short}`;
+
+      const timelineText = ph.isBase
+        ? (rateRevisions.length === 0 ? `Full Tenure (Mos 1 – ${ph.endMonth})` : `Months 1 to ${ph.endMonth}`)
+        : `Month ${ph.startMonth} onwards (Yr ${ph.year}, M${ph.monthInYear})`;
+
+      const policyBadge = ph.policy === 'emi'
+        ? `<span class="calc-val-badge" style="background:rgba(59,130,246,0.12); color:#2563EB;">Recalculate EMI</span>`
+        : `<span class="calc-val-badge" style="background:rgba(16,185,129,0.12); color:#059669;">Adjust Tenure (Keep EMI)</span>`;
+
+      const actionHtml = ph.isBase
+        ? `<span style="font-size:0.75rem; color:var(--color-text-muted);">Base Rate</span>`
+        : `<button type="button" class="rate-del-btn" data-id="${ph.id}" style="background:none; border:none; color:#EF4444; cursor:pointer; font-size:0.8rem; font-weight:600;">🗑️ Delete</button>`;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>Phase ${ph.phaseNum}${ph.isBase ? ' (Base)' : ''}</strong></td>
+        <td>${timelineText}</td>
+        <td>${calRangeText}</td>
+        <td><strong style="color:var(--color-primary); font-size:0.95rem;">${ph.rate.toFixed(2)}% p.a.</strong></td>
+        <td><span style="font-size:0.82rem; font-weight:600;">${ph.changeText}</span></td>
+        <td>${policyBadge}</td>
+        <td style="text-align: center;">${actionHtml}</td>
+      `;
+      rateScheduleTableBody.appendChild(tr);
+    });
+
+    // Wire up delete buttons
+    rateScheduleTableBody.querySelectorAll('.rate-del-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const idToDelete = this.getAttribute('data-id');
+        rateRevisions = rateRevisions.filter(r => r.id !== idToDelete);
+        triggerLiveCalculation();
+      });
+    });
+
+    // Update Badge
+    if (rateRevisionsCountBadge) {
+      if (rateRevisions.length === 0) {
+        rateRevisionsCountBadge.textContent = '1 Base Rate';
+        rateRevisionsCountBadge.style.background = 'rgba(100,116,139,0.1)';
+        rateRevisionsCountBadge.style.color = 'var(--color-text-secondary)';
+      } else {
+        rateRevisionsCountBadge.textContent = `${rateRevisions.length + 1} Rate Phases Active`;
+        rateRevisionsCountBadge.style.background = 'rgba(16,185,129,0.15)';
+        rateRevisionsCountBadge.style.color = '#059669';
+      }
+    }
+
+    // Update Summary strip
+    if (rateTimelineSummaryStrip && currentParams) {
+      const baseR = parseFloat(interestRateInput.value) || 8.75;
+      if (rateRevisions.length > 0) {
+        const ratesList = [baseR, ...rateRevisions.map(r => r.rate)];
+        const minR = Math.min(...ratesList);
+        const maxR = Math.max(...ratesList);
+        const weightedAvg = currentParams.weightedAvgRate || baseR;
+
+        rateTimelineSummaryStrip.innerHTML = `
+          <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2); border-radius: var(--radius-sm); padding: 0.6rem 0.85rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem;">
+            <span><strong>Active Floating Range:</strong> ${minR.toFixed(2)}% – ${maxR.toFixed(2)}% p.a. (${rateRevisions.length + 1} phases)</span>
+            <span style="color: #2563EB; font-weight: 700;">📊 Balance-Weighted Average Rate: ~${weightedAvg.toFixed(2)}% p.a.</span>
+          </div>
+        `;
+      } else {
+        rateTimelineSummaryStrip.innerHTML = `
+          <div style="font-size: 0.8rem; color: var(--color-text-muted); padding: 0.25rem 0;">
+            Constant fixed interest rate of <strong>${baseR}% p.a.</strong> applied across all years. Click "+ Apply Rate Revision" or a preset above to model floating rate cuts or hikes.
+          </div>
+        `;
+      }
+    }
+  }
+
   // --- 10. Reset All Handler ---
   function handleResetAll() {
     loanAmountInput.value = '5000000';
@@ -774,8 +1133,16 @@
     }
 
     customLumpsums = [];
+    rateRevisions = [];
     updateSchedulerYearOptions();
+    updateRateYearOptions();
     renderSchedulerTable(null);
+    renderRateTimelineTable(null);
+    if (rateTimelineContainer) {
+      rateTimelineContainer.style.display = 'none';
+      if (toggleRateTimelineIcon) toggleRateTimelineIcon.textContent = '➕';
+      if (toggleRateTimelineText) toggleRateTimelineText.textContent = 'Add Rate Revision';
+    }
 
     // Default mode tab: monthly
     const monthlyBtn = document.querySelector('.prepay-mode-btn[data-mode="monthly"]');
@@ -816,9 +1183,11 @@
     const investAnnualRate = (parseFloat(investRateInput.value) || 12) / 100;
     const investMonthlyRate = investAnnualRate / 12;
 
-    // Run baseline simulation (Zero Prepayment)
+    // Run baseline simulation (Zero Prepayment, with rate revisions)
     const baseSchedule = runSimulation({
       principal,
+      baseRate: rate,
+      rateRevisions,
       monthlyRate,
       totalMonths,
       baseEmi,
@@ -832,6 +1201,8 @@
     // Run prepayment simulation
     const prepaySchedule = runSimulation({
       principal,
+      baseRate: rate,
+      rateRevisions,
       monthlyRate,
       totalMonths,
       baseEmi,
@@ -864,9 +1235,32 @@
     const yearsSaved = monthsSaved / 12;
     const newTenureYears = prepaySchedule.monthsCompleted / 12;
 
+    // Balance-weighted average loan interest rate
+    let weightedRateSum = 0;
+    let balanceSum = 0;
+    prepaySchedule.monthly.forEach(item => {
+      weightedRateSum += item.openingBalance * item.rate;
+      balanceSum += item.openingBalance;
+    });
+    const weightedAvgRate = balanceSum > 0 ? (weightedRateSum / balanceSum) : rate;
+
     // Update UI Previews
     if (liveSyncText) {
-      liveSyncText.textContent = `Live Calculated for ₹ ${formatLakhsCrores(principal).replace('₹ ', '')} @ ${rate}% over ${tenureYears} Yrs`;
+      if (rateRevisions.length > 0) {
+        const lastRevRate = rateRevisions[rateRevisions.length - 1].rate;
+        liveSyncText.textContent = `Live Calculated for ₹ ${formatLakhsCrores(principal).replace('₹ ', '')} (Floating: ${rate}% → ${lastRevRate}%, avg ${weightedAvgRate.toFixed(2)}%) over ${tenureYears} Yrs`;
+      } else {
+        liveSyncText.textContent = `Live Calculated for ₹ ${formatLakhsCrores(principal).replace('₹ ', '')} @ ${rate}% over ${tenureYears} Yrs`;
+      }
+    }
+
+    if (arenaFloatingRateNotice && arenaAvgRateVal) {
+      if (rateRevisions.length > 0) {
+        arenaAvgRateVal.textContent = `${weightedAvgRate.toFixed(2)}% p.a.`;
+        arenaFloatingRateNotice.style.display = 'block';
+      } else {
+        arenaFloatingRateNotice.style.display = 'none';
+      }
     }
 
     renderBaselinePreview(baseEmi, baseSchedule.totalInterest, principal + baseSchedule.totalInterest);
@@ -879,6 +1273,13 @@
       yearlyPrepay,
       stepUpRate,
       impactMode,
+      prepaySchedule
+    });
+    renderRateTimelineTable({
+      principal,
+      baseRate: rate,
+      rateRevisions,
+      weightedAvgRate,
       prepaySchedule
     });
     renderHeroFreedomCard({
@@ -906,7 +1307,9 @@
       totalExtraPrepaid: prepaySchedule.totalPrepayment,
       newTenureYears,
       interestSaved,
-      rate,
+      rate: weightedAvgRate,
+      baseRate: rate,
+      hasFloatingRates: rateRevisions.length > 0,
       totalMonths,
       totalInvestedCapital,
       investmentFutureValue,
@@ -935,6 +1338,8 @@
   function runSimulation(params) {
     const {
       principal,
+      baseRate = parseFloat(interestRateInput.value) || 8.75,
+      rateRevisions = [],
       monthlyRate,
       totalMonths,
       baseEmi,
@@ -953,6 +1358,13 @@
       });
     }
 
+    const rateRevisionMap = {};
+    if (rateRevisions && rateRevisions.length > 0) {
+      rateRevisions.forEach(rev => {
+        rateRevisionMap[rev.loanMonth] = rev;
+      });
+    }
+
     let balance = principal;
     let totalInterest = 0;
     let totalPrincipalPaid = 0;
@@ -968,6 +1380,8 @@
     let curYearEmi = 0;
     let yearOpeningBalance = principal;
     let curEmi = baseEmi;
+    let currentAnnualRate = baseRate;
+    let curYearRates = [];
 
     let month = 1;
 
@@ -982,7 +1396,27 @@
         curYearInterest = 0;
         curYearPrepay = 0;
         curYearEmi = 0;
+        curYearRates = [];
       }
+
+      // Check if a rate revision takes effect in this month
+      if (rateRevisionMap[month]) {
+        const rev = rateRevisionMap[month];
+        currentAnnualRate = rev.rate;
+        const newMonthlyRate = currentAnnualRate / 12 / 100;
+        if (rev.policy === 'emi') {
+          const remainingScheduledMonths = Math.max(1, totalMonths - month + 1);
+          curEmi = computeEmi(balance, newMonthlyRate, remainingScheduledMonths);
+        } else {
+          const minRequiredEmi = balance * newMonthlyRate;
+          if (curEmi <= minRequiredEmi) {
+            curEmi = minRequiredEmi + 100;
+          }
+        }
+      }
+
+      const activeMonthlyRate = currentAnnualRate / 12 / 100;
+      curYearRates.push(currentAnnualRate);
 
       // Step-up on monthly prepay
       let extraMonthly = monthlyPrepay;
@@ -1004,7 +1438,7 @@
       const totalExtraThisMonth = extraMonthly + extraYearly + extraLumpsum;
 
       const openingBal = balance;
-      const interestForMonth = balance * monthlyRate;
+      const interestForMonth = balance * activeMonthlyRate;
       let regularEmiForMonth = curEmi;
       let principalFromEmi = 0;
       let prepayApplied = 0;
@@ -1016,7 +1450,7 @@
           principalFromEmi = balance;
           prepayApplied = 0;
         } else {
-          principalFromEmi = regularEmiForMonth - interestForMonth;
+          principalFromEmi = Math.max(0, regularEmiForMonth - interestForMonth);
           prepayApplied = balance - principalFromEmi;
         }
         balance = 0;
@@ -1028,7 +1462,7 @@
         // EMI reduction mode
         if (impactMode === 'emi' && prepayApplied > 0) {
           const remainingMonths = Math.max(1, totalMonths - month);
-          curEmi = computeEmi(balance, monthlyRate, remainingMonths);
+          curEmi = computeEmi(balance, activeMonthlyRate, remainingMonths);
         }
       }
 
@@ -1046,6 +1480,8 @@
       monthly.push({
         month,
         year: yearNum,
+        rate: currentAnnualRate,
+        isRevisionMonth: Boolean(rateRevisionMap[month]),
         openingBalance: openingBal,
         regularEmi: regularEmiForMonth,
         prepayment: prepayApplied,
@@ -1056,8 +1492,20 @@
       });
 
       if (monthInYear === 12 || balance <= 0.01) {
+        const uniqueRates = [...new Set(curYearRates)];
+        let rateText = '';
+        if (uniqueRates.length === 1) {
+          rateText = `${uniqueRates[0].toFixed(2)}%`;
+        } else {
+          rateText = uniqueRates.map(r => `${r.toFixed(2)}%`).join(' → ');
+        }
+        const avgYearRate = curYearRates.reduce((a, b) => a + b, 0) / curYearRates.length;
+
         yearly.push({
           year: yearNum,
+          rateText,
+          avgRate: avgYearRate,
+          rates: uniqueRates,
           openingBalance: yearOpeningBalance,
           regularEmi: curYearEmi,
           prepayment: curYearPrepay,
@@ -1078,7 +1526,8 @@
       totalPrepayment,
       totalPayment,
       monthly,
-      yearly
+      yearly,
+      newEmi: curEmi
     };
   }
 
@@ -1223,6 +1672,10 @@
 
     if (breakEvenRateBadge) breakEvenRateBadge.textContent = `Break-even ROI: ${breakEvenRate.toFixed(2)}% p.a.`;
 
+    const rateDisplayStr = data.hasFloatingRates
+      ? `weighted avg ${data.rate.toFixed(2)}%`
+      : `${data.rate}%`;
+
     if (data.totalExtraPrepaid <= 0) {
       if (cardPrepay) cardPrepay.classList.remove('is-winner');
       if (cardInvest) cardInvest.classList.remove('is-winner');
@@ -1242,7 +1695,7 @@
       if (verdictHeading) verdictHeading.textContent = 'Option B (Mutual Fund SIP) Builds Greater Net Wealth';
       if (verdictText) {
         verdictText.innerHTML = `
-          Because your expected equity return (<strong>${data.investAnnualRate}%</strong>) beats your loan interest rate (<strong>${data.rate}%</strong>), investing your extra cash builds more compounding wealth over time than prepaying the loan. However, prepaying gives 100% risk-free peace of mind!
+          Because your expected equity return (<strong>${data.investAnnualRate}%</strong>) beats your loan interest rate (<strong>${rateDisplayStr}</strong>), investing your extra cash builds more compounding wealth over time than prepaying the loan. However, prepaying gives 100% risk-free peace of mind!
         `;
       }
       if (advantageDifferenceBadge) {
@@ -1258,7 +1711,7 @@
       if (verdictHeading) verdictHeading.textContent = 'Option A (Prepayment) is Guaranteed & Superior';
       if (verdictText) {
         verdictText.innerHTML = `
-          Prepaying your loan saves a guaranteed <strong>${data.rate}% p.a.</strong> tax-free interest. Since your expected investment return does not beat the break-even hurdle rate (<strong>${breakEvenRate.toFixed(2)}%</strong>), eliminating debt early is both safer and more profitable.
+          Prepaying your loan saves a guaranteed <strong>${rateDisplayStr} p.a.</strong> tax-free interest. Since your expected investment return does not beat the break-even hurdle rate (<strong>${breakEvenRate.toFixed(2)}%</strong>), eliminating debt early is both safer and more profitable.
         `;
       }
       if (advantageDifferenceBadge) {
@@ -1677,18 +2130,33 @@
     data.forEach(item => {
       const tr = document.createElement('tr');
       let periodText = '';
+      let rateBadgeHtml = '';
+
       if (currentScheduleView === 'yearly') {
         const startD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12);
         const endD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12 + 11);
         periodText = `Year ${item.year} <span style="font-size:0.75rem; font-weight:400; color:#64748B; display:block;">${startD.short} – ${endD.short}</span>`;
+
+        if (item.rates && item.rates.length > 1) {
+          rateBadgeHtml = `<span class="calc-val-badge" style="background: rgba(245, 158, 11, 0.12); color: #D97706; font-size: 0.78rem; font-weight: 600;" title="Rates revised during year">${item.rateText}</span>`;
+        } else {
+          rateBadgeHtml = `<strong style="color: var(--color-text);">${item.rateText || (parseFloat(interestRateInput.value) + '%')}</strong>`;
+        }
       } else {
         const mD = getPeriodDate(startDate.year, startDate.month, item.month - 1);
         periodText = `${mD.short} <span style="font-size:0.75rem; font-weight:400; color:#64748B; display:block;">Month ${item.month}</span>`;
+
+        if (item.isRevisionMonth) {
+          rateBadgeHtml = `<span class="calc-val-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; font-weight: 700; font-size: 0.78rem;" title="Rate revision effective this month">⚡ ${item.rate.toFixed(2)}%</span>`;
+        } else {
+          rateBadgeHtml = `<span style="color: var(--color-text-secondary);">${(item.rate || parseFloat(interestRateInput.value)).toFixed(2)}%</span>`;
+        }
       }
 
       tr.innerHTML = `
         <td style="font-weight: 600;">${periodText}</td>
         <td>₹ ${format(item.openingBalance)}</td>
+        <td>${rateBadgeHtml}</td>
         <td>₹ ${format(item.regularEmi)}</td>
         <td style="${item.prepayment > 0 ? 'color:#059669; font-weight:700;' : ''}">${item.prepayment > 0 ? '₹ ' + format(item.prepayment) : '—'}</td>
         <td>₹ ${format(item.principalPaid)}</td>
@@ -1713,6 +2181,7 @@
       currentScheduleView === 'yearly' ? 'Year' : 'Month',
       'Calendar Period',
       'Opening Balance (INR)',
+      'Interest Rate (% p.a.)',
       'Regular EMI (INR)',
       'Prepayment (INR)',
       'Principal Paid (INR)',
@@ -1723,19 +2192,23 @@
 
     const rows = data.map(item => {
       let dateLabel = '';
+      let rateVal = '';
       if (currentScheduleView === 'yearly') {
         const startD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12);
         const endD = getPeriodDate(startDate.year, startDate.month, (item.year - 1) * 12 + 11);
         dateLabel = `${startD.short} to ${endD.short}`;
+        rateVal = item.rateText || `${item.avgRate ? item.avgRate.toFixed(2) : interestRateInput.value}%`;
       } else {
         const mD = getPeriodDate(startDate.year, startDate.month, item.month - 1);
         dateLabel = mD.short;
+        rateVal = `${(item.rate || parseFloat(interestRateInput.value)).toFixed(2)}%`;
       }
 
       return [
         currentScheduleView === 'yearly' ? `Year ${item.year}` : `Month ${item.month}`,
         `"${dateLabel}"`,
         item.openingBalance.toFixed(2),
+        `"${rateVal}"`,
         item.regularEmi.toFixed(2),
         item.prepayment.toFixed(2),
         item.principalPaid.toFixed(2),
@@ -1749,6 +2222,14 @@
     rows.forEach(r => {
       csvContent += r.join(',') + '\n';
     });
+
+    if (rateRevisions.length > 0) {
+      csvContent += '\n# FLOATING INTEREST RATE TIMELINE APPLIED\n';
+      csvContent += `# Initial Base Rate: ${interestRateInput.value}% p.a.\n`;
+      rateRevisions.forEach((rev, idx) => {
+        csvContent += `# Revision ${idx + 1}: Effective Year ${rev.year} Month ${rev.monthInYear} (Month ${rev.loanMonth}) -> ${rev.rate}% p.a. [Policy: ${rev.policy === 'emi' ? 'Recalculate EMI' : 'Adjust Tenure'}]\n`;
+      });
+    }
 
     csvContent += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
     csvContent += '# This calculation output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
@@ -1812,21 +2293,46 @@
     const impactMode = document.querySelector('input[name="impactMode"]:checked') ? document.querySelector('input[name="impactMode"]:checked').value : 'tenure';
 
     const baseSchedule = runSimulation({
-      principal, monthlyRate, totalMonths, baseEmi,
-      monthlyPrepay: 0, yearlyPrepay: 0, stepUpRate: 0, customLumpsums: [], impactMode: 'tenure'
+      principal,
+      baseRate: rate,
+      rateRevisions,
+      monthlyRate,
+      totalMonths,
+      baseEmi,
+      monthlyPrepay: 0,
+      yearlyPrepay: 0,
+      stepUpRate: 0,
+      customLumpsums: [],
+      impactMode: 'tenure'
     });
 
     const prepaySchedule = runSimulation({
-      principal, monthlyRate, totalMonths, baseEmi,
-      monthlyPrepay, yearlyPrepay,
+      principal,
+      baseRate: rate,
+      rateRevisions,
+      monthlyRate,
+      totalMonths,
+      baseEmi,
+      monthlyPrepay,
+      yearlyPrepay,
       stepUpRate: enableStepUp && enableStepUp.checked ? (parseFloat(prepayStepUp.value) || 0) / 100 : 0,
-      customLumpsums, impactMode
+      customLumpsums,
+      impactMode
     });
 
     const interestSaved = Math.max(0, baseSchedule.totalInterest - prepaySchedule.totalInterest);
     const monthsSaved = Math.max(0, totalMonths - prepaySchedule.monthsCompleted);
     const yearsSaved = monthsSaved / 12;
     const newTenureYears = prepaySchedule.monthsCompleted / 12;
+
+    // Balance-weighted average loan interest rate
+    let weightedRateSum = 0;
+    let balanceSum = 0;
+    prepaySchedule.monthly.forEach(item => {
+      weightedRateSum += item.openingBalance * item.rate;
+      balanceSum += item.openingBalance;
+    });
+    const weightedAvgRate = balanceSum > 0 ? (weightedRateSum / balanceSum) : rate;
 
     const startDate = getParsedStartDate();
     const newFinishDate = getPeriodDate(startDate.year, startDate.month, Math.max(0, prepaySchedule.monthsCompleted - 1));
@@ -1840,7 +2346,7 @@
       head: [['Loan Parameter', 'Standard Baseline', 'With Your Prepayments', 'Net Benefit / Savings']],
       body: [
         ['Loan Principal Amount', '₹ ' + Math.round(principal).toLocaleString('en-IN'), '₹ ' + Math.round(principal).toLocaleString('en-IN'), '—'],
-        ['Interest Rate', `${rate}% p.a.`, `${rate}% p.a.`, '—'],
+        ['Interest Rate', rateRevisions.length > 0 ? `Floating Rate (${rate}% base, ${rateRevisions.length + 1} phases)` : `${rate}% p.a.`, rateRevisions.length > 0 ? `Avg ~${weightedAvgRate.toFixed(2)}% p.a.` : `${rate}% p.a.`, '—'],
         ['Loan Tenure', `${tenureYears.toFixed(1)} Years (${totalMonths} Mos)`, `${newTenureYears.toFixed(1)} Years (${prepaySchedule.monthsCompleted} Mos)`, `${yearsSaved.toFixed(1)} Years Earlier (${monthsSaved} Mos Saved)`],
         ['Monthly Installment', '₹ ' + Math.round(baseEmi).toLocaleString('en-IN'), impactMode === 'emi' ? ('₹ ' + Math.round(prepaySchedule.newEmi || baseEmi).toLocaleString('en-IN') + ' (Reduced)') : ('₹ ' + Math.round(baseEmi).toLocaleString('en-IN') + (monthlyPrepay > 0 ? ' (+₹' + Math.round(monthlyPrepay).toLocaleString('en-IN') + ' prepay)' : '')), impactMode === 'emi' ? ('₹ ' + Math.round(baseEmi - (prepaySchedule.newEmi || baseEmi)).toLocaleString('en-IN') + ' saved/mo') : 'Tenure eliminated'],
         ['Total Interest Payable', '₹ ' + Math.round(baseSchedule.totalInterest).toLocaleString('en-IN'), '₹ ' + Math.round(prepaySchedule.totalInterest).toLocaleString('en-IN'), '₹ ' + Math.round(interestSaved).toLocaleString('en-IN') + ' Interest Saved'],
@@ -1860,6 +2366,7 @@
       startY: curY,
       head: [['Prepayment Strategy Element', 'Configured Input']],
       body: [
+        ['Floating Interest Rates', rateRevisions.length > 0 ? `${rateRevisions.length + 1} rate phases active (Avg ~${weightedAvgRate.toFixed(2)}% p.a.)` : 'Constant fixed interest rate across tenure'],
         ['Extra Monthly Prepayment', monthlyPrepay > 0 ? ('₹ ' + monthlyPrepay.toLocaleString('en-IN') + ' / month') : 'None'],
         ['Annual Step-Up on Prepayment', (enableStepUp && enableStepUp.checked) ? (`${prepayStepUp.value}% hike every year`) : 'None'],
         ['Annual Festive / Bonus Prepayment', yearlyPrepay > 0 ? ('₹ ' + yearlyPrepay.toLocaleString('en-IN') + ' / year') : 'None'],
@@ -1872,6 +2379,44 @@
     });
 
     curY = doc.lastAutoTable.finalY + 12;
+
+    // Section 2b: Floating Rate Phases Table (if any)
+    if (rateRevisions.length > 0) {
+      const rateRows = [];
+      rateRows.push([
+        'Phase 1 (Base)',
+        `Month 1 to ${rateRevisions[0].loanMonth - 1}`,
+        `${rate.toFixed(2)}% p.a.`,
+        'Initial Rate',
+        'Standard'
+      ]);
+      let prevRate = rate;
+      rateRevisions.forEach((rev, idx) => {
+        const nextRev = rateRevisions[idx + 1];
+        const endM = nextRev ? nextRev.loanMonth - 1 : totalMonths;
+        const diff = rev.rate - prevRate;
+        const diffStr = diff < 0 ? `${diff.toFixed(2)}% (Cut)` : `+${diff.toFixed(2)}% (Hike)`;
+        rateRows.push([
+          `Phase ${idx + 2}`,
+          `Month ${rev.loanMonth} to ${endM} (Yr ${rev.year} M${rev.monthInYear})`,
+          `${rev.rate.toFixed(2)}% p.a.`,
+          diffStr,
+          rev.policy === 'emi' ? 'Recalculate EMI' : 'Adjust Tenure'
+        ]);
+        prevRate = rev.rate;
+      });
+
+      doc.autoTable({
+        startY: curY,
+        head: [['Loan Rate Phase', 'Timeline Range', 'Interest Rate', 'Change vs. Prev', 'Bank Policy']],
+        body: rateRows,
+        theme: 'grid',
+        headStyles: { fillColor: [30, 64, 175], textColor: 255 },
+        styles: { fontSize: 8, cellPadding: 4, textColor: darkTextColor }
+      });
+
+      curY = doc.lastAutoTable.finalY + 12;
+    }
 
     // Section 3: Scheduled Prepayments (if any)
     if (customLumpsums.length > 0) {
@@ -1952,7 +2497,11 @@
 
     let text = '=== LOAN PREPAYMENT & FREEDOM SUMMARY ===\n';
     text += `Loan Amount: ${formatLakhsCrores(p)}\n`;
-    text += `Interest Rate: ${r}% p.a.\n`;
+    if (rateRevisions.length > 0) {
+      text += `Interest Rate: Floating (${r}% base, ${rateRevisions.length + 1} phases, avg ${arenaAvgRateVal ? arenaAvgRateVal.textContent : ''})\n`;
+    } else {
+      text += `Interest Rate: ${r}% p.a.\n`;
+    }
     text += `Tenure: ${t} Years\n`;
     text += `Monthly EMI: ${emi}\n\n`;
     if (debtFreeDate) text += `🗓️ Target Debt-Free Date: ${debtFreeDate}\n`;
@@ -1982,6 +2531,9 @@
   updateWordDisplays();
   updateStartDateDisplay();
   updateTargetSolver();
+  updateSchedulerYearOptions();
+  updateRateYearOptions();
+  renderRateTimelineTable(null);
   triggerLiveCalculation();
 
 })();
