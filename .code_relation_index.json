@@ -1,5 +1,5 @@
 {
-  "workspace_root": "\\\\192.168.137.244\\FreelanceReady\\tools-website",
+  "workspace_root": "\\\\192.168.137.247\\FreelanceReady\\tools-website",
   "files": {
     ".firebaserc": {
       "extension": "",
@@ -7,7 +7,7 @@
     },
     ".gitignore": {
       "extension": "",
-      "size_bytes": 93
+      "size_bytes": 131
     },
     "404.html": {
       "extension": ".html",
@@ -15,7 +15,7 @@
     },
     "about.html": {
       "extension": ".html",
-      "size_bytes": 8744
+      "size_bytes": 10903
     },
     "firebase.json": {
       "extension": ".json",
@@ -35,194 +35,47 @@
     },
     "index.html": {
       "extension": ".html",
-      "size_bytes": 135123
+      "size_bytes": 136004
     },
     "LICENSE": {
       "extension": "",
       "size_bytes": 3652
     },
-    "live_common.js": {
-      "extension": ".js",
-      "size_bytes": 87239,
-      "classes": [
-        {
-          "name": "markers"
-        }
-      ],
-      "functions": [
-        {
-          "name": "showFlyoutFor"
-        },
-        {
-          "name": "updatePortalSuiteStrip"
-        },
-        {
-          "name": "typeStep"
-        },
-        {
-          "name": "extractSlugFromUrl"
-        },
-        {
-          "name": "initGlobalHeaderNav"
-        },
-        {
-          "name": "initPrivacyUspStrip"
-        },
-        {
-          "name": "initDynamicUspRotator"
-        },
-        {
-          "name": "convertHundreds"
-        },
-        {
-          "name": "checkUrlHash"
-        },
-        {
-          "name": "closeToolPanel"
-        },
-        {
-          "name": "checkAndAttach"
-        },
-        {
-          "name": "showThemeToast"
-        },
-        {
-          "name": "isMini"
-        },
-        {
-          "name": "openToolInPortal"
-        },
-        {
-          "name": "buildFlyoutItemsHtml"
-        },
-        {
-          "name": "closeMobileSidebar"
-        },
-        {
-          "name": "dismissNotice"
-        },
-        {
-          "name": "initSidebarMiniFlyout"
-        },
-        {
-          "name": "scheduleHide"
-        },
-        {
-          "name": "hasAdPlacedInLeaderboard"
-        },
-        {
-          "name": "applyTheme"
-        },
-        {
-          "name": "closeSidebarMiniFlyout"
-        },
-        {
-          "name": "initToolSuccessBadges"
-        },
-        {
-          "name": "copyFeedback"
-        },
-        {
-          "name": "cycleTheme"
-        }
-      ],
-      "imports": []
-    },
-    "live_index.html": {
-      "extension": ".html",
-      "size_bytes": 125163
-    },
-    "live_pdf_tools.html": {
-      "extension": ".html",
-      "size_bytes": 154664
-    },
-    "matches.txt": {
-      "extension": ".txt",
-      "size_bytes": 3788
-    },
     "NOTICE.md": {
       "extension": ".md",
       "size_bytes": 1731
     },
-    "output-home-desktop.png": {
-      "extension": ".png",
-      "size_bytes": 228398
-    },
-    "output-home-mobile.png": {
-      "extension": ".png",
-      "size_bytes": 78541
-    },
-    "output-tax-desktop.png": {
-      "extension": ".png",
-      "size_bytes": 137252
-    },
     "privacy-policy.html": {
       "extension": ".html",
-      "size_bytes": 7611
+      "size_bytes": 9837
     },
     "robots.txt": {
       "extension": ".txt",
       "size_bytes": 203
     },
-    "scratch_dom.txt": {
-      "extension": ".txt",
-      "size_bytes": 960
-    },
-    "scratch_iframe_dom.txt": {
-      "extension": ".txt",
-      "size_bytes": 1663
-    },
-    "scratch_live_index.txt": {
-      "extension": ".txt",
-      "size_bytes": 920
-    },
     "sitemap.xml": {
       "extension": ".xml",
-      "size_bytes": 6977
+      "size_bytes": 8310
+    },
+    "STATE.md": {
+      "extension": ".md",
+      "size_bytes": 2477
     },
     "support.html": {
       "extension": ".html",
-      "size_bytes": 19930
+      "size_bytes": 22000
     },
     "terms.html": {
       "extension": ".html",
-      "size_bytes": 8277
+      "size_bytes": 10415
     },
     "css/styles.css": {
       "extension": ".css",
-      "size_bytes": 261159
+      "size_bytes": 277081
     },
-    "graphify-out/.graphify_labels.json": {
-      "extension": ".json",
-      "size_bytes": 2366
-    },
-    "graphify-out/.graphify_python": {
-      "extension": "",
-      "size_bytes": 37
-    },
-    "graphify-out/.graphify_root": {
-      "extension": "",
-      "size_bytes": 26
-    },
-    "graphify-out/graph.html": {
-      "extension": ".html",
-      "size_bytes": 564310
-    },
-    "graphify-out/graph.json": {
-      "extension": ".json",
-      "size_bytes": 709951
-    },
-    "graphify-out/GRAPH_REPORT.md": {
-      "extension": ".md",
-      "size_bytes": 9550
-    },
-    "graphify-out/cache/stat-index.json": {
-      "extension": ".json",
-      "size_bytes": 8487
-    },
-    "graphify-out/cache/ast/v0.9.50-s2/b08662c8dff2b941579610a602cbc66aad3d06ea7e2b13461c6b18d72e909d3c.json": {
-      "extension": ".json",
-      "size_bytes": 4863
+    "img/og-banner.png": {
+      "extension": ".png",
+      "size_bytes": 75603
     },
     "img/upi-qr.png": {
       "extension": ".png",
@@ -245,22 +98,22 @@
       "classes": [],
       "functions": [
         {
-          "name": "formatBytes"
+          "name": "utf8_to_b64"
         },
         {
           "name": "b64_to_utf8"
         },
         {
-          "name": "updateOutputStats"
-        },
-        {
           "name": "updateInputStats"
         },
         {
-          "name": "getByteSize"
+          "name": "formatBytes"
         },
         {
-          "name": "utf8_to_b64"
+          "name": "updateOutputStats"
+        },
+        {
+          "name": "getByteSize"
         }
       ],
       "imports": []
@@ -271,16 +124,16 @@
       "classes": [],
       "functions": [
         {
-          "name": "updateSecurityDepositBadge"
+          "name": "updateCharts"
+        },
+        {
+          "name": "recalculateAll"
         },
         {
           "name": "updateTable"
         },
         {
-          "name": "updateCharts"
-        },
-        {
-          "name": "formatINR"
+          "name": "formatLakhCrore"
         },
         {
           "name": "syncSliderAndInput"
@@ -289,10 +142,10 @@
           "name": "updateDownPaymentBadge"
         },
         {
-          "name": "recalculateAll"
+          "name": "updateSecurityDepositBadge"
         },
         {
-          "name": "formatLakhCrore"
+          "name": "formatINR"
         }
       ],
       "imports": []
@@ -303,22 +156,22 @@
       "classes": [],
       "functions": [
         {
-          "name": "toSentenceCase"
-        },
-        {
-          "name": "toKebabCase"
-        },
-        {
-          "name": "toTitleCase"
+          "name": "toCamelCase"
         },
         {
           "name": "toSnakeCase"
         },
         {
-          "name": "toCamelCase"
+          "name": "toKebabCase"
         },
         {
           "name": "toToggleCase"
+        },
+        {
+          "name": "toSentenceCase"
+        },
+        {
+          "name": "toTitleCase"
         }
       ],
       "imports": []
@@ -329,22 +182,19 @@
       "classes": [],
       "functions": [
         {
-          "name": "rgbToHex"
-        },
-        {
           "name": "createSwatch"
-        },
-        {
-          "name": "rgbToHsl"
-        },
-        {
-          "name": "showToast"
         },
         {
           "name": "hslToRgb"
         },
         {
-          "name": "generatePalettes"
+          "name": "rgbToHex"
+        },
+        {
+          "name": "rgbToHsl"
+        },
+        {
+          "name": "updateAllFromHex"
         },
         {
           "name": "hexToRgb"
@@ -353,7 +203,10 @@
           "name": "hue2rgb"
         },
         {
-          "name": "updateAllFromHex"
+          "name": "generatePalettes"
+        },
+        {
+          "name": "showToast"
         }
       ],
       "imports": []
@@ -368,52 +221,61 @@
       ],
       "functions": [
         {
-          "name": "showFlyoutFor"
-        },
-        {
-          "name": "updatePortalSuiteStrip"
-        },
-        {
-          "name": "typeStep"
-        },
-        {
-          "name": "extractSlugFromUrl"
+          "name": "initDynamicUspRotator"
         },
         {
           "name": "initPrivacyUspStrip"
         },
         {
-          "name": "initDynamicUspRotator"
+          "name": "applyTheme"
         },
         {
           "name": "convertHundreds"
         },
         {
-          "name": "closeSidebarTree"
-        },
-        {
-          "name": "checkUrlHash"
-        },
-        {
-          "name": "closeToolPanel"
-        },
-        {
-          "name": "showThemeToast"
-        },
-        {
-          "name": "isMini"
-        },
-        {
-          "name": "openToolInPortal"
-        },
-        {
-          "name": "buildFlyoutItemsHtml"
+          "name": "showFlyoutFor"
         },
         {
           "name": "openSidebarTree"
         },
         {
+          "name": "scheduleHide"
+        },
+        {
+          "name": "buildFlyoutItemsHtml"
+        },
+        {
+          "name": "updatePortalSuiteStrip"
+        },
+        {
+          "name": "cycleTheme"
+        },
+        {
+          "name": "closeToolPanel"
+        },
+        {
+          "name": "extractSlugFromUrl"
+        },
+        {
+          "name": "isMini"
+        },
+        {
+          "name": "checkUrlHash"
+        },
+        {
           "name": "dismissNotice"
+        },
+        {
+          "name": "closeSidebarTree"
+        },
+        {
+          "name": "hasAdPlacedInLeaderboard"
+        },
+        {
+          "name": "openToolInPortal"
+        },
+        {
+          "name": "typeStep"
         },
         {
           "name": "closeMobileSidebar"
@@ -422,19 +284,10 @@
           "name": "initSidebarMiniFlyout"
         },
         {
-          "name": "scheduleHide"
-        },
-        {
-          "name": "hasAdPlacedInLeaderboard"
+          "name": "showThemeToast"
         },
         {
           "name": "restoreActiveSidebarState"
-        },
-        {
-          "name": "applyTheme"
-        },
-        {
-          "name": "cycleTheme"
         }
       ],
       "imports": []
@@ -456,31 +309,31 @@
       "classes": [],
       "functions": [
         {
+          "name": "getPreferred"
+        },
+        {
+          "name": "fetchRates"
+        },
+        {
+          "name": "convert"
+        },
+        {
+          "name": "loadCache"
+        },
+        {
           "name": "setPreferred"
         },
         {
           "name": "renderHeaderToggle"
         },
         {
-          "name": "convert"
-        },
-        {
-          "name": "formatCurrency"
+          "name": "init"
         },
         {
           "name": "saveCache"
         },
         {
-          "name": "loadCache"
-        },
-        {
-          "name": "init"
-        },
-        {
-          "name": "fetchRates"
-        },
-        {
-          "name": "getPreferred"
+          "name": "formatCurrency"
         }
       ],
       "imports": []
@@ -491,34 +344,37 @@
       "classes": [],
       "functions": [
         {
-          "name": "convertXlsxToPdf"
+          "name": "findCleanSliceY"
+        },
+        {
+          "name": "formatBytes"
         },
         {
           "name": "convertDocxToXlsx"
         },
         {
-          "name": "triggerDownload"
-        },
-        {
-          "name": "convertPdfToPptx"
-        },
-        {
           "name": "escapeHtml"
         },
         {
-          "name": "convertPptxToPdf"
+          "name": "convertPdfToDocx"
         },
         {
-          "name": "extractTextFromBinaryDoc"
+          "name": "resetConverter"
         },
         {
-          "name": "findCleanSliceY"
+          "name": "getFileExtension"
+        },
+        {
+          "name": "handleFileSelection"
+        },
+        {
+          "name": "addCanvasPagesToPdf"
         },
         {
           "name": "convertXlsxToDocx"
         },
         {
-          "name": "updateProgress"
+          "name": "convertPdfToXlsx"
         },
         {
           "name": "startConversion"
@@ -527,34 +383,31 @@
           "name": "convertDocxToPdf"
         },
         {
-          "name": "addCanvasPagesToPdf"
+          "name": "convertPptxToPdf"
         },
         {
-          "name": "resetConverter"
+          "name": "triggerDownload"
+        },
+        {
+          "name": "updateProgress"
         },
         {
           "name": "ensureDocxPreviewEngine"
         },
         {
-          "name": "getFileExtension"
-        },
-        {
-          "name": "convertPdfToXlsx"
-        },
-        {
           "name": "updateTargetDescription"
+        },
+        {
+          "name": "extractTextFromBinaryDoc"
         },
         {
           "name": "ensureScriptLoaded"
         },
         {
-          "name": "formatBytes"
+          "name": "convertXlsxToPdf"
         },
         {
-          "name": "convertPdfToDocx"
-        },
-        {
-          "name": "handleFileSelection"
+          "name": "convertPdfToPptx"
         }
       ],
       "imports": []
@@ -564,177 +417,144 @@
       "size_bytes": 72267,
       "classes": [
         {
-          "name": "_e"
-        },
-        {
-          "name": "_"
-        },
-        {
-          "name": "z"
+          "name": "j"
         },
         {
           "name": "ne"
         },
         {
-          "name": "ae"
-        },
-        {
-          "name": "u"
-        },
-        {
-          "name": "Be"
-        },
-        {
-          "name": "me"
-        },
-        {
-          "name": "U"
-        },
-        {
-          "name": "be"
-        },
-        {
-          "name": "le"
-        },
-        {
-          "name": "he"
-        },
-        {
-          "name": "Re"
-        },
-        {
-          "name": "X"
-        },
-        {
-          "name": "de"
-        },
-        {
-          "name": "o"
-        },
-        {
-          "name": "we"
-        },
-        {
-          "name": "se"
-        },
-        {
-          "name": "J"
-        },
-        {
-          "name": "Se"
+          "name": "z"
         },
         {
           "name": "Z"
         },
         {
+          "name": "P"
+        },
+        {
+          "name": "me"
+        },
+        {
+          "name": "ce"
+        },
+        {
+          "name": "be"
+        },
+        {
           "name": "K"
         },
         {
-          "name": "q"
-        },
-        {
-          "name": "re"
-        },
-        {
-          "name": "oe"
-        },
-        {
-          "name": "te"
-        },
-        {
-          "name": "xe"
+          "name": "de"
         },
         {
           "name": "W"
         },
         {
+          "name": "o"
+        },
+        {
           "name": "Pe"
         },
         {
-          "name": "pe"
+          "name": "he"
         },
         {
-          "name": "j"
+          "name": "te"
+        },
+        {
+          "name": "oe"
         },
         {
           "name": "S"
         },
         {
-          "name": "V"
+          "name": "Se"
         },
         {
-          "name": "P"
+          "name": "X"
+        },
+        {
+          "name": "_e"
+        },
+        {
+          "name": "le"
+        },
+        {
+          "name": "se"
+        },
+        {
+          "name": "Be"
+        },
+        {
+          "name": "xe"
+        },
+        {
+          "name": "_"
+        },
+        {
+          "name": "we"
+        },
+        {
+          "name": "Re"
+        },
+        {
+          "name": "U"
+        },
+        {
+          "name": "J"
+        },
+        {
+          "name": "u"
+        },
+        {
+          "name": "re"
+        },
+        {
+          "name": "q"
         },
         {
           "name": "c"
         },
         {
-          "name": "ce"
+          "name": "ae"
+        },
+        {
+          "name": "V"
+        },
+        {
+          "name": "pe"
         }
       ],
       "functions": [
         {
-          "name": "m"
-        },
-        {
-          "name": "w"
-        },
-        {
-          "name": "O"
-        },
-        {
-          "name": "x"
-        },
-        {
-          "name": "y"
-        },
-        {
-          "name": "n"
-        },
-        {
-          "name": "g"
-        },
-        {
-          "name": "ze"
-        },
-        {
-          "name": "ee"
-        },
-        {
-          "name": "f"
-        },
-        {
-          "name": "v"
-        },
-        {
-          "name": "M"
-        },
-        {
-          "name": "B"
-        },
-        {
-          "name": "k"
-        },
-        {
-          "name": "d"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "Q"
-        },
-        {
-          "name": "Ve"
-        },
-        {
-          "name": "ke"
+          "name": "l"
         },
         {
           "name": "T"
         },
         {
-          "name": "L"
+          "name": "G"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "x"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "We"
+        },
+        {
+          "name": "g"
         },
         {
           "name": "b"
@@ -743,58 +563,91 @@
           "name": "Le"
         },
         {
-          "name": "Y"
+          "name": "k"
         },
         {
-          "name": "fe"
+          "name": "m"
         },
         {
-          "name": "G"
+          "name": "M"
         },
         {
-          "name": "p"
+          "name": "B"
         },
         {
-          "name": "l"
+          "name": "L"
         },
         {
-          "name": "ge"
-        },
-        {
-          "name": "A"
-        },
-        {
-          "name": "We"
-        },
-        {
-          "name": "ye"
-        },
-        {
-          "name": "ie"
-        },
-        {
-          "name": "ve"
-        },
-        {
-          "name": "F"
-        },
-        {
-          "name": "D"
+          "name": "ee"
         },
         {
           "name": "I"
         },
         {
-          "name": "R"
+          "name": "w"
         },
         {
-          "name": "E"
+          "name": "ye"
+        },
+        {
+          "name": "d"
+        },
+        {
+          "name": "ge"
         },
         {
           "name": "Xe"
         },
         {
+          "name": "Q"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "ve"
+        },
+        {
+          "name": "Ve"
+        },
+        {
+          "name": "O"
+        },
+        {
+          "name": "y"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "v"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "D"
+        },
+        {
+          "name": "ze"
+        },
+        {
+          "name": "ke"
+        },
+        {
           "name": "Ie"
+        },
+        {
+          "name": "n"
         }
       ],
       "imports": []
@@ -805,109 +658,34 @@
       "classes": [],
       "functions": [
         {
-          "name": "getPeriodDate"
-        },
-        {
-          "name": "initDualSyncSliders"
-        },
-        {
-          "name": "handleCopySummary"
-        },
-        {
-          "name": "initTrendChartControls"
-        },
-        {
-          "name": "updateWordDisplays"
-        },
-        {
-          "name": "handleResetAll"
-        },
-        {
-          "name": "renderSchedulerTable"
-        },
-        {
-          "name": "initPrepayModeTabs"
-        },
-        {
-          "name": "setScheduleView"
-        },
-        {
-          "name": "syncActiveChip"
-        },
-        {
-          "name": "format"
-        },
-        {
-          "name": "setTrendView"
+          "name": "renderBaselinePreview"
         },
         {
           "name": "computeBreakEvenRate"
         },
         {
-          "name": "renderPrincipalInterestChart"
+          "name": "runSimulation"
         },
         {
-          "name": "getParsedStartDate"
+          "name": "handleCopySummary"
         },
         {
-          "name": "renderVisualCharts"
-        },
-        {
-          "name": "triggerLiveCalculation"
-        },
-        {
-          "name": "initStartDateControls"
+          "name": "renderDecisionArena"
         },
         {
           "name": "handleApplyTargetGoal"
         },
         {
-          "name": "bindPair"
-        },
-        {
-          "name": "handleDownloadReport"
-        },
-        {
-          "name": "setActiveStartChip"
-        },
-        {
-          "name": "handleDownloadCsv"
-        },
-        {
-          "name": "handleOneExtraEmiHack"
-        },
-        {
-          "name": "updateSchedulerYearOptions"
-        },
-        {
-          "name": "initQuickChips"
-        },
-        {
-          "name": "calculateAndRender"
-        },
-        {
-          "name": "renderBaselinePreview"
+          "name": "updateTargetSolver"
         },
         {
           "name": "computeEmi"
         },
         {
-          "name": "initEventListeners"
+          "name": "initPrepayModeTabs"
         },
         {
-          "name": "renderWealthChart"
-        },
-        {
-          "name": "renderAmortizationTable"
-        },
-        {
-          "name": "renderHeroFreedomCard"
-        },
-        {
-          "name": "renderTrajectoryChart"
-        },
-        {
-          "name": "updateStartDateDisplay"
+          "name": "setActiveStartChip"
         },
         {
           "name": "initImpactRadios"
@@ -916,19 +694,94 @@
           "name": "handleAddLumpsum"
         },
         {
-          "name": "runSimulation"
+          "name": "renderHeroFreedomCard"
+        },
+        {
+          "name": "renderVisualCharts"
+        },
+        {
+          "name": "getPeriodDate"
+        },
+        {
+          "name": "handleDownloadCsv"
+        },
+        {
+          "name": "format"
+        },
+        {
+          "name": "bindPair"
+        },
+        {
+          "name": "renderWealthChart"
+        },
+        {
+          "name": "setTrendView"
+        },
+        {
+          "name": "handleDownloadReport"
+        },
+        {
+          "name": "updateSchedulerYearOptions"
+        },
+        {
+          "name": "initTrendChartControls"
+        },
+        {
+          "name": "updateStartDateDisplay"
+        },
+        {
+          "name": "renderPrincipalInterestChart"
         },
         {
           "name": "formatLakhsCrores"
         },
         {
-          "name": "renderDecisionArena"
+          "name": "renderSchedulerTable"
         },
         {
-          "name": "updateTargetSolver"
+          "name": "renderAmortizationTable"
+        },
+        {
+          "name": "syncActiveChip"
+        },
+        {
+          "name": "initQuickChips"
+        },
+        {
+          "name": "getParsedStartDate"
         },
         {
           "name": "renderKpiCards"
+        },
+        {
+          "name": "setScheduleView"
+        },
+        {
+          "name": "renderTrajectoryChart"
+        },
+        {
+          "name": "calculateAndRender"
+        },
+        {
+          "name": "initStartDateControls"
+        },
+        {
+          "name": "initEventListeners"
+        },
+        {
+          "name": "updateWordDisplays"
+        },
+        {
+          "name": "handleResetAll"
+        },
+        {
+          "name": "handleOneExtraEmiHack"
+        },
+        {
+          "name": "triggerLiveCalculation"
+        },
+        {
+          "name": "initDualSyncSliders"
         }
       ],
       "imports": []
@@ -950,43 +803,43 @@
       "classes": [],
       "functions": [
         {
+          "name": "getTopToolRequests"
+        },
+        {
+          "name": "submitRating"
+        },
+        {
+          "name": "setLocalGuestUser"
+        },
+        {
+          "name": "renderSharedRatings"
+        },
+        {
+          "name": "signIn"
+        },
+        {
+          "name": "showAuthModal"
+        },
+        {
           "name": "signOutUser"
         },
         {
           "name": "submitToolRequest"
         },
         {
-          "name": "signIn"
-        },
-        {
-          "name": "updateAuthUI"
-        },
-        {
-          "name": "submitRating"
-        },
-        {
-          "name": "getTopToolRequests"
-        },
-        {
-          "name": "clearLocalGuestUser"
-        },
-        {
-          "name": "renderSharedRatings"
+          "name": "syncUserProfile"
         },
         {
           "name": "getToolRating"
         },
         {
-          "name": "showAuthModal"
+          "name": "updateAuthUI"
         },
         {
-          "name": "setLocalGuestUser"
+          "name": "clearLocalGuestUser"
         },
         {
           "name": "getLocalGuestUser"
-        },
-        {
-          "name": "syncUserProfile"
         }
       ],
       "imports": [
@@ -999,34 +852,34 @@
       "classes": [],
       "functions": [
         {
-          "name": "bindChildEvents"
-        },
-        {
-          "name": "calculateAllGoals"
-        },
-        {
-          "name": "addChild"
-        },
-        {
-          "name": "renderChildren"
-        },
-        {
-          "name": "updateGoalsTable"
-        },
-        {
           "name": "updateCharts"
-        },
-        {
-          "name": "formatINR"
-        },
-        {
-          "name": "removeChild"
         },
         {
           "name": "calculateSipForTarget"
         },
         {
+          "name": "addChild"
+        },
+        {
+          "name": "updateGoalsTable"
+        },
+        {
           "name": "formatLakhCrore"
+        },
+        {
+          "name": "removeChild"
+        },
+        {
+          "name": "calculateAllGoals"
+        },
+        {
+          "name": "bindChildEvents"
+        },
+        {
+          "name": "renderChildren"
+        },
+        {
+          "name": "formatINR"
         }
       ],
       "imports": []
@@ -1048,256 +901,58 @@
       "classes": [],
       "functions": [
         {
-          "name": "qn"
-        },
-        {
-          "name": "Vs"
-        },
-        {
-          "name": "ne"
-        },
-        {
-          "name": "rs"
-        },
-        {
-          "name": "nn"
-        },
-        {
-          "name": "fA"
-        },
-        {
-          "name": "MB"
-        },
-        {
-          "name": "SB"
-        },
-        {
-          "name": "Xs"
-        },
-        {
-          "name": "_n"
-        },
-        {
-          "name": "sn"
-        },
-        {
-          "name": "uA"
-        },
-        {
-          "name": "qA"
-        },
-        {
-          "name": "gs"
-        },
-        {
-          "name": "ZA"
-        },
-        {
-          "name": "mr"
-        },
-        {
-          "name": "pr"
-        },
-        {
-          "name": "us"
-        },
-        {
-          "name": "r"
-        },
-        {
-          "name": "Ie"
-        },
-        {
-          "name": "cn"
-        },
-        {
-          "name": "YA"
-        },
-        {
-          "name": "Gn"
-        },
-        {
-          "name": "Cs"
-        },
-        {
-          "name": "n"
-        },
-        {
-          "name": "Be"
-        },
-        {
-          "name": "ee"
-        },
-        {
-          "name": "_A"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "de"
-        },
-        {
-          "name": "fn"
-        },
-        {
-          "name": "Lr"
-        },
-        {
-          "name": "ms"
-        },
-        {
-          "name": "He"
-        },
-        {
-          "name": "re"
-        },
-        {
-          "name": "fe"
-        },
-        {
-          "name": "KB"
+          "name": "xB"
         },
         {
           "name": "Hn"
         },
         {
-          "name": "p"
+          "name": "sB"
         },
         {
-          "name": "Ae"
-        },
-        {
-          "name": "zA"
-        },
-        {
-          "name": "a"
-        },
-        {
-          "name": "Ns"
-        },
-        {
-          "name": "on"
-        },
-        {
-          "name": "xB"
-        },
-        {
-          "name": "ie"
-        },
-        {
-          "name": "I"
-        },
-        {
-          "name": "an"
-        },
-        {
-          "name": "E"
-        },
-        {
-          "name": "Ds"
-        },
-        {
-          "name": "gA"
+          "name": "Qe"
         },
         {
           "name": "gB"
         },
         {
-          "name": "fr"
-        },
-        {
-          "name": "ns"
-        },
-        {
-          "name": "dA"
-        },
-        {
           "name": "B"
-        },
-        {
-          "name": "Qn"
-        },
-        {
-          "name": "gr"
-        },
-        {
-          "name": "UA"
-        },
-        {
-          "name": "wA"
-        },
-        {
-          "name": "Ye"
-        },
-        {
-          "name": "rB"
-        },
-        {
-          "name": "Kr"
-        },
-        {
-          "name": "XA"
-        },
-        {
-          "name": "te"
         },
         {
           "name": "oe"
         },
         {
-          "name": "WA"
+          "name": "Gn"
         },
         {
-          "name": "A"
+          "name": "I"
         },
         {
-          "name": "pe"
+          "name": "dA"
         },
         {
-          "name": "Xt"
+          "name": "_A"
+        },
+        {
+          "name": "uA"
+        },
+        {
+          "name": "lA"
         },
         {
           "name": "ye"
         },
         {
-          "name": "TB"
+          "name": "ZA"
         },
         {
-          "name": "lB"
+          "name": "an"
         },
         {
-          "name": "hA"
+          "name": "zA"
         },
         {
-          "name": "e"
-        },
-        {
-          "name": "Vn"
-        },
-        {
-          "name": "w"
-        },
-        {
-          "name": "Us"
-        },
-        {
-          "name": "ls"
-        },
-        {
-          "name": "QB"
-        },
-        {
-          "name": "jA"
-        },
-        {
-          "name": "CA"
-        },
-        {
-          "name": "Pt"
-        },
-        {
-          "name": "Qe"
+          "name": "gs"
         },
         {
           "name": "t"
@@ -1306,40 +961,238 @@
           "name": "Ee"
         },
         {
-          "name": "se"
+          "name": "Ye"
         },
         {
-          "name": "Bs"
+          "name": "e"
         },
         {
-          "name": "sB"
+          "name": "cn"
         },
         {
-          "name": "ws"
+          "name": "Vn"
         },
         {
           "name": "FA"
         },
         {
-          "name": "l"
+          "name": "Ie"
+        },
+        {
+          "name": "n"
+        },
+        {
+          "name": "pe"
+        },
+        {
+          "name": "sn"
+        },
+        {
+          "name": "WA"
+        },
+        {
+          "name": "de"
         },
         {
           "name": "zn"
         },
         {
-          "name": "bB"
+          "name": "pr"
         },
         {
-          "name": "lA"
+          "name": "Xs"
+        },
+        {
+          "name": "Vs"
+        },
+        {
+          "name": "Qn"
+        },
+        {
+          "name": "hA"
+        },
+        {
+          "name": "CA"
+        },
+        {
+          "name": "wA"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "Xt"
+        },
+        {
+          "name": "lB"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "rs"
+        },
+        {
+          "name": "SB"
+        },
+        {
+          "name": "fr"
+        },
+        {
+          "name": "Ae"
+        },
+        {
+          "name": "He"
+        },
+        {
+          "name": "ws"
+        },
+        {
+          "name": "re"
+        },
+        {
+          "name": "Ds"
+        },
+        {
+          "name": "Cs"
+        },
+        {
+          "name": "UA"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "ne"
+        },
+        {
+          "name": "mr"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "ms"
+        },
+        {
+          "name": "us"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "Pt"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "Bs"
+        },
+        {
+          "name": "qn"
+        },
+        {
+          "name": "Ns"
+        },
+        {
+          "name": "rB"
+        },
+        {
+          "name": "te"
+        },
+        {
+          "name": "qA"
+        },
+        {
+          "name": "YA"
+        },
+        {
+          "name": "nn"
+        },
+        {
+          "name": "ee"
+        },
+        {
+          "name": "w"
+        },
+        {
+          "name": "ns"
+        },
+        {
+          "name": "fA"
         },
         {
           "name": "EB"
         },
         {
-          "name": "Fs"
+          "name": "KB"
+        },
+        {
+          "name": "fn"
+        },
+        {
+          "name": "Kr"
+        },
+        {
+          "name": "Be"
+        },
+        {
+          "name": "ls"
+        },
+        {
+          "name": "QB"
+        },
+        {
+          "name": "bB"
+        },
+        {
+          "name": "_n"
+        },
+        {
+          "name": "MB"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "TB"
+        },
+        {
+          "name": "a"
+        },
+        {
+          "name": "Lr"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "Us"
+        },
+        {
+          "name": "XA"
+        },
+        {
+          "name": "se"
+        },
+        {
+          "name": "gA"
         },
         {
           "name": "ts"
+        },
+        {
+          "name": "Fs"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "gr"
+        },
+        {
+          "name": "jA"
         }
       ],
       "imports": []
@@ -1350,13 +1203,13 @@
       "classes": [],
       "functions": [
         {
+          "name": "formatBytes"
+        },
+        {
           "name": "handleFile"
         },
         {
           "name": "compressImage"
-        },
-        {
-          "name": "formatBytes"
         }
       ],
       "imports": []
@@ -1378,55 +1231,55 @@
       "classes": [],
       "functions": [
         {
+          "name": "renderResultsUI"
+        },
+        {
           "name": "initSyncSliders"
         },
         {
           "name": "calculateTaxAndRender"
         },
         {
-          "name": "formatLakhsCrores"
+          "name": "syncActiveChip"
         },
         {
-          "name": "computeBreakEvenDeductions"
-        },
-        {
-          "name": "renderResultsUI"
-        },
-        {
-          "name": "updateWordDisplays"
-        },
-        {
-          "name": "triggerLiveCalculation"
-        },
-        {
-          "name": "initEventListeners"
-        },
-        {
-          "name": "handleClearDeductions"
+          "name": "initQuickChips"
         },
         {
           "name": "computeOldRegimeTax"
         },
         {
+          "name": "computeBreakEvenDeductions"
+        },
+        {
+          "name": "initEventListeners"
+        },
+        {
           "name": "computeNewRegimeTax"
         },
         {
-          "name": "syncActiveChip"
-        },
-        {
-          "name": "handleMaxDeductions"
-        },
-        {
-          "name": "bindPair"
-        },
-        {
-          "name": "initQuickChips"
+          "name": "updateWordDisplays"
         },
         {
           "name": "fmt"
         },
         {
           "name": "calculateHraExemption"
+        },
+        {
+          "name": "triggerLiveCalculation"
+        },
+        {
+          "name": "formatLakhsCrores"
+        },
+        {
+          "name": "handleMaxDeductions"
+        },
+        {
+          "name": "handleClearDeductions"
+        },
+        {
+          "name": "bindPair"
         }
       ],
       "imports": []
@@ -1437,7 +1290,7 @@
       "classes": [],
       "functions": [
         {
-          "name": "updateStats"
+          "name": "formatBytes"
         },
         {
           "name": "processJSON"
@@ -1446,7 +1299,7 @@
           "name": "getByteSize"
         },
         {
-          "name": "formatBytes"
+          "name": "updateStats"
         }
       ],
       "imports": []
@@ -1461,34 +1314,34 @@
       ],
       "functions": [
         {
-          "name": "n"
+          "name": "l"
         },
         {
-          "name": "u"
+          "name": "j"
         },
         {
-          "name": "U"
+          "name": "T"
         },
         {
-          "name": "f"
+          "name": "G"
         },
         {
-          "name": "i"
+          "name": "A"
+        },
+        {
+          "name": "Z"
+        },
+        {
+          "name": "P"
+        },
+        {
+          "name": "a"
         },
         {
           "name": "N"
         },
         {
-          "name": "M"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "d"
-        },
-        {
-          "name": "X"
+          "name": "K"
         },
         {
           "name": "s"
@@ -1497,67 +1350,67 @@
           "name": "o"
         },
         {
-          "name": "T"
-        },
-        {
-          "name": "J"
-        },
-        {
-          "name": "L"
-        },
-        {
-          "name": "Z"
-        },
-        {
-          "name": "K"
-        },
-        {
-          "name": "Y"
-        },
-        {
-          "name": "G"
-        },
-        {
           "name": "p"
-        },
-        {
-          "name": "h"
-        },
-        {
-          "name": "l"
-        },
-        {
-          "name": "A"
         },
         {
           "name": "W"
         },
         {
-          "name": "a"
+          "name": "M"
         },
         {
-          "name": "j"
+          "name": "L"
         },
         {
-          "name": "P"
-        },
-        {
-          "name": "F"
-        },
-        {
-          "name": "D"
-        },
-        {
-          "name": "V"
-        },
-        {
-          "name": "R"
+          "name": "X"
         },
         {
           "name": "r"
         },
         {
+          "name": "d"
+        },
+        {
+          "name": "i"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "U"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "J"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "u"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "D"
+        },
+        {
+          "name": "h"
+        },
+        {
           "name": "c"
+        },
+        {
+          "name": "V"
+        },
+        {
+          "name": "n"
         }
       ],
       "imports": []
@@ -1568,10 +1421,10 @@
       "classes": [],
       "functions": [
         {
-          "name": "getSentences"
+          "name": "getRandomParagraph"
         },
         {
-          "name": "getRandomParagraph"
+          "name": "getSentences"
         },
         {
           "name": "getWords"
@@ -1585,13 +1438,13 @@
       "classes": [],
       "functions": [
         {
-          "name": "handleChange"
+          "name": "generateTags"
         },
         {
           "name": "updatePreview"
         },
         {
-          "name": "generateTags"
+          "name": "handleChange"
         }
       ],
       "imports": []
@@ -1613,58 +1466,58 @@
       "classes": [],
       "functions": [
         {
-          "name": "showAnnouncement"
-        },
-        {
           "name": "getRating"
-        },
-        {
-          "name": "addRecentlyUsed"
-        },
-        {
-          "name": "closeCmdPalette"
-        },
-        {
-          "name": "initCmdPalette"
-        },
-        {
-          "name": "timeAgo"
-        },
-        {
-          "name": "initFeedbackFAB"
-        },
-        {
-          "name": "getRatings"
-        },
-        {
-          "name": "renderRecentlyUsed"
-        },
-        {
-          "name": "initWhatsNew"
-        },
-        {
-          "name": "openCmdPalette"
-        },
-        {
-          "name": "renderCmdResults"
-        },
-        {
-          "name": "initRecentlyUsed"
         },
         {
           "name": "init"
         },
         {
-          "name": "renderWishlist"
+          "name": "getRatings"
         },
         {
-          "name": "getRecentlyUsed"
+          "name": "renderCmdResults"
+        },
+        {
+          "name": "timeAgo"
+        },
+        {
+          "name": "initCmdPalette"
+        },
+        {
+          "name": "initWhatsNew"
+        },
+        {
+          "name": "addRecentlyUsed"
         },
         {
           "name": "escapeHtml"
         },
         {
+          "name": "renderRecentlyUsed"
+        },
+        {
+          "name": "getRecentlyUsed"
+        },
+        {
+          "name": "renderWishlist"
+        },
+        {
+          "name": "closeCmdPalette"
+        },
+        {
           "name": "setRating"
+        },
+        {
+          "name": "openCmdPalette"
+        },
+        {
+          "name": "showAnnouncement"
+        },
+        {
+          "name": "initRecentlyUsed"
+        },
+        {
+          "name": "initFeedbackFAB"
         }
       ],
       "imports": []
@@ -1692,19 +1545,19 @@
       "classes": [],
       "functions": [
         {
-          "name": "evaluateRegex"
+          "name": "syncScroll"
+        },
+        {
+          "name": "escapeHtml"
         },
         {
           "name": "syncFlagsToInput"
         },
         {
-          "name": "syncScroll"
-        },
-        {
           "name": "syncInputToFlags"
         },
         {
-          "name": "escapeHtml"
+          "name": "evaluateRegex"
         }
       ],
       "imports": []
@@ -1718,10 +1571,10 @@
           "name": "renderChart"
         },
         {
-          "name": "recalculate"
+          "name": "formatLakhCrore"
         },
         {
-          "name": "formatLakhCrore"
+          "name": "recalculate"
         },
         {
           "name": "formatINR"
@@ -1757,25 +1610,25 @@
       "classes": [],
       "functions": [
         {
+          "name": "renderChart"
+        },
+        {
           "name": "syncSlider"
         },
         {
           "name": "bindChips"
         },
         {
+          "name": "formatLakhCrore"
+        },
+        {
+          "name": "updateBadge"
+        },
+        {
           "name": "recalculate"
         },
         {
           "name": "formatINR"
-        },
-        {
-          "name": "formatLakhCrore"
-        },
-        {
-          "name": "renderChart"
-        },
-        {
-          "name": "updateBadge"
         }
       ],
       "imports": []
@@ -1800,55 +1653,55 @@
       "classes": [],
       "functions": [
         {
-          "name": "fetchOembedInfo"
-        },
-        {
-          "name": "handleFormatDownload"
-        },
-        {
-          "name": "showProgressBar"
-        },
-        {
-          "name": "switchTab"
+          "name": "detectPlatform"
         },
         {
           "name": "handleFetchMedia"
         },
         {
+          "name": "showProgressBar"
+        },
+        {
           "name": "initEvents"
         },
         {
-          "name": "resolveDownloadStream"
-        },
-        {
-          "name": "generateFallbackStreamUrl"
-        },
-        {
-          "name": "isValidMediaUrl"
-        },
-        {
-          "name": "extractYouTubeId"
-        },
-        {
-          "name": "detectPlatform"
-        },
-        {
-          "name": "setLoadingState"
-        },
-        {
-          "name": "showError"
-        },
-        {
-          "name": "hideError"
-        },
-        {
-          "name": "triggerBrowserDownload"
+          "name": "fetchOembedInfo"
         },
         {
           "name": "generateThumbnail"
         },
         {
+          "name": "switchTab"
+        },
+        {
+          "name": "showError"
+        },
+        {
+          "name": "triggerBrowserDownload"
+        },
+        {
+          "name": "setLoadingState"
+        },
+        {
+          "name": "hideError"
+        },
+        {
           "name": "extractFallbackTitle"
+        },
+        {
+          "name": "extractYouTubeId"
+        },
+        {
+          "name": "generateFallbackStreamUrl"
+        },
+        {
+          "name": "resolveDownloadStream"
+        },
+        {
+          "name": "isValidMediaUrl"
+        },
+        {
+          "name": "handleFormatDownload"
         }
       ],
       "imports": []
@@ -1866,35 +1719,35 @@
     },
     "pages/age-calculator.html": {
       "extension": ".html",
-      "size_bytes": 11083
+      "size_bytes": 12312
     },
     "pages/audio-converter.html": {
       "extension": ".html",
-      "size_bytes": 22617
+      "size_bytes": 24241
     },
     "pages/base64-tool.html": {
       "extension": ".html",
-      "size_bytes": 11710
+      "size_bytes": 12920
     },
     "pages/bmi-calculator.html": {
       "extension": ".html",
-      "size_bytes": 9321
+      "size_bytes": 11809
     },
     "pages/buy-vs-rent-calculator.html": {
       "extension": ".html",
-      "size_bytes": 67847
+      "size_bytes": 68804
     },
     "pages/case-converter.html": {
       "extension": ".html",
-      "size_bytes": 12091
+      "size_bytes": 13197
     },
     "pages/color-picker.html": {
       "extension": ".html",
-      "size_bytes": 14413
+      "size_bytes": 15667
     },
     "pages/compound-interest.html": {
       "extension": ".html",
-      "size_bytes": 16395
+      "size_bytes": 17707
     },
     "pages/compress.html": {
       "extension": ".html",
@@ -1906,11 +1759,11 @@
     },
     "pages/currency-converter.html": {
       "extension": ".html",
-      "size_bytes": 8308
+      "size_bytes": 10857
     },
     "pages/document-converter.html": {
       "extension": ".html",
-      "size_bytes": 23995
+      "size_bytes": 23878
     },
     "pages/edit.html": {
       "extension": ".html",
@@ -1918,7 +1771,7 @@
     },
     "pages/emi-calculator.html": {
       "extension": ".html",
-      "size_bytes": 72209
+      "size_bytes": 71891
     },
     "pages/extract-text.html": {
       "extension": ".html",
@@ -1926,23 +1779,23 @@
     },
     "pages/fd-calculator.html": {
       "extension": ".html",
-      "size_bytes": 15152
+      "size_bytes": 16419
     },
     "pages/goal-financial-planner.html": {
       "extension": ".html",
-      "size_bytes": 30323
+      "size_bytes": 31398
     },
     "pages/gst-calculator.html": {
       "extension": ".html",
-      "size_bytes": 18346
+      "size_bytes": 18255
     },
     "pages/image-compressor.html": {
       "extension": ".html",
-      "size_bytes": 12533
+      "size_bytes": 13809
     },
     "pages/image-resizer.html": {
       "extension": ".html",
-      "size_bytes": 13944
+      "size_bytes": 15149
     },
     "pages/img-to-pdf.html": {
       "extension": ".html",
@@ -1950,31 +1803,31 @@
     },
     "pages/income-tax-calculator.html": {
       "extension": ".html",
-      "size_bytes": 47998
+      "size_bytes": 47833
     },
     "pages/inflation-calculator.html": {
       "extension": ".html",
-      "size_bytes": 19900
+      "size_bytes": 21487
     },
     "pages/invoice-generator.html": {
       "extension": ".html",
-      "size_bytes": 24964
+      "size_bytes": 26733
     },
     "pages/json-formatter.html": {
       "extension": ".html",
-      "size_bytes": 10901
+      "size_bytes": 12182
     },
     "pages/lorem-ipsum.html": {
       "extension": ".html",
-      "size_bytes": 10975
+      "size_bytes": 12262
     },
     "pages/markdown-previewer.html": {
       "extension": ".html",
-      "size_bytes": 7383
+      "size_bytes": 9897
     },
     "pages/markdown-to-pdf.html": {
       "extension": ".html",
-      "size_bytes": 19288
+      "size_bytes": 20917
     },
     "pages/merge.html": {
       "extension": ".html",
@@ -1982,7 +1835,7 @@
     },
     "pages/meta-tag-generator.html": {
       "extension": ".html",
-      "size_bytes": 15210
+      "size_bytes": 16472
     },
     "pages/metadata.html": {
       "extension": ".html",
@@ -1990,7 +1843,7 @@
     },
     "pages/ocr-tool.html": {
       "extension": ".html",
-      "size_bytes": 24455
+      "size_bytes": 26103
     },
     "pages/organize.html": {
       "extension": ".html",
@@ -2002,7 +1855,7 @@
     },
     "pages/password-generator.html": {
       "extension": ".html",
-      "size_bytes": 14548
+      "size_bytes": 17147
     },
     "pages/pdf-to-img.html": {
       "extension": ".html",
@@ -2010,11 +1863,11 @@
     },
     "pages/pdf-tools.html": {
       "extension": ".html",
-      "size_bytes": 155609
+      "size_bytes": 155417
     },
     "pages/percentage-calculator.html": {
       "extension": ".html",
-      "size_bytes": 14575
+      "size_bytes": 15894
     },
     "pages/protect.html": {
       "extension": ".html",
@@ -2022,35 +1875,35 @@
     },
     "pages/qr-generator.html": {
       "extension": ".html",
-      "size_bytes": 12582
+      "size_bytes": 15123
     },
     "pages/rd-calculator.html": {
       "extension": ".html",
-      "size_bytes": 16148
+      "size_bytes": 17318
     },
     "pages/regex-tester.html": {
       "extension": ".html",
-      "size_bytes": 12980
+      "size_bytes": 14255
     },
     "pages/resume-builder.html": {
       "extension": ".html",
-      "size_bytes": 32839
+      "size_bytes": 34727
     },
     "pages/retirement-benefits-calculator.html": {
       "extension": ".html",
-      "size_bytes": 24665
+      "size_bytes": 25747
     },
     "pages/screen-recorder.html": {
       "extension": ".html",
-      "size_bytes": 20457
+      "size_bytes": 22136
     },
     "pages/sip-calculator.html": {
       "extension": ".html",
-      "size_bytes": 17327
+      "size_bytes": 17514
     },
     "pages/slug-generator.html": {
       "extension": ".html",
-      "size_bytes": 11865
+      "size_bytes": 13144
     },
     "pages/split.html": {
       "extension": ".html",
@@ -2062,19 +1915,19 @@
     },
     "pages/swp-annuity-calculator.html": {
       "extension": ".html",
-      "size_bytes": 24083
+      "size_bytes": 25241
     },
     "pages/timezone-converter.html": {
       "extension": ".html",
-      "size_bytes": 7504
+      "size_bytes": 10046
     },
     "pages/tip-calculator.html": {
       "extension": ".html",
-      "size_bytes": 13614
+      "size_bytes": 16230
     },
     "pages/unit-converter.html": {
       "extension": ".html",
-      "size_bytes": 12733
+      "size_bytes": 15310
     },
     "pages/unlock.html": {
       "extension": ".html",
@@ -2082,11 +1935,11 @@
     },
     "pages/url-encoder.html": {
       "extension": ".html",
-      "size_bytes": 10947
+      "size_bytes": 12078
     },
     "pages/video-downloader.html": {
       "extension": ".html",
-      "size_bytes": 20138
+      "size_bytes": 21027
     },
     "pages/watermark.html": {
       "extension": ".html",
@@ -2094,11 +1947,11 @@
     },
     "pages/word-counter.html": {
       "extension": ".html",
-      "size_bytes": 12896
+      "size_bytes": 13889
     },
     "pages/youtube-thumbnail.html": {
       "extension": ".html",
-      "size_bytes": 16525
+      "size_bytes": 17968
     },
     "tools/converter_app.py": {
       "extension": ".py",
@@ -2124,55 +1977,12 @@
         "tkinter.messagebox",
         "docx2pdf.convert"
       ]
-    },
-    "_backups/common.backup.js": {
-      "extension": ".js",
-      "size_bytes": 33161,
-      "classes": [],
-      "functions": [
-        {
-          "name": "convertHundreds"
-        },
-        {
-          "name": "checkUrlHash"
-        },
-        {
-          "name": "closeMobileSidebar"
-        },
-        {
-          "name": "closeToolPanel"
-        },
-        {
-          "name": "typeStep"
-        },
-        {
-          "name": "applyTheme"
-        },
-        {
-          "name": "extractSlugFromUrl"
-        },
-        {
-          "name": "openToolInPortal"
-        },
-        {
-          "name": "initDynamicUspRotator"
-        }
-      ],
-      "imports": []
-    },
-    "_backups/index.backup.html": {
-      "extension": ".html",
-      "size_bytes": 83408
-    },
-    "_backups/styles.backup.css": {
-      "extension": ".css",
-      "size_bytes": 162141
     }
   },
   "summary": {
-    "total_files": 133,
+    "total_files": 114,
     "python_files": 1,
-    "js_ts_files": 36,
-    "other_files": 96
+    "js_ts_files": 34,
+    "other_files": 79
   }
 }
