@@ -35,7 +35,7 @@
     },
     "index.html": {
       "extension": ".html",
-      "size_bytes": 136004
+      "size_bytes": 134869
     },
     "LICENSE": {
       "extension": "",
@@ -59,11 +59,11 @@
     },
     "STATE.md": {
       "extension": ".md",
-      "size_bytes": 2477
+      "size_bytes": 2506
     },
     "support.html": {
       "extension": ".html",
-      "size_bytes": 22000
+      "size_bytes": 23555
     },
     "terms.html": {
       "extension": ".html",
@@ -101,7 +101,7 @@
           "name": "utf8_to_b64"
         },
         {
-          "name": "b64_to_utf8"
+          "name": "updateOutputStats"
         },
         {
           "name": "updateInputStats"
@@ -110,28 +110,19 @@
           "name": "formatBytes"
         },
         {
-          "name": "updateOutputStats"
+          "name": "getByteSize"
         },
         {
-          "name": "getByteSize"
+          "name": "b64_to_utf8"
         }
       ],
       "imports": []
     },
     "js/buy-vs-rent-calculator.js": {
       "extension": ".js",
-      "size_bytes": 34667,
+      "size_bytes": 35787,
       "classes": [],
       "functions": [
-        {
-          "name": "updateCharts"
-        },
-        {
-          "name": "recalculateAll"
-        },
-        {
-          "name": "updateTable"
-        },
         {
           "name": "formatLakhCrore"
         },
@@ -146,6 +137,15 @@
         },
         {
           "name": "formatINR"
+        },
+        {
+          "name": "updateCharts"
+        },
+        {
+          "name": "updateTable"
+        },
+        {
+          "name": "recalculateAll"
         }
       ],
       "imports": []
@@ -159,19 +159,19 @@
           "name": "toCamelCase"
         },
         {
-          "name": "toSnakeCase"
-        },
-        {
-          "name": "toKebabCase"
-        },
-        {
-          "name": "toToggleCase"
+          "name": "toTitleCase"
         },
         {
           "name": "toSentenceCase"
         },
         {
-          "name": "toTitleCase"
+          "name": "toToggleCase"
+        },
+        {
+          "name": "toSnakeCase"
+        },
+        {
+          "name": "toKebabCase"
         }
       ],
       "imports": []
@@ -182,38 +182,38 @@
       "classes": [],
       "functions": [
         {
-          "name": "createSwatch"
-        },
-        {
           "name": "hslToRgb"
         },
         {
           "name": "rgbToHex"
         },
         {
-          "name": "rgbToHsl"
+          "name": "generatePalettes"
         },
         {
           "name": "updateAllFromHex"
         },
         {
-          "name": "hexToRgb"
-        },
-        {
           "name": "hue2rgb"
         },
         {
-          "name": "generatePalettes"
+          "name": "hexToRgb"
+        },
+        {
+          "name": "rgbToHsl"
         },
         {
           "name": "showToast"
+        },
+        {
+          "name": "createSwatch"
         }
       ],
       "imports": []
     },
     "js/common.js": {
       "extension": ".js",
-      "size_bytes": 70485,
+      "size_bytes": 77472,
       "classes": [
         {
           "name": "markers"
@@ -221,73 +221,76 @@
       ],
       "functions": [
         {
+          "name": "typeStep"
+        },
+        {
+          "name": "openToolInPortal"
+        },
+        {
+          "name": "extractSlugFromUrl"
+        },
+        {
+          "name": "restoreActiveSidebarState"
+        },
+        {
+          "name": "closeToolPanel"
+        },
+        {
+          "name": "applyTheme"
+        },
+        {
           "name": "initDynamicUspRotator"
         },
         {
           "name": "initPrivacyUspStrip"
         },
         {
-          "name": "applyTheme"
-        },
-        {
-          "name": "convertHundreds"
-        },
-        {
-          "name": "showFlyoutFor"
-        },
-        {
-          "name": "openSidebarTree"
-        },
-        {
-          "name": "scheduleHide"
-        },
-        {
           "name": "buildFlyoutItemsHtml"
-        },
-        {
-          "name": "updatePortalSuiteStrip"
-        },
-        {
-          "name": "cycleTheme"
-        },
-        {
-          "name": "closeToolPanel"
-        },
-        {
-          "name": "extractSlugFromUrl"
-        },
-        {
-          "name": "isMini"
-        },
-        {
-          "name": "checkUrlHash"
-        },
-        {
-          "name": "dismissNotice"
         },
         {
           "name": "closeSidebarTree"
         },
         {
-          "name": "hasAdPlacedInLeaderboard"
+          "name": "showFlyoutFor"
         },
         {
-          "name": "openToolInPortal"
-        },
-        {
-          "name": "typeStep"
-        },
-        {
-          "name": "closeMobileSidebar"
-        },
-        {
-          "name": "initSidebarMiniFlyout"
+          "name": "convertHundreds"
         },
         {
           "name": "showThemeToast"
         },
         {
-          "name": "restoreActiveSidebarState"
+          "name": "hasAdPlacedInLeaderboard"
+        },
+        {
+          "name": "scheduleHide"
+        },
+        {
+          "name": "dismissToast"
+        },
+        {
+          "name": "dismissNotice"
+        },
+        {
+          "name": "cycleTheme"
+        },
+        {
+          "name": "checkUrlHash"
+        },
+        {
+          "name": "updatePortalSuiteStrip"
+        },
+        {
+          "name": "openSidebarTree"
+        },
+        {
+          "name": "closeMobileSidebar"
+        },
+        {
+          "name": "isMini"
+        },
+        {
+          "name": "initSidebarMiniFlyout"
         }
       ],
       "imports": []
@@ -309,28 +312,28 @@
       "classes": [],
       "functions": [
         {
-          "name": "getPreferred"
-        },
-        {
-          "name": "fetchRates"
+          "name": "saveCache"
         },
         {
           "name": "convert"
         },
         {
-          "name": "loadCache"
-        },
-        {
-          "name": "setPreferred"
-        },
-        {
-          "name": "renderHeaderToggle"
+          "name": "getPreferred"
         },
         {
           "name": "init"
         },
         {
-          "name": "saveCache"
+          "name": "fetchRates"
+        },
+        {
+          "name": "renderHeaderToggle"
+        },
+        {
+          "name": "setPreferred"
+        },
+        {
+          "name": "loadCache"
         },
         {
           "name": "formatCurrency"
@@ -344,10 +347,40 @@
       "classes": [],
       "functions": [
         {
-          "name": "findCleanSliceY"
+          "name": "formatBytes"
         },
         {
-          "name": "formatBytes"
+          "name": "updateTargetDescription"
+        },
+        {
+          "name": "convertDocxToPdf"
+        },
+        {
+          "name": "convertPdfToDocx"
+        },
+        {
+          "name": "ensureScriptLoaded"
+        },
+        {
+          "name": "handleFileSelection"
+        },
+        {
+          "name": "ensureDocxPreviewEngine"
+        },
+        {
+          "name": "addCanvasPagesToPdf"
+        },
+        {
+          "name": "convertXlsxToPdf"
+        },
+        {
+          "name": "updateProgress"
+        },
+        {
+          "name": "convertPdfToPptx"
+        },
+        {
+          "name": "findCleanSliceY"
         },
         {
           "name": "convertDocxToXlsx"
@@ -356,31 +389,7 @@
           "name": "escapeHtml"
         },
         {
-          "name": "convertPdfToDocx"
-        },
-        {
           "name": "resetConverter"
-        },
-        {
-          "name": "getFileExtension"
-        },
-        {
-          "name": "handleFileSelection"
-        },
-        {
-          "name": "addCanvasPagesToPdf"
-        },
-        {
-          "name": "convertXlsxToDocx"
-        },
-        {
-          "name": "convertPdfToXlsx"
-        },
-        {
-          "name": "startConversion"
-        },
-        {
-          "name": "convertDocxToPdf"
         },
         {
           "name": "convertPptxToPdf"
@@ -389,25 +398,19 @@
           "name": "triggerDownload"
         },
         {
-          "name": "updateProgress"
-        },
-        {
-          "name": "ensureDocxPreviewEngine"
-        },
-        {
-          "name": "updateTargetDescription"
-        },
-        {
           "name": "extractTextFromBinaryDoc"
         },
         {
-          "name": "ensureScriptLoaded"
+          "name": "convertXlsxToDocx"
         },
         {
-          "name": "convertXlsxToPdf"
+          "name": "getFileExtension"
         },
         {
-          "name": "convertPdfToPptx"
+          "name": "startConversion"
+        },
+        {
+          "name": "convertPdfToXlsx"
         }
       ],
       "imports": []
@@ -417,22 +420,67 @@
       "size_bytes": 72267,
       "classes": [
         {
-          "name": "j"
+          "name": "X"
         },
         {
           "name": "ne"
         },
         {
-          "name": "z"
+          "name": "le"
         },
         {
-          "name": "Z"
+          "name": "j"
+        },
+        {
+          "name": "Pe"
+        },
+        {
+          "name": "K"
         },
         {
           "name": "P"
         },
         {
+          "name": "ae"
+        },
+        {
+          "name": "se"
+        },
+        {
+          "name": "Se"
+        },
+        {
           "name": "me"
+        },
+        {
+          "name": "oe"
+        },
+        {
+          "name": "he"
+        },
+        {
+          "name": "V"
+        },
+        {
+          "name": "xe"
+        },
+        {
+          "name": "Be"
+        },
+        {
+          "name": "S"
+        },
+        {
+          "name": "z"
+        },
+        {
+          "name": "de"
+        },
+        {
+          "name": "J"
+        },
+        {
+          "name": "we"
         },
         {
           "name": "ce"
@@ -441,150 +489,81 @@
           "name": "be"
         },
         {
-          "name": "K"
-        },
-        {
-          "name": "de"
-        },
-        {
-          "name": "W"
-        },
-        {
-          "name": "o"
-        },
-        {
-          "name": "Pe"
-        },
-        {
-          "name": "he"
-        },
-        {
-          "name": "te"
-        },
-        {
-          "name": "oe"
-        },
-        {
-          "name": "S"
-        },
-        {
-          "name": "Se"
-        },
-        {
-          "name": "X"
+          "name": "re"
         },
         {
           "name": "_e"
         },
         {
-          "name": "le"
-        },
-        {
-          "name": "se"
-        },
-        {
-          "name": "Be"
-        },
-        {
-          "name": "xe"
-        },
-        {
-          "name": "_"
-        },
-        {
-          "name": "we"
-        },
-        {
-          "name": "Re"
-        },
-        {
-          "name": "U"
-        },
-        {
-          "name": "J"
-        },
-        {
-          "name": "u"
-        },
-        {
-          "name": "re"
-        },
-        {
-          "name": "q"
+          "name": "te"
         },
         {
           "name": "c"
         },
         {
-          "name": "ae"
+          "name": "Re"
         },
         {
-          "name": "V"
+          "name": "u"
+        },
+        {
+          "name": "W"
+        },
+        {
+          "name": "Z"
+        },
+        {
+          "name": "o"
+        },
+        {
+          "name": "q"
         },
         {
           "name": "pe"
+        },
+        {
+          "name": "_"
+        },
+        {
+          "name": "U"
         }
       ],
       "functions": [
         {
-          "name": "l"
-        },
-        {
-          "name": "T"
-        },
-        {
-          "name": "G"
-        },
-        {
-          "name": "A"
-        },
-        {
-          "name": "x"
-        },
-        {
-          "name": "E"
-        },
-        {
-          "name": "p"
-        },
-        {
-          "name": "ie"
-        },
-        {
-          "name": "We"
-        },
-        {
-          "name": "g"
+          "name": "ve"
         },
         {
           "name": "b"
         },
         {
-          "name": "Le"
+          "name": "D"
         },
         {
-          "name": "k"
+          "name": "Ve"
         },
         {
-          "name": "m"
-        },
-        {
-          "name": "M"
-        },
-        {
-          "name": "B"
-        },
-        {
-          "name": "L"
-        },
-        {
-          "name": "ee"
+          "name": "Ie"
         },
         {
           "name": "I"
         },
         {
-          "name": "w"
+          "name": "T"
+        },
+        {
+          "name": "g"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "Xe"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "We"
         },
         {
           "name": "ye"
@@ -593,195 +572,219 @@
           "name": "d"
         },
         {
-          "name": "ge"
-        },
-        {
-          "name": "Xe"
-        },
-        {
           "name": "Q"
-        },
-        {
-          "name": "Y"
-        },
-        {
-          "name": "ve"
-        },
-        {
-          "name": "Ve"
-        },
-        {
-          "name": "O"
-        },
-        {
-          "name": "y"
-        },
-        {
-          "name": "F"
-        },
-        {
-          "name": "H"
         },
         {
           "name": "v"
         },
         {
-          "name": "f"
+          "name": "O"
+        },
+        {
+          "name": "G"
+        },
+        {
+          "name": "x"
+        },
+        {
+          "name": "ie"
         },
         {
           "name": "fe"
         },
         {
-          "name": "R"
+          "name": "ge"
         },
         {
-          "name": "D"
+          "name": "k"
         },
         {
-          "name": "ze"
+          "name": "H"
+        },
+        {
+          "name": "L"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "w"
+        },
+        {
+          "name": "ee"
         },
         {
           "name": "ke"
         },
         {
-          "name": "Ie"
+          "name": "ze"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "Le"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "y"
         },
         {
           "name": "n"
+        },
+        {
+          "name": "M"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "m"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "B"
+        },
+        {
+          "name": "p"
         }
       ],
       "imports": []
     },
     "js/emi-calculator.js": {
       "extension": ".js",
-      "size_bytes": 81448,
+      "size_bytes": 81985,
       "classes": [],
       "functions": [
         {
-          "name": "renderBaselinePreview"
-        },
-        {
-          "name": "computeBreakEvenRate"
-        },
-        {
-          "name": "runSimulation"
-        },
-        {
-          "name": "handleCopySummary"
-        },
-        {
-          "name": "renderDecisionArena"
-        },
-        {
-          "name": "handleApplyTargetGoal"
-        },
-        {
-          "name": "updateTargetSolver"
-        },
-        {
-          "name": "computeEmi"
-        },
-        {
-          "name": "initPrepayModeTabs"
-        },
-        {
-          "name": "setActiveStartChip"
-        },
-        {
-          "name": "initImpactRadios"
-        },
-        {
-          "name": "handleAddLumpsum"
-        },
-        {
-          "name": "renderHeroFreedomCard"
-        },
-        {
-          "name": "renderVisualCharts"
-        },
-        {
-          "name": "getPeriodDate"
-        },
-        {
           "name": "handleDownloadCsv"
-        },
-        {
-          "name": "format"
-        },
-        {
-          "name": "bindPair"
-        },
-        {
-          "name": "renderWealthChart"
-        },
-        {
-          "name": "setTrendView"
-        },
-        {
-          "name": "handleDownloadReport"
-        },
-        {
-          "name": "updateSchedulerYearOptions"
-        },
-        {
-          "name": "initTrendChartControls"
-        },
-        {
-          "name": "updateStartDateDisplay"
-        },
-        {
-          "name": "renderPrincipalInterestChart"
-        },
-        {
-          "name": "formatLakhsCrores"
-        },
-        {
-          "name": "renderSchedulerTable"
-        },
-        {
-          "name": "renderAmortizationTable"
-        },
-        {
-          "name": "syncActiveChip"
-        },
-        {
-          "name": "initQuickChips"
-        },
-        {
-          "name": "getParsedStartDate"
-        },
-        {
-          "name": "renderKpiCards"
         },
         {
           "name": "setScheduleView"
         },
         {
-          "name": "renderTrajectoryChart"
+          "name": "handleCopySummary"
         },
         {
-          "name": "calculateAndRender"
-        },
-        {
-          "name": "initStartDateControls"
+          "name": "setActiveStartChip"
         },
         {
           "name": "initEventListeners"
         },
         {
-          "name": "updateWordDisplays"
+          "name": "initStartDateControls"
         },
         {
-          "name": "handleResetAll"
+          "name": "getPeriodDate"
+        },
+        {
+          "name": "renderSchedulerTable"
+        },
+        {
+          "name": "handleDownloadReport"
         },
         {
           "name": "handleOneExtraEmiHack"
         },
         {
+          "name": "handleApplyTargetGoal"
+        },
+        {
+          "name": "initQuickChips"
+        },
+        {
+          "name": "renderDecisionArena"
+        },
+        {
+          "name": "formatLakhsCrores"
+        },
+        {
+          "name": "updateStartDateDisplay"
+        },
+        {
+          "name": "initTrendChartControls"
+        },
+        {
+          "name": "renderAmortizationTable"
+        },
+        {
+          "name": "handleResetAll"
+        },
+        {
+          "name": "computeEmi"
+        },
+        {
+          "name": "renderWealthChart"
+        },
+        {
+          "name": "renderTrajectoryChart"
+        },
+        {
+          "name": "renderVisualCharts"
+        },
+        {
+          "name": "renderKpiCards"
+        },
+        {
+          "name": "updateSchedulerYearOptions"
+        },
+        {
           "name": "triggerLiveCalculation"
         },
         {
+          "name": "renderPrincipalInterestChart"
+        },
+        {
+          "name": "setTrendView"
+        },
+        {
+          "name": "updateWordDisplays"
+        },
+        {
+          "name": "syncActiveChip"
+        },
+        {
+          "name": "updateTargetSolver"
+        },
+        {
+          "name": "renderHeroFreedomCard"
+        },
+        {
+          "name": "computeBreakEvenRate"
+        },
+        {
+          "name": "initImpactRadios"
+        },
+        {
+          "name": "runSimulation"
+        },
+        {
           "name": "initDualSyncSliders"
+        },
+        {
+          "name": "bindPair"
+        },
+        {
+          "name": "calculateAndRender"
+        },
+        {
+          "name": "renderBaselinePreview"
+        },
+        {
+          "name": "getParsedStartDate"
+        },
+        {
+          "name": "initPrepayModeTabs"
+        },
+        {
+          "name": "format"
+        },
+        {
+          "name": "handleAddLumpsum"
         }
       ],
       "imports": []
@@ -803,16 +806,13 @@
       "classes": [],
       "functions": [
         {
-          "name": "getTopToolRequests"
-        },
-        {
-          "name": "submitRating"
-        },
-        {
-          "name": "setLocalGuestUser"
+          "name": "clearLocalGuestUser"
         },
         {
           "name": "renderSharedRatings"
+        },
+        {
+          "name": "submitToolRequest"
         },
         {
           "name": "signIn"
@@ -824,22 +824,25 @@
           "name": "signOutUser"
         },
         {
-          "name": "submitToolRequest"
+          "name": "updateAuthUI"
         },
         {
-          "name": "syncUserProfile"
+          "name": "setLocalGuestUser"
+        },
+        {
+          "name": "submitRating"
         },
         {
           "name": "getToolRating"
         },
         {
-          "name": "updateAuthUI"
-        },
-        {
-          "name": "clearLocalGuestUser"
+          "name": "getTopToolRequests"
         },
         {
           "name": "getLocalGuestUser"
+        },
+        {
+          "name": "syncUserProfile"
         }
       ],
       "imports": [
@@ -848,38 +851,38 @@
     },
     "js/goal-financial-planner.js": {
       "extension": ".js",
-      "size_bytes": 33850,
+      "size_bytes": 34532,
       "classes": [],
       "functions": [
         {
-          "name": "updateCharts"
-        },
-        {
-          "name": "calculateSipForTarget"
-        },
-        {
-          "name": "addChild"
+          "name": "formatLakhCrore"
         },
         {
           "name": "updateGoalsTable"
         },
         {
-          "name": "formatLakhCrore"
+          "name": "calculateSipForTarget"
+        },
+        {
+          "name": "calculateAllGoals"
         },
         {
           "name": "removeChild"
         },
         {
-          "name": "calculateAllGoals"
+          "name": "formatINR"
+        },
+        {
+          "name": "addChild"
+        },
+        {
+          "name": "updateCharts"
         },
         {
           "name": "bindChildEvents"
         },
         {
           "name": "renderChildren"
-        },
-        {
-          "name": "formatINR"
         }
       ],
       "imports": []
@@ -901,298 +904,298 @@
       "classes": [],
       "functions": [
         {
-          "name": "xB"
-        },
-        {
-          "name": "Hn"
-        },
-        {
-          "name": "sB"
-        },
-        {
-          "name": "Qe"
-        },
-        {
-          "name": "gB"
-        },
-        {
-          "name": "B"
-        },
-        {
-          "name": "oe"
-        },
-        {
-          "name": "Gn"
-        },
-        {
-          "name": "I"
-        },
-        {
-          "name": "dA"
-        },
-        {
-          "name": "_A"
-        },
-        {
-          "name": "uA"
-        },
-        {
-          "name": "lA"
-        },
-        {
-          "name": "ye"
-        },
-        {
-          "name": "ZA"
-        },
-        {
-          "name": "an"
-        },
-        {
-          "name": "zA"
-        },
-        {
-          "name": "gs"
-        },
-        {
-          "name": "t"
-        },
-        {
-          "name": "Ee"
-        },
-        {
-          "name": "Ye"
-        },
-        {
-          "name": "e"
-        },
-        {
-          "name": "cn"
-        },
-        {
-          "name": "Vn"
-        },
-        {
-          "name": "FA"
-        },
-        {
-          "name": "Ie"
-        },
-        {
-          "name": "n"
-        },
-        {
-          "name": "pe"
-        },
-        {
-          "name": "sn"
-        },
-        {
-          "name": "WA"
-        },
-        {
-          "name": "de"
-        },
-        {
-          "name": "zn"
-        },
-        {
-          "name": "pr"
-        },
-        {
-          "name": "Xs"
-        },
-        {
-          "name": "Vs"
-        },
-        {
-          "name": "Qn"
-        },
-        {
-          "name": "hA"
-        },
-        {
-          "name": "CA"
-        },
-        {
-          "name": "wA"
-        },
-        {
-          "name": "on"
-        },
-        {
-          "name": "Xt"
-        },
-        {
           "name": "lB"
-        },
-        {
-          "name": "r"
-        },
-        {
-          "name": "rs"
-        },
-        {
-          "name": "SB"
-        },
-        {
-          "name": "fr"
-        },
-        {
-          "name": "Ae"
-        },
-        {
-          "name": "He"
-        },
-        {
-          "name": "ws"
-        },
-        {
-          "name": "re"
-        },
-        {
-          "name": "Ds"
-        },
-        {
-          "name": "Cs"
-        },
-        {
-          "name": "UA"
-        },
-        {
-          "name": "l"
-        },
-        {
-          "name": "ne"
-        },
-        {
-          "name": "mr"
-        },
-        {
-          "name": "A"
-        },
-        {
-          "name": "ms"
-        },
-        {
-          "name": "us"
-        },
-        {
-          "name": "E"
-        },
-        {
-          "name": "Pt"
-        },
-        {
-          "name": "p"
-        },
-        {
-          "name": "Bs"
-        },
-        {
-          "name": "qn"
-        },
-        {
-          "name": "Ns"
-        },
-        {
-          "name": "rB"
-        },
-        {
-          "name": "te"
-        },
-        {
-          "name": "qA"
-        },
-        {
-          "name": "YA"
-        },
-        {
-          "name": "nn"
-        },
-        {
-          "name": "ee"
-        },
-        {
-          "name": "w"
-        },
-        {
-          "name": "ns"
-        },
-        {
-          "name": "fA"
-        },
-        {
-          "name": "EB"
-        },
-        {
-          "name": "KB"
-        },
-        {
-          "name": "fn"
-        },
-        {
-          "name": "Kr"
-        },
-        {
-          "name": "Be"
         },
         {
           "name": "ls"
         },
         {
-          "name": "QB"
-        },
-        {
-          "name": "bB"
-        },
-        {
-          "name": "_n"
-        },
-        {
-          "name": "MB"
-        },
-        {
-          "name": "fe"
-        },
-        {
-          "name": "TB"
-        },
-        {
-          "name": "a"
-        },
-        {
-          "name": "Lr"
-        },
-        {
-          "name": "ie"
-        },
-        {
-          "name": "Us"
-        },
-        {
-          "name": "XA"
+          "name": "YA"
         },
         {
           "name": "se"
         },
         {
-          "name": "gA"
+          "name": "Ie"
         },
         {
-          "name": "ts"
+          "name": "us"
         },
         {
-          "name": "Fs"
+          "name": "a"
         },
         {
-          "name": "H"
+          "name": "Ds"
+        },
+        {
+          "name": "E"
+        },
+        {
+          "name": "nn"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "ie"
+        },
+        {
+          "name": "Bs"
+        },
+        {
+          "name": "fe"
+        },
+        {
+          "name": "sB"
+        },
+        {
+          "name": "_n"
+        },
+        {
+          "name": "w"
+        },
+        {
+          "name": "He"
+        },
+        {
+          "name": "Vn"
+        },
+        {
+          "name": "CA"
+        },
+        {
+          "name": "qA"
+        },
+        {
+          "name": "Xt"
+        },
+        {
+          "name": "KB"
+        },
+        {
+          "name": "jA"
+        },
+        {
+          "name": "A"
+        },
+        {
+          "name": "pe"
+        },
+        {
+          "name": "UA"
+        },
+        {
+          "name": "QB"
         },
         {
           "name": "gr"
         },
         {
-          "name": "jA"
+          "name": "_A"
+        },
+        {
+          "name": "Ns"
+        },
+        {
+          "name": "EB"
+        },
+        {
+          "name": "Fs"
+        },
+        {
+          "name": "Vs"
+        },
+        {
+          "name": "ye"
+        },
+        {
+          "name": "bB"
+        },
+        {
+          "name": "Qe"
+        },
+        {
+          "name": "fn"
+        },
+        {
+          "name": "cn"
+        },
+        {
+          "name": "ns"
+        },
+        {
+          "name": "ts"
+        },
+        {
+          "name": "fA"
+        },
+        {
+          "name": "te"
+        },
+        {
+          "name": "SB"
+        },
+        {
+          "name": "gA"
+        },
+        {
+          "name": "uA"
+        },
+        {
+          "name": "ne"
+        },
+        {
+          "name": "qn"
+        },
+        {
+          "name": "Qn"
+        },
+        {
+          "name": "Xs"
+        },
+        {
+          "name": "mr"
+        },
+        {
+          "name": "Ye"
+        },
+        {
+          "name": "FA"
+        },
+        {
+          "name": "an"
+        },
+        {
+          "name": "Us"
+        },
+        {
+          "name": "e"
+        },
+        {
+          "name": "Pt"
+        },
+        {
+          "name": "fr"
+        },
+        {
+          "name": "WA"
+        },
+        {
+          "name": "zn"
+        },
+        {
+          "name": "XA"
+        },
+        {
+          "name": "t"
+        },
+        {
+          "name": "Hn"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "de"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "pr"
+        },
+        {
+          "name": "gB"
+        },
+        {
+          "name": "re"
+        },
+        {
+          "name": "Cs"
+        },
+        {
+          "name": "zA"
+        },
+        {
+          "name": "TB"
+        },
+        {
+          "name": "dA"
+        },
+        {
+          "name": "n"
+        },
+        {
+          "name": "B"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "ms"
+        },
+        {
+          "name": "rs"
+        },
+        {
+          "name": "xB"
+        },
+        {
+          "name": "Kr"
+        },
+        {
+          "name": "oe"
+        },
+        {
+          "name": "Ee"
+        },
+        {
+          "name": "I"
+        },
+        {
+          "name": "lA"
+        },
+        {
+          "name": "Be"
+        },
+        {
+          "name": "hA"
+        },
+        {
+          "name": "sn"
+        },
+        {
+          "name": "MB"
+        },
+        {
+          "name": "ZA"
+        },
+        {
+          "name": "on"
+        },
+        {
+          "name": "Gn"
+        },
+        {
+          "name": "Lr"
+        },
+        {
+          "name": "rB"
+        },
+        {
+          "name": "ws"
+        },
+        {
+          "name": "ee"
+        },
+        {
+          "name": "wA"
+        },
+        {
+          "name": "Ae"
+        },
+        {
+          "name": "gs"
         }
       ],
       "imports": []
@@ -1227,32 +1230,32 @@
     },
     "js/income-tax-calculator.js": {
       "extension": ".js",
-      "size_bytes": 29053,
+      "size_bytes": 29554,
       "classes": [],
       "functions": [
         {
-          "name": "renderResultsUI"
+          "name": "initQuickChips"
         },
         {
-          "name": "initSyncSliders"
+          "name": "formatLakhsCrores"
         },
         {
           "name": "calculateTaxAndRender"
         },
         {
-          "name": "syncActiveChip"
+          "name": "triggerLiveCalculation"
         },
         {
-          "name": "initQuickChips"
+          "name": "fmt"
         },
         {
-          "name": "computeOldRegimeTax"
-        },
-        {
-          "name": "computeBreakEvenDeductions"
+          "name": "handleMaxDeductions"
         },
         {
           "name": "initEventListeners"
+        },
+        {
+          "name": "bindPair"
         },
         {
           "name": "computeNewRegimeTax"
@@ -1261,25 +1264,25 @@
           "name": "updateWordDisplays"
         },
         {
-          "name": "fmt"
-        },
-        {
           "name": "calculateHraExemption"
         },
         {
-          "name": "triggerLiveCalculation"
+          "name": "computeOldRegimeTax"
         },
         {
-          "name": "formatLakhsCrores"
+          "name": "syncActiveChip"
         },
         {
-          "name": "handleMaxDeductions"
+          "name": "renderResultsUI"
+        },
+        {
+          "name": "computeBreakEvenDeductions"
         },
         {
           "name": "handleClearDeductions"
         },
         {
-          "name": "bindPair"
+          "name": "initSyncSliders"
         }
       ],
       "imports": []
@@ -1290,13 +1293,13 @@
       "classes": [],
       "functions": [
         {
-          "name": "formatBytes"
-        },
-        {
           "name": "processJSON"
         },
         {
           "name": "getByteSize"
+        },
+        {
+          "name": "formatBytes"
         },
         {
           "name": "updateStats"
@@ -1314,103 +1317,103 @@
       ],
       "functions": [
         {
-          "name": "l"
-        },
-        {
-          "name": "j"
-        },
-        {
-          "name": "T"
-        },
-        {
-          "name": "G"
-        },
-        {
-          "name": "A"
-        },
-        {
-          "name": "Z"
-        },
-        {
-          "name": "P"
-        },
-        {
-          "name": "a"
-        },
-        {
-          "name": "N"
-        },
-        {
-          "name": "K"
+          "name": "X"
         },
         {
           "name": "s"
         },
         {
-          "name": "o"
+          "name": "j"
         },
         {
-          "name": "p"
-        },
-        {
-          "name": "W"
-        },
-        {
-          "name": "M"
-        },
-        {
-          "name": "L"
-        },
-        {
-          "name": "X"
-        },
-        {
-          "name": "r"
-        },
-        {
-          "name": "d"
-        },
-        {
-          "name": "i"
-        },
-        {
-          "name": "Y"
-        },
-        {
-          "name": "U"
-        },
-        {
-          "name": "F"
-        },
-        {
-          "name": "H"
-        },
-        {
-          "name": "J"
-        },
-        {
-          "name": "f"
-        },
-        {
-          "name": "u"
-        },
-        {
-          "name": "R"
+          "name": "K"
         },
         {
           "name": "D"
         },
         {
-          "name": "h"
-        },
-        {
-          "name": "c"
+          "name": "P"
         },
         {
           "name": "V"
         },
         {
+          "name": "T"
+        },
+        {
+          "name": "a"
+        },
+        {
+          "name": "U"
+        },
+        {
+          "name": "i"
+        },
+        {
+          "name": "l"
+        },
+        {
+          "name": "d"
+        },
+        {
+          "name": "G"
+        },
+        {
+          "name": "r"
+        },
+        {
+          "name": "J"
+        },
+        {
+          "name": "H"
+        },
+        {
+          "name": "Y"
+        },
+        {
+          "name": "L"
+        },
+        {
+          "name": "c"
+        },
+        {
+          "name": "u"
+        },
+        {
+          "name": "W"
+        },
+        {
+          "name": "f"
+        },
+        {
+          "name": "Z"
+        },
+        {
+          "name": "o"
+        },
+        {
+          "name": "A"
+        },
+        {
           "name": "n"
+        },
+        {
+          "name": "M"
+        },
+        {
+          "name": "R"
+        },
+        {
+          "name": "F"
+        },
+        {
+          "name": "p"
+        },
+        {
+          "name": "N"
+        },
+        {
+          "name": "h"
         }
       ],
       "imports": []
@@ -1421,10 +1424,10 @@
       "classes": [],
       "functions": [
         {
-          "name": "getRandomParagraph"
+          "name": "getSentences"
         },
         {
-          "name": "getSentences"
+          "name": "getRandomParagraph"
         },
         {
           "name": "getWords"
@@ -1438,10 +1441,10 @@
       "classes": [],
       "functions": [
         {
-          "name": "generateTags"
+          "name": "updatePreview"
         },
         {
-          "name": "updatePreview"
+          "name": "generateTags"
         },
         {
           "name": "handleChange"
@@ -1466,46 +1469,43 @@
       "classes": [],
       "functions": [
         {
-          "name": "getRating"
-        },
-        {
-          "name": "init"
-        },
-        {
-          "name": "getRatings"
-        },
-        {
           "name": "renderCmdResults"
-        },
-        {
-          "name": "timeAgo"
-        },
-        {
-          "name": "initCmdPalette"
-        },
-        {
-          "name": "initWhatsNew"
-        },
-        {
-          "name": "addRecentlyUsed"
         },
         {
           "name": "escapeHtml"
         },
         {
-          "name": "renderRecentlyUsed"
-        },
-        {
           "name": "getRecentlyUsed"
         },
         {
-          "name": "renderWishlist"
+          "name": "getRating"
+        },
+        {
+          "name": "initFeedbackFAB"
+        },
+        {
+          "name": "init"
+        },
+        {
+          "name": "renderRecentlyUsed"
+        },
+        {
+          "name": "getRatings"
         },
         {
           "name": "closeCmdPalette"
         },
         {
           "name": "setRating"
+        },
+        {
+          "name": "renderWishlist"
+        },
+        {
+          "name": "initWhatsNew"
+        },
+        {
+          "name": "timeAgo"
         },
         {
           "name": "openCmdPalette"
@@ -1517,7 +1517,10 @@
           "name": "initRecentlyUsed"
         },
         {
-          "name": "initFeedbackFAB"
+          "name": "addRecentlyUsed"
+        },
+        {
+          "name": "initCmdPalette"
         }
       ],
       "imports": []
@@ -1551,13 +1554,13 @@
           "name": "escapeHtml"
         },
         {
+          "name": "evaluateRegex"
+        },
+        {
           "name": "syncFlagsToInput"
         },
         {
           "name": "syncInputToFlags"
-        },
-        {
-          "name": "evaluateRegex"
         }
       ],
       "imports": []
@@ -1610,25 +1613,25 @@
       "classes": [],
       "functions": [
         {
-          "name": "renderChart"
-        },
-        {
-          "name": "syncSlider"
+          "name": "formatLakhCrore"
         },
         {
           "name": "bindChips"
         },
         {
-          "name": "formatLakhCrore"
-        },
-        {
           "name": "updateBadge"
         },
         {
-          "name": "recalculate"
+          "name": "renderChart"
         },
         {
           "name": "formatINR"
+        },
+        {
+          "name": "syncSlider"
+        },
+        {
+          "name": "recalculate"
         }
       ],
       "imports": []
@@ -1639,10 +1642,10 @@
       "classes": [],
       "functions": [
         {
-          "name": "clearError"
+          "name": "showError"
         },
         {
-          "name": "showError"
+          "name": "clearError"
         }
       ],
       "imports": []
@@ -1653,52 +1656,52 @@
       "classes": [],
       "functions": [
         {
-          "name": "detectPlatform"
-        },
-        {
-          "name": "handleFetchMedia"
-        },
-        {
-          "name": "showProgressBar"
-        },
-        {
-          "name": "initEvents"
-        },
-        {
-          "name": "fetchOembedInfo"
-        },
-        {
-          "name": "generateThumbnail"
-        },
-        {
-          "name": "switchTab"
-        },
-        {
-          "name": "showError"
-        },
-        {
-          "name": "triggerBrowserDownload"
-        },
-        {
           "name": "setLoadingState"
         },
         {
           "name": "hideError"
         },
         {
-          "name": "extractFallbackTitle"
+          "name": "switchTab"
         },
         {
-          "name": "extractYouTubeId"
+          "name": "isValidMediaUrl"
+        },
+        {
+          "name": "handleFetchMedia"
         },
         {
           "name": "generateFallbackStreamUrl"
         },
         {
+          "name": "fetchOembedInfo"
+        },
+        {
+          "name": "extractYouTubeId"
+        },
+        {
+          "name": "generateThumbnail"
+        },
+        {
+          "name": "initEvents"
+        },
+        {
+          "name": "showProgressBar"
+        },
+        {
+          "name": "detectPlatform"
+        },
+        {
+          "name": "triggerBrowserDownload"
+        },
+        {
+          "name": "extractFallbackTitle"
+        },
+        {
           "name": "resolveDownloadStream"
         },
         {
-          "name": "isValidMediaUrl"
+          "name": "showError"
         },
         {
           "name": "handleFormatDownload"
@@ -1763,7 +1766,7 @@
     },
     "pages/document-converter.html": {
       "extension": ".html",
-      "size_bytes": 23878
+      "size_bytes": 24972
     },
     "pages/edit.html": {
       "extension": ".html",
@@ -1771,7 +1774,7 @@
     },
     "pages/emi-calculator.html": {
       "extension": ".html",
-      "size_bytes": 71891
+      "size_bytes": 73012
     },
     "pages/extract-text.html": {
       "extension": ".html",
@@ -1863,7 +1866,7 @@
     },
     "pages/pdf-tools.html": {
       "extension": ".html",
-      "size_bytes": 155417
+      "size_bytes": 156332
     },
     "pages/percentage-calculator.html": {
       "extension": ".html",
@@ -1895,7 +1898,7 @@
     },
     "pages/screen-recorder.html": {
       "extension": ".html",
-      "size_bytes": 22136
+      "size_bytes": 23118
     },
     "pages/sip-calculator.html": {
       "extension": ".html",
