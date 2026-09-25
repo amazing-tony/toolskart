@@ -558,8 +558,8 @@
       csv += '# Amazing-tools is not responsible or liable for any miscalculations or tax filing decisions.\n';
       csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
 
-      if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
-        window.Amazing-Tools.downloadFile(csv, 'Income_Tax_Comparison_Report.csv', 'text/csv');
+      if ((window.AmazingTools || window['Amazing-Tools']) && (window.AmazingTools || window['Amazing-Tools']).downloadFile) {
+        (window.AmazingTools || window['Amazing-Tools']).downloadFile(csv, 'Income_Tax_Comparison_Report.csv', 'text/csv');
       }
     });
   }
@@ -631,6 +631,13 @@
       
       doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
       doc.save(`Income_Tax_Report_${Math.round(gross/100000)}L.pdf`);
+      const api = window.AmazingTools || window['Amazing-Tools'];
+      if (api && api.flashSupportToast) {
+        api.flashSupportToast({
+          title: 'Tax Report Saved!',
+          message: 'If Amazing-Tools helped you optimize your taxes and plan your savings, consider supporting our free platform. Even your continued usage keeps us motivated to build more free financial tools!'
+        });
+      }
     });
   }
 

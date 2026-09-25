@@ -635,6 +635,14 @@
     });
 
     comparisonTableBody.innerHTML = html;
+    const tableWrap = document.querySelector('.comparison-table-card') || comparisonTableBody.closest('.table-container') || comparisonTableBody.parentElement;
+    const api = window.AmazingTools || window['Amazing-Tools'];
+    if (tableWrap && api && api.attachGratitudeBadge) {
+      api.attachGratitudeBadge(tableWrap, {
+        title: 'Did this 30-year comparison bring clarity to your housing decision?',
+        desc: 'Amazing-Tools is 100% free and private. Support our mission or feel completely free to keep running real estate scenarios — your smart decisions motivate us!'
+      });
+    }
   }
 
   // --- CSV EXPORT & COPY ---
@@ -645,14 +653,14 @@
       cachedYearlyData.forEach(d => {
         csv += `${d.year},${Math.round(d.propertyValue)},${Math.round(d.loanBalance)},${Math.round(d.buyerNetWorth)},${Math.round(d.monthlyRent)},${Math.round(d.renterNetWorth)},${d.winner}\n`;
       });
-      if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
+      if ((window.AmazingTools || window['Amazing-Tools']) && (window.AmazingTools || window['Amazing-Tools']).downloadFile) {
         csv += '\n# USER VERIFICATION DECLARATION & DISCLAIMER NOTICE\n';
       csv += '# This output is provided freely by Amazing-tools (amazing-tools.github.io) solely for educational and planning assistance.\n';
       csv += '# Real estate appreciation, rental yield, and investment returns vary widely by locality and macroeconomic factors.\n';
       csv += '# All figures must be independently verified at user level with legal and financial advisors before buying or leasing.\n';
       csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
       csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
-      window.Amazing-Tools.downloadFile(csv, 'Buy_vs_Rent_30Year_Comparison.csv', 'text/csv');
+      (window.AmazingTools || window['Amazing-Tools']).downloadFile(csv, 'Buy_vs_Rent_30Year_Comparison.csv', 'text/csv');
       }
     });
   }
@@ -773,6 +781,13 @@
       
       doc.text(doc.splitTextToSize(declText, 510), 42, curY + 28);
       doc.save(`Buy_vs_Rent_Report_30Year.pdf`);
+      const api = window.AmazingTools || window['Amazing-Tools'];
+      if (api && api.flashSupportToast) {
+        api.flashSupportToast({
+          title: 'Buy vs Rent Report Saved!',
+          message: 'If Amazing-Tools helped you evaluate your property decision, consider supporting our free platform. Even your continued use keeps us motivated to build more free tools in the right direction!'
+        });
+      }
     });
   }
 

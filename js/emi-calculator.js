@@ -1756,8 +1756,8 @@
     csvContent += '# Amazing-tools is not responsible or liable for any miscalculations, bank differences, or financial decisions made.\n';
     csvContent += '# Please report any miscalculations on our portal (hello@Amazing-Tools.com) for future corrections.\n';
     const filename = `loan_prepayment_schedule_${currentScheduleView}.csv`;
-    if (window.Amazing-Tools) {
-      window.Amazing-Tools.downloadFile(csvContent, filename, 'text/csv');
+    if ((window.AmazingTools || window['Amazing-Tools'])) {
+      (window.AmazingTools || window['Amazing-Tools']).downloadFile(csvContent, filename, 'text/csv');
     } else {
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
@@ -1931,6 +1931,13 @@
     doc.text(splitDeclaration, 42, curY + 28);
 
     doc.save(`Debt_Freedom_Plan_${Math.round(principal/100000)}L.pdf`);
+    const api = window.AmazingTools || window['Amazing-Tools'];
+    if (api && api.flashSupportToast) {
+      api.flashSupportToast({
+        title: 'Debt Freedom Plan Saved!',
+        message: 'If Amazing-Tools helped you plan your debt-freedom and save on interest, consider supporting our free platform. Even your continued usage keeps us motivated to build more free tools in the right direction!'
+      });
+    }
   }
 
   function handleCopySummary() {
@@ -1954,8 +1961,8 @@
     text += `📈 Option B Mutual Fund Corpus: ${sipCorpus}\n\n`;
     text += 'Calculated at Amazing-Tools (https://amazing-tools.github.io/pages/emi-calculator.html)';
 
-    if (window.Amazing-Tools) {
-      window.Amazing-Tools.copyToClipboard(text, btnCopySummary);
+    if ((window.AmazingTools || window['Amazing-Tools'])) {
+      (window.AmazingTools || window['Amazing-Tools']).copyToClipboard(text, btnCopySummary);
     } else {
       navigator.clipboard.writeText(text).then(() => {
         btnCopySummary.textContent = '✓ Copied!';

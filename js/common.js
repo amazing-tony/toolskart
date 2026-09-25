@@ -963,7 +963,8 @@
     'markdown-previewer': { title: 'Markdown Live Previewer', category: 'Developer Tools', url: 'pages/markdown-previewer.html' },
     'terms': { title: 'Terms of Service', category: 'Legal', url: 'terms.html' },
     'privacy-policy': { title: 'Privacy Policy', category: 'Legal', url: 'privacy-policy.html' },
-    'about': { title: 'About Us', category: 'Company', url: 'about.html' }
+    'about': { title: 'About Us', category: 'Company', url: 'about.html' },
+    'support': { title: 'Support Amazing-Tools', category: 'Support', url: 'support.html' }
   };
 
   function extractSlugFromUrl(url) {
@@ -1165,7 +1166,7 @@
 
     // Target URL for iframe
     let targetUrl = fullUrl || tool.url;
-    if (!targetUrl.startsWith('http') && !targetUrl.startsWith('pages/') && !['terms.html', 'privacy-policy.html', 'about.html'].includes(targetUrl)) {
+    if (!targetUrl.startsWith('http') && !targetUrl.startsWith('pages/') && !['terms.html', 'privacy-policy.html', 'about.html', 'support.html'].includes(targetUrl)) {
       targetUrl = 'pages/' + targetUrl;
     }
 
@@ -1349,7 +1350,125 @@
   }
 
   // ---- Utility Functions (globally available) ----
-  window.Amazing-Tools = {
+  let _lastToastTimestamp = 0;
+  const TOAST_COOLDOWN_MS = 45000;
+
+  const AmazingTools = {
+    flashSupportToast: function (options) {
+      const opts = options || {};
+      const now = Date.now();
+      if (!opts.force && (now - _lastToastTimestamp < TOAST_COOLDOWN_MS)) {
+        return; // Respectful cooldown
+      }
+      _lastToastTimestamp = now;
+
+      // If running inside iframe, dispatch postMessage to top portal window
+      if (window.self !== window.top) {
+        try {
+          window.top.postMessage({
+            type: 'AMAZING_TOOLS_SHOW_SUPPORT_TOAST',
+            options: opts
+          }, '*');
+          return;
+        } catch (e) {}
+      }
+
+      // Top window or standalone toast rendering
+      let container = document.querySelector('.at-support-toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'at-support-toast-container';
+        document.body.appendChild(container);
+      }
+
+      const isPagesDir = window.location.pathname.includes('/pages/');
+      const supportUrl = opts.supportUrl || (isPagesDir ? '../support.html?ref=download' : 'support.html?ref=download');
+      const title = opts.title || 'Download complete!';
+      const message = opts.message || 'If Amazing-Tools saved you time or added value to your work today, consider supporting our 100% free platform. Even continuing to use and explore our tools fuels our motivation to keep building in the right direction!';
+      const ctaText = opts.ctaText || '☕ Support / Say Thanks ↗';
+
+      const toast = document.createElement('div');
+      toast.className = 'at-support-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.innerHTML = `
+        <div class="at-toast-header">
+          <div class="at-toast-headline">
+            <span>🎉</span>
+            <span>${title}</span>
+            <span class="at-toast-badge-pill">100% Free</span>
+          </div>
+          <button type="button" class="at-toast-close-btn" aria-label="Dismiss notification" title="Dismiss">&times;</button>
+        </div>
+        <div class="at-toast-body">
+          ${message}
+        </div>
+        <div class="at-toast-footer">
+          <a href="${supportUrl}" target="_top" class="at-toast-cta-btn">
+            ${ctaText}
+          </a>
+          <button type="button" class="at-toast-dismiss-link">Keep creating 💙</button>
+        </div>
+      `;
+
+      function dismissToast() {
+        if (toast.classList.contains('is-hiding')) return;
+        toast.classList.add('is-hiding');
+        setTimeout(() => {
+          if (toast.parentElement) toast.remove();
+        }, 300);
+      }
+
+      const closeBtn = toast.querySelector('.at-toast-close-btn');
+      const dismissLink = toast.querySelector('.at-toast-dismiss-link');
+      if (closeBtn) closeBtn.addEventListener('click', dismissToast);
+      if (dismissLink) dismissLink.addEventListener('click', dismissToast);
+
+      container.appendChild(toast);
+      setTimeout(dismissToast, 8500);
+    },
+
+    getGratitudeBadgeHtml: function (customOptions) {
+      const opts = customOptions || {};
+      const isPagesDir = window.location.pathname.includes('/pages/');
+      const supportUrl = opts.supportUrl || (isPagesDir ? '../support.html?ref=task-complete' : 'support.html?ref=task-complete');
+      const title = opts.title || 'Did Amazing-Tools add value to your work?';
+      const desc = opts.desc || 'Amazing-Tools is 100% free, private & without ads. If this saved you time, you can support our mission — or simply keep using our tools with our best wishes!';
+      const btnText = opts.btnText || '☕ Support Our Work';
+
+      return `
+        <div class="gratitude-result-badge" data-gratitude-badge="true">
+          <div class="grb-content-wrap">
+            <div class="grb-icon">💛</div>
+            <div class="grb-text">
+              <div class="grb-title">${title}</div>
+              <div class="grb-desc">${desc}</div>
+            </div>
+          </div>
+          <div class="grb-actions">
+            <a href="${supportUrl}" target="_top" class="grb-btn-primary">
+              ${btnText}
+            </a>
+          </div>
+        </div>
+      `.trim();
+    },
+
+    attachGratitudeBadge: function (container, customOptions) {
+      let target = container;
+      if (typeof container === 'string') {
+        target = document.getElementById(container) || document.querySelector(container);
+      }
+      if (!target) return null;
+      if (target.querySelector('[data-gratitude-badge="true"]')) {
+        return target.querySelector('[data-gratitude-badge="true"]');
+      }
+      const temp = document.createElement('div');
+      temp.innerHTML = this.getGratitudeBadgeHtml(customOptions);
+      const badge = temp.firstElementChild;
+      target.appendChild(badge);
+      return badge;
+    },
     openTool: openToolInPortal,
     closeTool: closeToolPanel,
     setTheme: function (themeId, triggerToast = false) {
@@ -1433,12 +1552,15 @@
       });
     },
 
-    // Show result area with animation
-    showResult: function (elementId) {
+    // Show result area with animation and gratitude badge
+    showResult: function (elementId, options) {
       const el = document.getElementById(elementId);
       if (el) {
         el.classList.remove('hidden');
         el.classList.add('animate-in');
+        if (typeof this.attachGratitudeBadge === 'function') {
+          this.attachGratitudeBadge(el, options);
+        }
       }
     },
 
@@ -1496,6 +1618,12 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      if (typeof this.flashSupportToast === 'function') {
+        this.flashSupportToast({
+          title: 'Download complete!',
+          message: 'If Amazing-Tools saved you time or added value today, consider supporting our free & private platform. Even just continuing to use our tools fuels our motivation to build more free tools in the right direction!'
+        });
+      }
     },
 
     // Debounce function
@@ -1535,6 +1663,7 @@
       return result.trim();
     }
   };
+  window.ToolsKart = window.AmazingTools = window['Amazing-Tools'] = AmazingTools;
 
   // ---- Smooth scroll for anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1656,4 +1785,30 @@
     initPrivacyUspStrip();
   }
 
+
+  // ---- Cross-Frame & Global Download Interceptors for Support & Gratitude ----
+  window.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'AMAZING_TOOLS_SHOW_SUPPORT_TOAST') {
+      const api = window.AmazingTools || window.ToolsKart;
+      if (api && typeof api.flashSupportToast === 'function') {
+        api.flashSupportToast(event.data.options);
+      }
+    }
+  });
+
+  // Listen for file downloads triggered via anchor elements or buttons
+  document.addEventListener('click', function (e) {
+    const downloadTarget = e.target.closest('a[download], [data-download-btn], .btn-download, #downloadResultBtn, #btnDownloadVideo, #downloadBtn, .sejda-btn-primary[download]');
+    if (downloadTarget) {
+      setTimeout(() => {
+        const api = window.AmazingTools || window.ToolsKart;
+        if (api && typeof api.flashSupportToast === 'function') {
+          api.flashSupportToast({
+            title: 'Download complete!',
+            message: 'If Amazing-Tools saved you time or added value today, consider supporting our 100% free & private platform. Even your continued use inspires us to keep building in the right direction!'
+          });
+        }
+      }, 600);
+    }
+  });
 })();

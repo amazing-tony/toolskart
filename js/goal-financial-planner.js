@@ -655,6 +655,15 @@
         portfolioCurve.push(Math.round(balance));
       }
 
+      const targetWrap = document.querySelector('.planner-summary-card') || document.querySelector('.roadmap-card') || ctxRoadmap.parentElement;
+      const api = window.AmazingTools || window['Amazing-Tools'];
+      if (targetWrap && api && api.attachGratitudeBadge) {
+        api.attachGratitudeBadge(targetWrap, {
+          title: 'Did this financial roadmap bring clarity to your goals?',
+          desc: 'Amazing-Tools is 100% free and client-side private. Support our developer or feel free to keep planning your family’s future — your success inspires us!'
+        });
+      }
+
       goalRoadmapChart = new Chart(ctxRoadmap, {
         type: 'line',
         data: {
@@ -715,8 +724,8 @@
       csv += '# Amazing-tools is not responsible or liable for any miscalculations or financial decisions made.\n';
       csv += '# Please report any discrepancies on our portal (hello@Amazing-Tools.com) for future corrections.\n';
 
-      if (window.Amazing-Tools && window.Amazing-Tools.downloadFile) {
-        window.Amazing-Tools.downloadFile(csv, 'Life_Goals_Financial_Roadmap.csv', 'text/csv');
+      if ((window.AmazingTools || window['Amazing-Tools']) && (window.AmazingTools || window['Amazing-Tools']).downloadFile) {
+        (window.AmazingTools || window['Amazing-Tools']).downloadFile(csv, 'Life_Goals_Financial_Roadmap.csv', 'text/csv');
       } else {
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
