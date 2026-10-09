@@ -44,36 +44,57 @@ body {
 }
 *:focus-visible { outline: 2px solid var(--at-indigo) !important; outline-offset: 3px !important; }
 
-/* ── 3. HEADER ── */
-.header {
-  background: rgba(255,255,255,0.97) !important;
-  border-bottom: 1px solid var(--at-border) !important;
+/* ── 3. HEADER & LOGO CONTRAST GUARANTEE ── */
+.header, .header-slim {
+  background: rgba(255,255,255,0.98) !important;
+  border-bottom: 1.5px solid var(--at-border) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  box-shadow: 0 1px 0 rgba(99,102,241,0.08) !important;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06) !important;
   position: sticky !important;
   top: 0 !important;
   z-index: 1000 !important;
 }
-.logo { font-weight: 800 !important; color: var(--at-text) !important; text-decoration: none !important; }
-.logo-icon-bolt { color: var(--at-indigo) !important; }
-.nav a {
-  color: var(--at-text-secondary) !important;
-  font-weight: 500 !important;
-  font-size: 0.9rem !important;
-  border-radius: var(--at-radius-sm) !important;
+.logo, .logo span, .header-slim .logo, a.logo {
+  font-weight: 800 !important;
+  color: #0F172A !important;
   text-decoration: none !important;
-  transition: var(--at-transition) !important;
+  opacity: 1 !important;
 }
-.nav a:hover { color: var(--at-indigo) !important; background: var(--at-indigo-light) !important; }
-.header-badge-tag {
-  background: var(--at-indigo-light) !important;
+.logo-icon-bolt {
   color: var(--at-indigo) !important;
-  font-size: 0.7rem !important;
+  font-weight: 900 !important;
+}
+.nav > a, .nav > .nav-category-item > .nav-category-link {
+  color: #334155 !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+}
+.nav > a:hover, .nav > .nav-category-item > .nav-category-link:hover {
+  color: var(--at-indigo) !important;
+}
+.nav-quick-menu {
+  background: #FFFFFF !important;
+  border: 1.5px solid #E2E8F0 !important;
+  box-shadow: 0 12px 32px rgba(15,23,42,0.12) !important;
+}
+.nav-quick-item, .nav-quick-item span {
+  color: #1E293B !important;
+}
+.nav-quick-item:hover {
+  background: #EEF2FF !important;
+  color: var(--at-indigo) !important;
+}
+.header-badge-tag {
+  background: #EEF2FF !important;
+  color: #4338CA !important;
+  font-size: 0.72rem !important;
   font-weight: 700 !important;
-  padding: 0.2rem 0.6rem !important;
+  padding: 0.2rem 0.65rem !important;
   border-radius: var(--at-radius-pill) !important;
-  border: 1px solid rgba(99,102,241,0.2) !important;
+  border: 1px solid rgba(99,102,241,0.3) !important;
 }
 
 /* ── 4. SIDEBAR ── */
