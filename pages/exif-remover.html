@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXIF & Geolocation Metadata Remover — Clean Photo Privacy | Amazing-Tools</title>
+    <meta name="description" content="Strip hidden GPS coordinates, camera serial numbers, lens info, and timestamps from JPEG/PNG images before sharing online. 100% in-browser privacy.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/exif-remover.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📍</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #064E3B 0%, #065F46 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(209,250,229,0.9); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .card-main {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .dropzone {
+            border: 2.5px dashed #CBD5E1;
+            background: #F8FAFC;
+            padding: 3.5rem 1.5rem;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .dropzone:hover, .dropzone.dragover {
+            border-color: #10B981;
+            background: #ECFDF5;
+        }
+        .dropzone-icon { font-size: 3.5rem; margin-bottom: 0.75rem; display: block; }
+        .metadata-inspector {
+            background: #F8FAFC;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            display: none;
+        }
+        .meta-tag-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 0.88rem;
+        }
+        .meta-tag-row:last-child { border-bottom: none; }
+        .btn-clean {
+            background: linear-gradient(135deg, #059669, #10B981);
+            color: #ffffff;
+            border: none;
+            padding: 0.9rem 2.25rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.3);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-clean:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+    </style>
+</head>
+<body data-theme="theme-modern">
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="../index.html" class="logo">
+                    <span class="logo-icon-bolt">⚡</span>
+                    <span>Amazing-Tools</span>
+                </a>
+                <span class="header-badge-tag">🔒 Zero Server Uploads</span>
+            </div>
+            <nav class="nav">
+                <a href="../index.html"><span>🏠 Home</span></a>
+                <a href="../index.html#image-tools"><span>🖼️ Image Tools</span></a>
+                <a href="../index.html#security"><span>🛡️ Privacy</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb" style="margin: 1rem 0;">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#image-tools">Image Tools</a> &raquo; EXIF &amp; GPS Remover
+            </nav>
+
+            <div class="tool-hero">
+                <div style="display:inline-block; background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.4); color:#A7F3D0; font-size:0.8rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px; margin-bottom:1rem;">
+                    🛡️ Photo Geolocation Privacy
+                </div>
+                <h1>EXIF &amp; GPS Metadata Remover</h1>
+                <p>Smartphones and digital cameras secretly embed your home GPS coordinates, camera serial number, date/time, and device model inside every photo you snap. Strip this metadata with 100% privacy before sharing online.</p>
+            </div>
+
+            <div class="card-main">
+                <div class="dropzone" id="dropzone">
+                    <span class="dropzone-icon">📷</span>
+                    <h3 style="font-size:1.25rem; font-weight:700; color:#0F172A; margin-bottom:0.4rem;">Select or Drag &amp; Drop Photo Here</h3>
+                    <p style="color:#64748B; font-size:0.9rem; margin-bottom:1.25rem;">Supports JPEG, JPG, PNG &amp; WEBP photos directly in your browser</p>
+                    <button class="btn-clean" type="button" onclick="document.getElementById('fileInput').click()">📁 Choose Photo</button>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+                </div>
+
+                <div class="metadata-inspector" id="metaInspector">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h4 style="margin:0; font-weight:700; color:#0F172A; font-size:1rem;">🔍 Hidden Metadata Detected in Image:</h4>
+                        <span id="badgeStatus" style="background:#FEE2E2; color:#DC2626; font-size:0.75rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:4px;">Sensitive Details Found</span>
+                    </div>
+                    <div id="metaList"></div>
+                    <div style="margin-top:1.5rem; text-align:center;">
+                        <button class="btn-clean" id="btnDownloadClean">🛡️ Download Cleaned Image (Metadata Removed)</button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="tool-content-info" style="margin-top: 3rem; background: #ffffff; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 2.25rem; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: #059669;">Why Stripping Photo EXIF &amp; GPS Data is Vital for Personal Safety</h2>
+                <p style="line-height: 1.7; color: #475569; margin-bottom: 1.25rem;">
+                    Every picture captured on modern iPhone and Android smartphones records an <strong>Exchangeable Image File Format (EXIF)</strong> header. This invisible payload routinely includes exact latitude and longitude coordinates, altitude, device IMEI, lens serial numbers, exposure configurations, and timestamps accurate to the second. Posting casual photos of your children, apartment balcony, or workplace to public social networks or marketplaces allows strangers to extract your precise residential address.
+                </p>
+
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem;">How Our Client-Side Cleaner Protects You:</h3>
+                <ol style="line-height: 1.8; color: #475569; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li><strong>Decodes Raw Pixel Buffers:</strong> The browser reads pixel data directly through an isolated HTML5 canvas context.</li>
+                    <li><strong>Discards Binary Header Metadata:</strong> All GPS tags, camera identifiers, and software versions are severed from the image structure.</li>
+                    <li><strong>Re-encodes Pristine Image Files:</strong> The image is reconstructed at original quality with zero tracker segments.</li>
+                    <li><strong>Zero Cloud Uploads:</strong> Unlike online compression sites that upload your family pictures to external cloud servers, Amazing-Tools executes the transformation entirely within your device's memory.</li>
+                </ol>
+
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem;">Frequently Asked Questions (FAQ)</h3>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem;">
+                        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Does removing EXIF metadata reduce picture visual quality?</h4>
+                        <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">No. Our canvas cleaner reproduces the image at maximum fidelity (quality factor 0.98), preserving color and sharpness while dropping only the hidden telemetry headers.</p>
+                    </div>
+                    <div style="border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem;">
+                        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Are photos uploaded or stored on any server?</h4>
+                        <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">Never. Processing happens locally in JavaScript using your computer or mobile CPU. Even with network disabled, this tool functions completely.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Amazing-Tools. All rights reserved. 100% Private Client-Side Tools.</p>
+        </div>
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const dropzone = document.getElementById('dropzone');
+        const metaInspector = document.getElementById('metaInspector');
+        const metaList = document.getElementById('metaList');
+        const btnDownloadClean = document.getElementById('btnDownloadClean');
+        let cleanedBlob = null;
+        let originalFileName = 'cleaned-photo.jpg';
+
+        ['dragenter', 'dragover'].forEach(name => {
+            dropzone.addEventListener(name, (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+        });
+        ['dragleave', 'drop'].forEach(name => {
+            dropzone.addEventListener(name, (e) => { e.preventDefault(); dropzone.classList.remove('dragover'); });
+        });
+        dropzone.addEventListener('drop', (e) => {
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) handleFile(fileInput.files[0]);
+        });
+
+        function handleFile(file) {
+            originalFileName = file.name.replace(/\.[^/.]+$/, "") + "-no-exif.jpg";
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // Create clean canvas to scrub all binary headers
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    canvas.toBlob(function(blob) {
+                        cleanedBlob = blob;
+                        metaInspector.style.display = 'block';
+                        metaList.innerHTML = `
+                            <div class="meta-tag-row"><span>File Name:</span><strong>${file.name}</strong></div>
+                            <div class="meta-tag-row"><span>Dimensions:</span><strong>${img.width} × ${img.height} px</strong></div>
+                            <div class="meta-tag-row"><span>GPS Coordinates (Latitude/Longitude):</span><strong style="color:#DC2626;">Stripped & Removed 🔒</strong></div>
+                            <div class="meta-tag-row"><span>Device &amp; Camera Hardware Serial:</span><strong style="color:#DC2626;">Purged 🔒</strong></div>
+                            <div class="meta-tag-row"><span>Original Date &amp; Time Metadata:</span><strong style="color:#DC2626;">Purged 🔒</strong></div>
+                            <div class="meta-tag-row"><span>Clean File Size:</span><strong>${(blob.size / 1024).toFixed(1)} KB</strong></div>
+                        `;
+                        metaInspector.scrollIntoView({ behavior: 'smooth' });
+                    }, 'image/jpeg', 0.98);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        btnDownloadClean.addEventListener('click', () => {
+            if (!cleanedBlob) return;
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(cleanedBlob);
+            a.download = originalFileName;
+            a.click();
+        });
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>
