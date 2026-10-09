@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    Amazing-Tools — Universal Video & Audio Downloader Controller
    Supports YouTube, Shorts, Instagram Reels, Facebook, TikTok
    ========================================================= */
@@ -33,12 +33,7 @@
   // Currently active video info
   let currentMediaInfo = null;
 
-  // Cobalt / open resolver endpoints
-  const RESOLVER_ENDPOINTS = [
-    'https://cobalt-backend.canine.tools',
-    'https://api.cobalt.tools',
-    'https://cobalt.kalli.st'
-  ];
+  // No server-side resolver — browser cannot bypass CORS on YouTube/Instagram/Facebook.
 
   // Initialize Event Listeners
   initEvents();
@@ -165,7 +160,7 @@
     }
   }
 
-  // --- 2. Format Download Handler ---
+  // --- 2. Format Download Handler (Honest: browser cannot bypass CORS) ---
   async function handleFormatDownload(e) {
     const btn = e.currentTarget;
     const quality = btn.getAttribute('data-quality');
@@ -176,113 +171,107 @@
       return;
     }
 
-    const originalBtnText = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Preparing...';
+    const rawUrl = currentMediaInfo.url;
+    const platform = currentMediaInfo.platform;
 
-    showProgressBar('Connecting to media resolver...', 15);
+    // Hide any existing progress bar — we don't fake progress
+    if (downloadProgressBar) downloadProgressBar.style.display = 'none';
 
-    try {
-      // Query open Cobalt resolver API
-      const downloadUrl = await resolveDownloadStream(currentMediaInfo.url, quality, type);
+    // Show the honest helper panel with verified working options
+    showDownloadHelperPanel(rawUrl, quality, type, platform);
+  }
 
-      showProgressBar('Stream ready! Starting download...', 90);
+  // --- 3. Download Helper Panel (Verified Working External Services) ---
+  function showDownloadHelperPanel(rawUrl, quality, type, platform) {
+    const encodedUrl = encodeURIComponent(rawUrl);
+    const isYouTube = rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be');
+    const isAudio = type === 'audio';
 
-      // Trigger download in browser
-      triggerBrowserDownload(downloadUrl, currentMediaInfo.title, type, quality);
+    // Build yt-dlp command snippet for power users
+    const ytdlpFormat = isAudio
+      ? `-x --audio-format mp3`
+      : `-f "bestvideo[height<=${quality}]+bestaudio/best[height<=${quality}]"`;
+    const ytdlpCmd = `yt-dlp ${ytdlpFormat} "${rawUrl}"`;
 
-      setTimeout(() => {
-        showProgressBar('Download complete! Check your downloads folder.', 100);
-        btn.textContent = '✓ Downloaded';
-        setTimeout(() => {
-          btn.disabled = false;
-          btn.textContent = originalBtnText;
-          downloadProgressBar.style.display = 'none';
-        }, 3000);
-      }, 1200);
+    // Build service buttons HTML
+    const serviceButtons = `
+      <a href="https://cobalt.tools/#${encodedUrl}" target="_blank" rel="noopener noreferrer"
+         class="btn-helper-service cobalt">
+        🔵 cobalt.tools
+        <span class="helper-badge">Open Source · No Ads</span>
+      </a>
+      <a href="https://savefrom.net/#url=${encodedUrl}" target="_blank" rel="noopener noreferrer"
+         class="btn-helper-service savefrom">
+        🟢 savefrom.net
+        <span class="helper-badge">Fast &amp; Free</span>
+      </a>
+      <a href="https://y2mate.guru/?url=${encodedUrl}" target="_blank" rel="noopener noreferrer"
+         class="btn-helper-service y2mate">
+        🟠 y2mate.guru
+        <span class="helper-badge">MP4 &amp; MP3</span>
+      </a>
+      ${isYouTube ? `<a href="https://ssyoutube.com/watch?v=${encodedUrl}" target="_blank" rel="noopener noreferrer"
+         class="btn-helper-service ssyt">
+        🔴 ssyoutube.com
+        <span class="helper-badge">Quality Select</span>
+      </a>` : ''}
+    `;
 
-    } catch (err) {
-      console.error('Resolver error:', err);
-      // Smart Fallback
-      showProgressBar('Connecting via fallback download mirror...', 65);
-      
-      const fallbackUrl = generateFallbackStreamUrl(currentMediaInfo.url, quality, type);
-      triggerBrowserDownload(fallbackUrl, currentMediaInfo.title, type, quality);
+    // Build yt-dlp snippet (shown for all platforms)
+    const ytdlpSection = `
+      <div class="helper-cli-box">
+        <div class="helper-cli-label">⚡ Download locally with yt-dlp (fastest, no limits):</div>
+        <code class="helper-cli-code" id="ytdlpCmd">${escapeHtml(ytdlpCmd)}</code>
+        <button class="btn-copy-cmd" onclick="navigator.clipboard.writeText(${JSON.stringify(ytdlpCmd)}).then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='Copy'},2000)})">Copy</button>
+        <a href="https://github.com/yt-dlp/yt-dlp#installation" target="_blank" rel="noopener noreferrer"
+           class="helper-install-link">Install yt-dlp ↗</a>
+      </div>
+    `;
 
-      setTimeout(() => {
-        showProgressBar('Opened in downloader stream.', 100);
-        btn.disabled = false;
-        btn.textContent = originalBtnText;
-        setTimeout(() => { downloadProgressBar.style.display = 'none'; }, 3000);
-      }, 1500);
+    const panelHtml = `
+      <div class="download-helper-panel" id="downloadHelperPanel">
+        <div class="helper-header">
+          <span class="helper-icon">🚀</span>
+          <div>
+            <div class="helper-title">Your Download Options</div>
+            <div class="helper-subtitle">
+              Browser security prevents direct ${isAudio ? 'audio' : `${quality}p video`} downloads from
+              <strong>${platform}</strong>. Use one of these free, verified services:
+            </div>
+          </div>
+        </div>
+
+        <div class="helper-services">
+          ${serviceButtons}
+        </div>
+
+        ${ytdlpSection}
+
+        <div class="helper-footer">
+          <span>ℹ️</span>
+          <span>Each service opens a new tab pre-filled with your link. No signup needed.</span>
+        </div>
+      </div>
+    `;
+
+    // Inject or replace the helper panel below the result area
+    let existing = document.getElementById('downloadHelperPanel');
+    if (existing) {
+      existing.outerHTML = panelHtml;
+    } else {
+      downloaderResultArea.insertAdjacentHTML('afterend', panelHtml);
     }
+
+    // Scroll panel into view
+    const panel = document.getElementById('downloadHelperPanel');
+    if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  // --- 3. Stream Resolver Engine ---
-  async function resolveDownloadStream(url, quality, type) {
-    const isAudioOnly = type === 'audio';
-    const payload = {
-      url: url,
-      videoQuality: quality === '1080' ? '1080' : (quality === '720' ? '720' : '480'),
-      audioFormat: 'mp3',
-      isAudioOnly: isAudioOnly,
-      filenameStyle: 'classic'
-    };
-
-    let lastError = null;
-
-    for (const endpoint of RESOLVER_ENDPOINTS) {
-      try {
-        const response = await fetch(`${endpoint}/api/json`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.url) return data.url;
-          if (data.audio) return data.audio;
-        }
-      } catch (e) {
-        lastError = e;
-      }
-    }
-
-    throw lastError || new Error('All resolver mirrors busy');
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function generateFallbackStreamUrl(url, quality, type) {
-    // If external API instances are blocked by CORS/firewall, route through universal media handler
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-      const vid = extractYouTubeId(url);
-      if (type === 'audio') {
-        return `https://yewtu.be/latest_version?id=${vid}&itag=140`;
-      } else {
-        const itag = quality === '1080' ? '137' : (quality === '720' ? '22' : '18');
-        return `https://yewtu.be/latest_version?id=${vid}&itag=${itag}`;
-      }
-    }
-    return url;
-  }
 
-  function triggerBrowserDownload(downloadUrl, title, type, quality) {
-    const ext = type === 'audio' ? 'mp3' : 'mp4';
-    const cleanTitle = (title || 'video').replace(/[^a-zA-Z0-9_-]/g, '_').substring(0, 50);
-    const filename = `${cleanTitle}_${quality}.${ext}`;
-
-    const a = document.createElement('a');
-    a.href = downloadUrl;
-    a.download = filename;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
 
   // --- 4. oEmbed Metadata Helper ---
   async function fetchOembedInfo(url) {

@@ -14,9 +14,10 @@
   // ---- Multi-Theme Architecture: 11 Distinct Design Systems ----
   const THEME_KEY = 'Amazing-Tools_theme';
   const THEME_USER_SET_KEY = 'Amazing-Tools_theme_user_set';
-  const DEFAULT_THEME = 'theme-09-paper';
+  const DEFAULT_THEME = 'theme-modern';
 
   const THEMES = [
+    { id: 'theme-modern',       name: 'Midnight Prism (Modern)' },
     { id: 'theme-01-executive', name: 'Executive' },
     { id: 'theme-02-horizon',   name: 'Horizon' },
     { id: 'theme-03-heritage',  name: 'Heritage' },
@@ -164,20 +165,17 @@
     applyTheme(THEMES[nextIndex].id, true, true);
   }
 
-  // Detect and set initial theme: Paper by default, or user's explicit saved choice
+  // Detect and set initial theme: theme-modern by default, migrate old paper cache
   let savedTheme = DEFAULT_THEME;
   try {
     const isUserSet = localStorage.getItem(THEME_USER_SET_KEY) === 'true';
     const stored = localStorage.getItem(THEME_KEY);
     if (stored) {
-      if (isUserSet) {
-        // Explicit user choice persists independently for this user
-        savedTheme = stored;
-      } else if (stored !== 'theme-01-executive' && stored !== 'executive' && stored !== 'adminlte' && stored !== 'teal' && stored !== 'us-tech' && stored !== 'sejda') {
+      if (isUserSet && stored !== 'theme-09-paper') {
         savedTheme = stored;
       } else {
-        // Migrate old automatic default to new 'paper' default
         savedTheme = DEFAULT_THEME;
+        localStorage.setItem(THEME_KEY, DEFAULT_THEME);
       }
     }
   } catch (e) {}

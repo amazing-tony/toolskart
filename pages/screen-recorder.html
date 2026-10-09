@@ -68,6 +68,15 @@
             100% { transform: scale(0.95); opacity: 0.7; }
         }
 
+        @keyframes btn-pulse-red {
+          0% { box-shadow: 0 0 0 0 rgba(220,38,38,0.5); }
+          70% { box-shadow: 0 0 0 12px rgba(220,38,38,0); }
+          100% { box-shadow: 0 0 0 0 rgba(220,38,38,0); }
+        }
+        .btn-stop-pulsing {
+          animation: btn-pulse-red 1.2s infinite;
+        }
+
         .rec-timer {
             font-family: 'JetBrains Mono', monospace;
             font-size: 3rem;
@@ -226,10 +235,11 @@
                         <span>●</span> <span>Start Recording</span>
                     </button>
                     <button type="button" id="btnPauseRecord" class="btn btn-outline" style="display:none; padding:0.85rem 1.5rem;">⏸️ Pause</button>
-                    <button type="button" id="btnStopRecord" class="btn btn-primary" style="display:none; background:#0f172a; padding:0.85rem 1.75rem;">⏹️ Stop & Save</button>
+                    <button type="button" id="btnStopRecord" class="btn btn-primary" style="display:none; background:#0f172a; padding:0.85rem 1.75rem;">⏹️ Stop & Auto-Save</button>
                 </div>
 
                 <!-- Video Preview & Download Area -->
+                <div id="recToast" style="display:none; background:#16a34a; color:#fff; border-radius:8px; padding:0.75rem 1rem; margin-top:1rem; font-weight:600; font-size:0.95rem;"></div>
                 <div id="videoResultWrap" class="video-preview-wrap">
                     <h3 style="margin-bottom:0.75rem;">Recording Complete</h3>
                     <video id="playbackVideo" controls></video>
@@ -237,7 +247,7 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
                         <span id="recordedStats" style="font-size:0.9rem; color:#64748b;">Duration: 00:00 • Size: 0 MB</span>
                         <div style="display:flex; gap:0.75rem;">
-                            <button id="btnDownloadVideo" class="btn btn-primary" style="padding:0.6rem 1.5rem;">📥 Download Video (.webm)</button>
+                            <button id="btnDownloadVideo" class="btn btn-primary" style="padding:0.6rem 1.5rem;">📥 Save Again (Backup Copy)</button>
                             <button id="btnRecordAgain" class="btn btn-outline" style="padding:0.6rem 1rem;">↺ Record Again</button>
                         </div>
                     </div>
@@ -348,6 +358,14 @@
             return `${hrs}:${mins}:${secs}`;
         }
 
+        function showRecToast(msg) {
+            const toast = document.getElementById('recToast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 8000);
+        }
+
         async function startRecording() {
             try {
                 const wantSystem = chkSystem.checked;
@@ -420,7 +438,22 @@
                     statusIndicator.style.display = 'none';
                     btnPause.style.display = 'none';
                     btnStop.style.display = 'none';
+                    btnStop.classList.remove('btn-stop-pulsing');
                     resultWrap.style.display = 'block';
+
+                    // AUTO-DOWNLOAD immediately when stopped
+                    if (recordedBlob) {
+                        const autoUrl = URL.createObjectURL(recordedBlob);
+                        const autoA = document.createElement('a');
+                        autoA.href = autoUrl;
+                        autoA.download = `screen-recording-${new Date().toISOString().slice(0,10)}.webm`;
+                        document.body.appendChild(autoA);
+                        autoA.click();
+                        document.body.removeChild(autoA);
+                        setTimeout(() => URL.revokeObjectURL(autoUrl), 500);
+                        // Show success toast
+                        showRecToast('✅ Recording auto-saved to Downloads! Use "Save Again" if needed.');
+                    }
                 };
 
                 // Stop if user stops sharing via browser bar
@@ -446,6 +479,7 @@
                 settingsWrap.style.display = 'none';
                 btnPause.style.display = 'inline-block';
                 btnStop.style.display = 'inline-block';
+                btnStop.classList.add('btn-stop-pulsing');
                 statusIndicator.style.display = 'inline-flex';
                 statusText.textContent = 'RECORDING';
                 resultWrap.style.display = 'none';
