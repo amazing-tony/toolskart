@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PII & Sensitive Data Redactor — Free Client-Side Text Masker | Amazing-Tools</title>
+    <meta name="description" content="Redact sensitive personally identifiable information (PII) like emails, phone numbers, credit cards, SSN, Aadhaar, API keys & names directly in your browser with zero server uploads.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/pii-redactor.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .redactor-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .redactor-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .redactor-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .redactor-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .rule-chips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+        }
+        .rule-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #334155;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .rule-chip:hover { border-color: #6366F1; background: #EEF2FF; }
+        .rule-chip input[type="checkbox"] { accent-color: #6366F1; width: 17px; height: 17px; cursor: pointer; }
+        .redactor-panes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .pane-box { display: flex; flex-direction: column; }
+        .pane-box label { font-weight: 700; margin-bottom: 0.5rem; color: #0F172A; display: flex; justify-content: space-between; font-size: 0.95rem; }
+        .pane-textarea {
+            width: 100%;
+            height: 320px;
+            padding: 1rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace, sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            resize: vertical;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .pane-textarea:focus { border-color: #6366F1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }
+        .pane-textarea[readonly] { background: #F8FAFC; color: #0F172A; }
+        .redactor-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .btn-redact {
+            background: linear-gradient(135deg, #4F46E5, #6366F1);
+            color: #fff;
+            border: none;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+            transition: all 0.2s;
+        }
+        .btn-redact:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79,70,229,0.4); }
+        .btn-secondary {
+            background: #F1F5F9;
+            color: #334155;
+            border: 1px solid #CBD5E1;
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { background: #E2E8F0; color: #0F172A; }
+        .stats-badge-bar {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .stat-pill {
+            background: #EEF2FF;
+            color: #4338CA;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        @media (max-width: 768px) {
+            .redactor-panes { grid-template-columns: 1fr; }
+            .pane-textarea { height: 220px; }
+        }
+    </style>
+</head>
+<body data-theme="theme-modern">
+
+    <!-- Header -->
+    <header class="header header-slim">
+        <div class="container header-content">
+            <div class="header-left">
+                <a href="../index.html" class="logo">
+                    <span class="logo-icon-bolt">⚡</span>
+                    <span>Amazing-Tools</span>
+                </a>
+                <span class="header-badge-tag">🔒 100% In-Browser Privacy</span>
+            </div>
+            <nav class="nav">
+                <a href="../index.html"><span>🏠 Home</span></a>
+                <a href="../index.html#text-tools"><span>📝 Text Tools</span></a>
+                <a href="../index.html#dev-tools"><span>💻 Dev</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="tool-page">
+        <div class="container">
+            <nav class="breadcrumb" style="margin: 1rem 0;">
+                <a href="../index.html">Home</a> &raquo; <a href="../index.html#text-tools">Text Tools</a> &raquo; PII Redactor
+            </nav>
+
+            <div class="redactor-hero">
+                <div style="display:inline-block; background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.4); color:#C7D2FE; font-size:0.8rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:50px; margin-bottom:1rem;">
+                    🛡️ AI Prompt & LLM Sanitizer
+                </div>
+                <h1>PII & Sensitive Data Redactor</h1>
+                <p>Anonymize private emails, phone numbers, credit cards, Social Security numbers, Indian Aadhaar, IP addresses, and API credentials before sending logs or customer prompts to ChatGPT, Claude, or support tickets.</p>
+            </div>
+
+            <div class="redactor-card">
+                <h3 style="font-size:1.15rem; font-weight:700; color:#0F172A; margin-bottom:0.5rem;">1. Select Elements to Redact:</h3>
+                <div class="rule-chips-grid">
+                    <label class="rule-chip"><input type="checkbox" id="ruleEmail" checked> <span>✉️ Email Addresses</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="rulePhone" checked> <span>📞 Phone Numbers</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="ruleCard" checked> <span>💳 Credit Card Numbers</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="ruleSSN" checked> <span>🇺🇸 US SSN (xxx-xx-xxxx)</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="ruleAadhaar" checked> <span>🇮🇳 Aadhaar (xxxx xxxx xxxx)</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="ruleIP" checked> <span>🌐 IPv4 / IPv6 Addresses</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="ruleAPI" checked> <span>🔑 API Keys & Bearer Tokens</span></label>
+                    <label class="rule-chip"><input type="checkbox" id="ruleCustom"> <span>🔍 Custom Keywords</span></label>
+                </div>
+
+                <div id="customKeywordBox" style="display:none; margin-bottom:1rem;">
+                    <label style="font-weight:600; font-size:0.88rem; color:#475569; display:block; margin-bottom:0.35rem;">Enter comma-separated words/names to mask:</label>
+                    <input type="text" id="customKeywords" placeholder="e.g. Acme Corp, John Smith, SecretProject" style="width:100%; padding:0.65rem 0.85rem; border:1.5px solid #CBD5E1; border-radius:8px; font-size:0.9rem; box-sizing:border-box;">
+                </div>
+
+                <div style="display:flex; align-items:center; gap:1.25rem; margin-top:0.5rem; flex-wrap:wrap;">
+                    <div>
+                        <span style="font-size:0.88rem; font-weight:700; color:#475569;">Masking Style:</span>
+                        <select id="maskStyle" style="margin-left:0.5rem; padding:0.4rem 0.8rem; border-radius:6px; border:1px solid #CBD5E1; font-weight:600;">
+                            <option value="label">[REDACTED_TYPE] (e.g. [EMAIL], [PHONE])</option>
+                            <option value="asterisk">Asterisks (********)</option>
+                            <option value="partial">Partial Mask (j***@domain.com)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn-secondary" id="btnLoadSample" style="font-size:0.82rem; padding:0.4rem 0.8rem;">📋 Load Sample Log</button>
+                </div>
+
+                <div class="redactor-panes">
+                    <div class="pane-box">
+                        <label for="inputText">
+                            <span>Original Text / Raw Data</span>
+                            <span id="inputCharCount" style="font-size:0.8rem; font-weight:500; color:#64748B;">0 chars</span>
+                        </label>
+                        <textarea id="inputText" class="pane-textarea" placeholder="Paste sensitive text, customer support conversations, system logs, or prompts here..."></textarea>
+                    </div>
+                    <div class="pane-box">
+                        <label for="outputText">
+                            <span>Sanitized / Redacted Output</span>
+                            <span id="outputRedactCount" style="font-size:0.8rem; font-weight:700; color:#10B981;">0 items redacted</span>
+                        </label>
+                        <textarea id="outputText" class="pane-textarea" readonly placeholder="Anonymized output will appear here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="redactor-actions">
+                    <button class="btn-redact" id="btnExecuteRedact">🛡️ Redact & Sanitize Now</button>
+                    <div style="display:flex; gap:0.6rem;">
+                        <button class="btn-secondary" id="btnCopyResult">📋 Copy Sanitized Text</button>
+                        <button class="btn-secondary" id="btnDownloadResult">💾 Download .txt</button>
+                        <button class="btn-secondary" id="btnClear">✕ Clear</button>
+                    </div>
+                </div>
+
+                <div class="stats-badge-bar" id="statsBar" style="display:none;"></div>
+            </div>
+
+            <!-- SEO Editorial Content for AdSense Compliance -->
+            <section class="tool-content-info" style="margin-top: 3rem; background: #ffffff; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 2.25rem; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: #4F46E5;">Why Redacting PII is Essential Before Sharing Text with AI Models</h2>
+                <p style="line-height: 1.7; color: #475569; margin-bottom: 1.25rem;">
+                    With the explosive adoption of Large Language Models (LLMs) such as ChatGPT, Anthropic Claude, Microsoft Copilot, and Google Gemini, developers and corporate employees frequently copy-paste application logs, legal contracts, customer support emails, and database records into web prompts to troubleshoot bugs or summarize meetings. However, transmitting unredacted <strong>Personally Identifiable Information (PII)</strong> violates strict global data privacy regulations including the <strong>European Union GDPR</strong>, <strong>California CCPA</strong>, <strong>HIPAA</strong>, and corporate confidentiality protocols.
+                </p>
+
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem;">Key Data Elements Automatically Detected:</h3>
+                <ul style="line-height: 1.8; color: #475569; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li><strong>Email Addresses:</strong> RFC-compliant email detection replacing personal communication points with structured <code>[EMAIL]</code> tokens.</li>
+                    <li><strong>Phone Numbers:</strong> International E.164 formats, US numbers with area codes, Indian mobile 10-digit formats, and European phone notations.</li>
+                    <li><strong>Financial Payment Cards:</strong> Visa, Mastercard, American Express, RuPay, and Discover credit card number sequences.</li>
+                    <li><strong>National Identification:</strong> US Social Security Numbers (SSN) and Indian 12-digit Aadhaar formats.</li>
+                    <li><strong>Server & Network Infrastructure:</strong> Public IPv4 and IPv6 addresses preventing inadvertent internal corporate topology disclosure.</li>
+                    <li><strong>Developer Secrets:</strong> JWT Bearer tokens, GitHub personal access tokens, AWS keys, and OpenAI <code>sk-...</code> format keys.</li>
+                </ul>
+
+                <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem;">100% In-Browser Privacy — Zero Cloud Storage</h3>
+                <p style="line-height: 1.7; color: #475569; margin-bottom: 1.5rem;">
+                    A major security vulnerability of commercial redaction APIs is that you are uploading your confidential records to yet another cloud provider's server. <strong>Amazing-Tools does the exact opposite:</strong> all regular expressions and text substitution logic execute 100% in your local browser sandbox via JavaScript. Disconnect your internet connection or inspect browser network DevTools — no data ever leaves your laptop or mobile device.
+                </p>
+
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem;">Frequently Asked Questions (FAQ)</h3>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem;">
+                        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Does the tool preserve the grammatical structure for AI comprehension?</h4>
+                        <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">Yes! By default, the tool replaces entities with named semantic tokens (like <code>[EMAIL_1]</code>, <code>[PHONE_1]</code>). This allows AI assistants like ChatGPT to understand the context and relationships in your text without learning the actual confidential identity of the individual.</p>
+                    </div>
+                    <div style="border-bottom: 1px solid #E2E8F0; padding-bottom: 0.75rem;">
+                        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Can I add my company's specific project code names or employee names?</h4>
+                        <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">Yes. Check the "Custom Keywords" box and enter comma-separated terms (e.g. client names, proprietary product codenames). Every occurrence will be cleanly anonymized.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Is there a file or text character limit?</h4>
+                        <p style="font-size: 0.88rem; color: #475569; margin: 0; line-height: 1.6;">Because processing runs purely in your device's memory, you can comfortably process hundreds of pages of text logs and mega-transcripts in seconds with zero latency.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Amazing-Tools. All rights reserved. 100% Private Client-Side Utilities.</p>
+        </div>
+    </footer>
+
+    <script>
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const inputCharCount = document.getElementById('inputCharCount');
+        const outputRedactCount = document.getElementById('outputRedactCount');
+        const statsBar = document.getElementById('statsBar');
+        const customKeywordBox = document.getElementById('customKeywordBox');
+        const ruleCustom = document.getElementById('ruleCustom');
+
+        ruleCustom.addEventListener('change', () => {
+            customKeywordBox.style.display = ruleCustom.checked ? 'block' : 'none';
+        });
+
+        inputText.addEventListener('input', () => {
+            inputCharCount.textContent = `${inputText.value.length} chars`;
+        });
+
+        const SAMPLES = `Customer Support Ticket #40921
+From: sarah.jenkins@company-corp.com
+Phone: +1 (415) 882-9014 / Cell: 9876543210
+Agent Notes:
+Spoke with Sarah regarding unauthorized charge on corporate Visa card 4532-8921-0091-7842.
+Customer provided US SSN: 123-45-6789 and verified Indian office Aadhaar reference: 4321 8765 2109.
+Originating server IP: 192.168.1.105 and proxy 2001:0db8:85a3:0000:0000:8a2e:0370:7334.
+Debug Auth header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.sk_live_992140a8bf823e.
+Issue resolved successfully.`;
+
+        document.getElementById('btnLoadSample').addEventListener('click', () => {
+            inputText.value = SAMPLES;
+            inputCharCount.textContent = `${inputText.value.length} chars`;
+        });
+
+        document.getElementById('btnClear').addEventListener('click', () => {
+            inputText.value = '';
+            outputText.value = '';
+            inputCharCount.textContent = '0 chars';
+            outputRedactCount.textContent = '0 items redacted';
+            statsBar.style.display = 'none';
+            statsBar.innerHTML = '';
+        });
+
+        document.getElementById('btnCopyResult').addEventListener('click', () => {
+            if(!outputText.value) return alert('No redacted text to copy.');
+            navigator.clipboard.writeText(outputText.value);
+            alert('✅ Sanitized text copied to clipboard!');
+        });
+
+        document.getElementById('btnDownloadResult').addEventListener('click', () => {
+            if(!outputText.value) return alert('No text to download.');
+            const blob = new Blob([outputText.value], {type: 'text/plain;charset=utf-8'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'sanitized-redacted-output.txt';
+            a.click();
+        });
+
+        document.getElementById('btnExecuteRedact').addEventListener('click', () => {
+            let text = inputText.value;
+            if(!text.trim()) return alert('Please enter or paste text to redact.');
+
+            const style = document.getElementById('maskStyle').value;
+            let totalRedactions = 0;
+            const stats = {};
+
+            function replaceMatch(type, str) {
+                totalRedactions++;
+                stats[type] = (stats[type] || 0) + 1;
+                if (style === 'asterisk') return '*'.repeat(Math.max(6, Math.min(str.length, 12)));
+                if (style === 'partial') {
+                    if (str.length <= 4) return '***';
+                    return str[0] + '***' + str.slice(-1);
+                }
+                return `[REDACTED_${type}]`;
+            }
+
+            // 1. Email
+            if (document.getElementById('ruleEmail').checked) {
+                const reEmail = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+                text = text.replace(reEmail, (m) => replaceMatch('EMAIL', m));
+            }
+
+            // 2. US SSN
+            if (document.getElementById('ruleSSN').checked) {
+                const reSSN = /\b\d{3}-\d{2}-\d{4}\b/g;
+                text = text.replace(reSSN, (m) => replaceMatch('SSN', m));
+            }
+
+            // 3. Indian Aadhaar
+            if (document.getElementById('ruleAadhaar').checked) {
+                const reAadhaar = /\b\d{4}\s\d{4}\s\d{4}\b/g;
+                text = text.replace(reAadhaar, (m) => replaceMatch('AADHAAR', m));
+            }
+
+            // 4. Credit Cards
+            if (document.getElementById('ruleCard').checked) {
+                const reCard = /\b(?:\d{4}[-\s]?){3}\d{4}\b/g;
+                text = text.replace(reCard, (m) => replaceMatch('CREDIT_CARD', m));
+            }
+
+            // 5. Phone numbers
+            if (document.getElementById('rulePhone').checked) {
+                const rePhone = /(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b/g;
+                text = text.replace(rePhone, (m) => replaceMatch('PHONE', m));
+            }
+
+            // 6. IP Addresses (v4 + v6)
+            if (document.getElementById('ruleIP').checked) {
+                const reIPv4 = /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g;
+                const reIPv6 = /\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b/g;
+                text = text.replace(reIPv4, (m) => replaceMatch('IP_ADDRESS', m));
+                text = text.replace(reIPv6, (m) => replaceMatch('IP_ADDRESS', m));
+            }
+
+            // 7. API Keys and Tokens
+            if (document.getElementById('ruleAPI').checked) {
+                const reBearer = /Bearer\s+[A-Za-z0-9\-._~+/]+=*/gi;
+                const reApiKey = /\b(?:sk_live|sk_test|ghp_|AIzaSy)[A-Za-z0-9_\-]{16,}\b/gi;
+                text = text.replace(reBearer, (m) => replaceMatch('AUTH_TOKEN', m));
+                text = text.replace(reApiKey, (m) => replaceMatch('API_KEY', m));
+            }
+
+            // 8. Custom Keywords
+            if (ruleCustom.checked) {
+                const rawKeys = document.getElementById('customKeywords').value;
+                const keys = rawKeys.split(',').map(s => s.trim()).filter(Boolean);
+                keys.forEach(k => {
+                    const esc = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const re = new RegExp('\\b' + esc + '\\b', 'gi');
+                    text = text.replace(re, (m) => replaceMatch('NAME_KEYWORD', m));
+                });
+            }
+
+            outputText.value = text;
+            outputRedactCount.textContent = `✅ ${totalRedactions} items redacted`;
+
+            // Display badge breakdown
+            statsBar.innerHTML = '';
+            if (totalRedactions > 0) {
+                statsBar.style.display = 'flex';
+                for (const [k, count] of Object.entries(stats)) {
+                    const badge = document.createElement('span');
+                    badge.className = 'stat-pill';
+                    badge.textContent = `${k}: ${count}`;
+                    statsBar.appendChild(badge);
+                }
+            } else {
+                statsBar.style.display = 'none';
+            }
+        });
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

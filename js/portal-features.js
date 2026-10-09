@@ -38,6 +38,7 @@
     { id:'case-converter',    name:'Case Converter',           emoji:'🔤', cat:'Text',        href:'pages/case-converter.html' },
     { id:'json-formatter',    name:'JSON Formatter',           emoji:'⚡', cat:'Dev',         href:'pages/json-formatter.html' },
     { id:'base64-tool',       name:'Base64 Tool',              emoji:'🔐', cat:'Dev',         href:'pages/base64-tool.html' },
+    { id:'pii-redactor',      name:'PII & Sensitive Redactor', emoji:'🛡️', cat:'Text',        href:'pages/pii-redactor.html' },
     { id:'lorem-ipsum',       name:'Lorem Ipsum Generator',    emoji:'📄', cat:'Text',        href:'pages/lorem-ipsum.html' },
     { id:'slug-generator',    name:'URL Slug Generator',       emoji:'🔗', cat:'Dev',         href:'pages/slug-generator.html' },
     { id:'url-encoder',       name:'URL Encoder / Decoder',    emoji:'🌐', cat:'Dev',         href:'pages/url-encoder.html' },
