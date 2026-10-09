@@ -490,7 +490,8 @@ body {
 .footer-bottom a { color: var(--at-indigo) !important; }
 
 /* ── 14. COMMAND PALETTE ── */
-.cmd-palette { position: fixed !important; inset: 0 !important; background: rgba(15,23,42,0.75) !important; backdrop-filter: blur(8px) !important; z-index: 9999 !important; display: flex !important; align-items: flex-start !important; justify-content: center !important; padding-top: 15vh !important; }
+.cmd-palette { position: fixed; inset: 0; background: rgba(15,23,42,0.75) !important; backdrop-filter: blur(8px) !important; z-index: 9999 !important; align-items: flex-start !important; justify-content: center !important; padding-top: 15vh !important; }
+.cmd-palette[style*="display: none"], .cmd-palette[style*="display:none"] { display: none !important; }
 .cmd-inner { background: var(--at-surface) !important; border: 1.5px solid var(--at-border) !important; border-radius: 16px !important; box-shadow: 0 24px 64px rgba(15,23,42,0.35) !important; width: 100% !important; max-width: 600px !important; overflow: hidden !important; }
 .cmd-input { width: 100% !important; border: none !important; outline: none !important; font-size: 1.1rem !important; color: var(--at-text) !important; background: transparent !important; font-family: 'Inter',sans-serif !important; }
 
