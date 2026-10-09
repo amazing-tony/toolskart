@@ -96,6 +96,43 @@
 
             <div class="tz-grid" id="tzGrid"></div>
         </div>
+    
+        <section class="tool-content-info" style="margin-top: 3rem; background: var(--theme-surface, #ffffff); border: 1px solid var(--theme-border, #e2e8f0); border-radius: 12px; padding: 2.25rem; color: var(--theme-text, #1e293b); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--theme-primary, #4f46e5);">World Clock & Global Time Zone Meeting Planner</h2>
+            <p style="line-height: 1.7; color: var(--theme-text-secondary, #475569); margin-bottom: 1.25rem;">
+                Coordinating international conference calls, remote team standups, global product launches, and travel itineraries across disparate time zones can be challenging. Our interactive world clock and time zone converter allows you to compare live local times simultaneously across 20+ major global commercial hubs including New York (EST), London (GMT/BST), Tokyo (JST), Mumbai (IST), Sydney (AEST), Dubai (GST), and Berlin (CET).
+            </p>
+
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem;">How to Schedule Meetings Across Time Zones:</h3>
+            <ol style="line-height: 1.8; color: var(--theme-text-secondary, #475569); padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                <li><strong>Auto-Detected Local Time:</strong> The top card automatically detects your computer's local time zone and date via native browser APIs.</li>
+                <li><strong>Add Cities & Zones:</strong> Select international cities from the dropdown menu (e.g. London, Tokyo, Singapore, Los Angeles) and click <strong>"Add Timezone"</strong> to stack them in your comparison board.</li>
+                <li><strong>Interactive Future Time Scrubbing:</strong> Choose a specific date and hour using the reference time picker. All international clocks instantly recalculate to show corresponding local working hours.</li>
+                <li><strong>Identify Overlapping Work Hours:</strong> Effortlessly pinpoint mutually convenient meeting windows without confusion over Daylight Saving Time (DST) shifts.</li>
+            </ol>
+
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem;">Daylight Saving Time (DST) Accuracy</h3>
+            <p style="line-height: 1.7; color: var(--theme-text-secondary, #475569); margin-bottom: 1.5rem;">
+                Our time engine utilizes the official IANA Time Zone Database embedded in modern browser standards. This guarantees that seasonal 1-hour Daylight Saving Time adjustments for North America, the European Union, Australia, and New Zealand are automatically factored into calculations with 100% precision.
+            </p>
+
+            <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1rem;">Frequently Asked Questions (FAQ)</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="border-bottom: 1px solid var(--theme-border, #e2e8f0); padding-bottom: 0.75rem;">
+                    <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">How does the tool handle cities with half-hour or 45-minute offsets?</h4>
+                    <p style="font-size: 0.88rem; color: var(--theme-text-secondary, #475569); margin: 0; line-height: 1.6;">Regions with fractional UTC offsets (such as India Standard Time at UTC+5:30, Iran at UTC+3:30, or Nepal at UTC+5:45) are computed to the exact minute using standard ECMAScript Intl DateTimeFormat specifications.</p>
+                </div>
+                <div style="border-bottom: 1px solid var(--theme-border, #e2e8f0); padding-bottom: 0.75rem;">
+                    <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Can I delete cities from my comparison list?</h4>
+                    <p style="font-size: 0.88rem; color: var(--theme-text-secondary, #475569); margin: 0; line-height: 1.6;">Yes. Each timezone card has a removal icon (✕) in the top-right corner, allowing you to customize your workspace to only the regions you actively collaborate with.</p>
+                </div>
+                <div>
+                    <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Are my selected cities saved for future visits?</h4>
+                    <p style="font-size: 0.88rem; color: var(--theme-text-secondary, #475569); margin: 0; line-height: 1.6;">Yes. Your selected preferences and city clocks are remembered locally on your device so your custom dashboard is immediately available upon return.</p>
+                </div>
+            </div>
+        </section>
+    
     </main>
 
     <footer class="footer">
