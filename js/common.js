@@ -2132,4 +2132,91 @@
       }, 600);
     }
   });
+
+  /* ─────────────────────────────────────────────────────────
+     GDPR / CCPA / GOOGLE ADSENSE COMPLIANT COOKIE CONSENT
+  ───────────────────────────────────────────────────────── */
+  const COOKIE_CONSENT_KEY = 'at_cookie_consent_status';
+
+  function initCookieConsentBanner() {
+    try {
+      if (localStorage.getItem(COOKIE_CONSENT_KEY)) return;
+    } catch (_) {}
+
+    // Only render on top window
+    if (window.self !== window.top) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'atCookieConsentBanner';
+    banner.style.cssText = `
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2.5rem);
+      max-width: 680px;
+      background: rgba(15, 23, 42, 0.95);
+      color: #F8FAFC;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      animation: atCookieFadeUp 0.35s ease forwards;
+    `;
+
+    banner.innerHTML = `
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:0.75rem;">
+        <div>
+          <div style="font-weight:700; font-size:0.92rem; color:#fff; display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
+            🍪 Privacy & Cookie Policy (GDPR / CCPA)
+          </div>
+          <div style="color:#CBD5E1; font-size:0.82rem;">
+            We use cookies to analyze traffic, personalize content, and serve relevant Google AdSense ads. Your converted files and document processing remain 100% private and client-side on your device. Learn more in our <a href="/privacy-policy.html" style="color:#818CF8; text-decoration:underline;" target="_blank" rel="noopener">Privacy Policy</a>.
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.6rem; flex-wrap:wrap;">
+        <button id="atCookieDecline" style="background:transparent; border:1px solid #475569; color:#CBD5E1; padding:0.45rem 1rem; border-radius:6px; font-size:0.8rem; font-weight:600; cursor:pointer; transition:all 0.2s;">Essential Only</button>
+        <button id="atCookieAccept" style="background:#6366F1; border:none; color:#FFFFFF; padding:0.45rem 1.25rem; border-radius:6px; font-size:0.8rem; font-weight:700; cursor:pointer; box-shadow:0 2px 8px rgba(99,102,241,0.35); transition:all 0.2s;">Accept All Cookies</button>
+      </div>
+      <style>
+        @keyframes atCookieFadeUp {
+          from { opacity: 0; transform: translate(-50%, 20px); }
+          to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        #atCookieAccept:hover { background: #4F46E5; }
+        #atCookieDecline:hover { background: rgba(255,255,255,0.08); color:#fff; }
+      </style>
+    `;
+
+    document.body.appendChild(banner);
+
+    const closeBanner = (status) => {
+      try {
+        localStorage.setItem(COOKIE_CONSENT_KEY, status);
+      } catch (_) {}
+      banner.style.opacity = '0';
+      banner.style.transform = 'translate(-50%, 15px)';
+      banner.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      setTimeout(() => banner.remove(), 260);
+    };
+
+    document.getElementById('atCookieAccept')?.addEventListener('click', () => closeBanner('accepted'));
+    document.getElementById('atCookieDecline')?.addEventListener('click', () => closeBanner('declined'));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieConsentBanner);
+  } else {
+    initCookieConsentBanner();
+  }
 })();
