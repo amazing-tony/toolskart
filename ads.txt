@@ -1,0 +1,14 @@
+# ============================================================
+# ads.txt — Authorized Digital Sellers
+# https://amazing-tools.github.io/ads.txt
+# ============================================================
+#
+# IMPORTANT: Replace "pub-REPLACE_WITH_YOUR_ID" below with
+# your real Google AdSense Publisher ID.
+#
+# Find it at: https://adsense.google.com/start/
+# It looks like: pub-1234567890123456
+#
+# ============================================================
+
+google.com, pub-REPLACE_WITH_YOUR_ID, DIRECT, f08c47fec0942fa0

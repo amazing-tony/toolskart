@@ -1,11 +1,14 @@
-﻿# Amazing-Tools Robots.txt
+# Amazing-Tools Robots.txt
 # https://amazing-tools.github.io/
 
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://amazing-tools.github.io/sitemap.xml
-
 # Disallow admin/system files
 Disallow: /*.json$
+
+# Disallow internal development files
+Disallow: /scratch/
+
+# Sitemap
+Sitemap: https://amazing-tools.github.io/sitemap.xml
