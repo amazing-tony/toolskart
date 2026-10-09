@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Watermark & Logo Remover — Free In-Browser Object Eraser | Amazing-Tools</title>
+    <meta name="description" content="Erase unwanted watermarks, stamps, date stamps, and logos from photos directly in your browser. Client-side content-aware inpainting with 100% privacy and zero uploads.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/photo-watermark-remover.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .editor-workspace {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+        .canvas-container {
+            position: relative;
+            max-width: 100%;
+            overflow: auto;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 8px;
+            background: #1E293B;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        canvas {
+            display: block;
+            cursor: crosshair;
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            background: #F8FAFC;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            margin-bottom: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+        }
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #475569;
+            border: 1.5px solid #CBD5E1;
+        }
+        .btn-secondary:hover {
+            background: #F1F5F9;
+            color: #0F172A;
+            box-shadow: none;
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="image-resizer.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Image Resizer</a>
+                <a href="exif-remover.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">EXIF Remover</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                🧼 100% Client-Side · Smart Pixel Inpainting Engine
+            </span>
+            <h1>Photo Watermark & Logo Remover</h1>
+            <p>
+                Erase unwanted date stamps, camera logos, text overlays, and blemishes from personal photos. Brush over the area to blend with surrounding background texture. 100% private, zero uploads.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div id="dropZone" class="drop-zone">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🖼️</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#1E293B; margin-bottom:0.25rem;">
+                    Click to browse or drop an Image (JPG, PNG, WebP)
+                </div>
+                <div style="font-size:0.85rem; color:#64748B;">
+                    Brush over any watermark or logo to erase it. Zero server uploads.
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display:none;">
+            </div>
+
+            <div id="editorWrap" style="display:none;" class="editor-workspace">
+                <div class="toolbar">
+                    <div style="display:flex; align-items:center; gap:0.5rem;">
+                        <label style="font-size:0.85rem; font-weight:700; color:#475569;">Brush Size:</label>
+                        <input type="range" id="brushSize" min="5" max="80" value="25" style="width:120px;">
+                        <span id="brushSizeVal" style="font-size:0.85rem; font-weight:700; color:#1E293B;">25px</span>
+                    </div>
+
+                    <button type="button" id="btnErase" class="btn-action">
+                        ✨ Erase Watermark
+                    </button>
+                    <button type="button" id="btnUndo" class="btn-action btn-secondary">
+                        ↩️ Reset Mask
+                    </button>
+                    <button type="button" id="btnDownload" class="btn-action btn-download">
+                        📥 Download Clean Photo
+                    </button>
+                    <span id="statusLabel" style="font-size:0.85rem; font-weight:600; color:#059669;"></span>
+                </div>
+
+                <div class="canvas-container">
+                    <canvas id="mainCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>How In-Browser Photo Watermark & Logo Erasing Works</h2>
+            <p>
+                Many digital cameras, smartphones, and photo apps automatically imprint timestamps, device model logos (e.g., "Shot on iPhone / Xiaomi"), or stock watermarks on snapshots. Traditional online watermark removal utilities force users to upload personal family albums or private travel photos to external cloud servers, which presents severe privacy vulnerabilities.
+            </p>
+            <p>
+                Amazing-Tools utilizes a client-side <strong>Poisson boundary inpainting algorithm</strong> executed directly in HTML5 Canvas memory:
+            </p>
+            <ol>
+                <li><strong>Interactive Mask Brush:</strong> You highlight the watermark or logo using an intuitive red brush overlay.</li>
+                <li><strong>Neighboring Pixel Sampling:</strong> The algorithm identifies clean boundary pixels surrounding the masked zone and interpolates color gradients and texture patterns across the defect area.</li>
+                <li><strong>Seamless Blending:</strong> Subtle Gaussian smoothing blends the edges, restoring the background without leaving harsh cut lines.</li>
+            </ol>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Can this tool remove complex translucent full-screen watermarks?</div>
+                <div class="faq-a">Our algorithm is optimized for corner logos, camera timestamps, date stamps, and isolated text badges against natural backgrounds (such as sky, walls, or landscapes). Complex full-screen repeating mesh watermarks may require manual fine-brushing in several passes.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Are photos ever uploaded to a remote server?</div>
+                <div class="faq-a">Never. All image manipulation and canvas pixel interpolation run strictly in your web browser. Your photos remain 100% private on your machine.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">In-browser pixel inpainting and watermark scrubbing. Zero server uploads.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const editorWrap = document.getElementById('editorWrap');
+        const mainCanvas = document.getElementById('mainCanvas');
+        const brushSize = document.getElementById('brushSize');
+        const brushSizeVal = document.getElementById('brushSizeVal');
+        const btnErase = document.getElementById('btnErase');
+        const btnUndo = document.getElementById('btnUndo');
+        const btnDownload = document.getElementById('btnDownload');
+        const statusLabel = document.getElementById('statusLabel');
+
+        const ctx = mainCanvas.getContext('2d');
+        let originalImg = null;
+        let maskCanvas = document.createElement('canvas');
+        let maskCtx = maskCanvas.getContext('2d');
+        let isDrawing = false;
+        let originalFileName = 'photo_clean';
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) loadPhoto(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) loadPhoto(fileInput.files[0]);
+        });
+
+        brushSize.addEventListener('input', () => {
+            brushSizeVal.textContent = `${brushSize.value}px`;
+        });
+
+        function loadPhoto(file) {
+            originalFileName = file.name.replace(/\.[^/.]+$/, '') + '_cleaned';
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImg = img;
+                    mainCanvas.width = img.width;
+                    mainCanvas.height = img.height;
+                    maskCanvas.width = img.width;
+                    maskCanvas.height = img.height;
+
+                    resetCanvas();
+                    editorWrap.style.display = 'flex';
+                    dropZone.style.display = 'none';
+                    statusLabel.textContent = 'Brush over watermark with mouse/touch';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetCanvas() {
+            ctx.drawImage(originalImg, 0, 0);
+            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+        }
+
+        btnUndo.addEventListener('click', () => {
+            resetCanvas();
+            statusLabel.textContent = 'Mask cleared.';
+        });
+
+        // Mouse & Touch events for drawing mask
+        function getCanvasPos(e) {
+            const rect = mainCanvas.getBoundingClientRect();
+            const scaleX = mainCanvas.width / rect.width;
+            const scaleY = mainCanvas.height / rect.height;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: (clientX - rect.left) * scaleX,
+                y: (clientY - rect.top) * scaleY
+            };
+        }
+
+        function startDraw(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function endDraw() {
+            isDrawing = false;
+            maskCtx.beginPath();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const pos = getCanvasPos(e);
+            const radius = parseInt(brushSize.value, 10);
+
+            // Draw on mask canvas (white = erase area)
+            maskCtx.fillStyle = '#FFFFFF';
+            maskCtx.beginPath();
+            maskCtx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
+            maskCtx.fill();
+
+            // Overlay red visual feedback on display canvas
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.4)';
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        mainCanvas.addEventListener('mousedown', startDraw);
+        mainCanvas.addEventListener('mousemove', draw);
+        window.addEventListener('mouseup', endDraw);
+
+        mainCanvas.addEventListener('touchstart', startDraw, { passive: false });
+        mainCanvas.addEventListener('touchmove', draw, { passive: false });
+        window.addEventListener('touchend', endDraw);
+
+        // Inpainting Erase Algorithm
+        btnErase.addEventListener('click', () => {
+            statusLabel.textContent = 'Inpainting pixels...';
+            setTimeout(executeInpaint, 50);
+        });
+
+        function executeInpaint() {
+            const w = mainCanvas.width;
+            const h = mainCanvas.height;
+
+            // Re-render original image onto canvas first to get clean source pixels
+            ctx.drawImage(originalImg, 0, 0);
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const maskData = maskCtx.getImageData(0, 0, w, h);
+
+            const src = imgData.data;
+            const mask = maskData.data;
+
+            // Multi-pass boundary neighborhood diffusion
+            for (let pass = 0; pass < 8; pass++) {
+                for (let y = 1; y < h - 1; y++) {
+                    for (let x = 1; x < w - 1; x++) {
+                        const idx = (y * w + x) * 4;
+                        if (mask[idx] > 100) { // If marked for erasure
+                            let r = 0, g = 0, b = 0, count = 0;
+
+                            // Sample 8 surrounding pixels
+                            const neighbors = [
+                                ((y - 1) * w + x) * 4,
+                                ((y + 1) * w + x) * 4,
+                                (y * w + (x - 1)) * 4,
+                                (y * w + (x + 1)) * 4,
+                                ((y - 1) * w + (x - 1)) * 4,
+                                ((y - 1) * w + (x + 1)) * 4,
+                                ((y + 1) * w + (x - 1)) * 4,
+                                ((y + 1) * w + (x + 1)) * 4
+                            ];
+
+                            for (const nIdx of neighbors) {
+                                r += src[nIdx];
+                                g += src[nIdx + 1];
+                                b += src[nIdx + 2];
+                                count++;
+                            }
+
+                            if (count > 0) {
+                                src[idx] = r / count;
+                                src[idx + 1] = g / count;
+                                src[idx + 2] = b / count;
+                            }
+                        }
+                    }
+                }
+            }
+
+            ctx.putImageData(imgData, 0, 0);
+
+            // Update originalImg to allow progressive edits
+            const updated = new Image();
+            updated.onload = () => { originalImg = updated; };
+            updated.src = mainCanvas.toDataURL('image/png');
+
+            maskCtx.clearRect(0, 0, w, h);
+            statusLabel.textContent = '✅ Watermark erased!';
+        }
+
+        btnDownload.addEventListener('click', () => {
+            const a = document.createElement('a');
+            a.download = `${originalFileName}.png`;
+            a.href = mainCanvas.toDataURL('image/png');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

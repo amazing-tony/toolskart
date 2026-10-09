@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Watermark & Logo Overlay Studio — Add Logos & Captions to Video | Amazing-Tools</title>
+    <meta name="description" content="Add brand logos, watermarks, and designer text overlays onto video clips directly in your browser. Record and download composite video with zero server uploads.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/video-watermark-editor.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 640px) { .drop-grid { grid-template-columns: 1fr; } }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2rem 1rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            background: #F8FAFC;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+            margin-bottom: 1.5rem;
+        }
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.4rem;
+        }
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 0.5rem 0.65rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .video-stage {
+            background: #0F172A;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            background: #000;
+        }
+        .playback-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.65rem 1.5rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+        }
+        .btn-record {
+            background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="screen-recorder.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Screen Recorder</a>
+                <a href="watermark-inserter.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Photo Watermarker</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1150px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                🎬 100% In-Browser · Real-Time Canvas Video Compositor
+            </span>
+            <h1>Video Watermark & Logo Overlay Studio</h1>
+            <p>
+                Add channel logos, corner badges, copyright stamps, and designer text captions onto videos directly in your browser. Record and export the branded video without uploading gigabytes to cloud servers.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div class="drop-grid">
+                <div id="dropVideo" class="drop-zone">
+                    <div style="font-size:2rem; margin-bottom:0.3rem;">📹</div>
+                    <div style="font-weight:700; font-size:1rem; color:#1E293B;">1. Select Base Video</div>
+                    <div id="labelVideo" style="font-size:0.8rem; color:#64748B;">Drop video file (MP4, WebM, MOV)</div>
+                    <input type="file" id="inputVideo" accept="video/*" style="display:none;">
+                </div>
+                <div id="dropLogo" class="drop-zone">
+                    <div style="font-size:2rem; margin-bottom:0.3rem;">🛡️</div>
+                    <div style="font-weight:700; font-size:1rem; color:#1E293B;">2. Select Logo / Icon (Optional)</div>
+                    <div id="labelLogo" style="font-size:0.8rem; color:#64748B;">Drop PNG logo or leave empty for text only</div>
+                    <input type="file" id="inputLogo" accept="image/*" style="display:none;">
+                </div>
+            </div>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label for="captionText">Overlay Text / Caption</label>
+                    <input type="text" id="captionText" placeholder="e.g., @MyChannel • Official">
+                </div>
+                <div class="control-group">
+                    <label for="logoPos">Logo Placement</label>
+                    <select id="logoPos">
+                        <option value="top-right" selected>Top-Right Corner</option>
+                        <option value="bottom-right">Bottom-Right Corner</option>
+                        <option value="top-left">Top-Left Corner</option>
+                        <option value="bottom-left">Bottom-Left Corner</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="logoScale">Logo Size</label>
+                    <input type="range" id="logoScale" min="8" max="40" value="18">
+                </div>
+                <div class="control-group">
+                    <label for="watermarkOpacity">Watermark Opacity</label>
+                    <input type="range" id="watermarkOpacity" min="20" max="100" value="85">
+                </div>
+            </div>
+
+            <div class="video-stage">
+                <video id="hiddenVideo" playsinline loop style="display:none;"></video>
+                <canvas id="compCanvas"></canvas>
+            </div>
+
+            <div class="playback-bar">
+                <button type="button" id="btnPlayPause" class="btn-action">
+                    ▶️ Play / Preview
+                </button>
+                <button type="button" id="btnRecordExport" class="btn-action btn-record">
+                    ⏺️ Record & Auto-Save Branded Video
+                </button>
+                <button type="button" id="btnDownload" class="btn-action btn-download" style="display:none;">
+                    📥 Download Branded Video (.webm)
+                </button>
+                <span id="recordStatus" style="font-size:0.85rem; font-weight:700; color:#DC2626; display:none;"></span>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Brand Your Videos In-Browser?</h2>
+            <p>
+                Video content published on TikTok, YouTube Shorts, Instagram Reels, and LinkedIn is frequently copied and reposted without attribution. Placing an identifiable channel watermark, creator handle, or corporate logo protects your copyright and drives traffic back to your brand.
+            </p>
+            <p>
+                Conventional video editing programs (like Premiere or DaVinci) are complicated to learn, and cloud video SaaS platforms charge costly monthly subscriptions while uploading your multi-gigabyte video files to their servers. Amazing-Tools processes your video entirely within the local <code>HTML5 Canvas</code> and <code>MediaRecorder</code> APIs for instantaneous client-side results and 100% privacy.
+            </p>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">How does the export process work?</div>
+                <div class="faq-a">When you click "Record & Auto-Save", the browser plays the video from the beginning and captures the composited canvas frames into a high-quality WebM video using hardware-accelerated MediaRecorder encoding.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Are videos ever uploaded to a server?</div>
+                <div class="faq-a">Never. All video decoding, logo compositing, and stream encoding happen strictly inside your browser memory.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">In-browser video compositing and hardware-accelerated MediaRecorder. Zero server uploads.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropVideo = document.getElementById('dropVideo');
+        const inputVideo = document.getElementById('inputVideo');
+        const labelVideo = document.getElementById('labelVideo');
+        const dropLogo = document.getElementById('dropLogo');
+        const inputLogo = document.getElementById('inputLogo');
+        const labelLogo = document.getElementById('labelLogo');
+        const captionText = document.getElementById('captionText');
+        const logoPos = document.getElementById('logoPos');
+        const logoScale = document.getElementById('logoScale');
+        const watermarkOpacity = document.getElementById('watermarkOpacity');
+        const video = document.getElementById('hiddenVideo');
+        const canvas = document.getElementById('compCanvas');
+        const ctx = canvas.getContext('2d');
+        const btnPlayPause = document.getElementById('btnPlayPause');
+        const btnRecordExport = document.getElementById('btnRecordExport');
+        const btnDownload = document.getElementById('btnDownload');
+        const recordStatus = document.getElementById('recordStatus');
+
+        let logoImg = null;
+        let isPlaying = false;
+        let animFrameId = null;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let recordedBlob = null;
+        let videoFileName = 'branded_video';
+
+        dropVideo.addEventListener('click', () => inputVideo.click());
+        dropLogo.addEventListener('click', () => inputLogo.click());
+
+        inputVideo.addEventListener('change', () => {
+            if (inputVideo.files.length > 0) {
+                const file = inputVideo.files[0];
+                videoFileName = file.name.replace(/\.[^/.]+$/, '');
+                labelVideo.textContent = file.name;
+                video.src = URL.createObjectURL(file);
+                video.onloadedmetadata = () => {
+                    canvas.width = video.videoWidth || 640;
+                    canvas.height = video.videoHeight || 360;
+                    drawFrame();
+                };
+            }
+        });
+
+        inputLogo.addEventListener('change', () => {
+            if (inputLogo.files.length > 0) {
+                const file = inputLogo.files[0];
+                labelLogo.textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => { logoImg = img; drawFrame(); };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        [captionText, logoPos, logoScale, watermarkOpacity].forEach(el => {
+            el.addEventListener('input', drawFrame);
+        });
+
+        function drawFrame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (video.readyState >= 2) {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.fillStyle = '#0F172A';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#94A3B8';
+                ctx.font = '16px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Select video file to preview watermark overlays', canvas.width / 2, canvas.height / 2);
+            }
+
+            const opacity = parseInt(watermarkOpacity.value, 10) / 100;
+
+            // Draw Logo
+            if (logoImg) {
+                ctx.save();
+                ctx.globalAlpha = opacity;
+                const targetW = canvas.width * (parseInt(logoScale.value, 10) / 100);
+                const targetH = targetW * (logoImg.height / logoImg.width);
+                const margin = 24;
+                let lx = margin, ly = margin;
+
+                if (logoPos.value === 'top-right') {
+                    lx = canvas.width - targetW - margin;
+                    ly = margin;
+                } else if (logoPos.value === 'bottom-right') {
+                    lx = canvas.width - targetW - margin;
+                    ly = canvas.height - targetH - margin;
+                } else if (logoPos.value === 'bottom-left') {
+                    lx = margin;
+                    ly = canvas.height - targetH - margin;
+                }
+
+                ctx.drawImage(logoImg, lx, ly, targetW, targetH);
+                ctx.restore();
+            }
+
+            // Draw Caption Text
+            const text = captionText.value.trim();
+            if (text) {
+                ctx.save();
+                ctx.globalAlpha = opacity;
+                const fSize = Math.max(16, Math.floor(canvas.height * 0.05));
+                ctx.font = `bold ${fSize}px 'Montserrat', sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                
+                // Shadow
+                ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillText(text, canvas.width / 2, canvas.height - 24);
+                ctx.restore();
+            }
+        }
+
+        function loopRender() {
+            if (isPlaying) {
+                drawFrame();
+                animFrameId = requestAnimationFrame(loopRender);
+            }
+        }
+
+        btnPlayPause.addEventListener('click', () => {
+            if (!video.src) {
+                alert('Please select a video file first.');
+                return;
+            }
+            if (isPlaying) {
+                video.pause();
+                isPlaying = false;
+                cancelAnimationFrame(animFrameId);
+                btnPlayPause.textContent = '▶️ Play / Preview';
+            } else {
+                video.play();
+                isPlaying = true;
+                loopRender();
+                btnPlayPause.textContent = '⏸️ Pause';
+            }
+        });
+
+        // Record & Export via MediaRecorder
+        btnRecordExport.addEventListener('click', () => {
+            if (!video.src) {
+                alert('Please select a video file first.');
+                return;
+            }
+
+            recordedChunks = [];
+            const stream = canvas.captureStream(30);
+
+            // Audio capture if present
+            try {
+                if (video.captureStream) {
+                    const vStream = video.captureStream();
+                    const audioTracks = vStream.getAudioTracks();
+                    if (audioTracks.length > 0) stream.addTrack(audioTracks[0]);
+                }
+            } catch(e) {}
+
+            mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp8' });
+
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) recordedChunks.push(e.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+                recordStatus.textContent = '✅ Rendering complete! Auto-saving...';
+                
+                // Trigger auto download
+                const url = URL.createObjectURL(recordedBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${videoFileName}_watermarked.webm`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                btnDownload.style.display = 'inline-flex';
+                btnRecordExport.textContent = '⏺️ Record & Auto-Save Branded Video';
+            };
+
+            // Start from beginning
+            video.currentTime = 0;
+            video.loop = false;
+            video.play();
+            isPlaying = true;
+            loopRender();
+
+            mediaRecorder.start();
+            recordStatus.style.display = 'inline-block';
+            recordStatus.textContent = '🔴 Recording in progress... Please let video play through.';
+            btnRecordExport.textContent = '⏹️ Stop Recording Early';
+
+            video.onended = () => {
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                    video.loop = true;
+                }
+            };
+        });
+
+        btnDownload.addEventListener('click', () => {
+            if (!recordedBlob) return;
+            const url = URL.createObjectURL(recordedBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${videoFileName}_watermarked.webm`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        drawFrame();
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

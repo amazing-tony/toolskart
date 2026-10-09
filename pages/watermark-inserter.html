@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Watermark & Logo Inserter — Add Brand Stamps & Badges | Amazing-Tools</title>
+    <meta name="description" content="Add company logos, transparent icon watermarks, copyright badges, and brand stamps onto personal photos. 100% private, client-side positioning and scaling.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/watermark-inserter.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 640px) { .drop-grid { grid-template-columns: 1fr; } }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2rem 1rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            background: #F8FAFC;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+            margin-bottom: 1.5rem;
+        }
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.4rem;
+        }
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 0.5rem 0.65rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .preview-box {
+            text-align: center;
+            background: #0F172A;
+            padding: 1rem;
+            border-radius: 10px;
+            max-width: 100%;
+            overflow: auto;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(16,185,129,0.3);
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="photo-watermark-remover.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Watermark Remover</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                🛡️ Brand Protection · In-Browser Photo Stamp & Watermarker
+            </span>
+            <h1>Photo Watermark & Logo Inserter</h1>
+            <p>
+                Protect your creative photography, real estate listings, and business imagery against copyright theft. Place custom logo watermarks with adjustable opacity, size, and positioning. 100% private.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div class="drop-grid">
+                <div id="dropBase" class="drop-zone">
+                    <div style="font-size:2rem; margin-bottom:0.3rem;">🖼️</div>
+                    <div style="font-weight:700; font-size:1rem; color:#1E293B;">1. Select Base Photo</div>
+                    <div id="labelBase" style="font-size:0.8rem; color:#64748B;">Drop photo (JPG, PNG, WebP)</div>
+                    <input type="file" id="inputBase" accept="image/*" style="display:none;">
+                </div>
+                <div id="dropLogo" class="drop-zone">
+                    <div style="font-size:2rem; margin-bottom:0.3rem;">🛡️</div>
+                    <div style="font-weight:700; font-size:1rem; color:#1E293B;">2. Select Logo / Icon</div>
+                    <div id="labelLogo" style="font-size:0.8rem; color:#64748B;">Drop transparent PNG logo</div>
+                    <input type="file" id="inputLogo" accept="image/*" style="display:none;">
+                </div>
+            </div>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label for="positionSelect">Position / Placement</label>
+                    <select id="positionSelect">
+                        <option value="bottom-right" selected>Bottom-Right Corner</option>
+                        <option value="bottom-left">Bottom-Left Corner</option>
+                        <option value="top-right">Top-Right Corner</option>
+                        <option value="top-left">Top-Left Corner</option>
+                        <option value="center">Center Stamp</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="sizeRange">Logo Scale (% of image width)</label>
+                    <input type="range" id="sizeRange" min="5" max="60" value="18">
+                </div>
+
+                <div class="control-group">
+                    <label for="opacityRange">Opacity / Transparency</label>
+                    <input type="range" id="opacityRange" min="10" max="100" value="75">
+                </div>
+
+                <div class="control-group">
+                    <label for="marginRange">Edge Margin Padding (px)</label>
+                    <input type="range" id="marginRange" min="5" max="80" value="30">
+                </div>
+            </div>
+
+            <div class="preview-box">
+                <canvas id="canvasPreview"></canvas>
+            </div>
+
+            <div style="margin-top:1.5rem; text-align:center;">
+                <button type="button" id="btnDownload" class="btn-action">
+                    📥 Download Watermarked Photo
+                </button>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Adding Brand Watermarks and Logos Matters</h2>
+            <p>
+                Visual content theft is rampant across social platforms, e-commerce stores, and stock image repositories. Photographers, small business owners, and real estate agencies routinely find their original imagery republished without permission or attribution. Stamping a transparent brand logo or copyright badge across your imagery deters unauthorized scraping and reinforces brand recognition.
+            </p>
+
+            <h2>Zero-Upload Browser Security</h2>
+            <p>
+                Cloud-based watermarking platforms often retain rights or log metadata from your high-resolution portfolios. Amazing-Tools renders your watermarks directly onto your photos using HTML5 Canvas alpha compositing in your local browser memory. No data is ever transmitted across the network.
+            </p>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Can I use transparent PNG logos?</div>
+                <div class="faq-a">Yes! Transparent PNG and SVG logos are fully supported and will seamlessly overlay with pristine alpha transparency over your base photos.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Does watermarking reduce the base photo's original resolution?</div>
+                <div class="faq-a">No. The canvas renders precisely to your original photo's full pixel width and height, ensuring zero resolution loss.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">In-browser canvas compositing and logo insertion. Zero server uploads.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropBase = document.getElementById('dropBase');
+        const inputBase = document.getElementById('inputBase');
+        const labelBase = document.getElementById('labelBase');
+        const dropLogo = document.getElementById('dropLogo');
+        const inputLogo = document.getElementById('inputLogo');
+        const labelLogo = document.getElementById('labelLogo');
+        const positionSelect = document.getElementById('positionSelect');
+        const sizeRange = document.getElementById('sizeRange');
+        const opacityRange = document.getElementById('opacityRange');
+        const marginRange = document.getElementById('marginRange');
+        const canvas = document.getElementById('canvasPreview');
+        const ctx = canvas.getContext('2d');
+        const btnDownload = document.getElementById('btnDownload');
+
+        let baseImg = null;
+        let logoImg = null;
+        let baseFileName = 'watermarked_photo';
+
+        dropBase.addEventListener('click', () => inputBase.click());
+        dropLogo.addEventListener('click', () => inputLogo.click());
+
+        inputBase.addEventListener('change', () => {
+            if (inputBase.files.length > 0) {
+                const file = inputBase.files[0];
+                baseFileName = file.name.replace(/\.[^/.]+$/, '');
+                labelBase.textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => { baseImg = img; render(); };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        inputLogo.addEventListener('change', () => {
+            if (inputLogo.files.length > 0) {
+                const file = inputLogo.files[0];
+                labelLogo.textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => { logoImg = img; render(); };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        [positionSelect, sizeRange, opacityRange, marginRange].forEach(el => {
+            el.addEventListener('input', render);
+        });
+
+        function render() {
+            if (!baseImg) {
+                canvas.width = 600;
+                canvas.height = 350;
+                ctx.fillStyle = '#1E293B';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#94A3B8';
+                ctx.font = '16px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Upload a base photo and logo to preview', canvas.width / 2, canvas.height / 2);
+                return;
+            }
+
+            canvas.width = baseImg.width;
+            canvas.height = baseImg.height;
+
+            // Draw base photo
+            ctx.drawImage(baseImg, 0, 0);
+
+            if (logoImg) {
+                const scalePct = parseInt(sizeRange.value, 10) / 100;
+                const targetLogoWidth = canvas.width * scalePct;
+                const logoAspect = logoImg.height / logoImg.width;
+                const targetLogoHeight = targetLogoWidth * logoAspect;
+                const margin = parseInt(marginRange.value, 10);
+                const opacity = parseInt(opacityRange.value, 10) / 100;
+
+                let x = margin;
+                let y = margin;
+                const pos = positionSelect.value;
+
+                if (pos === 'bottom-right') {
+                    x = canvas.width - targetLogoWidth - margin;
+                    y = canvas.height - targetLogoHeight - margin;
+                } else if (pos === 'bottom-left') {
+                    x = margin;
+                    y = canvas.height - targetLogoHeight - margin;
+                } else if (pos === 'top-right') {
+                    x = canvas.width - targetLogoWidth - margin;
+                    y = margin;
+                } else if (pos === 'center') {
+                    x = (canvas.width - targetLogoWidth) / 2;
+                    y = (canvas.height - targetLogoHeight) / 2;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = opacity;
+                ctx.drawImage(logoImg, x, y, targetLogoWidth, targetLogoHeight);
+                ctx.restore();
+            }
+        }
+
+        btnDownload.addEventListener('click', () => {
+            if (!baseImg) {
+                alert('Please upload a base photo first.');
+                return;
+            }
+            const a = document.createElement('a');
+            a.download = `${baseFileName}_watermarked.png`;
+            a.href = canvas.toDataURL('image/png');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        // Initialize empty preview
+        render();
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

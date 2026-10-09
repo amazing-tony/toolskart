@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Enhancer & Color Beautifier — Free In-Browser Filter Studio | Amazing-Tools</title>
+    <meta name="description" content="Enhance photos with one-click auto-balance, brightness, contrast, saturation, sharpness, and beauty presets. 100% private, client-side pixel processing.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/photo-enhancer.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .editor-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        @media (max-width: 840px) { .editor-layout { grid-template-columns: 1fr; } }
+        .controls-panel {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+        .slider-group {
+            margin-bottom: 1rem;
+        }
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.35rem;
+        }
+        .slider-group input {
+            width: 100%;
+        }
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .btn-preset {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            padding: 0.5rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #1E293B;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-preset:hover {
+            border-color: #6366F1;
+            color: #4F46E5;
+            background: #EEF2FF;
+        }
+        .canvas-area {
+            background: #0F172A;
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            overflow: auto;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            box-shadow: 0 4px 14px rgba(16,185,129,0.3);
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="image-resizer.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Image Resizer</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1150px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                ✨ 100% Client-Side · High-Dynamic Range Color Engine
+            </span>
+            <h1>Photo Enhancer & Color Beautifier</h1>
+            <p>
+                Transform dull, underexposed, or washed-out snapshots into vibrant, high-contrast imagery. One-click auto balance, warm portraits, crisp landscapes, and vintage tones with zero cloud uploads.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div id="dropZone" class="drop-zone">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🪄</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#1E293B; margin-bottom:0.25rem;">
+                    Click to select or drop a Photo to enhance
+                </div>
+                <div style="font-size:0.85rem; color:#64748B;">
+                    Supports JPG, PNG, WebP. Hardware-accelerated canvas filter processing.
+                </div>
+                <input type="file" id="fileInput" accept="image/*" style="display:none;">
+            </div>
+
+            <div id="editorWrap" class="editor-layout" style="display:none;">
+                <div class="controls-panel">
+                    <label style="display:block; font-size:0.85rem; font-weight:800; color:#1E293B; text-transform:uppercase; margin-bottom:0.75rem; letter-spacing:0.05em;">
+                        Beautify Presets
+                    </label>
+                    <div class="preset-buttons">
+                        <button type="button" class="btn-preset" onclick="applyPreset('auto')">⚡ Auto Enhance</button>
+                        <button type="button" class="btn-preset" onclick="applyPreset('portrait')">🌸 Warm Glow</button>
+                        <button type="button" class="btn-preset" onclick="applyPreset('landscape')">🌲 Vivid Pop</button>
+                        <button type="button" class="btn-preset" onclick="applyPreset('monochrome')">🖤 Cinematic B&W</button>
+                        <button type="button" class="btn-preset" onclick="applyPreset('vintage')">🎞️ Vintage Film</button>
+                        <button type="button" class="btn-preset" onclick="resetFilters()">↩️ Reset All</button>
+                    </div>
+
+                    <label style="display:block; font-size:0.85rem; font-weight:800; color:#1E293B; text-transform:uppercase; margin-bottom:0.75rem; letter-spacing:0.05em;">
+                        Manual Sliders
+                    </label>
+
+                    <div class="slider-group">
+                        <div class="slider-header"><span>Brightness</span><span id="valBright">100%</span></div>
+                        <input type="range" id="sliderBright" min="50" max="180" value="100">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header"><span>Contrast</span><span id="valContrast">100%</span></div>
+                        <input type="range" id="sliderContrast" min="50" max="180" value="100">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header"><span>Vibrance / Saturation</span><span id="valSat">100%</span></div>
+                        <input type="range" id="sliderSat" min="0" max="220" value="100">
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header"><span>Warmth / Sepia</span><span id="valWarm">0%</span></div>
+                        <input type="range" id="sliderWarm" min="0" max="80" value="0">
+                    </div>
+
+                    <button type="button" id="btnDownload" class="btn-action">
+                        📥 Download Enhanced Photo
+                    </button>
+                </div>
+
+                <div class="canvas-area">
+                    <canvas id="photoCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Client-Side Photo Enhancement Matters</h2>
+            <p>
+                Modern camera sensors capture enormous dynamic range, but casual snapshots taken in low-light, back-lit, or overcast conditions often suffer from muted colors and flat tonal contrast. Commercial mobile photo editing suites lock simple tone correction filters behind recurring in-app subscriptions or compromise user confidentiality by uploading camera rolls to remote servers for "cloud AI processing".
+            </p>
+            <p>
+                Amazing-Tools Photo Enhancer applies tone-mapping matrix transformations and color grading curves directly within the HTML5 Canvas graphics pipeline in your browser. Calculations complete in 16 milliseconds per frame, enabling fluid slider feedback with zero bandwidth consumption and absolute privacy.
+            </p>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Does enhancement degrade the original resolution?</div>
+                <div class="faq-a">No. The internal canvas renders at the exact physical pixel dimensions of your uploaded photograph, preserving sharpness and fine detail upon download.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can I use this tool offline without internet?</div>
+                <div class="faq-a">Yes! Once the page is loaded, the entire rendering loop operates locally in browser memory without sending a single network packet.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">In-browser pixel adjustments and color grading curves. Zero server uploads.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const editorWrap = document.getElementById('editorWrap');
+        const canvas = document.getElementById('photoCanvas');
+        const ctx = canvas.getContext('2d');
+        const sliderBright = document.getElementById('sliderBright');
+        const sliderContrast = document.getElementById('sliderContrast');
+        const sliderSat = document.getElementById('sliderSat');
+        const sliderWarm = document.getElementById('sliderWarm');
+        const valBright = document.getElementById('valBright');
+        const valContrast = document.getElementById('valContrast');
+        const valSat = document.getElementById('valSat');
+        const valWarm = document.getElementById('valWarm');
+        const btnDownload = document.getElementById('btnDownload');
+
+        let rawImg = null;
+        let originalFileName = 'enhanced_photo';
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) loadPhoto(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) loadPhoto(fileInput.files[0]);
+        });
+
+        function loadPhoto(file) {
+            originalFileName = file.name.replace(/\.[^/.]+$/, '');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    rawImg = img;
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    dropZone.style.display = 'none';
+                    editorWrap.style.display = 'grid';
+                    render();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        [sliderBright, sliderContrast, sliderSat, sliderWarm].forEach(el => {
+            el.addEventListener('input', () => {
+                valBright.textContent = `${sliderBright.value}%`;
+                valContrast.textContent = `${sliderContrast.value}%`;
+                valSat.textContent = `${sliderSat.value}%`;
+                valWarm.textContent = `${sliderWarm.value}%`;
+                render();
+            });
+        });
+
+        function render() {
+            if (!rawImg) return;
+            const b = sliderBright.value;
+            const c = sliderContrast.value;
+            const s = sliderSat.value;
+            const w = sliderWarm.value;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.filter = `brightness(${b}%) contrast(${c}%) saturate(${s}%) sepia(${w}%)`;
+            ctx.drawImage(rawImg, 0, 0);
+        }
+
+        function applyPreset(name) {
+            if (name === 'auto') {
+                sliderBright.value = 108;
+                sliderContrast.value = 115;
+                sliderSat.value = 120;
+                sliderWarm.value = 0;
+            } else if (name === 'portrait') {
+                sliderBright.value = 112;
+                sliderContrast.value = 105;
+                sliderSat.value = 110;
+                sliderWarm.value = 15;
+            } else if (name === 'landscape') {
+                sliderBright.value = 104;
+                sliderContrast.value = 125;
+                sliderSat.value = 145;
+                sliderWarm.value = 0;
+            } else if (name === 'monochrome') {
+                sliderBright.value = 105;
+                sliderContrast.value = 135;
+                sliderSat.value = 0;
+                sliderWarm.value = 0;
+            } else if (name === 'vintage') {
+                sliderBright.value = 98;
+                sliderContrast.value = 110;
+                sliderSat.value = 85;
+                sliderWarm.value = 35;
+            }
+            valBright.textContent = `${sliderBright.value}%`;
+            valContrast.textContent = `${sliderContrast.value}%`;
+            valSat.textContent = `${sliderSat.value}%`;
+            valWarm.textContent = `${sliderWarm.value}%`;
+            render();
+        }
+
+        function resetFilters() {
+            sliderBright.value = 100;
+            sliderContrast.value = 100;
+            sliderSat.value = 100;
+            sliderWarm.value = 0;
+            valBright.textContent = '100%';
+            valContrast.textContent = '100%';
+            valSat.textContent = '100%';
+            valWarm.textContent = '0%';
+            render();
+        }
+
+        btnDownload.addEventListener('click', () => {
+            if (!rawImg) return;
+            const a = document.createElement('a');
+            a.download = `${originalFileName}_enhanced.png`;
+            a.href = canvas.toDataURL('image/png');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

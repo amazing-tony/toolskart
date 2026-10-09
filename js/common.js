@@ -1008,6 +1008,12 @@
 
     'pii-redactor': { title: 'PII & Sensitive Data Redactor', category: 'Text Tools', url: 'pages/pii-redactor.html' },
     'exif-remover': { title: 'EXIF & Geolocation Remover', category: 'Image Tools', url: 'pages/exif-remover.html' },
+      'photo-watermark-remover': { title: 'Photo Watermark Remover', category: 'Image Tools', url: 'pages/photo-watermark-remover.html' },
+      'watermark-inserter': { title: 'Photo Logo & Watermark Inserter', category: 'Image Tools', url: 'pages/watermark-inserter.html' },
+      'photo-enhancer': { title: 'Photo Enhancer & Beautifier', category: 'Image Tools', url: 'pages/photo-enhancer.html' },
+      'photo-text-editor': { title: 'Designer Text on Photo', category: 'Image Tools', url: 'pages/photo-text-editor.html' },
+      'video-watermark-editor': { title: 'Video Logo & Watermark Studio', category: 'Media Tools', url: 'pages/video-watermark-editor.html' },
+
       'image-resizer': { title: 'Image Resizer', category: 'Image Tools', url: 'pages/image-resizer.html' },
     'image-compressor': { title: 'Image Compressor', category: 'Image Tools', url: 'pages/image-compressor.html' },
     'color-picker': { title: 'Color Picker & Converter', category: 'Image Tools', url: 'pages/color-picker.html' },
