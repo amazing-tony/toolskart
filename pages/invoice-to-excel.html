@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice PDF to Excel & CSV Converter — Free Client-Side Table Extractor | Amazing-Tools</title>
+    <meta name="description" content="Convert PDF invoices, receipts, and bills into clean Excel and CSV tables directly in your browser. Extract itemized costs with 100% privacy and zero server uploads.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/invoice-to-excel.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- PDF.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        table.data-table th {
+            background: #F1F5F9;
+            color: #1E293B;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            border-bottom: 1.5px solid #CBD5E1;
+        }
+        table.data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #E2E8F0;
+            color: #334155;
+        }
+        table.data-table tr:hover td {
+            background: #F8FAFC;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+        }
+        .btn-export {
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+        }
+        .btn-export:hover {
+            box-shadow: 0 6px 18px rgba(16,185,129,0.35);
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="pdf-tools.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">PDF Studio</a>
+                <a href="invoice-generator.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Invoice Creator</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                📊 100% In-Browser · PDF.js Optical Table Extractor
+            </span>
+            <h1>Invoice PDF to Excel & CSV Converter</h1>
+            <p>
+                Extract itemized line items, bill amounts, tax calculations, and invoice summaries from PDF files directly into Excel and CSV spreadsheets. Completely private, client-side execution with zero cloud storage.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div id="dropZone" class="drop-zone">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">📄</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#1E293B; margin-bottom:0.25rem;">
+                    Click to select or drop an Invoice / Receipt PDF
+                </div>
+                <div style="font-size:0.85rem; color:#64748B;">
+                    Digital invoices, utility bills, freelance contracts, and receipts (.pdf). Zero server uploads.
+                </div>
+                <input type="file" id="fileInput" accept=".pdf,application/pdf" style="display:none;">
+            </div>
+
+            <div id="statusArea" style="display:none; margin-top:1.25rem; padding:0.85rem 1rem; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1; display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-weight:600; color:#1E293B; font-size:0.92rem;">
+                    <span id="fileName">invoice.pdf</span> — <span id="statusText" style="color:#4F46E5;">Reading PDF text elements...</span>
+                </div>
+                <button type="button" id="btnClear" style="background:none; border:none; color:#DC2626; cursor:pointer; font-weight:700; font-size:0.85rem;">Remove</button>
+            </div>
+
+            <!-- Action Controls -->
+            <div id="controlsArea" style="display:none; margin-top:1.5rem; flex-wrap:wrap; gap:1rem; align-items:center;">
+                <button type="button" id="btnDownloadCsv" class="btn-action btn-export">
+                    📥 Download CSV (.csv)
+                </button>
+                <button type="button" id="btnCopyJson" class="btn-action">
+                    📋 Copy as JSON
+                </button>
+                <span id="rowCountLabel" style="font-size:0.88rem; color:#64748B; font-weight:600;"></span>
+            </div>
+
+            <!-- Preview Table -->
+            <div id="tableWrap" class="table-responsive" style="display:none;">
+                <table id="resultTable" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Description / Line Item</th>
+                            <th>Qty</th>
+                            <th>Unit Rate</th>
+                            <th>Amount / Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Converting PDF Invoices to Spreadsheet Formats is Essential</h2>
+            <p>
+                Invoices, billings, and purchase receipts are universally transmitted as PDF documents because the format preserves visual typography and protects layout formatting across devices. However, PDFs are notoriously hostile to accounting workflows: businesses cannot easily sum columns, audit recurring expenses, calculate sales taxes, or import figures into accounting systems like QuickBooks, Xero, Tally, or Microsoft Excel without retyping data manually.
+            </p>
+            <p>
+                Manual invoice data entry wastes hours every week and introduces human transposition errors into balance sheets. Traditional online PDF-to-Excel conversion utilities monetize by demanding recurring subscriptions or by intercepting your financial documents on remote cloud servers.
+            </p>
+
+            <h2>How Amazing-Tools Extracts Invoice Tables 100% Client-Side</h2>
+            <p>
+                Our converter uses Mozilla's high-performance <code>PDF.js</code> rendering engine directly inside your web browser. When you drop a PDF into the tool:
+            </p>
+            <ol>
+                <li><strong>Local Glyph Parsing:</strong> The PDF vector canvas is inspected locally in your browser memory without sending a single byte over the internet.</li>
+                <li><strong>Spatial Coordinate Grouping:</strong> Words sharing identical horizontal Y-coordinates are recognized as table rows, and numerical currency values at the right edge are mapped into monetary columns.</li>
+                <li><strong>Instant Spreadsheet Export:</strong> The structured table can be exported to standard CSV (compatible with Microsoft Excel, Google Sheets, LibreOffice Calc, and Apple Numbers) or copied as structured JSON for developers.</li>
+            </ol>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Are my financial records, client names, or invoice totals stored anywhere?</div>
+                <div class="faq-a">No. Every step of the extraction occurs in your local browser sandbox. No file is ever transmitted to any remote server or stored in any database.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can this tool parse multi-page PDF statements?</div>
+                <div class="faq-a">Yes! The converter automatically loops through every page of your PDF invoice, aggregating itemized line items across pages into a unified tabular spreadsheet.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What spreadsheet programs can open the exported CSV file?</div>
+                <div class="faq-a">The downloaded CSV file uses standard comma-delimited formatting with UTF-8 encoding, allowing it to open seamlessly in Microsoft Excel, Google Sheets, Numbers, and OpenOffice without formatting errors.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">PDF text extraction executed in local browser memory. Zero server uploads.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const statusArea = document.getElementById('statusArea');
+        const fileName = document.getElementById('fileName');
+        const statusText = document.getElementById('statusText');
+        const btnClear = document.getElementById('btnClear');
+        const controlsArea = document.getElementById('controlsArea');
+        const tableWrap = document.getElementById('tableWrap');
+        const resultBody = document.getElementById('resultBody');
+        const rowCountLabel = document.getElementById('rowCountLabel');
+        const btnDownloadCsv = document.getElementById('btnDownloadCsv');
+        const btnCopyJson = document.getElementById('btnCopyJson');
+
+        let extractedRows = [];
+        let currentFileName = 'invoice';
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) handlePdf(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) handlePdf(fileInput.files[0]);
+        });
+
+        btnClear.addEventListener('click', () => {
+            fileInput.value = '';
+            statusArea.style.display = 'none';
+            controlsArea.style.display = 'none';
+            tableWrap.style.display = 'none';
+            extractedRows = [];
+        });
+
+        async function handlePdf(file) {
+            if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+                alert('Please upload a valid PDF invoice document.');
+                return;
+            }
+
+            currentFileName = file.name.replace(/\.pdf$/i, '');
+            fileName.textContent = file.name;
+            statusText.textContent = 'Parsing PDF text layers...';
+            statusArea.style.display = 'flex';
+            tableWrap.style.display = 'none';
+            controlsArea.style.display = 'none';
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const totalPages = pdf.numPages;
+
+                let lines = [];
+
+                for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                    statusText.textContent = `Scanning page ${pageNum} of ${totalPages}...`;
+                    const page = await pdf.getPage(pageNum);
+                    const textContent = await page.getTextContent();
+                    
+                    // Group items by vertical position (Y coordinate rounded to 4px)
+                    const rowMap = {};
+                    textContent.items.forEach(item => {
+                        const y = Math.round(item.transform[5] / 4) * 4;
+                        if (!rowMap[y]) rowMap[y] = [];
+                        rowMap[y].push({ text: item.str.trim(), x: item.transform[4] });
+                    });
+
+                    // Sort rows top-to-bottom (Y descends in PDF coordinate system)
+                    const sortedYs = Object.keys(rowMap).map(Number).sort((a, b) => b - a);
+
+                    sortedYs.forEach(y => {
+                        const rowItems = rowMap[y].sort((a, b) => a.x - b.x);
+                        const rowText = rowItems.map(i => i.text).filter(Boolean).join(' ');
+                        if (rowText.length > 2) {
+                            lines.push(rowItems);
+                        }
+                    });
+                }
+
+                parseInvoiceLines(lines);
+            } catch (err) {
+                console.error(err);
+                statusText.textContent = '❌ Error reading PDF: ' + err.message;
+            }
+        }
+
+        function parseInvoiceLines(rawRows) {
+            extractedRows = [];
+            const moneyRegex = /[$€£₹]?\s*\d+([.,]\d{2,3})?/g;
+
+            rawRows.forEach((rowItems, idx) => {
+                const combined = rowItems.map(i => i.text).join(' ');
+                // Check if line contains a monetary or numeric amount
+                const matches = combined.match(moneyRegex);
+                if (matches && matches.length >= 1 && combined.length > 5) {
+                    const lastAmount = matches[matches.length - 1];
+                    const secondAmount = matches.length >= 2 ? matches[matches.length - 2] : '';
+                    
+                    // Separate description from trailing amounts
+                    let desc = combined.replace(lastAmount, '').replace(secondAmount, '').trim();
+                    if (!desc) desc = `Item ${extractedRows.length + 1}`;
+
+                    extractedRows.push({
+                        id: extractedRows.length + 1,
+                        desc: desc,
+                        qty: '1',
+                        rate: secondAmount || lastAmount,
+                        amount: lastAmount
+                    });
+                }
+            });
+
+            if (extractedRows.length === 0) {
+                statusText.textContent = '⚠️ No clear tabular invoice items detected. The PDF may be a scanned image without a digital text layer.';
+                return;
+            }
+
+            renderTable();
+        }
+
+        function renderTable() {
+            resultBody.innerHTML = '';
+            extractedRows.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.id}</td>
+                    <td><strong>${escapeHtml(row.desc)}</strong></td>
+                    <td>${escapeHtml(row.qty)}</td>
+                    <td>${escapeHtml(row.rate)}</td>
+                    <td><span style="font-weight:700; color:#059669;">${escapeHtml(row.amount)}</span></td>
+                `;
+                resultBody.appendChild(tr);
+            });
+
+            statusText.textContent = `✅ Successfully extracted ${extractedRows.length} invoice rows!`;
+            rowCountLabel.textContent = `${extractedRows.length} items extracted`;
+            tableWrap.style.display = 'block';
+            controlsArea.style.display = 'flex';
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[m]);
+        }
+
+        // CSV Export
+        btnDownloadCsv.addEventListener('click', () => {
+            if (extractedRows.length === 0) return;
+            let csv = '"#","Description","Quantity","Unit Rate","Amount"\n';
+            extractedRows.forEach(r => {
+                csv += `"${r.id}","${r.desc.replace(/"/g, '""')}","${r.qty}","${r.rate.replace(/"/g, '""')}","${r.amount.replace(/"/g, '""')}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentFileName}_extracted.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+
+        // JSON Copy
+        btnCopyJson.addEventListener('click', () => {
+            if (extractedRows.length === 0) return;
+            navigator.clipboard.writeText(JSON.stringify(extractedRows, null, 2));
+            alert('Table copied as JSON array!');
+        });
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

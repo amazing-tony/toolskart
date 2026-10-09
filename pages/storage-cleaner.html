@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Storage & Cookie Hygiene Cleaner — Free Privacy Auditor | Amazing-Tools</title>
+    <meta name="description" content="Audit and purge hidden browser cookies, localStorage records, and indexedDB caches to reclaim disk space and prevent persistent tracker profiling.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/storage-cleaner.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .storage-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: #F8FAFC;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-num {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #4F46E5;
+            margin: 0.5rem 0 0.25rem;
+        }
+        .stat-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(220,38,38,0.3);
+        }
+        .btn-refresh {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="privacy-policy.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Privacy Policy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                🧹 100% In-Browser · Web Storage Manager API
+            </span>
+            <h1>Browser Storage & Cookie Hygiene Cleaner</h1>
+            <p>
+                Audit and purge accumulated localStorage variables, sessionStorage artifacts, and cached client-side data. Reclaim browser memory and enhance your digital privacy in one click.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div class="storage-stat-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Storage Used</div>
+                    <div id="statUsed" class="stat-num">0 KB</div>
+                    <div style="font-size:0.75rem; color:#64748B;">Origin sandbox quota</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">LocalStorage Keys</div>
+                    <div id="statLocal" class="stat-num">0</div>
+                    <div style="font-size:0.75rem; color:#64748B;">Persistent site entries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">SessionStorage Keys</div>
+                    <div id="statSession" class="stat-num">0</div>
+                    <div style="font-size:0.75rem; color:#64748B;">Active tab variables</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">IndexedDB Datastores</div>
+                    <div id="statIdb" class="stat-num">0</div>
+                    <div style="font-size:0.75rem; color:#64748B;">Client database stores</div>
+                </div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
+                <button type="button" id="btnAudit" class="btn-action btn-refresh">
+                    🔄 Refresh Storage Audit
+                </button>
+                <button type="button" id="btnClearAll" class="btn-action">
+                    🗑️ Purge Local & Session Storage Now
+                </button>
+                <span id="cleanStatus" style="font-weight:600; font-size:0.9rem; color:#059669; display:none;"></span>
+            </div>
+
+            <div id="detailsArea" style="margin-top:1.5rem; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:1.25rem;">
+                <label style="display:block; font-size:0.85rem; font-weight:800; color:#1E293B; margin-bottom:0.5rem;">
+                    Detected LocalStorage Key Inventory
+                </label>
+                <div id="keyList" style="font-family:monospace; font-size:0.85rem; color:#475569; max-height:160px; overflow-y:auto; line-height:1.6;">
+                    Scanning...
+                </div>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Understanding Hidden Browser Storage: Beyond Traditional Cookies</h2>
+            <p>
+                When everyday users clear their web history, they typically assume all tracking and persistent footprints are gone. However, modern web standards incorporate rich client-side storage technologies—most notably <strong>localStorage</strong>, <strong>sessionStorage</strong>, and <strong>IndexedDB</strong>—that can persist long after traditional HTTP cookies have expired.
+            </p>
+            <p>
+                Advertising networks, analytics platforms, and modern web apps use these persistent storage engines to cache device fingerprints, session IDs, and tracking preferences. Inspecting and regularly purging these stores helps keep your browser running fast, frees up disk space, and prevents tracking across visits.
+            </p>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Will purging browser storage log me out of open sites?</div>
+                <div class="faq-a">Clearing local storage removes saved user preferences and active auth tokens on this origin. If you have customized dashboard settings, they will reset to their clean default state.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Does this tool inspect other websites' data?</div>
+                <div class="faq-a">Due to the browser's mandatory Same-Origin Policy (SOP), websites can only inspect and manage data stored under their own origin. This tool demonstrates your current origin's hygiene and guides how browser sandboxes manage local disk caches.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">Browser storage inspection performed directly via native Storage Manager APIs.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const statUsed = document.getElementById('statUsed');
+        const statLocal = document.getElementById('statLocal');
+        const statSession = document.getElementById('statSession');
+        const statIdb = document.getElementById('statIdb');
+        const keyList = document.getElementById('keyList');
+        const btnAudit = document.getElementById('btnAudit');
+        const btnClearAll = document.getElementById('btnClearAll');
+        const cleanStatus = document.getElementById('cleanStatus');
+
+        async function auditStorage() {
+            // Estimate total quota
+            if (navigator.storage && navigator.storage.estimate) {
+                const est = await navigator.storage.estimate();
+                const usedKb = (est.usage / 1024).toFixed(1);
+                statUsed.textContent = usedKb > 1024 ? `${(usedKb / 1024).toFixed(2)} MB` : `${usedKb} KB`;
+            } else {
+                statUsed.textContent = 'API Unavailable';
+            }
+
+            // LocalStorage count
+            const localKeys = Object.keys(localStorage);
+            statLocal.textContent = localKeys.length;
+
+            // SessionStorage count
+            const sessionKeys = Object.keys(sessionStorage);
+            statSession.textContent = sessionKeys.length;
+
+            // IndexedDB databases
+            if (indexedDB.databases) {
+                const dbs = await indexedDB.databases();
+                statIdb.textContent = dbs.length;
+            } else {
+                statIdb.textContent = '0';
+            }
+
+            // Render key list
+            if (localKeys.length === 0) {
+                keyList.innerHTML = '<span style="color:#059669;">✨ LocalStorage is 100% clean and empty!</span>';
+            } else {
+                keyList.innerHTML = localKeys.map(k => `<div>🔑 <strong>${k}</strong> (${(localStorage.getItem(k)||'').length} bytes)</div>`).join('');
+            }
+        }
+
+        btnClearAll.addEventListener('click', () => {
+            if (confirm('Are you sure you want to purge all local storage and session variables?')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                cleanStatus.style.display = 'inline-block';
+                cleanStatus.textContent = '✅ All local data successfully purged!';
+                auditStorage();
+            }
+        });
+
+        btnAudit.addEventListener('click', () => {
+            cleanStatus.style.display = 'none';
+            auditStorage();
+        });
+
+        // Initialize audit on load
+        auditStorage();
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

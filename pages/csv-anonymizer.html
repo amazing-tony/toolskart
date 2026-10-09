@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV & Excel Data Anonymizer — Free In-Browser Dataset Masker | Amazing-Tools</title>
+    <meta name="description" content="Generate safe, realistic synthetic test datasets from production CSV files. Mask customer names, emails, phones, and addresses with 100% browser-based privacy.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/csv-anonymizer.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎭</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .column-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+            background: #F8FAFC;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+        }
+        .col-card {
+            background: #ffffff;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            padding: 0.85rem;
+        }
+        .col-card label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 0.4rem;
+        }
+        .col-card select {
+            width: 100%;
+            padding: 0.5rem 0.65rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+        }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+        table.data-table th {
+            background: #F1F5F9;
+            color: #1E293B;
+            font-weight: 700;
+            padding: 0.65rem 0.85rem;
+            border-bottom: 1.5px solid #CBD5E1;
+        }
+        table.data-table td {
+            padding: 0.65rem 0.85rem;
+            border-bottom: 1px solid #E2E8F0;
+            color: #334155;
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="pii-redactor.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">PII Redactor</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                🎭 100% In-Browser · Deterministic Data Masker & Fuzzer
+            </span>
+            <h1>CSV & Dataset Column Anonymizer</h1>
+            <p>
+                Safely sanitize databases, customer CSV spreadsheets, and export tables for staging, QA testing, or AI model training. Replace sensitive names, emails, phones, and credit balances with realistic synthetic mocks.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div id="dropZone" class="drop-zone">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">📊</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#1E293B; margin-bottom:0.25rem;">
+                    Click to browse or drop a CSV File (.csv)
+                </div>
+                <div style="font-size:0.85rem; color:#64748B;">
+                    Production database dumps, user tables, and spreadsheets. 100% client-side privacy.
+                </div>
+                <input type="file" id="fileInput" accept=".csv,text/csv,text/plain" style="display:none;">
+            </div>
+
+            <div id="fileInfoArea" style="display:none; margin-top:1.25rem; padding:0.85rem 1rem; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1; justify-content:space-between; align-items:center;">
+                <div style="font-weight:600; color:#1E293B; font-size:0.92rem;">
+                    📄 <span id="fileName">users.csv</span> — <span id="fileSummary" style="color:#4F46E5;">0 rows, 0 columns</span>
+                </div>
+                <button type="button" id="btnClear" style="background:none; border:none; color:#DC2626; cursor:pointer; font-weight:700; font-size:0.85rem;">Remove File</button>
+            </div>
+
+            <!-- Column Rules Mapping -->
+            <div id="mappingSection" style="display:none;">
+                <h3 style="font-size:1.1rem; font-weight:800; color:#0F172A; margin:1.5rem 0 0.5rem;">
+                    Select Masking Strategy per Column:
+                </h3>
+                <div id="columnGrid" class="column-grid"></div>
+
+                <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; margin-top:1rem;">
+                    <button type="button" id="btnAnonymize" class="btn-action">
+                        ⚡ Generate Anonymized Dataset
+                    </button>
+                    <button type="button" id="btnDownload" class="btn-action btn-download" style="display:none;">
+                        📥 Download Anonymized CSV
+                    </button>
+                    <span id="anonymizeStatus" style="font-weight:600; font-size:0.9rem; color:#059669; display:none;"></span>
+                </div>
+            </div>
+
+            <!-- Live Table Preview -->
+            <div id="previewWrap" class="table-responsive" style="display:none;">
+                <table class="data-table">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Dataset Anonymization is Vital for Engineering Teams</h2>
+            <p>
+                Modern software engineering teams frequently require realistic production datasets to debug staging environments, benchmark database queries, train machine learning models, or onboard external contractors. However, copying production databases containing real customer names, home addresses, phone numbers, and financial transactions directly into test environments introduces catastrophic data breach liability and violates international regulations such as GDPR, HIPAA, and SOC 2.
+            </p>
+            <p>
+                Traditional approaches to test data generation either involve synthetic generators that produce unrealistic dummy structures or complex command-line scripts. Amazing-Tools CSV Anonymizer bridges the gap: it takes your actual production CSV schema and replaces identifiable fields with context-aware, realistic synthetic tokens while maintaining relational consistency.
+            </p>
+
+            <h2>Supported Anonymization Modes</h2>
+            <ul>
+                <li><strong>Realistic First & Last Names:</strong> Substitutes real customer identities with plausible fake names drawn from international name dictionaries.</li>
+                <li><strong>Synthetic Email Addresses:</strong> Generates valid format test emails (e.g., <code>alex.j@example.test</code>).</li>
+                <li><strong>Fictional Phone Numbers:</strong> Formats realistic phone numbers using reserved dummy exchanges (e.g., <code>555-0100</code>).</li>
+                <li><strong>Numeric Fuzzing (+/- 20%):</strong> Jitters salaries, account balances, and monetary values by a random percentage so financial analytics can still be tested without revealing exact wealth.</li>
+                <li><strong>Random UUID / Hashing:</strong> Replaces database identifiers with cryptographic pseudonyms.</li>
+            </ul>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Does my CSV file leave my computer?</div>
+                <div class="faq-a">Never. The parsing, masking, and export occur entirely in your local browser sandbox. No data packets are sent across the internet.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Can this handle CSVs with quotes and commas inside text?</div>
+                <div class="faq-a">Yes! The tool incorporates an RFC 4180 compliant CSV parser that properly preserves fields containing internal quotation marks, line breaks, and commas.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">CSV parsing and data anonymization run locally in browser memory.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfoArea = document.getElementById('fileInfoArea');
+        const fileName = document.getElementById('fileName');
+        const fileSummary = document.getElementById('fileSummary');
+        const btnClear = document.getElementById('btnClear');
+        const mappingSection = document.getElementById('mappingSection');
+        const columnGrid = document.getElementById('columnGrid');
+        const btnAnonymize = document.getElementById('btnAnonymize');
+        const btnDownload = document.getElementById('btnDownload');
+        const anonymizeStatus = document.getElementById('anonymizeStatus');
+        const previewWrap = document.getElementById('previewWrap');
+        const tableHead = document.getElementById('tableHead');
+        const tableBody = document.getElementById('tableBody');
+
+        let rawRows = [];
+        let headers = [];
+        let anonymizedRows = [];
+        let originalFileName = 'dataset';
+
+        // Mock data pools
+        const FAKE_FIRST = ['Alex', 'Jordan', 'Taylor', 'Morgan', 'Sam', 'Chris', 'Pat', 'Casey', 'Robin', 'Devon', 'Jesse', 'Riley', 'Avery', 'Jamie'];
+        const FAKE_LAST = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Wilson', 'Anderson', 'Taylor', 'Thomas', 'Moore'];
+        const FAKE_CITIES = ['Springfield', 'Riverdale', 'Oakwood', 'Fairview', 'Pineville', 'Centerville', 'Lakeside', 'Georgetown'];
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) handleCsvFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) handleCsvFile(fileInput.files[0]);
+        });
+
+        btnClear.addEventListener('click', () => {
+            fileInput.value = '';
+            fileInfoArea.style.display = 'none';
+            mappingSection.style.display = 'none';
+            previewWrap.style.display = 'none';
+            rawRows = [];
+            headers = [];
+        });
+
+        function handleCsvFile(file) {
+            originalFileName = file.name.replace(/\.csv$/i, '');
+            fileName.textContent = file.name;
+            fileInfoArea.style.display = 'flex';
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                parseCsv(e.target.result);
+            };
+            reader.readAsText(file);
+        }
+
+        // RFC 4180 compliant CSV parser
+        function parseCsv(text) {
+            const lines = [];
+            let row = [];
+            let inQuotes = false;
+            let current = '';
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const next = text[i + 1];
+
+                if (char === '"') {
+                    if (inQuotes && next === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    row.push(current.trim());
+                    current = '';
+                } else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && next === '\n') i++;
+                    row.push(current.trim());
+                    if (row.length > 1 || row[0] !== '') lines.push(row);
+                    row = [];
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            if (current || row.length > 0) {
+                row.push(current.trim());
+                lines.push(row);
+            }
+
+            if (lines.length < 2) {
+                alert('CSV must contain at least a header row and 1 data row.');
+                return;
+            }
+
+            headers = lines[0];
+            rawRows = lines.slice(1);
+
+            fileSummary.textContent = `${rawRows.length} data rows, ${headers.length} columns`;
+            buildColumnSelectors();
+        }
+
+        function buildColumnSelectors() {
+            columnGrid.innerHTML = '';
+            headers.forEach((h, idx) => {
+                const colCard = document.createElement('div');
+                colCard.className = 'col-card';
+
+                const hLower = h.toLowerCase();
+                let defaultMode = 'keep';
+                if (hLower.includes('name')) defaultMode = 'name';
+                else if (hLower.includes('email') || hLower.includes('mail')) defaultMode = 'email';
+                else if (hLower.includes('phone') || hLower.includes('mobile') || hLower.includes('tel')) defaultMode = 'phone';
+                else if (hLower.includes('city') || hLower.includes('address')) defaultMode = 'city';
+                else if (hLower.includes('amount') || hLower.includes('balance') || hLower.includes('salary') || hLower.includes('price')) defaultMode = 'jitter';
+
+                colCard.innerHTML = `
+                    <label>Column: <strong>${escapeHtml(h)}</strong></label>
+                    <select id="colStrategy_${idx}">
+                        <option value="keep" ${defaultMode === 'keep' ? 'selected' : ''}>Keep Unchanged</option>
+                        <option value="name" ${defaultMode === 'name' ? 'selected' : ''}>Fake Full Name</option>
+                        <option value="email" ${defaultMode === 'email' ? 'selected' : ''}>Fake Email (@example.test)</option>
+                        <option value="phone" ${defaultMode === 'phone' ? 'selected' : ''}>Fake Phone Number</option>
+                        <option value="city" ${defaultMode === 'city' ? 'selected' : ''}>Fake City / Address</option>
+                        <option value="jitter" ${defaultMode === 'jitter' ? 'selected' : ''}>Fuzz Numbers (+/- 20%)</option>
+                        <option value="mask">Redact Asterisks (***)</option>
+                    </select>
+                `;
+                columnGrid.appendChild(colCard);
+            });
+
+            mappingSection.style.display = 'block';
+        }
+
+        btnAnonymize.addEventListener('click', () => {
+            const strategies = headers.map((_, idx) => document.getElementById(`colStrategy_${idx}`).value);
+
+            anonymizedRows = rawRows.map((row, rIdx) => {
+                return row.map((val, cIdx) => {
+                    const strat = strategies[cIdx];
+                    if (strat === 'keep') return val;
+                    if (strat === 'name') {
+                        const first = FAKE_FIRST[(rIdx + cIdx) % FAKE_FIRST.length];
+                        const last = FAKE_LAST[(rIdx * 3 + cIdx) % FAKE_LAST.length];
+                        return `${first} ${last}`;
+                    }
+                    if (strat === 'email') {
+                        const first = FAKE_FIRST[(rIdx + cIdx) % FAKE_FIRST.length].toLowerCase();
+                        return `${first}.${rIdx + 100}@example.test`;
+                    }
+                    if (strat === 'phone') {
+                        const num = 1000 + (rIdx * 7) % 8999;
+                        return `+1-555-01${num.toString().slice(0, 2)}`;
+                    }
+                    if (strat === 'city') {
+                        return FAKE_CITIES[(rIdx + cIdx) % FAKE_CITIES.length];
+                    }
+                    if (strat === 'jitter') {
+                        const num = parseFloat(val.replace(/[^0-9.-]+/g, ''));
+                        if (isNaN(num)) return val;
+                        const factor = 0.8 + (((rIdx * 17) % 40) / 100); // 0.8 to 1.2
+                        return (num * factor).toFixed(2);
+                    }
+                    if (strat === 'mask') {
+                        return '********';
+                    }
+                    return val;
+                });
+            });
+
+            renderPreview();
+            anonymizeStatus.style.display = 'inline-block';
+            anonymizeStatus.textContent = `✅ Anonymized ${anonymizedRows.length} rows!`;
+            btnDownload.style.display = 'inline-flex';
+        });
+
+        function renderPreview() {
+            tableHead.innerHTML = `<tr>${headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr>`;
+            const previewRows = anonymizedRows.slice(0, 15);
+            tableBody.innerHTML = previewRows.map(row => {
+                return `<tr>${row.map(c => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`;
+            }).join('');
+            previewWrap.style.display = 'block';
+        }
+
+        btnDownload.addEventListener('click', () => {
+            let csv = headers.map(h => `"${h.replace(/"/g, '""')}"`).join(',') + '\n';
+            anonymizedRows.forEach(row => {
+                csv += row.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${originalFileName}_anonymized.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[m]);
+        }
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

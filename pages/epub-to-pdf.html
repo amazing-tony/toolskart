@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPUB to PDF Book Converter — Free Client-Side E-Book Formatter | Amazing-Tools</title>
+    <meta name="description" content="Convert EPUB e-books into clean, readable PDF documents for printing and mobile reading directly in your browser. 100% private with zero server uploads.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/epub-to-pdf.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- JSZip for parsing EPUB archive -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- jsPDF for rendering client-side PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+            background: #F8FAFC;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+        }
+        .option-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.4rem;
+        }
+        .option-group select {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="pdf-tools.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">PDF Studio</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                📖 100% In-Browser · Open EPUB to Print-Ready PDF
+            </span>
+            <h1>EPUB to PDF Book Converter</h1>
+            <p>
+                Convert open textbooks, research papers, and public domain EPUB e-books into clean, printable PDF documents. 100% private, client-side rendering with zero server uploads.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div id="dropZone" class="drop-zone">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">📚</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#1E293B; margin-bottom:0.25rem;">
+                    Click to browse or drop an EPUB File (.epub)
+                </div>
+                <div style="font-size:0.85rem; color:#64748B;">
+                    Open-source textbooks, classic literature, and study notes. 100% private.
+                </div>
+                <input type="file" id="fileInput" accept=".epub,application/epub+zip" style="display:none;">
+            </div>
+
+            <div id="fileInfoArea" style="display:none; margin-top:1.25rem; padding:0.85rem 1rem; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1; justify-content:space-between; align-items:center;">
+                <div style="font-weight:600; color:#1E293B; font-size:0.92rem;">
+                    📖 <span id="fileName">book.epub</span> — <span id="fileChapters" style="color:#4F46E5;">Analyzing chapters...</span>
+                </div>
+                <button type="button" id="btnClear" style="background:none; border:none; color:#DC2626; cursor:pointer; font-weight:700; font-size:0.85rem;">Remove File</button>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-group">
+                    <label for="pageSize">Page Dimensions</label>
+                    <select id="pageSize">
+                        <option value="a4" selected>A4 (Standard Document)</option>
+                        <option value="letter">US Letter (North America)</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label for="fontSize">Body Typography Size</label>
+                    <select id="fontSize">
+                        <option value="11" selected>11 pt (Readable)</option>
+                        <option value="13">13 pt (Large Print / Seniors)</option>
+                        <option value="9">9 pt (Compact / Paper Saver)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
+                <button type="button" id="btnConvert" class="btn-action">
+                    📑 Convert & Download PDF
+                </button>
+                <span id="convertStatus" style="font-weight:600; font-size:0.9rem; color:#059669; display:none;"></span>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Convert EPUB E-Books into PDF?</h2>
+            <p>
+                The EPUB (Electronic Publication) standard is optimized for reflowable text on e-ink readers like Kindle or Kobo. However, EPUBs cannot be easily printed, annotated with standard stylus pens, or viewed predictably across devices without specialized reader software. Converting an EPUB to PDF creates fixed-layout page numbering, margins, and headers ideal for classroom printing, physical binder organization, or reading on standard laptop screens.
+            </p>
+
+            <h2>How In-Browser EPUB Conversion Works</h2>
+            <p>
+                EPUB files are fundamentally zipped archives containing XHTML documents, CSS stylesheets, and images. Amazing-Tools unzips the container in your browser memory using <code>JSZip</code>, cleans the HTML text flow, and typesets pages dynamically using <code>jsPDF</code> without uploading your reading material to third-party servers.
+            </p>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Are DRM-protected e-books supported?</div>
+                <div class="faq-a">No. Commercial books purchased with proprietary Amazon or Adobe DRM locks cannot be opened. The tool is designed for open-access textbooks, public domain books (such as Project Gutenberg), and personal manuscripts.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Is my book uploaded to any server?</div>
+                <div class="faq-a">Never. All unzipping, HTML parsing, and PDF rendering occur 100% client-side in your web browser.</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">EPUB decompression and PDF generation execute locally in browser memory.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfoArea = document.getElementById('fileInfoArea');
+        const fileName = document.getElementById('fileName');
+        const fileChapters = document.getElementById('fileChapters');
+        const btnClear = document.getElementById('btnClear');
+        const btnConvert = document.getElementById('btnConvert');
+        const convertStatus = document.getElementById('convertStatus');
+        const pageSize = document.getElementById('pageSize');
+        const fontSize = document.getElementById('fontSize');
+
+        let zipData = null;
+        let originalFileName = 'ebook';
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) handleEpub(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) handleEpub(fileInput.files[0]);
+        });
+
+        btnClear.addEventListener('click', () => {
+            fileInput.value = '';
+            fileInfoArea.style.display = 'none';
+            convertStatus.style.display = 'none';
+            zipData = null;
+        });
+
+        async function handleEpub(file) {
+            originalFileName = file.name.replace(/\.epub$/i, '');
+            fileName.textContent = file.name;
+            fileInfoArea.style.display = 'flex';
+            fileChapters.textContent = 'Unzipping e-book archive...';
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                zipData = await JSZip.loadAsync(arrayBuffer);
+                const htmlFiles = Object.keys(zipData.files).filter(k => k.endsWith('.html') || k.endsWith('.xhtml'));
+                fileChapters.textContent = `Found ${htmlFiles.length} chapter files. Ready to convert!`;
+            } catch (err) {
+                console.error(err);
+                fileChapters.textContent = '❌ Failed to read EPUB: ' + err.message;
+            }
+        }
+
+        btnConvert.addEventListener('click', async () => {
+            if (!zipData) {
+                alert('Please upload an EPUB file first.');
+                return;
+            }
+
+            convertStatus.style.display = 'inline-block';
+            convertStatus.textContent = 'Rendering PDF pages...';
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({
+                    format: pageSize.value,
+                    unit: 'pt'
+                });
+
+                const htmlFiles = Object.keys(zipData.files)
+                    .filter(k => (k.endsWith('.html') || k.endsWith('.xhtml')) && !k.includes('toc'))
+                    .sort();
+
+                const ptSize = parseInt(fontSize.value, 10);
+                doc.setFont('times', 'normal');
+                doc.setFontSize(ptSize);
+
+                const margin = 45;
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const maxLineWidth = pageWidth - margin * 2;
+                let currentY = margin;
+
+                for (let i = 0; i < htmlFiles.length; i++) {
+                    const rawHtml = await zipData.files[htmlFiles[i]].async('string');
+                    const parser = new DOMParser();
+                    const docTree = parser.parseFromString(rawHtml, 'text/html');
+                    
+                    // Extract text paragraphs
+                    const paragraphs = Array.from(docTree.querySelectorAll('p, h1, h2, h3, blockquote'))
+                        .map(el => el.textContent.trim())
+                        .filter(Boolean);
+
+                    for (const pText of paragraphs) {
+                        const splitLines = doc.splitTextToSize(pText, maxLineWidth);
+                        const blockHeight = splitLines.length * (ptSize * 1.3);
+
+                        if (currentY + blockHeight > pageHeight - margin) {
+                            doc.addPage();
+                            currentY = margin;
+                        }
+
+                        doc.text(splitLines, margin, currentY);
+                        currentY += blockHeight + 10;
+                    }
+
+                    if (i < htmlFiles.length - 1) {
+                        doc.addPage();
+                        currentY = margin;
+                    }
+                }
+
+                doc.save(`${originalFileName}.pdf`);
+                convertStatus.textContent = '✅ PDF downloaded successfully!';
+            } catch (err) {
+                console.error(err);
+                convertStatus.textContent = '❌ Error building PDF: ' + err.message;
+            }
+        });
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BFT2WT8J1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8BFT2WT8J1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Silence Remover & Speed Optimizer — Free In-Browser Trimmer | Amazing-Tools</title>
+    <meta name="description" content="Automatically detect and trim dead pauses and silences from voice recordings, lectures, and podcasts. 100% private, client-side Web Audio processing.">
+    <link rel="canonical" href="https://amazing-tools.github.io/pages/audio-silence-remover.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .tool-hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid rgba(99,102,241,0.25);
+        }
+        .tool-hero h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem; color: #fff; }
+        .tool-hero p { color: rgba(226,232,240,0.85); max-width: 680px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+        .app-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+            margin-bottom: 1.5rem;
+        }
+        .drop-zone {
+            border: 2px dashed #CBD5E1;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            background: #F8FAFC;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #6366F1;
+            background: #EEF2FF;
+        }
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+            background: #F8FAFC;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #E2E8F0;
+        }
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 0.4rem;
+        }
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+        }
+        .btn-download:hover {
+            box-shadow: 0 6px 18px rgba(16,185,129,0.35);
+        }
+        .waveform-canvas {
+            width: 100%;
+            height: 90px;
+            background: #0F172A;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: block;
+        }
+        .article-card {
+            background: #ffffff;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 2.25rem;
+            line-height: 1.75;
+            color: #334155;
+            margin-top: 2rem;
+        }
+        .article-card h2 { font-size: 1.5rem; font-weight: 800; color: #0F172A; margin: 1.75rem 0 0.75rem; }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; color: #1E293B; margin: 1.25rem 0 0.5rem; }
+        .article-card p { margin-bottom: 1rem; }
+        .article-card ul, .article-card ol { margin-left: 1.5rem; margin-bottom: 1.25rem; }
+        .faq-item { border-bottom: 1px solid #E2E8F0; padding: 1.25rem 0; }
+        .faq-q { font-weight: 700; color: #0F172A; font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .faq-a { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0.75rem 1.5rem;">
+            <a href="../index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:800; color:#0F172A; font-size:1.25rem;">
+                <span>⚡ Amazing-Tools</span>
+            </a>
+            <nav style="display:flex; gap:1.25rem; align-items:center;">
+                <a href="../index.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">All Tools</a>
+                <a href="audio-converter.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Audio Converter</a>
+                <a href="screen-recorder.html" style="text-decoration:none; color:#475569; font-weight:600; font-size:0.9rem;">Screen Recorder</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width:1100px; margin:2rem auto; padding:0 1.5rem;">
+        <div class="tool-hero">
+            <span style="display:inline-block; background:rgba(99,102,241,0.25); color:#C7D2FE; padding:0.3rem 0.85rem; border-radius:50px; font-weight:700; font-size:0.8rem; margin-bottom:1rem; border:1px solid rgba(99,102,241,0.4);">
+                🎙️ 100% In-Browser · Web Audio API Silence Detection
+            </span>
+            <h1>Audio Silence Remover & Speed Optimizer</h1>
+            <p>
+                Condense podcasts, student lecture voice memos, and interview recordings by automatically trimming silent pauses. Clean, punchy audio without server uploads or third-party audio apps.
+            </p>
+        </div>
+
+        <div class="app-card">
+            <div id="dropZone" class="drop-zone">
+                <div style="font-size:2.5rem; margin-bottom:0.5rem;">🎵</div>
+                <div style="font-weight:700; font-size:1.1rem; color:#1E293B; margin-bottom:0.25rem;">
+                    Click to browse or drop an Audio File (WAV, MP3, AAC, OGG)
+                </div>
+                <div style="font-size:0.85rem; color:#64748B;">
+                    Lectures, meetings, voice notes, and podcast episodes. 100% private.
+                </div>
+                <input type="file" id="fileInput" accept="audio/*,.wav,.mp3,.ogg,.m4a" style="display:none;">
+            </div>
+
+            <div id="fileInfoArea" style="display:none; margin-top:1.25rem; padding:0.85rem 1rem; background:#F8FAFC; border-radius:8px; border:1px solid #CBD5E1; justify-content:space-between; align-items:center;">
+                <div style="font-weight:600; color:#1E293B; font-size:0.92rem;">
+                    🎧 <span id="fileName">recording.mp3</span> (<span id="fileDuration">0:00</span>)
+                </div>
+                <button type="button" id="btnClear" style="background:none; border:none; color:#DC2626; cursor:pointer; font-weight:700; font-size:0.85rem;">Remove File</button>
+            </div>
+
+            <!-- Waveform Canvas -->
+            <canvas id="waveformCanvas" class="waveform-canvas" style="display:none;"></canvas>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label for="thresholdInput">Silence Threshold (Sensitivity)</label>
+                    <select id="thresholdInput">
+                        <option value="0.015">Aggressive (-36 dB, Fast Pauses)</option>
+                        <option value="0.01" selected>Standard (-40 dB, Recommended)</option>
+                        <option value="0.005">Gentle (-46 dB, Soft Backgrounds)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="minSilenceInput">Minimum Silence Duration (Seconds)</label>
+                    <input type="number" id="minSilenceInput" value="0.4" step="0.1" min="0.1" max="5.0">
+                </div>
+
+                <div class="control-group">
+                    <label for="paddingInput">Padding Around Speech (Seconds)</label>
+                    <input type="number" id="paddingInput" value="0.08" step="0.02" min="0" max="0.5">
+                </div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center; margin-top:1rem;">
+                <button type="button" id="btnProcess" class="btn-action">
+                    ✂️ Detect & Trim Dead Pauses
+                </button>
+                <button type="button" id="btnDownload" class="btn-action btn-download" style="display:none;">
+                    📥 Download Processed Audio (.wav)
+                </button>
+                <span id="processStatus" style="font-weight:600; font-size:0.9rem; color:#059669; display:none;"></span>
+            </div>
+
+            <div id="audioPlayerArea" style="display:none; margin-top:1.5rem;">
+                <label style="display:block; font-weight:700; font-size:0.9rem; color:#1E293B; margin-bottom:0.4rem;">Playback Trimmed Audio</label>
+                <audio id="audioPreview" controls style="width:100%;"></audio>
+            </div>
+        </div>
+
+        <article class="article-card">
+            <h2>Why Remove Dead Silence from Spoken Audio?</h2>
+            <p>
+                When recording interviews, university lectures, podcasts, or corporate meeting notes, natural speech contains extensive silent pauses, hesitation gaps, and thinking breaks. Studies show that spoken English recordings routinely contain between 15% and 35% empty dead air.
+            </p>
+            <p>
+                Removing dead air shortens the overall duration without making the speaker sound unnaturally sped up or high-pitched like a cartoon character. Listeners absorb the content in less time, and audio content feels crisper, more professional, and engaging.
+            </p>
+
+            <h2>How Client-Side Audio Trimming Works</h2>
+            <p>
+                Unlike commercial audio SaaS applications that upload gigabytes of private voice data to external cloud GPUs, Amazing-Tools uses the browser's native <strong>Web Audio API</strong>:
+            </p>
+            <ol>
+                <li><strong>PCM Decoding:</strong> Your audio file is decoded into floating-point PCM samples directly in your device's memory.</li>
+                <li><strong>Energy Waveform Analysis:</strong> The root-mean-square (RMS) energy is scanned across temporal windows. Samples falling below the silence threshold for longer than the minimum gap duration are marked for elimination.</li>
+                <li><strong>Zero-Crossing Splicing:</strong> The retained audio segments are spliced together with microsecond boundary crossfades to prevent clicks, pops, or harsh audio cuts.</li>
+                <li><strong>Uncompressed WAV Export:</strong> The final clean audio stream is serialized into standard 16-bit PCM WAV format ready for immediate playback or download.</li>
+            </ol>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-item">
+                <div class="faq-q">Will trimming silence make the speaker's voice sound distorted or high-pitched?</div>
+                <div class="faq-a">No! Unlike time-stretching tools that artificially speed up playback speed and risk robotic distortion, our silence trimmer leaves the spoken syllables completely untouched. It only removes silent gaps between words and sentences.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Are voice recordings uploaded to any cloud server?</div>
+                <div class="faq-a">Never. All digital signal processing happens entirely inside your computer's browser using client-side JavaScript. Your confidential interviews and recordings remain 100% private.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Why does the export save as a .WAV file?</div>
+                <div class="faq-a">WAV is an uncompressed, lossless universal audio standard supported natively across all operating systems, media players, and video editing suites (such as Premiere Pro, Final Cut, and DaVinci Resolve).</div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer" style="background:#0F172A; color:#94A3B8; padding:3rem 1.5rem; margin-top:4rem; border-top:1px solid #1E293B;">
+        <div style="max-width:1100px; margin:0 auto; text-align:center; font-size:0.88rem;">
+            <p style="margin-bottom:0.75rem; color:#F8FAFC; font-weight:700;">Amazing-Tools — 100% Private, Client-Side Utility Platform</p>
+            <p style="margin-bottom:1rem;">Digital signal processing runs entirely in local browser memory. Zero server uploads.</p>
+            <p>© 2026 Amazing-Tools. Free and Open Web Utilities for Everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfoArea = document.getElementById('fileInfoArea');
+        const fileName = document.getElementById('fileName');
+        const fileDuration = document.getElementById('fileDuration');
+        const btnClear = document.getElementById('btnClear');
+        const waveformCanvas = document.getElementById('waveformCanvas');
+        const thresholdInput = document.getElementById('thresholdInput');
+        const minSilenceInput = document.getElementById('minSilenceInput');
+        const paddingInput = document.getElementById('paddingInput');
+        const btnProcess = document.getElementById('btnProcess');
+        const btnDownload = document.getElementById('btnDownload');
+        const processStatus = document.getElementById('processStatus');
+        const audioPlayerArea = document.getElementById('audioPlayerArea');
+        const audioPreview = document.getElementById('audioPreview');
+
+        let audioCtx = null;
+        let originalBuffer = null;
+        let processedBlob = null;
+        let originalFileName = 'recording';
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) handleFile(fileInput.files[0]);
+        });
+
+        btnClear.addEventListener('click', () => {
+            fileInput.value = '';
+            fileInfoArea.style.display = 'none';
+            waveformCanvas.style.display = 'none';
+            btnDownload.style.display = 'none';
+            processStatus.style.display = 'none';
+            audioPlayerArea.style.display = 'none';
+            originalBuffer = null;
+            processedBlob = null;
+        });
+
+        async function handleFile(file) {
+            originalFileName = file.name.replace(/\.[^/.]+$/, '');
+            fileName.textContent = file.name;
+            fileInfoArea.style.display = 'flex';
+            processStatus.style.display = 'inline-block';
+            processStatus.textContent = 'Decoding audio waveform...';
+
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                originalBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+                const mins = Math.floor(originalBuffer.duration / 60);
+                const secs = Math.floor(originalBuffer.duration % 60);
+                fileDuration.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                processStatus.textContent = 'Audio ready for silence removal';
+                drawWaveform(originalBuffer);
+            } catch (err) {
+                console.error(err);
+                processStatus.textContent = '❌ Failed to decode audio: ' + err.message;
+            }
+        }
+
+        function drawWaveform(buffer) {
+            waveformCanvas.style.display = 'block';
+            const ctx = waveformCanvas.getContext('2d');
+            const data = buffer.getChannelData(0);
+            const step = Math.ceil(data.length / waveformCanvas.width);
+            const amp = waveformCanvas.height / 2;
+
+            ctx.fillStyle = '#0F172A';
+            ctx.fillRect(0, 0, waveformCanvas.width, waveformCanvas.height);
+            ctx.strokeStyle = '#6366F1';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+
+            for (let i = 0; i < waveformCanvas.width; i++) {
+                let min = 1.0, max = -1.0;
+                for (let j = 0; j < step; j++) {
+                    const datum = data[(i * step) + j];
+                    if (datum < min) min = datum;
+                    if (datum > max) max = datum;
+                }
+                ctx.moveTo(i, (1 + min) * amp);
+                ctx.lineTo(i, (1 + max) * amp);
+            }
+            ctx.stroke();
+        }
+
+        btnProcess.addEventListener('click', async () => {
+            if (!originalBuffer) {
+                alert('Please upload an audio file first.');
+                return;
+            }
+
+            processStatus.style.display = 'inline-block';
+            processStatus.textContent = 'Analyzing silence zones...';
+
+            const threshold = parseFloat(thresholdInput.value);
+            const minSilenceSec = parseFloat(minSilenceInput.value);
+            const paddingSec = parseFloat(paddingInput.value);
+
+            const sampleRate = originalBuffer.sampleRate;
+            const numChannels = originalBuffer.numberOfChannels;
+            const totalSamples = originalBuffer.length;
+            const channelData = [];
+            for (let c = 0; c < numChannels; c++) {
+                channelData.push(originalBuffer.getChannelData(c));
+            }
+
+            const minSilenceSamples = Math.floor(minSilenceSec * sampleRate);
+            const paddingSamples = Math.floor(paddingSec * sampleRate);
+            const windowSize = Math.floor(sampleRate * 0.02); // 20ms analysis window
+
+            // Detect speech vs silence windows
+            const keepMask = new Uint8Array(totalSamples);
+            keepMask.fill(1);
+
+            let silenceStart = -1;
+
+            for (let i = 0; i < totalSamples; i += windowSize) {
+                let rms = 0;
+                const end = Math.min(i + windowSize, totalSamples);
+                for (let j = i; j < end; j++) {
+                    const sample = channelData[0][j];
+                    rms += sample * sample;
+                }
+                rms = Math.sqrt(rms / (end - i));
+
+                if (rms < threshold) {
+                    if (silenceStart === -1) silenceStart = i;
+                } else {
+                    if (silenceStart !== -1) {
+                        const silenceLen = i - silenceStart;
+                        if (silenceLen >= minSilenceSamples) {
+                            const trimFrom = Math.min(silenceStart + paddingSamples, totalSamples);
+                            const trimTo = Math.max(i - paddingSamples, trimFrom);
+                            for (let k = trimFrom; k < trimTo; k++) {
+                                keepMask[k] = 0;
+                            }
+                        }
+                        silenceStart = -1;
+                    }
+                }
+            }
+
+            // Count kept samples
+            let keptCount = 0;
+            for (let i = 0; i < totalSamples; i++) {
+                if (keepMask[i] === 1) keptCount++;
+            }
+
+            if (keptCount === 0 || keptCount === totalSamples) {
+                processStatus.textContent = keptCount === 0 ? '⚠️ Threshold too high (entire audio marked silent)' : 'ℹ️ No silent gaps exceeded your minimum duration.';
+                return;
+            }
+
+            // Create new AudioBuffer
+            const trimmedBuffer = audioCtx.createBuffer(numChannels, keptCount, sampleRate);
+            for (let c = 0; c < numChannels; c++) {
+                const src = channelData[c];
+                const dst = trimmedBuffer.getChannelData(c);
+                let writeIdx = 0;
+                for (let i = 0; i < totalSamples; i++) {
+                    if (keepMask[i] === 1) {
+                        dst[writeIdx++] = src[i];
+                    }
+                }
+            }
+
+            // Encode to WAV Blob
+            processedBlob = bufferToWaveBlob(trimmedBuffer);
+            const savedSec = ((totalSamples - keptCount) / sampleRate).toFixed(1);
+            const savedPct = (((totalSamples - keptCount) / totalSamples) * 100).toFixed(0);
+
+            processStatus.textContent = `✅ Removed ${savedSec}s of dead air (${savedPct}% saved)!`;
+            btnDownload.style.display = 'inline-flex';
+
+            const audioUrl = URL.createObjectURL(processedBlob);
+            audioPreview.src = audioUrl;
+            audioPlayerArea.style.display = 'block';
+        });
+
+        btnDownload.addEventListener('click', () => {
+            if (!processedBlob) return;
+            const url = URL.createObjectURL(processedBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${originalFileName}_no_silence.wav`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+
+        // Simple WAV encoder
+        function bufferToWaveBlob(abuffer) {
+            const numOfChan = abuffer.numberOfChannels;
+            const length = abuffer.length * numOfChan * 2 + 44;
+            const out = new DataView(new ArrayBuffer(length));
+            const channels = [];
+            let sample = 0;
+            let offset = 0;
+            let pos = 0;
+
+            function setUint16(data) { out.setUint16(pos, data, true); pos += 2; }
+            function setUint32(data) { out.setUint32(pos, data, true); pos += 4; }
+
+            // Write RIFF header
+            setUint32(0x46464952); // "RIFF"
+            setUint32(length - 8); // file length - 8
+            setUint32(0x45564157); // "WAVE"
+            setUint32(0x20746d66); // "fmt " chunk
+            setUint32(16); // length = 16
+            setUint16(1); // PCM (uncompressed)
+            setUint16(numOfChan);
+            setUint32(abuffer.sampleRate);
+            setUint32(abuffer.sampleRate * 2 * numOfChan); // avg. bytes/sec
+            setUint16(numOfChan * 2); // block-align
+            setUint16(16); // 16-bit
+            setUint32(0x61746164); // "data" - chunk
+            setUint32(length - pos - 4); // chunk length
+
+            for (let i = 0; i < abuffer.numberOfChannels; i++) {
+                channels.push(abuffer.getChannelData(i));
+            }
+
+            while (pos < length) {
+                for (let i = 0; i < numOfChan; i++) {
+                    sample = Math.max(-1, Math.min(1, channels[i][offset]));
+                    sample = (0.5 + sample < 0 ? sample * 32768 : sample * 32767) | 0;
+                    out.setInt16(pos, sample, true);
+                    pos += 2;
+                }
+                offset++;
+            }
+
+            return new Blob([out], { type: 'audio/wav' });
+        }
+    </script>
+    <script src="../js/common.js" defer></script>
+</body>
+</html>

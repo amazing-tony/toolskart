@@ -998,6 +998,13 @@
     'base64-tool': { title: 'Base64 Encoder / Decoder', category: 'Developer Tools', url: 'pages/base64-tool.html' },
       'srt-sync': { title: 'Subtitle Time-Shift & Resync', category: 'Media Tools', url: 'pages/srt-sync.html' },
       'checksum-verifier': { title: 'File Checksum & Hash Verifier', category: 'Developer Tools', url: 'pages/checksum-verifier.html' },
+      'invoice-to-excel': { title: 'Invoice PDF to Excel & CSV', category: 'Document Tools', url: 'pages/invoice-to-excel.html' },
+      'audio-silence-remover': { title: 'Audio Silence Remover', category: 'Media Tools', url: 'pages/audio-silence-remover.html' },
+      'csv-anonymizer': { title: 'CSV & Dataset Anonymizer', category: 'Developer Tools', url: 'pages/csv-anonymizer.html' },
+      'epub-to-pdf': { title: 'EPUB to PDF Converter', category: 'Document Tools', url: 'pages/epub-to-pdf.html' },
+      'link-inspector': { title: 'Suspicious Link Inspector', category: 'Developer Tools', url: 'pages/link-inspector.html' },
+      'storage-cleaner': { title: 'Browser Storage Cleaner', category: 'Developer Tools', url: 'pages/storage-cleaner.html' },
+
 
     'pii-redactor': { title: 'PII & Sensitive Data Redactor', category: 'Text Tools', url: 'pages/pii-redactor.html' },
     'exif-remover': { title: 'EXIF & Geolocation Remover', category: 'Image Tools', url: 'pages/exif-remover.html' },
